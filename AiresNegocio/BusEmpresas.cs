@@ -1,0 +1,345 @@
+﻿using AiresDatos;
+using AiresEntidades;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AiresNegocio
+{
+    public class BusEmpresas : BusAbstracta
+    {
+        public List<EntEmpresa> ObtieneEmpresas()
+        {
+            try
+            {
+                List<EntEmpresa> lst = new List<EntEmpresa>();
+
+                dt = new DatEmpresas().obtieneEmpresas();
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntEmpresa m = new EntEmpresa();
+                    m.Id = Convert.ToInt32(r["EMP_ID"]);
+
+                    m.TipoPersonaId = Convert.ToInt32(r["EMP_TIPOPERSONAID"]);
+                    m.Descripcion = r["EMP_NOMBRE"].ToString();
+                    m.Nombre = r["EMP_NOMBRE"].ToString();
+                    m.NombreFiscal = r["EMP_NOMBREFISCAL"].ToString();
+                    m.RegimenFiscal = r["EMP_REGIMENFISCAL"].ToString();
+                    m.Direccion = r["EMP_DIRECCION"].ToString();
+                    m.Telefono = r["EMP_TELEFONO"].ToString();
+                    m.Telefono2 = r["EMP_TELEFONO2"].ToString();
+                    m.Email = r["EMP_EMAIL"].ToString();
+
+                    m.RFC = r["EMP_RFC"].ToString();
+                    m.Calle = r["EMP_CALLE"].ToString();
+                    m.NoExterior = r["EMP_NOEXTERIOR"].ToString();
+                    m.NoInterior = r["EMP_NOINTERIOR"].ToString();
+                    m.Colonia = r["EMP_COLONIA"].ToString();
+                    m.Localidad = r["EMP_LOCALIDAD"].ToString();
+                    m.Municipio = r["EMP_MUNICIPIO"].ToString();
+                    m.Estado = r["EMP_ESTADO"].ToString();
+                    m.CP = r["EMP_CP"].ToString();
+
+                    m.Contacto = r["EMP_CONTACTO"].ToString();
+                    m.TelefonoContacto = r["EMP_TELEFONOCONTACTO"].ToString();
+                    m.Banco = r["EMP_BANCO"].ToString();
+                    m.NumeroCuenta = r["EMP_NUMEROCUENTA"].ToString();
+                    m.Sucursal = r["EMP_SUCURSAL"].ToString();
+                    m.CLABE = r["EMP_CLABE"].ToString();
+                    m.NumeroReferencia = r["EMP_NUMEROREFERENCIA"].ToString();
+
+                    m.Certificado = r["EMP_CERTIFICADORUTA"].ToString();
+                    m.Key = r["EMP_KEYRUTA"].ToString();
+                    m.Clave = r["EMP_CLAVE"].ToString();
+
+                    m.TipoTasaIVAId = Convert.ToInt32(r["EMP_TIPOTASAIVAID"]);
+                    m.NoCertificado = r["EMP_NOCERTIFICADO"].ToString();
+
+                    //m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
+                    //m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+                    //m.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
+
+                    m.Fecha = Convert.ToDateTime(r["EMP_FECHAREGISTRO"]);
+                    m.Facturacion= Convert.ToBoolean(r["EMP_FACTURACION"]);
+                    lst.Add(m);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        /// <summary>
+        /// Gastos con ESTATUSID=1
+        /// </summary>
+        /// <returns></returns>
+        public List<EntEmpresa> ObtieneEmpresaGastosPorEmpresa(int EmpresaId)
+        {
+            try
+            {
+                List<EntEmpresa> lst = new List<EntEmpresa>();
+                dt = new DatEmpresas().obtieneEmpresaGastosPorEmpresa(EmpresaId);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntEmpresa m = new EntEmpresa();
+                    m.Id = Convert.ToInt32(r["EMP_ID"]);
+
+                    m.Descripcion = r["EMP_NOMBRE"].ToString();
+                    m.Nombre = r["EMP_NOMBRE"].ToString();
+                    m.NombreFiscal = r["EMP_NOMBREFISCAL"].ToString();
+                    m.Direccion = r["EMP_DIRECCION"].ToString();
+                    m.Telefono = r["EMP_TELEFONO"].ToString();
+                    m.Telefono2 = r["EMP_TELEFONO2"].ToString();
+                    m.Email = r["EMP_EMAIL"].ToString();
+                    m.Contacto = r["EMP_CONTACTO"].ToString();
+                    m.TelefonoContacto = r["EMP_TELEFONOCONTACTO"].ToString();
+                    m.Banco = r["EMP_BANCO"].ToString();
+                    m.NumeroCuenta = r["EMP_NUMEROCUENTA"].ToString();
+                    m.Sucursal = r["EMP_SUCURSAL"].ToString();
+                    m.CLABE = r["EMP_CLABE"].ToString();
+                    m.NumeroReferencia = r["EMP_NUMEROREFERENCIA"].ToString();
+
+                    //m.GastoId = Convert.ToInt32(r["GAS_ID"]);
+                    //m.NumeroFactura = r["GAS_NUMEROFACTURA"].ToString();
+                    //m.FechaFactura = Convert.ToDateTime(r["GAS_FECHAFACTURA"]);
+                    //m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
+                    //m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+
+                    m.Fecha = Convert.ToDateTime(r["EMP_FECHAREGISTRO"]);
+                    lst.Add(m);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        /// <summary>
+        /// Gastos con ESTATUSID=1
+        /// </summary>
+        /// <returns></returns>
+        public List<EntEmpresa> ObtieneEmpresasGastosDeuda()
+        {
+            try
+            {
+                List<EntEmpresa> lst = new List<EntEmpresa>();
+                dt = new DatEmpresas().obtieneEmpresasGastosDeuda();
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntEmpresa m = new EntEmpresa();
+                    m.Id = Convert.ToInt32(r["EMP_ID"]);
+
+                    m.Descripcion = r["EMP_NOMBRE"].ToString();
+                    m.Nombre = r["EMP_NOMBRE"].ToString();
+                    m.NombreFiscal = r["EMP_NOMBREFISCAL"].ToString();
+                    m.Direccion = r["EMP_DIRECCION"].ToString();
+                    m.Telefono = r["EMP_TELEFONO"].ToString();
+                    m.Telefono2 = r["EMP_TELEFONO2"].ToString();
+                    m.Email = r["EMP_EMAIL"].ToString();
+                    m.Contacto = r["EMP_CONTACTO"].ToString();
+                    m.TelefonoContacto = r["EMP_TELEFONOCONTACTO"].ToString();
+                    m.Banco = r["EMP_BANCO"].ToString();
+                    m.NumeroCuenta = r["EMP_NUMEROCUENTA"].ToString();
+                    m.Sucursal = r["EMP_SUCURSAL"].ToString();
+                    m.CLABE = r["EMP_CLABE"].ToString();
+                    m.NumeroReferencia = r["EMP_NUMEROREFERENCIA"].ToString();
+
+                    m.GastoId = Convert.ToInt32(r["GAS_ID"]);
+                    m.NumeroFactura = r["GAS_NUMEROFACTURA"].ToString();
+                    m.FechaFactura = Convert.ToDateTime(r["GAS_FECHAFACTURA"]);
+                    m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
+                    m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+
+                    m.Fecha = Convert.ToDateTime(r["EMP_FECHAREGISTRO"]);
+                    lst.Add(m);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        /// <summary>
+        /// Gastos con ESTATUSID=1
+        /// </summary>
+        /// <returns></returns>
+        public List<EntEmpresa> ObtieneEmpresasGastosDeuda(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            try
+            {
+                List<EntEmpresa> lst = new List<EntEmpresa>();
+                dt = new DatEmpresas().obtieneEmpresasGastosDeuda(FechaDesde, FechaHasta);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntEmpresa m = new EntEmpresa();
+                    m.Id = Convert.ToInt32(r["EMP_ID"]);
+
+                    m.Descripcion = r["EMP_NOMBRE"].ToString();
+                    m.Nombre = r["EMP_NOMBRE"].ToString();
+                    m.NombreFiscal = r["EMP_NOMBREFISCAL"].ToString();
+                    m.Direccion = r["EMP_DIRECCION"].ToString();
+                    m.Telefono = r["EMP_TELEFONO"].ToString();
+                    m.Telefono2 = r["EMP_TELEFONO2"].ToString();
+                    m.Email = r["EMP_EMAIL"].ToString();
+                    m.Contacto = r["EMP_CONTACTO"].ToString();
+                    m.TelefonoContacto = r["EMP_TELEFONOCONTACTO"].ToString();
+                    m.Banco = r["EMP_BANCO"].ToString();
+                    m.NumeroCuenta = r["EMP_NUMEROCUENTA"].ToString();
+                    m.Sucursal = r["EMP_SUCURSAL"].ToString();
+                    m.CLABE = r["EMP_CLABE"].ToString();
+                    m.NumeroReferencia = r["EMP_NUMEROREFERENCIA"].ToString();
+
+                    m.GastoId = Convert.ToInt32(r["GAS_ID"]);
+                    m.NumeroFactura = r["GAS_NUMEROFACTURA"].ToString();
+                    m.FechaFactura = Convert.ToDateTime(r["GAS_FECHAFACTURA"]);
+                    m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
+                    m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+                    m.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
+
+                    m.Fecha = Convert.ToDateTime(r["EMP_FECHAREGISTRO"]);
+                    lst.Add(m);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        /// <summary>
+        /// Gastos con ESTATUSID=1 o ESTATUSID=2
+        /// </summary>
+        /// <returns></returns>
+        public List<EntEmpresa> ObtieneEmpresasGastos(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            try
+            {
+                List<EntEmpresa> lst = new List<EntEmpresa>();
+                dt = new DatEmpresas().obtieneEmpresasGastos(FechaDesde, FechaHasta);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntEmpresa m = new EntEmpresa();
+                    m.Id = Convert.ToInt32(r["EMP_ID"]);
+
+                    m.Descripcion = r["EMP_NOMBRE"].ToString();
+                    m.Nombre = r["EMP_NOMBRE"].ToString();
+                    m.NombreFiscal = r["EMP_NOMBREFISCAL"].ToString();
+                    m.Direccion = r["EMP_DIRECCION"].ToString();
+                    m.Telefono = r["EMP_TELEFONO"].ToString();
+                    m.Telefono2 = r["EMP_TELEFONO2"].ToString();
+                    m.Email = r["EMP_EMAIL"].ToString();
+                    m.Contacto = r["EMP_CONTACTO"].ToString();
+                    m.TelefonoContacto = r["EMP_TELEFONOCONTACTO"].ToString();
+                    m.Banco = r["EMP_BANCO"].ToString();
+                    m.NumeroCuenta = r["EMP_NUMEROCUENTA"].ToString();
+                    m.Sucursal = r["EMP_SUCURSAL"].ToString();
+                    m.CLABE = r["EMP_CLABE"].ToString();
+                    m.NumeroReferencia = r["EMP_NUMEROREFERENCIA"].ToString();
+
+                    m.GastoId = Convert.ToInt32(r["GAS_ID"]);
+                    m.NumeroFactura = r["GAS_NUMEROFACTURA"].ToString();
+                    m.FechaFactura = Convert.ToDateTime(r["GAS_FECHAFACTURA"]);
+                    m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
+                    //m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+
+                    m.Fecha = Convert.ToDateTime(r["EMP_FECHAREGISTRO"]);
+                    lst.Add(m);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public List<EntEmpresa> ObtienePagosEmpresas(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            try
+            {
+                List<EntEmpresa> lst = new List<EntEmpresa>();
+                dt = new DatEmpresas().obtienePagosEmpresas(FechaDesde, FechaHasta);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntEmpresa p = new EntEmpresa();
+                    p.Id = Convert.ToInt32(r["EMP_ID"]);
+                    p.Nombre = r["EMP_NOMBRE"].ToString();
+
+                    p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+                    p.Fecha = Convert.ToDateTime(r["PAG_FECHAPAGO"]);
+                    p.FechaFactura = Convert.ToDateTime(r["GAS_FECHAFACTURA"]);
+                    p.NumeroFactura = r["GAS_NUMEROFACTURA"].ToString();
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntEmpresa> ObtieneNotasCreditoEmpresas(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            try
+            {
+                List<EntEmpresa> lst = new List<EntEmpresa>();
+                dt = new DatEmpresas().obtieneNotasCreditoEmpresas(FechaDesde, FechaHasta);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntEmpresa p = new EntEmpresa();
+                    p.Id = Convert.ToInt32(r["EMP_ID"]);
+                    p.Nombre = r["EMP_NOMBRE"].ToString();
+
+                    p.Pago = Convert.ToDecimal(r["NOTCRE_CANTIDAD"]);
+                    p.Fecha = Convert.ToDateTime(r["NOTCRE_FECHA"]);
+                    p.FechaFactura = Convert.ToDateTime(r["GAS_FECHAFACTURA"]);
+                    p.NumeroFactura = r["GAS_NUMEROFACTURA"].ToString();
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        /// <summary>
+        /// Agrega una Empresa.
+        /// </summary>
+        /// <param name="empresa">
+        /// Propiedades Necesarias: TipoPersonaId, Nombre, NombreFiscal, RegimenFiscal, Direccion, Calle, NoExterior, NoInterior, Colonia, Localidad, Municipio, Estado, CP, Telefono, Telefono2, RFC, Email, Banco, NumeroCuenta, Sucursal, CLABE, NumeroReferencia, Certificado, Key, Clave, TipoTasaIVAId, NoCertificado.
+        /// </param>
+        public int AgregaEmpresa(EntEmpresa Empresa)
+        {
+            try
+            {
+                return new DatEmpresas().agregaEmpresa(Empresa.TipoPersonaId, Empresa.Nombre, Empresa.NombreFiscal, Empresa.RegimenFiscal, Empresa.Direccion, Empresa.Calle, Empresa.NoExterior, Empresa.NoInterior, Empresa.Colonia, Empresa.Localidad, Empresa.Municipio, Empresa.Estado, Empresa.CP, Empresa.Telefono, Empresa.Telefono2, Empresa.RFC, Empresa.Email, Empresa.Banco, Empresa.NumeroCuenta, Empresa.Sucursal, Empresa.CLABE, Empresa.NumeroReferencia, Empresa.Certificado, Empresa.Key, Empresa.Clave, Empresa.TipoTasaIVAId, Empresa.NoCertificado);
+                //return 0;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        //public int AgregaNotaCredito(EntPago NotaCredito)
+        //{
+        //    try
+        //    {
+        //        return new DatEmpresas().agregaNotaCredito(NotaCredito.GastoId, NotaCredito.Cantidad, NotaCredito.Fecha);
+        //    }
+        //    catch (Exception ex) { throw new Exception(ex.Message); }
+        //}
+        /// <summary>
+        /// Actualiza nueva Empresa.
+        /// </summary>
+        /// <param name="empresa">
+        /// Propiedades Necesarias: Id, TipoPersonaId, Nombre, NombreFiscal, RegimenFiscal, Direccion, Calle, NoExterior, NoInterior, Colonia, Localidad, Municipio, Estado, CP, Telefono, Telefono2, RFC, Email, Banco, NumeroCuenta, Sucursal, CLABE, NumeroReferencia, Certificado, Key, Clave, TipoTasaIVAId, NoCertificado.
+        /// </param>
+        public int ActualizaEmpresa(EntEmpresa Empresa)
+        {
+            try
+            {
+                return new DatEmpresas().actualizaEmpresa(Empresa.Id, Empresa.TipoPersonaId, Empresa.Nombre, Empresa.NombreFiscal, Empresa.RegimenFiscal, Empresa.Direccion, Empresa.Calle, Empresa.NoExterior, Empresa.NoInterior, Empresa.Colonia, Empresa.Localidad, Empresa.Municipio, Empresa.Estado, Empresa.CP, Empresa.Telefono, Empresa.Telefono2, Empresa.RFC, Empresa.Email, Empresa.Banco, Empresa.NumeroCuenta, Empresa.Sucursal, Empresa.CLABE, Empresa.NumeroReferencia, Empresa.Certificado, Empresa.Key, Empresa.Clave, Empresa.TipoTasaIVAId, Empresa.NoCertificado);
+                //return 0;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        /// <summary>
+        /// Actualiza el Estatus de la Empresa solicitada.
+        /// </summary>
+        /// <param name="Empresa">
+        /// Propiedades Necesarias: Id, Estatus.
+        /// </param>
+        public int ActualizaEstatusEmpresa(EntEmpresa Empresa)
+        {
+            try
+            {
+                return new DatEmpresas().actualizaEstatusEmpresa(Empresa.Id, Empresa.Estatus);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+    }
+}
