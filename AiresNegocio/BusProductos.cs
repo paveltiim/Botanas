@@ -298,9 +298,11 @@ namespace AiresNegocio
                     EntProducto p = new EntProducto();
                     p.Id = Convert.ToInt32(r["PRODET_ID"]);
                     p.ProductoId = Convert.ToInt32(r["PRO_ID"]);
+                    p.TipoProductoId = Convert.ToInt32(r["PRO_TIPOPRODUCTOID"]);
                     p.Codigo = r["PRO_CODIGO"].ToString();
                     p.Descripcion = r["PRO_DESCRIPCION"].ToString();
                     p.Cantidad = Convert.ToInt32(r["PROPED_CANTIDAD"]);
+                    p.PrecioCosto = Convert.ToDecimal(r["PROPED_PRECIOCOSTO"]);
                     p.PrecioVenta = Convert.ToDecimal(r["PROPED_PRECIOVENTA"]);
                     p.Serie = r["PRODET_SERIE"].ToString(); 
                     lst.Add(p);
@@ -571,6 +573,30 @@ namespace AiresNegocio
         /// </summary>
         /// <param name="TipoProductoId"></param>
         /// <returns></returns>
+        public EntCatalogoGenerico ObtieneIngreso(int IngresoId)
+        {
+            try
+            {
+                //List<EntCatalogoGenerico> lst = new List<EntCatalogoGenerico>();
+                dt = new DatProductos().obtieneIngreso(IngresoId);
+                EntCatalogoGenerico p = new EntCatalogoGenerico();
+                foreach (DataRow r in dt.Rows)
+                {
+                    p = new EntCatalogoGenerico();
+                    p.Id = Convert.ToInt32(r["ING_ID"]);
+                    p.Descripcion = r["ING_DESCRIPCION"].ToString();
+                    p.Fecha = Convert.ToDateTime(r["ING_FECHA"]);
+                    //lst.Add(p);
+                }
+                return p;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="TipoProductoId"></param>
+        /// <returns></returns>
         public List<EntCatalogoGenerico> ObtieneIngresosProductos(DateTime FechaDesde, DateTime FechaHasta)
         {
             try
@@ -707,6 +733,20 @@ namespace AiresNegocio
             try
             {
                 return new DatProductos().agregaProductoDetalle(producto.Id, producto.IngresoId,producto.EmpresaId,producto.Serie, producto.PrecioCosto, producto.PrecioVenta, producto.PrecioVenta2, producto.PrecioEspecial, producto.Fecha);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        /// <summary>
+        /// Agrega nuevo ProductoDetalle.
+        /// </summary>
+        /// <param name="producto">
+        /// Propiedades Necesarias: TipoProductoId ,Descripcion, PrecioCosto, PrecioVenta, PrecioEspecial.
+        /// </param>
+        public int AgregaProductoDetalle(int Id, EntProducto producto)
+        {
+            try
+            {
+                return new DatProductos().agregaProductoDetalle(Id, producto.ProductoId, producto.IngresoId, producto.EmpresaId, producto.Serie, producto.PrecioCosto, producto.PrecioVenta, producto.PrecioVenta2, producto.PrecioEspecial, producto.Fecha);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }

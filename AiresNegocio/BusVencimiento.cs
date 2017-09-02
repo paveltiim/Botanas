@@ -40,5 +40,24 @@ namespace AiresNegocio
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+
+        public EntCatalogoGenerico ObtieneRegistroSincronizacion(DateTime Fecha)
+        {
+            try
+            {
+                List<EntCatalogoGenerico> lst = new List<EntCatalogoGenerico>();
+                dt = new DatVencimiento().obtieneRegistroSincronizacion(Fecha);
+                EntCatalogoGenerico c = new EntCatalogoGenerico();
+                foreach (DataRow r in dt.Rows)
+                {
+                    c.Id = Convert.ToInt32(r["REG_ID"]);
+                    c.Fecha = Convert.ToDateTime(r["REG_FECHA"]);
+                    //c.Estatus = Convert.ToBoolean(r["VEN_ESTATUS"]);
+                    //lst.Add(c);
+                }
+                return c;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
     }
 }

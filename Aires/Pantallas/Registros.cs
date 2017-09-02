@@ -1,6 +1,7 @@
 ﻿using AiresEntidades;
 using AiresNegocio;
 using AiresUtilerias;
+using Microsoft.Office.Interop.Excel;
 //using iTextSharp.text;
 //using iTextSharp.text.pdf;
 //using iTextSharp.text.pdf.parser;
@@ -11,6 +12,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -18,13 +20,13 @@ using System.Windows.Forms;
 
 namespace Aires.Pantallas
 {
-    public partial class Reportes : FormBase
+    public partial class Registros : FormBase
     {
         public void VerificaEmpresa()
         {
             cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
         }
-        public Reportes()
+        public Registros()
         {
             InitializeComponent();
         }
@@ -154,7 +156,7 @@ namespace Aires.Pantallas
         /// <param name="Cliente"></param>
         /// <param name="NotaVenta"></param>
         /// <param name="Presupuesto"></param>
-        void EnviaCorreo(EntPedido Pedido, EntCliente Cliente, string PathArchivosFactura)
+        void EnviaCorreo(EntCliente Cliente, string PathArchivosFactura)
             {
                 //ConfirmaEnviaCorreo vConfirmaEnviaCorreo = new ConfirmaEnviaCorreo();
                 //vConfirmaEnviaCorreo.CargaValores(Cliente);
@@ -170,9 +172,12 @@ namespace Aires.Pantallas
                     archivosAdjuntos.Add(file.FullName);
                 }
 
-                string asunto = "FACTURA DISTRIBUIDORA LM";
-
-                new UtiCorreo().EnviaCorreo("Distribuidora LM mirage - " + asunto, new List<string>() { Cliente.Email }, "Envío factura.", archivosAdjuntos);
+                EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
+                string asunto = "FACTURA -" + empresaSeleccionada.NombreFiscal + "- " + DateTime.Today.ToString("dd MMM");
+                string mensaje = "Apreciable " + Cliente.NombreFiscal + ", \n\n Le enviamos su debido comprobante fiscal solicitado, recordandole que estamos a sus ordenes para cualquier duda o aclaración. \n";
+                mensaje += "\n Agradecemos su preferencia y esperamos seguirle atendiendo como se merece. \n";
+                mensaje += "\n Atte. \n" + empresaSeleccionada.NombreFiscal;
+                new UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3 }, mensaje, archivosAdjuntos);
 
                 MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Cliente.Email + "-");
                 //}
@@ -207,16 +212,14 @@ namespace Aires.Pantallas
                 entPedidoBindingSource.DataSource = ListaPedidos;
                 rvVentas.RefreshReport();
             }
+        public List<EntPedido> ObtieneVentas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta)
+        {
+            List<EntPedido> ListaPedidos = new BusPedidos().ObtienePedidosClientesPorFechas(EmpresaId, FechaDesde, FechaHasta);
+            return ListaPedidos;
+        }
         #endregion
 
         int DiasPorSemana = 6;
-        void InicializaPantalla()
-        {
-            //if(Program.EmpresaSeleccionada!=null)
-            //    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
-            dtpFechaDesdeVentas.Value = ObtieneLunesEstaSemana(DateTime.Today);
-            dtpFechaHastaVentas.Value = dtpFechaDesdeVentas.Value.AddDays(DiasPorSemana);
-        }
         public void CargaEmpresas()
         {
             ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
@@ -306,6 +309,194 @@ namespace Aires.Pantallas
 
             gvPedidos.DataSource = null;
             gvPedidos.DataSource = pedidosFiltro.ToList();
+        }
+        void InicializaPantalla()
+        {
+            //if(Program.EmpresaSeleccionada!=null)
+            //    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
+            dtpFechaDesdeVentas.Value = ObtieneLunesEstaSemana(DateTime.Today);
+            dtpFechaHastaVentas.Value = dtpFechaDesdeVentas.Value.AddDays(DiasPorSemana);
+        }
+
+        void EnviaCorreoArchivo(string Email, DateTime Fecha, string PathArchivo, string Empresa)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+
+            List<string> archivosAdjuntos = new List<string>();
+
+            System.IO.FileInfo file = new System.IO.FileInfo(PathArchivo);
+            archivosAdjuntos.Add(file.FullName);
+
+            EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
+            string asunto = "VENTAS DE PRODUCTOS -" + Fecha.ToString("dd MMM yyyy")+"-"+Empresa;
+            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA TIIM. \n\n Abrir sistema TIIM-->Ir a 'Sincronización' en menu-->En Pestaña 'Importar Ventas'-->Seleccionar archivo descargado desde correo (archivo Excel adjunto). Se mostrarán las Ventas a Importar-->Presionar botón Importar-->";
+            new AiresUtilerias.UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Email }, mensaje, archivosAdjuntos);
+
+            //MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Email + "-");
+            //}
+        }
+        public void ExportarVentas(int EmpresaId, DateTime Fecha, string Email)
+        {
+            try
+            {
+                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+                if (xlApp == null)
+                    MandaExcepcion("Excel NO esta instalado apropiadamente!!");
+
+                this.Cursor = Cursors.WaitCursor;
+
+                CargaEmpresas();
+                EntEmpresa empresaSeleccionada = ListaEmpresas.Where(P => P.Id == EmpresaId).ToList()[0];
+
+                List<EntPedido> pedidosVentas = ObtieneVentas(EmpresaId, Fecha, Fecha);
+                //SeleccionaEmail vEmail = new Pantallas.SeleccionaEmail();
+                //if (vEmail.ShowDialog() == DialogResult.OK)
+                //{
+
+                if (pedidosVentas.Count > 0)
+                {
+                    Workbook xlWorkBook;
+                    Worksheet xlWorkSheet;
+
+                    object misValue = System.Reflection.Missing.Value;
+                    xlWorkBook = xlApp.Workbooks.Add(misValue);
+                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+
+                    try
+                    {
+                        //agregaPedido
+                        //int ClienteId, string Detalle, string Observaciones, decimal Total, decimal Pago, 
+                        //DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId
+
+                        //AgregarProductoDetallePedido
+                        //(int PedidoId, int ProductoId, int Cantidad, decimal PrecioCosto, decimal PrecioVenta)
+
+                        //if (p.TipoProductoId == 1)
+                        //{
+                        //    vProd.ActualizaEstatusProductoDetalle(p, 2);//ESTATUS:2=ENTREGADO
+                        //    vProd.AumentaProducto(p.ProductoId, -p.Cantidad);
+                        //}
+
+                        // AumentaPagoPedido
+                        //(pedidoAgrega.Id, -pago);
+
+                        //agregaFactura
+                        //(Factura.EmpresaId, Factura.PedidoId, Factura.NumeroFactura, Factura.UUID, Factura.Fecha, Factura.Ruta);
+
+                        //--------------REN|COL----------//
+                        xlWorkSheet.Cells[1, 1] = "CLIENTEID";
+                        xlWorkSheet.Cells[1, 2] = "CLIENTE";
+                        xlWorkSheet.Cells[1, 3] = "PEDIDODETALLE";
+                        xlWorkSheet.Cells[1, 4] = "TOTAL";
+                        xlWorkSheet.Cells[1, 5] = "PAGO";
+                        xlWorkSheet.Cells[1, 6] = "FECHA";
+                        xlWorkSheet.Cells[1, 7] = "FACTURADO";
+                        xlWorkSheet.Cells[1, 8] = "PEDIDOESTATUSID";
+
+                        xlWorkSheet.Cells[1, 9] = "PRODUCTODETALLEID";
+                        xlWorkSheet.Cells[1, 10] = "CANTIDAD";
+                        xlWorkSheet.Cells[1, 11] = "PRECIOCOSTO";
+                        xlWorkSheet.Cells[1, 12] = "PRECIOVENTA";
+
+                        xlWorkSheet.Cells[1, 13] = "TIPOPRODUCTOID";
+                        xlWorkSheet.Cells[1, 14] = "PRODUCTOID";
+
+                        xlWorkSheet.Cells[1, 15] = "NUMEROFACTURA";
+                        xlWorkSheet.Cells[1, 16] = "UUID";
+                        xlWorkSheet.Cells[1, 17] = "FECHAFACTURA";
+                        xlWorkSheet.Cells[1, 18] = "RUTAFACTURA";
+                        //hacer rutina para obtener los archivos de facturas
+
+                        int ren = 2;
+                        foreach (EntPedido pe in pedidosVentas)
+                        {
+                            List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetallePorPedido(pe.Id);
+
+                            //p.Id = Convert.ToInt32(r["PED_ID"]);
+                            //p.Detalle = r["PED_DETALLE"].ToString();
+                            //p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
+                            //p.Cliente = r["CLI_NOMBRE"].ToString();
+                            //p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+                            //p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
+                            //p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
+                            //p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
+                            //p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
+                            //p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
+                            //p.Facturado = Convert.ToBoolean(r["FAC_ID"]);
+                            //p.Factura = "AA" + r["FAC_NUMEROFACTURA"].ToString();
+                            //p.Factura = "S/F";
+                            //p.UUID = r["FAC_UUID"].ToString();
+                            //p.RutaFactura = r["FAC_RUTA"].ToString();
+                            //p.FechaEntrega = Convert.ToDateTime(r["FAC_FECHA"])
+
+                            //p.Id = Convert.ToInt32(r["PRODET_ID"]);
+                            //p.ProductoId = Convert.ToInt32(r["PRO_ID"]);
+                            //p.TipoProductoId = Convert.ToInt32(r["PRO_TIPOPRODUCTOID"]);
+                            //p.Codigo = r["PRO_CODIGO"].ToString();
+                            //p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+                            //p.Cantidad = Convert.ToInt32(r["PROPED_CANTIDAD"]);
+                            //p.PrecioCosto = Convert.ToDecimal(r["PROPED_PRECIOCOSTO"]);
+                            //p.PrecioVenta = Convert.ToDecimal(r["PROPED_PRECIOVENTA"]);
+                            //p.Serie = r["PRODET_SERIE"].ToString();
+
+                            foreach (EntProducto p in listaProductos)
+                            {
+                                xlWorkSheet.Cells[ren, 1] = pe.ClienteId;           // "CLIENTEID";
+                                xlWorkSheet.Cells[ren, 2] = pe.Cliente;             // "CLIENTE";
+                                xlWorkSheet.Cells[ren, 3] = pe.Detalle;             // "PEDIDODETALLE";
+                                xlWorkSheet.Cells[ren, 4] = pe.Total;               // "TOTAL";
+                                xlWorkSheet.Cells[ren, 5] = pe.Pago;                //"PAGO";
+                                xlWorkSheet.Cells[ren, 6] = pe.Fecha;               //"FECHA";
+                                xlWorkSheet.Cells[ren, 7] = pe.Facturado;           // "FACTURADO";
+                                xlWorkSheet.Cells[ren, 8] = pe.EstatusId;           // "PEDIDOESTATUSID";
+
+                                xlWorkSheet.Cells[ren, 9] = p.Id;                   // "PRODUCTODETALLEID";
+                                xlWorkSheet.Cells[ren, 10] = p.Cantidad;            // "CANTIDAD";
+                                xlWorkSheet.Cells[ren, 11] = p.PrecioCosto;         // "PRECIOCOSTO";
+                                xlWorkSheet.Cells[ren, 12] = p.PrecioVenta;         // "PRECIOVENTA";
+
+                                xlWorkSheet.Cells[ren, 13] = p.TipoProductoId;      // "TIPOPRODUCTOID";
+                                xlWorkSheet.Cells[ren, 14] = p.ProductoId;          // "PRODUCTOID";
+
+                                xlWorkSheet.Cells[ren, 15] = pe.Factura;            // "NUMEROFACTURA";
+                                xlWorkSheet.Cells[ren, 16] = pe.UUID;               // "UUID";
+                                xlWorkSheet.Cells[ren, 17] = pe.FechaEntrega;       // "FECHAFACTURA";
+                                xlWorkSheet.Cells[ren, 18] = pe.RutaFactura;        // "RUTAFACTURA";
+                                ren++;
+                            }
+                        }
+
+                        //EntCatalogoGenerico ingreso = ObtieneCatalogoGenericoFromGV(gvIngresos);
+                        string rutaExportacion = string.Format(@"c:\TIIM\EXPORTACIONES\Ventas {0:yyyy-MM-dd} {1}.xls", Fecha, empresaSeleccionada.Nombre);
+
+                        xlWorkBook.SaveAs(rutaExportacion, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                        xlWorkBook.Close(true, misValue, misValue);
+                        xlApp.Quit();
+
+                        Marshal.ReleaseComObject(xlWorkSheet);
+                        Marshal.ReleaseComObject(xlWorkBook);
+                        Marshal.ReleaseComObject(xlApp);
+
+                        EnviaCorreoArchivo(Email, Fecha, rutaExportacion, empresaSeleccionada.Nombre);
+                    }
+                    catch (Exception ex)
+                    {
+                        xlWorkBook.Close(true, misValue, misValue);
+                        xlApp.Quit();
+
+                        Marshal.ReleaseComObject(xlWorkSheet);
+                        Marshal.ReleaseComObject(xlWorkBook);
+                        Marshal.ReleaseComObject(xlApp);
+                        MandaExcepcion(ex.Message);
+                    }
+                }
+                //MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xls");
+                //}
+                this.Cursor = Cursors.Default;
+            }
+            catch (Exception ex) { MuestraExcepcion(ex, "ERROR EN LA EXPORTACIÓN"); }
         }
 
 
@@ -425,7 +616,7 @@ namespace Aires.Pantallas
                             //throw new Exception("error");
                             //pahtArchivosFactura = PathClienteDirectorioFacturas;
                             //pahtArchivosFactura = @"C:\TIIM\Facturacion\Facturas\RAFAEL GIL ARMENTA\20170105122126";
-                            EnviaCorreo(pedidoSeleccionado, cliente, PathClienteDirectorioFacturas);
+                            EnviaCorreo(cliente, PathClienteDirectorioFacturas);
                         }
                         catch (Exception ex)
                         {
@@ -459,7 +650,7 @@ namespace Aires.Pantallas
                         //throw new Exception("error");
                         //pahtArchivosFactura = PathClienteDirectorioFacturas;
                         //pahtArchivosFactura = @"C:\TIIM\Facturacion\Facturas\RAFAEL GIL ARMENTA\20170105122126";
-                        EnviaCorreo(pedidoSeleccionado, cliente, pedidoSeleccionado.RutaFactura);
+                        EnviaCorreo(cliente, pedidoSeleccionado.RutaFactura);
                     }
                     catch (Exception ex)
                     {

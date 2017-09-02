@@ -203,6 +203,16 @@ namespace Aires.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Mail_reply {
+            get {
+                object obj = ResourceManager.GetObject("Mail_reply", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Mail_Search__chico_ {
             get {
                 object obj = ResourceManager.GetObject("Mail-Search (chico)", resourceCulture);
@@ -476,6 +486,16 @@ namespace Aires.Properties {
         internal static System.Drawing.Bitmap Search {
             get {
                 object obj = ResourceManager.GetObject("Search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SINCRONIZAcion {
+            get {
+                object obj = ResourceManager.GetObject("SINCRONIZAcion", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -26,7 +26,7 @@ namespace AiresUtilerias
              * y Contrasena correspondiente
              */
 
-            server.Credentials = new System.Net.NetworkCredential("distribuidoralmmirage@outlook.com", "lmmirage01");
+            server.Credentials = new System.Net.NetworkCredential("pavel_tiim@hotmail.com", "tiimzoe10");
             server.EnableSsl = true;
         }
 
@@ -43,7 +43,7 @@ namespace AiresUtilerias
 
             mnsj.To.Add(new MailAddress(Para));
 
-            mnsj.From = new MailAddress("distribuidoralmmirage@outlook.com", "Distribuidora LM mirage");
+            mnsj.From = new MailAddress("pavel_tiim@hotmail.com", "Serdan Refrigeraciones");
 
             /* Si deseamos Adjuntar algún archivo*/
             //mnsj.Attachments.Add(new Attachment("C:\\archivo.pdf"));

@@ -56,6 +56,7 @@
     <Compile Include="EntPedido.cs" />
     <Compile Include="EntProducto.cs" />
     <Compile Include="EntProveedor.cs" />
+    <Compile Include="EntUsuario.cs" />
     <Compile Include="EntVencimiento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

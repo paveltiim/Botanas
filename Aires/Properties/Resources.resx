@@ -172,6 +172,9 @@
   <data name="Paper-Search (chico)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Paper-Search (chico).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Mail_reply" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Mail_reply.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Graph" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Graph.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -255,5 +258,8 @@
   </data>
   <data name="Materiales" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Materiales.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SINCRONIZAcion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SINCRONIZAcion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

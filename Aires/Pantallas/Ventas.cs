@@ -1,12 +1,14 @@
 ﻿using AiresEntidades;
 using AiresNegocio;
 using AiresUtilerias;
+//using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -90,16 +92,16 @@ namespace Aires.Pantallas
             }
             void CargaVentasEnPantallas()
             {
-                Form vRepVent = BuscaFormaBase(new Reportes().Titulo);
-                if (vRepVent != null)
-                    ((Reportes)vRepVent).CargaGvPedidos(Program.EmpresaSeleccionada.Id);
+                Form vRegVent = BuscaFormaBase(new Registros().Titulo);
+                if (vRegVent != null)
+                    ((Registros)vRegVent).CargaGvPedidos(Program.EmpresaSeleccionada.Id);
             }
 
             /// <summary>
             /// Agrega nuevo registro del Pedido solicitado.
             /// </summary>
             /// <param name="pedido"></param>
-            EntPedido AgregarPedido(int ClienteId, string Detalle, string Observaciones, decimal Total, decimal Pago, DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId)
+            public EntPedido AgregarPedido(int ClienteId, string Detalle, string Observaciones, decimal Total, decimal Pago, DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId)
             {
                 EntPedido pedido = new EntPedido()
                 {
@@ -341,6 +343,239 @@ namespace Aires.Pantallas
         
         #endregion
 
+        /// <summary>
+        /// Verifica que se halla seleccionado cliente.
+        /// Revisa el SelectedIndex de cmbClientes. Si su valor es 0 o -1, Manda excepción y Focus() en cmbClientes.
+        /// </summary>
+        void VerificaClienteSeleccionado()
+        {
+            if (ClienteSeleccionado == null)
+                throw new Exception("Seleccione un Cliente");
+        }
+        void VerificaProductosSeleccionados(List<EntProducto> ProductosSeleccionados)
+        {
+            if (ProductosSeleccionados==null ||ProductosSeleccionados.Count == 0)
+                throw new Exception("Agregue al menos un producto.");
+        }
+
+        /// <summary>
+        /// Muestra Ventana emergente para Confirmar Envio de Correo, llama los métodos Imprime.AsignaValoresParametrosImpresionDatosCliente y Imprime.AsignaValoresParametrosImpresion.
+        /// Envia correo electronico por medio de la clase UtiCorreo.
+        /// </summary>
+        /// <param name="Pedido"></param>
+        /// <param name="Cliente"></param>
+        /// <param name="NotaVenta"></param>
+        /// <param name="Presupuesto"></param>
+        void EnviaCorreo(EntEmpresa Empresa, EntPedido Pedido, EntCliente Cliente, string PathArchivosFactura)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+
+            List<string> archivosAdjuntos = new List<string>();
+
+            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(PathArchivosFactura);
+            foreach (System.IO.FileInfo file in dir.GetFiles())
+            {
+                archivosAdjuntos.Add(file.FullName);
+            }
+
+            string asunto = "FACTURA -" + Empresa.NombreFiscal + "- " + DateTime.Today.ToString("dd MMM");
+            string mensaje = "Apreciable " + Cliente.NombreFiscal + ", \n\n Le enviamos su debido comprobante fiscal solicitado, recordandole que estamos a sus ordenes para cualquier duda o aclaración. \n";
+            mensaje += "\n Agradecemos su preferencia y esperamos seguirle atendiendo como se merece. \n";
+            mensaje += "\n Atte. \n" + Empresa.NombreFiscal;
+            new UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3 }, mensaje, archivosAdjuntos);
+
+            MessageBox.Show("El Correo se ha Enviado correctamente, a la(s) dirección(es): \n " + Cliente.Email + " \n " + Cliente.Email2 + " \n " + Cliente.Email3);
+            //}
+        }
+        void CargaClientesDeudaEnPantallas()
+        {
+            Form vCli = BuscaFormaBase(new ClientesCredito().Titulo);
+            if (vCli != null)
+            {
+                ((ClientesCredito)vCli).CargaGvClientesCredito();
+                ((ClientesCredito)vCli).CargaGvPedidosClientesCredito();
+            }
+        }
+        //string ObtieneUltimaFactura()
+        //{
+        //    int ultimaFactura = ConvierteTextoAInteger(new BusFacturas().ObtieneUltimaFactura().NumeroFactura);
+        //    ultimaFactura++;
+
+        //    return ultimaFactura.ToString();
+        //}
+        string ObtieneUltimaFactura(int EmpresaId)
+        {
+            int ultimaFactura = ConvierteTextoAInteger(new BusFacturas().ObtieneUltimaFactura(EmpresaId).NumeroFactura);
+            ultimaFactura++;
+
+            return ultimaFactura.ToString();
+        }
+
+        void ActualizaEstatusPedido(EntPedido Pedido, int EstatusId)
+        {
+            Pedido.EstatusId = EstatusId;
+            new BusPedidos().ActualizaEstatusPedido(Pedido);
+        }
+        void ActualizaEstatusProductoDetallePedido(EntPedido Pedido, bool Estatus)
+        {
+            Pedido.Estatus = Estatus;
+            new BusPedidos().ActualizaEstatusProductoDetallePedido(Pedido);
+        }
+
+        string EncuentraArchivo(string Ruta,string Extension)
+        {
+            System.IO.DirectoryInfo di= new System.IO.DirectoryInfo(Ruta);
+            
+            System.IO.FileInfo [] fi = di.GetFiles();
+            foreach(System.IO.FileInfo f in fi)
+            {
+                if (f.Extension == Extension)
+                    return f.Name;
+            }
+            return "";
+        }
+        
+        EntFactura EnviarPreFactura(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
+                                    string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
+                                    decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
+        {
+            string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
+            if (!System.IO.Directory.Exists(pathClienteDirectorio))
+                System.IO.Directory.CreateDirectory(pathClienteDirectorio);
+
+            string pathClienteDirectorioFacturas = pathClienteDirectorio + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss");
+            System.IO.Directory.CreateDirectory(pathClienteDirectorioFacturas);
+
+            UtiFacturacionPruebas factura = new UtiFacturacionPruebas();
+            MessageBox.Show("ENVÍO PRE-FACTURA");
+
+
+
+            List<EntProducto> productosDetalle =ListaProductos;
+
+            //ListaProductos = new BusProductos().ObtieneProductosPorPedido(Pedido.Id);
+
+            List<EntProducto> ListaProductosFactura = new List<EntProducto>();
+            string codigo="";
+            int cantidad = 1;
+            foreach(EntProducto p in productosDetalle.OrderBy(P=>P.Codigo).ToList())
+            {
+                if (p.Codigo != codigo)
+                {
+                    EntProducto pneue = new EntProducto() { Id = p.Id, Codigo=p.Codigo, Serie=p.Serie, Descripcion=p.Descripcion, TipoUnidad=p.TipoUnidad, Cantidad=p.Cantidad, PrecioVenta = p.PrecioVenta, ProductoId = p.ProductoId };
+                    //pneue.Descripcion = p.Descripcion.PadRight(100, '°');
+                    pneue.Descripcion += " ";
+
+                    ListaProductosFactura.Add(pneue);
+                    codigo = pneue.Codigo;
+                    cantidad = 1;
+                }
+                else
+                {
+                    cantidad++;
+                    ListaProductosFactura[ListaProductosFactura.Count - 1].Cantidad++;
+                }
+                if (!string.IsNullOrWhiteSpace(p.Serie))
+                    ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += p.Serie + " | ";
+            }
+
+            //foreach (EntProducto p in ListaProductosFactura)
+            //{
+            //    p.Descripcion = p.Descripcion.PadRight(100, '.');
+            //    p.Descripcion += " ";
+
+            //    foreach (EntProducto pd in productosDetalle.Where(P => P.ProductoId == p.Id))
+            //    {
+            //        if (!string.IsNullOrWhiteSpace(pd.Serie))
+            //            p.Descripcion += pd.Serie + " | ";
+            //    }
+            //}
+            //Pedido.Factura = txtNumeroFactura.Text;
+            string uuid = factura.Facturar(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
+                                            NumeroCuenta, pathClienteDirectorioFacturas,
+                                            CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS);
+            EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
+
+            return fact;
+        }
+
+        EntFactura EnviarFactura(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
+                                    string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
+                                    decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
+        {
+            string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
+            if (!System.IO.Directory.Exists(pathClienteDirectorio))
+                System.IO.Directory.CreateDirectory(pathClienteDirectorio);
+
+            string pathClienteDirectorioFacturas = pathClienteDirectorio + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss");
+            System.IO.Directory.CreateDirectory(pathClienteDirectorioFacturas);
+
+            //FacturacionPrueba factura = new FacturacionPrueba();
+            //MessageBox.Show("FACTURACIÓN DE PRUEBA");
+            UtiFacturacion factura = new UtiFacturacion();
+            
+            List<EntProducto> productosDetalle = ListaProductos;
+            ListaProductos = new BusProductos().ObtieneProductosPorPedido(Pedido.Id);
+          
+            foreach (EntProducto p in ListaProductos)
+            {
+                p.Descripcion = p.Descripcion.PadRight(100, '.');
+                p.Descripcion += " ";
+
+                foreach (EntProducto pd in productosDetalle.Where(P => P.ProductoId == p.Id))
+                {
+                    if (!string.IsNullOrWhiteSpace(pd.Serie))
+                        p.Descripcion += pd.Serie +" | ";
+                }
+            }
+
+            string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
+                                           NumeroCuenta, pathClienteDirectorioFacturas,
+                                           CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS);
+            
+            EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
+
+            return fact;// pathClienteDirectorioFacturas;
+        }
+        EntFactura EnviarFacturaPrueba(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
+                                   string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
+                                   decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
+        {
+            string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
+            if (!System.IO.Directory.Exists(pathClienteDirectorio))
+                System.IO.Directory.CreateDirectory(pathClienteDirectorio);
+
+            string pathClienteDirectorioFacturas = pathClienteDirectorio + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss");
+            System.IO.Directory.CreateDirectory(pathClienteDirectorioFacturas);
+
+            UtiFacturacionPruebas factura = new UtiFacturacionPruebas();
+            MessageBox.Show("FACTURACIÓN DE PRUEBA");
+            //UtiFacturacion factura = new UtiFacturacion();
+
+            List<EntProducto> productosDetalle = ListaProductos;
+            ListaProductos = new BusProductos().ObtieneProductosPorPedido(Pedido.Id);
+
+            foreach (EntProducto p in ListaProductos)
+            {
+                p.Descripcion = p.Descripcion.PadRight(100, '.');
+                p.Descripcion += " ";
+
+                foreach (EntProducto pd in productosDetalle.Where(P => P.ProductoId == p.Id))
+                {
+                    if (!string.IsNullOrWhiteSpace(pd.Serie))
+                        p.Descripcion += pd.Serie + " | ";
+                }
+            }
+
+            string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
+                                           NumeroCuenta, pathClienteDirectorioFacturas,
+                                           CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS);
+
+            EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
+
+            return fact;// pathClienteDirectorioFacturas;
+        }
+
         private void Ventas_Load(object sender, EventArgs e)
         {
             try
@@ -350,11 +585,13 @@ namespace Aires.Pantallas
 
                 if (Program.EmpresaSeleccionada == null)
                     Program.EmpresaSeleccionada = SeleccionaEmpresa();
-
-                cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
-                CargaClientes(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
-                ClienteSeleccionado = null;
+                if (Program.EmpresaSeleccionada != null)
+                {
+                    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
+                    CargaClientes(Program.EmpresaSeleccionada.Id);
+                    CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
+                    ClienteSeleccionado = null;
+                }
             }
             catch (Exception ex)
             {
@@ -590,239 +827,6 @@ namespace Aires.Pantallas
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
         
-        /// <summary>
-        /// Verifica que se halla seleccionado cliente.
-        /// Revisa el SelectedIndex de cmbClientes. Si su valor es 0 o -1, Manda excepción y Focus() en cmbClientes.
-        /// </summary>
-        void VerificaClienteSeleccionado()
-        {
-            if (ClienteSeleccionado == null)
-                throw new Exception("Seleccione un Cliente");
-        }
-        void VerificaProductosSeleccionados(List<EntProducto> ProductosSeleccionados)
-        {
-            if (ProductosSeleccionados==null ||ProductosSeleccionados.Count == 0)
-                throw new Exception("Agregue al menos un producto.");
-        }
-
-        /// <summary>
-        /// Muestra Ventana emergente para Confirmar Envio de Correo, llama los métodos Imprime.AsignaValoresParametrosImpresionDatosCliente y Imprime.AsignaValoresParametrosImpresion.
-        /// Envia correo electronico por medio de la clase UtiCorreo.
-        /// </summary>
-        /// <param name="Pedido"></param>
-        /// <param name="Cliente"></param>
-        /// <param name="NotaVenta"></param>
-        /// <param name="Presupuesto"></param>
-        void EnviaCorreo(EntEmpresa Empresa, EntPedido Pedido, EntCliente Cliente, string PathArchivosFactura)
-        {
-            Cursor.Current = Cursors.WaitCursor;
-
-            List<string> archivosAdjuntos = new List<string>();
-
-            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(PathArchivosFactura);
-            foreach (System.IO.FileInfo file in dir.GetFiles())
-            {
-                archivosAdjuntos.Add(file.FullName);
-            }
-
-            string asunto = "FACTURA -" + Empresa.NombreFiscal + "- " + DateTime.Today.ToString("dd MMM");
-            string mensaje = "Apreciable " + Cliente.NombreFiscal + ", \n\n Le enviamos su debido comprobante fiscal solicitado, recordandole que estamos a sus ordenes para cualquier duda o aclaración. \n";
-            mensaje += "\n Agradecemos su preferencia y esperamos seguirle atendiendo como se merece. \n";
-            mensaje += "\n Atte. \n" + Empresa.NombreFiscal;
-            new UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3 }, mensaje, archivosAdjuntos);
-
-            MessageBox.Show("El Correo se ha Enviado correctamente, a la(s) dirección(es): \n " + Cliente.Email + " \n " + Cliente.Email2 + " \n " + Cliente.Email3);
-            //}
-        }
-        void CargaClientesDeudaEnPantallas()
-        {
-            Form vCli = BuscaFormaBase(new ClientesCredito().Titulo);
-            if (vCli != null)
-            {
-                ((ClientesCredito)vCli).CargaGvClientesCredito();
-                ((ClientesCredito)vCli).CargaGvPedidosClientesCredito();
-            }
-        }
-        //string ObtieneUltimaFactura()
-        //{
-        //    int ultimaFactura = ConvierteTextoAInteger(new BusFacturas().ObtieneUltimaFactura().NumeroFactura);
-        //    ultimaFactura++;
-
-        //    return ultimaFactura.ToString();
-        //}
-        string ObtieneUltimaFactura(int EmpresaId)
-        {
-            int ultimaFactura = ConvierteTextoAInteger(new BusFacturas().ObtieneUltimaFactura(EmpresaId).NumeroFactura);
-            ultimaFactura++;
-
-            return ultimaFactura.ToString();
-        }
-
-        void ActualizaEstatusPedido(EntPedido Pedido, int EstatusId)
-        {
-            Pedido.EstatusId = EstatusId;
-            new BusPedidos().ActualizaEstatusPedido(Pedido);
-        }
-        void ActualizaEstatusProductoDetallePedido(EntPedido Pedido, bool Estatus)
-        {
-            Pedido.Estatus = Estatus;
-            new BusPedidos().ActualizaEstatusProductoDetallePedido(Pedido);
-        }
-
-        string EncuentraArchivo(string Ruta,string Extension)
-        {
-            System.IO.DirectoryInfo di= new System.IO.DirectoryInfo(Ruta);
-            
-            System.IO.FileInfo [] fi = di.GetFiles();
-            foreach(System.IO.FileInfo f in fi)
-            {
-                if (f.Extension == Extension)
-                    return f.Name;
-            }
-            return "";
-        }
-        
-        EntFactura EnviarPreFactura(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
-                                    string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
-                                    decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
-        {
-            string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
-            if (!System.IO.Directory.Exists(pathClienteDirectorio))
-                System.IO.Directory.CreateDirectory(pathClienteDirectorio);
-
-            string pathClienteDirectorioFacturas = pathClienteDirectorio + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss");
-            System.IO.Directory.CreateDirectory(pathClienteDirectorioFacturas);
-
-            UtiFacturacionPruebas factura = new UtiFacturacionPruebas();
-            MessageBox.Show("ENVÍO PRE-FACTURA");
-
-
-
-            List<EntProducto> productosDetalle =ListaProductos;
-
-            //ListaProductos = new BusProductos().ObtieneProductosPorPedido(Pedido.Id);
-
-            List<EntProducto> ListaProductosFactura = new List<EntProducto>();
-            string codigo="";
-            int cantidad = 1;
-            foreach(EntProducto p in productosDetalle.OrderBy(P=>P.Codigo).ToList())
-            {
-                if (p.Codigo != codigo)
-                {
-                    EntProducto pneue = new EntProducto() { Id = p.Id, Codigo=p.Codigo, Serie=p.Serie, Descripcion=p.Descripcion, TipoUnidad=p.TipoUnidad, Cantidad=p.Cantidad, PrecioVenta = p.PrecioVenta, ProductoId = p.ProductoId };
-                    //pneue.Descripcion = p.Descripcion.PadRight(100, '°');
-                    pneue.Descripcion += " ";
-
-                    ListaProductosFactura.Add(pneue);
-                    codigo = pneue.Codigo;
-                    cantidad = 1;
-                }
-                else
-                {
-                    cantidad++;
-                    ListaProductosFactura[ListaProductosFactura.Count - 1].Cantidad++;
-                }
-                if (!string.IsNullOrWhiteSpace(p.Serie))
-                    ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += p.Serie + " | ";
-            }
-
-            //foreach (EntProducto p in ListaProductosFactura)
-            //{
-            //    p.Descripcion = p.Descripcion.PadRight(100, '.');
-            //    p.Descripcion += " ";
-
-            //    foreach (EntProducto pd in productosDetalle.Where(P => P.ProductoId == p.Id))
-            //    {
-            //        if (!string.IsNullOrWhiteSpace(pd.Serie))
-            //            p.Descripcion += pd.Serie + " | ";
-            //    }
-            //}
-            //Pedido.Factura = txtNumeroFactura.Text;
-            string uuid = factura.Facturar(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
-                                            NumeroCuenta, pathClienteDirectorioFacturas,
-                                            CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS);
-            EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
-
-            return fact;
-        }
-
-        EntFactura EnviarFactura(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
-                                    string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
-                                    decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
-        {
-            string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
-            if (!System.IO.Directory.Exists(pathClienteDirectorio))
-                System.IO.Directory.CreateDirectory(pathClienteDirectorio);
-
-            string pathClienteDirectorioFacturas = pathClienteDirectorio + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss");
-            System.IO.Directory.CreateDirectory(pathClienteDirectorioFacturas);
-
-            //FacturacionPrueba factura = new FacturacionPrueba();
-            //MessageBox.Show("FACTURACIÓN DE PRUEBA");
-            UtiFacturacion factura = new UtiFacturacion();
-            
-            List<EntProducto> productosDetalle = ListaProductos;
-            ListaProductos = new BusProductos().ObtieneProductosPorPedido(Pedido.Id);
-          
-            foreach (EntProducto p in ListaProductos)
-            {
-                p.Descripcion = p.Descripcion.PadRight(100, '.');
-                p.Descripcion += " ";
-
-                foreach (EntProducto pd in productosDetalle.Where(P => P.ProductoId == p.Id))
-                {
-                    if (!string.IsNullOrWhiteSpace(pd.Serie))
-                        p.Descripcion += pd.Serie +" | ";
-                }
-            }
-
-            string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
-                                           NumeroCuenta, pathClienteDirectorioFacturas,
-                                           CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS);
-            
-            EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
-
-            return fact;// pathClienteDirectorioFacturas;
-        }
-        EntFactura EnviarFacturaPrueba(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
-                                   string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
-                                   decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
-        {
-            string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
-            if (!System.IO.Directory.Exists(pathClienteDirectorio))
-                System.IO.Directory.CreateDirectory(pathClienteDirectorio);
-
-            string pathClienteDirectorioFacturas = pathClienteDirectorio + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss");
-            System.IO.Directory.CreateDirectory(pathClienteDirectorioFacturas);
-
-            UtiFacturacionPruebas factura = new UtiFacturacionPruebas();
-            MessageBox.Show("FACTURACIÓN DE PRUEBA");
-            //UtiFacturacion factura = new UtiFacturacion();
-
-            List<EntProducto> productosDetalle = ListaProductos;
-            ListaProductos = new BusProductos().ObtieneProductosPorPedido(Pedido.Id);
-
-            foreach (EntProducto p in ListaProductos)
-            {
-                p.Descripcion = p.Descripcion.PadRight(100, '.');
-                p.Descripcion += " ";
-
-                foreach (EntProducto pd in productosDetalle.Where(P => P.ProductoId == p.Id))
-                {
-                    if (!string.IsNullOrWhiteSpace(pd.Serie))
-                        p.Descripcion += pd.Serie + " | ";
-                }
-            }
-
-            string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
-                                           NumeroCuenta, pathClienteDirectorioFacturas,
-                                           CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS);
-
-            EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
-
-            return fact;// pathClienteDirectorioFacturas;
-        }
-
         private void txtPago_TextChanged(object sender, EventArgs e)
         {
             try {

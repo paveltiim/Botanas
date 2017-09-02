@@ -11,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
+
+using System.Runtime.InteropServices;
 
 namespace Aires.Pantallas
 {
@@ -20,8 +23,13 @@ namespace Aires.Pantallas
         {
             InitializeComponent();
         }
-        List<EntEmpresa> ListaEmpresas;
+        public void VerificaEmpresa()
+        {
+            cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
+        }
 
+        List<EntEmpresa> ListaEmpresas;
+        
         /// <summary>
         /// 
         /// 
@@ -118,7 +126,7 @@ namespace Aires.Pantallas
             Program.CambiaEmpresa = true;
         }
 
-        private void Reportes_Load(object sender, EventArgs e)
+        private void Inventarios_Load(object sender, EventArgs e)
         {
             try
             {
@@ -135,12 +143,14 @@ namespace Aires.Pantallas
                     cmbMesesEntradas.SelectedIndex = DateTime.Today.Month - 1;
                     dtpEntradasFechaDesde.Value = DateTime.Today;
 
-                    //CargaEntradas(new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1)));
-                    CargaIngresosProductos(new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1)));
-                    CargaInventario();
+                    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
 
-                    //this.rvInventario.RefreshReport();
-                    //this.rvEntradas.RefreshReport();
+                    ////CargaEntradas(new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1)));
+                    //CargaIngresosProductos(new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1)));
+                    //CargaInventario();
+
+                    ////this.rvInventario.RefreshReport();
+                    ////this.rvEntradas.RefreshReport();
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -423,6 +433,151 @@ namespace Aires.Pantallas
                 CargaInventario();
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+                if (xlApp == null)
+                    MandaExcepcion("Excel NO esta instalado apropiadamente!!");
+
+                SeleccionaEmail vEmail = new Pantallas.SeleccionaEmail();
+                if (vEmail.ShowDialog() == DialogResult.OK)
+                {
+                    this.Cursor = Cursors.WaitCursor;
+
+                    Workbook xlWorkBook;
+                    Worksheet xlWorkSheet;
+
+                    object misValue = System.Reflection.Missing.Value;
+                    xlWorkBook = xlApp.Workbooks.Add(misValue);
+                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                    //--------------REN|COL----------//
+                    xlWorkSheet.Cells[1, 1] = "ID";
+                    xlWorkSheet.Cells[1, 2] = "PRODUCTOID";
+                    xlWorkSheet.Cells[1, 3] = "CODIGO";
+                    xlWorkSheet.Cells[1, 4] = "DESCRIPCION";
+                    xlWorkSheet.Cells[1, 5] = "TIPOPRODUCTOID";
+                    xlWorkSheet.Cells[1, 6] = "TIPOPRODUCTO";
+                    xlWorkSheet.Cells[1, 7] = "SERIE";
+                    xlWorkSheet.Cells[1, 8] = "PRECIOCOSTO";
+                    xlWorkSheet.Cells[1, 9] = "PRECIOVENTA";
+
+                    xlWorkSheet.Cells[1, 10] = "INGRESOID";
+                    xlWorkSheet.Cells[1, 11] = "INGRESO";
+                    xlWorkSheet.Cells[1, 12] = "FECHAINGRESO";
+
+                    int ren = 2;
+                    foreach (EntCatalogoGenerico i in ObtieneListaGenericaFromGV(gvIngresos))
+                    {
+                        //EntCatalogoGenerico ingreso = ObtieneListaGenericaFromGV(gvIngresos)[gvIngresos.CurrentRow.Index];
+                        //CargaEntradas(ingreso.Id);
+
+                        List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetallePorIngreso(i.Id);
+                        //foreach (EntProducto p in listaProductos)
+                        //{
+                        //    new BusProductos().ObtieneProductosDetallePorIngreso(ingreso.Id).Where(P => P.ProductoId == p.Id).ToList();
+                        //}
+
+
+                        foreach (EntProducto p in listaProductos)
+                        {
+                            xlWorkSheet.Cells[ren, 1] = p.Id;           // "ID";
+                            xlWorkSheet.Cells[ren, 2] = p.ProductoId;   // "PRODUCTOID";
+                            xlWorkSheet.Cells[ren, 3] = p.Codigo;       // "CODIGO";
+                            xlWorkSheet.Cells[ren, 4] = p.Descripcion;  // "DESCRIPCION";
+
+                            xlWorkSheet.Cells[ren, 5] = p.TipoProductoId;  //"TIPOPRODUCTOID";
+                            xlWorkSheet.Cells[ren, 6] = p.TipoProducto;  //"TIPOPRODUCTO";
+                            xlWorkSheet.Cells[ren, 7] = p.Serie;        // "SERIE";
+                            xlWorkSheet.Cells[ren, 8] = p.PrecioCosto;  // "PRECIOCOSTO";
+                            xlWorkSheet.Cells[ren, 9] = p.PrecioVenta;  // "PRECIOVENTA";
+                            xlWorkSheet.Cells[ren, 10] = p.IngresoId;    // "INGRESOID";
+                            xlWorkSheet.Cells[ren, 11] = i.Descripcion;  // "INGRESO";
+                            xlWorkSheet.Cells[ren, 12] = i.Fecha;       // "INGRESOFECHA";
+                            ren++;
+                        }
+                    }
+
+                    EntCatalogoGenerico ingreso = ObtieneCatalogoGenericoFromGV(gvIngresos);
+                    string rutaExportacion = string.Format(@"c:\TIIM\EXPORTACIONES\Entradas {0:yyyy-MM-dd}.xls", ingreso.Fecha);
+
+                    try
+                    {
+                        xlWorkBook.SaveAs(rutaExportacion, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                        xlWorkBook.Close(true, misValue, misValue);
+                        xlApp.Quit();
+
+                        Marshal.ReleaseComObject(xlWorkSheet);
+                        Marshal.ReleaseComObject(xlWorkBook);
+                        Marshal.ReleaseComObject(xlApp);
+
+                        EnviaCorreoArchivo(vEmail.EmailSeleccionado, ingreso.Fecha, rutaExportacion);
+                    }
+                    catch (Exception ex){
+                        xlWorkBook.Close(true, misValue, misValue);
+                        xlApp.Quit();
+
+                        Marshal.ReleaseComObject(xlWorkSheet);
+                        Marshal.ReleaseComObject(xlWorkBook);
+                        Marshal.ReleaseComObject(xlApp);
+                        MandaExcepcion(ex.Message);
+                    }
+                    //MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xls");
+                }
+                this.Cursor = Cursors.Default;
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+        /// <summary>
+        /// Muestra Ventana emergente para Confirmar Envio de Correo, llama los métodos Imprime.AsignaValoresParametrosImpresionDatosCliente y Imprime.AsignaValoresParametrosImpresion.
+        /// Envia correo electronico por medio de la clase UtiCorreo.
+        /// </summary>
+        void EnviaCorreo(string Email, DateTime Fecha, string PathArchivos)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+
+            List<string> archivosAdjuntos = new List<string>();
+
+            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(PathArchivos);
+            foreach (System.IO.FileInfo file in dir.GetFiles())
+            {
+                archivosAdjuntos.Add(file.FullName);
+            }
+
+            EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
+            string asunto = "COMPRAS DE PRODUCTOS -" + Fecha.ToString("dd MMM yyyy");
+            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA TIIM";
+            new UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Email }, mensaje, archivosAdjuntos);
+
+            MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Email + "-");
+            //}
+        }
+        void EnviaCorreoArchivo(string Email, DateTime Fecha, string PathArchivo)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+
+            List<string> archivosAdjuntos = new List<string>();
+
+            //System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(PathArchivos);
+            //foreach (System.IO.FileInfo file in dir.GetFiles())
+            //{
+            //    archivosAdjuntos.Add(file.FullName);
+            //}
+            System.IO.FileInfo file = new System.IO.FileInfo(PathArchivo);
+            archivosAdjuntos.Add(file.FullName);
+
+            EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
+            string asunto = "COMPRAS DE PRODUCTOS -" + Fecha.ToString("dd MMM yyyy");
+            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA TIIM. \n\n Abrir sistema TIIM-->Ir a 'Sincronización' en menu-->En Pestaña 'Importar Entradas'-->Seleccionar archivo descargado desde correo (archivo Excel adjunto). Se mostrarán productos a Importar-->Presionar botón Importar";
+            new UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Email }, mensaje, archivosAdjuntos);
+
+            MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Email + "-");
+            //}
         }
     }
 }

@@ -349,6 +349,9 @@ namespace AiresNegocio
                         p.Factura = "AA" + r["FAC_NUMEROFACTURA"].ToString();
                     else
                         p.Factura = "S/F";
+                    p.UUID = r["FAC_UUID"].ToString();
+                    p.RutaFactura = r["FAC_RUTA"].ToString();
+                    p.FechaEntrega = Convert.ToDateTime(r["FAC_FECHA"]);
                     lst.Add(p);
                 }
                 return lst;

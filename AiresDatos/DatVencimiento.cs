@@ -41,5 +41,23 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
         }
+
+        public DataTable obtieneRegistroSincronizacion(DateTime Fecha)
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneRegistroSincronizacionPorFecha", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("Fecha", Fecha);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
     }
 }

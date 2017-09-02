@@ -62,7 +62,7 @@ namespace Aires.Pantallas
                 }
             }
 
-            EntProducto AgregaProducto(int TipoProductoId, string Codigo, string Descripcion)
+            public EntProducto AgregaProducto(int TipoProductoId, string Codigo, string Descripcion)
             {
                 EntProducto producto = new EntProducto()
                 {
@@ -75,7 +75,7 @@ namespace Aires.Pantallas
 
                 return producto;
             }
-            void AgregaProductoDetalle(int ProductoId, int IngresoId, int EmpresaId, string Serie, decimal PrecioCosto, decimal PrecioVenta, decimal PrecioVenta2, decimal PrecioEspecial)
+            public void AgregaProductoDetalle(int ProductoId, int IngresoId, int EmpresaId, string Serie, decimal PrecioCosto, decimal PrecioVenta, decimal PrecioVenta2, decimal PrecioEspecial)
             {
                 EntProducto producto = new EntProducto()
                 {
@@ -102,7 +102,7 @@ namespace Aires.Pantallas
                 return new BusProductos().AgregaIngresoProducto(ingreso);
             }
 
-            void ActualizaProducto(int ProductoId, int TipoProductoId, string Codigo, string Descripcion)
+            public void ActualizaProducto(int ProductoId, int TipoProductoId, string Codigo, string Descripcion)
             {
                 EntProducto producto = new EntProducto()
                 {

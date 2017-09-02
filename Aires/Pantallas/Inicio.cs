@@ -39,12 +39,36 @@ namespace Aires.Pantallas
                 this.Close();
             }
         }
+        string EmailPrincipal = "refrigeracion_serdan@hotmail.com";
+        void VerificaExportacion(DateTime Fecha, int EmpresaId)
+        {
+            EntCatalogoGenerico reg= new BusVencimiento().ObtieneRegistroSincronizacion(Fecha);
+            if (reg.Id <= 0)
+            {
+                //Vencimiento = true;
+                //MessageBox.Show("Su Sistema ha sido bloqueado, debido a que ha llegado a su Fecha de Vencimiento. \n\nFavor de comunicarse con TIIM para seguir utilizando su Sistema.                                   Gerente Admin. Anabel Araujo: 6681013253");
+                //this.Close();
+                new Registros().ExportarVentas(EmpresaId,Fecha, EmailPrincipal);
+                //ingresa registro sincronizacion
+                //new BusVencimiento().in
+            }
+        }
         #endregion
+        List<EntUsuario> CargaUsuarios()
+        {
+            List<EntUsuario> usuarios=new List<EntUsuario>();
+            usuarios.Add(new EntUsuario() { Id=1, Usuario = "admin", Contraseña = "serdan10" });
+            usuarios.Add(new EntUsuario() { Id = 9, Usuario = "serdanobr", Contraseña = "serobr20" });
+            usuarios.Add(new EntUsuario() { Id = 8, Usuario = "serdannav", Contraseña = "sernav30" });
+            return usuarios;
+        }
         private void Inicio_Load(object sender, EventArgs e)
         {
             try
             {
                 VerificaVencimiento();
+                
+                List<EntUsuario> usuarios=CargaUsuarios();
 
                 Menu a = (Menu)BuscaForma("Menu");
                 if (a == null)
@@ -55,6 +79,17 @@ namespace Aires.Pantallas
                 }
                 else
                     a.BringToFront();
+
+                Contraseña vInicioSesion = new Contraseña(usuarios);
+                if (vInicioSesion.ShowDialog() != DialogResult.OK)
+                    this.Close();
+                else
+                    Program.UsuarioSeleccionado = vInicioSesion.Usuario;
+
+                if (Program.UsuarioSeleccionado.Id > 1) {
+                    VerificaExportacion(DateTime.Today.AddDays(-2), Program.UsuarioSeleccionado.Id);
+                    VerificaExportacion(DateTime.Today.AddDays(-1), Program.UsuarioSeleccionado.Id);
+                }
             }
             catch (Exception ex)
             {
@@ -92,6 +127,8 @@ namespace Aires.Pantallas
                     a = new Productos();
                     a.MdiParent = this;
                     a.Show();
+                    if (Program.EmpresaSeleccionada == null)
+                        a.Close();
                 }
                 else
                 {
@@ -115,6 +152,8 @@ namespace Aires.Pantallas
                     a = new Clientes();
                     a.MdiParent = this;
                     a.Show();
+                    if (Program.EmpresaSeleccionada == null)
+                        a.Close();
                 }
                 else
                 {
@@ -138,6 +177,8 @@ namespace Aires.Pantallas
                     a = new Proveedores();
                     a.MdiParent = this;
                     a.Show();
+                    if (Program.EmpresaSeleccionada == null)
+                        a.Close();
                 }
                 else
                 {
@@ -161,6 +202,8 @@ namespace Aires.Pantallas
                     a = new Ventas();
                     a.MdiParent = this;
                     a.Show();
+                    if (Program.EmpresaSeleccionada == null)
+                        a.Close();
                 }
                 else
                 {
@@ -173,26 +216,7 @@ namespace Aires.Pantallas
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void toolStripButton6_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Reportes a = (Reportes)BuscaForma(new Reportes().Titulo);
-                if (a == null)
-                {
-                    a = new Reportes();
-                    a.MdiParent = this;
-                    a.Show();
-                }
-                else
-                    a.BringToFront();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
@@ -214,34 +238,15 @@ namespace Aires.Pantallas
             }
         }
         
-        private void toolStripButton8_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Gastos a = (Gastos)BuscaForma(new Gastos().Titulo);
-                if (a == null)
-                {
-                    a = new Gastos();
-                    a.MdiParent = this;
-                    a.Show();
-                }
-                else
-                    a.BringToFront();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+        
         private void toolStripButton6_Click_1(object sender, EventArgs e)
         {
             try
             {
-                Reportes a = (Reportes)BuscaForma(new Reportes().Titulo);
+                Registros a = (Registros)BuscaForma(new Registros().Titulo);
                 if (a == null)
                 {
-                    a = new Reportes();
+                    a = new Registros();
                     a.MdiParent = this;
                     a.Show();
                     if (Program.EmpresaSeleccionada == null)
@@ -269,9 +274,14 @@ namespace Aires.Pantallas
                     a = new Inventarios();
                     a.MdiParent = this;
                     a.Show();
+                    if (Program.EmpresaSeleccionada == null)
+                        a.Close();
                 }
                 else
+                {
+                    a.VerificaEmpresa();
                     a.BringToFront();
+                }
             }
             catch (Exception ex)
             {
@@ -289,6 +299,8 @@ namespace Aires.Pantallas
                     a = new ReportesGenerales();
                     a.MdiParent = this;
                     a.Show();
+                    if (Program.EmpresaSeleccionada == null)
+                        a.Close();
                 }
                 else
                     a.BringToFront();
@@ -332,6 +344,31 @@ namespace Aires.Pantallas
                 }
                 else
                     a.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void toolStripButton12_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Sincronizacion a = (Sincronizacion)BuscaForma(new Sincronizacion().Titulo);
+                if (a == null)
+                {
+                    a = new Sincronizacion();
+                    a.MdiParent = this;
+                    a.Show();
+                    if (Program.EmpresaSeleccionada == null)
+                        a.Close();
+                }
+                else
+                {
+                    a.VerificaEmpresa();
+                    a.BringToFront();
+                }
             }
             catch (Exception ex)
             {

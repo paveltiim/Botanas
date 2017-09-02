@@ -34,6 +34,7 @@ namespace Aires
                     return v;
             return null;
         }
+        
         public EntEmpresa SeleccionaEmpresa()
         {
             Pantallas.SeleccionaEmpresa vSeleccionaEmp = new Pantallas.SeleccionaEmpresa();
@@ -253,6 +254,43 @@ namespace Aires
             }
             else
                 MuestraMensaje("No se encontró archivo", "");
+        }
+        /// <summary>
+        /// Abre el archivo seleccionado con Proccess.
+        /// Si no encuentra la ruta Path envia mensaje de error.
+        /// </summary>
+        /// <param name="Path"></param>
+        /// <param name="FileName"></param>
+        public System.IO.FileInfo SeleccionaArchivo(string Path)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            //ofd.InitialDirectory = @"C:\TIIM\Anticipo\20150806\A quien corresponda";
+            ofd.InitialDirectory = Path;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                return new System.IO.FileInfo(ofd.FileName);
+                ////System.IO.File.Open(ofd.FileName, System.IO.FileMode.Open);
+                //System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                //proc.StartInfo.FileName = ofd.FileName;
+                //proc.Start();
+                //proc.Close();
+            }
+            return null;
+         }
+        /// <summary>
+        /// Abre el archivo seleccionado con Proccess.
+        /// Si no encuentra la ruta Path envia mensaje de error.
+        /// </summary>
+        /// <param name="Path"></param>
+        /// <param name="FileName"></param>
+        public string SeleccionaArchivo()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                return ofd.FileName;//new System.IO.FileInfo(ofd.FileName);
+            }
+            return null;
         }
         public void MuestraMensaje(string Mensaje, string Titulo)
         {

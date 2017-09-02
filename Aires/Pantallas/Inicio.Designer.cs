@@ -229,11 +229,12 @@
             this.toolStripButton12.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton12.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.toolStripButton12.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.toolStripButton12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton12.Image")));
+            this.toolStripButton12.Image = global::Aires.Properties.Resources.SINCRONIZAcion;
             this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton12.Name = "toolStripButton12";
-            this.toolStripButton12.Size = new System.Drawing.Size(179, 44);
-            this.toolStripButton12.Text = "Exportar/Importar";
+            this.toolStripButton12.Size = new System.Drawing.Size(155, 44);
+            this.toolStripButton12.Text = "Sincronización";
+            this.toolStripButton12.Click += new System.EventHandler(this.toolStripButton12_Click);
             // 
             // Inicio
             // 

@@ -172,23 +172,12 @@ namespace Aires.Pantallas
             } 
         
         #endregion
-
-        #region Metodos Impresion
-            public void CargaRvVentas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta)
-            {
-                List<EntPedido> ListaPedidos = new BusPedidos().ObtienePedidosClientesPorFechas(EmpresaId,FechaDesde,FechaHasta);
-                entPedidoBindingSource.DataSource = ListaPedidos;
-                rvVentas.RefreshReport();
-            }
-        #endregion
-
+        
         int DiasPorSemana = 6;
         void InicializaPantalla()
         {
             //if(Program.EmpresaSeleccionada!=null)
             //    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
-            dtpFechaDesdeVentas.Value = ObtieneLunesEstaSemana(DateTime.Today);
-            dtpFechaHastaVentas.Value = dtpFechaDesdeVentas.Value.AddDays(DiasPorSemana);
         }
         public void CargaEmpresas()
         {
@@ -216,7 +205,7 @@ namespace Aires.Pantallas
                 {
                     cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
 
-                    CargaGvPedidos(Program.EmpresaSeleccionada.Id);
+                    //CargaGvPedidos(Program.EmpresaSeleccionada.Id);
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -229,9 +218,9 @@ namespace Aires.Pantallas
                 if (Program.CambiaEmpresa)
                 {
                     Program.EmpresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
-                    //CargaGvPedidos(Program.EmpresaSeleccionada.Id);
-                    btnRefrescar.PerformClick();
-                    btnRefrescarReporteVentas.PerformClick();
+                    ////CargaGvPedidos(Program.EmpresaSeleccionada.Id);
+                    //btnRefrescar.PerformClick();
+                    //btnRefrescarReporteVentas.PerformClick();
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -249,71 +238,13 @@ namespace Aires.Pantallas
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
-        
-        private void btnFacturar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-               
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnEnviaCorreo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //EntPedido pedidoSeleccionado = ObtienePedidoFromGV(gvPedidos);
-
-                //if (!pedidoSeleccionado.Facturado)
-                //    throw new Exception("El Pedido NO ha sido facturado.");
-
-                //if (MuestraMensajeYesNo(string.Format("¿Seguro desea enviar la FACTURA al correo seleccionado? \n Cliente:{0}", pedidoSeleccionado.Cliente), "CONFIRMACIÓN") == DialogResult.Yes)
-                //{
-                //    Cursor.Current = Cursors.WaitCursor;
-                //    EntCliente cliente = ObtieneCliente(pedidoSeleccionado.ClienteId);
-                //    cliente.Email = "";
-                //    try
-                //    {
-                //        //throw new Exception("error");
-                //        //pahtArchivosFactura = PathClienteDirectorioFacturas;
-                //        //pahtArchivosFactura = @"C:\TIIM\Facturacion\Facturas\RAFAEL GIL ARMENTA\20170105122126";
-                //        EnviaCorreo(pedidoSeleccionado, cliente, pedidoSeleccionado.RutaFactura);
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        MuestraExcepcion(ex, "Correo NO enviado.");
-                //    }
-
-                //    Cursor.Current = Cursors.Default;
-                //}
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-               
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
+     
         private void btnRefrescar_Click(object sender, EventArgs e)
         {
             try
             {
-                CargaGvPedidos(Program.EmpresaSeleccionada.Id);
+                gvProductosDetalle.DataSource = null;
+                gvProductosDetalle.Refresh();
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -335,7 +266,21 @@ namespace Aires.Pantallas
         {
             try
             {
+                string rutaArchivo = SeleccionaArchivo();
+                System.IO.FileInfo fi = new FileInfo(rutaArchivo);
+                if (fi != null)
+                {
+                    if (fi.Extension != ".xls")
+                        MandaExcepcion("El archivo no es el correcto. \n Debe ser archivo de Excel (.xls)");
 
+                    txtDescripcionFiltro.Text = rutaArchivo; //fi.FullName;
+                    List<EntProducto> lst = new UtiLinqToExcel().ListaProductos(rutaArchivo);
+
+                    gvProductosDetalle.DataSource = lst;
+                    txtCantidadVentas.Text = lst.Count.ToString();
+                }
+                else
+                    MandaExcepcion("ARCHIVO NO ENCONTRADO");
             }
             catch (Exception ex)
             {
@@ -344,148 +289,12 @@ namespace Aires.Pantallas
         }
         
         #region Eventos Pestaña Impresion
-        bool CargarAños;
-            /// <summary>
-            /// Carga cmbAñoGastos,cmbAñosManoDeObra,cmbAñosMateriales.
-            /// </summary>
-            void CargaAños()
-            {
-                List<EntCatalogoGenerico> años = new List<EntCatalogoGenerico>();
-                for (int x = DateTime.Today.Year; x >= AñoInicio; x--)
-                {
-                    EntCatalogoGenerico año = new EntCatalogoGenerico();
-                    año.Descripcion = x.ToString();
-                    años.Add(año);
-                }
-                cmbAñoVentas.DataSource = años;
-                ////cmbAñoDepositos.DataSource = años;
-                //EntCatalogoGenerico[] añosCopy = new EntCatalogoGenerico[años.Count];
-                //años.CopyTo(añosCopy);
-                //cmbAñoDepositos.DataSource = añosCopy;
-                //cmbAñosManoDeObra.DataSource = añosCopy;
-                //cmbAñosMateriales.DataSource = añosCopy;
-            }
+      
             private void tcPedidosGrids_SelectedIndexChanged(object sender, EventArgs e)
             {
-                try
-                {
-                    if (tcPedidosGrids.SelectedIndex == 0) {
-                        btnRefrescar.PerformClick();
-                    }
-                    else if (tcPedidosGrids.SelectedIndex == 1)
-                    {
-                        if (!CargarAños)
-                        {
-                            CargaAños();
-                            cmbMesesVentas.SelectedIndex = DateTime.Today.Month - 1;
-                            //dtpEntradasFechaDesde.Value = DateTime.Today;
-
-                            CargaRvVentas(Program.EmpresaSeleccionada.Id, new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
-
-                            CargarAños = false;
-                        }
-                    }
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); }
+                
             }
-            private void btnRefrescarReporteVentas_Click(object sender, EventArgs e)
-        {
-            try {
-                if (rdoPorMesVentas.Checked)
-                {
-                    if (cmbMesesVentas.SelectedIndex >= 0)
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
-                }
-                else if (rdoPorDiaVentas.Checked)
-                    CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDiaVentas.Value.Date, dtpFechaDiaVentas.Value.Date);
-                else if (rdoPorFechasVentas.Checked)
-                    CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date);
-            }catch(Exception ex) { MuestraExcepcion(ex); }
-            }
-            private void rdoVentasPorMes_CheckedChanged(object sender, EventArgs e)
-            {
-                try
-                {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoPorDiaVentas.Checked = false;
-                        rdoPorFechasVentas.Checked = false;
-                        pnlVentasPorMes.Enabled = true;
-                        pnlVentasPorDia.Enabled = false;
-                        pnlVentasPorFechas.Enabled = false;
-
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
-                    }
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); }
-            }
-
-            private void rdoVentasPorSemana_CheckedChanged(object sender, EventArgs e)
-            {
-                try
-                {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoPorMesVentas.Checked = false;
-                        rdoPorFechasVentas.Checked = false;
-
-                        pnlVentasPorMes.Enabled = false;
-                        pnlVentasPorDia.Enabled = true;
-                        pnlVentasPorFechas.Enabled = false;
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDiaVentas.Value.Date, dtpFechaDiaVentas.Value.Date);
-                    }
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); } 
-            }
-
-            private void rdoPorFechasVentas_CheckedChanged(object sender, EventArgs e)
-            {
-                try
-                {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoPorMesVentas.Checked = false;
-                        rdoPorDiaVentas.Checked = false;
-
-                        pnlVentasPorMes.Enabled = false;
-                        pnlVentasPorDia.Enabled = false;
-                        pnlVentasPorFechas.Enabled = true;
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date);
-                    }
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-
-        private void dtpFechaDesdeVentas_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (rdoPorFechasVentas.Checked)
-                {
-                    if (dtpFechaDesdeVentas.Value.Date > dtpFechaHastaVentas.Value.Date)
-                        dtpFechaHastaVentas.Value = dtpFechaDesdeVentas.Value;
-                    else
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date);
-                }
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void dtpFechaHastaVentas_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (rdoPorFechasVentas.Checked)
-                {
-                    if (dtpFechaHastaVentas.Value.Date < dtpFechaDesdeVentas.Value.Date)
-                        dtpFechaDesdeVentas.Value = dtpFechaHastaVentas.Value;
-                    else
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date);
-                }
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
+           
         #endregion
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -493,5 +302,234 @@ namespace Aires.Pantallas
 
         }
 
+        private void gvProductosDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        bool EncuentraProductoDetalleEnListaProductos(List<EntProducto> ListaProductos, int ProductoId)
+        {
+            if (ListaProductos.Where(P => P.Id == ProductoId).Count() > 0)
+                return true;
+            else
+                return false;
+        }
+        int CuentaProductosEnListaProductos(List<EntProducto> ListaProductos, int ProductoId)
+        {
+            return ListaProductos.Where(P => P.ProductoId == ProductoId).Count();             
+        }
+        List<EntProducto> ObtieneProductosEnListaProductos(List<EntProducto> ListaProductos, int ProductoId)
+        {
+            return ListaProductos.Where(P => P.ProductoId == ProductoId).ToList();
+        }
+        void AgregaProductoDetalle(int Id, int ProductoId, int IngresoId, int EmpresaId, string Serie, decimal PrecioCosto, decimal PrecioVenta, decimal PrecioVenta2, decimal PrecioEspecial)
+        {
+            EntProducto producto = new EntProducto()
+            {
+                Id = Id,
+                ProductoId=ProductoId,
+                IngresoId = IngresoId,
+                EmpresaId = EmpresaId,
+                Serie = Serie,
+                PrecioCosto = PrecioCosto,
+                PrecioVenta = PrecioVenta,
+                PrecioVenta2 = PrecioVenta2,
+                PrecioEspecial = PrecioEspecial,
+                Fecha = DateTime.Now
+            };
+            producto.Id = new BusProductos().AgregaProductoDetalle(Id,producto);
+        }
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            try {
+                //REVISAR FECHA DE IMPORTACION PARA EVITAR DUPLICAR
+                //PENDIENTE TABLA DE REGISTRO DE IMPORTACIONES
+                EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
+                List<EntProducto> listaProductosTodos = new BusProductos().ObtieneProductosDetalleTodos();
+                List<EntProducto> listaProductosIngresar = ObtieneListaProductosFromGV(gvProductosDetalle);
+
+                int productoId = 0;
+                bool productoRepetido = false;
+                
+                foreach (EntProducto p in listaProductosIngresar) {
+                    if (!EncuentraProductoDetalleEnListaProductos(listaProductosTodos, p.Id))
+                    {
+                        if (new BusProductos().ObtieneIngreso(p.IngresoId).Id != p.IngresoId)
+                            new BusProductos().AgregaIngresoProducto(new EntCatalogoGenerico() { Descripcion = p.Ingreso, Fecha = p.Fecha });
+
+                        if (productoId != p.ProductoId)
+                        {
+                            productoId = p.ProductoId;
+                            int cantidadProductos = CuentaProductosEnListaProductos(listaProductosIngresar, p.ProductoId);
+                            if (cantidadProductos == 0)
+                                new Productos().AgregaProducto(p.TipoProductoId, p.Codigo, p.Descripcion);
+                            else
+                                new Productos().ActualizaProducto(p.ProductoId, p.TipoProductoId, p.Codigo, p.Descripcion);
+
+                            if (p.TipoProductoId == 1)//PRODUCTO
+                                new Productos().AumentaProducto(p.ProductoId, cantidadProductos);
+                            else//SERVICIO
+                                new Productos().AumentaProducto(p.ProductoId, 1);
+                        }
+                        AgregaProductoDetalle(p.Id, p.ProductoId, p.IngresoId, empresaSeleccionada.Id, p.Serie, p.PrecioCosto, p.PrecioVenta, p.PrecioVenta2, p.PrecioEspecial);
+                    }
+                    else
+                        productoRepetido = true;
+                }
+                if(productoRepetido)
+                    MuestraMensaje("Se encontraron Productos previamente importados. \n¡IMPORTACIÓN COMPLETA!","ALERTA");
+                else
+                    MuestraMensaje("¡IMPORTACIÓN COMPLETA!", "CONFIRMACIÓN");
+                txtDescripcionFiltro.Clear();
+                gvProductosDetalle.DataSource = null;
+                gvProductosDetalle.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MuestraExcepcion(ex);
+            }
+        }
+
+        private void gvPedidos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void gvPedidos_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        private void gvPedidos_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnImportaVentas_Click(object sender, EventArgs e)
+        {
+            Ventas vVentas = new Pantallas.Ventas();
+            //pedidoAgrega = vVentas.AgregarPedido(ClienteSeleccionado.Id, detallePedido.Remove(detallePedido.Length - 2), "", ConvierteTextoADecimal(txtTotal.Text), ConvierteTextoADecimal(txtPago.Text), DateTime.Now, DateTime.Today, 0, chkFacturar.Checked, 1);
+
+            //foreach (EntProducto p in productosSeleccionados)
+            //{
+            //    AgregarProductoDetallePedido(pedidoAgrega.Id, p.Id, p.Cantidad, p.PrecioCosto, p.PrecioVenta);
+            //    Productos vProd = new Productos();
+            //    if (p.TipoProductoId == 1)
+            //    {
+            //        vProd.ActualizaEstatusProductoDetalle(p, 2);//ESTATUS:2=ENTREGADO
+            //        vProd.AumentaProducto(p.ProductoId, -p.Cantidad);
+            //    }
+            //}
+
+            //decimal pago = ConvierteTextoADecimal(txtPago.Text);
+            //if (pago > 0)
+            //{
+            //    if (pago > ConvierteTextoADecimal(txtTotal.Text))
+            //    {
+            //        MuestraMensaje("El Pago debe ser menor al Total a pagar. \n El Pago NO será registrado", "PAGO NO REGISTRADO");
+            //        AumentaPagoPedido(pedidoAgrega.Id, -pago);
+            //    }
+            //    else
+            //    {
+            //        AgregarPago(pedidoAgrega.Id, pago);
+            //        AumentaPagoPedido(pedidoAgrega.Id, 0);//SOLO PARA CAMBIAR ESTATUS. VERIFICA SI EL TOTAL DEL PEDIDO ESTA PAGADO, CAMBIA ESTATUS DE SER ASI.
+            //        if (pago < ConvierteTextoADecimal(txtTotal.Text))
+            //            CargaClientesDeudaEnPantallas();
+            //    }
+            //}
+
+            //if (chkFacturar.Checked)
+            //{
+            //    bool facturado = false;
+            //    EntFactura factura = new EntFactura();
+
+            //    try
+            //    {
+            //        //int ultimaFactura = new BusPedidos().ObtieneUltimaFactura().Id;
+            //        //ultimaFactura++;
+            //        //pedidoAgrega.Factura = ultimaFactura.ToString();
+            //        pedidoAgrega.Factura = ObtieneUltimaFactura(empresaSeleccionada.Id);
+            //        pedidoAgrega.SubTotal = ConvierteTextoADecimal(txtSubtotal.Text);
+            //        pedidoAgrega.Total = ConvierteTextoADecimal(txtTotal.Text);
+
+            //        txtFormaPago.Text = cmbFormaPago.Text.Remove(2, cmbFormaPago.Text.Length - 2);
+            //        txtMetodoPago.Text = cmbMetodoPago.Text;
+
+            //        TomaDatosCliente(ClienteSeleccionado);
+
+            //        if (empresaSeleccionada.Facturacion)
+            //            factura = EnviarFactura(empresaSeleccionada, pedidoAgrega, productosSeleccionados, ClienteSeleccionado, DateTime.Now, txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text,
+            //                                txtNumeroCuenta.Text,
+            //                                cantidadIVA, cantidadIVARetenido, cantidadISRRetenido, cantidadIEPS);
+            //        else
+            //            factura = EnviarFacturaPrueba(empresaSeleccionada, pedidoAgrega, productosSeleccionados, ClienteSeleccionado, DateTime.Now, txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text,
+            //                                txtNumeroCuenta.Text,
+            //                                cantidadIVA, cantidadIVARetenido, cantidadISRRetenido, cantidadIEPS);
+
+            //        factura.EmpresaId = empresaSeleccionada.Id;
+            //        facturado = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        foreach (EntProducto p in productosSeleccionados)
+            //        {
+            //            Productos vProd = new Productos();
+            //            vProd.ActualizaEstatusProductoDetalle(p, 1);//ESTATUS:1=ACTIVO
+            //            vProd.AumentaProducto(p.ProductoId, p.Cantidad);
+            //        }
+            //        ActualizaEstatusProductoDetallePedido(pedidoAgrega, false);//ESTATUS:0=CANCELADO
+            //        ActualizaEstatusPedido(pedidoAgrega, 0);//ESTATUS:0=CANCELADO
+
+            //        MuestraExcepcionFacturacion(ex);
+            //    }
+
+            //    //COMENTAR EN PRODUCCION
+            //    //facturado = true;
+            //    if (facturado)
+            //    {
+            //        //MuestraMensaje("¡El pedido fue FACTURADO satisfactoriamente!", "CONFIRMACIÓN PEDIDO FACTURADO");
+            //        Cursor.Current = Cursors.WaitCursor;
+
+            //        AgregarFacturaPedido(factura);
+
+            //        try
+            //        {
+            //            Cursor.Current = Cursors.WaitCursor;
+
+            //            EnviaCorreo(empresaSeleccionada, pedidoAgrega, ClienteSeleccionado, factura.Ruta);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MuestraExcepcion(ex, "Correo NO enviado.");
+            //        }
+
+            //        try
+            //        {
+            //            if (MuestraMensajeYesNo("¿Desea mostrar Factura?") == DialogResult.Yes)
+            //            {
+            //                string nombreArchivo = EncuentraArchivo(factura.Ruta, ".pdf");
+            //                MuestraArchivo(factura.Ruta, nombreArchivo);
+            //            }
+            //        }
+            //        catch (Exception ex) { MuestraExcepcion(ex, "ERROR AL MOSTRAR FACTURA"); }
+
+
+            //        LimpiaTextBox(pnlCliente);
+            //        LimpiaTextBox(pnlAgrega);
+            //        LimpiaTextBox(pnlFacturacion, true);
+
+            //        ClienteSeleccionado = null;
+            //        chkFacturar.Checked = false;
+            //        chkFacturaPublicoGeneral.Checked = false;
+            //        gvProductosPedido.DataSource = null;
+            //        lbContadorSeries.Text = "0";
+
+            //        CargaVentasEnPantallas();
+            //        CargaClientes(empresaSeleccionada.Id);//SERA POR VOLVER A PONER LOS PARAMETROS???
+            //        CargaProductosDetalle(empresaSeleccionada.Id);
+
+            //        Cursor.Current = Cursors.Default;
+            //        MessageBox.Show("¡Pedido Registrado y Facturado!");
+            //    }
+            }
     }
 }

@@ -258,6 +258,21 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
+        public DataTable obtieneIngreso(int IngresoId)
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneIngresoPorId", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("IngresoId", IngresoId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         public DataTable obtieneIngresosProductosPorFechas(DateTime FechaDesde, DateTime FechaHasta)
         {
             try
@@ -388,14 +403,39 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
         }
-        public int agregaIngresoProducto(int EmpresaId,string Descripcion, DateTime Fecha)
+        public int agregaProductoDetalle(int Id, int ProductoId, int IngresoId, int EmpresaId, string Serie, decimal PrecioCosto, decimal PrecioVenta, decimal PrecioVenta2, decimal PrecioEspecial, DateTime Fecha)
+        {
+            try
+            {
+                com = new SqlCommand("insAgregaProductoDetalleConId", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("IngresoId", IngresoId);
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("Serie", Serie);
+                com.Parameters.AddWithValue("PrecioCosto", PrecioCosto);
+                com.Parameters.AddWithValue("PrecioVenta", PrecioVenta);
+                com.Parameters.AddWithValue("PrecioVenta2", PrecioVenta2);
+                com.Parameters.AddWithValue("PrecioEspecial", PrecioEspecial);
+                com.Parameters.AddWithValue("Id", Id);
+                //SqlParameter parm = new SqlParameter("Id", Id);
+                //parm.Direction = ParameterDirection.InputOutput;
+                //com.Parameters.Add(parm);
+                con.Open();
+                com.ExecuteNonQuery();
+                return Id;//Convert.ToInt32(com.Parameters["Id"].Value);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
+        public int agregaIngresoProducto(int ProveedorId,string Descripcion, DateTime Fecha)
         {
             try
             {
                 int Id = 0;
                 com = new SqlCommand("insAgregaIngreso", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("ProveedorId", ProveedorId);
                 com.Parameters.AddWithValue("Descripcion", Descripcion);
                 com.Parameters.AddWithValue("Fecha", Fecha);
                 SqlParameter parm = new SqlParameter("Id", Id);

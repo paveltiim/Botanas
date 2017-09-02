@@ -120,10 +120,10 @@ namespace Aires.Pantallas
         {
             try
             {
-                Reportes a = (Reportes)BuscaForma(new Reportes().Titulo);
+                Registros a = (Registros)BuscaForma(new Registros().Titulo);
                 if (a == null)
                 {
-                    a = new Reportes();
+                    a = new Registros();
                     a.MdiParent = this.ParentForm;
                     a.Show();
                     if (Program.EmpresaSeleccionada == null)
