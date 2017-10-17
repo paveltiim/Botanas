@@ -103,7 +103,8 @@ namespace AiresUtilerias
         public string Facturar(EntEmpresa Emisor, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente,
                                 string FolioFactura, DateTime FechaFactura, string FormaPago, string MedioPago, string CondicionPago,
                                 string NumeroCuenta, string PathGuardaArchivos,
-                                decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
+                                decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS,
+                                string Observaciones)
         {
             string respuesta;
             
@@ -152,7 +153,7 @@ namespace AiresUtilerias
             st.WriteLine("colorLetraE|000000");
             st.WriteLine("colorPlantillaHex|DCE3E6");
             st.WriteLine("logotipo|lg_de198d9f5c5960f7ac72e6f"); // Serdan // lg_27cb5900e159233c421067e - GREE
-            st.WriteLine("observaciones|");
+            st.WriteLine("observaciones|" + Observaciones.Replace("\r", " ").Replace("\n", " "));
             st.WriteLine("emailCliente|" + Cliente.Email);
 
             st.WriteLine("[Emisor]");
@@ -205,8 +206,9 @@ namespace AiresUtilerias
                 st.WriteLine("unidad|" + p.TipoUnidad);
                 st.WriteLine("noIdentificacion|");
                 st.WriteLine("descripcion|" + p.Descripcion);
-                st.WriteLine("valorUnitario|" + p.PrecioVentaSinIVA.ToString("0.00"));
-                st.WriteLine("importe|" + p.PrecioSinIVA.ToString("0.00"));
+                //CAMBIA DEPENDIENDO DEL TIPOIVAID
+                st.WriteLine("valorUnitario|" + (p.PrecioVenta/ (1 + IVA)).ToString("0.00"));//p.PrecioVentaSinIVA.ToString("0.00"));
+                st.WriteLine("importe|" + (p.Precio / (1 + IVA)).ToString("0.00"));//p.PrecioSinIVA.ToString("0.00"));
             }
 
             st.WriteLine("[ImpuestoTrasladado]");

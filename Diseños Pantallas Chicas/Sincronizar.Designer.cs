@@ -138,7 +138,7 @@
             this.btnImportar.Text = "Importar";
             this.btnImportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnImportar.UseVisualStyleBackColor = false;
-            this.btnImportar.Click += new System.EventHandler(this.btnImportarEntradas_Click);
+            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
             // 
             // gvProductosDetalle
             // 
@@ -274,7 +274,7 @@
             this.btnFiltrarCliente.Size = new System.Drawing.Size(37, 32);
             this.btnFiltrarCliente.TabIndex = 122;
             this.btnFiltrarCliente.UseVisualStyleBackColor = false;
-            this.btnFiltrarCliente.Click += new System.EventHandler(this.btnBuscaArchivoImportarEntradas_Click);
+            this.btnFiltrarCliente.Click += new System.EventHandler(this.btnFiltrarCliente_Click);
             // 
             // btnRefrescar
             // 

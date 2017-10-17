@@ -15,6 +15,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -25,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp">
@@ -135,6 +138,12 @@
     </Compile>
     <Compile Include="Pantallas\MuestraPagos.Designer.cs">
       <DependentUpon>MuestraPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\PreFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\PreFactura.Designer.cs">
+      <DependentUpon>PreFactura.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\SeleccionaEmail.cs">
       <SubType>Form</SubType>
@@ -314,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\EstadoDeCuenta.resx">
       <DependentUpon>EstadoDeCuenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\PreFactura.resx">
+      <DependentUpon>PreFactura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\SeleccionaEmail.resx">
       <DependentUpon>SeleccionaEmail.cs</DependentUpon>
@@ -617,6 +629,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SINCRONIZAcion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cargando.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

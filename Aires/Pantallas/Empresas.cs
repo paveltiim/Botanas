@@ -16,6 +16,12 @@ namespace Aires.Pantallas
     {
         void InicializaPantalla()
         {
+            if (Program.UsuarioSeleccionado.Id > 1)
+            {
+                btnEliminar.Enabled = false;
+                btnEditar.Enabled = false;
+                pnlDatos.Visible = false;
+             }
             cmbTipoPersona.SelectedIndex = 0;
             cmbTipoTasaIVA.SelectedIndex = 0;
         }

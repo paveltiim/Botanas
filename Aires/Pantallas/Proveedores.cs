@@ -67,18 +67,40 @@ namespace Aires.Pantallas
                 };
                 new BusProveedores().AgregaProveedor(proveedor);
             }
-            //void AgregarNotaCredito(int GastoId, decimal Cantidad, DateTime FechaPago)
-            //{
-            //    EntPago pago = new EntPago()
-            //    {
-            //        GastoId = GastoId,
-            //        Cantidad = Cantidad,
-            //        Fecha= FechaPago,
-            //        FechaPago=FechaPago
-            //    };
-            //    new BusEmpresas().AgregaNotaCredito(pago);
-            //}
-            void ActualizaProveedor(int ProveedorId, int EmpresaId, string Nombre, string NombreFiscal, string Direccion, string Telefono, string Telefono2, string Email, string Contacto, string TelefonoContacto, string Banco, string NumeroCuenta, string Sucursal, string CLABE, string NumeroReferencia)
+        public int AgregaProveedor(int EmpresaId, string Nombre, string NombreFiscal, string Direccion)
+        {
+            EntProveedor proveedor = new EntProveedor()
+            {
+                EmpresaId = EmpresaId,
+                Nombre = Nombre,
+                NombreFiscal = NombreFiscal,
+                Direccion = Direccion,
+                Telefono = "",
+                Telefono2 = "",
+                Email = "",
+                Contacto = "",
+                TelefonoContacto = "",
+                Banco = "",
+                NumeroCuenta = "",
+                Sucursal = "",
+                CLABE = "",
+                NumeroReferencia = "",
+                Fecha = DateTime.Now
+            };
+            return new BusProveedores().AgregaProveedor(proveedor);
+        }
+        //void AgregarNotaCredito(int GastoId, decimal Cantidad, DateTime FechaPago)
+        //{
+        //    EntPago pago = new EntPago()
+        //    {
+        //        GastoId = GastoId,
+        //        Cantidad = Cantidad,
+        //        Fecha= FechaPago,
+        //        FechaPago=FechaPago
+        //    };
+        //    new BusEmpresas().AgregaNotaCredito(pago);
+        //}
+        void ActualizaProveedor(int ProveedorId, int EmpresaId, string Nombre, string NombreFiscal, string Direccion, string Telefono, string Telefono2, string Email, string Contacto, string TelefonoContacto, string Banco, string NumeroCuenta, string Sucursal, string CLABE, string NumeroReferencia)
             {
                 EntProveedor proveedor = new EntProveedor()
                 {

@@ -2,6 +2,7 @@
 using AiresNegocio;
 using AiresUtilerias;
 using Microsoft.Office.Interop.Excel;
+using Microsoft.Reporting.WinForms;
 //using iTextSharp.text;
 //using iTextSharp.text.pdf;
 //using iTextSharp.text.pdf.parser;
@@ -108,44 +109,44 @@ namespace Aires.Pantallas
             /// <param name="pedido"></param>
 
             string PathClienteDirectorioFacturas;
-        EntFactura EnviarFactura(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
-                                string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
-                                decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
-        {
-            if (Cliente == null)
-                Cliente = new EntCliente();
+        //EntFactura EnviarFactura(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
+        //                        string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
+        //                        decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
+        //{
+        //    if (Cliente == null)
+        //        Cliente = new EntCliente();
 
-            Cliente.NoExterior = txtNoExterior.Text;
-            Cliente.NoInterior = txtNoInterior.Text;
-            Cliente.Calle = txtCalle.Text;
-            Cliente.Colonia = txtColonia.Text;
-            Cliente.Localidad = txtLocalidad.Text;
-            Cliente.Municipio = txtMunicipio.Text;
-            Cliente.Estado = txtEstado.Text;
-            Cliente.CP = txtCP.Text;
+        //    Cliente.NoExterior = txtNoExterior.Text;
+        //    Cliente.NoInterior = txtNoInterior.Text;
+        //    Cliente.Calle = txtCalle.Text;
+        //    Cliente.Colonia = txtColonia.Text;
+        //    Cliente.Localidad = txtLocalidad.Text;
+        //    Cliente.Municipio = txtMunicipio.Text;
+        //    Cliente.Estado = txtEstado.Text;
+        //    Cliente.CP = txtCP.Text;
 
-            Cliente.Email = txtEmail.Text;
+        //    Cliente.Email = txtEmail.Text;
 
-            string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
-            if (!System.IO.Directory.Exists(pathClienteDirectorio))
-                System.IO.Directory.CreateDirectory(pathClienteDirectorio);
+        //    string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
+        //    if (!System.IO.Directory.Exists(pathClienteDirectorio))
+        //        System.IO.Directory.CreateDirectory(pathClienteDirectorio);
 
-            string pathClienteDirectorioFacturas = pathClienteDirectorio + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss");
-            System.IO.Directory.CreateDirectory(pathClienteDirectorioFacturas);
+        //    string pathClienteDirectorioFacturas = pathClienteDirectorio + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss");
+        //    System.IO.Directory.CreateDirectory(pathClienteDirectorioFacturas);
 
-            //UtiFacturacionPruebas factura = new UtiFacturacionPruebas();
-            //MessageBox.Show("FACTURACIÓN DE PRUEBA");
-            UtiFacturacion factura = new UtiFacturacion();
+        //    //UtiFacturacionPruebas factura = new UtiFacturacionPruebas();
+        //    //MessageBox.Show("FACTURACIÓN DE PRUEBA");
+        //    UtiFacturacion factura = new UtiFacturacion();
             
 
-            //Pedido.Factura = txtNumeroFactura.Text;
-            string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
-                                            NumeroCuenta, pathClienteDirectorioFacturas,
-                                            CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS);
-            EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
+        //    //Pedido.Factura = txtNumeroFactura.Text;
+        //    string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
+        //                                    NumeroCuenta, pathClienteDirectorioFacturas,
+        //                                    CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS);
+        //    EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
 
-            return fact;// pathClienteDirectorioFacturas;
-        }
+        //    return fact;// pathClienteDirectorioFacturas;
+        //}
 
 
         /// <summary>
@@ -177,13 +178,13 @@ namespace Aires.Pantallas
                 string mensaje = "Apreciable " + Cliente.NombreFiscal + ", \n\n Le enviamos su debido comprobante fiscal solicitado, recordandole que estamos a sus ordenes para cualquier duda o aclaración. \n";
                 mensaje += "\n Agradecemos su preferencia y esperamos seguirle atendiendo como se merece. \n";
                 mensaje += "\n Atte. \n" + empresaSeleccionada.NombreFiscal;
-                new UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3 }, mensaje, archivosAdjuntos);
+                new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3 }, mensaje, archivosAdjuntos);
 
-                MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Cliente.Email + "-");
-                //}
-            }
+            MessageBox.Show("El Correo se ha Enviado correctamente, a la(s) dirección(es): \n " + Cliente.Email + " \n " + Cliente.Email2 + " \n " + Cliente.Email3);
+            //}
+        }
 
-            public void ConviertePdfToImage(string RutaPDF)
+        public void ConviertePdfToImage(string RutaPDF)
             {
 
                 //System.Drawing.Image pageImage = (Image)new PDFtoImage().ConvertPdfToImage(RutaPDF);
@@ -201,17 +202,21 @@ namespace Aires.Pantallas
                     //((Ventas)forma).CargaProductos();
                     ((Ventas)forma).CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
                 }
-            } 
-        
+            }
+
         #endregion
 
         #region Metodos Impresion
-            public void CargaRvVentas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta)
-            {
-                List<EntPedido> ListaPedidos = new BusPedidos().ObtienePedidosClientesPorFechas(EmpresaId,FechaDesde,FechaHasta);
-                entPedidoBindingSource.DataSource = ListaPedidos;
-                rvVentas.RefreshReport();
-            }
+        public void CargaRvVentas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta)
+        {
+            List<EntPedido> ListaPedidos = new BusPedidos().ObtienePedidosClientesPorFechas(EmpresaId, FechaDesde, FechaHasta);
+            entPedidoBindingSource.DataSource = ListaPedidos;
+            ReportParameter parmEmpresa;
+            parmEmpresa = new ReportParameter("Empresa", Program.EmpresaSeleccionada.Nombre);
+
+            rvVentas.LocalReport.SetParameters(parmEmpresa);
+            rvVentas.RefreshReport();
+        }
         public List<EntPedido> ObtieneVentas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta)
         {
             List<EntPedido> ListaPedidos = new BusPedidos().ObtienePedidosClientesPorFechas(EmpresaId, FechaDesde, FechaHasta);
@@ -312,6 +317,11 @@ namespace Aires.Pantallas
         }
         void InicializaPantalla()
         {
+            if(Program.UsuarioSeleccionado.Id>1)
+            {
+                tpReportes.Text="";
+                pnlReportesVentas.Visible = false;
+            }
             //if(Program.EmpresaSeleccionada!=null)
             //    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
             dtpFechaDesdeVentas.Value = ObtieneLunesEstaSemana(DateTime.Today);
@@ -329,7 +339,7 @@ namespace Aires.Pantallas
 
             EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
             string asunto = "VENTAS DE PRODUCTOS -" + Fecha.ToString("dd MMM yyyy")+"-"+Empresa;
-            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA TIIM. \n\n Abrir sistema TIIM-->Ir a 'Sincronización' en menu-->En Pestaña 'Importar Ventas'-->Seleccionar archivo descargado desde correo (archivo Excel adjunto). Se mostrarán las Ventas a Importar-->Presionar botón Importar-->";
+            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA 'SERDAN SOFTWARE'. \n\n Abrir sistema 'SERDAN SOFTWARE'-->Ir a 'Sincronización' en menu-->En Pestaña 'Importar Ventas'-->Seleccionar archivo descargado desde correo (archivo Excel adjunto). Se mostrarán las Ventas a Importar-->Presionar botón Importar-->";
             new AiresUtilerias.UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Email }, mensaje, archivosAdjuntos);
 
             //MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Email + "-");
@@ -388,25 +398,26 @@ namespace Aires.Pantallas
                         //--------------REN|COL----------//
                         xlWorkSheet.Cells[1, 1] = "CLIENTEID";
                         xlWorkSheet.Cells[1, 2] = "CLIENTE";
-                        xlWorkSheet.Cells[1, 3] = "PEDIDODETALLE";
-                        xlWorkSheet.Cells[1, 4] = "TOTAL";
-                        xlWorkSheet.Cells[1, 5] = "PAGO";
-                        xlWorkSheet.Cells[1, 6] = "FECHA";
-                        xlWorkSheet.Cells[1, 7] = "FACTURADO";
-                        xlWorkSheet.Cells[1, 8] = "PEDIDOESTATUSID";
+                        xlWorkSheet.Cells[1, 3] = "PEDIDOID";
+                        xlWorkSheet.Cells[1, 4] = "PEDIDODETALLE";
+                        xlWorkSheet.Cells[1, 5] = "TOTAL";
+                        xlWorkSheet.Cells[1, 6] = "PAGO";
+                        xlWorkSheet.Cells[1, 7] = "FECHA";
+                        xlWorkSheet.Cells[1, 8] = "FACTURADO";
+                        xlWorkSheet.Cells[1, 9] = "PEDIDOESTATUSID";
 
-                        xlWorkSheet.Cells[1, 9] = "PRODUCTODETALLEID";
-                        xlWorkSheet.Cells[1, 10] = "CANTIDAD";
-                        xlWorkSheet.Cells[1, 11] = "PRECIOCOSTO";
-                        xlWorkSheet.Cells[1, 12] = "PRECIOVENTA";
+                        xlWorkSheet.Cells[1, 10] = "PRODUCTODETALLEID";
+                        xlWorkSheet.Cells[1, 11] = "CANTIDAD";
+                        xlWorkSheet.Cells[1, 12] = "PRECIOCOSTO";
+                        xlWorkSheet.Cells[1, 13] = "PRECIOVENTA";
+                    
+                        xlWorkSheet.Cells[1, 14] = "TIPOPRODUCTOID";
+                        xlWorkSheet.Cells[1, 15] = "PRODUCTOID";
 
-                        xlWorkSheet.Cells[1, 13] = "TIPOPRODUCTOID";
-                        xlWorkSheet.Cells[1, 14] = "PRODUCTOID";
-
-                        xlWorkSheet.Cells[1, 15] = "NUMEROFACTURA";
-                        xlWorkSheet.Cells[1, 16] = "UUID";
-                        xlWorkSheet.Cells[1, 17] = "FECHAFACTURA";
-                        xlWorkSheet.Cells[1, 18] = "RUTAFACTURA";
+                        xlWorkSheet.Cells[1, 16] = "NUMEROFACTURA";
+                        xlWorkSheet.Cells[1, 17] = "UUID";
+                        xlWorkSheet.Cells[1, 18] = "FECHAFACTURA";
+                        xlWorkSheet.Cells[1, 19] = "RUTAFACTURA";
                         //hacer rutina para obtener los archivos de facturas
 
                         int ren = 2;
@@ -445,25 +456,26 @@ namespace Aires.Pantallas
                             {
                                 xlWorkSheet.Cells[ren, 1] = pe.ClienteId;           // "CLIENTEID";
                                 xlWorkSheet.Cells[ren, 2] = pe.Cliente;             // "CLIENTE";
-                                xlWorkSheet.Cells[ren, 3] = pe.Detalle;             // "PEDIDODETALLE";
-                                xlWorkSheet.Cells[ren, 4] = pe.Total;               // "TOTAL";
-                                xlWorkSheet.Cells[ren, 5] = pe.Pago;                //"PAGO";
-                                xlWorkSheet.Cells[ren, 6] = pe.Fecha;               //"FECHA";
-                                xlWorkSheet.Cells[ren, 7] = pe.Facturado;           // "FACTURADO";
-                                xlWorkSheet.Cells[ren, 8] = pe.EstatusId;           // "PEDIDOESTATUSID";
+                                xlWorkSheet.Cells[ren, 3] = pe.Id;             // "PEDIDOID";
+                                xlWorkSheet.Cells[ren, 4] = pe.Detalle;             // "PEDIDODETALLE";
+                                xlWorkSheet.Cells[ren, 5] = pe.Total;               // "TOTAL";
+                                xlWorkSheet.Cells[ren, 6] = pe.Pago;                //"PAGO";
+                                xlWorkSheet.Cells[ren, 7] = pe.Fecha;               //"FECHA";
+                                xlWorkSheet.Cells[ren, 8] = pe.Facturado;           // "FACTURADO";
+                                xlWorkSheet.Cells[ren, 9] = pe.EstatusId;           // "PEDIDOESTATUSID";
 
-                                xlWorkSheet.Cells[ren, 9] = p.Id;                   // "PRODUCTODETALLEID";
-                                xlWorkSheet.Cells[ren, 10] = p.Cantidad;            // "CANTIDAD";
-                                xlWorkSheet.Cells[ren, 11] = p.PrecioCosto;         // "PRECIOCOSTO";
-                                xlWorkSheet.Cells[ren, 12] = p.PrecioVenta;         // "PRECIOVENTA";
+                                xlWorkSheet.Cells[ren, 10] = p.Id;                   // "PRODUCTODETALLEID";
+                                xlWorkSheet.Cells[ren, 11] = p.Cantidad;            // "CANTIDAD";
+                                xlWorkSheet.Cells[ren, 12] = p.PrecioCosto;         // "PRECIOCOSTO";
+                                xlWorkSheet.Cells[ren, 13] = p.PrecioVenta;         // "PRECIOVENTA";
+                            
+                                xlWorkSheet.Cells[ren, 14] = p.TipoProductoId;      // "TIPOPRODUCTOID";
+                                xlWorkSheet.Cells[ren, 15] = p.ProductoId;          // "PRODUCTOID";
 
-                                xlWorkSheet.Cells[ren, 13] = p.TipoProductoId;      // "TIPOPRODUCTOID";
-                                xlWorkSheet.Cells[ren, 14] = p.ProductoId;          // "PRODUCTOID";
-
-                                xlWorkSheet.Cells[ren, 15] = pe.Factura;            // "NUMEROFACTURA";
-                                xlWorkSheet.Cells[ren, 16] = pe.UUID;               // "UUID";
-                                xlWorkSheet.Cells[ren, 17] = pe.FechaEntrega;       // "FECHAFACTURA";
-                                xlWorkSheet.Cells[ren, 18] = pe.RutaFactura;        // "RUTAFACTURA";
+                                xlWorkSheet.Cells[ren, 16] = pe.Factura;            // "NUMEROFACTURA";
+                                xlWorkSheet.Cells[ren, 17] = pe.UUID;               // "UUID";
+                                xlWorkSheet.Cells[ren, 18] = pe.FechaEntrega;       // "FECHAFACTURA";
+                                xlWorkSheet.Cells[ren, 19] = pe.RutaFactura;        // "RUTAFACTURA";
                                 ren++;
                             }
                         }
@@ -640,11 +652,11 @@ namespace Aires.Pantallas
                 if (!pedidoSeleccionado.Facturado)
                     throw new Exception("El Pedido NO ha sido facturado.");
 
-                if (MuestraMensajeYesNo(string.Format("¿Seguro desea enviar la FACTURA al correo seleccionado? \n Cliente:{0}", pedidoSeleccionado.Cliente), "CONFIRMACIÓN") == DialogResult.Yes)
+                EntCliente cliente = ObtieneCliente(pedidoSeleccionado.ClienteId);
+                if (MuestraMensajeYesNo(string.Format("¿Seguro desea enviar la FACTURA al correo seleccionado? \n \n Cliente:{0} \n \n Email:  {1} \n Email2: {2} \n Email3: {3}", pedidoSeleccionado.Cliente, cliente.Email, cliente.Email2, cliente.Email3), "CONFIRMACIÓN") == DialogResult.Yes)
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    EntCliente cliente = ObtieneCliente(pedidoSeleccionado.ClienteId);
-                    cliente.Email = txtEmail.Text;
+                    //cliente.Email = txtEmail.Text;
                     try
                     {
                         //throw new Exception("error");
@@ -673,8 +685,14 @@ namespace Aires.Pantallas
                     Cursor.Current = Cursors.WaitCursor;
                     //FacturacionPrueba factura = new FacturacionPrueba();
                     //MessageBox.Show("CANCELACIÓN PRUEBA");
-                    UtiFacturacionPruebas factura = new UtiFacturacionPruebas();
-                    factura.Cancelar(new EntEmpresa() { RFC="XAXX010101000" },pedidoSeleccionado.UUID);
+                    UtiFacturacion factura = new UtiFacturacion();
+                    UtiFacturacionPruebas facturaPruebas = new UtiFacturacionPruebas();
+
+
+                    if (Program.EmpresaSeleccionada.Facturacion)
+                        factura.Cancelar(Program.EmpresaSeleccionada, pedidoSeleccionado.UUID);
+                    else
+                        facturaPruebas.Cancelar(new EntEmpresa() { RFC="XAXX010101000" },pedidoSeleccionado.UUID);
                     //factura.Cancelar(1, pedidoSeleccionado.UUID);
 
                     List<EntFactura> facturasPedido=new BusPedidos().ObtieneFacturasPorPedido(pedidoSeleccionado.Id);
@@ -738,7 +756,7 @@ namespace Aires.Pantallas
                     {
                         Productos vProd = new Productos();
                         vProd.ActualizaEstatusProductoDetalle(p, 1);//ESTATUS:1=ACTIVO
-                        vProd.AumentaProducto(p.ProductoId, p.Cantidad);
+                        vProd.AumentaProducto(p.ProductoId, Convert.ToInt32(p.Cantidad));
                     }
                     ActualizaEstatusProductoDetallePedido(pedidoSeleccionado, false);//ESTATUS:0=CANCELADO
                     ActualizaEstatusPedido(pedidoSeleccionado,0);//ESTATUS:0=CANCELADO
@@ -847,68 +865,68 @@ namespace Aires.Pantallas
             {
                 if (e.ColumnIndex == 0)
                 {
-                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
+                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.Descending)
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderBy(P => P.NumCliente).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Ascending;
                     }
                     else
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderByDescending(P => P.NumCliente).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Descending;
                     }
                 }
                 else if (e.ColumnIndex == 1)
                 {
-                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
+                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.Descending)
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderBy(P => P.Cliente).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Ascending;
                     }
                     else
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderByDescending(P => P.Cliente).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Descending;
                     }
                 }
                 else if (e.ColumnIndex == 2)
                 {
-                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
+                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.Descending)
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderBy(P => P.Detalle).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Ascending;
                     }
                     else
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderByDescending(P => P.Detalle).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Descending;
                     }
                 }
 
                 else if (e.ColumnIndex == 3)
                 {
-                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
+                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.Descending)
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderBy(P => P.Factura).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Ascending;
                     }
                     else
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderByDescending(P => P.Factura).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Descending;
                     }
                 }
                 else if (e.ColumnIndex == 5)
                 {
-                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
+                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == System.Windows.Forms.SortOrder.Descending)
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderBy(P => P.Fecha).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Ascending;
                     }
                     else
                     {
                         gvPedidos.DataSource = ((List<EntPedido>)((DataGridView)sender).DataSource).OrderByDescending(P => P.Fecha).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.Descending;
                     }
                 }
             }

@@ -30,21 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.tsbProveedores = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbInventario = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
@@ -58,7 +58,7 @@
             this.toolStripButton1,
             this.toolStripSeparator3,
             this.toolStripButton11,
-            this.toolStripButton5,
+            this.tsbProveedores,
             this.toolStripButton3,
             this.toolStripSeparator1,
             this.toolStripButton2,
@@ -68,7 +68,7 @@
             this.toolStripButton7,
             this.toolStripButton10,
             this.toolStripSeparator5,
-            this.toolStripButton8,
+            this.tsbInventario,
             this.toolStripSeparator2,
             this.toolStripButton9,
             this.toolStripButton12});
@@ -77,31 +77,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(1354, 50);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 50);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 50);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 50);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
             // 
             // toolStripButton1
             // 
@@ -114,6 +89,11 @@
             this.toolStripButton1.Text = "Inicio";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 50);
+            // 
             // toolStripButton11
             // 
             this.toolStripButton11.Font = new System.Drawing.Font("Segoe UI", 15F);
@@ -125,15 +105,15 @@
             this.toolStripButton11.Text = "Empresas";
             this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click);
             // 
-            // toolStripButton5
+            // tsbProveedores
             // 
-            this.toolStripButton5.Font = new System.Drawing.Font("Segoe UI", 15F);
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(165, 47);
-            this.toolStripButton5.Text = "Proveedores";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
+            this.tsbProveedores.Font = new System.Drawing.Font("Segoe UI", 15F);
+            this.tsbProveedores.Image = ((System.Drawing.Image)(resources.GetObject("tsbProveedores.Image")));
+            this.tsbProveedores.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbProveedores.Name = "tsbProveedores";
+            this.tsbProveedores.Size = new System.Drawing.Size(165, 47);
+            this.tsbProveedores.Text = "Proveedores";
+            this.tsbProveedores.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripButton3
             // 
@@ -145,6 +125,11 @@
             this.toolStripButton3.Size = new System.Drawing.Size(132, 47);
             this.toolStripButton3.Text = "Clientes";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
             // toolStripButton2
             // 
@@ -166,6 +151,11 @@
             this.toolStripButton4.Size = new System.Drawing.Size(113, 47);
             this.toolStripButton4.Text = "Ventas";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 50);
             // 
             // toolStripButton6
             // 
@@ -201,17 +191,27 @@
             this.toolStripButton10.Visible = false;
             this.toolStripButton10.Click += new System.EventHandler(this.toolStripButton10_Click_1);
             // 
-            // toolStripButton8
+            // toolStripSeparator5
             // 
-            this.toolStripButton8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.toolStripButton8.Font = new System.Drawing.Font("Segoe UI", 15F);
-            this.toolStripButton8.Image = global::Aires.Properties.Resources.Graph;
-            this.toolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(152, 52);
-            this.toolStripButton8.Text = "Inventario";
-            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click_1);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 50);
+            // 
+            // tsbInventario
+            // 
+            this.tsbInventario.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tsbInventario.Font = new System.Drawing.Font("Segoe UI", 15F);
+            this.tsbInventario.Image = global::Aires.Properties.Resources.Graph;
+            this.tsbInventario.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbInventario.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbInventario.Name = "tsbInventario";
+            this.tsbInventario.Size = new System.Drawing.Size(152, 52);
+            this.tsbInventario.Text = "Inventario";
+            this.tsbInventario.Click += new System.EventHandler(this.toolStripButton8_Click_1);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
             // 
             // toolStripButton9
             // 
@@ -261,14 +261,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton tsbProveedores;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStripButton tsbInventario;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;

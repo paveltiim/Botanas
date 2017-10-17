@@ -272,7 +272,22 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
-
+        public DataTable obtieneIngreso(int EmpresaId, string Serie)
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneIngresoPorSerieProducto", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("Serie", Serie);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        
         public DataTable obtieneIngresosProductosPorFechas(DateTime FechaDesde, DateTime FechaHasta)
         {
             try
@@ -428,7 +443,7 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
         }
-        public int agregaIngresoProducto(int ProveedorId,string Descripcion, DateTime Fecha)
+        public int agregaIngresoProducto(int ProveedorId, string Descripcion, DateTime Fecha)
         {
             try
             {
@@ -438,12 +453,34 @@ namespace AiresDatos
                 com.Parameters.AddWithValue("ProveedorId", ProveedorId);
                 com.Parameters.AddWithValue("Descripcion", Descripcion);
                 com.Parameters.AddWithValue("Fecha", Fecha);
+                //com.Parameters.AddWithValue("Id", Id);
                 SqlParameter parm = new SqlParameter("Id", Id);
                 parm.Direction = ParameterDirection.InputOutput;
                 com.Parameters.Add(parm);
                 con.Open();
                 com.ExecuteNonQuery();
                 return Convert.ToInt32(com.Parameters["Id"].Value);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
+        public int agregaIngresoProducto(int Id, int ProveedorId,string Descripcion, DateTime Fecha)
+        {
+            try
+            {
+                //int Id = 0;
+                com = new SqlCommand("insAgregaIngresoConId", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("ProveedorId", ProveedorId);
+                com.Parameters.AddWithValue("Descripcion", Descripcion);
+                com.Parameters.AddWithValue("Fecha", Fecha);
+                com.Parameters.AddWithValue("Id", Id);
+                //SqlParameter parm = new SqlParameter("Id", Id);
+                //parm.Direction = ParameterDirection.InputOutput;
+                //com.Parameters.Add(parm);
+                con.Open();
+                com.ExecuteNonQuery();
+                return Id;// Convert.ToInt32(com.Parameters["Id"].Value);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }

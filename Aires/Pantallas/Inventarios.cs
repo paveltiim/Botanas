@@ -343,7 +343,7 @@ namespace Aires.Pantallas
                     List<EntProducto> productos = new BusProductos().ObtieneProductosPorIngreso(ingresoSeleccionado.Id);
                     foreach (EntProducto p in productos)
                     {
-                        new BusProductos().AumentaProducto(p.Id, -p.Cantidad);
+                        new BusProductos().AumentaProducto(p.Id, -Convert.ToInt32(p.Cantidad));
                     }
 
                     btnRefrescar.PerformClick();
@@ -368,7 +368,7 @@ namespace Aires.Pantallas
                         p.EstatusId = 0;
                         new BusProductos().ActualizaEstatusProductoDetalle(p);
                     }
-                    new BusProductos().AumentaProducto(productoSeleccionado.Id, -productoSeleccionado.Cantidad);
+                    new BusProductos().AumentaProducto(productoSeleccionado.Id, -Convert.ToInt32(productoSeleccionado.Cantidad));
 
                     CargaEntradas(ingresoSeleccionado.Id);
                 }
@@ -435,104 +435,6 @@ namespace Aires.Pantallas
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
-        private void btnExportar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
-
-                if (xlApp == null)
-                    MandaExcepcion("Excel NO esta instalado apropiadamente!!");
-
-                SeleccionaEmail vEmail = new Pantallas.SeleccionaEmail();
-                if (vEmail.ShowDialog() == DialogResult.OK)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-
-                    Workbook xlWorkBook;
-                    Worksheet xlWorkSheet;
-
-                    object misValue = System.Reflection.Missing.Value;
-                    xlWorkBook = xlApp.Workbooks.Add(misValue);
-                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
-                    //--------------REN|COL----------//
-                    xlWorkSheet.Cells[1, 1] = "ID";
-                    xlWorkSheet.Cells[1, 2] = "PRODUCTOID";
-                    xlWorkSheet.Cells[1, 3] = "CODIGO";
-                    xlWorkSheet.Cells[1, 4] = "DESCRIPCION";
-                    xlWorkSheet.Cells[1, 5] = "TIPOPRODUCTOID";
-                    xlWorkSheet.Cells[1, 6] = "TIPOPRODUCTO";
-                    xlWorkSheet.Cells[1, 7] = "SERIE";
-                    xlWorkSheet.Cells[1, 8] = "PRECIOCOSTO";
-                    xlWorkSheet.Cells[1, 9] = "PRECIOVENTA";
-
-                    xlWorkSheet.Cells[1, 10] = "INGRESOID";
-                    xlWorkSheet.Cells[1, 11] = "INGRESO";
-                    xlWorkSheet.Cells[1, 12] = "FECHAINGRESO";
-
-                    int ren = 2;
-                    foreach (EntCatalogoGenerico i in ObtieneListaGenericaFromGV(gvIngresos))
-                    {
-                        //EntCatalogoGenerico ingreso = ObtieneListaGenericaFromGV(gvIngresos)[gvIngresos.CurrentRow.Index];
-                        //CargaEntradas(ingreso.Id);
-
-                        List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetallePorIngreso(i.Id);
-                        //foreach (EntProducto p in listaProductos)
-                        //{
-                        //    new BusProductos().ObtieneProductosDetallePorIngreso(ingreso.Id).Where(P => P.ProductoId == p.Id).ToList();
-                        //}
-
-
-                        foreach (EntProducto p in listaProductos)
-                        {
-                            xlWorkSheet.Cells[ren, 1] = p.Id;           // "ID";
-                            xlWorkSheet.Cells[ren, 2] = p.ProductoId;   // "PRODUCTOID";
-                            xlWorkSheet.Cells[ren, 3] = p.Codigo;       // "CODIGO";
-                            xlWorkSheet.Cells[ren, 4] = p.Descripcion;  // "DESCRIPCION";
-
-                            xlWorkSheet.Cells[ren, 5] = p.TipoProductoId;  //"TIPOPRODUCTOID";
-                            xlWorkSheet.Cells[ren, 6] = p.TipoProducto;  //"TIPOPRODUCTO";
-                            xlWorkSheet.Cells[ren, 7] = p.Serie;        // "SERIE";
-                            xlWorkSheet.Cells[ren, 8] = p.PrecioCosto;  // "PRECIOCOSTO";
-                            xlWorkSheet.Cells[ren, 9] = p.PrecioVenta;  // "PRECIOVENTA";
-                            xlWorkSheet.Cells[ren, 10] = p.IngresoId;    // "INGRESOID";
-                            xlWorkSheet.Cells[ren, 11] = i.Descripcion;  // "INGRESO";
-                            xlWorkSheet.Cells[ren, 12] = i.Fecha;       // "INGRESOFECHA";
-                            ren++;
-                        }
-                    }
-
-                    EntCatalogoGenerico ingreso = ObtieneCatalogoGenericoFromGV(gvIngresos);
-                    string rutaExportacion = string.Format(@"c:\TIIM\EXPORTACIONES\Entradas {0:yyyy-MM-dd}.xls", ingreso.Fecha);
-
-                    try
-                    {
-                        xlWorkBook.SaveAs(rutaExportacion, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-                        xlWorkBook.Close(true, misValue, misValue);
-                        xlApp.Quit();
-
-                        Marshal.ReleaseComObject(xlWorkSheet);
-                        Marshal.ReleaseComObject(xlWorkBook);
-                        Marshal.ReleaseComObject(xlApp);
-
-                        EnviaCorreoArchivo(vEmail.EmailSeleccionado, ingreso.Fecha, rutaExportacion);
-                    }
-                    catch (Exception ex){
-                        xlWorkBook.Close(true, misValue, misValue);
-                        xlApp.Quit();
-
-                        Marshal.ReleaseComObject(xlWorkSheet);
-                        Marshal.ReleaseComObject(xlWorkBook);
-                        Marshal.ReleaseComObject(xlApp);
-                        MandaExcepcion(ex.Message);
-                    }
-                    //MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xls");
-                }
-                this.Cursor = Cursors.Default;
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
         /// <summary>
         /// Muestra Ventana emergente para Confirmar Envio de Correo, llama los métodos Imprime.AsignaValoresParametrosImpresionDatosCliente y Imprime.AsignaValoresParametrosImpresion.
         /// Envia correo electronico por medio de la clase UtiCorreo.
@@ -551,7 +453,7 @@ namespace Aires.Pantallas
 
             EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
             string asunto = "COMPRAS DE PRODUCTOS -" + Fecha.ToString("dd MMM yyyy");
-            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA TIIM";
+            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA 'SERDAN SOFTWARE'";
             new UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Email }, mensaje, archivosAdjuntos);
 
             MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Email + "-");
@@ -571,13 +473,444 @@ namespace Aires.Pantallas
             System.IO.FileInfo file = new System.IO.FileInfo(PathArchivo);
             archivosAdjuntos.Add(file.FullName);
 
-            EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
             string asunto = "COMPRAS DE PRODUCTOS -" + Fecha.ToString("dd MMM yyyy");
-            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA TIIM. \n\n Abrir sistema TIIM-->Ir a 'Sincronización' en menu-->En Pestaña 'Importar Entradas'-->Seleccionar archivo descargado desde correo (archivo Excel adjunto). Se mostrarán productos a Importar-->Presionar botón Importar";
+            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA 'SERDAN SOFTWARE'. \n\n Abrir sistema 'SERDAN SOFTWARE'27-->Ir a 'Sincronización' en menu-->En Pestaña 'Importar Entradas'-->Seleccionar archivo descargado desde correo (archivo Excel adjunto). Se mostrarán productos a Importar-->Presionar botón Importar";
             new UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Email }, mensaje, archivosAdjuntos);
 
             MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Email + "-");
             //}
+        }
+        public void ExportaProductos(List<EntProducto> ListaProductos) {
+            if (ListaProductos.Count == 0)
+                MandaExcepcion("NO SE SELECCIONARON PRODUCTOS A EXPORTAR");
+
+            this.Cursor = Cursors.WaitCursor;
+            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+            if (xlApp == null)
+                MandaExcepcion("Excel NO esta instalado apropiadamente!!");
+
+            SeleccionaEmail vEmail = new Pantallas.SeleccionaEmail();
+            if (vEmail.ShowDialog() == DialogResult.OK)
+            {
+
+                Workbook xlWorkBook;
+                Worksheet xlWorkSheet;
+
+                object misValue = System.Reflection.Missing.Value;
+                xlWorkBook = xlApp.Workbooks.Add(misValue);
+                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                //--------------REN|COL----------//
+                xlWorkSheet.Cells[1, 1] = "ID";
+                xlWorkSheet.Cells[1, 2] = "PRODUCTOID";
+                xlWorkSheet.Cells[1, 3] = "CODIGO";
+                xlWorkSheet.Cells[1, 4] = "DESCRIPCION";
+                xlWorkSheet.Cells[1, 5] = "TIPOPRODUCTOID";
+                xlWorkSheet.Cells[1, 6] = "TIPOPRODUCTO";
+                xlWorkSheet.Cells[1, 7] = "SERIE";
+                xlWorkSheet.Cells[1, 8] = "PRECIOCOSTO";
+                xlWorkSheet.Cells[1, 9] = "PRECIOVENTA";
+
+                xlWorkSheet.Cells[1, 10] = "INGRESOID";
+                xlWorkSheet.Cells[1, 11] = "INGRESO";
+                xlWorkSheet.Cells[1, 12] = "FECHAINGRESO";
+
+                xlWorkSheet.Cells[1, 13] = "EMPRESAID";
+                //xlWorkSheet.Cells[1, 14] = "PROVEEDORID";
+
+                int ren = 2;
+                //foreach (EntCatalogoGenerico i in ObtieneListaGenericaFromGV(gvIngresos))
+                //{
+
+                    //List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetallePorIngreso(i.Id);
+
+                    foreach (EntProducto p in ListaProductos)
+                    {
+                        xlWorkSheet.Cells[ren, 1] = p.Id;           // "ID";
+                        xlWorkSheet.Cells[ren, 2] = p.ProductoId;   // "PRODUCTOID";
+                        xlWorkSheet.Cells[ren, 3] = p.Codigo;       // "CODIGO";
+                        xlWorkSheet.Cells[ren, 4] = p.Descripcion;  // "DESCRIPCION";
+
+                        xlWorkSheet.Cells[ren, 5] = p.TipoProductoId;   //"TIPOPRODUCTOID";
+                        xlWorkSheet.Cells[ren, 6] = p.TipoProducto;     //"TIPOPRODUCTO";
+                        xlWorkSheet.Cells[ren, 7] = p.Serie;            // "SERIE";
+                        xlWorkSheet.Cells[ren, 8] = p.PrecioCosto;      // "PRECIOCOSTO";
+                        xlWorkSheet.Cells[ren, 9] = p.PrecioVenta;      // "PRECIOVENTA";
+                        xlWorkSheet.Cells[ren, 10] = p.IngresoId;       // "INGRESOID";
+                        xlWorkSheet.Cells[ren, 11] = p.Ingreso;         // "INGRESO";
+                        xlWorkSheet.Cells[ren, 12] = p.Fecha;           // "INGRESOFECHA";
+
+                        xlWorkSheet.Cells[ren, 13] = p.EmpresaId;           // "EMPRESAID";
+                    ren++;
+                    }
+                //}
+
+                //EntCatalogoGenerico ingreso = ObtieneCatalogoGenericoFromGV(gvIngresos);
+                string rutaExportacion = string.Format(@"c:\TIIM\EXPORTACIONES\Entradas {0:yyyy-MM-dd}.xls", ListaProductos[0].Fecha);
+
+                try
+                {
+                    xlWorkBook.SaveAs(rutaExportacion, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+
+                    Marshal.ReleaseComObject(xlWorkSheet);
+                    Marshal.ReleaseComObject(xlWorkBook);
+                    Marshal.ReleaseComObject(xlApp);
+
+                    EnviaCorreoArchivo(vEmail.EmailSeleccionado, ListaProductos[0].Fecha, rutaExportacion);
+                }
+                catch (Exception ex)
+                {
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+
+                    Marshal.ReleaseComObject(xlWorkSheet);
+                    Marshal.ReleaseComObject(xlWorkBook);
+                    Marshal.ReleaseComObject(xlApp);
+                    MandaExcepcion(ex.Message);
+                }
+                MuestraMensaje("¡EXPORTACIÓN ENVIADA!", "CONFIRMACIÓN");
+                //MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xls");
+                this.Cursor = Cursors.Default;
+            }
+            this.Cursor = Cursors.Default;
+        }
+        public void ExportaProductos(List<EntProducto> ListaProductos, int EmpresaId)
+        {
+            if (ListaProductos.Count == 0)
+                MandaExcepcion("NO SE SELECCIONARON PRODUCTOS A EXPORTAR");
+
+            this.Cursor = Cursors.WaitCursor;
+            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+            if (xlApp == null)
+                MandaExcepcion("Excel NO esta instalado apropiadamente!!");
+
+            SeleccionaEmail vEmail = new Pantallas.SeleccionaEmail();
+            if (vEmail.ShowDialog() == DialogResult.OK)
+            {
+
+                Workbook xlWorkBook;
+                Worksheet xlWorkSheet;
+
+                object misValue = System.Reflection.Missing.Value;
+                xlWorkBook = xlApp.Workbooks.Add(misValue);
+                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                //--------------REN|COL----------//
+                xlWorkSheet.Cells[1, 1] = "ID";
+                xlWorkSheet.Cells[1, 2] = "PRODUCTOID";
+                xlWorkSheet.Cells[1, 3] = "CODIGO";
+                xlWorkSheet.Cells[1, 4] = "DESCRIPCION";
+                xlWorkSheet.Cells[1, 5] = "TIPOPRODUCTOID";
+                xlWorkSheet.Cells[1, 6] = "TIPOPRODUCTO";
+                xlWorkSheet.Cells[1, 7] = "SERIE";
+                xlWorkSheet.Cells[1, 8] = "PRECIOCOSTO";
+                xlWorkSheet.Cells[1, 9] = "PRECIOVENTA";
+
+                xlWorkSheet.Cells[1, 10] = "INGRESOID";
+                xlWorkSheet.Cells[1, 11] = "INGRESO";
+                xlWorkSheet.Cells[1, 12] = "FECHAINGRESO";
+
+                xlWorkSheet.Cells[1, 13] = "EMPRESAID";
+                //xlWorkSheet.Cells[1, 14] = "PROVEEDORID";
+
+                int ren = 2;
+                //foreach (EntCatalogoGenerico i in ObtieneListaGenericaFromGV(gvIngresos))
+                //{
+
+                //List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetallePorIngreso(i.Id);
+
+                foreach (EntProducto p in ListaProductos)
+                {
+                    xlWorkSheet.Cells[ren, 1] = p.Id;           // "ID";
+                    xlWorkSheet.Cells[ren, 2] = p.ProductoId;   // "PRODUCTOID";
+                    xlWorkSheet.Cells[ren, 3] = p.Codigo;       // "CODIGO";
+                    xlWorkSheet.Cells[ren, 4] = p.Descripcion;  // "DESCRIPCION";
+
+                    xlWorkSheet.Cells[ren, 5] = p.TipoProductoId;   //"TIPOPRODUCTOID";
+                    xlWorkSheet.Cells[ren, 6] = p.TipoProducto;     //"TIPOPRODUCTO";
+                    xlWorkSheet.Cells[ren, 7] = p.Serie;            // "SERIE";
+                    xlWorkSheet.Cells[ren, 8] = p.PrecioCosto;      // "PRECIOCOSTO";
+                    xlWorkSheet.Cells[ren, 9] = p.PrecioVenta;      // "PRECIOVENTA";
+                    xlWorkSheet.Cells[ren, 10] = p.IngresoId;       // "INGRESOID";
+                    xlWorkSheet.Cells[ren, 11] = p.Ingreso;         // "INGRESO";
+                    xlWorkSheet.Cells[ren, 12] = p.Fecha;           // "INGRESOFECHA";
+
+                    xlWorkSheet.Cells[ren, 13] = EmpresaId;           // "EMPRESAID";
+                    ren++;
+                }
+                //}
+
+                //EntCatalogoGenerico ingreso = ObtieneCatalogoGenericoFromGV(gvIngresos);
+                string rutaExportacion = string.Format(@"c:\TIIM\EXPORTACIONES\Entradas {0:yyyy-MM-dd}.xls", ListaProductos[0].Fecha);
+
+                try
+                {
+                    xlWorkBook.SaveAs(rutaExportacion, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+
+                    Marshal.ReleaseComObject(xlWorkSheet);
+                    Marshal.ReleaseComObject(xlWorkBook);
+                    Marshal.ReleaseComObject(xlApp);
+
+                    EnviaCorreoArchivo(vEmail.EmailSeleccionado, ListaProductos[0].Fecha, rutaExportacion);
+                }
+                catch (Exception ex)
+                {
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+
+                    Marshal.ReleaseComObject(xlWorkSheet);
+                    Marshal.ReleaseComObject(xlWorkBook);
+                    Marshal.ReleaseComObject(xlApp);
+                    MandaExcepcion(ex.Message);
+                }
+                MuestraMensaje("¡EXPORTACIÓN ENVIADA!", "CONFIRMACIÓN");
+                //MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xls");
+                this.Cursor = Cursors.Default;
+            }
+            this.Cursor = Cursors.Default;
+        }
+        public void ExportaIngresos(List<EntCatalogoGenerico> ListaIngresos)
+        {
+            if (ListaIngresos.Count == 0)
+                MandaExcepcion("NO SE SELECCIONARON INGRESOS A EXPORTAR");
+
+            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+            if (xlApp == null)
+                MandaExcepcion("Excel NO esta instalado apropiadamente!!");
+
+            SeleccionaEmail vEmail = new Pantallas.SeleccionaEmail();
+            if (vEmail.ShowDialog() == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                Workbook xlWorkBook;
+                Worksheet xlWorkSheet;
+
+                object misValue = System.Reflection.Missing.Value;
+                xlWorkBook = xlApp.Workbooks.Add(misValue);
+                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                //--------------REN|COL----------//
+                xlWorkSheet.Cells[1, 1] = "ID";
+                xlWorkSheet.Cells[1, 2] = "PRODUCTOID";
+                xlWorkSheet.Cells[1, 3] = "CODIGO";
+                xlWorkSheet.Cells[1, 4] = "DESCRIPCION";
+                xlWorkSheet.Cells[1, 5] = "TIPOPRODUCTOID";
+                xlWorkSheet.Cells[1, 6] = "TIPOPRODUCTO";
+                xlWorkSheet.Cells[1, 7] = "SERIE";
+                xlWorkSheet.Cells[1, 8] = "PRECIOCOSTO";
+                xlWorkSheet.Cells[1, 9] = "PRECIOVENTA";
+
+                xlWorkSheet.Cells[1, 10] = "INGRESOID";
+                xlWorkSheet.Cells[1, 11] = "INGRESO";
+                xlWorkSheet.Cells[1, 12] = "FECHAINGRESO";
+
+                xlWorkSheet.Cells[1, 13] = "EMPRESAID";
+                //xlWorkSheet.Cells[1, 14] = "PROVEEDORID";
+
+                int ren = 2;
+                foreach (EntCatalogoGenerico i in ListaIngresos)
+                {
+                    //EntCatalogoGenerico ingreso = ObtieneListaGenericaFromGV(gvIngresos)[gvIngresos.CurrentRow.Index];
+                    //CargaEntradas(ingreso.Id);
+
+                    List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetallePorIngreso(i.Id);
+                    //foreach (EntProducto p in listaProductos)
+                    //{
+                    //    new BusProductos().ObtieneProductosDetallePorIngreso(ingreso.Id).Where(P => P.ProductoId == p.Id).ToList();
+                    //}
+
+
+                    foreach (EntProducto p in listaProductos)
+                    {
+                        xlWorkSheet.Cells[ren, 1] = p.Id;           // "ID";
+                        xlWorkSheet.Cells[ren, 2] = p.ProductoId;   // "PRODUCTOID";
+                        xlWorkSheet.Cells[ren, 3] = p.Codigo;       // "CODIGO";
+                        xlWorkSheet.Cells[ren, 4] = p.Descripcion;  // "DESCRIPCION";
+
+                        xlWorkSheet.Cells[ren, 5] = p.TipoProductoId;   //"TIPOPRODUCTOID";
+                        xlWorkSheet.Cells[ren, 6] = p.TipoProducto;     //"TIPOPRODUCTO";
+                        xlWorkSheet.Cells[ren, 7] = p.Serie;            // "SERIE";
+                        xlWorkSheet.Cells[ren, 8] = p.PrecioCosto;      // "PRECIOCOSTO";
+                        xlWorkSheet.Cells[ren, 9] = p.PrecioVenta;      // "PRECIOVENTA";
+                        xlWorkSheet.Cells[ren, 10] = p.IngresoId;       // "INGRESOID";
+                        xlWorkSheet.Cells[ren, 11] = i.Descripcion;     // "INGRESO";
+                        xlWorkSheet.Cells[ren, 12] = i.Fecha;           // "INGRESOFECHA";
+                        xlWorkSheet.Cells[ren, 13] = p.EmpresaId;       // "EMPRESAID";
+                        ren++;
+                    }
+                }
+
+                EntCatalogoGenerico ingreso = ListaIngresos[0];
+                string rutaExportacion = string.Format(@"c:\TIIM\EXPORTACIONES\Entradas {0:yyyy-MM-dd}.xls", ingreso.Fecha);
+
+                try
+                {
+                    xlWorkBook.SaveAs(rutaExportacion, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+
+                    Marshal.ReleaseComObject(xlWorkSheet);
+                    Marshal.ReleaseComObject(xlWorkBook);
+                    Marshal.ReleaseComObject(xlApp);
+
+                    EnviaCorreoArchivo(vEmail.EmailSeleccionado, ingreso.Fecha, rutaExportacion);
+                }
+                catch (Exception ex)
+                {
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+
+                    Marshal.ReleaseComObject(xlWorkSheet);
+                    Marshal.ReleaseComObject(xlWorkBook);
+                    Marshal.ReleaseComObject(xlApp);
+                    MandaExcepcion(ex.Message);
+                }
+                MuestraMensaje("¡EXPORTACIÓN ENVIADA!", "CONFIRMACIÓN");
+                //MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xls");
+                this.Cursor = Cursors.Default;
+            }
+            this.Cursor = Cursors.Default;
+        }
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportaIngresos(ObtieneListaGenericaFromGV(gvIngresos).Where(P => P.Estatus).ToList());
+                //Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+                //if (xlApp == null)
+                //    MandaExcepcion("Excel NO esta instalado apropiadamente!!");
+
+                //SeleccionaEmail vEmail = new Pantallas.SeleccionaEmail();
+                //if (vEmail.ShowDialog() == DialogResult.OK)
+                //{
+                //    this.Cursor = Cursors.WaitCursor;
+
+                //    Workbook xlWorkBook;
+                //    Worksheet xlWorkSheet;
+
+                //    object misValue = System.Reflection.Missing.Value;
+                //    xlWorkBook = xlApp.Workbooks.Add(misValue);
+                //    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                //    //--------------REN|COL----------//
+                //    xlWorkSheet.Cells[1, 1] = "ID";
+                //    xlWorkSheet.Cells[1, 2] = "PRODUCTOID";
+                //    xlWorkSheet.Cells[1, 3] = "CODIGO";
+                //    xlWorkSheet.Cells[1, 4] = "DESCRIPCION";
+                //    xlWorkSheet.Cells[1, 5] = "TIPOPRODUCTOID";
+                //    xlWorkSheet.Cells[1, 6] = "TIPOPRODUCTO";
+                //    xlWorkSheet.Cells[1, 7] = "SERIE";
+                //    xlWorkSheet.Cells[1, 8] = "PRECIOCOSTO";
+                //    xlWorkSheet.Cells[1, 9] = "PRECIOVENTA";
+
+                //    xlWorkSheet.Cells[1, 10] = "INGRESOID";
+                //    xlWorkSheet.Cells[1, 11] = "INGRESO";
+                //    xlWorkSheet.Cells[1, 12] = "FECHAINGRESO";
+
+                //    int ren = 2;
+                //    foreach (EntCatalogoGenerico i in ObtieneListaGenericaFromGV(gvIngresos).Where(P => P.Estatus).ToList())
+                //    {
+                //        //EntCatalogoGenerico ingreso = ObtieneListaGenericaFromGV(gvIngresos)[gvIngresos.CurrentRow.Index];
+                //        //CargaEntradas(ingreso.Id);
+
+                //        List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetallePorIngreso(i.Id);
+                //        //foreach (EntProducto p in listaProductos)
+                //        //{
+                //        //    new BusProductos().ObtieneProductosDetallePorIngreso(ingreso.Id).Where(P => P.ProductoId == p.Id).ToList();
+                //        //}
+
+
+                //        foreach (EntProducto p in listaProductos)
+                //        {
+                //            xlWorkSheet.Cells[ren, 1] = p.Id;           // "ID";
+                //            xlWorkSheet.Cells[ren, 2] = p.ProductoId;   // "PRODUCTOID";
+                //            xlWorkSheet.Cells[ren, 3] = p.Codigo;       // "CODIGO";
+                //            xlWorkSheet.Cells[ren, 4] = p.Descripcion;  // "DESCRIPCION";
+
+                //            xlWorkSheet.Cells[ren, 5] = p.TipoProductoId;  //"TIPOPRODUCTOID";
+                //            xlWorkSheet.Cells[ren, 6] = p.TipoProducto;  //"TIPOPRODUCTO";
+                //            xlWorkSheet.Cells[ren, 7] = p.Serie;        // "SERIE";
+                //            xlWorkSheet.Cells[ren, 8] = p.PrecioCosto;  // "PRECIOCOSTO";
+                //            xlWorkSheet.Cells[ren, 9] = p.PrecioVenta;  // "PRECIOVENTA";
+                //            xlWorkSheet.Cells[ren, 10] = p.IngresoId;    // "INGRESOID";
+                //            xlWorkSheet.Cells[ren, 11] = i.Descripcion;  // "INGRESO";
+                //            xlWorkSheet.Cells[ren, 12] = i.Fecha;       // "INGRESOFECHA";
+                //            ren++;
+                //        }
+                //    }
+
+                //    EntCatalogoGenerico ingreso = ObtieneCatalogoGenericoFromGV(gvIngresos);
+                //    string rutaExportacion = string.Format(@"c:\TIIM\EXPORTACIONES\Entradas {0:yyyy-MM-dd}.xls", ingreso.Fecha);
+
+                //    try
+                //    {
+                //        xlWorkBook.SaveAs(rutaExportacion, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                //        xlWorkBook.Close(true, misValue, misValue);
+                //        xlApp.Quit();
+
+                //        Marshal.ReleaseComObject(xlWorkSheet);
+                //        Marshal.ReleaseComObject(xlWorkBook);
+                //        Marshal.ReleaseComObject(xlApp);
+
+                //        EnviaCorreoArchivo(vEmail.EmailSeleccionado, ingreso.Fecha, rutaExportacion);
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        xlWorkBook.Close(true, misValue, misValue);
+                //        xlApp.Quit();
+
+                //        Marshal.ReleaseComObject(xlWorkSheet);
+                //        Marshal.ReleaseComObject(xlWorkBook);
+                //        Marshal.ReleaseComObject(xlApp);
+                //        MandaExcepcion(ex.Message);
+                //    }
+                //    MuestraMensaje("¡EXPORTACIÓN ENVIADA!", "CONFIRMACIÓN");
+                //    //MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xls");
+                //    this.Cursor = Cursors.Default;
+                //}
+                this.Cursor = Cursors.Default;
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void btnExportaProducto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EntCatalogoGenerico ingreso = ObtieneListaGenericaFromGV(gvIngresos)[gvIngresos.CurrentRow.Index];
+                EntProducto productoSeleccionado = ObtieneProductoFromGV(gvProductos);
+
+                ExportaProductos(new BusProductos().ObtieneProductosDetallePorIngreso(ingreso.Id).Where(P => P.ProductoId == productoSeleccionado.Id).ToList());
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void btnBuscaSerie_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EntCatalogoGenerico ingreso=new BusProductos().ObtieneIngreso(Program.EmpresaSeleccionada.Id,txtBuscaSerie.Text);
+                if (ingreso.Id <= 0)
+                    MandaExcepcion("NO SE ENCONTRO LA SERIE EN LA EMPRESA: " + Program.EmpresaSeleccionada.Nombre);
+
+                rdoEntradasPorSemana.Checked = true;
+                dtpEntradasFechaDesde.Value = ingreso.Fecha;
+                List<EntCatalogoGenerico> lstIngresos = new List<EntCatalogoGenerico>();
+                lstIngresos.Add(ingreso);
+
+                gvIngresos.DataSource = lstIngresos;
+                CargaEntradas(ingreso.Id);
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
         }
     }
 }

@@ -58,6 +58,36 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+        public DataTable obtieneUltimoRegistroSincronizacion()
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneUltimoRegistroSincronizacion", con);
+                com.CommandType = CommandType.StoredProcedure;
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public void agregarRegistroSincronizacion(DateTime Fecha)
+        {
+            try
+            {
+                com = new SqlCommand("insAgregaRegistroSincronizacion", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("Fecha", Fecha);
+                con.Open();
+                com.ExecuteNonQuery();
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
 
     }
 }

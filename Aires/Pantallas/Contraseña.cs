@@ -69,5 +69,19 @@ namespace Aires.Pantallas
         {
 
         }
+
+        private void Contraseña_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (this.DialogResult == DialogResult.Abort)
+                {
+                    e.Cancel = true;
+                    textBox1.Focus();
+                    MessageBox.Show("Usuario y/o Contraseña Incorrecto(s)");
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
     }
 }

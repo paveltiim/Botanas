@@ -105,12 +105,14 @@ namespace AiresUtilerias
         public string Facturar(EntEmpresa Emisor, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente,
                                 string FolioFactura, DateTime FechaFactura, string FormaPago, string MedioPago, string CondicionPago,
                                 string NumeroCuenta, string PathGuardaArchivos,
-                                decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS)
+                                decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS,
+                                string Observaciones)
         {
             string respuesta;
-
+            string rfc;
             //XAXX010101000
-            Emisor.RFC = "LAN7008173R5";
+            //Emisor.RFC = "LAN7008173R5";
+            rfc= "LAN7008173R5";
 
             IEPS = 0.08m;
             switch (Emisor.TipoTasaIVAId)
@@ -150,11 +152,13 @@ namespace AiresUtilerias
             st.WriteLine("colorLetraE|000000");
             st.WriteLine("colorPlantillaHex|DCE3E6");
             st.WriteLine("logotipo|"); //lg_27cb5900e159233c421067e //GREE
-            st.WriteLine("observaciones|"+ string.Format("POR ESTE CONDUCTO CEDO LOS DERECHOS DE LA PRESENTE FACTURA A BANOBRAS S.N.C., INSTITUCIÓN FIDUCIARIA EN EL FIDEICOMISO 728 FIPATERM QUEDANDO BANOBRAS S.N.C. EN PODER DE DICHA FACTURA HASTA EN TANTO NO SEA CUBIERTO EN SU TOTALIDAD EL FINANCIAMIENTO QUE SE ME HA OTORGADO.{0} ENDOSO IGUALMENTE LA FACTURA Y AUTORIZO A BANOBRAS S.N.C. INSTITUCIÓN FIDUCIARIA EN EL FIDEICOMISO 728 FIPATERM PARA SI DEJO DE PAGAR PARCIAL O TOTALMENTE MI ADEUDO (CREDITO) Y ESTE SEA PAGADO POR MI AVAL, POR EL PROVEEDOR O POR CUALQUIER PERSONA FISICA O MORAL, BANOBRAS S.N.C. INSITUCIÓN FIDUICIARIA EN EL FIDEICOMISO 728 FIPATERM PODRÁ ENTREGAR ESTA FACTURA A QUIEN RALICE EL PAGO POR MI.{1} FIRMA DEL USUARIO _____________________________","           ","            "));
+            st.WriteLine("observaciones|"+ Observaciones.Replace("\r", " ").Replace("\n", " "));
+            //st.WriteLine("observaciones|"+ string.Format("{0} POR ESTE CONDUCTO CEDO LOS DERECHOS DE LA PRESENTE FACTURA A BANOBRAS S.N.C., INSTITUCIÓN FIDUCIARIA EN EL FIDEICOMISO 728 FIPATERM QUEDANDO BANOBRAS S.N.C. EN PODER DE DICHA FACTURA HASTA EN TANTO NO SEA CUBIERTO EN SU TOTALIDAD EL FINANCIAMIENTO QUE SE ME HA OTORGADO.{1} ENDOSO IGUALMENTE LA FACTURA Y AUTORIZO A BANOBRAS S.N.C. INSTITUCIÓN FIDUCIARIA EN EL FIDEICOMISO 728 FIPATERM PARA SI DEJO DE PAGAR PARCIAL O TOTALMENTE MI ADEUDO (CREDITO) Y ESTE SEA PAGADO POR MI AVAL, POR EL PROVEEDOR O POR CUALQUIER PERSONA FISICA O MORAL, BANOBRAS S.N.C. INSITUCIÓN FIDUICIARIA EN EL FIDEICOMISO 728 FIPATERM PODRÁ ENTREGAR ESTA FACTURA A QUIEN RALICE EL PAGO POR MI.{2} FIRMA DEL USUARIO _____________________________", "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -", " ", " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"));
             st.WriteLine("emailCliente|" + Cliente.Email);
 
             st.WriteLine("[Emisor]");
-            st.WriteLine("rfc|" + Emisor.RFC);
+            //st.WriteLine("rfc|" + Emisor.RFC);
+            st.WriteLine("rfc|" + rfc);
             st.WriteLine("nombre|" + Emisor.NombreFiscal);
             st.WriteLine("RegimenFiscal|" + Emisor.RegimenFiscal);
 
@@ -279,7 +283,7 @@ namespace AiresUtilerias
             requestTimbrarCFDI reqt = new requestTimbrarCFDI();
             reqt.UserID = UserID;// "UsuarioPruebasWS";
             reqt.UserPass = UserPass;// "b9ec2afa3361a59af4b4d102d3f704eabdf097d4";
-            reqt.emisorRFC = Emisor.RFC;// "LAN7008173R5";
+            reqt.emisorRFC = rfc;//Emisor.RFC;// "LAN7008173R5";
             //DESCOMENTAR EN PRODUCCION
             //reqt.urlTimbrado = "https://t2.facturacionmoderna.com/timbrado/soap";
             //COMENTAR EN PRODUCCION
@@ -440,6 +444,7 @@ namespace AiresUtilerias
             requestTimbrarCFDI reqt = new requestTimbrarCFDI();
             reqt.UserID = UserID;// "UsuarioPruebasWS";
             reqt.UserPass = UserPass;// "b9ec2afa3361a59af4b4d102d3f704eabdf097d4";
+            //NOTACREDITO
             reqt.emisorRFC = Emisor.RFC;// "LAN7008173R5";
             reqt.urlTimbrado = "https://t2.facturacionmoderna.com/timbrado/soap";
             //https://t1demo.facturacionmoderna.com/timbrado/soap
@@ -504,11 +509,12 @@ namespace AiresUtilerias
             //ActivarCancelado activation = new ActivarCancelado();
             WSConecFM.Resultados r_wsconect = new Resultados();// activation.Activacion(activarC);
 
-            Emisor.RFC = "LAN7008173R5";
+            string rfc= "LAN7008173R5";
+            //Emisor.RFC = "LAN7008173R5";
             requestCancelarCFDI reqc = new requestCancelarCFDI();
             reqc.UserID = UserID;// "UsuarioPruebasWS";
             reqc.UserPass = UserPass;// "b9ec2afa3361a59af4b4d102d3f704eabdf097d4";
-            reqc.emisorRFC = Emisor.RFC;
+            reqc.emisorRFC = rfc;// Emisor.RFC;
             reqc.urlCancelado = "https://t1demo.facturacionmoderna.com/timbrado/soap";
             reqc.uuid = UUID;
 

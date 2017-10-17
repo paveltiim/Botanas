@@ -14,13 +14,13 @@ namespace Aires.Pantallas
 {
     public partial class AgregaMaterialesProducto : FormBase
     {
-        List<AiresEntidades.EntProducto> ListaProductosDetalle;
-        public AgregaMaterialesProducto(List<AiresEntidades.EntProducto> ProductosDetalle)
+        AiresEntidades.EntProducto ProductoDetalle;
+        public AgregaMaterialesProducto(AiresEntidades.EntProducto ProductosDetalle)
         {
             InitializeComponent();
 
-            ListaProductosDetalle = ProductosDetalle;
-            gvProductosDetalle.DataSource = ProductosDetalle;
+            this.ProductoDetalle = ProductosDetalle;
+            //gvProductosDetalle.DataSource = new BusProductos().ObtieneProductosDetallePorPedido;
         }
 
         void ActualizaProductoDetalle(int ProductoId, string Serie, decimal PrecioCosto)

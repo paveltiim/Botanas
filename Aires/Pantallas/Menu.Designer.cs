@@ -35,11 +35,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnInventario = new System.Windows.Forms.Button();
             this.btnVentas = new System.Windows.Forms.Button();
-            this.btnProductos = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
-            this.btnEmpresas = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnProductos = new System.Windows.Forms.Button();
+            this.btnEmpresas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -143,22 +143,6 @@
             this.btnVentas.UseVisualStyleBackColor = false;
             this.btnVentas.Click += new System.EventHandler(this.btnVentas_Click);
             // 
-            // btnProductos
-            // 
-            this.btnProductos.BackColor = System.Drawing.Color.White;
-            this.btnProductos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProductos.BackgroundImage")));
-            this.btnProductos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnProductos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnProductos.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProductos.Location = new System.Drawing.Point(447, 199);
-            this.btnProductos.Name = "btnProductos";
-            this.btnProductos.Size = new System.Drawing.Size(212, 157);
-            this.btnProductos.TabIndex = 7;
-            this.btnProductos.Text = "Productos";
-            this.btnProductos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnProductos.UseVisualStyleBackColor = false;
-            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
-            // 
             // btnClientes
             // 
             this.btnClientes.BackColor = System.Drawing.Color.White;
@@ -174,22 +158,6 @@
             this.btnClientes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnClientes.UseVisualStyleBackColor = false;
             this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click);
-            // 
-            // btnEmpresas
-            // 
-            this.btnEmpresas.BackColor = System.Drawing.Color.White;
-            this.btnEmpresas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEmpresas.BackgroundImage")));
-            this.btnEmpresas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnEmpresas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEmpresas.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEmpresas.Location = new System.Drawing.Point(3, 199);
-            this.btnEmpresas.Name = "btnEmpresas";
-            this.btnEmpresas.Size = new System.Drawing.Size(215, 157);
-            this.btnEmpresas.TabIndex = 5;
-            this.btnEmpresas.Text = "Proveedores";
-            this.btnEmpresas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEmpresas.UseVisualStyleBackColor = false;
-            this.btnEmpresas.Click += new System.EventHandler(this.btnEmpresas_Click);
             // 
             // button1
             // 
@@ -225,6 +193,38 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btnProductos
+            // 
+            this.btnProductos.BackColor = System.Drawing.Color.White;
+            this.btnProductos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProductos.BackgroundImage")));
+            this.btnProductos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnProductos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProductos.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProductos.Location = new System.Drawing.Point(447, 199);
+            this.btnProductos.Name = "btnProductos";
+            this.btnProductos.Size = new System.Drawing.Size(212, 157);
+            this.btnProductos.TabIndex = 7;
+            this.btnProductos.Text = "Productos";
+            this.btnProductos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnProductos.UseVisualStyleBackColor = false;
+            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
+            // 
+            // btnEmpresas
+            // 
+            this.btnEmpresas.BackColor = System.Drawing.Color.White;
+            this.btnEmpresas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEmpresas.BackgroundImage")));
+            this.btnEmpresas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnEmpresas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEmpresas.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEmpresas.Location = new System.Drawing.Point(3, 199);
+            this.btnEmpresas.Name = "btnEmpresas";
+            this.btnEmpresas.Size = new System.Drawing.Size(215, 157);
+            this.btnEmpresas.TabIndex = 5;
+            this.btnEmpresas.Text = "Proveedores";
+            this.btnEmpresas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEmpresas.UseVisualStyleBackColor = false;
+            this.btnEmpresas.Click += new System.EventHandler(this.btnEmpresas_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,6 +237,7 @@
             this.ShowIcon = false;
             this.Text = "Menu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Menu_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

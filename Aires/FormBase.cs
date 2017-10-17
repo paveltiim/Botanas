@@ -8,18 +8,19 @@ using System.Windows.Forms;
 
 namespace Aires
 {
-    public class FormBase:Form
+    public class FormBase : Form
     {
         string PantallaSize = "1700, 802";
 
         public string PathFacturas = @"C:\TIIM\Facturacion\Facturas";
         public string PathPreFacturas = @"C:\TIIM\Facturacion\PreFacturas";
-
+        public string PathPreFacturasCopia = @"\Servidor\Facturacion\PreFacturas";
+        public string PathFacturasCopia = @"\Oficina - pc\tiim\Facturacion\Facturas";//@"\LAPTOP-LJCQA84V\Users\pavel\Documents\FacturacionModerna";//
         public string Titulo { get { return this.Text; } }
 
         public decimal IVA = 0.16m;
-        public int AlturaMaximaGrid= 200;
-        
+        public int AlturaMaximaGrid = 200;
+
         public int AñoInicio = 2016;
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace Aires
                     return v;
             return null;
         }
-        
+
         public EntEmpresa SeleccionaEmpresa()
         {
             Pantallas.SeleccionaEmpresa vSeleccionaEmp = new Pantallas.SeleccionaEmpresa();
@@ -171,7 +172,7 @@ namespace Aires
                 else if (c.GetType() == typeof(ComboBox) && InicializaComboBox)
                     ((ComboBox)c).SelectedIndex = 0;
                 if (c.HasChildren)
-                    LimpiaTextBox(c,InicializaComboBox);
+                    LimpiaTextBox(c, InicializaComboBox);
             }
         }
         public void ChecaChecBox(Control Contenedor, bool Checked)
@@ -181,7 +182,7 @@ namespace Aires
                 if (c.GetType() == typeof(CheckBox))
                     ((CheckBox)c).Checked = Checked;
                 if (c.HasChildren)
-                    ChecaChecBox(c,Checked);
+                    ChecaChecBox(c, Checked);
             }
         }
         public void EnableTextBox(Control Contenedor, bool Checked)
@@ -191,7 +192,7 @@ namespace Aires
                 if (c.GetType() == typeof(TextBox))
                     ((TextBox)c).Enabled = Checked;
                 if (c.HasChildren)
-                    EnableTextBox(c,Checked);
+                    EnableTextBox(c, Checked);
             }
         }
 
@@ -227,7 +228,7 @@ namespace Aires
         /// <param name="FileName"></param>
         public void MuestraArchivo(string Path, string FileName)
         {
-            if (System.IO.File.Exists(Path+"\\"+FileName))
+            if (System.IO.File.Exists(Path + "\\" + FileName))
             {
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.StartInfo.FileName = Path + "\\" + FileName;
@@ -276,7 +277,7 @@ namespace Aires
                 //proc.Close();
             }
             return null;
-         }
+        }
         /// <summary>
         /// Abre el archivo seleccionado con Proccess.
         /// Si no encuentra la ruta Path envia mensaje de error.
@@ -292,6 +293,20 @@ namespace Aires
             }
             return null;
         }
+
+        public string EncuentraArchivo(string Ruta, string Extension)
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Ruta);
+
+            System.IO.FileInfo[] fi = di.GetFiles();
+            foreach (System.IO.FileInfo f in fi)
+            {
+                if (f.Extension == Extension)
+                    return f.Name;
+            }
+            return "";
+        }
+
         public void MuestraMensaje(string Mensaje, string Titulo)
         {
             MessageBox.Show(Mensaje, Titulo, MessageBoxButtons.OK);
@@ -419,7 +434,7 @@ namespace Aires
             if (GridViewProductos.CurrentRow == null)
                 return null;
 
-            return (EntProducto)((List<EntProducto>)GridViewProductos.DataSource)[GridViewProductos.CurrentRow.Index-1];
+            return (EntProducto)((List<EntProducto>)GridViewProductos.DataSource)[GridViewProductos.CurrentRow.Index - 1];
         }
         public EntPedido ObtienePedidoFromGV(DataGridView GridViewPedidos)
         {
@@ -435,7 +450,8 @@ namespace Aires
 
             return (EntPago)((List<EntPago>)GridViewPagos.DataSource)[GridViewPagos.CurrentRow.Index];
         }
-        
+
+
         private void InitializeComponent()
         {
             this.SuspendLayout();

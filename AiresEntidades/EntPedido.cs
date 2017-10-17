@@ -38,6 +38,6 @@ namespace AiresEntidades
         public string RutaFactura { get; set; }
         public string Factura { get; set; }
 
-        public List<EntProducto> ProductosPedido { get; set; }
+        public EntProducto ProductoPedido { get; set; }
     }
 }

@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Registros));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.entPedidoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pnlFacturacion = new System.Windows.Forms.Panel();
@@ -98,27 +98,26 @@
             this.btnVerFactura = new System.Windows.Forms.Button();
             this.btnFacturar = new System.Windows.Forms.Button();
             this.btnEnviaCorreo = new System.Windows.Forms.Button();
-            this.tpReportes = new System.Windows.Forms.TabPage();
-            this.pnlReportesVentas = new System.Windows.Forms.Panel();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.rdoPorFechasVentas = new System.Windows.Forms.RadioButton();
+            this.pnlVentasPorFechas = new System.Windows.Forms.Panel();
+            this.dtpFechaHastaVentas = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaDesdeVentas = new System.Windows.Forms.DateTimePicker();
+            this.btnRefrescarReporteVentas = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.rvVentas = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.rdoPorMesVentas = new System.Windows.Forms.RadioButton();
+            this.rdoPorDiaVentas = new System.Windows.Forms.RadioButton();
+            this.pnlVentasPorDia = new System.Windows.Forms.Panel();
+            this.dtpFechaDiaVentas = new System.Windows.Forms.DateTimePicker();
             this.pnlVentasPorMes = new System.Windows.Forms.Panel();
             this.cmbMesesVentas = new System.Windows.Forms.ComboBox();
             this.cmbAñoVentas = new System.Windows.Forms.ComboBox();
             this.entCatalogoGenericoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rdoPorFechasVentas = new System.Windows.Forms.RadioButton();
-            this.pnlVentasPorDia = new System.Windows.Forms.Panel();
-            this.dtpFechaDiaVentas = new System.Windows.Forms.DateTimePicker();
-            this.pnlVentasPorFechas = new System.Windows.Forms.Panel();
-            this.dtpFechaHastaVentas = new System.Windows.Forms.DateTimePicker();
-            this.dtpFechaDesdeVentas = new System.Windows.Forms.DateTimePicker();
-            this.rdoPorDiaVentas = new System.Windows.Forms.RadioButton();
-            this.btnRefrescarReporteVentas = new System.Windows.Forms.Button();
-            this.rdoPorMesVentas = new System.Windows.Forms.RadioButton();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label24 = new System.Windows.Forms.Label();
             this.cmbEmpresas = new System.Windows.Forms.ComboBox();
             this.btnBuscaEmpresa = new System.Windows.Forms.Button();
-            this.rvVentas = new Microsoft.Reporting.WinForms.ReportViewer();
             ((System.ComponentModel.ISupportInitialize)(this.entPedidoBindingSource)).BeginInit();
             this.pnlFacturacion.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -126,14 +125,13 @@
             this.tcPedidosGrids.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvPedidos)).BeginInit();
-            this.tpReportes.SuspendLayout();
-            this.pnlReportesVentas.SuspendLayout();
-            this.pnlVentasPorMes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).BeginInit();
-            this.pnlVentasPorDia.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.pnlVentasPorFechas.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.pnlVentasPorDia.SuspendLayout();
+            this.pnlVentasPorMes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // entPedidoBindingSource
@@ -516,7 +514,7 @@
             // tcPedidosGrids
             // 
             this.tcPedidosGrids.Controls.Add(this.tabPage1);
-            this.tcPedidosGrids.Controls.Add(this.tpReportes);
+            this.tcPedidosGrids.Controls.Add(this.tabPage2);
             this.tcPedidosGrids.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tcPedidosGrids.Location = new System.Drawing.Point(12, 16);
             this.tcPedidosGrids.Name = "tcPedidosGrids";
@@ -706,8 +704,8 @@
             this.gvPedidos.Name = "gvPedidos";
             this.gvPedidos.ReadOnly = true;
             this.gvPedidos.RowHeadersVisible = false;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial Unicode MS", 7F);
-            this.gvPedidos.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Unicode MS", 7F);
+            this.gvPedidos.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.gvPedidos.RowTemplate.Height = 27;
             this.gvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvPedidos.Size = new System.Drawing.Size(1103, 480);
@@ -719,8 +717,8 @@
             // NumCliente
             // 
             this.NumCliente.DataPropertyName = "NumCliente";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NumCliente.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NumCliente.DefaultCellStyle = dataGridViewCellStyle1;
             this.NumCliente.FillWeight = 1F;
             this.NumCliente.HeaderText = "Num. Cliente";
             this.NumCliente.Name = "NumCliente";
@@ -745,8 +743,8 @@
             // Factura
             // 
             this.Factura.DataPropertyName = "Factura";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Factura.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Factura.DefaultCellStyle = dataGridViewCellStyle2;
             this.Factura.FillWeight = 1.5F;
             this.Factura.HeaderText = "Factura";
             this.Factura.Name = "Factura";
@@ -763,8 +761,8 @@
             // FechaCorta
             // 
             this.FechaCorta.DataPropertyName = "FechaCorta";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.FechaCorta.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.FechaCorta.DefaultCellStyle = dataGridViewCellStyle3;
             this.FechaCorta.FillWeight = 1.5F;
             this.FechaCorta.HeaderText = "Fecha";
             this.FechaCorta.Name = "FechaCorta";
@@ -773,8 +771,8 @@
             // totalDataGridViewTextBoxColumn
             // 
             this.totalDataGridViewTextBoxColumn.DataPropertyName = "Total";
-            dataGridViewCellStyle9.Format = "c2";
-            this.totalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Format = "c2";
+            this.totalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.totalDataGridViewTextBoxColumn.FillWeight = 2F;
             this.totalDataGridViewTextBoxColumn.HeaderText = "Total";
             this.totalDataGridViewTextBoxColumn.Name = "totalDataGridViewTextBoxColumn";
@@ -837,37 +835,156 @@
             this.btnEnviaCorreo.UseVisualStyleBackColor = false;
             this.btnEnviaCorreo.Click += new System.EventHandler(this.btnEnviaCorreo_Click);
             // 
-            // tpReportes
+            // tabPage2
             // 
-            this.tpReportes.Controls.Add(this.pnlReportesVentas);
-            this.tpReportes.Location = new System.Drawing.Point(4, 23);
-            this.tpReportes.Name = "tpReportes";
-            this.tpReportes.Padding = new System.Windows.Forms.Padding(3);
-            this.tpReportes.Size = new System.Drawing.Size(1548, 718);
-            this.tpReportes.TabIndex = 1;
-            this.tpReportes.Text = "Reportes";
-            this.tpReportes.UseVisualStyleBackColor = true;
+            this.tabPage2.Controls.Add(this.rdoPorFechasVentas);
+            this.tabPage2.Controls.Add(this.pnlVentasPorFechas);
+            this.tabPage2.Controls.Add(this.btnRefrescarReporteVentas);
+            this.tabPage2.Controls.Add(this.tabControl1);
+            this.tabPage2.Controls.Add(this.rdoPorMesVentas);
+            this.tabPage2.Controls.Add(this.rdoPorDiaVentas);
+            this.tabPage2.Controls.Add(this.pnlVentasPorDia);
+            this.tabPage2.Controls.Add(this.pnlVentasPorMes);
+            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1548, 718);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Impresión";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // pnlReportesVentas
+            // rdoPorFechasVentas
             // 
-            this.pnlReportesVentas.Controls.Add(this.pnlVentasPorMes);
-            this.pnlReportesVentas.Controls.Add(this.rdoPorFechasVentas);
-            this.pnlReportesVentas.Controls.Add(this.pnlVentasPorDia);
-            this.pnlReportesVentas.Controls.Add(this.pnlVentasPorFechas);
-            this.pnlReportesVentas.Controls.Add(this.rdoPorDiaVentas);
-            this.pnlReportesVentas.Controls.Add(this.btnRefrescarReporteVentas);
-            this.pnlReportesVentas.Controls.Add(this.rdoPorMesVentas);
-            this.pnlReportesVentas.Controls.Add(this.tabControl1);
-            this.pnlReportesVentas.Location = new System.Drawing.Point(0, 1);
-            this.pnlReportesVentas.Name = "pnlReportesVentas";
-            this.pnlReportesVentas.Size = new System.Drawing.Size(1355, 744);
-            this.pnlReportesVentas.TabIndex = 116;
+            this.rdoPorFechasVentas.AutoSize = true;
+            this.rdoPorFechasVentas.Location = new System.Drawing.Point(11, 94);
+            this.rdoPorFechasVentas.Name = "rdoPorFechasVentas";
+            this.rdoPorFechasVentas.Size = new System.Drawing.Size(80, 18);
+            this.rdoPorFechasVentas.TabIndex = 115;
+            this.rdoPorFechasVentas.Text = "Por Fechas";
+            this.rdoPorFechasVentas.UseVisualStyleBackColor = true;
+            this.rdoPorFechasVentas.CheckedChanged += new System.EventHandler(this.rdoPorFechasVentas_CheckedChanged);
+            // 
+            // pnlVentasPorFechas
+            // 
+            this.pnlVentasPorFechas.Controls.Add(this.dtpFechaHastaVentas);
+            this.pnlVentasPorFechas.Controls.Add(this.dtpFechaDesdeVentas);
+            this.pnlVentasPorFechas.Enabled = false;
+            this.pnlVentasPorFechas.Location = new System.Drawing.Point(91, 84);
+            this.pnlVentasPorFechas.Name = "pnlVentasPorFechas";
+            this.pnlVentasPorFechas.Size = new System.Drawing.Size(500, 32);
+            this.pnlVentasPorFechas.TabIndex = 114;
+            // 
+            // dtpFechaHastaVentas
+            // 
+            this.dtpFechaHastaVentas.Location = new System.Drawing.Point(259, 7);
+            this.dtpFechaHastaVentas.Name = "dtpFechaHastaVentas";
+            this.dtpFechaHastaVentas.Size = new System.Drawing.Size(224, 21);
+            this.dtpFechaHastaVentas.TabIndex = 15;
+            this.dtpFechaHastaVentas.ValueChanged += new System.EventHandler(this.dtpFechaHastaVentas_ValueChanged);
+            // 
+            // dtpFechaDesdeVentas
+            // 
+            this.dtpFechaDesdeVentas.Location = new System.Drawing.Point(5, 7);
+            this.dtpFechaDesdeVentas.Name = "dtpFechaDesdeVentas";
+            this.dtpFechaDesdeVentas.Size = new System.Drawing.Size(224, 21);
+            this.dtpFechaDesdeVentas.TabIndex = 15;
+            this.dtpFechaDesdeVentas.ValueChanged += new System.EventHandler(this.dtpFechaDesdeVentas_ValueChanged);
+            // 
+            // btnRefrescarReporteVentas
+            // 
+            this.btnRefrescarReporteVentas.BackColor = System.Drawing.Color.White;
+            this.btnRefrescarReporteVentas.BackgroundImage = global::Aires.Properties.Resources.Refresh;
+            this.btnRefrescarReporteVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRefrescarReporteVentas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefrescarReporteVentas.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefrescarReporteVentas.Location = new System.Drawing.Point(350, 11);
+            this.btnRefrescarReporteVentas.Name = "btnRefrescarReporteVentas";
+            this.btnRefrescarReporteVentas.Size = new System.Drawing.Size(77, 66);
+            this.btnRefrescarReporteVentas.TabIndex = 113;
+            this.btnRefrescarReporteVentas.Text = "Refrescar";
+            this.btnRefrescarReporteVentas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRefrescarReporteVentas.UseVisualStyleBackColor = false;
+            this.btnRefrescarReporteVentas.Click += new System.EventHandler(this.btnRefrescarReporteVentas_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Tai Le", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(7, 115);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1328, 553);
+            this.tabControl1.TabIndex = 45;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.rvVentas);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1320, 527);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Impresión";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // rvVentas
+            // 
+            this.rvVentas.DocumentMapWidth = 88;
+            reportDataSource1.Name = "dsVentas";
+            reportDataSource1.Value = this.entPedidoBindingSource;
+            this.rvVentas.LocalReport.DataSources.Add(reportDataSource1);
+            this.rvVentas.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptVentas.rdlc";
+            this.rvVentas.Location = new System.Drawing.Point(0, 0);
+            this.rvVentas.Name = "rvVentas";
+            this.rvVentas.Size = new System.Drawing.Size(1088, 527);
+            this.rvVentas.TabIndex = 0;
+            // 
+            // rdoPorMesVentas
+            // 
+            this.rdoPorMesVentas.AutoSize = true;
+            this.rdoPorMesVentas.Checked = true;
+            this.rdoPorMesVentas.Location = new System.Drawing.Point(11, 17);
+            this.rdoPorMesVentas.Name = "rdoPorMesVentas";
+            this.rdoPorMesVentas.Size = new System.Drawing.Size(66, 18);
+            this.rdoPorMesVentas.TabIndex = 44;
+            this.rdoPorMesVentas.TabStop = true;
+            this.rdoPorMesVentas.Text = "Por Mes";
+            this.rdoPorMesVentas.UseVisualStyleBackColor = true;
+            this.rdoPorMesVentas.CheckedChanged += new System.EventHandler(this.rdoVentasPorMes_CheckedChanged);
+            // 
+            // rdoPorDiaVentas
+            // 
+            this.rdoPorDiaVentas.AutoSize = true;
+            this.rdoPorDiaVentas.Location = new System.Drawing.Point(11, 56);
+            this.rdoPorDiaVentas.Name = "rdoPorDiaVentas";
+            this.rdoPorDiaVentas.Size = new System.Drawing.Size(62, 18);
+            this.rdoPorDiaVentas.TabIndex = 43;
+            this.rdoPorDiaVentas.Text = "Por Día";
+            this.rdoPorDiaVentas.UseVisualStyleBackColor = true;
+            this.rdoPorDiaVentas.CheckedChanged += new System.EventHandler(this.rdoVentasPorSemana_CheckedChanged);
+            // 
+            // pnlVentasPorDia
+            // 
+            this.pnlVentasPorDia.Controls.Add(this.dtpFechaDiaVentas);
+            this.pnlVentasPorDia.Enabled = false;
+            this.pnlVentasPorDia.Location = new System.Drawing.Point(91, 46);
+            this.pnlVentasPorDia.Name = "pnlVentasPorDia";
+            this.pnlVentasPorDia.Size = new System.Drawing.Size(243, 32);
+            this.pnlVentasPorDia.TabIndex = 42;
+            // 
+            // dtpFechaDiaVentas
+            // 
+            this.dtpFechaDiaVentas.Location = new System.Drawing.Point(5, 7);
+            this.dtpFechaDiaVentas.Name = "dtpFechaDiaVentas";
+            this.dtpFechaDiaVentas.Size = new System.Drawing.Size(224, 21);
+            this.dtpFechaDiaVentas.TabIndex = 15;
+            this.dtpFechaDiaVentas.ValueChanged += new System.EventHandler(this.btnRefrescarReporteVentas_Click);
             // 
             // pnlVentasPorMes
             // 
             this.pnlVentasPorMes.Controls.Add(this.cmbMesesVentas);
             this.pnlVentasPorMes.Controls.Add(this.cmbAñoVentas);
-            this.pnlVentasPorMes.Location = new System.Drawing.Point(93, 6);
+            this.pnlVentasPorMes.Location = new System.Drawing.Point(91, 6);
             this.pnlVentasPorMes.Name = "pnlVentasPorMes";
             this.pnlVentasPorMes.Size = new System.Drawing.Size(243, 34);
             this.pnlVentasPorMes.TabIndex = 41;
@@ -913,122 +1030,6 @@
             // 
             this.entCatalogoGenericoBindingSource.DataSource = typeof(AiresEntidades.EntCatalogoGenerico);
             // 
-            // rdoPorFechasVentas
-            // 
-            this.rdoPorFechasVentas.AutoSize = true;
-            this.rdoPorFechasVentas.Location = new System.Drawing.Point(13, 94);
-            this.rdoPorFechasVentas.Name = "rdoPorFechasVentas";
-            this.rdoPorFechasVentas.Size = new System.Drawing.Size(80, 18);
-            this.rdoPorFechasVentas.TabIndex = 115;
-            this.rdoPorFechasVentas.Text = "Por Fechas";
-            this.rdoPorFechasVentas.UseVisualStyleBackColor = true;
-            this.rdoPorFechasVentas.CheckedChanged += new System.EventHandler(this.rdoPorFechasVentas_CheckedChanged);
-            // 
-            // pnlVentasPorDia
-            // 
-            this.pnlVentasPorDia.Controls.Add(this.dtpFechaDiaVentas);
-            this.pnlVentasPorDia.Enabled = false;
-            this.pnlVentasPorDia.Location = new System.Drawing.Point(93, 46);
-            this.pnlVentasPorDia.Name = "pnlVentasPorDia";
-            this.pnlVentasPorDia.Size = new System.Drawing.Size(243, 32);
-            this.pnlVentasPorDia.TabIndex = 42;
-            // 
-            // dtpFechaDiaVentas
-            // 
-            this.dtpFechaDiaVentas.Location = new System.Drawing.Point(5, 7);
-            this.dtpFechaDiaVentas.Name = "dtpFechaDiaVentas";
-            this.dtpFechaDiaVentas.Size = new System.Drawing.Size(224, 21);
-            this.dtpFechaDiaVentas.TabIndex = 15;
-            this.dtpFechaDiaVentas.ValueChanged += new System.EventHandler(this.btnRefrescarReporteVentas_Click);
-            // 
-            // pnlVentasPorFechas
-            // 
-            this.pnlVentasPorFechas.Controls.Add(this.dtpFechaHastaVentas);
-            this.pnlVentasPorFechas.Controls.Add(this.dtpFechaDesdeVentas);
-            this.pnlVentasPorFechas.Enabled = false;
-            this.pnlVentasPorFechas.Location = new System.Drawing.Point(93, 84);
-            this.pnlVentasPorFechas.Name = "pnlVentasPorFechas";
-            this.pnlVentasPorFechas.Size = new System.Drawing.Size(500, 32);
-            this.pnlVentasPorFechas.TabIndex = 114;
-            // 
-            // dtpFechaHastaVentas
-            // 
-            this.dtpFechaHastaVentas.Location = new System.Drawing.Point(259, 7);
-            this.dtpFechaHastaVentas.Name = "dtpFechaHastaVentas";
-            this.dtpFechaHastaVentas.Size = new System.Drawing.Size(224, 21);
-            this.dtpFechaHastaVentas.TabIndex = 15;
-            this.dtpFechaHastaVentas.ValueChanged += new System.EventHandler(this.dtpFechaHastaVentas_ValueChanged);
-            // 
-            // dtpFechaDesdeVentas
-            // 
-            this.dtpFechaDesdeVentas.Location = new System.Drawing.Point(5, 7);
-            this.dtpFechaDesdeVentas.Name = "dtpFechaDesdeVentas";
-            this.dtpFechaDesdeVentas.Size = new System.Drawing.Size(224, 21);
-            this.dtpFechaDesdeVentas.TabIndex = 15;
-            this.dtpFechaDesdeVentas.ValueChanged += new System.EventHandler(this.dtpFechaDesdeVentas_ValueChanged);
-            // 
-            // rdoPorDiaVentas
-            // 
-            this.rdoPorDiaVentas.AutoSize = true;
-            this.rdoPorDiaVentas.Location = new System.Drawing.Point(13, 56);
-            this.rdoPorDiaVentas.Name = "rdoPorDiaVentas";
-            this.rdoPorDiaVentas.Size = new System.Drawing.Size(62, 18);
-            this.rdoPorDiaVentas.TabIndex = 43;
-            this.rdoPorDiaVentas.Text = "Por Día";
-            this.rdoPorDiaVentas.UseVisualStyleBackColor = true;
-            this.rdoPorDiaVentas.CheckedChanged += new System.EventHandler(this.rdoVentasPorSemana_CheckedChanged);
-            // 
-            // btnRefrescarReporteVentas
-            // 
-            this.btnRefrescarReporteVentas.BackColor = System.Drawing.Color.White;
-            this.btnRefrescarReporteVentas.BackgroundImage = global::Aires.Properties.Resources.Refresh;
-            this.btnRefrescarReporteVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRefrescarReporteVentas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefrescarReporteVentas.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescarReporteVentas.Location = new System.Drawing.Point(352, 11);
-            this.btnRefrescarReporteVentas.Name = "btnRefrescarReporteVentas";
-            this.btnRefrescarReporteVentas.Size = new System.Drawing.Size(77, 66);
-            this.btnRefrescarReporteVentas.TabIndex = 113;
-            this.btnRefrescarReporteVentas.Text = "Refrescar";
-            this.btnRefrescarReporteVentas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRefrescarReporteVentas.UseVisualStyleBackColor = false;
-            this.btnRefrescarReporteVentas.Click += new System.EventHandler(this.btnRefrescarReporteVentas_Click);
-            // 
-            // rdoPorMesVentas
-            // 
-            this.rdoPorMesVentas.AutoSize = true;
-            this.rdoPorMesVentas.Checked = true;
-            this.rdoPorMesVentas.Location = new System.Drawing.Point(13, 17);
-            this.rdoPorMesVentas.Name = "rdoPorMesVentas";
-            this.rdoPorMesVentas.Size = new System.Drawing.Size(66, 18);
-            this.rdoPorMesVentas.TabIndex = 44;
-            this.rdoPorMesVentas.TabStop = true;
-            this.rdoPorMesVentas.Text = "Por Mes";
-            this.rdoPorMesVentas.UseVisualStyleBackColor = true;
-            this.rdoPorMesVentas.CheckedChanged += new System.EventHandler(this.rdoVentasPorMes_CheckedChanged);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Font = new System.Drawing.Font("Microsoft Tai Le", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(9, 115);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1328, 599);
-            this.tabControl1.TabIndex = 45;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.AutoScroll = true;
-            this.tabPage4.Controls.Add(this.rvVentas);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1320, 573);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Impresión";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
             // label24
             // 
             this.label24.AutoSize = true;
@@ -1066,19 +1067,6 @@
             this.btnBuscaEmpresa.UseVisualStyleBackColor = false;
             this.btnBuscaEmpresa.Click += new System.EventHandler(this.btnBuscaEmpresa_Click);
             // 
-            // rvVentas
-            // 
-            this.rvVentas.AutoScroll = true;
-            this.rvVentas.DocumentMapWidth = 88;
-            reportDataSource1.Name = "dsVentas";
-            reportDataSource1.Value = this.entPedidoBindingSource;
-            this.rvVentas.LocalReport.DataSources.Add(reportDataSource1);
-            this.rvVentas.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptVentas.rdlc";
-            this.rvVentas.Location = new System.Drawing.Point(0, 0);
-            this.rvVentas.Name = "rvVentas";
-            this.rvVentas.Size = new System.Drawing.Size(800, 573);
-            this.rvVentas.TabIndex = 116;
-            // 
             // Registros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1106,15 +1094,14 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvPedidos)).EndInit();
-            this.tpReportes.ResumeLayout(false);
-            this.pnlReportesVentas.ResumeLayout(false);
-            this.pnlReportesVentas.PerformLayout();
-            this.pnlVentasPorMes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).EndInit();
-            this.pnlVentasPorDia.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.pnlVentasPorFechas.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.pnlVentasPorDia.ResumeLayout(false);
+            this.pnlVentasPorMes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1163,7 +1150,7 @@
         private System.Windows.Forms.Button btnEnviaCorreo;
         private System.Windows.Forms.Button btnFacturar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.TabPage tpReportes;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.RadioButton rdoPorMesVentas;
         private System.Windows.Forms.RadioButton rdoPorDiaVentas;
         private System.Windows.Forms.Panel pnlVentasPorDia;
@@ -1173,6 +1160,7 @@
         private System.Windows.Forms.ComboBox cmbAñoVentas;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage4;
+        private Microsoft.Reporting.WinForms.ReportViewer rvVentas;
         private System.Windows.Forms.Button btnRefrescarReporteVentas;
         private System.Windows.Forms.BindingSource entCatalogoGenericoBindingSource;
         private System.Windows.Forms.CheckBox chkFacturaPublicoGeneral;
@@ -1203,7 +1191,5 @@
         private System.Windows.Forms.Panel pnlVentasPorFechas;
         private System.Windows.Forms.DateTimePicker dtpFechaHastaVentas;
         private System.Windows.Forms.DateTimePicker dtpFechaDesdeVentas;
-        private System.Windows.Forms.Panel pnlReportesVentas;
-        private Microsoft.Reporting.WinForms.ReportViewer rvVentas;
     }
 }

@@ -91,7 +91,7 @@ namespace Aires.Pantallas
                 };
                 producto.Id = new BusProductos().AgregaProductoDetalle(producto);
             }
-            int AgregaIngresoProducto(int EmpresaId, string Descripcion, DateTime Fecha)
+            public int AgregaIngresoProducto(int EmpresaId, string Descripcion, DateTime Fecha)
             {
                 EntCatalogoGenerico ingreso = new EntCatalogoGenerico()
                 {
@@ -99,7 +99,7 @@ namespace Aires.Pantallas
                     Descripcion = Descripcion,
                     Fecha = Fecha
                 };
-                return new BusProductos().AgregaIngresoProducto(ingreso);
+                return new BusProductos().AgregaIngreso(ingreso);
             }
 
             public void ActualizaProducto(int ProductoId, int TipoProductoId, string Codigo, string Descripcion)
@@ -114,7 +114,7 @@ namespace Aires.Pantallas
                 };
                 new BusProductos().ActualizaProducto(producto);
             }        
-            void ActualizaEstatusProducto(EntProducto Producto, bool Estatus)
+            public void ActualizaEstatusProducto(EntProducto Producto, bool Estatus)
             {
                 Producto.Estatus = Estatus;
                 new BusProductos().ActualizaEstatusProducto(Producto);
@@ -193,6 +193,12 @@ namespace Aires.Pantallas
 
         void InicializaPantalla()
         {
+            if (Program.UsuarioSeleccionado.Id > 1)
+            {
+                btnEliminar.Enabled = false;
+                pnlDatos.Visible = false;
+                lbTituloIngreso.Visible = false;
+            }
             LimpiaTextBox(pnlDatos);
             ActivaAgregar(true);
             //if(Program.EmpresaSeleccionada!=null)
@@ -474,6 +480,8 @@ namespace Aires.Pantallas
 
                     gvSeries.DataSource = null;
                     gvSeriesAutomatico.DataSource = null;
+
+                    btnFiltroProducto.PerformClick();
                 }
                 //CargaDatosProducto(ProductoSeleccionado);
                 ////NuevoProducto = false;
@@ -1006,6 +1014,16 @@ namespace Aires.Pantallas
                     tcSeries.Visible = true;
                 else
                     tcSeries.Visible = false;
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void btnMateriales_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EntProducto productoSeleccionado = ObtieneProductoFromGV(gvProductos);
+                AgregaMaterialesProducto vMaterialesKit = new AgregaMaterialesProducto(productoSeleccionado);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }

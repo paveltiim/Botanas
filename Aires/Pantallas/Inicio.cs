@@ -39,27 +39,38 @@ namespace Aires.Pantallas
                 this.Close();
             }
         }
-        string EmailPrincipal = "refrigeracion_serdan@hotmail.com";
-        void VerificaExportacion(DateTime Fecha, int EmpresaId)
+        string EmailPrincipal ="refrigeracion_serdan@hotmail.com";// "pavel_tiim@hotmail.com";
+        void VerificaExportacion(int EmpresaId)
         {
-            EntCatalogoGenerico reg= new BusVencimiento().ObtieneRegistroSincronizacion(Fecha);
-            if (reg.Id <= 0)
+            EntCatalogoGenerico reg = new BusVencimiento().ObtieneUltimoRegistroSincronizacion();//new BusVencimiento().ObtieneRegistroSincronizacion(Fecha);
+
+            
+            for (DateTime x = reg.Fecha.AddDays(1); x <= DateTime.Today.AddDays(-1); x=x.AddDays(1))
             {
-                //Vencimiento = true;
-                //MessageBox.Show("Su Sistema ha sido bloqueado, debido a que ha llegado a su Fecha de Vencimiento. \n\nFavor de comunicarse con TIIM para seguir utilizando su Sistema.                                   Gerente Admin. Anabel Araujo: 6681013253");
-                //this.Close();
-                new Registros().ExportarVentas(EmpresaId,Fecha, EmailPrincipal);
-                //ingresa registro sincronizacion
-                //new BusVencimiento().in
+                DateTime fecha = x;
+                new Registros().ExportarVentas(EmpresaId, fecha, EmailPrincipal);
+                new BusVencimiento().AgregarRegistroSincronizacion(fecha);
             }
+            
+            //if (reg.Id <= 0)
+            //{
+            //    //Vencimiento = true;
+            //    //MessageBox.Show("Su Sistema ha sido bloqueado, debido a que ha llegado a su Fecha de Vencimiento. \n\nFavor de comunicarse con TIIM para seguir utilizando su Sistema.                                   Gerente Admin. Anabel Araujo: 6681013253");
+            //    //this.Close();
+            //    new Registros().ExportarVentas(EmpresaId,Fecha, EmailPrincipal);
+            //    //ingresa registro sincronizacion
+            //    new BusVencimiento().AgregarRegistroSincronizacion(Fecha);
+            //}
         }
         #endregion
+
         List<EntUsuario> CargaUsuarios()
         {
             List<EntUsuario> usuarios=new List<EntUsuario>();
-            usuarios.Add(new EntUsuario() { Id=1, Usuario = "admin", Contraseña = "serdan10" });
-            usuarios.Add(new EntUsuario() { Id = 9, Usuario = "serdanobr", Contraseña = "serobr20" });
+            usuarios.Add(new EntUsuario() { Id=1, Usuario = "admin", Contraseña = "serdan1" });
             usuarios.Add(new EntUsuario() { Id = 8, Usuario = "serdannav", Contraseña = "sernav30" });
+            usuarios.Add(new EntUsuario() { Id = 9, Usuario = "serdanobr", Contraseña = "serobr20" });
+            usuarios.Add(new EntUsuario() { Id = 5, Usuario = "serdancas", Contraseña = "sercas10" });
             return usuarios;
         }
         private void Inicio_Load(object sender, EventArgs e)
@@ -69,6 +80,25 @@ namespace Aires.Pantallas
                 VerificaVencimiento();
                 
                 List<EntUsuario> usuarios=CargaUsuarios();
+
+                Program.UsuarioSeleccionado = usuarios[0];// 1 - admin //new EntUsuario() { Id = 1 };
+                //Program.UsuarioSeleccionado = usuarios[3];// 5 - SerdanCasar //new EntUsuario()
+
+                //Contraseña vInicioSesion = new Contraseña(usuarios);
+
+                //if (vInicioSesion.ShowDialog() != DialogResult.OK)
+                //    this.Close();
+                //else
+                //    Program.UsuarioSeleccionado = vInicioSesion.Usuario;// new EntUsuario() { Id = 9 };/
+
+                if (Program.UsuarioSeleccionado.Id > 1)
+                {
+                    tsbProveedores.Visible = false;
+                    tsbInventario.Visible = false;
+                    VerificaExportacion(Program.UsuarioSeleccionado.Id);
+                    //VerificaExportacion(DateTime.Today.AddDays(-2), Program.UsuarioSeleccionado.Id);
+                    //VerificaExportacion(DateTime.Today.AddDays(-1), Program.UsuarioSeleccionado.Id);
+                }
 
                 Menu a = (Menu)BuscaForma("Menu");
                 if (a == null)
@@ -80,16 +110,7 @@ namespace Aires.Pantallas
                 else
                     a.BringToFront();
 
-                Contraseña vInicioSesion = new Contraseña(usuarios);
-                if (vInicioSesion.ShowDialog() != DialogResult.OK)
-                    this.Close();
-                else
-                    Program.UsuarioSeleccionado = vInicioSesion.Usuario;
-
-                if (Program.UsuarioSeleccionado.Id > 1) {
-                    VerificaExportacion(DateTime.Today.AddDays(-2), Program.UsuarioSeleccionado.Id);
-                    VerificaExportacion(DateTime.Today.AddDays(-1), Program.UsuarioSeleccionado.Id);
-                }
+                
             }
             catch (Exception ex)
             {

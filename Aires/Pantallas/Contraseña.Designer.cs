@@ -131,6 +131,7 @@
             this.Name = "Contraseña";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingrese Usuario";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Contraseña_FormClosing);
             this.Load += new System.EventHandler(this.AgregaPago_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

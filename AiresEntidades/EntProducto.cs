@@ -19,7 +19,8 @@ namespace AiresEntidades
         public string Serie { get; set; }
         public int TipoProductoId { get; set; }
         public string TipoProducto { get; set; }
-        public int Cantidad { get; set; }
+
+        public decimal Cantidad { get; set; }
         public int Existencia { get; set; }
         public decimal PrecioCosto { get; set; }
         public decimal PrecioVenta { get; set; }

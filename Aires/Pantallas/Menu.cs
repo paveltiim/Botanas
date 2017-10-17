@@ -162,5 +162,14 @@ namespace Aires.Pantallas
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+            //MessageBox.Show("checa solicitud en prefactura");
+            if (Program.UsuarioSeleccionado.Id > 1)
+            {
+                btnEmpresas.Enabled = false;
+            }
+        }
     }
 }

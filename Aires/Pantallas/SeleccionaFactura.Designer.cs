@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -115,19 +115,19 @@
             this.gvGastosProveedor.Name = "gvGastosProveedor";
             this.gvGastosProveedor.ReadOnly = true;
             this.gvGastosProveedor.RowHeadersVisible = false;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial Unicode MS", 6.75F);
-            this.gvGastosProveedor.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Unicode MS", 6.75F);
+            this.gvGastosProveedor.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.gvGastosProveedor.RowTemplate.Height = 27;
             this.gvGastosProveedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvGastosProveedor.Size = new System.Drawing.Size(495, 358);
+            this.gvGastosProveedor.Size = new System.Drawing.Size(515, 358);
             this.gvGastosProveedor.TabIndex = 89;
             this.gvGastosProveedor.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvGastosEmpresa_CellContentDoubleClick);
             // 
             // numeroFacturaDataGridViewTextBoxColumn
             // 
             this.numeroFacturaDataGridViewTextBoxColumn.DataPropertyName = "NumeroFactura";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.numeroFacturaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.numeroFacturaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.numeroFacturaDataGridViewTextBoxColumn.FillWeight = 1.3F;
             this.numeroFacturaDataGridViewTextBoxColumn.HeaderText = "Factura";
             this.numeroFacturaDataGridViewTextBoxColumn.Name = "numeroFacturaDataGridViewTextBoxColumn";
@@ -136,8 +136,8 @@
             // FechaFactura
             // 
             this.FechaFactura.DataPropertyName = "FechaFactura";
-            dataGridViewCellStyle9.Format = "d";
-            this.FechaFactura.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Format = "d";
+            this.FechaFactura.DefaultCellStyle = dataGridViewCellStyle2;
             this.FechaFactura.FillWeight = 1F;
             this.FechaFactura.HeaderText = "Fecha Factura";
             this.FechaFactura.Name = "FechaFactura";
@@ -146,8 +146,8 @@
             // deudaDataGridViewTextBoxColumn
             // 
             this.deudaDataGridViewTextBoxColumn.DataPropertyName = "Deuda";
-            dataGridViewCellStyle10.Format = "c2";
-            this.deudaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Format = "c2";
+            this.deudaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.deudaDataGridViewTextBoxColumn.FillWeight = 1.2F;
             this.deudaDataGridViewTextBoxColumn.HeaderText = "Total";
             this.deudaDataGridViewTextBoxColumn.Name = "deudaDataGridViewTextBoxColumn";
@@ -156,8 +156,8 @@
             // pagoDataGridViewTextBoxColumn
             // 
             this.pagoDataGridViewTextBoxColumn.DataPropertyName = "Pago";
-            dataGridViewCellStyle11.Format = "c2";
-            this.pagoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Format = "c2";
+            this.pagoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.pagoDataGridViewTextBoxColumn.FillWeight = 1.2F;
             this.pagoDataGridViewTextBoxColumn.HeaderText = "Pago";
             this.pagoDataGridViewTextBoxColumn.Name = "pagoDataGridViewTextBoxColumn";
@@ -166,8 +166,8 @@
             // NotasCredito
             // 
             this.NotasCredito.DataPropertyName = "NotasCredito";
-            dataGridViewCellStyle12.Format = "c2";
-            this.NotasCredito.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Format = "c2";
+            this.NotasCredito.DefaultCellStyle = dataGridViewCellStyle5;
             this.NotasCredito.FillWeight = 1F;
             this.NotasCredito.HeaderText = "Notas Crédito";
             this.NotasCredito.Name = "NotasCredito";
@@ -176,8 +176,8 @@
             // saldoDataGridViewTextBoxColumn
             // 
             this.saldoDataGridViewTextBoxColumn.DataPropertyName = "Saldo";
-            dataGridViewCellStyle13.Format = "c2";
-            this.saldoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Format = "c2";
+            this.saldoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.saldoDataGridViewTextBoxColumn.FillWeight = 1.2F;
             this.saldoDataGridViewTextBoxColumn.HeaderText = "Saldo";
             this.saldoDataGridViewTextBoxColumn.Name = "saldoDataGridViewTextBoxColumn";
@@ -192,7 +192,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(519, 452);
+            this.ClientSize = new System.Drawing.Size(539, 452);
             this.Controls.Add(this.gvGastosProveedor);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);

@@ -86,6 +86,7 @@ namespace AiresNegocio
                     c.Sucursal = r["CLI_SUCURSAL"].ToString();
                     c.CLABE = r["CLI_CLABE"].ToString();
                     c.NumeroReferencia = r["CLI_NUMEROREFERENCIA"].ToString();
+                    c.FormaPagoId = Convert.ToInt32(r["CLI_FORMAPAGOID"]);
                     c.IncluyeKit = Convert.ToBoolean(r["CLI_INCLUYEKIT"]);
                     c.Fecha = Convert.ToDateTime(r["CLI_FECHAREGISTRO"]);
                     c.Estatus = Convert.ToBoolean(r["CLI_ESTATUS"]);
@@ -121,6 +122,10 @@ namespace AiresNegocio
                     c.Celular = r["CLI_CELULAR"].ToString();
                     c.RFC = r["CLI_RFC"].ToString();
                     c.Email = r["CLI_EMAIL"].ToString();
+
+                    c.Email2 = r["CLI_EMAIL2"].ToString();
+                    c.Email3 = r["CLI_EMAIL3"].ToString();
+
                     c.Banco = r["CLI_BANCO"].ToString();
                     c.NumeroCuenta = r["CLI_NUMEROCUENTA"].ToString();
                     c.Sucursal = r["CLI_SUCURSAL"].ToString();
@@ -170,7 +175,17 @@ namespace AiresNegocio
         {
             try
             {
-                return new DatClientes().agregaCliente(cliente.EmpresaId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit, cliente.Fecha);
+                //return new DatClientes().agregaCliente(cliente.EmpresaId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit, cliente.Fecha);
+                return new DatClientes().agregaClientePorEmpresa(cliente.EmpresaId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit, cliente.Fecha);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public int AgregaCliente(int ClienteId, EntCliente cliente)
+        {
+            try
+            {
+                //return new DatClientes().agregaCliente(cliente.EmpresaId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit, cliente.Fecha);
+                return new DatClientes().agregaCliente(ClienteId,cliente.EmpresaId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit, cliente.Fecha);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }

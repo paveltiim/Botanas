@@ -144,24 +144,58 @@ namespace Aires.Pantallas
         //    };
         //    producto.Id = new BusProductos().AgregaProductoDetalle(producto);
         //}
+        int AgregaIngreso(EntEmpresa EmpresaNueva, string EmpresaAnterior) {
+            int proveedorId;
+
+            List<EntProveedor> provedores = new BusProveedores().ObtieneProveedores(EmpresaNueva.Id).Where(P => P.Nombre == EmpresaNueva.Nombre).ToList();
+            if (provedores.Count > 0)
+                proveedorId = provedores[0].Id;
+            else
+            {
+                Proveedores vProv = new Proveedores();
+                proveedorId = vProv.AgregaProveedor(EmpresaNueva.Id, EmpresaNueva.Nombre, EmpresaNueva.NombreFiscal, EmpresaNueva.Direccion);
+            }
+
+            Productos vProd = new Pantallas.Productos();
+
+            return vProd.AgregaIngresoProducto(proveedorId, "TRASPASO DE "+ EmpresaAnterior, DateTime.Today);
+            //EntCatalogoGenerico ingreso = new EntCatalogoGenerico();
+            //ingreso.EmpresaId = proveedorId;
+            //ingreso.Descripcion = p.Ingreso;
+            //ingreso.Fecha = DateTime.Today;
+
+            ////if (ingreso.EmpresaId != p.EmpresaId)
+            //p.IngresoId = new BusProductos().AgregaIngreso(ingreso);
+            ////else
+            ////    new BusProductos().ActualizaIngreso(ingreso);
+        }
         private void btnMueveAIngreso_Click(object sender, EventArgs e)
         {
             try
             {
-                List<EntProducto> productosSeleccionados = ObtieneListaProductosFromGV(gvProductosDetalle);
+                List<EntProducto> productosSeleccionados = ObtieneListaProductosFromGV(gvProductosDetalle).Where(P => P.Estatus).ToList();
+                if (productosSeleccionados.Count == 0)
+                    MandaExcepcion("SELECCIONE AL MENOS UN PRODUCTO");
+
                 SeleccionaEmpresa vSeleccionaEmp = new SeleccionaEmpresa();
                 if (vSeleccionaEmp.ShowDialog() == DialogResult.OK)
                 {
+                    int ingresoId = AgregaIngreso(vSeleccionaEmp.EmpresaSeleccionada, Program.EmpresaSeleccionada.Nombre);
                     //vSeleccionaEmp.EmpresaSeleccionada;
+
                     foreach (EntProducto p in productosSeleccionados)
                     {
-                        if (p.Estatus)
-                        {
-                            //ListaProductosDetalle.Remove(p);
-                            p.EmpresaId = vSeleccionaEmp.EmpresaSeleccionada.Id;
-                            new BusProductos().ActualizaProductoDetalle(p);
-                            new BusProductos().ActualizaProductoDetallePedido(p);
-                        }
+                        //if (p.Estatus)
+                        //{
+                        //ListaProductosDetalle.Remove(p);
+                        EntEmpresa empresaSeleccionada = vSeleccionaEmp.EmpresaSeleccionada;
+                        p.EmpresaId = empresaSeleccionada.Id;
+                        p.IngresoId = ingresoId;
+
+                        //SOLO PARA ACTUALIZAR EMPRESAID e INGRESOID
+                        new BusProductos().ActualizaProductoDetalle(p);
+                            //new BusProductos().ActualizaProductoDetallePedido(p);
+                        //}
                     }
 
                     this.Close();
@@ -179,6 +213,19 @@ namespace Aires.Pantallas
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<EntProducto> productosSeleccionados = ObtieneListaProductosFromGV(gvProductosDetalle).Where(P => P.Estatus).ToList();
+                if (productosSeleccionados.Count == 0)
+                    MandaExcepcion("SELECCIONE AL MENOS UN PRODUCTO");
+                Inventarios vInvent = new Inventarios();
+                vInvent.ExportaProductos(productosSeleccionados, Program.EmpresaSeleccionada.Id);
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
         }
     }
 }

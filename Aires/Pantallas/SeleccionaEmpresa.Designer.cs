@@ -76,6 +76,7 @@
             this.btnAgregar.Text = "Seleccionar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // entEmpresaBindingSource
             // 
@@ -105,7 +106,7 @@
             this.gvEmpresas.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gvEmpresas.RowTemplate.Height = 27;
             this.gvEmpresas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvEmpresas.Size = new System.Drawing.Size(648, 368);
+            this.gvEmpresas.Size = new System.Drawing.Size(670, 368);
             this.gvEmpresas.TabIndex = 95;
             this.gvEmpresas.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvEmpresas_CellContentDoubleClick_1);
             this.gvEmpresas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvEmpresas_CellDoubleClick);
@@ -139,7 +140,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(671, 462);
+            this.ClientSize = new System.Drawing.Size(694, 462);
             this.Controls.Add(this.gvEmpresas);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);

@@ -271,7 +271,7 @@ namespace AiresDatos
             finally { con.Close(); }
         }
 
-        public void agregaProductoPedido(int PedidoId, int ProductoId, int ProductoCantidad, decimal ProductoPrecio, string Detalle)
+        public void agregaProductoPedido(int PedidoId, int ProductoId, decimal ProductoCantidad, decimal ProductoPrecio, string Detalle)
         {
             try
             {
@@ -292,7 +292,7 @@ namespace AiresDatos
             finally { con.Close(); }
         }
 
-        public void agregaProductoDetallePedido(int PedidoId, int ProductoId, int Cantidad, decimal PrecioCosto, decimal PrecioVenta, DateTime FechaRegistro)
+        public void agregaProductoDetallePedido(int PedidoId, int ProductoId, decimal Cantidad, decimal PrecioCosto, decimal PrecioVenta, DateTime FechaRegistro)
         {
             try
             {
