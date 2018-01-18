@@ -14,26 +14,33 @@ namespace Aires.Pantallas
 {
     public partial class SeleccionaEmpresa : Form
     {
+        /// <summary>
+        /// Ejecuta CargaEmpresas en constructor.
+        /// </summary>
         public SeleccionaEmpresa()
         {
             InitializeComponent();
             CargaEmpresas();
         }
-
+        /// <summary>
+        /// Ejecuta CargaEmpresas en constructor.
+        /// </summary>
+        public SeleccionaEmpresa(bool Consignacion)
+        {
+            InitializeComponent();
+            CargaEmpresas();
+            this.Consignacion = Consignacion;
+        }
         public SeleccionaEmpresa(List<EntEmpresa> ListaEmpresas)
         {
             InitializeComponent();
             this.ListaEmpresas = ListaEmpresas;
             gvEmpresas.DataSource = ListaEmpresas;
         }
+        public bool Consignacion { get; set; }
 
         public List<EntEmpresa> ListaEmpresas { get; set; }
 
-        public void CargaEmpresas()
-        {
-            ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
-            gvEmpresas.DataSource = ListaEmpresas;
-        }
         public EntEmpresa ObtieneEmpresaFromGV(DataGridView GridViewEmpresas)
         {
             if (GridViewEmpresas.CurrentRow == null)
@@ -42,6 +49,16 @@ namespace Aires.Pantallas
         }
 
         public EntEmpresa EmpresaSeleccionada { get { return ObtieneEmpresaFromGV(gvEmpresas); } }
+
+        public void CargaEmpresas()
+        {
+            if (Program.UsuarioSeleccionado.Id > 1)
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas().Where(P => P.UsuarioId == Program.UsuarioSeleccionado.Id).ToList();
+            else
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
+            gvEmpresas.DataSource = ListaEmpresas;
+        }
+
 
         private void SeleccionaEmpresa_Load(object sender, EventArgs e)
         {

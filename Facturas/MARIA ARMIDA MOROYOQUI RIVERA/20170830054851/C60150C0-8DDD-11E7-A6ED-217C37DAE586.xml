@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" version="3.2" fecha="2017-08-30T17:48:51" folio="75" serie="AA" subTotal="7474.14" descuento="0" total="8670.00" Moneda="MXN" TipoCambio="0.00" tipoDeComprobante="ingreso" noCertificado="20001000000200000240" certificado="MIIEPDCCAySgAwIBAgIUMjAwMDEwMDAwMDAyMDAwMDAyNDAwDQYJKoZIhvcNAQEFBQAwggFcMRowGAYDVQQDDBFBLkMuIDIgZGUgcHJ1ZWJhczEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSkwJwYJKoZIhvcNAQkBFhphc2lzbmV0QHBydWViYXMuc2F0LmdvYi5teDEmMCQGA1UECQwdQXYuIEhpZGFsZ28gNzcsIENvbC4gR3VlcnJlcm8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQRGlzdHJpdG8gRmVkZXJhbDESMBAGA1UEBwwJQ295b2Fjw6FuMTQwMgYJKoZIhvcNAQkCDCVSZXNwb25zYWJsZTogQXJhY2VsaSBHYW5kYXJhIEJhdXRpc3RhMB4XDTEyMTAyMzE5MzAwM1oXDTE2MTAyMzE5MzAwM1owgbYxGzAZBgNVBAMTEkxBQlMgQU5FWCBTQSBERSBDVjEbMBkGA1UEKRMSTEFCUyBBTkVYIFNBIERFIENWMRswGQYDVQQKExJMQUJTIEFORVggU0EgREUgQ1YxJTAjBgNVBC0THExBTjcwMDgxNzNSNSAvIEhFR1Q3NjEwMDM0UzIxHjAcBgNVBAUTFSAvIEhFR1Q3NjEwMDNNREZSTk4wOTEWMBQGA1UECxMNUmVxdWVyaW1pZW50bzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAvjKVy3rrKgRdJnBzL2bgyQ19j653JQ5nZq+iko/6mXjqoMktXIoa+hBOmuvTYtOCflIXTG5V3q8P+k5EYcuZtAbLsvbIIEqHqLMhIZYZXFTJS6NP6bJbg9ebyAaT8Bx2+meMUjASlo8vVvWYz11MBKQWs4zA8/3nMg7fCO+256UCAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBAMSmgaWWWkvO8bCt8wzaCsenLDFxKBy5A2PNQMiF3QGJIRboybZwgMWrTRyqdHl0yxvekgRw0snXHHjmj4Kg2nKs5i/QQOF5G/0Id/mFo1thfnPrUe34IIoOiS8+PQij55hWeBb+tqRy9QDwOBMwvUgeUAyfz44gV0QaRgcAhIaF5OEGJn5DZXUMnFY00fjR3zP8nXd+pR9+v7c/xmweEf5ubEtAFYr7sIVlhVxyhWXp1pgCTYKbgdAycIAKnCA+ApKKGGJHnCiMA+tGqREY6Fj6DjYE6jSlewvsUb70mgj6DJalh7hGDR67atq0mBzvMCUUIKR77GK799AbXP/uC1k=" formaDePago="01" metodoDePago="Pago en una sola exhibición" LugarExpedicion="Los Mochis, Sinaloa" sello="c/h4GqfhCz+Lt/QLyctbyKJxTgYJqvkwY3+Go6l6WH/L7n6ajuKsdrTHWPpHlYA+0KIXbx4+k7sPcXyfmJCeoX2OeVpZuUwSdJN4LqqpmpR5PukmZ9WvJwvkGhNhmUDSMN5Xc5gmgNvnKEz17xYUgfW951MO6ittReh9dTZdElI=">
+  <cfdi:Emisor nombre="GRISELDA ARMENTA MIRANDA" rfc="LAN7008173R5">
+    <cfdi:DomicilioFiscal calle="NICOLAS BRAVO" noExterior="108" colonia="CENTRO" localidad="NAVOJOA" municipio="NAVOJOA" estado="SONORA" pais="México" codigoPostal="85800"/>
+    <cfdi:RegimenFiscal Regimen="REGIMEN DE LAS PERSONAS FISICAS CON ACTIDADES EMPRESARIALES Y EMPRESARIALES"/>
+  </cfdi:Emisor>
+  <cfdi:Receptor nombre="MARIA ARMIDA MOROYOQUI RIVERA" rfc="MORA9008266H1">
+    <cfdi:Domicilio calle="FRANCISCO SERRANO" noExterior="104" colonia="PUEBLO VIEJO" localidad="NAVOJOA" municipio="NAVOJOA" estado="SONORA" pais="MÉXICO" codigoPostal="85845"/>
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad="1" unidad="PIEZA" descripcion="AIRE ACONDICIONADO MINI SPLITMODELO  ASW-12A2/FFR1MARCA AUX 1 TONS  SOLO FRIO....................... A21026509208W00900 |" valorUnitario="5905.17" importe="5905.17"/>
+    <cfdi:Concepto cantidad="1" unidad="PIEZA" descripcion="INSTALACION DE AIRE ACONDICIONADO MINI SPLIT........................................................" valorUnitario="1568.97" importe="1568.97"/>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos totalImpuestosTrasladados="1195.86">
+    <cfdi:Traslados>
+      <cfdi:Traslado impuesto="IVA" tasa="16.00" importe="1195.86"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/TimbreFiscalDigital/TimbreFiscalDigital.xsd" version="1.0" UUID="C60150C0-8DDD-11E7-A6ED-217C37DAE586" FechaTimbrado="2017-08-30T18:48:50" selloCFD="c/h4GqfhCz+Lt/QLyctbyKJxTgYJqvkwY3+Go6l6WH/L7n6ajuKsdrTHWPpHlYA+0KIXbx4+k7sPcXyfmJCeoX2OeVpZuUwSdJN4LqqpmpR5PukmZ9WvJwvkGhNhmUDSMN5Xc5gmgNvnKEz17xYUgfW951MO6ittReh9dTZdElI=" noCertificadoSAT="20001000000300022323" selloSAT="rmBZc7hn/z5nMB5XFJJjRslwVSzsY7480RMSQCAx4amy3QB545YLIGqXvTgxMpVfvOJ7gBYC+IWoRd9sB38Dr7wnMDLbT0WPBldUhB1aYOj2Ea+3tdVIC22DZZUMNNBEENrcnD1dRoBjCVXkyb0jcCKEKw9G1gKMtzLq4eoJRl1bD6c6qDbsvdewtHpYHTwI51zBWCMOuPka0+P37Ub/cJ2dCGbTOQtY70axAEEPD7A/KmpJ6JLVrpNQFJLqgcrjZ9g9V9LoiJSWy7YNDax+/WU3/32Fe3BzbBsiW+XnlwXaEF1KoaGhT7qNE7aHnb1QBOVxILgdm6PJ+TyIEsWU8w=="/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

@@ -53,10 +53,24 @@ namespace AiresNegocio
 
                     m.Certificado = r["EMP_CERTIFICADORUTA"].ToString();
                     m.Key = r["EMP_KEYRUTA"].ToString();
-                    m.Clave = r["EMP_CLAVE"].ToString();
+                    //m.Clave = r["EMP_CLAVE"].ToString();
 
-                    m.TipoTasaIVAId = Convert.ToInt32(r["EMP_TIPOTASAIVAID"]);
                     m.NoCertificado = r["EMP_NOCERTIFICADO"].ToString();
+                    m.TipoTasaIVAId = Convert.ToInt32(r["EMP_TIPOTASAIVAID"]);
+
+
+                    m.TipoFactorId = 1;//Convert.ToInt32(r["EMP_TIPOFACTORID"]);
+                    m.TipoFactor = "Tasa";//r["CATFAC_DESCRIPCION"].ToString();
+                    m.TasaOCuota = 0.16m;//Convert.ToDecimal(r["EMP_TASAOCUOTA"]);
+
+
+                    m.RegimenFiscalId = Convert.ToInt32(r["EMP_REGIMENFISCALID"]);
+                    m.RegimenFiscal = r["CATREG_DESCRIPCION"].ToString();
+
+                    m.UsoCFDIId = Convert.ToInt32(r["EMP_USOCFDIID"]);
+
+                    m.TimbresEmpresa = Convert.ToInt32(r["TIMBRESRESTANTES"]);
+                    //m.Timbres = Convert.ToInt32(r["TIMBRESRESTANTES"]);
 
                     //m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
                     //m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
@@ -64,6 +78,8 @@ namespace AiresNegocio
 
                     m.Fecha = Convert.ToDateTime(r["EMP_FECHAREGISTRO"]);
                     m.Facturacion= Convert.ToBoolean(r["EMP_FACTURACION"]);
+
+                    m.UsuarioId = Convert.ToInt32(r["EMP_USUARIOID"]);
                     lst.Add(m);
                 }
                 return lst;
@@ -322,7 +338,13 @@ namespace AiresNegocio
         {
             try
             {
-                return new DatEmpresas().actualizaEmpresa(Empresa.Id, Empresa.TipoPersonaId, Empresa.Nombre, Empresa.NombreFiscal, Empresa.RegimenFiscal, Empresa.Direccion, Empresa.Calle, Empresa.NoExterior, Empresa.NoInterior, Empresa.Colonia, Empresa.Localidad, Empresa.Municipio, Empresa.Estado, Empresa.CP, Empresa.Telefono, Empresa.Telefono2, Empresa.RFC, Empresa.Email, Empresa.Banco, Empresa.NumeroCuenta, Empresa.Sucursal, Empresa.CLABE, Empresa.NumeroReferencia, Empresa.Certificado, Empresa.Key, Empresa.Clave, Empresa.TipoTasaIVAId, Empresa.NoCertificado);
+                return new DatEmpresas().actualizaEmpresa(Empresa.Id, Empresa.TipoPersonaId, Empresa.Nombre, Empresa.NombreFiscal, 
+                    Empresa.RegimenFiscal, Empresa.Direccion, Empresa.Calle, Empresa.NoExterior, Empresa.NoInterior, Empresa.Colonia, 
+                    Empresa.Localidad, Empresa.Municipio, Empresa.Estado, Empresa.CP, Empresa.Telefono, Empresa.Telefono2, 
+                    Empresa.RFC, Empresa.Email, Empresa.Banco, Empresa.NumeroCuenta, Empresa.Sucursal, Empresa.CLABE, 
+                    Empresa.NumeroReferencia, Empresa.Certificado, Empresa.Key, Empresa.Clave,
+                         Empresa.TipoTasaIVAId, Empresa.NoCertificado, Empresa.RegimenFiscalId, Empresa.TipoFactorId, Empresa.TasaOCuota, Empresa.UsoCFDIId);
+
                 //return 0;
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
@@ -338,6 +360,95 @@ namespace AiresNegocio
             try
             {
                 return new DatEmpresas().actualizaEstatusEmpresa(Empresa.Id, Empresa.Estatus);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public int AumentaTimbreEmpresa(int EmpresaId)
+        {
+            try
+            {
+                return new DatEmpresas().aumentaTimbresEmpresa(EmpresaId);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+
+        public List<EntCatalogoGenerico> ObtieneProductosServicios()
+        {
+            try
+            {
+                List<EntCatalogoGenerico> lst = new List<EntCatalogoGenerico>();
+                dt = new DatEmpresas().obtieneProductosServicios();
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntCatalogoGenerico m = new EntCatalogoGenerico();
+                    m.Id = Convert.ToInt32(r["CATPRO_ID"]);
+                    m.Clave = r["CATPRO_CLAVE"].ToString();
+                    m.Descripcion = r["CATPRO_DESCRIPCION"].ToString();
+                    //m.EmpresaId = Convert.ToInt32(r["EMPPROSER_ID"]);
+                    //m.Estatus = Convert.ToBoolean(r["EMPPROSER_ESTATUS"]);
+                    lst.Add(m);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntCatalogoGenerico> ObtieneUnidades()
+        {
+            try
+            {
+                List<EntCatalogoGenerico> lst = new List<EntCatalogoGenerico>();
+                dt = new DatEmpresas().obtieneUnidades();
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntCatalogoGenerico m = new EntCatalogoGenerico();
+                    m.Id = Convert.ToInt32(r["CATUNI_ID"]);
+                    m.Clave = r["CATUNI_CLAVE"].ToString();
+                    m.Descripcion = r["CATUNI_DESCRIPCION"].ToString();
+                    //m.EmpresaId = Convert.ToInt32(r["EMPUNI_ID"]);
+                    //m.Estatus = Convert.ToBoolean(r["EMPUNI_ESTATUS"]);
+                    lst.Add(m);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public List<EntCatalogoGenerico> ObtieneCatalogoRegimen()
+        {
+            try
+            {
+                List<EntCatalogoGenerico> lst = new List<EntCatalogoGenerico>();
+                dt = new DatEmpresas().obtieneCatalogoRegimen();
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntCatalogoGenerico m = new EntCatalogoGenerico();
+                    m.Id = Convert.ToInt32(r["CATREG_ID"]);
+                    m.Descripcion = r["CATREG_ID"].ToString() + " - " + r["CATREG_DESCRIPCION"].ToString();
+
+                    lst.Add(m);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntCatalogoGenerico> ObtieneCatalogoUsoCFDI()
+        {
+            try
+            {
+                List<EntCatalogoGenerico> lst = new List<EntCatalogoGenerico>();
+                dt = new DatEmpresas().obtieneCatalogoUsoCFDI();
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntCatalogoGenerico m = new EntCatalogoGenerico();
+                    m.Id = Convert.ToInt32(r["CATUSO_ID"]);
+                    m.Clave = r["CATUSO_CLAVE"].ToString();
+                    m.Descripcion = r["CATUSO_CLAVE"].ToString() + " - " + r["CATUSO_DESCRIPCION"].ToString();
+
+                    lst.Add(m);
+                }
+                return lst;
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }

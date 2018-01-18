@@ -238,6 +238,23 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
+        public DataTable obtieneUltimaNotaCredito(int EmpresaId)
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneUltimaNotaCreditoPorEmpresa", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         public int agregaPedido(int ClienteId, string Detalle, string Observaciones, decimal Total, decimal Pago, DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId)
         {
             try
@@ -314,7 +331,7 @@ namespace AiresDatos
             finally { con.Close(); }
         }
 
-        public int agregaNotaCredito(int PedidoId, decimal Cantidad, DateTime Fecha)
+        public int agregaNotaCredito(int EmpresaId, int PedidoId, string Numero, decimal Cantidad, DateTime Fecha)
         {
             try
             {
@@ -322,7 +339,9 @@ namespace AiresDatos
 
                 com = new SqlCommand("insAgregaNotaDeCreditoPedido", con);
                 com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 com.Parameters.AddWithValue("PedidoId", PedidoId);
+                com.Parameters.AddWithValue("Numero", Numero);
                 com.Parameters.AddWithValue("Cantidad", Cantidad);
                 com.Parameters.AddWithValue("Fecha", Fecha);
                 SqlParameter parm = new SqlParameter("Id", Id);
@@ -584,5 +603,46 @@ namespace AiresDatos
             finally { con.Close(); }
         }
 
+
+        public DataTable obtieneUltimoComplemento()
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneUltimoComplementoPago", con);
+                com.CommandType = CommandType.StoredProcedure;
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public int agregaComplementoPago(int FacturaId, DateTime Fecha,
+                                        int TipoComprobanteId, int FormaPagoId, string Ruta)
+        {
+            try
+            {
+                int Id = 0;
+
+                com = new SqlCommand("insAgregaComplementoPagoFactura", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("FacturaId", FacturaId);
+                com.Parameters.AddWithValue("Fecha", Fecha);
+                com.Parameters.AddWithValue("TipoComprobanteId", TipoComprobanteId);
+                com.Parameters.AddWithValue("FormaPagoId", FormaPagoId);
+                com.Parameters.AddWithValue("Ruta", Ruta);
+                SqlParameter parm = new SqlParameter("Id", Id);
+                parm.Direction = ParameterDirection.InputOutput;
+                com.Parameters.Add(parm);
+                con.Open();
+                com.ExecuteNonQuery();
+
+                return Convert.ToInt32(com.Parameters["Id"].Value);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
     }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" version="3.2" fecha="2017-08-22T09:47:15" folio="65" serie="AA" subTotal="3793.10" descuento="0" total="4400.00" Moneda="MXN" TipoCambio="0.00" tipoDeComprobante="ingreso" noCertificado="20001000000200000240" certificado="MIIEPDCCAySgAwIBAgIUMjAwMDEwMDAwMDAyMDAwMDAyNDAwDQYJKoZIhvcNAQEFBQAwggFcMRowGAYDVQQDDBFBLkMuIDIgZGUgcHJ1ZWJhczEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSkwJwYJKoZIhvcNAQkBFhphc2lzbmV0QHBydWViYXMuc2F0LmdvYi5teDEmMCQGA1UECQwdQXYuIEhpZGFsZ28gNzcsIENvbC4gR3VlcnJlcm8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQRGlzdHJpdG8gRmVkZXJhbDESMBAGA1UEBwwJQ295b2Fjw6FuMTQwMgYJKoZIhvcNAQkCDCVSZXNwb25zYWJsZTogQXJhY2VsaSBHYW5kYXJhIEJhdXRpc3RhMB4XDTEyMTAyMzE5MzAwM1oXDTE2MTAyMzE5MzAwM1owgbYxGzAZBgNVBAMTEkxBQlMgQU5FWCBTQSBERSBDVjEbMBkGA1UEKRMSTEFCUyBBTkVYIFNBIERFIENWMRswGQYDVQQKExJMQUJTIEFORVggU0EgREUgQ1YxJTAjBgNVBC0THExBTjcwMDgxNzNSNSAvIEhFR1Q3NjEwMDM0UzIxHjAcBgNVBAUTFSAvIEhFR1Q3NjEwMDNNREZSTk4wOTEWMBQGA1UECxMNUmVxdWVyaW1pZW50bzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAvjKVy3rrKgRdJnBzL2bgyQ19j653JQ5nZq+iko/6mXjqoMktXIoa+hBOmuvTYtOCflIXTG5V3q8P+k5EYcuZtAbLsvbIIEqHqLMhIZYZXFTJS6NP6bJbg9ebyAaT8Bx2+meMUjASlo8vVvWYz11MBKQWs4zA8/3nMg7fCO+256UCAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBAMSmgaWWWkvO8bCt8wzaCsenLDFxKBy5A2PNQMiF3QGJIRboybZwgMWrTRyqdHl0yxvekgRw0snXHHjmj4Kg2nKs5i/QQOF5G/0Id/mFo1thfnPrUe34IIoOiS8+PQij55hWeBb+tqRy9QDwOBMwvUgeUAyfz44gV0QaRgcAhIaF5OEGJn5DZXUMnFY00fjR3zP8nXd+pR9+v7c/xmweEf5ubEtAFYr7sIVlhVxyhWXp1pgCTYKbgdAycIAKnCA+ApKKGGJHnCiMA+tGqREY6Fj6DjYE6jSlewvsUb70mgj6DJalh7hGDR67atq0mBzvMCUUIKR77GK799AbXP/uC1k=" formaDePago="01" metodoDePago="Pago en una sola exhibición" LugarExpedicion="Los Mochis, Sinaloa" sello="sbQfkkLzPIbamRud/mau6Wykt/N0+PCqH4FUJ8yUQMWufoi40JmFRea2rekAQ6mQpVYwFLwAzabX/mLAf5j+YUoDiis1aShjhC+4lciF0YHdFBt0+rs6Deu8ac9rzoukTi0TKWJjfQeGreT8mf32YNzayzS8chmTfJ66t1Avwx0=">
+  <cfdi:Emisor nombre="GRISELDA ARMENTA MIRANDA" rfc="LAN7008173R5">
+    <cfdi:DomicilioFiscal calle="CALIFORNIA CIUDAD OBREGON CAJEME" noExterior="850" colonia="ZONA NORTE" localidad="CAJEME" municipio="OBREGON" estado="SONORA" pais="México" codigoPostal="85040"/>
+    <cfdi:RegimenFiscal Regimen="PERSONAS FISICAS CON ACTIVIDADES EMPRESARIALES Y PROFESIONALES"/>
+  </cfdi:Emisor>
+  <cfdi:Receptor nombre="DAMASO OBED LIMON DURAZO" rfc="LIDD850923HX9">
+    <cfdi:Domicilio calle="IGNACIO PESQUEIRA" noExterior="192" colonia="CAMPESTRE" localidad="CD OBREGON" municipio="CAJEME" estado="SONORA" pais="MÉXICO" codigoPostal="85160"/>
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad="1" unidad="PIEZA" descripcion="AIRE ACONDICIONADO MINI SPLIT MARCA MIRAGE 1 TON SOLO FRIO ......................................... CXF121J8051712279/EXF121J8051711208 |" valorUnitario="3793.10" importe="3793.10"/>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos totalImpuestosTrasladados="606.90">
+    <cfdi:Traslados>
+      <cfdi:Traslado impuesto="IVA" tasa="16.00" importe="606.90"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/TimbreFiscalDigital/TimbreFiscalDigital.xsd" version="1.0" UUID="2B1C237E-8751-11E7-B288-15B27FF61714" FechaTimbrado="2017-08-22T10:47:14" selloCFD="sbQfkkLzPIbamRud/mau6Wykt/N0+PCqH4FUJ8yUQMWufoi40JmFRea2rekAQ6mQpVYwFLwAzabX/mLAf5j+YUoDiis1aShjhC+4lciF0YHdFBt0+rs6Deu8ac9rzoukTi0TKWJjfQeGreT8mf32YNzayzS8chmTfJ66t1Avwx0=" noCertificadoSAT="20001000000300022323" selloSAT="l7hl+WDCVvsfucrB3deygJhAM84+AXbZNt/9Fpxc4mPRQWAqv8O6P1ku7UhJAoukH+pccKpr3rK0dq1pO/Sk576pxL5s72ItQOqePH7YZrfMR55fsYZGCgH5ImKC6AZZ0XHpZGOe9mSjpJUEq7iOFU+QJPbEultbc2WKqRe5y9ztkMu5XPaxfbQpmv/hrF2jeSUr7+3z3sre0vgohblBOLwej5t9bhmYMxm04A/mjQAYdg+voeVaulJ7PvJtIS0Z0v3q79LeWtD1auRQ5dppbviVVihSAN9Yz16H7kFD48cCfjBWbNorfF4OIrYxqCgJe+5bdp0Nlfu7J8OJiLSw4Q=="/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

@@ -88,6 +88,9 @@ namespace AiresNegocio
                     c.NumeroReferencia = r["CLI_NUMEROREFERENCIA"].ToString();
                     c.FormaPagoId = Convert.ToInt32(r["CLI_FORMAPAGOID"]);
                     c.IncluyeKit = Convert.ToBoolean(r["CLI_INCLUYEKIT"]);
+
+                    c.EmpresaId = Convert.ToInt32(r["CLI_EMPRESAASOCIADAID"]);
+
                     c.Fecha = Convert.ToDateTime(r["CLI_FECHAREGISTRO"]);
                     c.Estatus = Convert.ToBoolean(r["CLI_ESTATUS"]);
                     lst.Add(c);

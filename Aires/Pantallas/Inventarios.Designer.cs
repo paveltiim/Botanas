@@ -30,22 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inventarios));
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource7 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource8 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource9 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource3 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.EntProductoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.entCatalogoGenericoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label24 = new System.Windows.Forms.Label();
             this.cmbEmpresas = new System.Windows.Forms.ComboBox();
             this.btnBuscaEmpresa = new System.Windows.Forms.Button();
@@ -59,21 +56,30 @@
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.rvInventarioDetalle = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnExportar = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
+            this.pnlBotonesGenerales = new System.Windows.Forms.Panel();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
             this.btnRefrescar = new System.Windows.Forms.Button();
+            this.btnBuscaSerie = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtBuscaSerie = new System.Windows.Forms.TextBox();
+            this.btnExportar = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.gvIngresos = new System.Windows.Forms.DataGridView();
+            this.Estatus = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entCatalogoGenericoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btnExportaProducto = new System.Windows.Forms.Button();
-            this.btnMueveAIngreso = new System.Windows.Forms.Button();
+            this.pnlBotonesDetalle = new System.Windows.Forms.Panel();
             this.btnEliminarProductosDetalle = new System.Windows.Forms.Button();
+            this.btnMueveAIngreso = new System.Windows.Forms.Button();
+            this.btnExportaProducto = new System.Windows.Forms.Button();
             this.txtPrecioVentaTotalEntradas = new System.Windows.Forms.TextBox();
             this.txtPrecioCostoTotalEntradas = new System.Windows.Forms.TextBox();
             this.txtCantidadTotalEntradas = new System.Windows.Forms.TextBox();
@@ -94,61 +100,36 @@
             this.pnlEntradasPorMes = new System.Windows.Forms.Panel();
             this.cmbMesesEntradas = new System.Windows.Forms.ComboBox();
             this.cmbAñoEntradas = new System.Windows.Forms.ComboBox();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtBusquedaSerieHistorial = new System.Windows.Forms.TextBox();
-            this.gvProductosDetalle = new System.Windows.Forms.DataGridView();
-            this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serieDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IngresoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaCorta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmpresaId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estatus = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtBuscaSerie = new System.Windows.Forms.TextBox();
-            this.btnBuscaSerie = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.EntProductoBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).BeginInit();
             this.tcInventarios.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tcReportesInventario.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.pnlBotonesGenerales.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvIngresos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.pnlBotonesDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvProductos)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.pnlEntradasPorSemana.SuspendLayout();
             this.pnlEntradasPorMes.SuspendLayout();
-            this.tabPage8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvProductosDetalle)).BeginInit();
             this.SuspendLayout();
             // 
             // EntProductoBindingSource
             // 
             this.EntProductoBindingSource.DataSource = typeof(AiresEntidades.EntProducto);
             // 
-            // entCatalogoGenericoBindingSource
-            // 
-            this.entCatalogoGenericoBindingSource.DataSource = typeof(AiresEntidades.EntCatalogoGenerico);
-            // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.BackColor = System.Drawing.Color.Transparent;
-            this.label24.Location = new System.Drawing.Point(378, 33);
+            this.label24.Location = new System.Drawing.Point(378, 27);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(51, 13);
             this.label24.TabIndex = 121;
@@ -160,7 +141,7 @@
             this.cmbEmpresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEmpresas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmpresas.FormattingEnabled = true;
-            this.cmbEmpresas.Location = new System.Drawing.Point(429, 23);
+            this.cmbEmpresas.Location = new System.Drawing.Point(429, 17);
             this.cmbEmpresas.Name = "cmbEmpresas";
             this.cmbEmpresas.Size = new System.Drawing.Size(359, 28);
             this.cmbEmpresas.TabIndex = 122;
@@ -174,7 +155,7 @@
             this.btnBuscaEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBuscaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscaEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscaEmpresa.Location = new System.Drawing.Point(794, 23);
+            this.btnBuscaEmpresa.Location = new System.Drawing.Point(794, 17);
             this.btnBuscaEmpresa.Name = "btnBuscaEmpresa";
             this.btnBuscaEmpresa.Size = new System.Drawing.Size(40, 28);
             this.btnBuscaEmpresa.TabIndex = 120;
@@ -185,9 +166,8 @@
             // 
             this.tcInventarios.Controls.Add(this.tabPage1);
             this.tcInventarios.Controls.Add(this.tabPage2);
-            this.tcInventarios.Controls.Add(this.tabPage8);
             this.tcInventarios.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tcInventarios.Location = new System.Drawing.Point(15, 34);
+            this.tcInventarios.Location = new System.Drawing.Point(15, 28);
             this.tcInventarios.Name = "tcInventarios";
             this.tcInventarios.SelectedIndex = 0;
             this.tcInventarios.Size = new System.Drawing.Size(1595, 753);
@@ -258,9 +238,9 @@
             // 
             // rvInventario
             // 
-            reportDataSource7.Name = "dsInventario";
-            reportDataSource7.Value = this.EntProductoBindingSource;
-            this.rvInventario.LocalReport.DataSources.Add(reportDataSource7);
+            reportDataSource1.Name = "dsInventario";
+            reportDataSource1.Value = this.EntProductoBindingSource;
+            this.rvInventario.LocalReport.DataSources.Add(reportDataSource1);
             this.rvInventario.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptInventarioProducto.rdlc";
             this.rvInventario.Location = new System.Drawing.Point(0, 22);
             this.rvInventario.Name = "rvInventario";
@@ -280,9 +260,9 @@
             // 
             // rvInventarioDetalle
             // 
-            reportDataSource8.Name = "dsInventario";
-            reportDataSource8.Value = this.EntProductoBindingSource;
-            this.rvInventarioDetalle.LocalReport.DataSources.Add(reportDataSource8);
+            reportDataSource2.Name = "dsInventario";
+            reportDataSource2.Value = this.EntProductoBindingSource;
+            this.rvInventarioDetalle.LocalReport.DataSources.Add(reportDataSource2);
             this.rvInventarioDetalle.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptInventarioDetalle.rdlc";
             this.rvInventarioDetalle.Location = new System.Drawing.Point(0, 0);
             this.rvInventarioDetalle.Name = "rvInventarioDetalle";
@@ -291,13 +271,12 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.pnlBotonesGenerales);
+            this.tabPage2.Controls.Add(this.btnRefrescar);
             this.tabPage2.Controls.Add(this.btnBuscaSerie);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.txtBuscaSerie);
             this.tabPage2.Controls.Add(this.btnExportar);
-            this.tabPage2.Controls.Add(this.btnEditar);
-            this.tabPage2.Controls.Add(this.btnEliminar);
-            this.tabPage2.Controls.Add(this.btnRefrescar);
             this.tabPage2.Controls.Add(this.tabControl2);
             this.tabPage2.Controls.Add(this.tabControl1);
             this.tabPage2.Controls.Add(this.rdoEntradasPorMes);
@@ -312,38 +291,14 @@
             this.tabPage2.Text = "Entradas";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnExportar
+            // pnlBotonesGenerales
             // 
-            this.btnExportar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExportar.BackColor = System.Drawing.Color.White;
-            this.btnExportar.BackgroundImage = global::Aires.Properties.Resources.Mail_reply;
-            this.btnExportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExportar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportar.Location = new System.Drawing.Point(267, 644);
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(74, 66);
-            this.btnExportar.TabIndex = 115;
-            this.btnExportar.Text = "Exportar";
-            this.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnExportar.UseVisualStyleBackColor = false;
-            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.BackColor = System.Drawing.Color.White;
-            this.btnEditar.BackgroundImage = global::Aires.Properties.Resources.editar2;
-            this.btnEditar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(89, 644);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(77, 66);
-            this.btnEditar.TabIndex = 114;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEditar.UseVisualStyleBackColor = false;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            this.pnlBotonesGenerales.Controls.Add(this.btnEliminar);
+            this.pnlBotonesGenerales.Controls.Add(this.btnEditar);
+            this.pnlBotonesGenerales.Location = new System.Drawing.Point(85, 643);
+            this.pnlBotonesGenerales.Name = "pnlBotonesGenerales";
+            this.pnlBotonesGenerales.Size = new System.Drawing.Size(162, 75);
+            this.pnlBotonesGenerales.TabIndex = 122;
             // 
             // btnEliminar
             // 
@@ -352,7 +307,7 @@
             this.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(178, 644);
+            this.btnEliminar.Location = new System.Drawing.Point(84, 1);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(77, 66);
             this.btnEliminar.TabIndex = 113;
@@ -361,6 +316,22 @@
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
+            // btnEditar
+            // 
+            this.btnEditar.BackColor = System.Drawing.Color.White;
+            this.btnEditar.BackgroundImage = global::Aires.Properties.Resources.editar2;
+            this.btnEditar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.Location = new System.Drawing.Point(1, 1);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(77, 66);
+            this.btnEditar.TabIndex = 114;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
             // btnRefrescar
             // 
             this.btnRefrescar.BackColor = System.Drawing.Color.White;
@@ -368,7 +339,7 @@
             this.btnRefrescar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRefrescar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescar.Location = new System.Drawing.Point(0, 643);
+            this.btnRefrescar.Location = new System.Drawing.Point(3, 644);
             this.btnRefrescar.Name = "btnRefrescar";
             this.btnRefrescar.Size = new System.Drawing.Size(77, 66);
             this.btnRefrescar.TabIndex = 112;
@@ -376,6 +347,53 @@
             this.btnRefrescar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRefrescar.UseVisualStyleBackColor = false;
             this.btnRefrescar.Click += new System.EventHandler(this.btnRefrescar_Click);
+            // 
+            // btnBuscaSerie
+            // 
+            this.btnBuscaSerie.BackColor = System.Drawing.Color.Transparent;
+            this.btnBuscaSerie.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBuscaSerie.BackgroundImage")));
+            this.btnBuscaSerie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBuscaSerie.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuscaSerie.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscaSerie.Location = new System.Drawing.Point(602, 48);
+            this.btnBuscaSerie.Name = "btnBuscaSerie";
+            this.btnBuscaSerie.Size = new System.Drawing.Size(40, 28);
+            this.btnBuscaSerie.TabIndex = 121;
+            this.btnBuscaSerie.UseVisualStyleBackColor = false;
+            this.btnBuscaSerie.Click += new System.EventHandler(this.btnBuscaSerie_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(330, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 14);
+            this.label2.TabIndex = 117;
+            this.label2.Text = "Serie:";
+            // 
+            // txtBuscaSerie
+            // 
+            this.txtBuscaSerie.Location = new System.Drawing.Point(367, 53);
+            this.txtBuscaSerie.Name = "txtBuscaSerie";
+            this.txtBuscaSerie.Size = new System.Drawing.Size(233, 21);
+            this.txtBuscaSerie.TabIndex = 116;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExportar.BackColor = System.Drawing.Color.White;
+            this.btnExportar.BackgroundImage = global::Aires.Properties.Resources.Mail_reply;
+            this.btnExportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnExportar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExportar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportar.Location = new System.Drawing.Point(252, 644);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(74, 66);
+            this.btnExportar.TabIndex = 115;
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // tabControl2
             // 
@@ -428,14 +446,48 @@
             this.gvIngresos.MultiSelect = false;
             this.gvIngresos.Name = "gvIngresos";
             this.gvIngresos.RowHeadersVisible = false;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial Unicode MS", 6.5F);
-            this.gvIngresos.RowsDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Unicode MS", 6.5F);
+            this.gvIngresos.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gvIngresos.RowTemplate.Height = 27;
             this.gvIngresos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvIngresos.Size = new System.Drawing.Size(316, 527);
             this.gvIngresos.TabIndex = 80;
             this.gvIngresos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvIngresos_CellDoubleClick);
             this.gvIngresos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvIngresos_CellDoubleClick);
+            // 
+            // Estatus
+            // 
+            this.Estatus.DataPropertyName = "Estatus";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.NullValue = false;
+            this.Estatus.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Estatus.FillWeight = 0.4F;
+            this.Estatus.HeaderText = "Sel.";
+            this.Estatus.Name = "Estatus";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Fecha";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Unicode MS", 8.5F);
+            dataGridViewCellStyle2.Format = "d";
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn1.FillWeight = 1F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Fecha";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Descripcion";
+            this.dataGridViewTextBoxColumn3.FillWeight = 3F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Descripcion";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // entCatalogoGenericoBindingSource
+            // 
+            this.entCatalogoGenericoBindingSource.DataSource = typeof(AiresEntidades.EntCatalogoGenerico);
             // 
             // textBox2
             // 
@@ -466,9 +518,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.pnlBotonesDetalle);
             this.tabPage3.Controls.Add(this.btnExportaProducto);
-            this.tabPage3.Controls.Add(this.btnMueveAIngreso);
-            this.tabPage3.Controls.Add(this.btnEliminarProductosDetalle);
             this.tabPage3.Controls.Add(this.txtPrecioVentaTotalEntradas);
             this.tabPage3.Controls.Add(this.txtPrecioCostoTotalEntradas);
             this.tabPage3.Controls.Add(this.txtCantidadTotalEntradas);
@@ -480,6 +531,47 @@
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Reporte";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // pnlBotonesDetalle
+            // 
+            this.pnlBotonesDetalle.Controls.Add(this.btnEliminarProductosDetalle);
+            this.pnlBotonesDetalle.Controls.Add(this.btnMueveAIngreso);
+            this.pnlBotonesDetalle.Location = new System.Drawing.Point(2, 495);
+            this.pnlBotonesDetalle.Name = "pnlBotonesDetalle";
+            this.pnlBotonesDetalle.Size = new System.Drawing.Size(169, 33);
+            this.pnlBotonesDetalle.TabIndex = 117;
+            // 
+            // btnEliminarProductosDetalle
+            // 
+            this.btnEliminarProductosDetalle.BackColor = System.Drawing.Color.White;
+            this.btnEliminarProductosDetalle.BackgroundImage = global::Aires.Properties.Resources.flechabaja;
+            this.btnEliminarProductosDetalle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEliminarProductosDetalle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEliminarProductosDetalle.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminarProductosDetalle.Location = new System.Drawing.Point(2, 0);
+            this.btnEliminarProductosDetalle.Name = "btnEliminarProductosDetalle";
+            this.btnEliminarProductosDetalle.Size = new System.Drawing.Size(64, 32);
+            this.btnEliminarProductosDetalle.TabIndex = 114;
+            this.btnEliminarProductosDetalle.Text = "Eliminar";
+            this.btnEliminarProductosDetalle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEliminarProductosDetalle.UseVisualStyleBackColor = false;
+            this.btnEliminarProductosDetalle.Click += new System.EventHandler(this.btnEliminarProductosDetalle_Click);
+            // 
+            // btnMueveAIngreso
+            // 
+            this.btnMueveAIngreso.BackColor = System.Drawing.Color.White;
+            this.btnMueveAIngreso.BackgroundImage = global::Aires.Properties.Resources.Arrow;
+            this.btnMueveAIngreso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMueveAIngreso.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMueveAIngreso.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMueveAIngreso.Location = new System.Drawing.Point(93, 0);
+            this.btnMueveAIngreso.Name = "btnMueveAIngreso";
+            this.btnMueveAIngreso.Size = new System.Drawing.Size(60, 32);
+            this.btnMueveAIngreso.TabIndex = 115;
+            this.btnMueveAIngreso.Text = "Mover";
+            this.btnMueveAIngreso.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnMueveAIngreso.UseVisualStyleBackColor = false;
+            this.btnMueveAIngreso.Click += new System.EventHandler(this.btnMueveAIngreso_Click);
             // 
             // btnExportaProducto
             // 
@@ -497,38 +589,6 @@
             this.btnExportaProducto.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExportaProducto.UseVisualStyleBackColor = false;
             this.btnExportaProducto.Click += new System.EventHandler(this.btnExportaProducto_Click);
-            // 
-            // btnMueveAIngreso
-            // 
-            this.btnMueveAIngreso.BackColor = System.Drawing.Color.White;
-            this.btnMueveAIngreso.BackgroundImage = global::Aires.Properties.Resources.Arrow;
-            this.btnMueveAIngreso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMueveAIngreso.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMueveAIngreso.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMueveAIngreso.Location = new System.Drawing.Point(91, 495);
-            this.btnMueveAIngreso.Name = "btnMueveAIngreso";
-            this.btnMueveAIngreso.Size = new System.Drawing.Size(60, 32);
-            this.btnMueveAIngreso.TabIndex = 115;
-            this.btnMueveAIngreso.Text = "Mover";
-            this.btnMueveAIngreso.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnMueveAIngreso.UseVisualStyleBackColor = false;
-            this.btnMueveAIngreso.Click += new System.EventHandler(this.btnMueveAIngreso_Click);
-            // 
-            // btnEliminarProductosDetalle
-            // 
-            this.btnEliminarProductosDetalle.BackColor = System.Drawing.Color.White;
-            this.btnEliminarProductosDetalle.BackgroundImage = global::Aires.Properties.Resources.flechabaja;
-            this.btnEliminarProductosDetalle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnEliminarProductosDetalle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEliminarProductosDetalle.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminarProductosDetalle.Location = new System.Drawing.Point(0, 495);
-            this.btnEliminarProductosDetalle.Name = "btnEliminarProductosDetalle";
-            this.btnEliminarProductosDetalle.Size = new System.Drawing.Size(64, 32);
-            this.btnEliminarProductosDetalle.TabIndex = 114;
-            this.btnEliminarProductosDetalle.Text = "Eliminar";
-            this.btnEliminarProductosDetalle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEliminarProductosDetalle.UseVisualStyleBackColor = false;
-            this.btnEliminarProductosDetalle.Click += new System.EventHandler(this.btnEliminarProductosDetalle_Click);
             // 
             // txtPrecioVentaTotalEntradas
             // 
@@ -577,8 +637,8 @@
             this.gvProductos.Name = "gvProductos";
             this.gvProductos.ReadOnly = true;
             this.gvProductos.RowHeadersVisible = false;
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Arial Unicode MS", 7F);
-            this.gvProductos.RowsDefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Unicode MS", 7F);
+            this.gvProductos.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.gvProductos.RowTemplate.Height = 27;
             this.gvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvProductos.Size = new System.Drawing.Size(1217, 495);
@@ -588,8 +648,8 @@
             // Codigo
             // 
             this.Codigo.DataPropertyName = "Codigo";
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Codigo.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Codigo.DefaultCellStyle = dataGridViewCellStyle4;
             this.Codigo.FillWeight = 1F;
             this.Codigo.HeaderText = "Codigo";
             this.Codigo.Name = "Codigo";
@@ -614,8 +674,8 @@
             // precioCostoDataGridViewTextBoxColumn
             // 
             this.precioCostoDataGridViewTextBoxColumn.DataPropertyName = "PrecioCosto";
-            dataGridViewCellStyle27.Format = "c2";
-            this.precioCostoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle5.Format = "c2";
+            this.precioCostoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.precioCostoDataGridViewTextBoxColumn.FillWeight = 1.5F;
             this.precioCostoDataGridViewTextBoxColumn.HeaderText = "Precio Costo c/u";
             this.precioCostoDataGridViewTextBoxColumn.Name = "precioCostoDataGridViewTextBoxColumn";
@@ -624,8 +684,8 @@
             // precioVentaDataGridViewTextBoxColumn
             // 
             this.precioVentaDataGridViewTextBoxColumn.DataPropertyName = "PrecioVenta";
-            dataGridViewCellStyle28.Format = "c2";
-            this.precioVentaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle6.Format = "c2";
+            this.precioVentaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.precioVentaDataGridViewTextBoxColumn.FillWeight = 1.5F;
             this.precioVentaDataGridViewTextBoxColumn.HeaderText = "Precio Venta c/u";
             this.precioVentaDataGridViewTextBoxColumn.Name = "precioVentaDataGridViewTextBoxColumn";
@@ -634,9 +694,9 @@
             // PrecioC
             // 
             this.PrecioC.DataPropertyName = "PrecioC";
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("Arial Unicode MS", 8F);
-            dataGridViewCellStyle29.Format = "c2";
-            this.PrecioC.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Unicode MS", 8F);
+            dataGridViewCellStyle7.Format = "c2";
+            this.PrecioC.DefaultCellStyle = dataGridViewCellStyle7;
             this.PrecioC.FillWeight = 2F;
             this.PrecioC.HeaderText = "Precio Costo";
             this.PrecioC.Name = "PrecioC";
@@ -645,9 +705,9 @@
             // Precio
             // 
             this.Precio.DataPropertyName = "Precio";
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Arial Unicode MS", 8F);
-            dataGridViewCellStyle30.Format = "c2";
-            this.Precio.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Unicode MS", 8F);
+            dataGridViewCellStyle8.Format = "c2";
+            this.Precio.DefaultCellStyle = dataGridViewCellStyle8;
             this.Precio.FillWeight = 2F;
             this.Precio.HeaderText = "Precio Venta";
             this.Precio.Name = "Precio";
@@ -667,9 +727,9 @@
             // rvEntradas
             // 
             this.rvEntradas.DocumentMapWidth = 88;
-            reportDataSource9.Name = "dsEntradas";
-            reportDataSource9.Value = this.EntProductoBindingSource;
-            this.rvEntradas.LocalReport.DataSources.Add(reportDataSource9);
+            reportDataSource3.Name = "dsEntradas";
+            reportDataSource3.Value = this.EntProductoBindingSource;
+            this.rvEntradas.LocalReport.DataSources.Add(reportDataSource3);
             this.rvEntradas.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptEntradas.rdlc";
             this.rvEntradas.Location = new System.Drawing.Point(0, 0);
             this.rvEntradas.Name = "rvEntradas";
@@ -762,215 +822,6 @@
             this.cmbAñoEntradas.ValueMember = "Descripcion";
             this.cmbAñoEntradas.SelectedIndexChanged += new System.EventHandler(this.cmbAñoGastos_SelectedIndexChanged);
             // 
-            // tabPage8
-            // 
-            this.tabPage8.Controls.Add(this.panel1);
-            this.tabPage8.Controls.Add(this.label1);
-            this.tabPage8.Controls.Add(this.txtBusquedaSerieHistorial);
-            this.tabPage8.Controls.Add(this.gvProductosDetalle);
-            this.tabPage8.Location = new System.Drawing.Point(4, 23);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(1587, 726);
-            this.tabPage8.TabIndex = 2;
-            this.tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1334, 689);
-            this.panel1.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 14);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Serie:";
-            // 
-            // txtBusquedaSerieHistorial
-            // 
-            this.txtBusquedaSerieHistorial.Location = new System.Drawing.Point(91, 24);
-            this.txtBusquedaSerieHistorial.Name = "txtBusquedaSerieHistorial";
-            this.txtBusquedaSerieHistorial.Size = new System.Drawing.Size(269, 21);
-            this.txtBusquedaSerieHistorial.TabIndex = 2;
-            this.txtBusquedaSerieHistorial.TextChanged += new System.EventHandler(this.txtBusquedaSerieHistorial_TextChanged);
-            // 
-            // gvProductosDetalle
-            // 
-            this.gvProductosDetalle.AutoGenerateColumns = false;
-            this.gvProductosDetalle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gvProductosDetalle.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.gvProductosDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvProductosDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codigoDataGridViewTextBoxColumn,
-            this.descripcionDataGridViewTextBoxColumn,
-            this.serieDataGridViewTextBoxColumn,
-            this.IngresoId,
-            this.TipoProducto,
-            this.FechaCorta,
-            this.EmpresaId,
-            this.Fecha,
-            this.PrecioCosto,
-            this.dataGridViewTextBoxColumn2});
-            this.gvProductosDetalle.DataSource = this.EntProductoBindingSource;
-            this.gvProductosDetalle.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.gvProductosDetalle.Location = new System.Drawing.Point(0, 50);
-            this.gvProductosDetalle.MultiSelect = false;
-            this.gvProductosDetalle.Name = "gvProductosDetalle";
-            this.gvProductosDetalle.ReadOnly = true;
-            this.gvProductosDetalle.RowHeadersVisible = false;
-            this.gvProductosDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvProductosDetalle.Size = new System.Drawing.Size(1200, 446);
-            this.gvProductosDetalle.TabIndex = 1;
-            // 
-            // codigoDataGridViewTextBoxColumn
-            // 
-            this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
-            this.codigoDataGridViewTextBoxColumn.FillWeight = 1F;
-            this.codigoDataGridViewTextBoxColumn.HeaderText = "Codigo";
-            this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
-            this.codigoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // descripcionDataGridViewTextBoxColumn
-            // 
-            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "Descripcion";
-            this.descripcionDataGridViewTextBoxColumn.FillWeight = 3F;
-            this.descripcionDataGridViewTextBoxColumn.HeaderText = "Descripcion";
-            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
-            this.descripcionDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // serieDataGridViewTextBoxColumn
-            // 
-            this.serieDataGridViewTextBoxColumn.DataPropertyName = "Serie";
-            this.serieDataGridViewTextBoxColumn.FillWeight = 1.5F;
-            this.serieDataGridViewTextBoxColumn.HeaderText = "Serie";
-            this.serieDataGridViewTextBoxColumn.Name = "serieDataGridViewTextBoxColumn";
-            this.serieDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // IngresoId
-            // 
-            this.IngresoId.DataPropertyName = "IngresoId";
-            this.IngresoId.FillWeight = 1F;
-            this.IngresoId.HeaderText = "Ingreso Id";
-            this.IngresoId.Name = "IngresoId";
-            this.IngresoId.ReadOnly = true;
-            // 
-            // TipoProducto
-            // 
-            this.TipoProducto.DataPropertyName = "TipoProducto";
-            this.TipoProducto.FillWeight = 2F;
-            this.TipoProducto.HeaderText = "Ingreso Desc.";
-            this.TipoProducto.Name = "TipoProducto";
-            this.TipoProducto.ReadOnly = true;
-            // 
-            // FechaCorta
-            // 
-            this.FechaCorta.DataPropertyName = "FechaCorta";
-            this.FechaCorta.FillWeight = 1.5F;
-            this.FechaCorta.HeaderText = "Fecha Ingreso";
-            this.FechaCorta.Name = "FechaCorta";
-            this.FechaCorta.ReadOnly = true;
-            // 
-            // EmpresaId
-            // 
-            this.EmpresaId.DataPropertyName = "EmpresaId";
-            this.EmpresaId.FillWeight = 1F;
-            this.EmpresaId.HeaderText = "Factura Id";
-            this.EmpresaId.Name = "EmpresaId";
-            this.EmpresaId.ReadOnly = true;
-            // 
-            // Fecha
-            // 
-            this.Fecha.DataPropertyName = "Fecha";
-            this.Fecha.FillWeight = 1.5F;
-            this.Fecha.HeaderText = "Fecha Factura";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            // 
-            // PrecioCosto
-            // 
-            this.PrecioCosto.DataPropertyName = "PrecioCosto";
-            dataGridViewCellStyle32.Format = "c2";
-            this.PrecioCosto.DefaultCellStyle = dataGridViewCellStyle32;
-            this.PrecioCosto.FillWeight = 1F;
-            this.PrecioCosto.HeaderText = "Precio Costo";
-            this.PrecioCosto.Name = "PrecioCosto";
-            this.PrecioCosto.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "PrecioVenta";
-            dataGridViewCellStyle33.Format = "c2";
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle33;
-            this.dataGridViewTextBoxColumn2.FillWeight = 1F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Precio Venta";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // Estatus
-            // 
-            this.Estatus.DataPropertyName = "Estatus";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.NullValue = false;
-            this.Estatus.DefaultCellStyle = dataGridViewCellStyle23;
-            this.Estatus.FillWeight = 0.4F;
-            this.Estatus.HeaderText = "Sel.";
-            this.Estatus.Name = "Estatus";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Fecha";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial Unicode MS", 8.5F);
-            dataGridViewCellStyle24.Format = "d";
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle24;
-            this.dataGridViewTextBoxColumn1.FillWeight = 1F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Fecha";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Descripcion";
-            this.dataGridViewTextBoxColumn3.FillWeight = 3F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Descripcion";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(330, 60);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 14);
-            this.label2.TabIndex = 117;
-            this.label2.Text = "Serie:";
-            // 
-            // txtBuscaSerie
-            // 
-            this.txtBuscaSerie.Location = new System.Drawing.Point(367, 57);
-            this.txtBuscaSerie.Name = "txtBuscaSerie";
-            this.txtBuscaSerie.Size = new System.Drawing.Size(233, 21);
-            this.txtBuscaSerie.TabIndex = 116;
-            // 
-            // btnBuscaSerie
-            // 
-            this.btnBuscaSerie.BackColor = System.Drawing.Color.Transparent;
-            this.btnBuscaSerie.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBuscaSerie.BackgroundImage")));
-            this.btnBuscaSerie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBuscaSerie.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBuscaSerie.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscaSerie.Location = new System.Drawing.Point(602, 52);
-            this.btnBuscaSerie.Name = "btnBuscaSerie";
-            this.btnBuscaSerie.Size = new System.Drawing.Size(40, 28);
-            this.btnBuscaSerie.TabIndex = 121;
-            this.btnBuscaSerie.UseVisualStyleBackColor = false;
-            this.btnBuscaSerie.Click += new System.EventHandler(this.btnBuscaSerie_Click);
-            // 
             // Inventarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -988,7 +839,6 @@
             this.Text = "Inventarios";
             this.Load += new System.EventHandler(this.Inventarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.EntProductoBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).EndInit();
             this.tcInventarios.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tcReportesInventario.ResumeLayout(false);
@@ -997,20 +847,20 @@
             this.tabPage7.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.pnlBotonesGenerales.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvIngresos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.pnlBotonesDetalle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvProductos)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.pnlEntradasPorSemana.ResumeLayout(false);
             this.pnlEntradasPorMes.ResumeLayout(false);
-            this.tabPage8.ResumeLayout(false);
-            this.tabPage8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvProductosDetalle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1050,25 +900,10 @@
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TabPage tabPage7;
         private Microsoft.Reporting.WinForms.ReportViewer rvInventarioDetalle;
-        private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtBusquedaSerieHistorial;
-        private System.Windows.Forms.DataGridView gvProductosDetalle;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnEliminarProductosDetalle;
         private System.Windows.Forms.Button btnMueveAIngreso;
         private System.Windows.Forms.Button btnEditar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codigoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn serieDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IngresoId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TipoProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCorta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EmpresaId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioCosto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.ComboBox cmbEmpresas;
         private System.Windows.Forms.Button btnBuscaEmpresa;
@@ -1089,5 +924,7 @@
         private System.Windows.Forms.Button btnBuscaSerie;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBuscaSerie;
+        private System.Windows.Forms.Panel pnlBotonesGenerales;
+        private System.Windows.Forms.Panel pnlBotonesDetalle;
     }
 }

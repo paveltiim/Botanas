@@ -29,7 +29,8 @@ namespace AiresUtilerias
                                  IngresoId = row["INGRESOID"].Cast<Int32>(),
                                  Ingreso = row["INGRESO"].Cast<string>(),
                                  Fecha = row["FECHAINGRESO"].Cast<DateTime>(),
-                                 EmpresaId = row["EMPRESAID"].Cast<Int32>()
+                                 EmpresaId = row["EMPRESAID"].Cast<Int32>(),
+                                 EstatusId=1
                              }
                              select item).ToList();
 

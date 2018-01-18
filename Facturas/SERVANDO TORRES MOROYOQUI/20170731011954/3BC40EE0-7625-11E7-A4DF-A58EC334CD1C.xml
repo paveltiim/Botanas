@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" version="3.2" fecha="2017-07-31T13:19:54" folio="24" serie="AA" subTotal="15819.00" descuento="0" total="18350.04" Moneda="MXN" TipoCambio="0.00" tipoDeComprobante="ingreso" noCertificado="20001000000200000240" certificado="MIIEPDCCAySgAwIBAgIUMjAwMDEwMDAwMDAyMDAwMDAyNDAwDQYJKoZIhvcNAQEFBQAwggFcMRowGAYDVQQDDBFBLkMuIDIgZGUgcHJ1ZWJhczEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSkwJwYJKoZIhvcNAQkBFhphc2lzbmV0QHBydWViYXMuc2F0LmdvYi5teDEmMCQGA1UECQwdQXYuIEhpZGFsZ28gNzcsIENvbC4gR3VlcnJlcm8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQRGlzdHJpdG8gRmVkZXJhbDESMBAGA1UEBwwJQ295b2Fjw6FuMTQwMgYJKoZIhvcNAQkCDCVSZXNwb25zYWJsZTogQXJhY2VsaSBHYW5kYXJhIEJhdXRpc3RhMB4XDTEyMTAyMzE5MzAwM1oXDTE2MTAyMzE5MzAwM1owgbYxGzAZBgNVBAMTEkxBQlMgQU5FWCBTQSBERSBDVjEbMBkGA1UEKRMSTEFCUyBBTkVYIFNBIERFIENWMRswGQYDVQQKExJMQUJTIEFORVggU0EgREUgQ1YxJTAjBgNVBC0THExBTjcwMDgxNzNSNSAvIEhFR1Q3NjEwMDM0UzIxHjAcBgNVBAUTFSAvIEhFR1Q3NjEwMDNNREZSTk4wOTEWMBQGA1UECxMNUmVxdWVyaW1pZW50bzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAvjKVy3rrKgRdJnBzL2bgyQ19j653JQ5nZq+iko/6mXjqoMktXIoa+hBOmuvTYtOCflIXTG5V3q8P+k5EYcuZtAbLsvbIIEqHqLMhIZYZXFTJS6NP6bJbg9ebyAaT8Bx2+meMUjASlo8vVvWYz11MBKQWs4zA8/3nMg7fCO+256UCAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQEFBQADggEBAMSmgaWWWkvO8bCt8wzaCsenLDFxKBy5A2PNQMiF3QGJIRboybZwgMWrTRyqdHl0yxvekgRw0snXHHjmj4Kg2nKs5i/QQOF5G/0Id/mFo1thfnPrUe34IIoOiS8+PQij55hWeBb+tqRy9QDwOBMwvUgeUAyfz44gV0QaRgcAhIaF5OEGJn5DZXUMnFY00fjR3zP8nXd+pR9+v7c/xmweEf5ubEtAFYr7sIVlhVxyhWXp1pgCTYKbgdAycIAKnCA+ApKKGGJHnCiMA+tGqREY6Fj6DjYE6jSlewvsUb70mgj6DJalh7hGDR67atq0mBzvMCUUIKR77GK799AbXP/uC1k=" formaDePago="01" metodoDePago="Pago en una sola exhibición" LugarExpedicion="Los Mochis, Sinaloa" sello="Kof5iEzUXVfJFSK5Tl9qDrD/AfLngkvUDWtHQuhCuStoKUTYdda1oY1Q53uUnmoUcpzn0PqtqqX/v5vQBDxaNVPSiMHjnU69gK+qMlabHrvXYD7KXqt2l9lgLUhhI4539vuosHyCFnYCzEA+i5hWF9sP8o2EvDSRLZLf0Niw+F0=">
+  <cfdi:Emisor nombre="GRISELDA ARMENTA MIRANDA" rfc="LAN7008173R5">
+    <cfdi:DomicilioFiscal calle="NICOLAS BRAVO" noExterior="108" colonia="CENTRO" localidad="NAVOJOA" municipio="NAVOJOA" estado="SONORA" pais="México" codigoPostal="85800"/>
+    <cfdi:RegimenFiscal Regimen="REGIMEN DE LAS PERSONAS FISICAS CON ACTIDADES EMPRESARIALES Y EMPRESARIALES"/>
+  </cfdi:Emisor>
+  <cfdi:Receptor nombre="SERVANDO TORRES MOROYOQUI" rfc="TOMS770405SY9">
+    <cfdi:Domicilio calle="VENUSTINAJO CARRANZA" noExterior="28" colonia="SAN IGNACIO" localidad="NAVOJOA" municipio="NAVOJOA" estado="SONORA" pais="MÉXICO" codigoPostal="85288"/>
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad="1" unidad="PIEZA" descripcion="REFRIGERADOR  MARCA WHIRLPOOL 21 PIES............................................................... HR72614858 |" valorUnitario="15819.00" importe="15819.00"/>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos totalImpuestosTrasladados="2531.04">
+    <cfdi:Traslados>
+      <cfdi:Traslado impuesto="IVA" tasa="16.00" importe="2531.04"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/TimbreFiscalDigital/TimbreFiscalDigital.xsd" version="1.0" UUID="3BC40EE0-7625-11E7-A4DF-A58EC334CD1C" FechaTimbrado="2017-07-31T14:19:54" selloCFD="Kof5iEzUXVfJFSK5Tl9qDrD/AfLngkvUDWtHQuhCuStoKUTYdda1oY1Q53uUnmoUcpzn0PqtqqX/v5vQBDxaNVPSiMHjnU69gK+qMlabHrvXYD7KXqt2l9lgLUhhI4539vuosHyCFnYCzEA+i5hWF9sP8o2EvDSRLZLf0Niw+F0=" noCertificadoSAT="20001000000300022323" selloSAT="KAOo4zH2XaVxnjaxO0Ltf52usIHRO3N9rvEpoxRaf6aH6mZ3LYjMvkGP6XgC24egCv7yUQlGG4eLLfS4DG710RO4OSqSQmBLMQLSXIIaNfX6orWzo06IS2h/HCfAXGE04ywNtsVxxRnNPs0q1ikUwOO2oP0P7jqJhyckyQLQLX52gnGJxUHfHVJLazx+HI7MW/bYX8xMj72T6i5qYLu3CJX8dJq34cVkxHLqfexAKJXuWDk9JTpHm8tmy6V7Iu5t8tovMZgeHjXBO5Cp/D/sTq02q4giT1v0djNUdoIPbM33uRYJYFAFC997pAdALU50tJO8tiR05j+JgIA+uhuH2A=="/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

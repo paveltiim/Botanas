@@ -63,7 +63,11 @@ namespace Aires.Pantallas
             public void CargaEmpresas()
             {
                 Program.CambiaEmpresa = false;
+            if (Program.UsuarioSeleccionado.Id > 1)
+                cmbEmpresas.DataSource = new BusEmpresas().ObtieneEmpresas().Where(P => P.UsuarioId == Program.UsuarioSeleccionado.Id).ToList();
+            else
                 cmbEmpresas.DataSource = new BusEmpresas().ObtieneEmpresas();
+            //cmbEmpresas.DataSource = new BusEmpresas().ObtieneEmpresas();
                 Program.CambiaEmpresa = true;
             }
             //public void CargaClientes(int EmpresaId)
@@ -219,6 +223,33 @@ namespace Aires.Pantallas
 
             CalculaSumaTotal(productosPedido, txtTotal);
             lbContadorSeries.Text = productosPedido.Count.ToString();
+        }
+        void AgregaRemueveProductoEnPedido(EntProducto ProductoSeleccionado, decimal CantidadAgrega)
+        {
+            List<EntProducto> productosPedido = ObtieneListaProductosFromGV(gvProductosPedido);
+
+            if (CantidadAgrega > 0)
+            {
+                if (productosPedido == null)
+                    productosPedido = new List<EntProducto>();
+
+                //ProductoSeleccionado = ObtieneProductosFromGV(gvProductos);
+                ProductoSeleccionado.Cantidad = CantidadAgrega;
+                productosPedido.Add(ProductoSeleccionado);
+                ListaProductos.Remove(ProductoSeleccionado);
+            }
+            else if (CantidadAgrega < 0)
+            {
+                productosPedido.Remove(ProductoSeleccionado);
+                ListaProductos.Add(ProductoSeleccionado);
+            }
+
+            gvProductosPedido.DataSource = null;
+            gvProductosPedido.DataSource = productosPedido;
+
+            CalculaSumaTotal(productosPedido, txtTotal);
+            lbContadorSeries.Text = productosPedido.Count.ToString();
+
         }
 
         public void AgregarFacturaPedido(EntFactura Factura)
@@ -900,11 +931,39 @@ namespace Aires.Pantallas
         {
             try
             {
-                if ((e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7) && e.RowIndex > -1)
+                if ((e.ColumnIndex == 5 || e.ColumnIndex == 6 || e.ColumnIndex == 7) && e.RowIndex > -1)//CANTIDAD | PRECIO SIN IVA
                 {
                     EntProducto productoSeleccionado = ObtieneProductoFromGV(gvProductosPedido);
                     decimal iva = 1.16m;
-                    if (e.ColumnIndex == 6)
+                    if (e.ColumnIndex == 5)//CANTIDAD 
+                    {
+                        //EntProducto productoSeleccionado = ObtieneProductoFromGV(gvProductosPedido);
+                        if (!string.IsNullOrWhiteSpace(productoSeleccionado.Serie)) {
+                            productoSeleccionado.Cantidad = 1;
+                            MandaExcepcion("PRODUCTOS CON SERIE NO SE PUEDEN VENDER EN CANTIDADES MAYORES A 1.");
+                        }
+
+                        List<EntProducto> listaProductosSeleccionados = ListaProductos.Where(P => P.ProductoId == productoSeleccionado.ProductoId).ToList();
+                        int existenciaProducto = listaProductosSeleccionados.Count() + 1;//COMPENSACION POR PRODUCTOSELECCIONADO
+                        int cantidadProductos = Convert.ToInt32(productoSeleccionado.Cantidad);
+                        if (productoSeleccionado.Cantidad > existenciaProducto)
+                        {
+                            MuestraMensajeError("La Cantidad solicitada es mayor a la Existente. \n Existencia: " + existenciaProducto, "ERROR");
+                            // productoSeleccionado.Existencia;
+                            //gvProductosPedido.CurrentRow.Cells[4].Value = productoSeleccionado.Existencia;
+                            cantidadProductos = existenciaProducto;
+                        }
+                        //else
+                        //{
+                        //    //    //gvProductosPedido.CurrentRow.Cells[gvProductosPedido.ColumnCount - 1].Selected = true;
+                        //    //    //gvProductosPedido.CurrentRow.Cells[4].Selected = true;
+                        //}
+                        for (int x = 0; x < cantidadProductos-1; x++) {
+                            AgregaRemueveProductoEnPedido(listaProductosSeleccionados[x], 1);
+                        }
+                        productoSeleccionado.Cantidad = 1;
+                    }
+                    else if (e.ColumnIndex == 6)//PRECIO SIN IVA
                     {
                         decimal precioSinIVA = productoSeleccionado.PrecioVentaSinIVA; // ConvierteTextoADecimal(gvProductosPedido.CurrentRow.Cells[6].Value.ToString());
                         decimal precioIVA = Math.Round(precioSinIVA * iva, 2);
@@ -1013,6 +1072,7 @@ namespace Aires.Pantallas
 
                     pedidoAgrega = AgregarPedido(ClienteSeleccionado.Id, detallePedido.Remove(detallePedido.Length - 2), "", ConvierteTextoADecimal(txtTotal.Text), ConvierteTextoADecimal(txtPago.Text), DateTime.Now, DateTime.Today, 0, chkFacturar.Checked, 1);
 
+                    int ingresoId = 0;
                     foreach (EntProducto p in productosSeleccionados)
                     {
                         AgregarProductoDetallePedido(pedidoAgrega.Id, p.Id, p.Cantidad, p.PrecioCosto, p.PrecioVenta);
@@ -1021,6 +1081,29 @@ namespace Aires.Pantallas
                         {
                             vProd.ActualizaEstatusProductoDetalle(p, 2);//ESTATUS:2=ENTREGADO
                             vProd.AumentaProducto(p.ProductoId, -Convert.ToInt32(p.Cantidad));
+
+                            //INGRESA SI EL CLIENTE ES EMPRESA PROPIA.
+                            //if (NuevoProducto)
+                            if (ClienteSeleccionado.EmpresaId > 0)
+                            {
+                                if (ingresoId == 0) {
+                                    string descripcion = "";
+                                    descripcion = "COMPRA A EMPRESA " + empresaSeleccionada.Nombre + "-" + DateTime.Today.Date;
+                                    //ProductoIngresa.Fecha.ToShortDateString();
+                                    ingresoId = new BusProductos().AgregaIngreso(new EntCatalogoGenerico() { Descripcion = descripcion, Fecha = DateTime.Today.Date });
+                                }
+
+                                //List<EntProducto> productosEmpresa=new BusProductos().ObtieneProductos(ClienteSeleccionado.EmpresaId);
+                                int productoId = 0;
+                                if (productoId != p.ProductoId)
+                                {
+                                    productoId = p.ProductoId;
+
+                                    new BusProductos().ActualizaEstatusProducto(p.ProductoId, true);
+                                }
+
+                                vProd.AgregaProductoDetalle(p.ProductoId, ingresoId, ClienteSeleccionado.EmpresaId, p.Serie, p.PrecioCosto, p.PrecioVenta, p.PrecioVenta2, p.PrecioEspecial);
+                            }
                         }
                     }
 

@@ -34,8 +34,8 @@ namespace AiresUtilerias
         string PathCreaArchivoBaseTxt { get; set; }
         string NumeroCertificadoSelloDigital;
         string RFC;
-        string NombreLegal;
-        string RegimenFiscal;
+        //string NombreLegal;
+        //string RegimenFiscal;
         string Calle;
         string NumeroExterior;
         string NumeroInterior;
@@ -46,50 +46,59 @@ namespace AiresUtilerias
         string Pais;
         string CodigoPostal;
 
-        string CalleSucursal;
-        string NumeroExteriorSucursal;
-        string NumeroInteriorSucursal;
-        string ColoniaSucursal;
-        string LocalidadSucursal;
-        string MunicipioSucursal;
-        string EstadoSucursal;
-        string PaisSucursal;
-        string CodigoPostalSucursal;
+        //string CalleSucursal;
+        //string NumeroExteriorSucursal;
+        //string NumeroInteriorSucursal;
+        //string ColoniaSucursal;
+        //string LocalidadSucursal;
+        //string MunicipioSucursal;
+        //string EstadoSucursal;
+        //string PaisSucursal;
+        //string CodigoPostalSucursal;
         public decimal IVA, IEPS;
         public decimal ISR = 0.10m;
 
-        void CargaDatosFacturacionEmpresa()
-        {
-            //RFC = "CATS8706298F6";
-            //NombreLegal = "SERGIO PATRICIO CAZARES TARÍN";
-            //RegimenFiscal = "Persona Física con Actividad Empresarial y Profesional";
-            ////COMENTAR EN PRODUCCION
-            ////NumeroCertificadoSelloDigital = "20001000000300022815";
-            ////COMENTAR EN PRODUCCION
-            //NumeroCertificadoSelloDigital = "00001000000400591711";//Distribuidora LM
 
-            CalleSucursal = "";
-            NumeroExteriorSucursal = "";
-            NumeroInteriorSucursal = "";
-            ColoniaSucursal = "";
-            LocalidadSucursal = "";
-            MunicipioSucursal = "";
-            EstadoSucursal = "";
-            PaisSucursal = "";
-            CodigoPostalSucursal = "";
-        }
-        void CargaDatosFacturacionCliente(EntCliente Cliente)
-        {
-            Calle = Cliente.Calle;
-            NumeroExterior = Cliente.NoExterior;
-            NumeroInterior = Cliente.NoInterior;
-            Colonia = Cliente.Colonia;
-            Localidad = Cliente.Localidad;
-            Municipio = Cliente.Municipio;
-            Estado = Cliente.Estado;
-            Pais = "MÉXICO";
-            CodigoPostal = Cliente.CP;
-        }
+        int RegimenFiscalId;
+        int TipoPersonaId;
+        int TipoFactorId;
+        string TipoFactor;
+        decimal TasaOCuota;
+        int UsoCFDIId;
+
+        //void CargaDatosFacturacionEmpresa()
+        //{
+        //    //RFC = "CATS8706298F6";
+        //    //NombreLegal = "SERGIO PATRICIO CAZARES TARÍN";
+        //    //RegimenFiscal = "Persona Física con Actividad Empresarial y Profesional";
+        //    ////COMENTAR EN PRODUCCION
+        //    ////NumeroCertificadoSelloDigital = "20001000000300022815";
+        //    ////COMENTAR EN PRODUCCION
+        //    //NumeroCertificadoSelloDigital = "00001000000400591711";//Distribuidora LM
+
+        //    CalleSucursal = "";
+        //    NumeroExteriorSucursal = "";
+        //    NumeroInteriorSucursal = "";
+        //    ColoniaSucursal = "";
+        //    LocalidadSucursal = "";
+        //    MunicipioSucursal = "";
+        //    EstadoSucursal = "";
+        //    PaisSucursal = "";
+        //    CodigoPostalSucursal = "";
+        //}
+        //void CargaDatosFacturacionCliente(EntCliente Cliente)
+        //{
+        //    Calle = Cliente.Calle;
+        //    NumeroExterior = Cliente.NoExterior;
+        //    NumeroInterior = Cliente.NoInterior;
+        //    Colonia = Cliente.Colonia;
+        //    Localidad = Cliente.Localidad;
+        //    Municipio = Cliente.Municipio;
+        //    Estado = Cliente.Estado;
+        //    Pais = "MÉXICO";
+        //    CodigoPostal = Cliente.CP;
+        //}
+
         /// <summary>
         /// 
         /// </summary>
@@ -112,7 +121,7 @@ namespace AiresUtilerias
             string rfc;
             //XAXX010101000
             //Emisor.RFC = "LAN7008173R5";
-            rfc= "LAN7008173R5";
+            rfc= "MSE061107IA8";
 
             IEPS = 0.08m;
             switch (Emisor.TipoTasaIVAId)
@@ -204,7 +213,7 @@ namespace AiresUtilerias
             {
                 st.WriteLine("[Concepto]");
                 st.WriteLine("cantidad|" + p.Cantidad);
-                st.WriteLine("unidad|" + p.TipoUnidad);
+                st.WriteLine("unidad|" + p.Unidad);
                 st.WriteLine("noIdentificacion|");
                 st.WriteLine("descripcion|" + p.Descripcion);
                 st.WriteLine("valorUnitario|" + (p.PrecioVenta / (1 + IVA)).ToString("0.00"));
@@ -334,7 +343,7 @@ namespace AiresUtilerias
             //Cursor.Current = Cursors.Default;
             return r_wsconect.uuid;
         }
-        public string FacturarNotaCredito(decimal Total, string FolioFactura, EntCliente Cliente, DateTime FechaFactura, string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta, string PathGuardaArchivos)
+        public string FacturarNotaCredito(EntEmpresa Emisor, decimal Total, string Descripcion, string FolioFactura, EntCliente Cliente, DateTime FechaFactura, string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta, string PathGuardaArchivos)
 
         {
             string respuesta;
@@ -354,7 +363,7 @@ namespace AiresUtilerias
             //cantidadIva = Pedido.Total - subtotal;
 
             st.WriteLine("[Encabezado]");
-            st.WriteLine("serie|NC");
+            st.WriteLine("serie|NC-");
             st.WriteLine("fecha|" + FechaFactura.ToString("yyyy-MM-ddTHH:mm:ss"));
             st.WriteLine("folio|" + FolioFactura);
             st.WriteLine("tipoDeComprobante|egreso");
@@ -375,14 +384,14 @@ namespace AiresUtilerias
             st.WriteLine("plantillaPDF|custom");
             st.WriteLine("colorLetraE|000000");
             st.WriteLine("colorPlantillaHex|2ECCFA");
-            st.WriteLine("logotipo|C:\\TIIM\\Sistema\\LOGOTIPOMIRAGE.png");
+            st.WriteLine("logotipo|");
             st.WriteLine("observaciones|");
             st.WriteLine("emailCliente|" + Cliente.Email);
 
             st.WriteLine("[Emisor]");
-            st.WriteLine("rfc|" + RFC);
-            st.WriteLine("nombre|" + NombreLegal);
-            st.WriteLine("RegimenFiscal|" + RegimenFiscal);
+            st.WriteLine("rfc|" + "LAN7008173R5");
+            st.WriteLine("nombre|" + Emisor.NombreFiscal);
+            st.WriteLine("RegimenFiscal|" + Emisor.RegimenFiscal);
 
             st.WriteLine("[DomicilioFiscal]");
             st.WriteLine("calle|CARRANZA Y GUILLERMO PRIETO");
@@ -408,7 +417,7 @@ namespace AiresUtilerias
             //st.WriteLine(CalleSucursal + "||||||||");
 
             st.WriteLine("[Receptor]");
-            st.WriteLine("rfc|" + Cliente.RFC);
+            st.WriteLine("rfc|" + Cliente.RFC);// LAN7008173R5");//" + Cliente.RFC);
             st.WriteLine("nombre|" + Cliente.NombreFiscal);
 
             st.WriteLine("[Domicilio]");
@@ -426,7 +435,7 @@ namespace AiresUtilerias
             st.WriteLine("cantidad|1");
             st.WriteLine("unidad|No aplica");
             st.WriteLine("noIdentificacion|");
-            st.WriteLine("descripcion|Descuento por pornto pago.");
+            st.WriteLine("descripcion|"+Descripcion);//NOTA DE CRÉDITO.
             st.WriteLine("valorUnitario|" + subtotal.ToString("0.00"));
             st.WriteLine("importe|" + subtotal.ToString("0.00"));
 
@@ -445,10 +454,10 @@ namespace AiresUtilerias
             reqt.UserID = UserID;// "UsuarioPruebasWS";
             reqt.UserPass = UserPass;// "b9ec2afa3361a59af4b4d102d3f704eabdf097d4";
             //NOTACREDITO
-            reqt.emisorRFC = Emisor.RFC;// "LAN7008173R5";
-            reqt.urlTimbrado = "https://t2.facturacionmoderna.com/timbrado/soap";
-            //https://t1demo.facturacionmoderna.com/timbrado/soap
-            reqt.generarPDF = true;
+            reqt.emisorRFC = "LAN7008173R5";// Emisor.RFC;// "LAN7008173R5";
+            reqt.urlTimbrado = "https://t1demo.facturacionmoderna.com/timbrado/soap";
+            //"https://t2.facturacionmoderna.com/timbrado/soap";
+            //reqt.generarPDF = true;
 
             Timbrado timbra = new Timbrado();
 
@@ -510,6 +519,7 @@ namespace AiresUtilerias
             WSConecFM.Resultados r_wsconect = new Resultados();// activation.Activacion(activarC);
 
             string rfc= "LAN7008173R5";
+            rfc = "MSE061107IA8";
             //Emisor.RFC = "LAN7008173R5";
             requestCancelarCFDI reqc = new requestCancelarCFDI();
             reqc.UserID = UserID;// "UsuarioPruebasWS";
@@ -531,5 +541,333 @@ namespace AiresUtilerias
 
             return respuesta;
         }
+
+        public string Facturar33(EntEmpresa Emisor, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente,
+                                string FolioFactura, DateTime FechaFactura,
+                                string TipoComprobante, string UsoCFDI,
+                                string FormaPago, string MetodoPago, string CondicionPago,
+                                string NumeroCuenta, string PathGuardaArchivos,
+                                decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS,
+                                string Observaciones)
+        {
+            string respuesta;
+
+
+            //EN FACTURACION 3.3 LAN SI FUNCIONA EN 3.2 NO. SOLO MSE.
+            //3.3: LAN7008173R5 YA FUNCIONA MSE061107IA8 CON SU CERTIFICADO
+            //3.2: MSE061107IA8
+
+            //EN 3.3 EL RFC DEL CLIENTE TDVIA NO ESTA PERMITIDO LIBRE. SERA EL MISMO QUE DEL EMISOR (DE PRUEBA: LAN O MSE)
+
+            UsoCFDI = "G01";
+
+            //RFC = "MSE061107IA8";// "LAN7008173R5"; // 
+            //CERTIFICADO  MSE061107IA8: 20001000000300022759
+            RFC = "LAN7008173R5";
+            //int RegimenFiscalId = 601; //Pruebas Ley General|601; TIIM RIF|621; Profesional|612
+            RegimenFiscalId = 601;//pruebas
+
+            NumeroCertificadoSelloDigital = "20001000000300022815";//PRUEBAS LAN7|"20001000000300022815";
+
+            IVA = Emisor.TasaOCuota;
+            IEPS = 0.08m;
+
+            System.IO.StreamWriter st = new System.IO.StreamWriter(LayoutFile);//@"C:\Users\TIIM\Documents\TIIM\FacturaPruebaCreada3.txt" //20001000000200000278
+
+            st.WriteLine("[ComprobanteFiscalDigital]");
+            st.WriteLine("Version=3.3");
+            st.WriteLine("Serie=AA");
+            st.WriteLine("Folio=" + FolioFactura);
+            st.WriteLine("Fecha=" + FechaFactura.ToString("yyyy-MM-ddTHH:mm:ss"));
+            st.WriteLine("FormaPago=" + FormaPago);
+            st.WriteLine("NoCertificado=" + NumeroCertificadoSelloDigital);
+            st.WriteLine("CondicionesDePago=" + CondicionPago);
+            st.WriteLine("SubTotal="  +Pedido.SubTotal.ToString("0.00"));
+            st.WriteLine("Descuento=0");
+            st.WriteLine("Moneda=MXN");
+            st.WriteLine("Total=" + Pedido.Total.ToString("0.00"));
+            st.WriteLine("TipoDeComprobante=I");
+            st.WriteLine("MetodoPago=" + MetodoPago); //st.WriteLine("MetodoPago=" + MedioPago);
+            st.WriteLine("LugarExpedicion="+Emisor.CP);
+
+            st.WriteLine("[DatosAdicionales]");
+            st.WriteLine("tipoDocumento=FACTURA");
+            st.WriteLine("observaciones=" + Observaciones.Replace("\r", " ").Replace("\n", " ")+" Facturación Versión 3.3 - TIIM Tecnología | www.tiimtecnologia.com |"); //Facturación Versión 3.3 - TIIM Tecnología | www.tiimtecnologia.com |");
+            //********************************************************************************************************************************
+            st.WriteLine("platillaPDF=clasic");//gti_clasica");// clasic");// custom");
+            //st.WriteLine("colorLetraE=000000");
+            //st.WriteLine("colorPlantillaHex=000000");
+            st.WriteLine("logotipo=lg_27cb5900e159233c421067e");//lg_a0f8b790af59b2e36be4cf1//TIIM 
+
+
+            st.WriteLine("[Emisor]");
+            st.WriteLine("Rfc=" + RFC);//RFC PRUEBAS.
+            st.WriteLine("Nombre=" + Emisor.NombreFiscal);
+            st.WriteLine("RegimenFiscal=" + RegimenFiscalId);
+
+            st.WriteLine("[Receptor]");
+            st.WriteLine("Rfc=" + RFC);//Cliente.RFC//EN 3.3 EL RFC DEL CLIENTE TDVIA NO ESTA PERMITIDO LIBRE. SERA EL MISMO QUE DEL EMISOR (DE PRUEBA: LAN O MSE);
+            st.WriteLine("Nombre=" + Cliente.NombreFiscal);
+            st.WriteLine("UsoCFDI=" + UsoCFDI); //UsoCFDI| TIIM | I04:Equipo de computo y accesorios    //st.WriteLine("UsoCFDI=" + Emisor.UsoCDFI);
+
+
+            int cont = 1;
+            foreach (EntProducto p in ListaProductos)
+            {
+                st.WriteLine("[Concepto#" + cont + "]");
+                st.WriteLine("ClaveProdServ=" + p.ClaveProductoServicio);//TIIM | 81161501 CLAVE PRODUCTO SERVICIO//st.WriteLine("ClaveProdServ=81161501" + p.ClaveProdServ);
+                st.WriteLine("NoIdentificacion=" + p.Id.ToString());//TTIM | MENS01*
+                st.WriteLine("Cantidad=" + p.Cantidad);
+                st.WriteLine("ClaveUnidad=" + p.ClaveUnidad); //TIIM | E48 Unidad de servicio //st.WriteLine("ClaveUnidad=" + p.ClaveUnidad);
+                if (p.Unidad.Length > 20)
+                    st.WriteLine("Unidad=" + p.Unidad.Remove(20));//+ p.Unidad //st.WriteLine("Unidad=" + p.TipoUnidad);
+                else
+                    st.WriteLine("Unidad=" + p.Unidad);//+ p.Unidad //st.WriteLine("Unidad=" + p.TipoUnidad);
+
+                st.WriteLine("Descripcion=" + p.Descripcion.Replace('|', '-'));
+
+                decimal importe = Math.Round((Math.Round(p.Precio, 2) / (1 + IVA)), 4);
+
+                decimal importeSinRedondeo = (Math.Round(p.Precio, 2) / (1 + IVA));
+                st.WriteLine("ValorUnitario=" + (importe / p.Cantidad).ToString("0.0000"));//p.PrecioVentaSinIVA.ToString("0.00"));
+                st.WriteLine("Importe=" + importe.ToString("0.0000"));//p.PrecioSinIVA.ToString("0.00"));
+                st.WriteLine("Descuento=0.00");
+
+                st.WriteLine("Impuestos.Traslados.Base = [" + importe.ToString("0.0000") + "]");//p.PrecioSinIVA.ToString("0.00") + "]");
+                st.WriteLine("Impuestos.Traslados.Impuesto =[002]");//002
+                st.WriteLine("Impuestos.Traslados.TipoFactor =[" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") + "]");//Tasa|Cuota|Exento
+                st.WriteLine("Impuestos.Traslados.TasaOCuota =[" + IVA.ToString().PadRight(8, '0') + "]");// 0.160000
+                if (Emisor.TipoFactorId > 1)// CUOTA|EXENTO|
+                    st.WriteLine("Impuestos.Traslados.Importe =[0.0000]");
+                else
+                    st.WriteLine("Impuestos.Traslados.Importe =[" + (Math.Round(p.Precio, 2) - Math.Round(importeSinRedondeo, 4)).ToString("0.0000") + "]");//p.PrecioSinIVA).ToString("0.00") + "]");
+                //st.WriteLine("Impuestos.Traslados.Importe =[" + (p.Precio - Math.Round(importeSinRedondeo, 4)).ToString("0.0000") + "]");//p.PrecioSinIVA).ToString("0.00") + "]");
+                                                                                                                                             //st.WriteLine("Impuestos.Traslados.Importe =[" + (p.Precio - p.PrecioSinIVA).ToString("0.00") + "]");
+
+                cont++;
+            }
+
+            //TRASLADOS TOTALES
+            if (CantidadIEPS > 0)//SI LLEVA CON IEPS SE PONEN LOS DOS SINO SOLO IVA
+            {
+                st.WriteLine("[Traslados]");
+                st.WriteLine("TotalImpuestosTrasladados=" + (CantidadIVA + CantidadIEPS).ToString("0.00"));
+                st.WriteLine("Impuesto=[002,003]");
+                st.WriteLine("TipoFactor=[" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") + ",Tasa]");//Tasa| NO HAY (Cuota|Exento) PARA IEPS 
+                st.WriteLine("TasaOCuota=[" + IVA.ToString().PadRight(8, '0') + "," + IEPS.ToString().PadRight(8, '0') + "]");
+                st.WriteLine("Importe=[" + CantidadIVA.ToString("0.00") + "," + CantidadIEPS.ToString("0.00") + "]");
+            }
+            else if (Emisor.TipoFactorId != 3)
+            {
+                st.WriteLine("[Traslados]");
+                st.WriteLine("TotalImpuestosTrasladados=" + CantidadIVA.ToString("0.00"));
+                st.WriteLine("Impuesto=[002]");
+                st.WriteLine("TipoFactor=[" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") + "]");
+                st.WriteLine("TasaOCuota=[" + IVA.ToString().PadRight(8, '0') + "]");
+                st.WriteLine("Importe=[" + CantidadIVA.ToString("0.00") + "]");
+            }
+
+
+            st.Close();
+
+            WSConecFM.Resultados r_wsconect = new Resultados();//activation.Activacion(activarC);
+
+            requestTimbrarCFDI reqt = new requestTimbrarCFDI();
+            reqt.UserID = UserID;// "UsuarioPruebasWS";
+            reqt.UserPass = UserPass;// "b9ec2afa3361a59af4b4d102d3f704eabdf097d4";
+                                     //reqt.emisorRFC = emisorRFC;// "LAN7008173R5";
+                                     //reqt.urlTimbrado = "https://t2.facturacionmoderna.com/timbrado/soap";
+
+
+            reqt.urlTimbrado = "https://t1demo.facturacionmoderna.com/timbrado/soap";
+            reqt.emisorRFC = RFC;// "MSE061107IA8";//"LAN7008173R5";
+            ////
+            reqt.generarPDF = true;
+            //TUEM470405V4A
+
+            Timbrado timbra = new Timbrado();
+
+            //DESCOMENTAR EN PRODUCCION
+            r_wsconect = timbra.Timbrar(LayoutFile, reqt);
+            //COMENTAR EN PRODUCCION
+            //r_wsconect.status = false;
+            if (!r_wsconect.status)
+            {
+                respuesta = r_wsconect.message; //MessageBox.Show(r_wsconect.message);
+                throw new Exception("ERROR EN TIMBRADO-" + respuesta);// Environment.Exit(-1);
+            }
+            byte[] byteXML = System.Convert.FromBase64String(r_wsconect.xmlBase64);
+            System.IO.FileStream swxml = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".xml"))), System.IO.FileMode.Create);
+            swxml.Write(byteXML, 0, byteXML.Length);
+            swxml.Close();
+            if (reqt.generarCBB)
+            {
+                byte[] byteCBB = System.Convert.FromBase64String(r_wsconect.cbbBase64);
+                System.IO.FileStream swcbb = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".png"))), System.IO.FileMode.Create);
+                swcbb.Write(byteCBB, 0, byteCBB.Length);
+                swcbb.Close();
+            }
+            if (reqt.generarPDF)
+            {
+                byte[] bytePDF = System.Convert.FromBase64String(r_wsconect.pdfBase64);
+                System.IO.FileStream swpdf = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".pdf"))), System.IO.FileMode.Create);
+                swpdf.Write(bytePDF, 0, bytePDF.Length);
+                swpdf.Close();
+            }
+            if (reqt.generarTXT)
+            {
+                byte[] byteTXT = System.Convert.FromBase64String(r_wsconect.txtBase64);
+                System.IO.FileStream swtxt = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".txt"))), System.IO.FileMode.Create);
+                swtxt.Write(byteTXT, 0, byteTXT.Length);
+                swtxt.Close();
+            }
+
+            respuesta = "Comprobante guardado en " + PathGuardaArchivos + "\\";//MessageBox.Show("Comprobante guardado en " + path + "\\");
+            //Cursor.Current = Cursors.Default;
+            return r_wsconect.uuid;
+        }
+        public string FacturarComplementoPago(EntEmpresa Emisor, EntCliente Cliente, string FolioComplemento, DateTime FechaComplemento,
+                                            DateTime FechaPago, string FormaPago, decimal Monto,
+                                            string UUID, string FolioFactura, decimal SaldoAnterior,
+                                            string PathGuardaArchivos)
+        {
+            string respuesta;
+
+            string layoutFile = @"C:\TIIM\Facturacion\FacturaComplePagoBase.txt";
+
+            //CargaDatosFacturacionEmpresa();
+            //CargaDatosFacturacionCliente(Cliente);
+
+
+            RFC = "LAN7008173R5";
+            //NumeroCertificadoSelloDigital = "20001000000200000240";
+            NumeroCertificadoSelloDigital = "20001000000300022815";//PRUEBAS LAN7|"20001000000300022815";
+
+            IVA = 0.16m;
+
+            System.IO.StreamWriter st = new System.IO.StreamWriter(layoutFile);//@"C:\Users\TIIM\Documents\TIIM\FacturaPruebaCreada3.txt" //20001000000200000278
+
+
+            st.WriteLine("[ReciboPagos]");
+            //st.WriteLine("Version=3.3");
+            st.WriteLine("Serie=CP");
+            st.WriteLine("Folio=" + FolioComplemento);
+            st.WriteLine("Fecha=" + FechaComplemento.ToString("yyyy-MM-ddTHH:mm:ss"));
+            //st.WriteLine("FormaPago=" + FormaPago);
+            st.WriteLine("NoCertificado=" + NumeroCertificadoSelloDigital);
+            //st.WriteLine("CondicionesDePago=" + CondicionPago);
+            //st.WriteLine("SubTotal=" + subtotal.ToString("0.00"));
+            //st.WriteLine("Descuento=0");
+            //st.WriteLine("Moneda=MXN");
+            //st.WriteLine("Total=" + Pedido.Total.ToString("0.00"));
+            //st.WriteLine("TipoDeComprobante=I");
+            //st.WriteLine("MetodoPago=" + MedioPago); //st.WriteLine("MetodoPago=" + MedioPago);
+            st.WriteLine("LugarExpedicion=81200");
+
+            st.WriteLine("[DatosAdicionales]");
+            st.WriteLine("tipoDocumento=RECIBO DE PAGO");
+            st.WriteLine("observaciones=Factura: AA" + FolioFactura + "- SALDO ANTERIOR: " + SaldoAnterior.ToString("0.00") + " MONTO PAGADO: " + Monto.ToString("0.00") + ".          Facturación Versión 3.3 - TIIM Tecnología | www.tiimtecnologia.com |");//Facturación Versión 3.3 - TIIM Tecnología | www.tiimtecnologia.com |");
+            st.WriteLine("platillaPDF=clasic");//gti_clasica");// clasic");// custom");
+            //st.WriteLine("colorLetraE=000000");
+            //st.WriteLine("colorPlantillaHex=000000");
+            st.WriteLine("logotipo=lg_a0f8b790af59b2e36be4cf1");//lg_a0f8b790af59b2e36be4cf1//TIIM 
+
+
+            st.WriteLine("[Emisor]");
+            st.WriteLine("Rfc=" + RFC);//RFC PRUEBAS.
+            st.WriteLine("Nombre=" + Emisor.NombreFiscal);
+            st.WriteLine("RegimenFiscal=" + RegimenFiscalId);
+
+            st.WriteLine("[Receptor]");
+            st.WriteLine("Rfc=" + RFC);//Cliente.RFC;
+            st.WriteLine("Nombre=" + Cliente.NombreFiscal);
+            //st.WriteLine("UsoCFDI=" + UsoCFDI); //UsoCFDI| TIIM | I04:Equipo de computo y accesorios    //st.WriteLine("UsoCFDI=" + Emisor.UsoCDFI);
+
+            st.WriteLine("[ComplementoPagos]");
+            st.WriteLine("Version=1.0");//;
+
+            st.WriteLine("[Pago#1]");
+            st.WriteLine("FechaPago=" + FechaPago.ToString("yyyy-MM-ddTHH:mm:ss"));
+            st.WriteLine("FormaDePagoP=" + FormaPago);
+            st.WriteLine("MonedaP=MXN");
+            st.WriteLine("TipoCambioP=");
+            st.WriteLine("Monto=" + Monto.ToString("0.00"));
+
+            st.WriteLine("NumOperacion=");
+            st.WriteLine("RfcEmisorCtaOrd=");
+            st.WriteLine("NomBancoOrdExt=");
+            st.WriteLine("CtaOrdenante=");
+            st.WriteLine("RfcEmisorCtaBen=");
+            st.WriteLine("CtaBeneficiario=");
+            st.WriteLine("TipoCadPago=");
+            st.WriteLine("CertPago=");
+            st.WriteLine("CadPago=");
+            st.WriteLine("SelloPago=");
+
+            st.WriteLine("DoctoRelacionado.IdDocumento =[" + UUID + "]");
+            st.WriteLine("DoctoRelacionado.Serie =[AA]");
+            st.WriteLine("DoctoRelacionado.Folio =[" + FolioFactura + "]");
+            st.WriteLine("DoctoRelacionado.MonedaDR =[MXN]");
+            st.WriteLine("DoctoRelacionado.TipoCambioDR =[]");
+            st.WriteLine("DoctoRelacionado.MetodoDePagoDR =[PPD]");
+            st.WriteLine("DoctoRelacionado.NumParcialidad =[1]");
+            st.WriteLine("DoctoRelacionado.ImpSaldoAnt =[" + SaldoAnterior.ToString("0.00") + "]");
+            st.WriteLine("DoctoRelacionado.ImpPagado =[" + Monto.ToString("0.00") + "]");
+            st.WriteLine("DoctoRelacionado.ImpSaldoInsoluto =[" + (SaldoAnterior - Monto).ToString("0.00") + "]");
+
+            st.Close();
+
+            WSConecFM.Resultados r_wsconect = new Resultados();//activation.Activacion(activarC);
+
+            requestTimbrarCFDI reqt = new requestTimbrarCFDI();
+            reqt.UserID = UserID;// "UsuarioPruebasWS";
+            reqt.UserPass = UserPass;// "b9ec2afa3361a59af4b4d102d3f704eabdf097d4";
+            reqt.urlTimbrado = "https://t1demo.facturacionmoderna.com/timbrado/soap";
+            reqt.emisorRFC = RFC;// "LAN7008173R5";
+            reqt.generarPDF = true;
+            //TUEM470405V4A
+
+            Timbrado timbra = new Timbrado();
+
+            r_wsconect = timbra.Timbrar(layoutFile, reqt);
+            //COMENTAR EN PRODUCCION
+            //r_wsconect.status = false;
+            if (!r_wsconect.status)
+            {
+                respuesta = r_wsconect.message; //MessageBox.Show(r_wsconect.message);
+                throw new Exception("ERROR EN TIMBRADO-" + respuesta);// Environment.Exit(-1);
+            }
+            byte[] byteXML = System.Convert.FromBase64String(r_wsconect.xmlBase64);
+            System.IO.FileStream swxml = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".xml"))), System.IO.FileMode.Create);
+            swxml.Write(byteXML, 0, byteXML.Length);
+            swxml.Close();
+            if (reqt.generarCBB)
+            {
+                byte[] byteCBB = System.Convert.FromBase64String(r_wsconect.cbbBase64);
+                System.IO.FileStream swcbb = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".png"))), System.IO.FileMode.Create);
+                swcbb.Write(byteCBB, 0, byteCBB.Length);
+                swcbb.Close();
+            }
+            if (reqt.generarPDF)
+            {
+                byte[] bytePDF = System.Convert.FromBase64String(r_wsconect.pdfBase64);
+                System.IO.FileStream swpdf = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".pdf"))), System.IO.FileMode.Create);
+                swpdf.Write(bytePDF, 0, bytePDF.Length);
+                swpdf.Close();
+            }
+            if (reqt.generarTXT)
+            {
+                byte[] byteTXT = System.Convert.FromBase64String(r_wsconect.txtBase64);
+                System.IO.FileStream swtxt = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".txt"))), System.IO.FileMode.Create);
+                swtxt.Write(byteTXT, 0, byteTXT.Length);
+                swtxt.Close();
+            }
+
+            respuesta = "Comprobante guardado en " + PathGuardaArchivos + "\\";//MessageBox.Show("Comprobante guardado en " + path + "\\");
+            //Cursor.Current = Cursors.Default;
+            return r_wsconect.uuid;
+        }
+
+
     }
 }

@@ -119,7 +119,10 @@ namespace Aires.Pantallas
         }
         public void CargaEmpresas()
         {
-            ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
+            if (Program.UsuarioSeleccionado.Id > 1)
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas().Where(P => P.UsuarioId == Program.UsuarioSeleccionado.Id).ToList();
+            else
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
 
             Program.CambiaEmpresa = false;
             cmbEmpresas.DataSource = ListaEmpresas;
@@ -152,6 +155,9 @@ namespace Aires.Pantallas
                     ////this.rvInventario.RefreshReport();
                     ////this.rvEntradas.RefreshReport();
                 }
+
+                pnlBotonesGenerales.Enabled = Program.UsuarioSeleccionado.Administrador;
+                pnlBotonesDetalle.Enabled = Program.UsuarioSeleccionado.Administrador;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -299,16 +305,7 @@ namespace Aires.Pantallas
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
-
-        private void txtBusquedaSerieHistorial_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                gvProductosDetalle.DataSource = new BusProductos().ObtieneProductoDetalleHistorial(txtBusquedaSerieHistorial.Text);
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
+        
         private void btnEditar_Click(object sender, EventArgs e)
         {
             try
@@ -459,7 +456,7 @@ namespace Aires.Pantallas
             MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Email + "-");
             //}
         }
-        void EnviaCorreoArchivo(string Email, DateTime Fecha, string PathArchivo)
+        void EnviaCorreoArchivoCompras(string Email, DateTime Fecha, string PathArchivo)
         {
             Cursor.Current = Cursors.WaitCursor;
 
@@ -474,7 +471,7 @@ namespace Aires.Pantallas
             archivosAdjuntos.Add(file.FullName);
 
             string asunto = "COMPRAS DE PRODUCTOS -" + Fecha.ToString("dd MMM yyyy");
-            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA 'SERDAN SOFTWARE'. \n\n Abrir sistema 'SERDAN SOFTWARE'27-->Ir a 'Sincronización' en menu-->En Pestaña 'Importar Entradas'-->Seleccionar archivo descargado desde correo (archivo Excel adjunto). Se mostrarán productos a Importar-->Presionar botón Importar";
+            string mensaje = "IMPORTAR ARCHIVO AL SISTEMA 'SERDAN SOFTWARE'. \n\n Abrir sistema 'SERDAN SOFTWARE'-->Ir a 'Sincronización' en menu-->En Pestaña 'Importar Entradas'-->Seleccionar archivo descargado desde correo (archivo Excel adjunto). Se mostrarán productos a Importar-->Presionar botón Importar";
             new UtiCorreo().EnviaCorreo("" + asunto, new List<string>() { Email }, mensaje, archivosAdjuntos);
 
             MessageBox.Show("El Correo se ha Enviado correctamente, a la dirección -" + Email + "-");
@@ -559,7 +556,7 @@ namespace Aires.Pantallas
                     Marshal.ReleaseComObject(xlWorkBook);
                     Marshal.ReleaseComObject(xlApp);
 
-                    EnviaCorreoArchivo(vEmail.EmailSeleccionado, ListaProductos[0].Fecha, rutaExportacion);
+                    EnviaCorreoArchivoCompras(vEmail.EmailSeleccionado, ListaProductos[0].Fecha, rutaExportacion);
                 }
                 catch (Exception ex)
                 {
@@ -657,7 +654,7 @@ namespace Aires.Pantallas
                     Marshal.ReleaseComObject(xlWorkBook);
                     Marshal.ReleaseComObject(xlApp);
 
-                    EnviaCorreoArchivo(vEmail.EmailSeleccionado, ListaProductos[0].Fecha, rutaExportacion);
+                    EnviaCorreoArchivoCompras(vEmail.EmailSeleccionado, ListaProductos[0].Fecha, rutaExportacion);
                 }
                 catch (Exception ex)
                 {
@@ -761,7 +758,7 @@ namespace Aires.Pantallas
                     Marshal.ReleaseComObject(xlWorkBook);
                     Marshal.ReleaseComObject(xlApp);
 
-                    EnviaCorreoArchivo(vEmail.EmailSeleccionado, ingreso.Fecha, rutaExportacion);
+                    EnviaCorreoArchivoCompras(vEmail.EmailSeleccionado, ingreso.Fecha, rutaExportacion);
                 }
                 catch (Exception ex)
                 {
@@ -911,6 +908,11 @@ namespace Aires.Pantallas
                 CargaEntradas(ingreso.Id);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

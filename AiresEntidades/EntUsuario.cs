@@ -10,5 +10,6 @@ namespace AiresEntidades
     {
         public string Usuario { get; set; }
         public string Contraseña { get; set; }
+        public bool Administrador { get; set; }
     }
 }

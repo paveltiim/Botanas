@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.entProductoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnEliminar = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -52,8 +52,11 @@
             this.btnMueveAIngreso = new System.Windows.Forms.Button();
             this.btnRefrescar = new System.Windows.Forms.Button();
             this.btnExportar = new System.Windows.Forms.Button();
+            this.pnlBotones = new System.Windows.Forms.Panel();
+            this.btnMueveAConsignacion = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.entProductoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvProductosDetalle)).BeginInit();
+            this.pnlBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // entProductoBindingSource
@@ -62,13 +65,13 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEliminar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEliminar.BackColor = System.Drawing.Color.White;
             this.btnEliminar.BackgroundImage = global::Aires.Properties.Resources.flechabaja;
             this.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Bold);
-            this.btnEliminar.Location = new System.Drawing.Point(708, 9);
+            this.btnEliminar.Location = new System.Drawing.Point(121, 4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(43, 33);
             this.btnEliminar.TabIndex = 94;
@@ -159,8 +162,8 @@
             this.gvProductosDetalle.Location = new System.Drawing.Point(16, 45);
             this.gvProductosDetalle.Name = "gvProductosDetalle";
             this.gvProductosDetalle.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Unicode MS", 6.75F);
-            this.gvProductosDetalle.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Unicode MS", 6.75F);
+            this.gvProductosDetalle.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.gvProductosDetalle.RowTemplate.Height = 27;
             this.gvProductosDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvProductosDetalle.Size = new System.Drawing.Size(841, 556);
@@ -199,8 +202,8 @@
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "PrecioCosto";
-            dataGridViewCellStyle1.Format = "c2";
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "c2";
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn5.FillWeight = 1F;
             this.dataGridViewTextBoxColumn5.HeaderText = "Precio Costo";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
@@ -208,8 +211,8 @@
             // PrecioVenta
             // 
             this.PrecioVenta.DataPropertyName = "PrecioVenta";
-            dataGridViewCellStyle2.Format = "c2";
-            this.PrecioVenta.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "c2";
+            this.PrecioVenta.DefaultCellStyle = dataGridViewCellStyle6;
             this.PrecioVenta.FillWeight = 1F;
             this.PrecioVenta.HeaderText = "Precio Venta";
             this.PrecioVenta.Name = "PrecioVenta";
@@ -218,8 +221,8 @@
             // Fecha
             // 
             this.Fecha.DataPropertyName = "Fecha";
-            dataGridViewCellStyle3.Format = "d";
-            this.Fecha.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "d";
+            this.Fecha.DefaultCellStyle = dataGridViewCellStyle7;
             this.Fecha.FillWeight = 1F;
             this.Fecha.HeaderText = "Fecha Ingreso";
             this.Fecha.Name = "Fecha";
@@ -235,12 +238,13 @@
             // 
             // btnMueveAIngreso
             // 
+            this.btnMueveAIngreso.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnMueveAIngreso.BackColor = System.Drawing.Color.White;
             this.btnMueveAIngreso.BackgroundImage = global::Aires.Properties.Resources.Arrow;
             this.btnMueveAIngreso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnMueveAIngreso.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMueveAIngreso.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMueveAIngreso.Location = new System.Drawing.Point(810, 10);
+            this.btnMueveAIngreso.Location = new System.Drawing.Point(170, 5);
             this.btnMueveAIngreso.Name = "btnMueveAIngreso";
             this.btnMueveAIngreso.Size = new System.Drawing.Size(47, 32);
             this.btnMueveAIngreso.TabIndex = 119;
@@ -251,13 +255,13 @@
             // 
             // btnRefrescar
             // 
-            this.btnRefrescar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefrescar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnRefrescar.BackColor = System.Drawing.Color.White;
             this.btnRefrescar.BackgroundImage = global::Aires.Properties.Resources.Refresh;
             this.btnRefrescar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRefrescar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescar.Location = new System.Drawing.Point(661, 9);
+            this.btnRefrescar.Location = new System.Drawing.Point(74, 4);
             this.btnRefrescar.Name = "btnRefrescar";
             this.btnRefrescar.Size = new System.Drawing.Size(43, 33);
             this.btnRefrescar.TabIndex = 93;
@@ -273,7 +277,7 @@
             this.btnExportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnExportar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExportar.Font = new System.Drawing.Font("Segoe UI", 5.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportar.Location = new System.Drawing.Point(757, 10);
+            this.btnExportar.Location = new System.Drawing.Point(810, 10);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(47, 32);
             this.btnExportar.TabIndex = 120;
@@ -282,17 +286,43 @@
             this.btnExportar.UseVisualStyleBackColor = false;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
+            // pnlBotones
+            // 
+            this.pnlBotones.Controls.Add(this.btnMueveAConsignacion);
+            this.pnlBotones.Controls.Add(this.btnMueveAIngreso);
+            this.pnlBotones.Controls.Add(this.btnRefrescar);
+            this.pnlBotones.Controls.Add(this.btnEliminar);
+            this.pnlBotones.Location = new System.Drawing.Point(587, 5);
+            this.pnlBotones.Name = "pnlBotones";
+            this.pnlBotones.Size = new System.Drawing.Size(223, 37);
+            this.pnlBotones.TabIndex = 121;
+            // 
+            // btnMueveAConsignacion
+            // 
+            this.btnMueveAConsignacion.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnMueveAConsignacion.BackColor = System.Drawing.Color.White;
+            this.btnMueveAConsignacion.BackgroundImage = global::Aires.Properties.Resources.Arrow;
+            this.btnMueveAConsignacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMueveAConsignacion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMueveAConsignacion.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMueveAConsignacion.Location = new System.Drawing.Point(3, 5);
+            this.btnMueveAConsignacion.Name = "btnMueveAConsignacion";
+            this.btnMueveAConsignacion.Size = new System.Drawing.Size(66, 32);
+            this.btnMueveAConsignacion.TabIndex = 120;
+            this.btnMueveAConsignacion.Text = "Mover Consignación";
+            this.btnMueveAConsignacion.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnMueveAConsignacion.UseVisualStyleBackColor = false;
+            this.btnMueveAConsignacion.Click += new System.EventHandler(this.btnMueveAConsignacion_Click);
+            // 
             // MuestraProductosDetalle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(869, 606);
+            this.Controls.Add(this.pnlBotones);
             this.Controls.Add(this.btnExportar);
-            this.Controls.Add(this.btnMueveAIngreso);
             this.Controls.Add(this.gvProductosDetalle);
-            this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnRefrescar);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.txtFiltroSerie);
             this.Controls.Add(this.textBox1);
@@ -306,6 +336,7 @@
             this.Load += new System.EventHandler(this.SeleccionaFactura_Load);
             ((System.ComponentModel.ISupportInitialize)(this.entProductoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvProductosDetalle)).EndInit();
+            this.pnlBotones.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,5 +362,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ingreso;
         private System.Windows.Forms.Button btnExportar;
+        private System.Windows.Forms.Panel pnlBotones;
+        private System.Windows.Forms.Button btnMueveAConsignacion;
     }
 }

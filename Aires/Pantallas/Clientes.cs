@@ -285,7 +285,10 @@ namespace Aires.Pantallas
         }
         public void CargaEmpresas()
         {
-            ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
+            if (Program.UsuarioSeleccionado.Id > 1)
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas().Where(P => P.UsuarioId == Program.UsuarioSeleccionado.Id).ToList();
+            else
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
 
             Program.CambiaEmpresa = false;
             cmbEmpresas.DataSource = ListaEmpresas;

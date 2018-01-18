@@ -206,7 +206,10 @@ namespace Aires.Pantallas
         }
         public void CargaEmpresas()
         {
-            ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
+            if (Program.UsuarioSeleccionado.Id > 1)
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas().Where(P => P.UsuarioId == Program.UsuarioSeleccionado.Id).ToList();
+            else
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
 
             Program.CambiaEmpresa = false;
             cmbEmpresas.DataSource = ListaEmpresas;
@@ -936,6 +939,19 @@ namespace Aires.Pantallas
                     else
                     {
                         gvProductos.DataSource = ((List<EntProducto>)((DataGridView)sender).DataSource).OrderByDescending(P => P.Descripcion).ToList();
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+                    }
+                }
+                else if (e.ColumnIndex == 4)
+                {
+                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
+                    {
+                        gvProductos.DataSource = ((List<EntProducto>)((DataGridView)sender).DataSource).OrderBy(P => P.Existencia).ToList();
+                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                    }
+                    else
+                    {
+                        gvProductos.DataSource = ((List<EntProducto>)((DataGridView)sender).DataSource).OrderByDescending(P => P.Existencia).ToList();
                         ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
                     }
                 }

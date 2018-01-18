@@ -12,8 +12,17 @@ namespace AiresEntidades
         public int IngresoId { get; set; }
         public string Ingreso { get; set; }
 
-        public int TipoUnidadId { get; set; }
-        public string TipoUnidad { get; set; }
+
+        public int TipoId { get; set; }
+        public string Tipo { get; set; }
+
+        public int ProductoServicioId { get; set; }
+        public string ClaveProductoServicio { get; set; }
+        public string ProductoServicio { get; set; }
+
+        public int UnidadId { get; set; }
+        public string ClaveUnidad { get; set; }
+        public string Unidad { get; set; }
 
         public string Codigo { get; set; }
         public string Serie { get; set; }

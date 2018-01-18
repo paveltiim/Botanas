@@ -227,7 +227,10 @@ namespace Aires.Pantallas
         int DiasPorSemana = 6;
         public void CargaEmpresas()
         {
-            ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
+            if (Program.UsuarioSeleccionado.Id > 1)
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas().Where(P => P.UsuarioId == Program.UsuarioSeleccionado.Id).ToList();
+            else
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
 
             Program.CambiaEmpresa = false;
             cmbEmpresas.DataSource = ListaEmpresas;
@@ -692,7 +695,7 @@ namespace Aires.Pantallas
                     if (Program.EmpresaSeleccionada.Facturacion)
                         factura.Cancelar(Program.EmpresaSeleccionada, pedidoSeleccionado.UUID);
                     else
-                        facturaPruebas.Cancelar(new EntEmpresa() { RFC="XAXX010101000" },pedidoSeleccionado.UUID);
+                        facturaPruebas.Cancelar(new EntEmpresa() { RFC = "XAXX010101000" }, pedidoSeleccionado.UUID);
                     //factura.Cancelar(1, pedidoSeleccionado.UUID);
 
                     List<EntFactura> facturasPedido=new BusPedidos().ObtieneFacturasPorPedido(pedidoSeleccionado.Id);

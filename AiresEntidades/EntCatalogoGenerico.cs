@@ -8,5 +8,6 @@ namespace AiresEntidades
 {
     public class EntCatalogoGenerico : EntAbstracta
     {
+        public string Clave { get; set; }
     }
 }

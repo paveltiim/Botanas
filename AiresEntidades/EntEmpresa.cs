@@ -51,5 +51,15 @@ namespace AiresEntidades
         public int TipoTasaIVAId { get; set; }
         public string NoCertificado { get; set; }
         public bool Facturacion { get; set; }
+
+        public int RegimenFiscalId { get; set; }
+        public int TipoFactorId { get; set; }
+        public string TipoFactor { get; set; }
+        public decimal TasaOCuota { get; set; }
+        public int UsoCFDIId { get; set; }
+
+        public int TimbresEmpresa { get; set; }
+        public int Timbres { get; set; }
+
     }
 }

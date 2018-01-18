@@ -13,5 +13,11 @@ namespace AiresEntidades
         public string UUID { get; set; }
         public string Ruta { get; set; }
 
+
+        public int TipoComprobanteId { get; set; }
+        public int FormaPagoId { get; set; }
+        public int MetodoPagoId { get; set; }
+        public int UsoCFDIId { get; set; }
+
     }
 }

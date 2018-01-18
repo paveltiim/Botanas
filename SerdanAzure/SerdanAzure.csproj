@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8FD43934-F994-4903-92C5-7553EFB9F298}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aires</RootNamespace>
+    <AssemblyName>SerdanObregon</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\ActualizaProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\ActualizaProducto.designer.cs">
+      <DependentUpon>ActualizaProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\AgregaComplementoPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaComplementoPago.Designer.cs">
+      <DependentUpon>AgregaComplementoPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\AgregaDeposito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaDeposito.designer.cs">
+      <DependentUpon>AgregaDeposito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\AgregaDeuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaDeuda.designer.cs">
+      <DependentUpon>AgregaDeuda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\AgregaFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaFactura.designer.cs">
+      <DependentUpon>AgregaFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\AgregaMateriales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaMateriales.designer.cs">
+      <DependentUpon>AgregaMateriales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\AgregaMaterialesProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaMaterialesProducto.designer.cs">
+      <DependentUpon>AgregaMaterialesProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\AgregaPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaPago.designer.cs">
+      <DependentUpon>AgregaPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\AgregaPagoGasto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaPagoGasto.designer.cs">
+      <DependentUpon>AgregaPagoGasto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Clientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Clientes.designer.cs">
+      <DependentUpon>Clientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\ContraseñaGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\ContraseñaGeneral.designer.cs">
+      <DependentUpon>ContraseñaGeneral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Contraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Contraseña.designer.cs">
+      <DependentUpon>Contraseña.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Empresas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Empresas.designer.cs">
+      <DependentUpon>Empresas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\FiltroClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\FiltroClientes.designer.cs">
+      <DependentUpon>FiltroClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\FiltroProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\FiltroProductos.designer.cs">
+      <DependentUpon>FiltroProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Inicio.designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Inventarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Inventarios.designer.cs">
+      <DependentUpon>Inventarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Menu.designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\MuestraIngreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\MuestraIngreso.designer.cs">
+      <DependentUpon>MuestraIngreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\MuestraProductosDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\MuestraProductosDetalle.designer.cs">
+      <DependentUpon>MuestraProductosDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\PreFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\PreFactura.designer.cs">
+      <DependentUpon>PreFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Productos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Productos.designer.cs">
+      <DependentUpon>Productos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Proveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Proveedores.designer.cs">
+      <DependentUpon>Proveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Registros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Registros.designer.cs">
+      <DependentUpon>Registros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\ReportesGenerales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\ReportesGenerales.designer.cs">
+      <DependentUpon>ReportesGenerales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaEmail.designer.cs">
+      <DependentUpon>SeleccionaEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaEmpresa.designer.cs">
+      <DependentUpon>SeleccionaEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaFactura.designer.cs">
+      <DependentUpon>SeleccionaFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaFacturaPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaFacturaPedidos.designer.cs">
+      <DependentUpon>SeleccionaFacturaPedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaIngreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaIngreso.designer.cs">
+      <DependentUpon>SeleccionaIngreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Sincronizar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Sincronizar.designer.cs">
+      <DependentUpon>Sincronizar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Ventas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Ventas.designer.cs">
+      <DependentUpon>Ventas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormBase.resx">
+      <DependentUpon>FormBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\ActualizaProducto.resx">
+      <DependentUpon>ActualizaProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaDeposito.resx">
+      <DependentUpon>AgregaDeposito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaDeuda.resx">
+      <DependentUpon>AgregaDeuda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaFactura.resx">
+      <DependentUpon>AgregaFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaMateriales.resx">
+      <DependentUpon>AgregaMateriales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaMaterialesProducto.resx">
+      <DependentUpon>AgregaMaterialesProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaPago.resx">
+      <DependentUpon>AgregaPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaPagoGasto.resx">
+      <DependentUpon>AgregaPagoGasto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Clientes.resx">
+      <DependentUpon>Clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\ContraseñaGeneral.resx">
+      <DependentUpon>ContraseñaGeneral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Contraseña.resx">
+      <DependentUpon>Contraseña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Empresas.resx">
+      <DependentUpon>Empresas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\FiltroClientes.resx">
+      <DependentUpon>FiltroClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\FiltroProductos.resx">
+      <DependentUpon>FiltroProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Inventarios.resx">
+      <DependentUpon>Inventarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\MuestraIngreso.resx">
+      <DependentUpon>MuestraIngreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\MuestraProductosDetalle.resx">
+      <DependentUpon>MuestraProductosDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\PreFactura.resx">
+      <DependentUpon>PreFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Productos.resx">
+      <DependentUpon>Productos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Proveedores.resx">
+      <DependentUpon>Proveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Registros.resx">
+      <DependentUpon>Registros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\ReportesGenerales.resx">
+      <DependentUpon>ReportesGenerales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\SeleccionaEmail.resx">
+      <DependentUpon>SeleccionaEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\SeleccionaEmpresa.resx">
+      <DependentUpon>SeleccionaEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\SeleccionaFactura.resx">
+      <DependentUpon>SeleccionaFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\SeleccionaFacturaPedidos.resx">
+      <DependentUpon>SeleccionaFacturaPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\SeleccionaIngreso.resx">
+      <DependentUpon>SeleccionaIngreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Sincronizar.resx">
+      <DependentUpon>Sincronizar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Ventas.resx">
+      <DependentUpon>Ventas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Reportes\rptCompras.rdlc" />
+    <EmbeddedResource Include="Reportes\rptComprasPorProveedor.rdlc" />
+    <EmbeddedResource Include="Reportes\rptDepositos.rdlc" />
+    <EmbeddedResource Include="Reportes\rptDepositosNeue.rdlc" />
+    <EmbeddedResource Include="Reportes\rptDeudaClientes.rdlc" />
+    <EmbeddedResource Include="Reportes\rptDeudaProveedores.rdlc" />
+    <EmbeddedResource Include="Reportes\rptEntradas.rdlc" />
+    <EmbeddedResource Include="Reportes\rptEntradasDetalle.rdlc" />
+    <EmbeddedResource Include="Reportes\rptEstadoDeCuentaCliente.rdlc" />
+    <EmbeddedResource Include="Reportes\rptGraficaVentasClientes.rdlc" />
+    <EmbeddedResource Include="Reportes\rptGraficaVentasProductos.rdlc" />
+    <EmbeddedResource Include="Reportes\rptInventarioDetalle.rdlc" />
+    <EmbeddedResource Include="Reportes\rptInventarioProducto.rdlc" />
+    <EmbeddedResource Include="Reportes\rptNotasCreditoProveedores.rdlc" />
+    <EmbeddedResource Include="Reportes\rptPagosClientes.rdlc" />
+    <EmbeddedResource Include="Reportes\rptPagosProveedores.rdlc" />
+    <EmbeddedResource Include="Reportes\rptProductosHastaFecha.rdlc" />
+    <EmbeddedResource Include="Reportes\rptProductosHastaFecha2.rdlc" />
+    <EmbeddedResource Include="Reportes\rptVentas.rdlc" />
+    <EmbeddedResource Include="Reportes\rptVentasPorCliente.rdlc" />
+    <EmbeddedResource Include="Reportes\rptVentasPorProducto.rdlc" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AiresEntidades\SerdanEntidades.csproj">
+      <Project>{5308d57c-05c8-495a-b18b-51a361a786e1}</Project>
+      <Name>SerdanEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AiresNegocio\SerdanNegocio.csproj">
+      <Project>{b0b0069a-c1cd-419b-a505-db0400956583}</Project>
+      <Name>SerdanNegocio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AiresUtilerias\SerdanUtilerias.csproj">
+      <Project>{02a506c1-5b69-48ef-97a0-3cb0fd718b91}</Project>
+      <Name>SerdanUtilerias</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\palomitaChica.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cruzChica.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\azul.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cargando.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ClientesCredito.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clipMini.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Comprar %28Chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Comprar %28Sin Fondo%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Comprar %28Sin Fondo-Chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dolar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dolar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editar2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flechabaja.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Graph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\List.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mail_reply.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mail-Search %28chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Materiales.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nota de Credito %28Chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nota de Credito %28Rounded-Chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pagar %28Chico%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pagar %28Chico-Rounded%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pagar %28Ver%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pagar %28Ver%292.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pagar %28White%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pagar %28White-Chico%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paper %28chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paper-add %28Chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paper-add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paper-Cancel %28chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paper-Search %28chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pedidos %28Sin Fondo%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pedidos %28White%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pedidos %28White-Chico%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pedidos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Person-group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rojo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SINCRONIZAcion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ventas2sinfondo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\verdeClaro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VerLista%28boton%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\X.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

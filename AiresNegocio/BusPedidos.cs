@@ -41,8 +41,14 @@ namespace AiresNegocio
                     p.Factura = "AA"+r["FAC_NUMEROFACTURA"].ToString();
                     if (p.Facturado)
                         p.EstatusDescripcion = "VIGENTE";
-                    else
+                    else if (!string.IsNullOrWhiteSpace(p.UUID))
                         p.EstatusDescripcion = "CANCELADO";
+                    else
+                    {
+                        p.EstatusDescripcion = "SIN FACTURAR";
+                        p.Factura="";
+                        
+                    }
                     //if (p.Factura == "0")
                     //    p.Factura = "";
                     //else
@@ -531,7 +537,7 @@ namespace AiresNegocio
         {
             try
             {
-                return new DatPedidos().agregaNotaCredito(NotaCredito.PedidoId, NotaCredito.Cantidad, NotaCredito.Fecha);
+                return new DatPedidos().agregaNotaCredito(NotaCredito.EmpresaId,NotaCredito.PedidoId, NotaCredito.Descripcion, NotaCredito.Cantidad, NotaCredito.Fecha);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
@@ -627,6 +633,24 @@ namespace AiresNegocio
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
+        public EntFactura ObtieneUltimaNotaCredito(int EmpresaId)
+        {
+            try
+            {
+                dt = new DatPedidos().obtieneUltimaNotaCredito(EmpresaId);
+                EntFactura p = new EntFactura();
+                foreach (DataRow r in dt.Rows)
+                {
+                    p.Id = Convert.ToInt32(r["NOTCRE_ID"]);
+                    p.NumeroFactura = r["NOTCRE_NUMERO"].ToString();
+                    p.Fecha = Convert.ToDateTime(r["NOTCRE_FECHA"]);
+                    p.EstatusId = Convert.ToInt32(r["NOTCRE_ESTATUS"]);
+                }
+                return p;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         /// <summary>
         /// Actualiza el Pago del Pedido.
         /// </summary>
@@ -704,6 +728,44 @@ namespace AiresNegocio
             try
             {
                 new DatPedidos().aumentaPagoPedido(Pedido.Id, Pedido.Pago);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+
+        public EntFactura ObtieneUltimoComplementoPago()
+        {
+            try
+            {
+                dt = new DatPedidos().obtieneUltimoComplemento();
+                EntFactura p = new EntFactura();
+                foreach (DataRow r in dt.Rows)
+                {
+                    p.Id = Convert.ToInt32(r["COMPAG_ID"]);
+                    if (p.Id > 0)
+                    {
+                        p.Fecha = Convert.ToDateTime(r["COMPAG_FECHA"]);
+                        p.Estatus = Convert.ToBoolean(r["COMPAG_ESTATUS"]);
+                    }
+                }
+                return p;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        /// <summary>
+        /// .
+        /// </summary>
+        /// <param name="Complemento">
+        /// Propiedades Necesarias: Id(FacturaId), Fecha, TipoComprobanteId,
+        ///                         FormaPagoId, Ruta.
+        /// </param>
+        public void AgregaComplementePago(EntFactura Complemento)
+        {
+            try
+            {
+                new DatPedidos().agregaComplementoPago(Complemento.Id, Complemento.Fecha,
+                                                        Complemento.TipoComprobanteId, Complemento.FormaPagoId, Complemento.Ruta);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }

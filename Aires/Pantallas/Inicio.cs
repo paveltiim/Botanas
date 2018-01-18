@@ -39,17 +39,22 @@ namespace Aires.Pantallas
                 this.Close();
             }
         }
-        string EmailPrincipal ="refrigeracion_serdan@hotmail.com";// "pavel_tiim@hotmail.com";
+        string EmailPrincipal ="pavel_tiim@hotmail.com";// "pavel_tiim@hotmail.com";
         void VerificaExportacion(int EmpresaId)
         {
-            EntCatalogoGenerico reg = new BusVencimiento().ObtieneUltimoRegistroSincronizacion();//new BusVencimiento().ObtieneRegistroSincronizacion(Fecha);
+            //EntCatalogoGenerico reg = new BusVencimiento().ObtieneUltimoRegistroSincronizacion();//new BusVencimiento().ObtieneRegistroSincronizacion(Fecha);
 
-            
-            for (DateTime x = reg.Fecha.AddDays(1); x <= DateTime.Today.AddDays(-1); x=x.AddDays(1))
+            //DateTime fechaInicial = new DateTime(2017, 10, 4);
+            //DateTime fechaFinal = new DateTime(2017, 11, 22);
+
+            DateTime fechaInicial = new DateTime(2017, 10, 2);
+            DateTime fechaFinal = new DateTime(2017, 10, 2);
+            //for (DateTime x = reg.Fecha.AddDays(1); x <= DateTime.Today.AddDays(-1); x=x.AddDays(1))
+            for (DateTime x = fechaInicial; x <= fechaFinal; x = x.AddDays(1))
             {
-                DateTime fecha = x;
+                    DateTime fecha = x;
                 new Registros().ExportarVentas(EmpresaId, fecha, EmailPrincipal);
-                new BusVencimiento().AgregarRegistroSincronizacion(fecha);
+                //new BusVencimiento().AgregarRegistroSincronizacion(fecha);
             }
             
             //if (reg.Id <= 0)
@@ -67,7 +72,7 @@ namespace Aires.Pantallas
         List<EntUsuario> CargaUsuarios()
         {
             List<EntUsuario> usuarios=new List<EntUsuario>();
-            usuarios.Add(new EntUsuario() { Id=1, Usuario = "admin", Contraseña = "serdan1" });
+            usuarios.Add(new EntUsuario() { Id=1, Usuario = "admin", Contraseña = "serdan1", Administrador=true });
             usuarios.Add(new EntUsuario() { Id = 8, Usuario = "serdannav", Contraseña = "sernav30" });
             usuarios.Add(new EntUsuario() { Id = 9, Usuario = "serdanobr", Contraseña = "serobr20" });
             usuarios.Add(new EntUsuario() { Id = 5, Usuario = "serdancas", Contraseña = "sercas10" });
@@ -81,23 +86,37 @@ namespace Aires.Pantallas
                 
                 List<EntUsuario> usuarios=CargaUsuarios();
 
-                Program.UsuarioSeleccionado = usuarios[0];// 1 - admin //new EntUsuario() { Id = 1 };
-                //Program.UsuarioSeleccionado = usuarios[3];// 5 - SerdanCasar //new EntUsuario()
+                int version = 3;//1:SERDAN; 2:CASAR; 3:OBR NAV
+                tsbSincronizacion.Enabled = false;
+                switch (version)
+                {
+                    case 1:
+                        Program.UsuarioSeleccionado = usuarios[0];// 1 - admin //new EntUsuario() { Id = 1 };
+                        break;
+                    case 2:
+                        Program.UsuarioSeleccionado = usuarios[3];// 5 - SerdanCasar //new EntUsuario()
+                        break;
+                    case 3:
+                        Contraseña vInicioSesion = new Contraseña(usuarios);
 
-                //Contraseña vInicioSesion = new Contraseña(usuarios);
+                        if (vInicioSesion.ShowDialog() != DialogResult.OK)
+                            this.Close();
+                        else
+                            Program.UsuarioSeleccionado = vInicioSesion.Usuario;// new EntUsuario() { Id = 9 };/
 
-                //if (vInicioSesion.ShowDialog() != DialogResult.OK)
-                //    this.Close();
-                //else
-                //    Program.UsuarioSeleccionado = vInicioSesion.Usuario;// new EntUsuario() { Id = 9 };/
+                        break;
+                }
 
                 if (Program.UsuarioSeleccionado.Id > 1)
                 {
                     tsbProveedores.Visible = false;
-                    tsbInventario.Visible = false;
-                    VerificaExportacion(Program.UsuarioSeleccionado.Id);
-                    //VerificaExportacion(DateTime.Today.AddDays(-2), Program.UsuarioSeleccionado.Id);
-                    //VerificaExportacion(DateTime.Today.AddDays(-1), Program.UsuarioSeleccionado.Id);
+                    ////tsbInventario.Visible = false;
+
+                    //VERSION AZURE - YA NO ES NECESASRIO EXPORTACION DE VENTAS
+                    //VerificaExportacion(Program.UsuarioSeleccionado.Id);
+
+                    ////VerificaExportacion(DateTime.Today.AddDays(-2), Program.UsuarioSeleccionado.Id);
+                    ////VerificaExportacion(DateTime.Today.AddDays(-1), Program.UsuarioSeleccionado.Id);
                 }
 
                 Menu a = (Menu)BuscaForma("Menu");

@@ -58,7 +58,9 @@ namespace Aires.Pantallas
         
         private void SeleccionaFactura_Load(object sender, EventArgs e)
         {
-
+            try {
+                pnlBotones.Enabled = Program.UsuarioSeleccionado.Administrador;
+            } catch(Exception ex) { MuestraExcepcion(ex); }
         }
 
         private void txtFiltroSerie_TextChanged(object sender, EventArgs e)
@@ -147,6 +149,7 @@ namespace Aires.Pantallas
         int AgregaIngreso(EntEmpresa EmpresaNueva, string EmpresaAnterior) {
             int proveedorId;
 
+            //REALMENTE VERIFICA SI YA SE AGREGO LA EMPRESANUEVA COMO PROVEEDOR. LO HACE POR NOMBRE, NO SE PUEDE BUSCAR POR ID DE PROVEEDOR(NO SE SABE).
             List<EntProveedor> provedores = new BusProveedores().ObtieneProveedores(EmpresaNueva.Id).Where(P => P.Nombre == EmpresaNueva.Nombre).ToList();
             if (provedores.Count > 0)
                 proveedorId = provedores[0].Id;
@@ -181,30 +184,53 @@ namespace Aires.Pantallas
                 if (vSeleccionaEmp.ShowDialog() == DialogResult.OK)
                 {
                     int ingresoId = AgregaIngreso(vSeleccionaEmp.EmpresaSeleccionada, Program.EmpresaSeleccionada.Nombre);
-                    //vSeleccionaEmp.EmpresaSeleccionada;
-
+                    
                     foreach (EntProducto p in productosSeleccionados)
                     {
-                        //if (p.Estatus)
-                        //{
-                        //ListaProductosDetalle.Remove(p);
                         EntEmpresa empresaSeleccionada = vSeleccionaEmp.EmpresaSeleccionada;
                         p.EmpresaId = empresaSeleccionada.Id;
                         p.IngresoId = ingresoId;
 
                         //SOLO PARA ACTUALIZAR EMPRESAID e INGRESOID
                         new BusProductos().ActualizaProductoDetalle(p);
-                            //new BusProductos().ActualizaProductoDetallePedido(p);
-                        //}
                     }
 
                     this.Close();
-                    //CargaProductosEnPantallas(); //NO PUEDE POR NO SER HIJA
+                    //CargaProductosEnPantallas(); //NO PUEDE POR NO SER HIJA (MdiChildren)
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
+        private void btnMueveAConsignacion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<EntProducto> productosSeleccionados = ObtieneListaProductosFromGV(gvProductosDetalle).Where(P => P.Estatus).ToList();
+                if (productosSeleccionados.Count == 0)
+                    MandaExcepcion("SELECCIONE AL MENOS UN PRODUCTO");
+
+                SeleccionaEmpresa vSeleccionaEmp = new SeleccionaEmpresa(true);
+                if (vSeleccionaEmp.ShowDialog() == DialogResult.OK)
+                {
+                    int ingresoId = AgregaIngreso(vSeleccionaEmp.EmpresaSeleccionada, Program.EmpresaSeleccionada.Nombre);
+
+                    foreach (EntProducto p in productosSeleccionados)
+                    {
+                        EntEmpresa empresaSeleccionada = vSeleccionaEmp.EmpresaSeleccionada;
+                        p.EmpresaId = empresaSeleccionada.Id;
+                        p.IngresoId = ingresoId;
+
+                        //SOLO PARA ACTUALIZAR EMPRESAID e INGRESOID
+                        new BusProductos().ActualizaProductoDetalle(p);
+                    }
+
+                    this.Close();
+                    //CargaProductosEnPantallas(); //NO PUEDE POR NO SER HIJA (MdiChildren)
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -227,5 +253,6 @@ namespace Aires.Pantallas
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
+
     }
 }
