@@ -52,6 +52,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -64,17 +65,17 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1326, 608);
-            this.splitContainer1.SplitterDistance = 171;
-            this.splitContainer1.SplitterWidth = 3;
+            this.splitContainer1.Size = new System.Drawing.Size(1768, 748);
+            this.splitContainer1.SplitterDistance = 275;
             this.splitContainer1.TabIndex = 1;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(149, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(199, 18);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(759, 395);
+            this.pictureBox1.Size = new System.Drawing.Size(1012, 486);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -82,9 +83,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel1.Location = new System.Drawing.Point(149, 2);
+            this.panel1.Location = new System.Drawing.Point(199, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(925, 10);
+            this.panel1.Size = new System.Drawing.Size(1233, 12);
             this.panel1.TabIndex = 4;
             // 
             // tableLayoutPanel1
@@ -92,9 +94,9 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.77477F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.22523F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 440F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 587F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel1.Controls.Add(this.btnInventario, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnVentas, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnClientes, 1, 1);
@@ -102,13 +104,14 @@
             this.tableLayoutPanel1.Controls.Add(this.button2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnProductos, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnEmpresas, 0, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(188, 46);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(251, 57);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 164F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(885, 374);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 202F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1180, 460);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // btnInventario
@@ -119,9 +122,10 @@
             this.tableLayoutPanel1.SetColumnSpan(this.btnInventario, 2);
             this.btnInventario.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnInventario.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInventario.Location = new System.Drawing.Point(3, 363);
+            this.btnInventario.Location = new System.Drawing.Point(4, 447);
+            this.btnInventario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnInventario.Name = "btnInventario";
-            this.btnInventario.Size = new System.Drawing.Size(432, 2);
+            this.btnInventario.Size = new System.Drawing.Size(576, 2);
             this.btnInventario.TabIndex = 6;
             this.btnInventario.Text = "Entradas/Salidas Inventario";
             this.btnInventario.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -135,9 +139,10 @@
             this.btnVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnVentas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVentas.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVentas.Location = new System.Drawing.Point(3, 3);
+            this.btnVentas.Location = new System.Drawing.Point(4, 4);
+            this.btnVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVentas.Name = "btnVentas";
-            this.btnVentas.Size = new System.Drawing.Size(212, 189);
+            this.btnVentas.Size = new System.Drawing.Size(283, 233);
             this.btnVentas.TabIndex = 0;
             this.btnVentas.Text = "Ventas";
             this.btnVentas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -151,9 +156,10 @@
             this.btnClientes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnClientes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClientes.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClientes.Location = new System.Drawing.Point(224, 199);
+            this.btnClientes.Location = new System.Drawing.Point(299, 245);
+            this.btnClientes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClientes.Name = "btnClientes";
-            this.btnClientes.Size = new System.Drawing.Size(217, 157);
+            this.btnClientes.Size = new System.Drawing.Size(289, 193);
             this.btnClientes.TabIndex = 2;
             this.btnClientes.Text = "Clientes";
             this.btnClientes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -167,9 +173,10 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(447, 3);
+            this.button1.Location = new System.Drawing.Point(596, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(215, 189);
+            this.button1.Size = new System.Drawing.Size(287, 233);
             this.button1.TabIndex = 8;
             this.button1.Text = "Compras";
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -185,9 +192,10 @@
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 16F);
             this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(224, 3);
+            this.button2.Location = new System.Drawing.Point(299, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(217, 189);
+            this.button2.Size = new System.Drawing.Size(289, 233);
             this.button2.TabIndex = 9;
             this.button2.Text = "Registros Ventas";
             this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -201,9 +209,10 @@
             this.btnProductos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnProductos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProductos.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProductos.Location = new System.Drawing.Point(447, 199);
+            this.btnProductos.Location = new System.Drawing.Point(596, 245);
+            this.btnProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnProductos.Name = "btnProductos";
-            this.btnProductos.Size = new System.Drawing.Size(212, 157);
+            this.btnProductos.Size = new System.Drawing.Size(283, 193);
             this.btnProductos.TabIndex = 7;
             this.btnProductos.Text = "Productos";
             this.btnProductos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -217,9 +226,10 @@
             this.btnEmpresas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnEmpresas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEmpresas.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEmpresas.Location = new System.Drawing.Point(3, 199);
+            this.btnEmpresas.Location = new System.Drawing.Point(4, 245);
+            this.btnEmpresas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEmpresas.Name = "btnEmpresas";
-            this.btnEmpresas.Size = new System.Drawing.Size(215, 157);
+            this.btnEmpresas.Size = new System.Drawing.Size(287, 193);
             this.btnEmpresas.TabIndex = 5;
             this.btnEmpresas.Text = "Proveedores";
             this.btnEmpresas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -228,12 +238,13 @@
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1326, 608);
+            this.ClientSize = new System.Drawing.Size(1768, 748);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Menu";
             this.ShowIcon = false;
             this.Text = "Menu";

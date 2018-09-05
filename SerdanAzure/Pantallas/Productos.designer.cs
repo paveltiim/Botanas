@@ -57,6 +57,7 @@
             this.txtCodigoBusqueda = new System.Windows.Forms.TextBox();
             this.btnRefrescar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnIngresaProductoAEmpresa = new System.Windows.Forms.Button();
             this.btnMateriales = new System.Windows.Forms.Button();
             this.btnActualizarProductos = new System.Windows.Forms.Button();
             this.btnVerSeriesProducto = new System.Windows.Forms.Button();
@@ -232,6 +233,7 @@
             this.label21.Size = new System.Drawing.Size(51, 13);
             this.label21.TabIndex = 123;
             this.label21.Text = "Empresa:";
+            this.label21.Click += new System.EventHandler(this.label21_Click);
             // 
             // cmbEmpresas
             // 
@@ -310,6 +312,7 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.btnIngresaProductoAEmpresa);
             this.panel3.Controls.Add(this.btnMateriales);
             this.panel3.Controls.Add(this.btnActualizarProductos);
             this.panel3.Controls.Add(this.btnVerSeriesProducto);
@@ -321,6 +324,22 @@
             this.panel3.Size = new System.Drawing.Size(1145, 761);
             this.panel3.TabIndex = 84;
             // 
+            // btnIngresaProductoAEmpresa
+            // 
+            this.btnIngresaProductoAEmpresa.BackColor = System.Drawing.Color.White;
+            this.btnIngresaProductoAEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnIngresaProductoAEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnIngresaProductoAEmpresa.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngresaProductoAEmpresa.Location = new System.Drawing.Point(1061, 490);
+            this.btnIngresaProductoAEmpresa.Name = "btnIngresaProductoAEmpresa";
+            this.btnIngresaProductoAEmpresa.Size = new System.Drawing.Size(74, 66);
+            this.btnIngresaProductoAEmpresa.TabIndex = 92;
+            this.btnIngresaProductoAEmpresa.Text = "Ingresa Producto";
+            this.btnIngresaProductoAEmpresa.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnIngresaProductoAEmpresa.UseVisualStyleBackColor = false;
+            this.btnIngresaProductoAEmpresa.Visible = false;
+            this.btnIngresaProductoAEmpresa.Click += new System.EventHandler(this.btnIngresaProductoAEmpresa_Click);
+            // 
             // btnMateriales
             // 
             this.btnMateriales.BackColor = System.Drawing.Color.White;
@@ -328,7 +347,7 @@
             this.btnMateriales.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMateriales.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMateriales.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Bold);
-            this.btnMateriales.Location = new System.Drawing.Point(518, 488);
+            this.btnMateriales.Location = new System.Drawing.Point(518, 489);
             this.btnMateriales.Name = "btnMateriales";
             this.btnMateriales.Size = new System.Drawing.Size(74, 66);
             this.btnMateriales.TabIndex = 91;
@@ -346,7 +365,7 @@
             this.btnActualizarProductos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnActualizarProductos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnActualizarProductos.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActualizarProductos.Location = new System.Drawing.Point(390, 488);
+            this.btnActualizarProductos.Location = new System.Drawing.Point(390, 489);
             this.btnActualizarProductos.Name = "btnActualizarProductos";
             this.btnActualizarProductos.Size = new System.Drawing.Size(74, 66);
             this.btnActualizarProductos.TabIndex = 90;
@@ -362,7 +381,7 @@
             this.btnVerSeriesProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnVerSeriesProducto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVerSeriesProducto.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerSeriesProducto.Location = new System.Drawing.Point(260, 488);
+            this.btnVerSeriesProducto.Location = new System.Drawing.Point(260, 489);
             this.btnVerSeriesProducto.Name = "btnVerSeriesProducto";
             this.btnVerSeriesProducto.Size = new System.Drawing.Size(74, 66);
             this.btnVerSeriesProducto.TabIndex = 85;
@@ -378,7 +397,7 @@
             this.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(131, 488);
+            this.btnEliminar.Location = new System.Drawing.Point(131, 489);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(74, 66);
             this.btnEliminar.TabIndex = 84;
@@ -394,7 +413,7 @@
             this.btnEditar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(2, 488);
+            this.btnEditar.Location = new System.Drawing.Point(2, 489);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(74, 66);
             this.btnEditar.TabIndex = 83;
@@ -1646,7 +1665,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1387, 766);
             this.Controls.Add(this.btnBuscaEmpresa);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.cmbEmpresas);
@@ -1819,5 +1838,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn precioCostoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioVentaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn existenciaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button btnIngresaProductoAEmpresa;
     }
 }

@@ -296,6 +296,12 @@ namespace Aires
             return null;
         }
 
+        /// <summary>
+        /// Busca el tipo de archivo con la Extension solicitada y regresa el nombre del archivo (el primero que encuentre).
+        /// </summary>
+        /// <param name="Ruta">Ruta del directorio que contiene el archivo</param>
+        /// <param name="Extension"></param>
+        /// <returns></returns>
         public string EncuentraArchivo(string Ruta, string Extension)
         {
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Ruta);
@@ -307,6 +313,24 @@ namespace Aires
                     return f.Name;
             }
             return "";
+        }
+        /// <summary>
+        /// Regresa el numero de archivos encontrados con la Extension solicitada en la Ruta solicitada.
+        /// </summary>
+        /// <param name="Ruta"></param>
+        /// <param name="Extension"></param>
+        /// <returns></returns>
+        public int CuentaArchivos(string Ruta, string Extension)
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Ruta);
+
+            System.IO.FileInfo[] fi = di.GetFiles();
+            //foreach (System.IO.FileInfo f in fi)
+            //{
+            //    if (f.Extension == Extension)
+            //        return f.Name;
+            //}
+            return fi.Length;
         }
 
         public void MuestraMensaje(string Mensaje, string Titulo)

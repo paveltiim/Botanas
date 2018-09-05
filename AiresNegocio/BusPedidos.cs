@@ -35,24 +35,27 @@ namespace AiresNegocio
                     p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
                     p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
 
-                    p.UUID = r["FAC_UUID"].ToString();
                     p.Facturado = Convert.ToBoolean(r["FACTURADO"]);
+                    p.UUID = r["FAC_UUID"].ToString();
                     p.RutaFactura = r["FAC_RUTA"].ToString();
-                    p.Factura = "AA"+r["FAC_NUMEROFACTURA"].ToString();
+                    p.Factura = r["FAC_SERIEFACTURA"].ToString() + r["FAC_NUMEROFACTURA"].ToString();//"AA" + r["FAC_NUMEROFACTURA"].ToString();
                     if (p.Facturado)
+                    {
                         p.EstatusDescripcion = "VIGENTE";
+                        p.Fecha = Convert.ToDateTime(r["FAC_FECHA"]);
+                        p.FechaCorta = Convert.ToDateTime(r["FAC_FECHA"]).ToShortDateString();
+                    }
                     else if (!string.IsNullOrWhiteSpace(p.UUID))
+                    {
                         p.EstatusDescripcion = "CANCELADO";
+                        p.Fecha = Convert.ToDateTime(r["FAC_FECHA"]);
+                        p.FechaCorta = Convert.ToDateTime(r["FAC_FECHA"]).ToShortDateString();
+                    }
                     else
                     {
                         p.EstatusDescripcion = "SIN FACTURAR";
-                        p.Factura="";
-                        
+                        p.Factura = "";
                     }
-                    //if (p.Factura == "0")
-                    //    p.Factura = "";
-                    //else
-                    //    p.Factura = "AA " + p.Factura;
 
                     lst.Add(p);
                 }
@@ -60,268 +63,147 @@ namespace AiresNegocio
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+        
+        //public List<EntPedido> ObtienePedidosClientesCredito()
+        //{
+        //    try
+        //    {
+        //        List<EntPedido> lst = new List<EntPedido>();
+        //        dt = new DatPedidos().obtienePedidosClientesCredito();
+        //        foreach (DataRow r in dt.Rows)
+        //        {
+        //            EntPedido p = new EntPedido();
+        //            p.Id = Convert.ToInt32(r["PED_ID"]);
+        //            p.Detalle = r["PED_DETALLE"].ToString();
+        //            //p.Observaciones = r["PED_OBSERVACIONES"].ToString();
+        //            p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
+        //            p.Cliente = r["CLI_NOMBRE"].ToString();
 
-        public List<EntPedido> ObtienePedidosPorFechas(int Pendientes, int Pagados, int Entregados, int Cancelados, int Presupuesto, DateTime FechaDesde, DateTime FechaHasta)
-        {
-            try
-            {
-                List<EntPedido> lst = new List<EntPedido>();
-                dt = new DatPedidos().obtienePedidosPorFechas(Pendientes, Pagados, Entregados, Cancelados, Presupuesto, FechaDesde, FechaHasta);
-                foreach (DataRow r in dt.Rows)
-                {
-                    EntPedido p = new EntPedido();
-                    p.Id = Convert.ToInt32(r["PED_ID"]);
-                    p.Detalle = r["PED_DETALLE"].ToString();
-                    p.Observaciones = r["PED_OBSERVACIONES"].ToString();
-                    p.Cliente = r["CLI_NOMBRE"].ToString();
-                    p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
-                    p.Pago = Convert.ToDecimal(r["PED_PAGO"]);
-                    p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
-                    p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
-                    p.EmpleadoId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.Empleado = r["EMP_NOMBRE"].ToString();
-                    p.Facturado = Convert.ToBoolean(r["PED_FACTURADO"]);
-                    p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
-                    lst.Add(p);
-                }
-                return lst;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
+        //            p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+        //            //p.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
+        //            //p.Debe = Convert.ToDecimal(r["DEBE"]);
+        //            p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
+        //            p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
+        //            p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
+        //            p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
+        //            p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
 
-        public List<EntPedido> ObtienePedidosPorFechasEntrega(int Pendientes, int Pagados, int Entregados, int Cancelados, int Presupuesto, DateTime FechaDesde, DateTime FechaHasta)
-        {
-            try
-            {
-                List<EntPedido> lst = new List<EntPedido>();
-                dt = new DatPedidos().obtienePedidosPorFechasEntrega(Pendientes, Pagados, Entregados, Cancelados, Presupuesto, FechaDesde, FechaHasta);
-                foreach (DataRow r in dt.Rows)
-                {
-                    EntPedido p = new EntPedido();
-                    p.Id = Convert.ToInt32(r["PED_ID"]);
-                    p.Detalle = r["PED_DETALLE"].ToString();
-                    p.Observaciones = r["PED_OBSERVACIONES"].ToString();
-                    p.Cliente = r["CLI_NOMBRE"].ToString();
-                    p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
-                    p.Pago = Convert.ToDecimal(r["PED_PAGO"]);
-                    p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
-                    p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
-                    p.FechaEntrega = Convert.ToDateTime(r["PED_FECHAENTREGA"]);
-                    p.EmpleadoId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.Empleado = r["EMP_NOMBRE"].ToString();
-                    p.Facturado = Convert.ToBoolean(r["PED_FACTURADO"]);
-                    p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
-                    lst.Add(p);
-                }
-                return lst;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
+        //            p.Factura = r["FAC_ID"].ToString();
+        //            if (p.Factura == "0")
+        //                p.Factura = "";
+        //            else
+        //                p.Factura = "AA " + p.Factura;
 
-        public List<EntPedido> ObtienePedidosPorCliente(int ClienteId)
-        {
-            try
-            {
-                List<EntPedido> lst = new List<EntPedido>();
-                dt = new DatPedidos().obtienePedidosPorCliente(ClienteId);
-                foreach (DataRow r in dt.Rows)
-                {
-                    EntPedido p = new EntPedido();
-                    p.Id = Convert.ToInt32(r["PED_ID"]);
-                    p.Detalle = r["PED_DETALLE"].ToString();
-                    p.Observaciones = r["PED_OBSERVACIONES"].ToString();
-                    p.Cliente = r["CLI_NOMBRE"].ToString();
-                    p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
-                    p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
-                    p.Pago = Convert.ToDecimal(r["PED_PAGO"]);
-                    p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
-                    p.EmpleadoId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.Empleado = r["EMP_NOMBRE"].ToString();
-                    p.Facturado = Convert.ToBoolean(r["PED_FACTURADO"]);
-                    p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
+        //            lst.Add(p);
+        //        }
+        //        return lst;
+        //    }
+        //    catch (Exception ex) { throw new Exception(ex.Message); }
+        //}
+        //public List<EntPedido> ObtienePedidosClienteCredito(int ClienteId)
+        //{
+        //    try
+        //    {
+        //        List<EntPedido> lst = new List<EntPedido>();
+        //        dt = new DatPedidos().obtienePedidosClientesCredito(ClienteId);
+        //        foreach (DataRow r in dt.Rows)
+        //        {
+        //            EntPedido p = new EntPedido();
+        //            p.Id = Convert.ToInt32(r["PED_ID"]);
+        //            p.Detalle = r["PED_DETALLE"].ToString();
+        //            p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
+        //            p.Cliente = r["CLI_NOMBRE"].ToString();
 
-                    //p.Anticipo = Convert.ToDecimal(r["ANTICIPO"]);
-                    //p.Finiquito = Convert.ToDecimal(r["FINIQUITO"]);
+        //            p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+        //            //p.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
+        //            p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
+        //            p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
+        //            p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
+        //            p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
+        //            p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
 
-                    lst.Add(p);
-                }
-                return lst;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
+        //            p.Factura = r["FAC_ID"].ToString();
+        //            if (p.Factura == "0")
+        //                p.Factura = "";
+        //            else
+        //                p.Factura = "AA " + p.Factura;
 
-        public List<EntPedido> ObtienePedidosFacturado()
-        {
-            try
-            {
-                List<EntPedido> lst = new List<EntPedido>();
-                dt = new DatPedidos().obtienePedidosFacturado();
-                foreach (DataRow r in dt.Rows)
-                {
-                    EntPedido p = new EntPedido();
-                    p.Id = Convert.ToInt32(r["PED_ID"]);
-                    p.Detalle = r["PED_DETALLE"].ToString();
-                    p.Observaciones = r["PED_OBSERVACIONES"].ToString();
-                    p.Cliente = r["CLI_NOMBRE"].ToString();
-                    p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
-                    p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
-                    p.Pago = Convert.ToDecimal(r["PED_PAGO"]);
-                    p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
-                    p.EmpleadoId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.Empleado = r["EMP_NOMBRE"].ToString();
-                    p.Facturado = Convert.ToBoolean(r["PED_FACTURADO"]);
-                    p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
-                    lst.Add(p);
-                }
-                return lst;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
+        //            lst.Add(p);
+        //        }
+        //        return lst;
+        //    }
+        //    catch (Exception ex) { throw new Exception(ex.Message); }
+        //}
+        //public List<EntPedido> ObtienePedidosClientesCredito(DateTime FechaDesde, DateTime FechaHasta)
+        //{
+        //    try
+        //    {
+        //        List<EntPedido> lst = new List<EntPedido>();
+        //        dt = new DatPedidos().obtienePedidosClientesCredito(FechaDesde, FechaHasta);
+        //        foreach (DataRow r in dt.Rows)
+        //        {
+        //            EntPedido p = new EntPedido();
+        //            p.Id = Convert.ToInt32(r["PED_ID"]);
+        //            p.Detalle = r["PED_DETALLE"].ToString();
+        //            p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
+        //            p.Cliente = r["CLI_NOMBRE"].ToString();
 
-        public List<EntPedido> ObtienePedidosClientesCredito()
-        {
-            try
-            {
-                List<EntPedido> lst = new List<EntPedido>();
-                dt = new DatPedidos().obtienePedidosClientesCredito();
-                foreach (DataRow r in dt.Rows)
-                {
-                    EntPedido p = new EntPedido();
-                    p.Id = Convert.ToInt32(r["PED_ID"]);
-                    p.Detalle = r["PED_DETALLE"].ToString();
-                    //p.Observaciones = r["PED_OBSERVACIONES"].ToString();
-                    p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
-                    p.Cliente = r["CLI_NOMBRE"].ToString();
+        //            p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+        //            //p.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
+        //            p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
+        //            p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
+        //            p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
+        //            p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
+        //            p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
 
-                    p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
-                    //p.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
-                    //p.Debe = Convert.ToDecimal(r["DEBE"]);
-                    p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
-                    p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
-                    p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
-                    p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
+        //            p.Factura = r["FAC_ID"].ToString();
+        //            if (p.Factura == "0")
+        //                p.Factura = "";
+        //            else
+        //                p.Factura = "AA " + p.Factura;
 
-                    p.Factura = r["FAC_ID"].ToString();
-                    if (p.Factura == "0")
-                        p.Factura = "";
-                    else
-                        p.Factura = "AA " + p.Factura;
+        //            lst.Add(p);
+        //        }
+        //        return lst;
+        //    }
+        //    catch (Exception ex) { throw new Exception(ex.Message); }
+        //}
+        //public List<EntPedido> ObtienePedidosClientesCredito(DateTime FechaLimite)
+        //{
+        //    try
+        //    {
+        //        List<EntPedido> lst = new List<EntPedido>();
+        //        dt = new DatPedidos().obtienePedidosClientesCredito(FechaLimite);
+        //        foreach (DataRow r in dt.Rows)
+        //        {
+        //            EntPedido p = new EntPedido();
+        //            p.Id = Convert.ToInt32(r["PED_ID"]);
+        //            p.Detalle = r["PED_DETALLE"].ToString();
+        //            p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
+        //            p.Cliente = r["CLI_NOMBRE"].ToString();
 
-                    lst.Add(p);
-                }
-                return lst;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
-        public List<EntPedido> ObtienePedidosClienteCredito(int ClienteId)
-        {
-            try
-            {
-                List<EntPedido> lst = new List<EntPedido>();
-                dt = new DatPedidos().obtienePedidosClientesCredito(ClienteId);
-                foreach (DataRow r in dt.Rows)
-                {
-                    EntPedido p = new EntPedido();
-                    p.Id = Convert.ToInt32(r["PED_ID"]);
-                    p.Detalle = r["PED_DETALLE"].ToString();
-                    p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
-                    p.Cliente = r["CLI_NOMBRE"].ToString();
+        //            p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+        //            //p.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
+        //            p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
+        //            p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
+        //            p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
+        //            p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
+        //            p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
 
-                    p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
-                    //p.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
-                    p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
-                    p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
-                    p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
-                    p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
+        //            p.Factura = r["FAC_ID"].ToString();
+        //            if (p.Factura == "0")
+        //                p.Factura = "";
+        //            else
+        //                p.Factura = "AA " + p.Factura;
 
-                    p.Factura = r["FAC_ID"].ToString();
-                    if (p.Factura == "0")
-                        p.Factura = "";
-                    else
-                        p.Factura = "AA " + p.Factura;
-
-                    lst.Add(p);
-                }
-                return lst;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
-        public List<EntPedido> ObtienePedidosClientesCredito(DateTime FechaDesde, DateTime FechaHasta)
-        {
-            try
-            {
-                List<EntPedido> lst = new List<EntPedido>();
-                dt = new DatPedidos().obtienePedidosClientesCredito(FechaDesde, FechaHasta);
-                foreach (DataRow r in dt.Rows)
-                {
-                    EntPedido p = new EntPedido();
-                    p.Id = Convert.ToInt32(r["PED_ID"]);
-                    p.Detalle = r["PED_DETALLE"].ToString();
-                    p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
-                    p.Cliente = r["CLI_NOMBRE"].ToString();
-
-                    p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
-                    //p.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
-                    p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
-                    p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
-                    p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
-                    p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
-
-                    p.Factura = r["FAC_ID"].ToString();
-                    if (p.Factura == "0")
-                        p.Factura = "";
-                    else
-                        p.Factura = "AA " + p.Factura;
-
-                    lst.Add(p);
-                }
-                return lst;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
-        public List<EntPedido> ObtienePedidosClientesCredito(DateTime FechaLimite)
-        {
-            try
-            {
-                List<EntPedido> lst = new List<EntPedido>();
-                dt = new DatPedidos().obtienePedidosClientesCredito(FechaLimite);
-                foreach (DataRow r in dt.Rows)
-                {
-                    EntPedido p = new EntPedido();
-                    p.Id = Convert.ToInt32(r["PED_ID"]);
-                    p.Detalle = r["PED_DETALLE"].ToString();
-                    p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
-                    p.Cliente = r["CLI_NOMBRE"].ToString();
-
-                    p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
-                    //p.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
-                    p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
-                    p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
-                    p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
-                    p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                    p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
-
-                    p.Factura = r["FAC_ID"].ToString();
-                    if (p.Factura == "0")
-                        p.Factura = "";
-                    else
-                        p.Factura = "AA " + p.Factura;
-
-                    if (string.IsNullOrWhiteSpace(p.Factura))
-                        p.Factura = p.Detalle;
-                    lst.Add(p);
-                }
-                return lst;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
+        //            if (string.IsNullOrWhiteSpace(p.Factura))
+        //                p.Factura = p.Detalle;
+        //            lst.Add(p);
+        //        }
+        //        return lst;
+        //    }
+        //    catch (Exception ex) { throw new Exception(ex.Message); }
+        //}
         public List<EntPedido> ObtienePedidosClientesPorFechas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta)
         {
             try
@@ -344,20 +226,29 @@ namespace AiresNegocio
                     p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
                     p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
 
-                    //p.Factura = r["FAC_ID"].ToString();
-                    //if (p.Factura == "0")
-                    //    p.Factura = "";
+                    //p.Facturado = Convert.ToBoolean(r["FAC_ID"]);
+                    //if (p.Facturado)
+                    //    p.Factura = r["FAC_SERIEFACTURA"].ToString() + r["FAC_NUMEROFACTURA"].ToString();//"AA" + r["FAC_NUMEROFACTURA"].ToString();
                     //else
-                    //    p.Factura = "AA " + p.Factura;
+                    //    p.Factura = "S/F";
+                    //p.UUID = r["FAC_UUID"].ToString();
+                    //p.RutaFactura = r["FAC_RUTA"].ToString();
+                    //p.FechaEntrega = Convert.ToDateTime(r["FAC_FECHA"]);
 
-                    p.Facturado = Convert.ToBoolean(r["FAC_ID"]);
-                    if (p.Facturado)
-                        p.Factura = "AA" + r["FAC_NUMEROFACTURA"].ToString();
-                    else
-                        p.Factura = "S/F";
+                    p.Facturado = Convert.ToBoolean(r["FAC_ESTATUSID"]);
                     p.UUID = r["FAC_UUID"].ToString();
                     p.RutaFactura = r["FAC_RUTA"].ToString();
-                    p.FechaEntrega = Convert.ToDateTime(r["FAC_FECHA"]);
+                    p.Factura = r["FAC_SERIEFACTURA"].ToString() + r["FAC_NUMEROFACTURA"].ToString();//"AA" + r["FAC_NUMEROFACTURA"].ToString();
+                    if (p.Facturado)
+                        p.EstatusDescripcion = "VIGENTE";
+                    else if (!string.IsNullOrWhiteSpace(p.UUID))
+                        p.EstatusDescripcion = "CANCELADO";
+                    else
+                    {
+                        p.EstatusDescripcion = "SIN FACTURAR";
+                        p.Factura = "";
+                    }
+
                     lst.Add(p);
                 }
                 return lst;
@@ -386,14 +277,30 @@ namespace AiresNegocio
                     p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
                     p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
 
-                    p.Factura = r["FAC_ID"].ToString();
-                    if (p.Factura == "0")
-                        p.Factura = "";
-                    else
-                        p.Factura = "AA " + p.Factura;
+                    //p.Facturado = Convert.ToBoolean(r["FAC_ID"]);
+                    //if (p.Facturado)
+                    //    p.Factura = r["FAC_SERIEFACTURA"].ToString() + r["FAC_NUMEROFACTURA"].ToString();//"AA" + r["FAC_NUMEROFACTURA"].ToString();
+                    //else
+                    //    p.Factura = "S/F";
+                    //p.UUID = r["FAC_UUID"].ToString();
+                    //p.RutaFactura = r["FAC_RUTA"].ToString();
+                    //p.FechaEntrega = Convert.ToDateTime(r["FAC_FECHA"]);
 
-                    if (string.IsNullOrWhiteSpace(p.Factura))
-                        p.Factura = p.Detalle;
+                    p.Facturado = Convert.ToBoolean(r["FAC_ESTATUSID"]);
+                    p.UUID = r["FAC_UUID"].ToString();
+                    p.Factura = r["FAC_SERIEFACTURA"].ToString() + r["FAC_NUMEROFACTURA"].ToString();//"AA" + r["FAC_NUMEROFACTURA"].ToString();
+                    p.FormaPagoId= Convert.ToInt32(r["FAC_FORMAPAGOID"]);
+                    p.RutaFactura = r["FAC_RUTA"].ToString();
+                    if (p.Facturado)
+                        p.EstatusDescripcion = "VIGENTE";
+                    else if (!string.IsNullOrWhiteSpace(p.UUID))
+                        p.EstatusDescripcion = "CANCELADO";
+                    else
+                    {
+                        p.EstatusDescripcion = "SIN FACTURAR";
+                        p.Factura = "";
+                    }
+
                     lst.Add(p);
                 }
                 return lst;
@@ -657,14 +564,16 @@ namespace AiresNegocio
         /// <param name="Factura">
         /// Propiedades Necesarias: Id, Pago.
         /// </param>
-        public void AgregaFactura(EntFactura Factura)
-        {
-            try
-            {
-                new DatPedidos().agregaFactura(Factura.PedidoId, Factura.UUID, Factura.Fecha, Factura.Ruta);
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
+        //public void AgregaFactura(EntFactura Factura)
+        //{
+        //    try
+        //    {
+        //        new DatPedidos().agregaFactura(Factura.PedidoId, Factura.UUID,
+        //                                        Factura.TipoComprobanteId, Factura.FormaPagoId, Factura.MetodoPagoId, Factura.UsoCFDIId,
+        //                                        Factura.Fecha, Factura.Ruta);
+        //    }
+        //    catch (Exception ex) { throw new Exception(ex.Message); }
+        //}
         /// <summary>
         /// Actualiza Estatus del Pedido.
         /// </summary>

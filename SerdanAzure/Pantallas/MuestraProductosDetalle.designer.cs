@@ -286,6 +286,7 @@
             this.btnExportar.Text = "Exportar";
             this.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Visible = false;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // pnlBotones
@@ -294,7 +295,7 @@
             this.pnlBotones.Controls.Add(this.btnMueveAIngreso);
             this.pnlBotones.Controls.Add(this.btnRefrescar);
             this.pnlBotones.Controls.Add(this.btnEliminar);
-            this.pnlBotones.Location = new System.Drawing.Point(586, 5);
+            this.pnlBotones.Location = new System.Drawing.Point(637, 5);
             this.pnlBotones.Name = "pnlBotones";
             this.pnlBotones.Size = new System.Drawing.Size(223, 37);
             this.pnlBotones.TabIndex = 121;

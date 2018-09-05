@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Aires</RootNamespace>
-    <AssemblyName>SerdanObregon</AssemblyName>
+    <AssemblyName>Serdan</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\Aires\bin\Debug\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -96,11 +99,23 @@
     <Compile Include="Pantallas\AgregaMaterialesProducto.designer.cs">
       <DependentUpon>AgregaMaterialesProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\AgregaObservacionFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaObservacionFactura.designer.cs">
+      <DependentUpon>AgregaObservacionFactura.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pantallas\AgregaPago.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pantallas\AgregaPago.designer.cs">
       <DependentUpon>AgregaPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\AgregaNumeroFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\AgregaNumeroFactura.designer.cs">
+      <DependentUpon>AgregaNumeroFactura.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\AgregaPagoGasto.cs">
       <SubType>Form</SubType>
@@ -269,8 +284,14 @@
     <EmbeddedResource Include="Pantallas\AgregaMaterialesProducto.resx">
       <DependentUpon>AgregaMaterialesProducto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaObservacionFactura.resx">
+      <DependentUpon>AgregaObservacionFactura.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\AgregaPago.resx">
       <DependentUpon>AgregaPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaNumeroFactura.resx">
+      <DependentUpon>AgregaNumeroFactura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\AgregaPagoGasto.resx">
       <DependentUpon>AgregaPagoGasto.cs</DependentUpon>
@@ -365,16 +386,27 @@
     <EmbeddedResource Include="Reportes\rptEstadoDeCuentaCliente.rdlc" />
     <EmbeddedResource Include="Reportes\rptGraficaVentasClientes.rdlc" />
     <EmbeddedResource Include="Reportes\rptGraficaVentasProductos.rdlc" />
+    <EmbeddedResource Include="Reportes\rptHistoricoProductosDetallePorCantidad.rdlc" />
+    <EmbeddedResource Include="Reportes\rptHistoricoProductosDetallePorPrecioCosto.rdlc" />
+    <EmbeddedResource Include="Reportes\rptHistoricoProductosPorCantidad.rdlc" />
+    <EmbeddedResource Include="Reportes\rptHistoricoProductosPorPrecioCosto.rdlc" />
     <EmbeddedResource Include="Reportes\rptInventarioDetalle.rdlc" />
     <EmbeddedResource Include="Reportes\rptInventarioProducto.rdlc" />
+    <EmbeddedResource Include="Reportes\rptNotasCreditoClientes.rdlc" />
     <EmbeddedResource Include="Reportes\rptNotasCreditoProveedores.rdlc" />
     <EmbeddedResource Include="Reportes\rptPagosClientes.rdlc" />
+    <EmbeddedResource Include="Reportes\rptPagosClientesNeue.rdlc" />
     <EmbeddedResource Include="Reportes\rptPagosProveedores.rdlc" />
     <EmbeddedResource Include="Reportes\rptProductosHastaFecha.rdlc" />
     <EmbeddedResource Include="Reportes\rptProductosHastaFecha2.rdlc" />
-    <EmbeddedResource Include="Reportes\rptVentas.rdlc" />
-    <EmbeddedResource Include="Reportes\rptVentasPorCliente.rdlc" />
+    <EmbeddedResource Include="Reportes\rptVentas.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rptVentasPorCliente.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptVentasPorProducto.rdlc" />
+    <None Include="Properties\DataSources\AiresEntidades.EntCliente.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

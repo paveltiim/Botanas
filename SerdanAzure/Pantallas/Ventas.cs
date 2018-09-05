@@ -187,17 +187,23 @@ namespace Aires.Pantallas
             /// 
             /// </summary>
             /// <param name="pedido"></param>
-            void AgregarFacturaPedido(int PedidoId, string UUID, string Ruta)
-            {
-                EntFactura factura = new EntFactura()
-                {
-                    PedidoId = PedidoId,
-                    UUID=UUID,
-                    Fecha = DateTime.Today,
-                    Ruta=Ruta
-                };
-                new BusPedidos().AgregaFactura(factura);
-            }
+            //void AgregarFacturaPedido(int PedidoId, string UUID, string Ruta, int FormaPagoId, int MetodoPagoId, int UsoCFDIId)
+            //{
+            //    EntFactura factura = new EntFactura()
+            //    {
+            //        PedidoId = PedidoId,
+            //        UUID=UUID,
+
+            //        TipoComprobanteId = 1,
+            //        FormaPagoId = FormaPagoId,
+            //        MetodoPagoId = MetodoPagoId,
+            //        UsoCFDIId = UsoCFDIId,
+
+            //        Fecha = DateTime.Today,
+            //        Ruta=Ruta
+            //    };
+            //    new BusPedidos().AgregaFactura(factura);
+            //}
 
         void AgregaProductoEnPedido(EntProducto ProductoSeleccionado, decimal CantidadAgrega)
         {
@@ -342,8 +348,13 @@ namespace Aires.Pantallas
             //txtSucursal.Text = Cliente.Sucursal;
             //txtCLABE.Text = Cliente.CLABE;
             //txtNumeroReferencia.Text = Cliente.NumeroReferencia;
-            cmbFormaPago.SelectedIndex = Cliente.FormaPagoId-1;
+            if(Cliente.FormaPagoId>0)
+                cmbFormaPago.SelectedIndex = Cliente.FormaPagoId-1;
 
+            if (Cliente.RFC == "XAXX010101000")
+                ClientePublicoGeneral = true;
+            else
+                ClientePublicoGeneral = false;
         }
         void CargaDatosClientePubicoGeneral(EntCliente Cliente)
             {
@@ -381,33 +392,48 @@ namespace Aires.Pantallas
             {
                 txtTotal.Text = FormatoMoney(ConvierteTextoADecimal(txtTotal.Text) + CantidadSumar);
             }
-            /// <summary>
-            /// Muestra el resultado de ListaProductos.Sum(P=>P.Precio) en TxtMuestraTotal.Text.
-            /// </summary>
-            /// <param name="CantidadSumar"></param>
-            void CalculaSumaTotal(List<EntProducto> ListaProductos, TextBox TxtMuestraTotal)
+
+        /// <summary>
+        /// Muestra el resultado de ListaProductos.Sum(P=>P.Precio) en TxtMuestraTotal.Text.
+        /// </summary>
+        /// <param name="CantidadSumar"></param>
+        void CalculaSumaTotal(List<EntProducto> ListaProductos, TextBox TxtMuestraTotal)
+        {
+            decimal total, subtotal, cantidadIva, descuento;
+
+            if (ListaProductos == null)
             {
-                decimal total, subtotal, cantidadIva;
-
+                total = 0;
+                subtotal = 0;
+                cantidadIva = 0;
+            }
+            else
+            {
                 total = ListaProductos.Sum(P => P.Precio);
-                subtotal = Math.Round(total, 2) / (1 + IVA); //Math.Round(total / (1 + IVA), 2);
-             
-                cantidadIva = subtotal * IVA;
-                cantidadIva = Math.Round(total, 2) - subtotal;
 
-                if (txtRFC.Text=="XAXX010101000" || chkFacturaPublicoGeneral.Checked) 
-                {
-                    subtotal = total;
-                    cantidadIva = 0;
-                }
-            
-                TxtMuestraTotal.Text = FormatoMoney(total);
-                txtSubtotal.Text = FormatoMoney(subtotal);
-                txtIVA.Text = FormatoMoney(cantidadIva);
-                txtRestante.Text = FormatoMoney(total-ConvierteTextoADecimal(txtPago.Text));
+                ////if (txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked)
+                //if ((ClientePublicoGeneral || chkFacturaPublicoGeneral.Checked) && Program.EmpresaSeleccionada.TipoPersonaId==1)
+                //{
+                //    subtotal = total;
+                //    cantidadIva = 0;
+                //}
+                //else
+                //{
+                    subtotal = Math.Round(total, 2) / (1 + IVA); //Math.Round(total / (1 + IVA), 2);
+                    cantidadIva = subtotal * IVA;
+                    cantidadIva = Math.Round(total, 2) - subtotal;
+                //}
             }
 
+            descuento = ConvierteTextoADecimal(txtDescuento);
+            TxtMuestraTotal.Text = FormatoMoney(total-descuento);
+            txtSubtotal.Text = FormatoMoney(subtotal);
+            txtIVA.Text = FormatoMoney(cantidadIva);
+            txtRestante.Text = FormatoMoney(total - ConvierteTextoADecimal(txtPago.Text));
+        }
+
         #endregion
+
         public void CargaCatalogoUsoCFDI()
         {
             //ListaEmpresas = new BusEmpresas().ObtieneCatalogoRegimen();
@@ -465,8 +491,8 @@ namespace Aires.Pantallas
             mensaje += "\n Agradecemos su preferencia y esperamos seguirle atendiendo como se merece. \n";
             mensaje += "\n Atte. \n" + Empresa.NombreFiscal;
 
-            if (Program.UsuarioSeleccionado.Id > 1)
-            {
+            //if (Program.UsuarioSeleccionado.Id > 1)
+            //{
                 string email4 = "refrigeracion_serdan@hotmail.com";
                 if (Program.UsuarioSeleccionado.Id == 5)
                 {//CASAR
@@ -474,11 +500,11 @@ namespace Aires.Pantallas
                     string email6 = "comercializadoracasar@hotmail.com";
                     new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3, email4 , email5, email6}, mensaje, archivosAdjuntos);
                 }
-                else
+                //else
                     new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3, email4 }, mensaje, archivosAdjuntos);
-            }
-            else
-                new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3}, mensaje, archivosAdjuntos);
+            //}
+            //else
+            //    new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3}, mensaje, archivosAdjuntos);
 
             MessageBox.Show("El Correo se ha Enviado correctamente, a la(s) dirección(es): \n " + Cliente.Email + " \n " + Cliente.Email2 + " \n " + Cliente.Email3);
             //}
@@ -557,7 +583,7 @@ namespace Aires.Pantallas
                 if (!string.IsNullOrWhiteSpace(p.Serie))
                     ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += p.Serie + " | ";
             }
-            if(Program.UsuarioSeleccionado.Id == 8 || Program.UsuarioSeleccionado.Id == 9)
+            if(Program.UsuarioSeleccionado.Id == 8 || Program.UsuarioSeleccionado.Id == 9)//OBR-NAV
                 ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += "Solicitud:".PadLeft(60,'-') + txtBanco.Text;
 
             //FacturacionPrueba factura = new FacturacionPrueba();
@@ -567,21 +593,23 @@ namespace Aires.Pantallas
             int tipoTasaIVAid = Empresa.TipoTasaIVAId;
             decimal tasaOCuota = Empresa.TasaOCuota;
 
-            //CHECAR
-            if (txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked)
-            {
-                Empresa.TipoTasaIVAId = 2;//TASA 0%
-                Empresa.TasaOCuota = 0.0m;//TASA 0%
-            }
-            else
-            {
-                Empresa.TipoTasaIVAId = 1;//TASA 16%
-                Empresa.TasaOCuota = 0.16m;//TASA 0%
-            }
-            //string uuid = factura.Facturar(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
-            //                               NumeroCuenta, pathClienteDirectorioFacturas,
-            //                               CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
-            string uuid = factura.Facturar33(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, "AA", FechaFactura, 
+            ////CHECAR
+            //if ((txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked) && Program.EmpresaSeleccionada.TipoPersonaId == 1)//Persona Fisica
+            //{
+            //    Empresa.TipoTasaIVAId = 2;//TASA 0%
+            //    Empresa.TasaOCuota = 0.0m;//TASA 0%
+            //}
+            //else
+            //{
+            //    Empresa.TipoTasaIVAId = 1;//TASA 16%
+            //    Empresa.TasaOCuota = 0.16m;//TASA 0%
+            //}
+
+            ////string uuid = factura.Facturar(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
+            ////                               NumeroCuenta, pathClienteDirectorioFacturas,
+            ////                               CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
+            string serie = Empresa.SerieFactura;//"AA";
+            string uuid = factura.Facturar33(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, serie, FechaFactura, 
                                            TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
                                            NumeroCuenta, pathClienteDirectorioFacturas,
                                            CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
@@ -630,20 +658,20 @@ namespace Aires.Pantallas
             int tipoTasaIVAid = Empresa.TipoTasaIVAId;
             decimal tasaOCuota = Empresa.TasaOCuota;
 
-            if (txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked)
-            {
-                Empresa.TipoTasaIVAId = 2;//TASA 0%
-                Empresa.TasaOCuota = 0.0m;//TASA 0%
-            }
-            else
-            {
-                Empresa.TipoTasaIVAId = 1;//TASA 16%
-                Empresa.TasaOCuota = 0.16m;//TASA 0%
-            }
+            //if ((txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked) && Program.EmpresaSeleccionada.TipoPersonaId == 1)//Persona Fisica
+            //{
+            //    Empresa.TipoTasaIVAId = 2;//TASA 0%
+            //    Empresa.TasaOCuota = 0.0m;//TASA 0%
+            //}
+            //else
+            //{
+            //    Empresa.TipoTasaIVAId = 1;//TASA 16%
+            //    Empresa.TasaOCuota = 0.16m;//TASA 0%
+            //}
 
-            //string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
-            //                               NumeroCuenta, pathClienteDirectorioFacturas,
-            //                               CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
+            ////string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
+            ////                               NumeroCuenta, pathClienteDirectorioFacturas,
+            ////                               CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
             string uuid = factura.Facturar33(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, 
                                            TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
                                            NumeroCuenta, pathClienteDirectorioFacturas,
@@ -672,8 +700,7 @@ namespace Aires.Pantallas
             if (ProductosSeleccionados == null || ProductosSeleccionados.Count == 0)
                 throw new Exception("Agregue al menos un producto.");
         }
-
-
+        
         void CargaClientesDeudaEnPantallas()
         {
             //Form vCli = BuscaFormaBase(new ClientesCredito().Titulo);
@@ -683,6 +710,8 @@ namespace Aires.Pantallas
             //    ((ClientesCredito)vCli).CargaGvPedidosClientesCredito();
             //}
         }
+
+
 
         private void Ventas_Load(object sender, EventArgs e)
         {
@@ -705,8 +734,9 @@ namespace Aires.Pantallas
 
                     ClienteSeleccionado = null;
                 }
-                int timbresrestantes = Program.EmpresaSeleccionada.TimbresEmpresa;
+                int timbresrestantes = Program.EmpresaSeleccionada.TimbresRestantes;
                 lbFacturasRestantes.Text = timbresrestantes.ToString();
+                lbFacturasContratadas.Text = Program.EmpresaSeleccionada.TimbresUsados.ToString() + '/' + Program.EmpresaSeleccionada.Timbres.ToString();
                 if (timbresrestantes <= 5)
                     MuestraMensaje(string.Format("¡Solo quedan {0} timbres para la empresa seleccionada!", timbresrestantes), "LÍMITE DE TIMBRES");
             }
@@ -820,7 +850,8 @@ namespace Aires.Pantallas
                 CalculaSumaTotal(ObtieneListaProductosFromGV(gvProductosPedido), txtTotal);
             }catch(Exception ex) { MuestraMensaje(ex.Message, "ERROR"); }
         }
-        
+        bool ClientePublicoGeneral;
+
         private void txtClienteBusqueda_TextChanged(object sender, EventArgs e)
         {
             try
@@ -851,7 +882,8 @@ namespace Aires.Pantallas
                     if (ClienteSeleccionado != null)
                     {
                         CargaDatosCliente(ClienteSeleccionado);
-                        chkFacturaPublicoGeneral.Checked = false;
+                        //chkFacturaPublicoGeneral.Checked = false;
+                        chkFacturaPublicoGeneral.Checked = ClientePublicoGeneral;
                     }
 
                     OcultaBuscadorGrid(gvClientes, txtClienteBusqueda);
@@ -874,7 +906,8 @@ namespace Aires.Pantallas
                 if (ClienteSeleccionado != null)
                 {
                     CargaDatosCliente(ClienteSeleccionado);
-                    chkFacturaPublicoGeneral.Checked = false;
+                    //chkFacturaPublicoGeneral.Checked = false;
+                    chkFacturaPublicoGeneral.Checked = ClientePublicoGeneral;
                 }
 
                 OcultaBuscadorGrid(gvClientes, txtClienteBusqueda);
@@ -896,7 +929,8 @@ namespace Aires.Pantallas
                     CargaDatosCliente(ClienteSeleccionado);
                     OcultaBuscadorGrid(gvClientes, txtClienteBusqueda);
 
-                    chkFacturaPublicoGeneral.Checked = false;
+                    //chkFacturaPublicoGeneral.Checked = false;
+                    chkFacturaPublicoGeneral.Checked = ClientePublicoGeneral;
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -944,6 +978,11 @@ namespace Aires.Pantallas
                                 // productoSeleccionado.Existencia;
                                 //gvProductosPedido.CurrentRow.Cells[4].Value = productoSeleccionado.Existencia;
                                 cantidadProductos = existenciaProducto;
+                                //if (cantidadProductos == 1)
+                                //{
+                                //    AgregaRemueveProductoEnPedido(productoSeleccionado, -1);
+                                //    AgregaRemueveProductoEnPedido(productoSeleccionado, 1);
+                                //}
                             }
                             //else
                             //{
@@ -955,6 +994,9 @@ namespace Aires.Pantallas
                                 AgregaRemueveProductoEnPedido(listaProductosSeleccionados[x], 1);
                             }
                             productoSeleccionado.Cantidad = 1;
+                            //gvProductosPedido.Rows[gvProductosPedido.CurrentRow.Index].Cells[8].Value =1;
+                            //gvProductosPedido.Rows[gvProductosPedido.CurrentRow.Index].Cells[8].Value = ConvierteTextoADecimal("1");
+                            //gvProductosPedido.Refresh();
                         }
                     }
                     else if (e.ColumnIndex == 9)//PRECIO SIN IVA
@@ -973,12 +1015,12 @@ namespace Aires.Pantallas
                         //gvProductosPedido.CurrentRow.Cells[6].Value = precioSinIVA;
                     }
 
-                    if(gvProductosPedido.Rows.Count>1)
-                        gvProductosPedido.Rows[gvProductosPedido.CurrentRow.Index].Cells[gvProductosPedido.ColumnCount - 1].Selected = true;
-                    else
-                        gvProductosPedido.CurrentRow.Cells[gvProductosPedido.ColumnCount - 1].Selected = true;
+                    //if(gvProductosPedido.Rows.Count>1)
+                    //    gvProductosPedido.Rows[gvProductosPedido.CurrentRow.Index].Cells[gvProductosPedido.ColumnCount - 1].Selected = true;
+                    //else
+                    //    gvProductosPedido.CurrentRow.Cells[gvProductosPedido.ColumnCount - 1].Selected = true;
                     gvProductosPedido.Refresh();
-                    gvProductosPedido.CurrentRow.Cells[gvProductosPedido.ColumnCount - 1].Selected = true;
+                    //gvProductosPedido.CurrentRow.Cells[gvProductosPedido.ColumnCount - 1].Selected = true;
                     CalculaSumaTotal(ListaProductosPedido, txtTotal);
                 }
             }
@@ -1051,7 +1093,7 @@ namespace Aires.Pantallas
             {
                 string mensaje;
 
-                lbFacturasRestantes.Text = Program.EmpresaSeleccionada.TimbresEmpresa.ToString();
+                lbFacturasRestantes.Text = Program.EmpresaSeleccionada.TimbresRestantes.ToString();
                 if (ConvierteTextoAInteger(lbFacturasRestantes.Text) <= 0)
                     MandaExcepcion("Timbres insuficientes");
 
@@ -1099,7 +1141,6 @@ namespace Aires.Pantallas
                             vProd.AumentaProducto(p.ProductoId, -Convert.ToInt32(p.Cantidad));
 
                             //INGRESA SI EL CLIENTE ES EMPRESA PROPIA.
-                            //if (NuevoProducto)
                             if (ClienteSeleccionado.EmpresaId > 0)
                             {
                                 if (ingresoId == 0) {
@@ -1107,7 +1148,7 @@ namespace Aires.Pantallas
                                     string descripcion, factura = "";
 
                                     if (chkFacturar.Checked)
-                                        factura = "FAC: AA" + ObtieneUltimaFactura(empresaSeleccionada.Id);
+                                        factura = "FAC: "+empresaSeleccionada.SerieFactura + ObtieneUltimaFactura(empresaSeleccionada.Id);
                                     else
                                         factura = "SIN FACTURAR";
                                     descripcion = "COMPRA A EMPRESA -" + empresaSeleccionada.Nombre + "- "+factura+" - "+ DateTime.Today.ToShortDateString();
@@ -1187,10 +1228,10 @@ namespace Aires.Pantallas
                                 {
                                     //DESCUENTA TIMBRE
                                     new BusEmpresas().AumentaTimbreEmpresa(empresaSeleccionada.Id);
-                                    Program.EmpresaSeleccionada.TimbresEmpresa--;
-                                    //Program.EmpresaSeleccionada.Timbres--;
-                                    empresaSeleccionada.TimbresEmpresa--;
-                                    //empresaSeleccionada.Timbres--;
+                                    //Program.EmpresaSeleccionada.TimbresRestantes--;
+                                    //Program.EmpresaSeleccionada.TimbresUsados++;
+                                    empresaSeleccionada.TimbresRestantes--;
+                                    empresaSeleccionada.TimbresUsados++;
                                 }
                                 catch(Exception ex) { }
                             }
@@ -1207,6 +1248,9 @@ namespace Aires.Pantallas
                             factura.FormaPagoId = ConvierteTextoAInteger(txtFormaPago.Text);
                             factura.MetodoPagoId = cmbMetodoPago.SelectedIndex + 1;
                             factura.UsoCFDIId = ObtieneCatalogoGenericoFromCmb(cmbUsoCFDI).Id;
+
+                            factura.SerieFactura = empresaSeleccionada.SerieFactura;
+
                             facturado = true;
                         }
                         catch (Exception ex)
@@ -1280,40 +1324,44 @@ namespace Aires.Pantallas
                             catch (Exception ex) { MuestraExcepcion(ex, "ERROR AL MOSTRAR FACTURA"); }
 
 
-                            LimpiaTextBox(pnlCliente);
-                            LimpiaTextBox(pnlAgrega);
-                            LimpiaTextBox(pnlFacturacion, true);
-                            
-                            ClienteSeleccionado = null;
-                            chkFacturar.Checked = false;
-                            chkFacturaPublicoGeneral.Checked = false;
-                            gvProductosPedido.DataSource = null;
-                            lbContadorSeries.Text = "0";
+                            //LimpiaTextBox(pnlCliente);
+                            //LimpiaTextBox(pnlAgrega);
+                            //LimpiaTextBox(pnlFacturacion, true);
+
+                            //ClienteSeleccionado = null;
+                            //chkFacturar.Checked = false;
+                            //chkFacturaPublicoGeneral.Checked = false;
+                            //gvProductosPedido.DataSource = null;
+                            //lbContadorSeries.Text = "0";
+
+                            //CargaProductosDetalle(empresaSeleccionada.Id);
+                            btnCancelar.PerformClick();
 
                             CargaVentasEnPantallas();
                             CargaClientes(empresaSeleccionada.Id);//SERA POR VOLVER A PONER LOS PARAMETROS???
-                            CargaProductosDetalle(empresaSeleccionada.Id);
-
+                            
                             Cursor.Current = Cursors.Default;
                             MessageBox.Show("¡Pedido Registrado y Facturado!");
                         }
                     }
                     else
                     {
-                        LimpiaTextBox(pnlCliente);
-                        LimpiaTextBox(pnlAgrega);
-                        LimpiaTextBox(pnlFacturacion, true);
-                                        
-                        ClienteSeleccionado = null;
-                        chkFacturar.Checked = false;
-                        chkFacturaPublicoGeneral.Checked = false;
-                        gvProductosPedido.DataSource = null;
-                        lbContadorSeries.Text = "0";
+                        //LimpiaTextBox(pnlCliente);
+                        //LimpiaTextBox(pnlAgrega);
+                        //LimpiaTextBox(pnlFacturacion, true);
+
+                        //ClienteSeleccionado = null;
+                        //chkFacturar.Checked = false;
+                        //chkFacturaPublicoGeneral.Checked = false;
+                        //gvProductosPedido.DataSource = null;
+                        //lbContadorSeries.Text = "0";
+
+                        //CargaProductosDetalle(empresaSeleccionada.Id);
+                        btnCancelar.PerformClick();
 
                         CargaVentasEnPantallas();
                         CargaClientes(empresaSeleccionada.Id);
-                        CargaProductosDetalle(empresaSeleccionada.Id);
-
+                        
                         Cursor.Current = Cursors.Default;
                         MessageBox.Show("¡Pedido Registrado!");
                     }
@@ -1332,14 +1380,18 @@ namespace Aires.Pantallas
                 LimpiaTextBox(pnlFacturacion, true);
 
                 ClienteSeleccionado = null;
-                chkFacturar.Checked = false;
-                chkFacturaPublicoGeneral.Checked = false;
+
                 gvProductosPedido.DataSource = null;
                 lbContadorSeries.Text = "0";
 
+                chkFacturar.Checked = false;
+                chkFacturaPublicoGeneral.Checked = false;
+
                 //CargaProductos();
                 CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
-                lbFacturasRestantes.Text = Program.EmpresaSeleccionada.TimbresEmpresa.ToString();
+                lbFacturasRestantes.Text = Program.EmpresaSeleccionada.TimbresRestantes.ToString();
+                lbFacturasContratadas.Text = Program.EmpresaSeleccionada.TimbresUsados.ToString() + '/' + Program.EmpresaSeleccionada.Timbres.ToString() ;
+                Cursor.Current = Cursors.Default;
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -1411,15 +1463,18 @@ namespace Aires.Pantallas
         {
             try
             {
-                EnableTextBox(pnlFacturacion, !chkFacturaPublicoGeneral.Checked);
+                //SE LIMPIA TODO LO QUE NO SE NECESITA POR SE PUBLICO GENERAL
+                //EnableTextBox(pnlFacturacion, !chkFacturaPublicoGeneral.Checked);
+                EnableTextBox(gbDireccionFiscal, !chkFacturaPublicoGeneral.Checked);
                 LimpiaTextBox(pnlFacturacion);
                 
+                //SE VUELVE A COLOCAR DESPUES DE HABER LIMPIADO
                 txtFormaPago.Text = cmbFormaPago.Text.Remove(2, cmbFormaPago.Text.Length - 2);
                 txtMetodoPago.Text = cmbMetodoPago.Text.Remove(3);
                 txtUsoCFDI.Text = cmbUsoCFDI.Text.Remove(3);
 
-                txtCondicionesPago.Enabled = true;
-                txtNumeroCuenta.Enabled = true;
+                //txtCondicionesPago.Enabled = true;
+                //txtNumeroCuenta.Enabled = true;
                 if (chkFacturaPublicoGeneral.Checked)
                 {
                     //EntCliente clientePublicoGeneral = ListaClientes.Where(P => P.Id == 10).ToList()[0];
@@ -1434,7 +1489,7 @@ namespace Aires.Pantallas
                         clientePublicoGeneral.Nombre = "PUBLICO GENERAL";
                     clientePublicoGeneral.NombreFiscal = "PUBLICO GENERAL";
                     clientePublicoGeneral.RFC = "XAXX010101000";
-                    clientePublicoGeneral.Email = "pavel_tiim@hotmail.com";
+                    clientePublicoGeneral.Email = "tiimfacturacion@hotmail.com";
                     clientePublicoGeneral.FormaPagoId = 1;
 
                     CargaDatosCliente(clientePublicoGeneral);
@@ -1521,11 +1576,11 @@ namespace Aires.Pantallas
 
                     int tipoTasaIVAid = empresaSeleccionada.TipoTasaIVAId;
                     decimal tasaIVA = empresaSeleccionada.TasaOCuota;
-                    if (txtRFC.Text=="XAXX010101000" || chkFacturaPublicoGeneral.Checked)
-                    {
-                        empresaSeleccionada.TipoTasaIVAId = 2;//TASA 0%
-                        empresaSeleccionada.TasaOCuota = 0.0m;
-                    }
+                    //if ((txtRFC.Text=="XAXX010101000" || chkFacturaPublicoGeneral.Checked) && Program.EmpresaSeleccionada.TipoPersonaId == 1)//Persona Fisica
+                    //{
+                    //    empresaSeleccionada.TipoTasaIVAId = 2;//TASA 0%
+                    //    empresaSeleccionada.TasaOCuota = 0.0m;
+                    //}
                     PreFactura vPreFac = new PreFactura(empresaSeleccionada, pedidoAgrega, productosSeleccionados, ClienteSeleccionado,
                                            "I", txtUsoCFDI.Text, txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text,
                                            txtNumeroCuenta.Text,
@@ -1627,7 +1682,7 @@ namespace Aires.Pantallas
         {
             try
             {
-                lbFacturasRestantes.Text = Program.EmpresaSeleccionada.TimbresEmpresa.ToString();
+                lbFacturasRestantes.Text = Program.EmpresaSeleccionada.TimbresRestantes.ToString();
                 if (ConvierteTextoAInteger(lbFacturasRestantes.Text) <= 0)
                     MandaExcepcion("Timbres insuficientes");
 
@@ -1636,8 +1691,8 @@ namespace Aires.Pantallas
 
                 //DESCUENTA TIMBRE
                 new BusEmpresas().AumentaTimbreEmpresa(empresaSeleccionada.Id);
-                Program.EmpresaSeleccionada.TimbresEmpresa--;
-                Program.EmpresaSeleccionada.Timbres--;
+                Program.EmpresaSeleccionada.TimbresRestantes--;
+                Program.EmpresaSeleccionada.TimbresUsados++;
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -1653,6 +1708,42 @@ namespace Aires.Pantallas
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void cmbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //if (cmbFormaPago.SelectedIndex == cmbFormaPago.Items.Count - 1)
+                //    cmbMetodoPago.SelectedIndex = 1;//PARCIALIDADES
+                //else
+                //    cmbMetodoPago.SelectedIndex = 0;
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void cmbMetodoPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //if (cmbMetodoPago.SelectedIndex == 1)//PARCIALIDADES
+                //    cmbFormaPago.SelectedIndex = cmbFormaPago.Items.Count - 1;
+                //else
+                //    cmbFormaPago.SelectedIndex = 0;
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void txtDescuento_Leave(object sender, EventArgs e)
+        {
+            TextBoxDecimalMoney_Leave(sender, e);
+        }
+
+        private void txtDescuento_TextChanged(object sender, EventArgs e)
+        {
+            try {
+                CalculaSumaTotal(ListaProductosPedido, txtTotal);
+            } catch(Exception ex) { MuestraExcepcion(ex); }
         }
     }
 }

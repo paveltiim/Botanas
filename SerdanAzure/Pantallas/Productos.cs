@@ -42,8 +42,8 @@ namespace Aires.Pantallas
             }
             public void CargaProductosDetalle(int EmpresaId)
             {
-                //ListaProductosDetalle = new BusProductos().ObtieneProductosDetalle().OrderBy(P => P.Descripcion).ToList();
-                gvProductosDetalle.DataSource = new BusProductos().ObtieneProductosDetalle(EmpresaId).OrderBy(P => P.Descripcion).ToList();
+            //ListaProductosDetalle = new BusProductos().ObtieneProductosDetalle().OrderBy(P => P.Descripcion).ToList();
+            gvProductosDetalle.DataSource = new BusProductos().ObtieneProductosDetalle(EmpresaId).OrderBy(P => P.Descripcion).ToList();
             }
         public void CargaProductosConsignacion(int EmpresaId)
         {
@@ -1167,6 +1167,59 @@ namespace Aires.Pantallas
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void btnIngresaProductoAEmpresa_Click(object sender, EventArgs e)
+        {
+            //INGRESA SI EL CLIENTE ES EMPRESA PROPIA.
+            //if (ClienteSeleccionado.EmpresaId > 0)
+            //{
+                //if (ingresoId == 0)
+                //{
+                    int proveedorId = 0;
+                    string descripcion, factura = "";
+
+            //if (chkFacturar.Checked)
+            factura = "FAC: " + Program.EmpresaSeleccionada.SerieFactura + "208";//ObtieneUltimaFactura(Program.EmpresaSeleccionada.Id);
+            factura = "FAC: AA208";
+            //else
+            //    factura = "SIN FACTURAR";
+            descripcion = "COMPRA A EMPRESA -" + Program.EmpresaSeleccionada.Nombre + "- " + factura + " - " + DateTime.Today.ToShortDateString();
+            //ProductoIngresa.Fecha.ToShortDateString();
+
+            //VERIFICA SI YA SE AGREGO LA EMPRESANUEVA COMO PROVEEDOR. LO HACE POR NOMBRE, NO SE PUEDE BUSCAR POR ID DE PROVEEDOR(NO SE SABE).
+            int empresaAsociadaId = 6;//EJEMPLO: GRISELDA MOCHIS = 6.
+            string empresaNombre = "MARCOS JAVIER CASTRO FIERRO";
+            List<EntProveedor> provedores = new BusProveedores().ObtieneProveedores(empresaAsociadaId).Where(P => P.Nombre == empresaNombre).ToList();
+            if (provedores.Count > 0)
+                proveedorId = provedores[0].Id;
+            else
+                proveedorId = new Pantallas.Proveedores().AgregaProveedor(empresaAsociadaId, empresaNombre, empresaNombre, "");
+
+            int ingresoId = new BusProductos().AgregaIngreso(new EntCatalogoGenerico() { EmpresaId = proveedorId, Descripcion = descripcion, Fecha = DateTime.Today.Date });
+            //}
+
+            //List<EntProducto> productosEmpresa=new BusProductos().ObtieneProductos(ClienteSeleccionado.EmpresaId);
+            int productoId = 196;//    BHS30;
+            string serie = "721170900205";
+            decimal precioEspecial= 27355.20m;//PRECIO COSTO ORIGINAL
+            decimal precioVenta= 34905.24m;
+
+            //if (productoId != p.ProductoId)
+            //{
+            //    productoId = p.ProductoId;
+
+            new BusProductos().ActualizaEstatusProducto(productoId, true);
+            //}
+
+            //PARA LA EMPRESA QUE COMPRA EL PRECIOCOSTO DEL PRODUCTO SERIA A LO QUE SE LE ESTA VENDIENDO.
+            AgregaProductoDetalle(productoId, ingresoId, empresaAsociadaId, serie, precioVenta, 0, 0, precioEspecial);
+            //}
+        }
+
+        private void label21_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

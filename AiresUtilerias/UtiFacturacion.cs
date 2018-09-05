@@ -336,7 +336,9 @@ namespace AiresUtilerias
             //Cursor.Current = Cursors.Default;
             return r_wsconect.uuid;
         }
-        public string FacturarNotaCredito(EntEmpresa Emisor, decimal Total, string Descripcion, string FolioFactura, EntCliente Cliente, DateTime FechaFactura, string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta, string PathGuardaArchivos)
+        public string FacturarNotaCredito(EntEmpresa Emisor, decimal Total, string Descripcion, string FolioFactura, EntCliente Cliente, 
+                                            DateTime FechaFactura, string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta, 
+                                            string PathGuardaArchivos)
 
         {
             string respuesta;
@@ -815,5 +817,180 @@ namespace AiresUtilerias
             //Cursor.Current = Cursors.Default;
             return r_wsconect.uuid;
         }
+        public string FacturarNotaCredito33(EntEmpresa Emisor, decimal Total, string Descripcion, EntCliente Cliente, 
+                               string UUIDFactura,
+                               string Serie, string FolioNotaCredito, DateTime FechaNotaCredito,
+                               string FormaPago, string MetodoPago, string CondicionPago,string NumeroCuenta, 
+                               string PathGuardaArchivos,
+                               decimal CantidadIVA,
+                               string Observaciones)
+        {
+            string respuesta;
+
+            IVA = Emisor.TasaOCuota;
+            IEPS = 0.08m;
+
+            //System.IO.StreamWriter st = new System.IO.StreamWriter(PathCreaArchivoBaseTxt);//@"C:\Users\TIIM\Documents\TIIM\FacturaPruebaCreada3.txt" //20001000000200000278
+            System.IO.StreamWriter st = new System.IO.StreamWriter(LayoutFileNC);//@"C:\Users\TIIM\Documents\TIIM\FacturaPruebaCreada3.txt" //20001000000200000278
+
+            //decimal subtotal = Total / (1 + IVA);
+            decimal subtotal = Math.Round(Total, 2) / (1 + IVA); //Math.Round(total / (1 + IVA), 2);
+            //cantidadIva = Math.Round(total, 2) - subtotal;
+
+
+            //decimal cantidadIva = subtotal * IVA;
+
+            st.WriteLine("[ComprobanteFiscalDigital]");
+            st.WriteLine("Version=3.3");
+            st.WriteLine("Serie=" + Serie);
+            st.WriteLine("Folio=" + FolioNotaCredito);
+            st.WriteLine("Fecha=" + FechaNotaCredito.ToString("yyyy-MM-ddTHH:mm:ss"));
+            st.WriteLine("FormaPago=" + FormaPago);
+            st.WriteLine("NoCertificado=" + NumeroCertificadoSelloDigital);
+            st.WriteLine("CondicionesDePago=" + CondicionPago);
+            st.WriteLine("SubTotal=" + subtotal.ToString("0.00"));
+            st.WriteLine("Descuento=0");
+            st.WriteLine("Moneda=MXN");
+            st.WriteLine("Total=" + Total.ToString("0.00"));
+            st.WriteLine("TipoDeComprobante=E");
+            st.WriteLine("MetodoPago=" + MetodoPago); //st.WriteLine("MetodoPago=" + MedioPago);
+            st.WriteLine("LugarExpedicion=" + Emisor.CP);
+
+            st.WriteLine("[CfdiRelacionados]");
+            st.WriteLine("TipoRelacion=01");
+            st.WriteLine("UUID=["+ UUIDFactura + "]");
+
+            //; Atributo requerido para indicar la clave de la relación que existe entre éste CFDI y los CFDI previos.(Conforme al catálogo c_TipoRelacion)
+            
+            st.WriteLine("[DatosAdicionales]");
+            st.WriteLine("tipoDocumento=NOTA DE CRÉDITO");
+            st.WriteLine("observaciones=" + Observaciones.Replace("\r", " ").Replace("\n", " ") + " Facturación Versión 3.3 - TIIM Tecnología | www.tiimtecnologia.com |"); //Facturación Versión 3.3 - TIIM Tecnología | www.tiimtecnologia.com |");
+            st.WriteLine("platillaPDF=custom");//gti_clasica");// clasic");// custom");
+            st.WriteLine("colorLetraE=000000");
+            st.WriteLine("colorPlantillaHex=000000");
+            st.WriteLine("logotipo=lg_de198d9f5c5960f7ac72e6f"); //lg_de198d9f5c5960f7ac72e6f - Serdan //lg_a0f8b790af59b2e36be4cf1//TIIM 
+
+
+            st.WriteLine("[Emisor]");
+            st.WriteLine("Rfc=" + Emisor.RFC);
+            st.WriteLine("Nombre=" + Emisor.NombreFiscal);
+            st.WriteLine("RegimenFiscal=" + Emisor.RegimenFiscalId);
+
+            st.WriteLine("[Receptor]");
+            st.WriteLine("Rfc=" + Cliente.RFC);
+            st.WriteLine("Nombre=" + Cliente.NombreFiscal);
+            st.WriteLine("UsoCFDI=G02"); //UsoCFDI| G02 Devoluciones, descuentos y bonificacione //st.WriteLine("UsoCFDI=" + Emisor.UsoCDFI);
+
+
+            int cont = 1;
+            //foreach (EntProducto p in ListaProductos)
+            //{
+                st.WriteLine("[Concepto#" + cont + "]");
+                st.WriteLine("ClaveProdServ=84111506");//TIIM | 81161501 CLAVE PRODUCTO SERVICIO//st.WriteLine("ClaveProdServ=81161501" + p.ClaveProdServ);
+                st.WriteLine("NoIdentificacion=");//TTIM | MENS01*
+                st.WriteLine("Cantidad=1");
+                st.WriteLine("ClaveUnidad=ACT"); //TIIM | E48 Unidad de servicio //st.WriteLine("ClaveUnidad=" + p.ClaveUnidad);
+                //if (p.Unidad.Length > 20)
+                    st.WriteLine("Unidad=Actividad");//+ p.Unidad //st.WriteLine("Unidad=" + p.TipoUnidad);
+                //else
+                //    st.WriteLine("Unidad=" + p.Unidad);//+ p.Unidad //st.WriteLine("Unidad=" + p.TipoUnidad);
+
+                st.WriteLine("Descripcion="+Descripcion);
+
+                decimal importe = Math.Round((Math.Round(Total, 2) / (1 + IVA)), 4);
+
+                decimal importeSinRedondeo = (Math.Round(Total, 2) / (1 + IVA));
+                st.WriteLine("ValorUnitario=" + (importe / 1).ToString("0.0000"));//p.PrecioVentaSinIVA.ToString("0.00"));
+                st.WriteLine("Importe=" + importe.ToString("0.0000"));//p.PrecioSinIVA.ToString("0.00"));
+                st.WriteLine("Descuento=0.00");
+
+                st.WriteLine("Impuestos.Traslados.Base = [" + importe.ToString("0.0000") + "]");//p.PrecioSinIVA.ToString("0.00") + "]");
+                st.WriteLine("Impuestos.Traslados.Impuesto =[002]");//002
+                st.WriteLine("Impuestos.Traslados.TipoFactor =[" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") + "]");//Tasa|Cuota|Exento
+                st.WriteLine("Impuestos.Traslados.TasaOCuota =[" + IVA.ToString().PadRight(8, '0') + "]");// 0.160000
+                if (Emisor.TipoFactorId > 1)// CUOTA|EXENTO|
+                    st.WriteLine("Impuestos.Traslados.Importe =[0.0000]");
+                else
+                    st.WriteLine("Impuestos.Traslados.Importe =[" + (Math.Round(Total, 2) - Math.Round(importeSinRedondeo, 4)).ToString("0.0000") + "]");//p.PrecioSinIVA).ToString("0.00") + "]");
+                                                                                                                                                            //st.WriteLine("Impuestos.Traslados.Importe =[" + (p.Precio - Math.Round(importeSinRedondeo, 4)).ToString("0.0000") + "]");//p.PrecioSinIVA).ToString("0.00") + "]");
+                                                                                                                                                            //st.WriteLine("Impuestos.Traslados.Importe =[" + (p.Precio - p.PrecioSinIVA).ToString("0.00") + "]");
+
+                cont++;
+            //}
+
+            //TRASLADOS TOTALES
+            //if (CantidadIEPS > 0)//SI LLEVA CON IEPS SE PONEN LOS DOS SINO SOLO IVA
+            //{
+            //    st.WriteLine("[Traslados]");
+            //    st.WriteLine("TotalImpuestosTrasladados=" + (CantidadIVA + CantidadIEPS).ToString("0.00"));
+            //    st.WriteLine("Impuesto=[002,003]");
+            //    st.WriteLine("TipoFactor=[" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") + ",Tasa]");//Tasa| NO HAY (Cuota|Exento) PARA IEPS 
+            //    st.WriteLine("TasaOCuota=[" + IVA.ToString().PadRight(8, '0') + "," + IEPS.ToString().PadRight(8, '0') + "]");
+            //    st.WriteLine("Importe=[" + CantidadIVA.ToString("0.00") + "," + CantidadIEPS.ToString("0.00") + "]");
+            //}
+            //else 
+            if (Emisor.TipoFactorId != 3)
+            {
+                st.WriteLine("[Traslados]");
+                st.WriteLine("TotalImpuestosTrasladados=" + CantidadIVA.ToString("0.00"));
+                st.WriteLine("Impuesto=[002]");
+                st.WriteLine("TipoFactor=[" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") + "]");
+                st.WriteLine("TasaOCuota=[" + IVA.ToString().PadRight(8, '0') + "]");
+                st.WriteLine("Importe=[" + CantidadIVA.ToString("0.00") + "]");
+            }
+
+
+            st.Close();
+
+            WSConecFM.Resultados r_wsconect = new Resultados();//activation.Activacion(activarC);
+
+            requestTimbrarCFDI reqt = new requestTimbrarCFDI();
+            reqt.UserID = UserID;// "UsuarioPruebasWS";
+            reqt.UserPass = UserPass;// "b9ec2afa3361a59af4b4d102d3f704eabdf097d4";
+            reqt.emisorRFC = Emisor.RFC;// "LAN7008173R5";
+            reqt.urlTimbrado = "https://t2.facturacionmoderna.com/timbrado/soap";
+
+            reqt.generarPDF = true;
+
+            Timbrado timbra = new Timbrado();
+            r_wsconect = timbra.Timbrar(LayoutFileNC, reqt);
+
+            //r_wsconect.status = false;
+            if (!r_wsconect.status)
+            {
+                respuesta = r_wsconect.message; //MessageBox.Show(r_wsconect.message);
+                throw new Exception("ERROR EN TIMBRADO-" + respuesta);// Environment.Exit(-1);
+            }
+            byte[] byteXML = System.Convert.FromBase64String(r_wsconect.xmlBase64);
+            System.IO.FileStream swxml = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".xml"))), System.IO.FileMode.Create);
+            swxml.Write(byteXML, 0, byteXML.Length);
+            swxml.Close();
+            if (reqt.generarCBB)
+            {
+                byte[] byteCBB = System.Convert.FromBase64String(r_wsconect.cbbBase64);
+                System.IO.FileStream swcbb = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".png"))), System.IO.FileMode.Create);
+                swcbb.Write(byteCBB, 0, byteCBB.Length);
+                swcbb.Close();
+            }
+            if (reqt.generarPDF)
+            {
+                byte[] bytePDF = System.Convert.FromBase64String(r_wsconect.pdfBase64);
+                System.IO.FileStream swpdf = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".pdf"))), System.IO.FileMode.Create);
+                swpdf.Write(bytePDF, 0, bytePDF.Length);
+                swpdf.Close();
+            }
+            if (reqt.generarTXT)
+            {
+                byte[] byteTXT = System.Convert.FromBase64String(r_wsconect.txtBase64);
+                System.IO.FileStream swtxt = new System.IO.FileStream((PathGuardaArchivos + ("\\" + (r_wsconect.uuid + ".txt"))), System.IO.FileMode.Create);
+                swtxt.Write(byteTXT, 0, byteTXT.Length);
+                swtxt.Close();
+            }
+
+            respuesta = "Comprobante guardado en " + PathGuardaArchivos + "\\";//MessageBox.Show("Comprobante guardado en " + path + "\\");
+            //Cursor.Current = Cursors.Default;
+            return r_wsconect.uuid;
+        }
+
     }
 }

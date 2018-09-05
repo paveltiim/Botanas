@@ -88,7 +88,7 @@ namespace Aires.Pantallas
                 
                 List<EntUsuario> usuarios=CargaUsuarios();
 
-                int version = 2;//1:SERDAN; 2:CASAR; 3:OBR NAV; 4:MARTIN
+                int version = 4;//1:SERDAN; 2:CASAR; 3:OBR NAV; 4:MARTIN
 
                 tsbSincronizacion.Enabled = false;
                 switch (version)

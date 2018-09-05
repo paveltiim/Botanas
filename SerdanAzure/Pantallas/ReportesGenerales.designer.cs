@@ -47,7 +47,7 @@
             this.EntEmpresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.EntDepositoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tcReportes = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tpVentas = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdoPorMesVentas = new System.Windows.Forms.RadioButton();
             this.btnRefrescarReporteVentas = new System.Windows.Forms.Button();
@@ -72,7 +72,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.rvVentasPorProducto = new Microsoft.Reporting.WinForms.ReportViewer();
             this.cmbFiltroProductosVentas = new System.Windows.Forms.ComboBox();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tpEntradas = new System.Windows.Forms.TabPage();
             this.tabControl7 = new System.Windows.Forms.TabControl();
             this.tabPage20 = new System.Windows.Forms.TabPage();
             this.rvEntradas = new Microsoft.Reporting.WinForms.ReportViewer();
@@ -105,7 +105,7 @@
             this.cmbMesesInventario = new System.Windows.Forms.ComboBox();
             this.cmbAñosInventario = new System.Windows.Forms.ComboBox();
             this.rdoPorMesInventario = new System.Windows.Forms.RadioButton();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tpClientes = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.pnlAlDiaClientes = new System.Windows.Forms.Panel();
@@ -121,7 +121,7 @@
             this.cmbMesesDeudaCliente = new System.Windows.Forms.ComboBox();
             this.cmbAñosDeudaClientes = new System.Windows.Forms.ComboBox();
             this.rdoPorMesDeudaClientes = new System.Windows.Forms.RadioButton();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tpProveedores = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnRefrescaDeudaProveedores = new System.Windows.Forms.Button();
             this.pnlPorMesDeudaProveedores = new System.Windows.Forms.Panel();
@@ -134,12 +134,15 @@
             this.rvDeudaProveedores = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabPage16 = new System.Windows.Forms.TabPage();
             this.rvPagosProveedores = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.btnBuscaEmpresa = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cmbEmpresas = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.entPedidoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EntProductoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EntEmpresaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EntDepositoBindingSource)).BeginInit();
             this.tcReportes.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tpVentas.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlPorMesVentas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).BeginInit();
@@ -149,7 +152,7 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.entClienteBindingSource)).BeginInit();
             this.tabPage10.SuspendLayout();
-            this.tabPage5.SuspendLayout();
+            this.tpEntradas.SuspendLayout();
             this.tabControl7.SuspendLayout();
             this.tabPage20.SuspendLayout();
             this.tabPage21.SuspendLayout();
@@ -162,14 +165,14 @@
             this.panel6.SuspendLayout();
             this.pnlAlDiaInventario.SuspendLayout();
             this.pnlPorMesInventario.SuspendLayout();
-            this.tabPage6.SuspendLayout();
+            this.tpClientes.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage11.SuspendLayout();
             this.pnlAlDiaClientes.SuspendLayout();
             this.tabPage12.SuspendLayout();
             this.panel3.SuspendLayout();
             this.pnlPorMesDeudaClientes.SuspendLayout();
-            this.tabPage7.SuspendLayout();
+            this.tpProveedores.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pnlPorMesDeudaProveedores.SuspendLayout();
             this.tabControl5.SuspendLayout();
@@ -195,30 +198,30 @@
             // 
             // tcReportes
             // 
-            this.tcReportes.Controls.Add(this.tabPage2);
-            this.tcReportes.Controls.Add(this.tabPage5);
+            this.tcReportes.Controls.Add(this.tpVentas);
+            this.tcReportes.Controls.Add(this.tpEntradas);
             this.tcReportes.Controls.Add(this.tabPage13);
-            this.tcReportes.Controls.Add(this.tabPage6);
-            this.tcReportes.Controls.Add(this.tabPage7);
+            this.tcReportes.Controls.Add(this.tpClientes);
+            this.tcReportes.Controls.Add(this.tpProveedores);
             this.tcReportes.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tcReportes.Location = new System.Drawing.Point(12, 12);
+            this.tcReportes.Location = new System.Drawing.Point(12, 15);
             this.tcReportes.Name = "tcReportes";
             this.tcReportes.SelectedIndex = 0;
             this.tcReportes.Size = new System.Drawing.Size(1556, 745);
             this.tcReportes.TabIndex = 86;
             this.tcReportes.SelectedIndexChanged += new System.EventHandler(this.tcReportes_SelectedIndexChanged);
             // 
-            // tabPage2
+            // tpVentas
             // 
-            this.tabPage2.Controls.Add(this.panel1);
-            this.tabPage2.Controls.Add(this.tabControl1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 23);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1548, 718);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Ventas";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tpVentas.Controls.Add(this.panel1);
+            this.tpVentas.Controls.Add(this.tabControl1);
+            this.tpVentas.Location = new System.Drawing.Point(4, 23);
+            this.tpVentas.Name = "tpVentas";
+            this.tpVentas.Padding = new System.Windows.Forms.Padding(3);
+            this.tpVentas.Size = new System.Drawing.Size(1548, 718);
+            this.tpVentas.TabIndex = 1;
+            this.tpVentas.Text = "Ventas";
+            this.tpVentas.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -497,17 +500,17 @@
             this.cmbFiltroProductosVentas.ValueMember = "Id";
             this.cmbFiltroProductosVentas.SelectedIndexChanged += new System.EventHandler(this.cmbFiltroProductosVentas_SelectedIndexChanged);
             // 
-            // tabPage5
+            // tpEntradas
             // 
-            this.tabPage5.Controls.Add(this.tabControl7);
-            this.tabPage5.Controls.Add(this.panel5);
-            this.tabPage5.Location = new System.Drawing.Point(4, 23);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1548, 718);
-            this.tabPage5.TabIndex = 3;
-            this.tabPage5.Text = "Entradas";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.tpEntradas.Controls.Add(this.tabControl7);
+            this.tpEntradas.Controls.Add(this.panel5);
+            this.tpEntradas.Location = new System.Drawing.Point(4, 23);
+            this.tpEntradas.Name = "tpEntradas";
+            this.tpEntradas.Padding = new System.Windows.Forms.Padding(3);
+            this.tpEntradas.Size = new System.Drawing.Size(1548, 718);
+            this.tpEntradas.TabIndex = 3;
+            this.tpEntradas.Text = "Entradas";
+            this.tpEntradas.UseVisualStyleBackColor = true;
             // 
             // tabControl7
             // 
@@ -898,16 +901,16 @@
             this.rdoPorMesInventario.UseVisualStyleBackColor = true;
             this.rdoPorMesInventario.CheckedChanged += new System.EventHandler(this.rdoPorMesInventario_CheckedChanged);
             // 
-            // tabPage6
+            // tpClientes
             // 
-            this.tabPage6.Controls.Add(this.tabControl3);
-            this.tabPage6.Controls.Add(this.panel3);
-            this.tabPage6.Location = new System.Drawing.Point(4, 23);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1548, 718);
-            this.tabPage6.TabIndex = 4;
-            this.tabPage6.Text = "Clientes";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.tpClientes.Controls.Add(this.tabControl3);
+            this.tpClientes.Controls.Add(this.panel3);
+            this.tpClientes.Location = new System.Drawing.Point(4, 23);
+            this.tpClientes.Name = "tpClientes";
+            this.tpClientes.Size = new System.Drawing.Size(1548, 718);
+            this.tpClientes.TabIndex = 4;
+            this.tpClientes.Text = "Clientes";
+            this.tpClientes.UseVisualStyleBackColor = true;
             // 
             // tabControl3
             // 
@@ -1092,17 +1095,17 @@
             this.rdoPorMesDeudaClientes.UseVisualStyleBackColor = true;
             this.rdoPorMesDeudaClientes.CheckedChanged += new System.EventHandler(this.rdoPorMesDeudaClientes_CheckedChanged);
             // 
-            // tabPage7
+            // tpProveedores
             // 
-            this.tabPage7.Controls.Add(this.panel4);
-            this.tabPage7.Controls.Add(this.tabControl5);
-            this.tabPage7.Location = new System.Drawing.Point(4, 23);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1548, 718);
-            this.tabPage7.TabIndex = 5;
-            this.tabPage7.Text = "Proveedores";
-            this.tabPage7.UseVisualStyleBackColor = true;
+            this.tpProveedores.Controls.Add(this.panel4);
+            this.tpProveedores.Controls.Add(this.tabControl5);
+            this.tpProveedores.Location = new System.Drawing.Point(4, 23);
+            this.tpProveedores.Name = "tpProveedores";
+            this.tpProveedores.Padding = new System.Windows.Forms.Padding(3);
+            this.tpProveedores.Size = new System.Drawing.Size(1548, 718);
+            this.tpProveedores.TabIndex = 5;
+            this.tpProveedores.Text = "Proveedores";
+            this.tpProveedores.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
@@ -1257,13 +1260,53 @@
             this.rvPagosProveedores.Size = new System.Drawing.Size(850, 525);
             this.rvPagosProveedores.TabIndex = 49;
             // 
+            // btnBuscaEmpresa
+            // 
+            this.btnBuscaEmpresa.BackColor = System.Drawing.Color.Transparent;
+            this.btnBuscaEmpresa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBuscaEmpresa.BackgroundImage")));
+            this.btnBuscaEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBuscaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuscaEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscaEmpresa.Location = new System.Drawing.Point(840, 5);
+            this.btnBuscaEmpresa.Name = "btnBuscaEmpresa";
+            this.btnBuscaEmpresa.Size = new System.Drawing.Size(40, 28);
+            this.btnBuscaEmpresa.TabIndex = 128;
+            this.btnBuscaEmpresa.UseVisualStyleBackColor = false;
+            this.btnBuscaEmpresa.Click += new System.EventHandler(this.btnBuscaEmpresa_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.Color.Transparent;
+            this.label21.Location = new System.Drawing.Point(424, 15);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(51, 13);
+            this.label21.TabIndex = 126;
+            this.label21.Text = "Empresa:";
+            // 
+            // cmbEmpresas
+            // 
+            this.cmbEmpresas.DisplayMember = "Descripcion";
+            this.cmbEmpresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEmpresas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbEmpresas.FormattingEnabled = true;
+            this.cmbEmpresas.Location = new System.Drawing.Point(475, 5);
+            this.cmbEmpresas.Name = "cmbEmpresas";
+            this.cmbEmpresas.Size = new System.Drawing.Size(359, 28);
+            this.cmbEmpresas.TabIndex = 127;
+            this.cmbEmpresas.ValueMember = "Id";
+            this.cmbEmpresas.SelectedIndexChanged += new System.EventHandler(this.cmbEmpresas_SelectedIndexChanged);
+            // 
             // ReportesGenerales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1362, 741);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.btnBuscaEmpresa);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.cmbEmpresas);
             this.Controls.Add(this.tcReportes);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -1275,7 +1318,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.EntEmpresaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EntDepositoBindingSource)).EndInit();
             this.tcReportes.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tpVentas.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlPorMesVentas.ResumeLayout(false);
@@ -1288,7 +1331,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.entClienteBindingSource)).EndInit();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
+            this.tpEntradas.ResumeLayout(false);
             this.tabControl7.ResumeLayout(false);
             this.tabPage20.ResumeLayout(false);
             this.tabPage20.PerformLayout();
@@ -1305,7 +1348,7 @@
             this.panel6.PerformLayout();
             this.pnlAlDiaInventario.ResumeLayout(false);
             this.pnlPorMesInventario.ResumeLayout(false);
-            this.tabPage6.ResumeLayout(false);
+            this.tpClientes.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
@@ -1314,7 +1357,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.pnlPorMesDeudaClientes.ResumeLayout(false);
-            this.tabPage7.ResumeLayout(false);
+            this.tpProveedores.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.pnlPorMesDeudaProveedores.ResumeLayout(false);
@@ -1323,6 +1366,7 @@
             this.tabPage15.PerformLayout();
             this.tabPage16.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1330,7 +1374,7 @@
 
         private System.Windows.Forms.TabControl tcReportes;
         private System.Windows.Forms.BindingSource entPedidoBindingSource;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tpVentas;
         private System.Windows.Forms.RadioButton rdoPorMesVentas;
         private System.Windows.Forms.RadioButton rdoPorDiaVentas;
         private System.Windows.Forms.Panel pnlPorDiaVentas;
@@ -1345,7 +1389,7 @@
         private System.Windows.Forms.BindingSource entCatalogoGenericoBindingSource;
         private System.Windows.Forms.BindingSource EntEmpresaBindingSource;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tpEntradas;
         private Microsoft.Reporting.WinForms.ReportViewer rvEntradas;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnRefrescaEntradas;
@@ -1357,7 +1401,7 @@
         private System.Windows.Forms.DateTimePicker dtpFechaEntradas;
         private System.Windows.Forms.RadioButton rdoPorDiaEntradas;
         private System.Windows.Forms.BindingSource EntProductoBindingSource;
-        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tpClientes;
         private Microsoft.Reporting.WinForms.ReportViewer rvDeudaClientes;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnRefrescarDeudaClientes;
@@ -1366,7 +1410,7 @@
         private System.Windows.Forms.ComboBox cmbAñosDeudaClientes;
         private System.Windows.Forms.RadioButton rdoPorMesDeudaClientes;
         private System.Windows.Forms.RadioButton rdoTotalDeudaCliente;
-        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tpProveedores;
         private Microsoft.Reporting.WinForms.ReportViewer rvDeudaProveedores;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.RadioButton rdoTotalDeudaProveedores;
@@ -1420,5 +1464,8 @@
         private System.Windows.Forms.TabPage tabPage20;
         private System.Windows.Forms.TabPage tabPage21;
         private Microsoft.Reporting.WinForms.ReportViewer rvEntradasDetalle;
+        private System.Windows.Forms.Button btnBuscaEmpresa;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox cmbEmpresas;
     }
 }

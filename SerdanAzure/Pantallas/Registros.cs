@@ -3,9 +3,9 @@ using AiresNegocio;
 using AiresUtilerias;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Reporting.WinForms;
-//using iTextSharp.text;
-//using iTextSharp.text.pdf;
-//using iTextSharp.text.pdf.parser;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,17 +64,17 @@ namespace Aires.Pantallas
                 new BusPedidos().ActualizaEstatusProductoDetallePedido(Pedido);
             }
 
-            void AgregarFacturaPedido(int PedidoId, string UUID, string Ruta)
-            {
-                EntFactura factura = new EntFactura()
-                {
-                    PedidoId = PedidoId,
-                    UUID = UUID,
-                    Fecha = DateTime.Today,
-                    Ruta=Ruta
-                };
-                new BusPedidos().AgregaFactura(factura);
-            }
+            //void AgregarFacturaPedido(int PedidoId, string UUID, string Ruta)
+            //{
+            //    EntFactura factura = new EntFactura()
+            //    {
+            //        PedidoId = PedidoId,
+            //        UUID = UUID,
+            //        Fecha = DateTime.Today,
+            //        Ruta=Ruta
+            //    };
+            //    new BusPedidos().AgregaFactura(factura);
+            //}
             void ActualizaEstatusFacturaPedido(EntFactura Factura, int EstatusId)
             {
                 Factura.EstatusId = EstatusId;
@@ -207,10 +207,13 @@ namespace Aires.Pantallas
         #endregion
 
         #region Metodos Impresion
-        public void CargaRvVentas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta)
+        public void CargaRvVentas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta, int ClienteId)
         {
             List<EntPedido> ListaPedidos = new BusPedidos().ObtienePedidosClientesPorFechas(EmpresaId, FechaDesde, FechaHasta);
-            entPedidoBindingSource.DataSource = ListaPedidos;
+            if(ClienteId>0)
+                entPedidoBindingSource.DataSource = ListaPedidos.Where(P=>P.ClienteId==ClienteId);
+            else
+                entPedidoBindingSource.DataSource = ListaPedidos;
             ReportParameter parmEmpresa;
             parmEmpresa = new ReportParameter("Empresa", Program.EmpresaSeleccionada.Nombre);
 
@@ -314,7 +317,6 @@ namespace Aires.Pantallas
                                 select c;
             }
 
-
             gvPedidos.DataSource = null;
             gvPedidos.DataSource = pedidosFiltro.ToList();
         }
@@ -329,6 +331,7 @@ namespace Aires.Pantallas
             //    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
             dtpFechaDesdeVentas.Value = ObtieneLunesEstaSemana(DateTime.Today);
             dtpFechaHastaVentas.Value = dtpFechaDesdeVentas.Value.AddDays(DiasPorSemana);
+            cmbUsoCFDI.SelectedIndex = 0;
         }
 
         void EnviaCorreoArchivo(string Email, DateTime Fecha, string PathArchivo, string Empresa)
@@ -514,11 +517,25 @@ namespace Aires.Pantallas
             catch (Exception ex) { MuestraExcepcion(ex, "ERROR EN LA EXPORTACIÓN"); }
         }
 
+        public void CargaCatalogoUsoCFDI()
+        {
+            //ListaEmpresas = new BusEmpresas().ObtieneCatalogoRegimen();
+            cmbUsoCFDI.DataSource = new BusEmpresas().ObtieneCatalogoUsoCFDI();
+        }
 
+        public void CargaClientes(int EmpresaId)
+        {
+            List<EntCliente > lst = new BusClientes().ObtieneClientes(EmpresaId).OrderBy(P => P.Nombre).ToList();
+            //List<EntCliente> lst = new BusClientes().ObtieneClientes(EmpresaId);
+            lst.Insert(0, new EntCliente() { Id = -1, Nombre = "-TODOS-" });
+            cmbClientes.DataSource = lst;
+
+        }
         private void Reportes_Load(object sender, EventArgs e)
         {
             try
             {
+                CargaCatalogoUsoCFDI();
                 InicializaPantalla();
                 CargaEmpresas();
 
@@ -529,9 +546,11 @@ namespace Aires.Pantallas
                 {
                     cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
 
+                    CargaClientes(Program.EmpresaSeleccionada.Id);
                     CargaGvPedidos(Program.EmpresaSeleccionada.Id);
 
                     gvPedidos.ClearSelection();
+
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -595,7 +614,8 @@ namespace Aires.Pantallas
         EntFactura EnviarFactura(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
                                     string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
                                     decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS,
-                                    string Observaciones)
+                                    string Observaciones,
+                                   string TipoComprobante, string UsoCFDI)
         {
             string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
             if (!System.IO.Directory.Exists(pathClienteDirectorio))
@@ -663,18 +683,26 @@ namespace Aires.Pantallas
             UtiFacturacion factura = new UtiFacturacion();
 
             int tipoTasaIVAid = Empresa.TipoTasaIVAId;
-            if (txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked)
+            decimal tasaOCuota = Empresa.TasaOCuota;
+
+            if ((txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked) && Program.EmpresaSeleccionada.TipoPersonaId == 1)//Persona Fisica
             {
                 Empresa.TipoTasaIVAId = 2;//TASA 0%
+                Empresa.TasaOCuota = 0.0m;//TASA 0%
             }
-            //string uuid = factura.Facturar(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
-            //                               NumeroCuenta, pathClienteDirectorioFacturas,
-            //                               CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
-            string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
+            else
+            {
+                Empresa.TipoTasaIVAId = 1;//TASA 16%
+                Empresa.TasaOCuota = 0.16m;//TASA 0%
+            }
+
+            string uuid = factura.Facturar33(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura,"AA", FechaFactura,
+                                           TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
                                            NumeroCuenta, pathClienteDirectorioFacturas,
                                            CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
 
             Empresa.TipoTasaIVAId = tipoTasaIVAid;
+            Empresa.TasaOCuota = tasaOCuota;
 
             EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
 
@@ -683,7 +711,8 @@ namespace Aires.Pantallas
         EntFactura EnviarFacturaPrueba(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
                                    string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
                                    decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS,
-                                   string Observaciones)
+                                   string Observaciones,
+                                   string TipoComprobante, string UsoCFDI)
         {
             string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
             if (!System.IO.Directory.Exists(pathClienteDirectorio))
@@ -714,20 +743,31 @@ namespace Aires.Pantallas
             //UtiFacturacion factura = new UtiFacturacion();
 
             int tipoTasaIVAid = Empresa.TipoTasaIVAId;
-            if (txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked)
-                Empresa.TipoTasaIVAId = 2;//TASA 0%
+            decimal tasaOCuota = Empresa.TasaOCuota;
 
-            string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
+            if ((txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked) && Program.EmpresaSeleccionada.TipoPersonaId == 1)//Persona Fisica
+            {
+                Empresa.TipoTasaIVAId = 2;//TASA 0%
+                Empresa.TasaOCuota = 0.0m;//TASA 0%
+            }
+            else
+            {
+                Empresa.TipoTasaIVAId = 1;//TASA 16%
+                Empresa.TasaOCuota = 0.16m;//TASA 0%
+            }
+
+            string uuid = factura.Facturar33(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura,
+                                           TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
                                            NumeroCuenta, pathClienteDirectorioFacturas,
                                            CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
-
             Empresa.TipoTasaIVAId = tipoTasaIVAid;
+            Empresa.TasaOCuota = tasaOCuota;
 
             EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
 
             return fact;// pathClienteDirectorioFacturas;
         }
-        public void AgregarFacturaPedido(EntFactura Factura)
+        void AgregarFacturaPedido(EntFactura Factura)
         {
             new BusFacturas().AgregaFactura(Factura);
         }
@@ -748,8 +788,8 @@ namespace Aires.Pantallas
             mensaje += "\n Agradecemos su preferencia y esperamos seguirle atendiendo como se merece. \n";
             mensaje += "\n Atte. \n" + Empresa.NombreFiscal;
 
-            if (Program.UsuarioSeleccionado.Id > 1)
-            {
+            //if (Program.UsuarioSeleccionado.Id > 1)
+            //{
                 string email4 = "refrigeracion_serdan@hotmail.com";
                 if (Program.UsuarioSeleccionado.Id == 5)
                 {//CASAR
@@ -757,15 +797,16 @@ namespace Aires.Pantallas
                     string email6 = "comercializadoracasar@hotmail.com";
                     new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3, email4, email5, email6 }, mensaje, archivosAdjuntos);
                 }
-                else
+                //else
                     new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3, email4 }, mensaje, archivosAdjuntos);
-            }
-            else
-                new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3 }, mensaje, archivosAdjuntos);
+            //}
+            //else
+            //    new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3 }, mensaje, archivosAdjuntos);
 
             MessageBox.Show("El Correo se ha Enviado correctamente, a la(s) dirección(es): \n " + Cliente.Email + " \n " + Cliente.Email2 + " \n " + Cliente.Email3);
             //}
         }
+
         private void btnFacturar_Click(object sender, EventArgs e)
         {
             try
@@ -796,22 +837,17 @@ namespace Aires.Pantallas
                         foreach (EntProducto pd in new BusProductos().ObtieneProductosDetallePorPedido(pedidoSeleccionado.Id).Where(P => P.ProductoId == p.Id))
                         {
                             if (!string.IsNullOrWhiteSpace(pd.Serie))
-                                p.Descripcion += pd.Serie + " | ";
+                                p.Descripcion += pd.Serie + " - ";
                         }
                     }
                     if (Program.UsuarioSeleccionado.Id == 8 || Program.UsuarioSeleccionado.Id == 9)
                         productosPorPedido[productosPorPedido.Count - 1].Descripcion += "Solicitud:".PadLeft(60, '-') + txtBanco.Text;
 
                     EntCliente cliente = ObtieneCliente(pedidoSeleccionado.ClienteId);
-                    if (chkFacturaPublicoGeneral.Checked)
-                    {
-                        EntCliente clientePublicoGeneral = ObtieneCliente(10);
-                        clientePublicoGeneral.Nombre = cliente.Nombre;
+                    TomaDatosCliente(cliente);
 
-                        cliente = clientePublicoGeneral;
-                    }
                     bool facturado = false;
-                    string uuid = "";
+                    //string uuid = "";
                     EntFactura factura = new EntFactura();
 
                     try
@@ -821,25 +857,64 @@ namespace Aires.Pantallas
                         //pedidoSeleccionado.Factura = ultimaFactura.ToString();
 
                         pedidoSeleccionado.Factura = ObtieneUltimaFactura(Program.EmpresaSeleccionada.Id);
-                        pedidoSeleccionado.SubTotal = pedidoSeleccionado.Total/1.16m;
-                        //pedidoSeleccionado.Total = ConvierteTextoADecimal(txtTotal.Text);
 
+                        decimal cantidadIva;
+                        if ((cliente.RFC == "XAXX010101000" || chkFacturaPublicoGeneral.Checked) && Program.EmpresaSeleccionada.TipoPersonaId == 1)//Persona Fisica
+                        {
+                            pedidoSeleccionado.SubTotal = pedidoSeleccionado.Total;
+                            cantidadIva = 0;
+                        }
+                        else
+                        {
+                            pedidoSeleccionado.SubTotal = Math.Round(pedidoSeleccionado.Total, 2) / (1 + IVA); //Math.Round(total / (1 + IVA), 2);
+                            //SOLO VERIFICACION QUE EL CALCULO ES EL MISMO
+                            //cantidadIva = pedidoSeleccionado.SubTotal * IVA;
+                            cantidadIva = Math.Round(pedidoSeleccionado.Total, 2) - pedidoSeleccionado.SubTotal;
+                        }
+                        
                         txtFormaPago.Text = cmbFormaPago.Text.Remove(2, cmbFormaPago.Text.Length - 2);
-                        txtMetodoPago.Text = cmbMetodoPago.Text;
+                        txtMetodoPago.Text = cmbMetodoPago.Text.Remove(3);
+                        txtUsoCFDI.Text = cmbUsoCFDI.Text.Remove(3);
 
-                        TomaDatosCliente(cliente);
+                        //TomaDatosCliente(cliente);
 
+                        //pruebas
+                        //empresaSeleccionada.Facturacion = false;
                         if (empresaSeleccionada.Facturacion)
+                        {
                             factura = EnviarFactura(empresaSeleccionada, pedidoSeleccionado, productosPorPedido, cliente, DateTime.Now, txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text,
                                                 txtNumeroCuenta.Text,
-                                                pedidoSeleccionado.Total- pedidoSeleccionado.SubTotal, 0, 0, 0, txtObservaciones.Text);
+                                                cantidadIva, 0, 0, 0, txtObservaciones.Text,
+                                                "I", txtUsoCFDI.Text);
+
+                            try
+                            {
+                                //DESCUENTA TIMBRE
+                                new BusEmpresas().AumentaTimbreEmpresa(empresaSeleccionada.Id);
+                                Program.EmpresaSeleccionada.TimbresRestantes--;
+                                //Program.EmpresaSeleccionada.Timbres--;
+                                empresaSeleccionada.TimbresRestantes--;
+                                //empresaSeleccionada.Timbres--;
+                            }
+                             catch (Exception ex) { }
+                        }
                         else
-                            factura = EnviarFacturaPrueba(empresaSeleccionada, pedidoSeleccionado, productosPorPedido, cliente, DateTime.Now, txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text,
+                            factura = EnviarFacturaPrueba(empresaSeleccionada, pedidoSeleccionado, productosPorPedido, cliente, DateTime.Now, 
+                                                txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text,
                                                 txtNumeroCuenta.Text,
-                                                pedidoSeleccionado.Total - pedidoSeleccionado.SubTotal, 0, 0, 0, txtObservaciones.Text);
+                                                cantidadIva, 0, 0, 0, txtObservaciones.Text, 
+                                                "I", txtUsoCFDI.Text);
 
                         //uuid = EnviarFactura(pedidoSeleccionado, productosPorPedido, cliente, DateTime.Now, txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text, txtNumeroCuenta.Text);
                         factura.EmpresaId = empresaSeleccionada.Id;
+                        factura.TipoComprobanteId = 1;//I-INGRESO.
+                        factura.FormaPagoId = ConvierteTextoAInteger(txtFormaPago.Text);
+                        factura.MetodoPagoId = cmbMetodoPago.SelectedIndex + 1;
+                        factura.UsoCFDIId = ObtieneCatalogoGenericoFromCmb(cmbUsoCFDI).Id;
+
+                        //if(empresaSeleccionada.Id==5)//CASAR | TODAVIA NO APLICA
+                        factura.SerieFactura = empresaSeleccionada.SerieFactura;
+
                         facturado = true;
                     }
                     catch (Exception ex)
@@ -925,7 +1000,7 @@ namespace Aires.Pantallas
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelaFactura_Click(object sender, EventArgs e)
         {
             try
             {
@@ -966,14 +1041,15 @@ namespace Aires.Pantallas
                 btnCancelar.Enabled = pedido.Facturado;
                 btnFacturar.Visible= string.IsNullOrEmpty(pedido.UUID);
                 pnlFacturacion.Visible = string.IsNullOrEmpty(pedido.UUID);
+
+                btnFacturaExterna.Visible = string.IsNullOrEmpty(pedido.UUID);
+
                 btnComplementoPago.Enabled = pedido.Facturado;
 
                 //LimpiaTextBox(pnlFacturacion,true);
 
                 LimpiaTextBox(groupBox2, true);
                 CargaDatosCliente(ObtieneCliente(pedido.ClienteId));
-                txtFormaPago.Text = cmbFormaPago.Text;
-                txtMetodoPago.Text = cmbMetodoPago.Text.Remove(2, cmbMetodoPago.Text.Length - 2);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -1010,6 +1086,7 @@ namespace Aires.Pantallas
                     foreach (EntProducto p in productosPedido)
                     {
                         Productos vProd = new Productos();
+                        new BusProductos().ActualizaEstatusProducto(p.ProductoId, true);
                         vProd.ActualizaEstatusProductoDetalle(p, 1);//ESTATUS:1=ACTIVO
                         vProd.AumentaProducto(p.ProductoId, Convert.ToInt32(p.Cantidad));
                     }
@@ -1064,29 +1141,34 @@ namespace Aires.Pantallas
         {
             try
             {
-                EnableTextBox(pnlFacturacion, !chkFacturaPublicoGeneral.Checked);
+                EnableTextBox(gbDatosFiscales, !chkFacturaPublicoGeneral.Checked);
                 LimpiaTextBox(pnlFacturacion);
 
-                txtFormaPago.Text = cmbFormaPago.Text;
-                txtMetodoPago.Text = cmbMetodoPago.Text.Remove(2, cmbMetodoPago.Text.Length - 2);
+                EntPedido pedidoSeleccionado = ObtienePedidoFromGV(gvPedidos);
+                EntCliente clienteSeleccionado = ObtieneCliente(pedidoSeleccionado.ClienteId);
                 if (chkFacturaPublicoGeneral.Checked)
                 {
-                    EntCliente clientePublicoGeneral = ObtieneCliente(10);
-                    //EntCliente clientePublicoGeneral = ListaClientes.Where(P => P.Id == 10).ToList()[0];
+                    //EntCliente clientePublicoGeneral = ObtieneCliente(10);
+                    //CargaDatosClientePubicoGeneral(clientePublicoGeneral);
+                    EntCliente clientePublicoGeneral = new EntCliente();
+                    if (clienteSeleccionado != null)
+                        clientePublicoGeneral.Nombre = clienteSeleccionado.Nombre;
+                    else
+                        clientePublicoGeneral.Nombre = "PUBLICO GENERAL";
+                    clientePublicoGeneral.NombreFiscal = "PUBLICO GENERAL";
+                    clientePublicoGeneral.RFC = "XAXX010101000";
+                    clientePublicoGeneral.Email = "tiimfacturacion@hotmail.com";
+                    clientePublicoGeneral.FormaPagoId = 1;
 
-                    CargaDatosClientePubicoGeneral(clientePublicoGeneral);
-
-                    txtCondicionesPago.Enabled = true;
-                    txtNumeroCuenta.Enabled = true;
+                    CargaDatosCliente(clientePublicoGeneral);
                 }
+                else if (clienteSeleccionado != null)
+                    CargaDatosCliente(clienteSeleccionado);
                 else
-                {
-                    EntPedido pedidoSeleccionado = ObtienePedidoFromGV(gvPedidos);
-                    CargaDatosCliente(ObtieneCliente(pedidoSeleccionado.ClienteId));
+                    CargaDatosCliente(new EntCliente());
 
-                    txtNombreFiscal.Enabled = false;
-                    txtRFC.Enabled = false;
-                }
+                txtNombreFiscal.Enabled = false;
+                txtRFC.Enabled = false;
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -1225,7 +1307,10 @@ namespace Aires.Pantallas
                             cmbMesesVentas.SelectedIndex = DateTime.Today.Month - 1;
                             //dtpEntradasFechaDesde.Value = DateTime.Today;
 
-                            CargaRvVentas(Program.EmpresaSeleccionada.Id, new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
+                            CargaRvVentas(Program.EmpresaSeleccionada.Id, 
+                                new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), 
+                                new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)),
+                                ObtieneClienteFromCmb(cmbClientes).Id);
 
                             CargarAños = false;
                         }
@@ -1239,12 +1324,15 @@ namespace Aires.Pantallas
                 if (rdoPorMesVentas.Checked)
                 {
                     if (cmbMesesVentas.SelectedIndex >= 0)
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
+                        CargaRvVentas(Program.EmpresaSeleccionada.Id, new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)),
+                            ObtieneClienteFromCmb(cmbClientes).Id);
                 }
                 else if (rdoPorDiaVentas.Checked)
-                    CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDiaVentas.Value.Date, dtpFechaDiaVentas.Value.Date);
+                    CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDiaVentas.Value.Date, dtpFechaDiaVentas.Value.Date,
+                        ObtieneClienteFromCmb(cmbClientes).Id);
                 else if (rdoPorFechasVentas.Checked)
-                    CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date);
+                    CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date,
+                        ObtieneClienteFromCmb(cmbClientes).Id);
             }catch(Exception ex) { MuestraExcepcion(ex); }
             }
             private void rdoVentasPorMes_CheckedChanged(object sender, EventArgs e)
@@ -1259,7 +1347,8 @@ namespace Aires.Pantallas
                         pnlVentasPorDia.Enabled = false;
                         pnlVentasPorFechas.Enabled = false;
 
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
+                        CargaRvVentas(Program.EmpresaSeleccionada.Id, new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)),
+                            ObtieneClienteFromCmb(cmbClientes).Id);
                     }
                 }
                 catch (Exception ex) { MuestraExcepcion(ex); }
@@ -1277,7 +1366,8 @@ namespace Aires.Pantallas
                         pnlVentasPorMes.Enabled = false;
                         pnlVentasPorDia.Enabled = true;
                         pnlVentasPorFechas.Enabled = false;
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDiaVentas.Value.Date, dtpFechaDiaVentas.Value.Date);
+                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDiaVentas.Value.Date, dtpFechaDiaVentas.Value.Date,
+                            ObtieneClienteFromCmb(cmbClientes).Id);
                     }
                 }
                 catch (Exception ex) { MuestraExcepcion(ex); } 
@@ -1295,7 +1385,8 @@ namespace Aires.Pantallas
                         pnlVentasPorMes.Enabled = false;
                         pnlVentasPorDia.Enabled = false;
                         pnlVentasPorFechas.Enabled = true;
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date);
+                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date,
+                            ObtieneClienteFromCmb(cmbClientes).Id);
                     }
                 }
                 catch (Exception ex) { MuestraExcepcion(ex); }
@@ -1311,7 +1402,8 @@ namespace Aires.Pantallas
                     if (dtpFechaDesdeVentas.Value.Date > dtpFechaHastaVentas.Value.Date)
                         dtpFechaHastaVentas.Value = dtpFechaDesdeVentas.Value;
                     else
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date);
+                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date,
+                            ObtieneClienteFromCmb(cmbClientes).Id);
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -1326,7 +1418,8 @@ namespace Aires.Pantallas
                     if (dtpFechaHastaVentas.Value.Date < dtpFechaDesdeVentas.Value.Date)
                         dtpFechaDesdeVentas.Value = dtpFechaHastaVentas.Value;
                     else
-                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date);
+                        CargaRvVentas(Program.EmpresaSeleccionada.Id, dtpFechaDesdeVentas.Value.Date, dtpFechaHastaVentas.Value.Date,
+                            ObtieneClienteFromCmb(cmbClientes).Id);
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -1389,6 +1482,648 @@ namespace Aires.Pantallas
             {
                 EntPedido pedido = ObtienePedidoFromGV(gvPedidos);
                 MuestraAgregarComprobantePago(pedido);
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void btnFacturaExterna_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EntEmpresa empresaSeleccionada = Program.EmpresaSeleccionada;
+
+                EntPedido pedidoSeleccionado = ObtienePedidoFromGV(gvPedidos);
+
+                AgregaNumeroFactura vNumFac = new Pantallas.AgregaNumeroFactura();
+                if (vNumFac.ShowDialog() == DialogResult.OK) { 
+                    EntFactura factura = new EntFactura();
+                    factura.EmpresaId = empresaSeleccionada.Id;
+                    factura.PedidoId = pedidoSeleccionado.Id;
+                    
+                    factura.TipoComprobanteId = 1;//I-INGRESO.
+                    //factura.FormaPagoId = ConvierteTextoAInteger(txtFormaPago.Text);
+                    //factura.MetodoPagoId = cmbMetodoPago.SelectedIndex + 1;
+                    //factura.UsoCFDIId = ObtieneCatalogoGenericoFromCmb(cmbUsoCFDI).Id;
+                    factura.SerieFactura = "";// empresaSeleccionada.SerieFactura;
+
+                    factura.NumeroFactura = vNumFac.NumeroFactura;
+                    factura.Fecha = vNumFac.FechaFactura;
+                    factura.UUID = "";
+                    factura.Ruta = "";
+
+                    AgregarFacturaPedido(factura);
+
+                    btnFacturar.Visible = false;
+                    pnlFacturacion.Visible = false;
+
+                    btnRefrescar.Refresh();
+                }
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        ///CREAR PDF'S
+        void ModificaPDF(string TextoEscribe, string RutaArchivoModifica, string VersionModificada, List<EntProducto> ListaProductos)
+        {
+            string pathSourcePDF = RutaArchivoModifica;
+            //pathSourcePDF = @"C:\TIIM\Facturacion\FacturasPruebas\SERGIO PATRICIO GREE\20171004024601\439DFA02-9679-11E8-9275-D737D49CA409.pdf";
+            FileInfo file = new FileInfo(RutaArchivoModifica);
+            string pathOutputPDF = RutaArchivoModifica.Remove(RutaArchivoModifica.Length-4) + "-OBSERVACION"+VersionModificada+".pdf";
+             //   pathOutputPDF = @"C:\TIIM\Facturacion\FacturasPruebas\SERGIO PATRICIO GREE\20171004024601\neuefile.pdf";
+
+            ////Create an instance of our strategy
+            //var t = new MyLocationTextExtractionStrategy("TOTAL");
+
+            ////Parse page 1 of the document above
+            //using (var r = new PdfReader(pathSourcePDF))
+            //{
+            //    var ex = PdfTextExtractor.GetTextFromPage(r, 1, t);
+            //}
+
+            //create PdfReader object to read from the existing document
+            using (PdfReader reader3 = new PdfReader(pathSourcePDF))
+            //create PdfStamper object to write to get the pages from reader 
+            using (PdfStamper stamper = new PdfStamper(reader3, new FileStream(pathOutputPDF, FileMode.Create)))
+            {
+                //select two pages from the original document
+                reader3.SelectPages("1");
+
+                //gettins the page size in order to substract from the iTextSharp coordinates
+                var pageSize = reader3.GetPageSize(1);
+
+                // PdfContentByte from stamper to add content to the pages over the original content
+                PdfContentByte pbover = stamper.GetOverContent(1);
+
+                //add content to the page using ColumnText
+                iTextSharp.text.Font font = new iTextSharp.text.Font();
+                font.Size = 8;
+
+                //USING SPIRE
+                ////PdfTextFind[] results = null;
+                ////foreach (PdfPageBase page in doc.Pages)
+                ////{
+                ////    results = page.FindText("Spire.PDF").Finds;
+                ////    foreach (PdfTextFind text in results)
+                ////    {
+                ////        PointF p = text.Position;
+                ////        Console.WriteLine(p);
+                ////    }
+                ////}
+                //USING SPIRE
+
+                //var t = new MyLocationTextExtractionStrategy("TOTAL");
+                //var ex = PdfTextExtractor.GetTextFromPage(reader3, 1, t);
+                //int x = Convert.ToInt32(t.myPoints[0].Rect.Left);
+                //int y = Convert.ToInt32(t.myPoints[0].Rect.Bottom);
+
+                //***BUSCACOORDENADAS***
+                string textSearch = "TOTAL";
+                var parser = new PdfReaderContentParser(reader3);
+
+                    var strategy = parser.ProcessContent(1, new LocationTextExtractionStrategyWithPosition());
+
+                    var res = strategy.GetLocations();
+                    
+                var searchResult = res.Where(p => p.Text.Contains(textSearch)).OrderBy(p => p.Y).Reverse().ToList();
+                //****//
+                int cant = ListaProductos.Count;
+                
+                int x = 120;
+                int y = (Convert.ToInt32(searchResult[1].Y)+118)/cant;
+
+                y = (int)(pageSize.Height - y);
+                //Creates an image that is the size i need to hide the text i'm interested in removing
+                iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(new Bitmap(600, 40), BaseColor.WHITE);
+                //Sets the position that the image needs to be placed (ie the location of the text to be removed)
+                image.SetAbsolutePosition(0, y-20);
+                //Adds the image to the output pdf
+                stamper.GetOverContent(1).AddImage(image, true);
+                //setting up the X and Y coordinates of the document
+                ColumnText.ShowTextAligned(pbover, Element.ALIGN_CENTER, new Phrase(TextoEscribe, font), x, y, 0);
+                ColumnText.ShowTextAligned(pbover, Element.ALIGN_CENTER, new Phrase("Facturación 3.3 - Tiim Tecnología - www.tiimtecnologia.com -", font), 80, y-20, 0);
+            }
+
+        }
+
+        public class LocationTextExtractionStrategyWithPosition : LocationTextExtractionStrategy
+        {
+            private readonly List<TextChunk> locationalResult = new List<TextChunk>();
+
+            private readonly ITextChunkLocationStrategy tclStrat;
+
+            public LocationTextExtractionStrategyWithPosition() : this(new TextChunkLocationStrategyDefaultImp())
+            {
+            }
+
+            /**
+             * Creates a new text extraction renderer, with a custom strategy for
+             * creating new TextChunkLocation objects based on the input of the
+             * TextRenderInfo.
+             * @param strat the custom strategy
+             */
+            public LocationTextExtractionStrategyWithPosition(ITextChunkLocationStrategy strat)
+            {
+                tclStrat = strat;
+            }
+
+
+            private bool StartsWithSpace(string str)
+            {
+                if (str.Length == 0) return false;
+                return str[0] == ' ';
+            }
+
+
+            private bool EndsWithSpace(string str)
+            {
+                if (str.Length == 0) return false;
+                return str[str.Length - 1] == ' ';
+            }
+
+            /**
+             * Filters the provided list with the provided filter
+             * @param textChunks a list of all TextChunks that this strategy found during processing
+             * @param filter the filter to apply.  If null, filtering will be skipped.
+             * @return the filtered list
+             * @since 5.3.3
+             */
+
+            private List<TextChunk> filterTextChunks(List<TextChunk> textChunks, ITextChunkFilter filter)
+            {
+                if (filter == null)
+                {
+                    return textChunks;
+                }
+
+                var filtered = new List<TextChunk>();
+
+                foreach (var textChunk in textChunks)
+                {
+                    if (filter.Accept(textChunk))
+                    {
+                        filtered.Add(textChunk);
+                    }
+                }
+
+                return filtered;
+            }
+
+            public override void RenderText(TextRenderInfo renderInfo)
+            {
+                LineSegment segment = renderInfo.GetBaseline();
+                if (renderInfo.GetRise() != 0)
+                { // remove the rise from the baseline - we do this because the text from a super/subscript render operations should probably be considered as part of the baseline of the text the super/sub is relative to 
+                    Matrix riseOffsetTransform = new Matrix(0, -renderInfo.GetRise());
+                    segment = segment.TransformBy(riseOffsetTransform);
+                }
+                TextChunk tc = new TextChunk(renderInfo.GetText(), tclStrat.CreateLocation(renderInfo, segment));
+                locationalResult.Add(tc);
+            }
+
+
+            public IList<TextLocation> GetLocations()
+            {
+
+                var filteredTextChunks = filterTextChunks(locationalResult, null);
+                filteredTextChunks.Sort();
+
+                TextChunk lastChunk = null;
+
+                var textLocations = new List<TextLocation>();
+
+                foreach (var chunk in filteredTextChunks)
+                {
+
+                    if (lastChunk == null)
+                    {
+                        //initial
+                        textLocations.Add(new TextLocation
+                        {
+                            Text = chunk.Text,
+                            X = iTextSharp.text.Utilities.PointsToMillimeters(chunk.Location.StartLocation[0]),
+                            Y = iTextSharp.text.Utilities.PointsToMillimeters(chunk.Location.StartLocation[1])
+                        });
+
+                    }
+                    else
+                    {
+                        if (chunk.SameLine(lastChunk))
+                        {
+                            var text = "";
+                            // we only insert a blank space if the trailing character of the previous string wasn't a space, and the leading character of the current string isn't a space
+                            if (IsChunkAtWordBoundary(chunk, lastChunk) && !StartsWithSpace(chunk.Text) && !EndsWithSpace(lastChunk.Text))
+                                text += ' ';
+
+                            text += chunk.Text;
+
+                            textLocations[textLocations.Count - 1].Text += text;
+
+                        }
+                        else
+                        {
+
+                            textLocations.Add(new TextLocation
+                            {
+                                Text = chunk.Text,
+                                X = iTextSharp.text.Utilities.PointsToMillimeters(chunk.Location.StartLocation[0]),
+                                Y = iTextSharp.text.Utilities.PointsToMillimeters(chunk.Location.StartLocation[1])
+                            });
+                        }
+                    }
+                    lastChunk = chunk;
+                }
+
+                //now find the location(s) with the given texts
+                return textLocations;
+
+            }
+
+        }
+
+        public class TextLocation
+        {
+            public float X { get; set; }
+            public float Y { get; set; }
+
+            public string Text { get; set; }
+        }
+    
+    ////Helper class that stores our rectangle and text
+    //public class RectAndText
+    //{
+    //    public iTextSharp.text.Rectangle Rect;
+    //    public String Text;
+    //    public RectAndText(iTextSharp.text.Rectangle rect, String text)
+    //    {
+    //        this.Rect = rect;
+    //        this.Text = text;
+    //    }
+    //}
+    //public class MyLocationTextExtractionStrategy : LocationTextExtractionStrategy
+    //{
+    //    //Hold each coordinate
+    //    public List<RectAndText> myPoints = new List<RectAndText>();
+
+    //    //The string that we're searching for
+    //    public String TextToSearchFor { get; set; }
+
+    //    //How to compare strings
+    //    public System.Globalization.CompareOptions CompareOptions { get; set; }
+
+    //    public MyLocationTextExtractionStrategy(String textToSearchFor, System.Globalization.CompareOptions compareOptions = System.Globalization.CompareOptions.None)
+    //    {
+    //        this.TextToSearchFor = textToSearchFor;
+    //        this.CompareOptions = compareOptions;
+    //    }
+
+    //    //Automatically called for each chunk of text in the PDF
+    //    public override void RenderText(TextRenderInfo renderInfo)
+    //    {
+    //        base.RenderText(renderInfo);
+
+    //        //See if the current chunk contains the text
+    //        var startPosition = System.Globalization.CultureInfo.CurrentCulture.CompareInfo.IndexOf(renderInfo.GetText(), this.TextToSearchFor, this.CompareOptions);
+
+    //        //If not found bail
+    //        if (startPosition < 0)
+    //        {
+    //            return;
+    //        }
+
+    //        //Grab the individual characters
+    //        var chars = renderInfo.GetCharacterRenderInfos().Skip(startPosition).Take(this.TextToSearchFor.Length).ToList();
+
+    //        //Grab the first and last character
+    //        var firstChar = chars.First();
+    //        var lastChar = chars.Last();
+
+
+    //        //Get the bounding box for the chunk of text
+    //        var bottomLeft = firstChar.GetDescentLine().GetStartPoint();
+    //        var topRight = lastChar.GetAscentLine().GetEndPoint();
+
+    //        //Create a rectangle from it
+    //        var rect = new iTextSharp.text.Rectangle(
+    //                                                bottomLeft[Vector.I1],
+    //                                                bottomLeft[Vector.I2],
+    //                                                topRight[Vector.I1],
+    //                                                topRight[Vector.I2]
+    //                                                );
+
+    //        //Add this to our main collection
+    //        this.myPoints.Add(new RectAndText(rect, this.TextToSearchFor));
+    //    }
+
+    //}
+
+    //public static class PdfTextExtract
+    //{
+    //    public static string pdfText(string path)
+    //    {
+    //        PdfReader reader = new PdfReader(path);
+    //        string text = string.Empty;
+    //        for (int page = 1; page <= reader.NumberOfPages; page++)
+    //        {
+    //            text += PdfTextExtractor.GetTextFromPage(reader, page);
+    //        }
+    //        reader.Close();
+    //        return text;
+    //    }
+    //}
+
+    ///// <summary>
+    ///// Parses a PDF file and extracts the text from it.
+    ///// </summary>
+    //public class PDFParser
+    //{
+    //    /// BT = Beginning of a text object operator 
+    //    /// ET = End of a text object operator
+    //    /// Td move to the start of next line
+    //    ///  5 Ts = superscript
+    //    /// -5 Ts = subscript
+
+    //    #region Fields
+
+    //    #region _numberOfCharsToKeep
+    //    /// <summary>
+    //    /// The number of characters to keep, when extracting text.
+    //    /// </summary>
+    //    private static int _numberOfCharsToKeep = 15;
+    //    #endregion
+
+    //    #endregion
+
+    //    #region ExtractText
+    //    /// <summary>
+    //    /// Extracts a text from a PDF file.
+    //    /// </summary>
+    //    /// <param name="inFileName">the full path to the pdf file.</param>
+    //    /// <param name="outFileName">the output file name.</param>
+    //    /// <returns>the extracted text</returns>
+    //    public bool ExtractText(string inFileName, string outFileName)
+    //    {
+    //        StreamWriter outFile = null;
+    //        try
+    //        {
+    //            // Create a reader for the given PDF file
+    //            PdfReader reader = new PdfReader(inFileName);
+    //            //outFile = File.CreateText(outFileName);
+    //            outFile = new StreamWriter(outFileName, false, System.Text.Encoding.UTF8);
+
+    //            Console.Write("Processing: ");
+
+    //            int totalLen = 68;
+    //            float charUnit = ((float)totalLen) / (float)reader.NumberOfPages;
+    //            int totalWritten = 0;
+    //            float curUnit = 0;
+
+    //            for (int page = 1; page <= reader.NumberOfPages; page++)
+    //            {
+    //                outFile.Write(ExtractTextFromPDFBytes(reader.GetPageContent(page)) + " ");
+
+    //                // Write the progress.
+    //                if (charUnit >= 1.0f)
+    //                {
+    //                    for (int i = 0; i < (int)charUnit; i++)
+    //                    {
+    //                        Console.Write("#");
+    //                        totalWritten++;
+    //                    }
+    //                }
+    //                else
+    //                {
+    //                    curUnit += charUnit;
+    //                    if (curUnit >= 1.0f)
+    //                    {
+    //                        for (int i = 0; i < (int)curUnit; i++)
+    //                        {
+    //                            Console.Write("#");
+    //                            totalWritten++;
+    //                        }
+    //                        curUnit = 0;
+    //                    }
+
+    //                }
+    //            }
+
+    //            if (totalWritten < totalLen)
+    //            {
+    //                for (int i = 0; i < (totalLen - totalWritten); i++)
+    //                {
+    //                    Console.Write("#");
+    //                }
+    //            }
+    //            return true;
+    //        }
+    //        catch
+    //        {
+    //            return false;
+    //        }
+    //        finally
+    //        {
+    //            if (outFile != null) outFile.Close();
+    //        }
+    //    }
+    //    #endregion
+
+    //    #region ExtractTextFromPDFBytes
+    //    /// <summary>
+    //    /// This method processes an uncompressed Adobe (text) object 
+    //    /// and extracts text.
+    //    /// </summary>
+    //    /// <param name="input">uncompressed</param>
+    //    /// <returns></returns>
+    //    public string ExtractTextFromPDFBytes(byte[] input)
+    //    {
+    //        if (input == null || input.Length == 0) return "";
+
+    //        try
+    //        {
+    //            string resultString = "";
+
+    //            // Flag showing if we are we currently inside a text object
+    //            bool inTextObject = false;
+
+    //            // Flag showing if the next character is literal 
+    //            // e.g. '\\' to get a '\' character or '\(' to get '('
+    //            bool nextLiteral = false;
+
+    //            // () Bracket nesting level. Text appears inside ()
+    //            int bracketDepth = 0;
+
+    //            // Keep previous chars to get extract numbers etc.:
+    //            char[] previousCharacters = new char[_numberOfCharsToKeep];
+    //            for (int j = 0; j < _numberOfCharsToKeep; j++) previousCharacters[j] = ' ';
+
+
+    //            for (int i = 0; i < input.Length; i++)
+    //            {
+    //                char c = (char)input[i];
+    //                if (input[i] == 213)
+    //                    c = "'".ToCharArray()[0];
+
+    //                if (inTextObject)
+    //                {
+    //                    // Position the text
+    //                    if (bracketDepth == 0)
+    //                    {
+    //                        if (CheckToken(new string[] { "TD", "Td" }, previousCharacters))
+    //                        {
+    //                            resultString += "\n\r";
+    //                        }
+    //                        else
+    //                        {
+    //                            if (CheckToken(new string[] { "'", "T*", "\"" }, previousCharacters))
+    //                            {
+    //                                resultString += "\n";
+    //                            }
+    //                            else
+    //                            {
+    //                                if (CheckToken(new string[] { "Tj" }, previousCharacters))
+    //                                {
+    //                                    resultString += " ";
+    //                                }
+    //                            }
+    //                        }
+    //                    }
+
+    //                    // End of a text object, also go to a new line.
+    //                    if (bracketDepth == 0 &&
+    //                        CheckToken(new string[] { "ET" }, previousCharacters))
+    //                    {
+
+    //                        inTextObject = false;
+    //                        resultString += " ";
+    //                    }
+    //                    else
+    //                    {
+    //                        // Start outputting text
+    //                        if ((c == '(') && (bracketDepth == 0) && (!nextLiteral))
+    //                        {
+    //                            bracketDepth = 1;
+    //                        }
+    //                        else
+    //                        {
+    //                            // Stop outputting text
+    //                            if ((c == ')') && (bracketDepth == 1) && (!nextLiteral))
+    //                            {
+    //                                bracketDepth = 0;
+    //                            }
+    //                            else
+    //                            {
+    //                                // Just a normal text character:
+    //                                if (bracketDepth == 1)
+    //                                {
+    //                                    // Only print out next character no matter what. 
+    //                                    // Do not interpret.
+    //                                    if (c == '\\' && !nextLiteral)
+    //                                    {
+    //                                        resultString += c.ToString();
+    //                                        nextLiteral = true;
+    //                                    }
+    //                                    else
+    //                                    {
+    //                                        if (((c >= ' ') && (c <= '~')) ||
+    //                                            ((c >= 128) && (c < 255)))
+    //                                        {
+    //                                            resultString += c.ToString();
+    //                                        }
+
+    //                                        nextLiteral = false;
+    //                                    }
+    //                                }
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+    //                // Store the recent characters for 
+    //                // when we have to go back for a checking
+    //                for (int j = 0; j < _numberOfCharsToKeep - 1; j++)
+    //                {
+    //                    previousCharacters[j] = previousCharacters[j + 1];
+    //                }
+    //                previousCharacters[_numberOfCharsToKeep - 1] = c;
+
+    //                // Start of a text object
+    //                if (!inTextObject && CheckToken(new string[] { "BT" }, previousCharacters))
+    //                {
+    //                    inTextObject = true;
+    //                }
+    //            }
+
+    //            return CleanupContent(resultString);
+    //        }
+    //        catch
+    //        {
+    //            return "";
+    //        }
+    //    }
+
+    //    private string CleanupContent(string text)
+    //    {
+    //        string[] patterns = { @"\\\(", @"\\\)", @"\\226", @"\\222", @"\\223", @"\\224", @"\\340", @"\\342", @"\\344", @"\\300", @"\\302", @"\\304", @"\\351", @"\\350", @"\\352", @"\\353", @"\\311", @"\\310", @"\\312", @"\\313", @"\\362", @"\\364", @"\\366", @"\\322", @"\\324", @"\\326", @"\\354", @"\\356", @"\\357", @"\\314", @"\\316", @"\\317", @"\\347", @"\\307", @"\\371", @"\\373", @"\\374", @"\\331", @"\\333", @"\\334", @"\\256", @"\\231", @"\\253", @"\\273", @"\\251", @"\\221" };
+    //        string[] replace = { "(", ")", "-", "'", "\"", "\"", "à", "â", "ä", "À", "Â", "Ä", "é", "è", "ê", "ë", "É", "È", "Ê", "Ë", "ò", "ô", "ö", "Ò", "Ô", "Ö", "ì", "î", "ï", "Ì", "Î", "Ï", "ç", "Ç", "ù", "û", "ü", "Ù", "Û", "Ü", "®", "™", "«", "»", "©", "'" };
+
+    //        for (int i = 0; i < patterns.Length; i++)
+    //        {
+    //            string regExPattern = patterns[i];
+    //            Regex regex = new Regex(regExPattern, RegexOptions.IgnoreCase);
+    //            text = regex.Replace(text, replace[i]);
+    //        }
+
+    //        return text;
+    //    }
+
+    //    #endregion
+
+    //    #region CheckToken
+    //    /// <summary>
+    //    /// Check if a certain 2 character token just came along (e.g. BT)
+    //    /// </summary>
+    //    /// <param name="tokens">the searched token</param>
+    //    /// <param name="recent">the recent character array</param>
+    //    /// <returns></returns>
+    //    private bool CheckToken(string[] tokens, char[] recent)
+    //    {
+    //        foreach (string token in tokens)
+    //        {
+    //            if ((recent[_numberOfCharsToKeep - 3] == token[0]) &&
+    //                (recent[_numberOfCharsToKeep - 2] == token[1]) &&
+    //                ((recent[_numberOfCharsToKeep - 1] == ' ') ||
+    //                (recent[_numberOfCharsToKeep - 1] == 0x0d) ||
+    //                (recent[_numberOfCharsToKeep - 1] == 0x0a)) &&
+    //                ((recent[_numberOfCharsToKeep - 4] == ' ') ||
+    //                (recent[_numberOfCharsToKeep - 4] == 0x0d) ||
+    //                (recent[_numberOfCharsToKeep - 4] == 0x0a))
+    //                )
+    //            {
+    //                return true;
+    //            }
+    //        }
+    //        return false;
+    //    }
+    //    #endregion
+    //}
+
+    private void btnReimprimeObservaciones_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EntPedido pedidoSeleccionado = ObtienePedidoFromGV(gvPedidos);
+                if (!pedidoSeleccionado.Facturado)
+                    throw new Exception("Pedido Sin Facturar");
+
+                AgregaObservacionFactura vObserv = new AgregaObservacionFactura();
+                if (vObserv.ShowDialog() == DialogResult.OK)
+                {
+                    string rutaArchivo = pedidoSeleccionado.RutaFactura + "\\" + EncuentraArchivo(pedidoSeleccionado.RutaFactura, ".pdf");
+                    //string rutaArchivo = @"C:\TIIM\Facturacion\FacturasPruebas\SERGIO PATRICIO GREE\20171004024601\439DFA02-9679-11E8-9275-D737D49CA409.pdf";
+                    int versionArchivo = CuentaArchivos(pedidoSeleccionado.RutaFactura, ".pdf");
+                    ModificaPDF(vObserv.Observacion, rutaArchivo, versionArchivo.ToString(), new BusProductos().ObtieneProductosPorPedido(pedidoSeleccionado.Id));
+                    MuestraArchivo(rutaArchivo.Remove(rutaArchivo.Length - 4) + "-OBSERVACION" + versionArchivo.ToString() + ".pdf", true);
+                }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }

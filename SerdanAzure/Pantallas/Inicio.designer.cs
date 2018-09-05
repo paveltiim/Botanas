@@ -221,7 +221,6 @@
             this.toolStripButton9.Name = "toolStripButton9";
             this.toolStripButton9.Size = new System.Drawing.Size(133, 44);
             this.toolStripButton9.Text = "Reportes";
-            this.toolStripButton9.Visible = false;
             this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
             // tsbSincronizacion

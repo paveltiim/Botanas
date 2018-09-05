@@ -24,7 +24,10 @@ namespace AiresEntidades
 
         public int GastoId { get; set; }
         public DateTime FechaFactura { get; set; }
+        public string UUIDFactura { get; set; }
         public string NumeroFactura { get; set; }
+        public int FormaPagoId { get; set; }
+
         public decimal Deuda { get; set; }
         public decimal Pago { get; set; }
         public decimal NotasCredito { get; set; }

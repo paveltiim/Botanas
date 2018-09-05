@@ -58,8 +58,27 @@ namespace AiresEntidades
         public decimal TasaOCuota { get; set; }
         public int UsoCFDIId { get; set; }
 
-        public int TimbresEmpresa { get; set; }
         public int Timbres { get; set; }
+        public int TimbresUsados { get; set; }
+        public int TimbresRestantes { get; set; }
+
+        public string SerieFactura
+        {
+            get
+            {
+                string[] nombreSplit = Nombre.Trim().Split(' ');
+                try
+                {
+                    if (nombreSplit.Length == 0)
+                        return "AA";
+                    else if (nombreSplit.Length > 1)
+                        return (nombreSplit[0][0].ToString() + nombreSplit[nombreSplit.Length - 1][0].ToString()).ToUpper();
+                    else
+                        return (nombreSplit[0][0].ToString() + nombreSplit[1][0].ToString()).ToUpper();
+                }catch(Exception ex) { return ""; }
+            }
+        }
+
 
     }
 }

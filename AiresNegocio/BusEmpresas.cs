@@ -69,7 +69,10 @@ namespace AiresNegocio
 
                     m.UsoCFDIId = Convert.ToInt32(r["EMP_USOCFDIID"]);
 
-                    m.TimbresEmpresa = Convert.ToInt32(r["TIMBRESRESTANTES"]);
+                    m.Timbres = Convert.ToInt32(r["TIM_TIMBRESCONTRATADOS"]);
+                    m.TimbresUsados = Convert.ToInt32(r["TIM_TIMBRESUSADOS"]);
+
+                    m.TimbresRestantes = Convert.ToInt32(r["TIMBRESRESTANTES"]);
                     //m.Timbres = Convert.ToInt32(r["TIMBRESRESTANTES"]);
 
                     //m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);

@@ -40,87 +40,87 @@ namespace Aires.Pantallas
         public void CargaCmbClientes()
         {
             List<EntCliente> lst = new BusClientes().ObtieneClientes().OrderBy(P => P.Nombre).ToList();
-            lst.Insert(0,new EntCliente() { Id = -1, Nombre = "-TODOS-" });
+            lst.Insert(0, new EntCliente() { Id = -1, Nombre = "-TODOS-" });
             cmbClientesVentas.DataSource = lst;
 
             //CargaClientesEnPantallas();
         }
 
         #region Metodos Ventas
-            List<EntPedido> ListaPedidos;
-            ///// <summary>
-            ///// Carga cmbAñoGastos,cmbAñosManoDeObra,cmbAñosMateriales.
-            ///// </summary>
-            //void CargaAños()
-            //{
-            //    List<EntCatalogoGenerico> años = new List<EntCatalogoGenerico>();
-            //    for (int x = DateTime.Today.Year; x >= AñoInicio; x--)
-            //    {
-            //        EntCatalogoGenerico año = new EntCatalogoGenerico();
-            //        año.Descripcion = x.ToString();
-            //        años.Add(año);
-            //    }
-            //    cmbAñoVentas.DataSource = años;
-            //    ////cmbAñoDepositos.DataSource = años;
-            //    //EntCatalogoGenerico[] añosCopy = new EntCatalogoGenerico[años.Count];
-            //    //años.CopyTo(añosCopy);
-            //    //cmbAñoDepositos.DataSource = añosCopy;
-            //    //cmbAñosManoDeObra.DataSource = añosCopy;
-            //    //cmbAñosMateriales.DataSource = añosCopy;
-            //}
-       
-            public void CargaRvVentas(DateTime FechaDesde, DateTime FechaHasta)
-                {
-                    //ListaPedidos = new BusPedidos().ObtienePedidosClientesPorFechas(FechaDesde,FechaHasta);
-                    entPedidoBindingSource.DataSource = ListaPedidos;
-                    rvVentas.RefreshReport();
-                    rvVentasPorCliente.RefreshReport();
+        List<EntPedido> ListaPedidos;
+        ///// <summary>
+        ///// Carga cmbAñoGastos,cmbAñosManoDeObra,cmbAñosMateriales.
+        ///// </summary>
+        //void CargaAños()
+        //{
+        //    List<EntCatalogoGenerico> años = new List<EntCatalogoGenerico>();
+        //    for (int x = DateTime.Today.Year; x >= AñoInicio; x--)
+        //    {
+        //        EntCatalogoGenerico año = new EntCatalogoGenerico();
+        //        año.Descripcion = x.ToString();
+        //        años.Add(año);
+        //    }
+        //    cmbAñoVentas.DataSource = años;
+        //    ////cmbAñoDepositos.DataSource = años;
+        //    //EntCatalogoGenerico[] añosCopy = new EntCatalogoGenerico[años.Count];
+        //    //años.CopyTo(añosCopy);
+        //    //cmbAñoDepositos.DataSource = añosCopy;
+        //    //cmbAñosManoDeObra.DataSource = añosCopy;
+        //    //cmbAñosMateriales.DataSource = añosCopy;
+        //}
 
-                    ReportParameter parm = new ReportParameter("Total", "0");
-                    rvGraficoVentasClientes.LocalReport.SetParameters(parm);
+        public void CargaRvVentas(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            //ListaPedidos = new BusPedidos().ObtienePedidosClientesPorFechas(FechaDesde,FechaHasta);
+            entPedidoBindingSource.DataSource = ListaPedidos;
+            rvVentas.RefreshReport();
+            rvVentasPorCliente.RefreshReport();
 
-                    rvGraficoVentasClientes.RefreshReport();
+            ReportParameter parm = new ReportParameter("Total", "0");
+            rvGraficoVentasClientes.LocalReport.SetParameters(parm);
 
-                    CargaRvVentasProductos(FechaDesde, FechaHasta);
-                }
+            rvGraficoVentasClientes.RefreshReport();
 
-            public void CargaRvVentas(DateTime FechaDesde, DateTime FechaHasta, int FiltroClienteId)
-            {
-                entPedidoBindingSource.DataSource= ListaPedidos.Where(P => P.ClienteId == FiltroClienteId);
-                ReportParameter parm = new ReportParameter("Total", "0");
-                rvGraficoVentasClientes.LocalReport.SetParameters(parm);
+            CargaRvVentasProductos(FechaDesde, FechaHasta);
+        }
 
-                rvGraficoVentasClientes.RefreshReport();
+        public void CargaRvVentas(DateTime FechaDesde, DateTime FechaHasta, int FiltroClienteId)
+        {
+            entPedidoBindingSource.DataSource = ListaPedidos.Where(P => P.ClienteId == FiltroClienteId);
+            ReportParameter parm = new ReportParameter("Total", "0");
+            rvGraficoVentasClientes.LocalReport.SetParameters(parm);
 
-                CargaRvVentasProductos(FechaDesde, FechaHasta, FiltroClienteId);
-            }
+            rvGraficoVentasClientes.RefreshReport();
+
+            CargaRvVentasProductos(FechaDesde, FechaHasta, FiltroClienteId);
+        }
         List<EntProducto> ListaProductosVentas;
-            public void CargaRvVentasProductos(DateTime FechaDesde, DateTime FechaHasta)
-            {
-                ListaProductosVentas = new BusProductos().ObtieneProductosPorFechaPedido(FechaDesde, FechaHasta);
-                EntProductoBindingSource.DataSource = ListaProductosVentas;
-                rvGraficaVentasProductos.RefreshReport();
-                rvVentasPorProducto.RefreshReport();
-            }
-            public void CargaRvVentasProductos(DateTime FechaDesde, DateTime FechaHasta, int FiltroClienteId)
-            {
-                List<EntProducto> listaProducto = new BusProductos().ObtieneProductosPorFechaPedidoCliente(FechaDesde, FechaHasta, FiltroClienteId);
-                EntProductoBindingSource.DataSource = listaProducto;
-                rvGraficaVentasProductos.RefreshReport();
-                rvVentasPorProducto.RefreshReport();
-            }
-            public void CargaRvVentasProductos(List<EntProducto> ListaProductosVentas, int FiltroProductoId)
-            {
-                EntProductoBindingSource.DataSource = ListaProductosVentas.Where(P => P.Id == FiltroProductoId);
-                rvGraficaVentasProductos.RefreshReport();
-                rvVentasPorProducto.RefreshReport();
-            }
-            public void CargaRvVentasProductos(List<EntProducto> ListaProductosVentas)
-            {
-                EntProductoBindingSource.DataSource = ListaProductosVentas;
-                rvGraficaVentasProductos.RefreshReport();
-                rvVentasPorProducto.RefreshReport();
-            }
+        public void CargaRvVentasProductos(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            ListaProductosVentas = new BusProductos().ObtieneProductosPorFechaPedido(FechaDesde, FechaHasta);
+            EntProductoBindingSource.DataSource = ListaProductosVentas;
+            rvGraficaVentasProductos.RefreshReport();
+            rvVentasPorProducto.RefreshReport();
+        }
+        public void CargaRvVentasProductos(DateTime FechaDesde, DateTime FechaHasta, int FiltroClienteId)
+        {
+            List<EntProducto> listaProducto = new BusProductos().ObtieneProductosPorFechaPedidoCliente(FechaDesde, FechaHasta, FiltroClienteId);
+            EntProductoBindingSource.DataSource = listaProducto;
+            rvGraficaVentasProductos.RefreshReport();
+            rvVentasPorProducto.RefreshReport();
+        }
+        public void CargaRvVentasProductos(List<EntProducto> ListaProductosVentas, int FiltroProductoId)
+        {
+            EntProductoBindingSource.DataSource = ListaProductosVentas.Where(P => P.Id == FiltroProductoId);
+            rvGraficaVentasProductos.RefreshReport();
+            rvVentasPorProducto.RefreshReport();
+        }
+        public void CargaRvVentasProductos(List<EntProducto> ListaProductosVentas)
+        {
+            EntProductoBindingSource.DataSource = ListaProductosVentas;
+            rvGraficaVentasProductos.RefreshReport();
+            rvVentasPorProducto.RefreshReport();
+        }
         #endregion
         #region Metodos Compras
         ///// <summary>
@@ -138,79 +138,80 @@ namespace Aires.Pantallas
         //    cmbAñosCompras.DataSource = años;
         //}
         public void CargaRvCompras(DateTime FechaDesde, DateTime FechaHasta)
-            {
-                ////List<EntEmpresa> ListaEmpresasGastos = new BusEmpresas().ObtieneEmpresasGastos(FechaDesde, FechaHasta);
-                ////EntEmpresaBindingSource.DataSource = ListaEmpresasGastos;
-                //rvCompras.RefreshReport();
-                //rvComprasPorProveedor.RefreshReport();
-            }
+        {
+            ////List<EntEmpresa> ListaEmpresasGastos = new BusEmpresas().ObtieneEmpresasGastos(FechaDesde, FechaHasta);
+            ////EntEmpresaBindingSource.DataSource = ListaEmpresasGastos;
+            //rvCompras.RefreshReport();
+            //rvComprasPorProveedor.RefreshReport();
+        }
         #endregion
         #region Metodos Entradas
-            //void CargaAñosEntradas()
-            //{
-            //    List<EntCatalogoGenerico> años = new List<EntCatalogoGenerico>();
-            //    for (int x = DateTime.Today.Year; x >= AñoInicio; x--)
-            //    {
-            //        EntCatalogoGenerico año = new EntCatalogoGenerico();
-            //        año.Descripcion = x.ToString();
-            //        años.Add(año);
-            //    }
-            //    cmbAñoEntradas.DataSource = años;
-            //}
-            public void CargaCmbProductos()
-            {
-                List<EntProducto> lst = new BusProductos().ObtieneProductosCodigos().OrderBy(P => P.Descripcion).ToList();
-                lst.Insert(0, new EntProducto() { Id = -1, Descripcion = "-TODOS-" });
-                cmbFiltroProductosEntradas.DataSource = lst;
-                cmbFiltroProductosVentas.DataSource = lst;
-            }
-            List<EntProducto> ListaProductosEntradas;
-            public void CargaRvEntradas(DateTime FechaDesde, DateTime FechaHasta)
-            {
-                ListaProductosEntradas= new BusProductos().ObtieneProductosPorFechaIngreso(FechaDesde,FechaHasta);
-                EntProductoBindingSource.DataSource = ListaProductosEntradas;
-                rvEntradas.RefreshReport();
-                rvEntradas.RefreshReport();
+        //void CargaAñosEntradas()
+        //{
+        //    List<EntCatalogoGenerico> años = new List<EntCatalogoGenerico>();
+        //    for (int x = DateTime.Today.Year; x >= AñoInicio; x--)
+        //    {
+        //        EntCatalogoGenerico año = new EntCatalogoGenerico();
+        //        año.Descripcion = x.ToString();
+        //        años.Add(año);
+        //    }
+        //    cmbAñoEntradas.DataSource = años;
+        //}
+        public void CargaCmbProductos()
+        {
+            List<EntProducto> lst = new BusProductos().ObtieneProductosCodigos().OrderBy(P => P.Descripcion).ToList();
+            lst.Insert(0, new EntProducto() { Id = -1, Descripcion = "-TODOS-" });
+            cmbFiltroProductosEntradas.DataSource = lst;
+            cmbFiltroProductosVentas.DataSource = lst;
+        }
+        List<EntProducto> ListaProductosEntradas;
+        public void CargaRvEntradas(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            ListaProductosEntradas = new BusProductos().ObtieneProductosPorFechaIngreso(FechaDesde, FechaHasta);
+            EntProductoBindingSource.DataSource = ListaProductosEntradas;
+            rvEntradas.RefreshReport();
+            rvEntradas.RefreshReport();
 
-                EntProductoBindingSource.DataSource = new BusProductos().ObtieneProductosDetallePorFechaIngreso(FechaDesde, FechaHasta); ;
-                rvEntradasDetalle.RefreshReport();
-            }
-            public void CargaRvEntradas(List<EntProducto> ListaProductosEntradas, int FiltroProductoId)
-            {
-                EntProductoBindingSource.DataSource = ListaProductosEntradas.Where(P=>P.Id==FiltroProductoId);
-                rvEntradas.RefreshReport();
-            }
-            public void CargaRvEntradas(List<EntProducto> ListaProductosEntradas)
-            {
-                EntProductoBindingSource.DataSource = ListaProductosEntradas;
-                rvEntradas.RefreshReport();
-            }
+            EntProductoBindingSource.DataSource = new BusProductos().ObtieneProductosDetallePorFechaIngreso(FechaDesde, FechaHasta); ;
+            rvEntradasDetalle.RefreshReport();
+        }
+        public void CargaRvEntradas(List<EntProducto> ListaProductosEntradas, int FiltroProductoId)
+        {
+            EntProductoBindingSource.DataSource = ListaProductosEntradas.Where(P => P.Id == FiltroProductoId);
+            rvEntradas.RefreshReport();
+        }
+        public void CargaRvEntradas(List<EntProducto> ListaProductosEntradas)
+        {
+            EntProductoBindingSource.DataSource = ListaProductosEntradas;
+            rvEntradas.RefreshReport();
+        }
         #endregion
         #region Metodos Clientes
         void CargaRvDeudaClientes()
         {
-            List<EntPedido> list = new BusPedidos().ObtienePedidosClientesCredito();
-            entPedidoBindingSource.DataSource = list;
-            rvDeudaClientes.RefreshReport();
+            //List<EntPedido> list = new BusPedidos().ObtienePedidosClientesCredito();
+            //entPedidoBindingSource.DataSource = list;
+            //rvDeudaClientes.RefreshReport();
         }
         void CargaRvDeudaClientes(DateTime FechaDesde, DateTime FechaHasta)
         {
-            List<EntPedido> list = new BusPedidos().ObtienePedidosClientesCredito(FechaDesde,FechaHasta);
-            entPedidoBindingSource.DataSource = list;
-            rvDeudaClientes.RefreshReport();
+            //List<EntPedido> list = new BusPedidos().ObtienePedidosClientesCredito(FechaDesde,FechaHasta);
+            //entPedidoBindingSource.DataSource = list;
+            //rvDeudaClientes.RefreshReport();
 
-            //CargaRvPagosClientes(FechaDesde, FechaHasta);
+            ////CargaRvPagosClientes(FechaDesde, FechaHasta);
         }
         void CargaRvDeudaClientes(DateTime FechaLimite)
         {
-            List<EntPedido> list = new BusPedidos().ObtienePedidosClientesCredito(FechaLimite);
-            entPedidoBindingSource.DataSource = list;
-            rvDeudaClientes.RefreshReport();
+            //List<EntPedido> list = new BusPedidos().ObtienePedidosClientesCredito(FechaLimite);
+            //entPedidoBindingSource.DataSource = list;
+            //rvDeudaClientes.RefreshReport();
 
-            //CargaRvPagosClientes(new DateTime(2016,1,1), FechaLimite);
+            ////CargaRvPagosClientes(new DateTime(2016,1,1), FechaLimite);
         }
-        void CargaRvPagosClientes(DateTime FechaDesde, DateTime FechaHasta) {
-            entPedidoBindingSource.DataSource = new BusPedidos().ObtienePagosClientes(FechaDesde,FechaHasta);
+        void CargaRvPagosClientes(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            entPedidoBindingSource.DataSource = new BusPedidos().ObtienePagosClientes(FechaDesde, FechaHasta);
             rvPagosClientes.RefreshReport();
         }
 
@@ -223,15 +224,40 @@ namespace Aires.Pantallas
             //rvDepositos.RefreshReport();
         }
         #endregion
-        public void CargaRvInventario(DateTime FechaHasta)
+        public void CargaRvInventario(int EmpresaId, DateTime FechaHasta)
         {
-            List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetalleHastaFecha(FechaHasta).OrderBy(P=>P.Descripcion).ToList();
+            List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetalleHastaFecha(EmpresaId, FechaHasta).OrderBy(P => P.Descripcion).ToList();
             EntProductoBindingSource.DataSource = listaProductos;
             rvProductosHastaFecha.RefreshReport();
+
+            //int EmpresaId = Program.EmpresaSeleccionada.Id;
+            //ReportParameter parmEmpresa;
+            //parmEmpresa = new ReportParameter("Empresa", Program.EmpresaSeleccionada.Nombre);
+
+            //if (tcReportesInventario.SelectedIndex == 0)
+            //{
+            //    List<EntProducto> listaProductos;
+            //    if (chkSoloConExistencia.Checked)
+            //        listaProductos = new BusProductos().ObtieneProductosDetalle(EmpresaId);
+            //    else
+            //        listaProductos = new BusProductos().ObtieneProductos(EmpresaId);
+            //    //gvPedidos.DataSource = ListaPedidos;
+            //    EntProductoBindingSource.DataSource = listaProductos;
+
+            //    rvInventario.LocalReport.SetParameters(parmEmpresa);
+            //    rvInventario.RefreshReport();
+            //}
+            //else if (tcReportesInventario.SelectedIndex == 1)
+            //{
+            //    EntProductoBindingSource.DataSource = new BusProductos().ObtieneProductosDetalle(EmpresaId);
+
+            //    rvInventarioDetalle.LocalReport.SetParameters(parmEmpresa);
+            //    rvInventarioDetalle.RefreshReport();
         }
-        public void CargaRvInventario(DateTime FechaHasta, string FiltroCodigoProducto,string FiltroProducto)
+
+        public void CargaRvInventario(DateTime FechaHasta, string FiltroCodigoProducto, string FiltroProducto)
         {
-            List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetalleHastaFecha(FechaHasta).Where(P=>P.Codigo.ToUpper().Contains(FiltroCodigoProducto.ToUpper()) && P.Descripcion.ToUpper().Contains(FiltroProducto.ToUpper())).OrderBy(P => P.Descripcion).ToList();
+            List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetalleHastaFecha(FechaHasta).Where(P => P.Codigo.ToUpper().Contains(FiltroCodigoProducto.ToUpper()) && P.Descripcion.ToUpper().Contains(FiltroProducto.ToUpper())).OrderBy(P => P.Descripcion).ToList();
             EntProductoBindingSource.DataSource = listaProductos;
             rvProductosHastaFecha.RefreshReport();
         }
@@ -267,19 +293,46 @@ namespace Aires.Pantallas
         //    lst.Add(new EntEmpresa() { Id = -1, Descripcion = "-TODAS-" });
         //    cmbEmpresasVentas.DataSource = lst;
         //}
+        public void CargaEmpresas()
+        {
+            if (Program.UsuarioSeleccionado.Id > 1)
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas().Where(P => P.UsuarioId == Program.UsuarioSeleccionado.Id).ToList();
+            else
+                ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
+
+            Program.CambiaEmpresa = false;
+            cmbEmpresas.DataSource = ListaEmpresas;
+            Program.CambiaEmpresa = true;
+
+            //CargaClientesEnPantallas();
+        }
+        List<EntEmpresa> ListaEmpresas;
+
         private void Reportes_Load(object sender, EventArgs e)
         {
             try
             {
-                //CargaEmpresas();
-                CargaCmbClientes();
+                CargaEmpresas();
+                //CargaCmbClientes();
 
-                CargaAñosCmb(cmbAñoVentas);
-                cmbMesesVentas.SelectedIndex = DateTime.Today.Month - 1;
-                    
-                CargaRvVentas(new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
+                if (Program.EmpresaSeleccionada == null)
+                    Program.EmpresaSeleccionada = SeleccionaEmpresa();
 
-                CargaCmbProductos();
+                cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
+
+                //CargaAñosCmb(cmbAñoVentas);
+                //cmbMesesVentas.SelectedIndex = DateTime.Today.Month - 1;
+                CargaAñosCmb(cmbAñosInventario);
+                cmbMesesInventario.SelectedIndex = DateTime.Today.Month - 1;
+
+                //CargaRvVentas(new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
+
+                //CargaCmbProductos();
+
+                tcReportes.TabPages.Remove(tpVentas);
+                tcReportes.TabPages.Remove(tpEntradas);
+                tcReportes.TabPages.Remove(tpClientes);
+                tcReportes.TabPages.Remove(tpProveedores);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             this.rvGraficoVentasClientes.RefreshReport();
@@ -308,7 +361,7 @@ namespace Aires.Pantallas
                         cmbMesesEntradas.SelectedIndex = DateTime.Today.Month - 1;
 
                         btnRefrescaEntradas.PerformClick();
-                        ReporteEntradasCargado = true;                        
+                        ReporteEntradasCargado = true;
                     }
                 }
                 else if (tcReportes.SelectedIndex == 2)//PESTAÑA INVENTARIO
@@ -358,66 +411,66 @@ namespace Aires.Pantallas
         bool ReporteComprasCargado, ReporteEntradasCargado, ReporteDeudaClientesCargado, ReporteDeudaProveedoresCargado, ReporteInventarioCargado, ReporteDepositosCargado;
 
         #region Eventos Pestaña Ventas
-            DateTime FechaDesdeVentas
-            {
-                get
-                {
-                    if (rdoPorMesVentas.Checked)
-                        return new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), ConvierteTextoAInteger(cmbMesesVentas.SelectedIndex.ToString()) + 1, 1);
-                    else
-                        return dtpFechaDesdeVentas.Value.Date;
-                }
-            }
-            DateTime FechaDesdeHasta
-            {
-                get
-                {
-                    if (rdoPorMesVentas.Checked)
-                        return new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1));
-                    else
-                        return dtpFechaDesdeVentas.Value.Date;
-                }
-            }
-        private void btnRefrescarReporteVentas_Click(object sender, EventArgs e)
+        DateTime FechaDesdeVentas
+        {
+            get
             {
                 if (rdoPorMesVentas.Checked)
-                {
-                    if (cmbMesesVentas.SelectedIndex >= 0)
-                        CargaRvVentas(new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
-                }
+                    return new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), ConvierteTextoAInteger(cmbMesesVentas.SelectedIndex.ToString()) + 1, 1);
                 else
-                    CargaRvVentas(dtpFechaDesdeVentas.Value.Date, dtpFechaDesdeVentas.Value.Date);              
+                    return dtpFechaDesdeVentas.Value.Date;
             }
-            private void rdoPorMesVentas_CheckedChanged(object sender, EventArgs e)
+        }
+        DateTime FechaDesdeHasta
+        {
+            get
             {
-                try
-                {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoPorDiaVentas.Checked = false;
-                        pnlPorMesVentas.Enabled = true;
-                        pnlPorDiaVentas.Enabled = false;
-
-                        CargaRvVentas(new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
-                    }
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); }
+                if (rdoPorMesVentas.Checked)
+                    return new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1));
+                else
+                    return dtpFechaDesdeVentas.Value.Date;
             }
-
-            private void rdoPorSemanaVentas_CheckedChanged(object sender, EventArgs e)
+        }
+        private void btnRefrescarReporteVentas_Click(object sender, EventArgs e)
+        {
+            if (rdoPorMesVentas.Checked)
             {
-                try
-                {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoPorMesVentas.Checked = false;
-                        pnlPorMesVentas.Enabled = false;
-                        pnlPorDiaVentas.Enabled = true;
-                        CargaRvVentas(dtpFechaDesdeVentas.Value.Date, dtpFechaDesdeVentas.Value.Date);
-                    }
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); } 
+                if (cmbMesesVentas.SelectedIndex >= 0)
+                    CargaRvVentas(new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
             }
+            else
+                CargaRvVentas(dtpFechaDesdeVentas.Value.Date, dtpFechaDesdeVentas.Value.Date);
+        }
+        private void rdoPorMesVentas_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((RadioButton)sender).Checked)
+                {
+                    rdoPorDiaVentas.Checked = false;
+                    pnlPorMesVentas.Enabled = true;
+                    pnlPorDiaVentas.Enabled = false;
+
+                    CargaRvVentas(new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoVentas.Text), cmbMesesVentas.SelectedIndex + 1)));
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void rdoPorSemanaVentas_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((RadioButton)sender).Checked)
+                {
+                    rdoPorMesVentas.Checked = false;
+                    pnlPorMesVentas.Enabled = false;
+                    pnlPorDiaVentas.Enabled = true;
+                    CargaRvVentas(dtpFechaDesdeVentas.Value.Date, dtpFechaDesdeVentas.Value.Date);
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
         #endregion
         #region Eventos Pestaña Compras
         //private void rdoPorMesCompras_CheckedChanged(object sender, EventArgs e)
@@ -461,168 +514,169 @@ namespace Aires.Pantallas
         //        CargaRvCompras(dtpFechaCompras.Value.Date, dtpFechaCompras.Value.Date);
         //}
 
-            
+
         #endregion
         #region Eventos Pestaña Entradas
-            private void btnRefrescaEntradas_Click(object sender, EventArgs e)
+        private void btnRefrescaEntradas_Click(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                if (rdoPorMesEntradas.Checked)
                 {
-                    if (rdoPorMesEntradas.Checked)
-                    {
-                        if (cmbMesesEntradas.SelectedIndex >= 0)
-                            CargaRvEntradas(new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1)));
-                    }
-                    else
-                        CargaRvEntradas(dtpFechaEntradas.Value.Date, dtpFechaEntradas.Value.Date);
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); }
-            }
-
-            private void rdoPorMesEntradas_CheckedChanged(object sender, EventArgs e)
-            {
-                try
-                {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoPorDiaEntradas.Checked = false;
-                        pnlPorMesEntradas.Enabled = true;
-                        pnlPorDiaEntradas.Enabled = false;
-
+                    if (cmbMesesEntradas.SelectedIndex >= 0)
                         CargaRvEntradas(new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1)));
-                    }
                 }
-                catch (Exception ex) { MuestraExcepcion(ex); }
+                else
+                    CargaRvEntradas(dtpFechaEntradas.Value.Date, dtpFechaEntradas.Value.Date);
             }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
 
-            private void rdoPorDiaEntradas_CheckedChanged(object sender, EventArgs e)
+        private void rdoPorMesEntradas_CheckedChanged(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                if (((RadioButton)sender).Checked)
                 {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoPorMesEntradas.Checked = false;
-                        pnlPorMesEntradas.Enabled = false;
-                        pnlPorDiaEntradas.Enabled = true;
-                        CargaRvEntradas(dtpFechaEntradas.Value.Date, dtpFechaEntradas.Value.Date);
-                    }
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); }
-            }
+                    rdoPorDiaEntradas.Checked = false;
+                    pnlPorMesEntradas.Enabled = true;
+                    pnlPorDiaEntradas.Enabled = false;
 
-            #endregion
+                    CargaRvEntradas(new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1)));
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void rdoPorDiaEntradas_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((RadioButton)sender).Checked)
+                {
+                    rdoPorMesEntradas.Checked = false;
+                    pnlPorMesEntradas.Enabled = false;
+                    pnlPorDiaEntradas.Enabled = true;
+                    CargaRvEntradas(dtpFechaEntradas.Value.Date, dtpFechaEntradas.Value.Date);
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        #endregion
         #region Pestaña Clientes
-            private void btnRefrescarDeudaClientes_Click(object sender, EventArgs e)
+        private void btnRefrescarDeudaClientes_Click(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                if (rdoPorMesDeudaClientes.Checked)
                 {
-                    if (rdoPorMesDeudaClientes.Checked)
+                    if (cmbMesesDeudaCliente.SelectedIndex >= 0)
                     {
-                        if (cmbMesesDeudaCliente.SelectedIndex >= 0)
-                        {
-                            if (tabControl3.SelectedIndex == 0)//Deuda
-                                CargaRvDeudaClientes(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1)));
-                            else if(tabControl3.SelectedIndex==1)
-                                CargaRvPagosClientes(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1)));
-                        }
+                        if (tabControl3.SelectedIndex == 0)//Deuda
+                            CargaRvDeudaClientes(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1)));
+                        else if (tabControl3.SelectedIndex == 1)
+                            CargaRvPagosClientes(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1)));
                     }
-                    else if (rdoTotalDeudaCliente.Checked)
-                        CargaRvDeudaClientes();
-                    else
-                        CargaRvDeudaClientes(dtpFechaLimiteClientes.Value.Date);
                 }
-                catch (Exception ex) { MuestraExcepcion(ex); }
+                else if (rdoTotalDeudaCliente.Checked)
+                    CargaRvDeudaClientes();
+                else
+                    CargaRvDeudaClientes(dtpFechaLimiteClientes.Value.Date);
             }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
 
-            private void cmbMesesDeudaCliente_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbMesesDeudaCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                btnRefrescarDeudaClientes.PerformClick();
+                //if (rdoPorMesDeudaClientes.Checked)
+                //{
+                //    if (cmbMesesDeudaCliente.SelectedIndex >= 0)
+                //        CargaRvDeudaClientes(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1)));
+                //}
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void rdoTotalDeudaCliente_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((RadioButton)sender).Checked)
                 {
+                    rdoPorMesDeudaClientes.Checked = false;
+                    pnlPorMesDeudaClientes.Enabled = false;
+                    rdoAlDiaClientes.Checked = false;
+                    pnlAlDiaClientes.Enabled = false;
+                    CargaRvDeudaClientes();
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void rdoPorMesDeudaClientes_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((RadioButton)sender).Checked)
+                {
+                    rdoTotalDeudaCliente.Checked = false;
+                    pnlPorMesDeudaClientes.Enabled = true;
+                    rdoAlDiaClientes.Checked = false;
+                    pnlAlDiaClientes.Enabled = false;
+
+                    //CargaRvDeudaClientes(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1)));
                     btnRefrescarDeudaClientes.PerformClick();
-                    //if (rdoPorMesDeudaClientes.Checked)
-                    //{
-                    //    if (cmbMesesDeudaCliente.SelectedIndex >= 0)
-                    //        CargaRvDeudaClientes(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1)));
-                    //}
                 }
-                catch (Exception ex) { MuestraExcepcion(ex); }
             }
-
-            private void rdoTotalDeudaCliente_CheckedChanged(object sender, EventArgs e)
-            {
-                try
-                {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoPorMesDeudaClientes.Checked = false;
-                        pnlPorMesDeudaClientes.Enabled = false;
-                        rdoAlDiaClientes.Checked = false;
-                        pnlAlDiaClientes.Enabled = false;
-                        CargaRvDeudaClientes();
-                    }
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); }
-            }
-
-            private void rdoPorMesDeudaClientes_CheckedChanged(object sender, EventArgs e)
-            {
-                try
-                {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoTotalDeudaCliente.Checked = false;
-                        pnlPorMesDeudaClientes.Enabled = true;
-                        rdoAlDiaClientes.Checked = false;
-                        pnlAlDiaClientes.Enabled = false;
-
-                        //CargaRvDeudaClientes(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaClientes.Text), cmbMesesDeudaCliente.SelectedIndex + 1)));
-                        btnRefrescarDeudaClientes.PerformClick();
-                    }
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); }
-            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
         #endregion
         #region Eventos Pestaña Inventarios
 
-            private void rdoPorMesInventario_CheckedChanged(object sender, EventArgs e)
+        private void rdoPorMesInventario_CheckedChanged(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                if (((RadioButton)sender).Checked)
                 {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoAlDiaInventario.Checked = false;
-                        pnlPorMesInventario.Enabled = true;
-                        pnlAlDiaInventario.Enabled = false;
+                    rdoAlDiaInventario.Checked = false;
+                    pnlPorMesInventario.Enabled = true;
+                    pnlAlDiaInventario.Enabled = false;
 
-                        btnRefrescarInventario.PerformClick();
-                    }
+                    btnRefrescarInventario.PerformClick();
                 }
-                catch (Exception ex) { MuestraExcepcion(ex); }
             }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
 
-            private void rdoAlDiaInventario_CheckedChanged(object sender, EventArgs e)
+        private void rdoAlDiaInventario_CheckedChanged(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                if (((RadioButton)sender).Checked)
                 {
-                    if (((RadioButton)sender).Checked)
-                    {
-                        rdoPorMesInventario.Checked = false;
-                        pnlPorMesInventario.Enabled = false;
-                        pnlAlDiaInventario.Enabled = true;
+                    rdoPorMesInventario.Checked = false;
+                    pnlPorMesInventario.Enabled = false;
+                    pnlAlDiaInventario.Enabled = true;
 
-                        btnRefrescarInventario.PerformClick();
-                    }
+                    btnRefrescarInventario.PerformClick();
                 }
-                catch (Exception ex) { MuestraExcepcion(ex); }
             }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
 
-            private void dtpAlDiaInventario_ValueChanged(object sender, EventArgs e)
+        private void dtpAlDiaInventario_ValueChanged(object sender, EventArgs e)
+        {
+            try
             {
-                try {
-                    CargaRvInventario(dtpAlDiaInventario.Value.Date);
-                }
-                catch (Exception ex) { MuestraExcepcion(ex); }
+                CargaRvInventario(Program.EmpresaSeleccionada.Id, dtpAlDiaInventario.Value.Date);
             }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
         #endregion
         private void btnRefrescaDeudaProveedores_Click(object sender, EventArgs e)
         {
@@ -634,8 +688,8 @@ namespace Aires.Pantallas
                     {
                         if (tabControl5.SelectedIndex == 0)
                             CargaRvDeudaProveedores(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaProveedores.Text), cmbMesesDeudaProveedores.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaProveedores.Text), cmbMesesDeudaProveedores.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaProveedores.Text), cmbMesesDeudaProveedores.SelectedIndex + 1)));
-                    
-                        else if(tabControl5.SelectedIndex == 1)
+
+                        else if (tabControl5.SelectedIndex == 1)
                             CargaRvPagosProveedores(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaProveedores.Text), cmbMesesDeudaProveedores.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaProveedores.Text), cmbMesesDeudaProveedores.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaProveedores.Text), cmbMesesDeudaProveedores.SelectedIndex + 1)));
                         else if (tabControl5.SelectedIndex == 2)
                             CargaRvNotasCreditoProveedores(new DateTime(ConvierteTextoAInteger(cmbAñosDeudaProveedores.Text), cmbMesesDeudaProveedores.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñosDeudaProveedores.Text), cmbMesesDeudaProveedores.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosDeudaProveedores.Text), cmbMesesDeudaProveedores.SelectedIndex + 1)));
@@ -704,7 +758,7 @@ namespace Aires.Pantallas
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
-        
+
         private void btnRefrescarInventario_Click(object sender, EventArgs e)
         {
             try
@@ -712,25 +766,27 @@ namespace Aires.Pantallas
                 if (rdoPorMesInventario.Checked)
                 {
                     if (cmbMesesInventario.SelectedIndex >= 0)
-                        CargaRvInventario(new DateTime(ConvierteTextoAInteger(cmbAñosInventario.Text), cmbMesesInventario.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosInventario.Text), cmbMesesInventario.SelectedIndex + 1)));
+                        CargaRvInventario(Program.EmpresaSeleccionada.Id,new DateTime(ConvierteTextoAInteger(cmbAñosInventario.Text), cmbMesesInventario.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñosInventario.Text), cmbMesesInventario.SelectedIndex + 1)));
                 }
                 //else if (rdoTotalDeudaCliente.Checked)
                 //    CargaRvDeudaClientes();
                 else
-                    CargaRvInventario(dtpAlDiaInventario.Value.Date);
+                    CargaRvInventario(Program.EmpresaSeleccionada.Id, dtpAlDiaInventario.Value.Date);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
         private void tabControl3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 if (tabControl3.SelectedIndex == 0)
                 {
                     pnlAlDiaClientes.Enabled = true;
                     rdoAlDiaClientes.Enabled = true;
                     rdoTotalDeudaCliente.Enabled = true;
-                }else
+                }
+                else
                     if (tabControl3.SelectedIndex == 1)
                 {
                     rdoPorMesDeudaClientes.Checked = true;
@@ -738,7 +794,8 @@ namespace Aires.Pantallas
                     rdoAlDiaClientes.Enabled = false;
                     rdoTotalDeudaCliente.Enabled = false;
                 }
-            } catch(Exception ex) { MuestraExcepcion(ex); }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
         private void tabControl5_SelectedIndexChanged(object sender, EventArgs e)
@@ -809,6 +866,32 @@ namespace Aires.Pantallas
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
+        private void btnBuscaEmpresa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SeleccionaEmpresa vSeleccionaEmp = new Pantallas.SeleccionaEmpresa(ListaEmpresas);
+                if (vSeleccionaEmp.ShowDialog() == DialogResult.OK)
+                {
+                    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == vSeleccionaEmp.EmpresaSeleccionada.Id);
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void cmbEmpresas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Program.CambiaEmpresa)
+                {
+                    Program.EmpresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
+                    btnRefrescarInventario.PerformClick();
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
         //private void btnRefrescaDepositos_Click(object sender, EventArgs e)
         //{
         //    try
@@ -825,7 +908,7 @@ namespace Aires.Pantallas
         //    }
         //    catch (Exception ex) { MuestraExcepcion(ex); }
         //}
-        
+
         private void txtBuscaProductoCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
             try

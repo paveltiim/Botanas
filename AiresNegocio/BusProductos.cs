@@ -363,12 +363,21 @@ namespace AiresNegocio
                     p.Id = Convert.ToInt32(r["PRO_ID"]);
                     p.Descripcion = r["PRO_DESCRIPCION"].ToString();
 
-                    p.Unidad = "PIEZA";
+
+                    //p.Unidad = "PIEZA";
+                    p.ProductoServicioId = Convert.ToInt32(r["PRO_TIPOPRODUCTOSERVICIOID"]);
+                    p.ProductoServicio = r["CATPRO_DESCRIPCION"].ToString();
+                    p.ClaveProductoServicio = r["CATPRO_CLAVE"].ToString();
+                    p.UnidadId = Convert.ToInt32(r["PRO_TIPOUNIDADID"]);
+                    p.Unidad = r["CATUNI_DESCRIPCION"].ToString();
+                    p.ClaveUnidad = r["CATUNI_CLAVE"].ToString();
+
 
                     p.Cantidad = Convert.ToInt32(r["CANTIDAD"]);
                     p.PrecioVenta = Convert.ToDecimal(r["PROPED_PRECIOVENTA"]);
-
+                    
                     p.PrecioVentaSinIVA = Math.Round(p.PrecioVenta/1.16m,2);
+                    //subtotal = Math.Round(total, 2) / (1 + IVA);
                     lst.Add(p);
                 }
                 return lst;
@@ -615,6 +624,37 @@ namespace AiresNegocio
             {
                 List<EntProducto> lst = new List<EntProducto>();
                 dt = new DatProductos().selObtieneProductosDetalleHastaFecha(FechaHasta);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    //p.Id = Convert.ToInt32(r["PROPED_ID"]);
+                    //p.Id = Convert.ToInt32(r["PRO_ID"]);
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+                    p.Cantidad = 1;
+                    p.PrecioCosto = Convert.ToDecimal(r["PRODET_PRECIOCOSTO"]);
+                    p.PrecioVenta = Convert.ToDecimal(r["PRODET_PRECIOVENTA"]);
+
+                    //p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        /// <summary>
+        /// Productos sin vender Hasta Fecha
+        /// </summary>
+        /// <param name="FechaDesde"></param>
+        /// <param name="FechaHasta"></param>
+        /// <param name="ClienteId"></param>
+        /// <returns></returns>
+        public List<EntProducto> ObtieneProductosDetalleHastaFecha(int EmpresaId, DateTime FechaHasta)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                dt = new DatProductos().selObtieneProductosDetalleHastaFecha(EmpresaId, FechaHasta);
                 foreach (DataRow r in dt.Rows)
                 {
                     EntProducto p = new EntProducto();

@@ -60,18 +60,27 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
-        public int agregaFactura(int EmpresaId, int PedidoId, string NumeroFactura, string UUID, DateTime Fecha, string Ruta)
+        public int agregaFactura(int EmpresaId, int PedidoId, string SerieFactura, string NumeroFactura, string UUID,
+                                    int TipoComprobanteId, int FormaPagoId, int MetodoPagoId, int UsoCFDIId,
+                                    DateTime Fecha, string Ruta)
         {
             try
             {
                 int Id = 0;
 
-                com = new SqlCommand("insAgregaFacturaPedido", con);
+                com = new SqlCommand("insAgregaFacturaPedido33", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 com.Parameters.AddWithValue("PedidoId", PedidoId);
+                com.Parameters.AddWithValue("SerieFactura", SerieFactura);
                 com.Parameters.AddWithValue("NumeroFactura", NumeroFactura);
                 com.Parameters.AddWithValue("UUID", UUID);
+
+                com.Parameters.AddWithValue("TipoComprobanteId", TipoComprobanteId);
+                com.Parameters.AddWithValue("FormaPagoId", FormaPagoId);
+                com.Parameters.AddWithValue("MetodoPagoId", MetodoPagoId);
+                com.Parameters.AddWithValue("UsoCFDIId", UsoCFDIId);
+
                 com.Parameters.AddWithValue("Fecha", Fecha);
                 com.Parameters.AddWithValue("Ruta", Ruta);
                 SqlParameter parm = new SqlParameter("Id", Id);

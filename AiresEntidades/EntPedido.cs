@@ -35,8 +35,9 @@ namespace AiresEntidades
 
         public bool Facturado { get; set; }
         public string UUID { get; set; }
-        public string RutaFactura { get; set; }
         public string Factura { get; set; }
+        public int FormaPagoId { get; set; }
+        public string RutaFactura { get; set; }
 
         public EntProducto ProductoPedido { get; set; }
     }

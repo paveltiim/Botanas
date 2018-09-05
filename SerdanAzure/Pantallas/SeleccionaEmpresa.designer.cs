@@ -139,9 +139,9 @@
             // 
             // TimbresEmpresa
             // 
-            this.TimbresEmpresa.DataPropertyName = "TimbresEmpresa";
+            this.TimbresEmpresa.DataPropertyName = "TimbresRestantes";
             this.TimbresEmpresa.FillWeight = 0.7F;
-            this.TimbresEmpresa.HeaderText = "Timbres";
+            this.TimbresEmpresa.HeaderText = "Timbres Restantes";
             this.TimbresEmpresa.Name = "TimbresEmpresa";
             this.TimbresEmpresa.ReadOnly = true;
             // 

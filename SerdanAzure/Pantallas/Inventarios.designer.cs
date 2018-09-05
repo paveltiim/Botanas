@@ -143,7 +143,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.BackColor = System.Drawing.Color.Transparent;
-            this.label24.Location = new System.Drawing.Point(378, 27);
+            this.label24.Location = new System.Drawing.Point(378, 16);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(51, 13);
             this.label24.TabIndex = 121;
@@ -155,7 +155,7 @@
             this.cmbEmpresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEmpresas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmpresas.FormattingEnabled = true;
-            this.cmbEmpresas.Location = new System.Drawing.Point(429, 17);
+            this.cmbEmpresas.Location = new System.Drawing.Point(429, 6);
             this.cmbEmpresas.Name = "cmbEmpresas";
             this.cmbEmpresas.Size = new System.Drawing.Size(359, 28);
             this.cmbEmpresas.TabIndex = 122;
@@ -169,7 +169,7 @@
             this.btnBuscaEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBuscaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscaEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscaEmpresa.Location = new System.Drawing.Point(794, 17);
+            this.btnBuscaEmpresa.Location = new System.Drawing.Point(794, 6);
             this.btnBuscaEmpresa.Name = "btnBuscaEmpresa";
             this.btnBuscaEmpresa.Size = new System.Drawing.Size(40, 28);
             this.btnBuscaEmpresa.TabIndex = 120;
@@ -182,10 +182,10 @@
             this.tcInventarios.Controls.Add(this.tabPage8);
             this.tcInventarios.Controls.Add(this.tabPage2);
             this.tcInventarios.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tcInventarios.Location = new System.Drawing.Point(15, 28);
+            this.tcInventarios.Location = new System.Drawing.Point(15, 17);
             this.tcInventarios.Name = "tcInventarios";
             this.tcInventarios.SelectedIndex = 0;
-            this.tcInventarios.Size = new System.Drawing.Size(1595, 753);
+            this.tcInventarios.Size = new System.Drawing.Size(1564, 749);
             this.tcInventarios.TabIndex = 86;
             this.tcInventarios.SelectedIndexChanged += new System.EventHandler(this.tcInventarios_SelectedIndexChanged);
             // 
@@ -196,7 +196,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1587, 726);
+            this.tabPage1.Size = new System.Drawing.Size(1556, 722);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Inventario Físico";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -208,7 +208,7 @@
             this.btnRefrescarInventario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRefrescarInventario.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescarInventario.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescarInventario.Location = new System.Drawing.Point(6, 660);
+            this.btnRefrescarInventario.Location = new System.Drawing.Point(7, 600);
             this.btnRefrescarInventario.Name = "btnRefrescarInventario";
             this.btnRefrescarInventario.Size = new System.Drawing.Size(77, 66);
             this.btnRefrescarInventario.TabIndex = 113;
@@ -224,7 +224,7 @@
             this.tcReportesInventario.Location = new System.Drawing.Point(3, 5);
             this.tcReportesInventario.Name = "tcReportesInventario";
             this.tcReportesInventario.SelectedIndex = 0;
-            this.tcReportesInventario.Size = new System.Drawing.Size(1551, 653);
+            this.tcReportesInventario.Size = new System.Drawing.Size(1030, 589);
             this.tcReportesInventario.TabIndex = 1;
             this.tcReportesInventario.SelectedIndexChanged += new System.EventHandler(this.btnRefrescarInventario_Click);
             // 
@@ -235,7 +235,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 23);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1543, 626);
+            this.tabPage6.Size = new System.Drawing.Size(1022, 562);
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Productos";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -259,7 +259,7 @@
             this.rvInventario.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptInventarioProducto.rdlc";
             this.rvInventario.Location = new System.Drawing.Point(0, 22);
             this.rvInventario.Name = "rvInventario";
-            this.rvInventario.Size = new System.Drawing.Size(1543, 604);
+            this.rvInventario.Size = new System.Drawing.Size(1022, 540);
             this.rvInventario.TabIndex = 0;
             // 
             // tabPage7
@@ -268,7 +268,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 23);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1543, 626);
+            this.tabPage7.Size = new System.Drawing.Size(1022, 562);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Detalle";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -281,7 +281,7 @@
             this.rvInventarioDetalle.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptInventarioDetalle.rdlc";
             this.rvInventarioDetalle.Location = new System.Drawing.Point(0, 0);
             this.rvInventarioDetalle.Name = "rvInventarioDetalle";
-            this.rvInventarioDetalle.Size = new System.Drawing.Size(1543, 671);
+            this.rvInventarioDetalle.Size = new System.Drawing.Size(1022, 585);
             this.rvInventarioDetalle.TabIndex = 1;
             // 
             // tabPage8
@@ -290,7 +290,7 @@
             this.tabPage8.Controls.Add(this.tcReportesInventarioConsignacion);
             this.tabPage8.Location = new System.Drawing.Point(4, 23);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1587, 726);
+            this.tabPage8.Size = new System.Drawing.Size(1556, 722);
             this.tabPage8.TabIndex = 2;
             this.tabPage8.Text = "Inventario Consignación";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -302,7 +302,7 @@
             this.btnRefrescaInventarioConsignacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRefrescaInventarioConsignacion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescaInventarioConsignacion.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescaInventarioConsignacion.Location = new System.Drawing.Point(6, 657);
+            this.btnRefrescaInventarioConsignacion.Location = new System.Drawing.Point(6, 600);
             this.btnRefrescaInventarioConsignacion.Name = "btnRefrescaInventarioConsignacion";
             this.btnRefrescaInventarioConsignacion.Size = new System.Drawing.Size(77, 66);
             this.btnRefrescaInventarioConsignacion.TabIndex = 114;
@@ -318,7 +318,7 @@
             this.tcReportesInventarioConsignacion.Location = new System.Drawing.Point(2, 2);
             this.tcReportesInventarioConsignacion.Name = "tcReportesInventarioConsignacion";
             this.tcReportesInventarioConsignacion.SelectedIndex = 0;
-            this.tcReportesInventarioConsignacion.Size = new System.Drawing.Size(1551, 653);
+            this.tcReportesInventarioConsignacion.Size = new System.Drawing.Size(980, 595);
             this.tcReportesInventarioConsignacion.TabIndex = 2;
             this.tcReportesInventarioConsignacion.SelectedIndexChanged += new System.EventHandler(this.tcReportesInventarioConsignacion_SelectedIndexChanged);
             // 
@@ -329,7 +329,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 23);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(1543, 626);
+            this.tabPage9.Size = new System.Drawing.Size(972, 568);
             this.tabPage9.TabIndex = 0;
             this.tabPage9.Text = "Productos";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -353,7 +353,7 @@
             this.rvInventarioConsignacion.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptInventarioProducto.rdlc";
             this.rvInventarioConsignacion.Location = new System.Drawing.Point(0, 22);
             this.rvInventarioConsignacion.Name = "rvInventarioConsignacion";
-            this.rvInventarioConsignacion.Size = new System.Drawing.Size(1543, 604);
+            this.rvInventarioConsignacion.Size = new System.Drawing.Size(972, 550);
             this.rvInventarioConsignacion.TabIndex = 0;
             // 
             // tabPage10
@@ -362,7 +362,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 23);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1543, 626);
+            this.tabPage10.Size = new System.Drawing.Size(972, 568);
             this.tabPage10.TabIndex = 1;
             this.tabPage10.Text = "Detalle";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -375,7 +375,7 @@
             this.rvInventarioDetalleConsignacion.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptInventarioDetalle.rdlc";
             this.rvInventarioDetalleConsignacion.Location = new System.Drawing.Point(0, 0);
             this.rvInventarioDetalleConsignacion.Name = "rvInventarioDetalleConsignacion";
-            this.rvInventarioDetalleConsignacion.Size = new System.Drawing.Size(1543, 671);
+            this.rvInventarioDetalleConsignacion.Size = new System.Drawing.Size(972, 536);
             this.rvInventarioDetalleConsignacion.TabIndex = 1;
             // 
             // tabPage2
@@ -395,7 +395,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1587, 726);
+            this.tabPage2.Size = new System.Drawing.Size(1556, 722);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Entradas";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -404,7 +404,7 @@
             // 
             this.pnlBotonesGenerales.Controls.Add(this.btnEliminar);
             this.pnlBotonesGenerales.Controls.Add(this.btnEditar);
-            this.pnlBotonesGenerales.Location = new System.Drawing.Point(85, 643);
+            this.pnlBotonesGenerales.Location = new System.Drawing.Point(85, 640);
             this.pnlBotonesGenerales.Name = "pnlBotonesGenerales";
             this.pnlBotonesGenerales.Size = new System.Drawing.Size(162, 75);
             this.pnlBotonesGenerales.TabIndex = 122;
@@ -448,7 +448,7 @@
             this.btnRefrescar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRefrescar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescar.Location = new System.Drawing.Point(3, 644);
+            this.btnRefrescar.Location = new System.Drawing.Point(3, 641);
             this.btnRefrescar.Name = "btnRefrescar";
             this.btnRefrescar.Size = new System.Drawing.Size(77, 66);
             this.btnRefrescar.TabIndex = 112;
@@ -495,13 +495,14 @@
             this.btnExportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnExportar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExportar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportar.Location = new System.Drawing.Point(252, 644);
+            this.btnExportar.Location = new System.Drawing.Point(252, 640);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(74, 66);
             this.btnExportar.TabIndex = 115;
             this.btnExportar.Text = "Exportar";
             this.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Visible = false;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // tabControl2
@@ -697,6 +698,7 @@
             this.btnExportaProducto.Text = "Exportar";
             this.btnExportaProducto.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExportaProducto.UseVisualStyleBackColor = false;
+            this.btnExportaProducto.Visible = false;
             this.btnExportaProducto.Click += new System.EventHandler(this.btnExportaProducto_Click);
             // 
             // txtPrecioVentaTotalEntradas

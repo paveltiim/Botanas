@@ -29,25 +29,32 @@
         private void InitializeComponent()
         {
             this.pnlFacturacion = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtCantidad = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtRFC = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtNombreFiscal = new System.Windows.Forms.TextBox();
             this.cmbFormaPago = new System.Windows.Forms.ComboBox();
-            this.cmbMetodoPago = new System.Windows.Forms.ComboBox();
-            this.txtNumeroCuenta = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txtCondicionesPago = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtMetodoPago = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtFormaPago = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.txtRFC = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtNombreFiscal = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtFormaPago = new System.Windows.Forms.TextBox();
+            this.cmbMetodoPago = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtNumeroCuenta = new System.Windows.Forms.TextBox();
+            this.txtMetodoPago = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtCondicionesPago = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtFolio = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtUUID = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCP = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -67,230 +74,299 @@
             this.txtColonia = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.pnlFacturacion.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlFacturacion
             // 
-            this.pnlFacturacion.Controls.Add(this.label4);
-            this.pnlFacturacion.Controls.Add(this.label3);
-            this.pnlFacturacion.Controls.Add(this.txtDescripcion);
-            this.pnlFacturacion.Controls.Add(this.txtCantidad);
+            this.pnlFacturacion.Controls.Add(this.groupBox3);
             this.pnlFacturacion.Controls.Add(this.groupBox2);
-            this.pnlFacturacion.Controls.Add(this.groupBox1);
-            this.pnlFacturacion.Location = new System.Drawing.Point(40, 20);
+            this.pnlFacturacion.Location = new System.Drawing.Point(22, 11);
             this.pnlFacturacion.Margin = new System.Windows.Forms.Padding(2);
             this.pnlFacturacion.Name = "pnlFacturacion";
-            this.pnlFacturacion.Size = new System.Drawing.Size(340, 460);
+            this.pnlFacturacion.Size = new System.Drawing.Size(380, 384);
             this.pnlFacturacion.TabIndex = 112;
             // 
-            // label3
+            // groupBox3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 440);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 14);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "Cantidad:";
+            this.groupBox3.Controls.Add(this.txtDescripcion);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.txtCantidad);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.cmbFormaPago);
+            this.groupBox3.Controls.Add(this.txtRFC);
+            this.groupBox3.Controls.Add(this.txtEmail);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.txtNombreFiscal);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.txtFormaPago);
+            this.groupBox3.Controls.Add(this.cmbMetodoPago);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.txtNumeroCuenta);
+            this.groupBox3.Controls.Add(this.txtMetodoPago);
+            this.groupBox3.Controls.Add(this.label20);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.txtCondicionesPago);
+            this.groupBox3.Location = new System.Drawing.Point(4, 81);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(373, 298);
+            this.groupBox3.TabIndex = 43;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Datos Nota Crédito";
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescripcion.Location = new System.Drawing.Point(105, 206);
+            this.txtDescripcion.Multiline = true;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(238, 54);
+            this.txtDescripcion.TabIndex = 41;
+            this.txtDescripcion.Text = "NOTA DE CRÉDITO";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(27, 211);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 14);
+            this.label4.TabIndex = 42;
+            this.label4.Text = "Descripción:";
             // 
             // txtCantidad
             // 
             this.txtCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCantidad.Location = new System.Drawing.Point(87, 435);
+            this.txtCantidad.Location = new System.Drawing.Point(104, 265);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(167, 22);
             this.txtCantidad.TabIndex = 36;
             this.txtCantidad.Text = "$0.00";
             // 
-            // groupBox2
+            // label3
             // 
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.txtRFC);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.txtNombreFiscal);
-            this.groupBox2.Controls.Add(this.cmbFormaPago);
-            this.groupBox2.Controls.Add(this.cmbMetodoPago);
-            this.groupBox2.Controls.Add(this.txtNumeroCuenta);
-            this.groupBox2.Controls.Add(this.label20);
-            this.groupBox2.Controls.Add(this.txtCondicionesPago);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.txtMetodoPago);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.txtFormaPago);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.txtEmail);
-            this.groupBox2.Location = new System.Drawing.Point(4, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(328, 191);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Datos de Factura";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(40, 270);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 14);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "Cantidad:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 147);
+            this.label2.Location = new System.Drawing.Point(43, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 14);
             this.label2.TabIndex = 110;
             this.label2.Text = "Nombre Fiscal:";
             // 
+            // cmbFormaPago
+            // 
+            this.cmbFormaPago.FormattingEnabled = true;
+            this.cmbFormaPago.Items.AddRange(new object[] {
+            "01 - Efectivo",
+            "02 - Cheque nominativo",
+            "03 - Transferencia electrónica de fondos",
+            "04 - Tarjeta de crédito",
+            "05 - Monedero electrónico",
+            "06 - Dinero electrónico",
+            "08 - Vales de despensa",
+            "12 - Dación en pago",
+            "13 - Pago por subrogación",
+            "14 - Pago por consignación",
+            "15 - Condonación",
+            "17 - Compensación",
+            "23 - Novación",
+            "24 - Confusión",
+            "25 - Remisión de deuda",
+            "26 - Prescripción o caducidad",
+            "27 - A satisfacción del acreedor",
+            "28 - Tarjeta de débito",
+            "29 - Tarjeta de servicios",
+            "30 - Aplicación de anticipos",
+            "99 - Por definir"});
+            this.cmbFormaPago.Location = new System.Drawing.Point(125, 67);
+            this.cmbFormaPago.Name = "cmbFormaPago";
+            this.cmbFormaPago.Size = new System.Drawing.Size(195, 22);
+            this.cmbFormaPago.TabIndex = 106;
+            // 
             // txtRFC
             // 
             this.txtRFC.Enabled = false;
             this.txtRFC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRFC.Location = new System.Drawing.Point(124, 166);
+            this.txtRFC.Location = new System.Drawing.Point(125, 43);
             this.txtRFC.Name = "txtRFC";
             this.txtRFC.Size = new System.Drawing.Size(195, 22);
             this.txtRFC.TabIndex = 109;
             // 
+            // txtEmail
+            // 
+            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Location = new System.Drawing.Point(125, 163);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(195, 22);
+            this.txtEmail.TabIndex = 4;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 172);
+            this.label1.Location = new System.Drawing.Point(82, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 14);
             this.label1.TabIndex = 108;
             this.label1.Text = "R.F.C.:";
             // 
-            // txtNombreFiscal
-            // 
-            this.txtNombreFiscal.Enabled = false;
-            this.txtNombreFiscal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreFiscal.Location = new System.Drawing.Point(124, 141);
-            this.txtNombreFiscal.Name = "txtNombreFiscal";
-            this.txtNombreFiscal.Size = new System.Drawing.Size(195, 22);
-            this.txtNombreFiscal.TabIndex = 107;
-            // 
-            // cmbFormaPago
-            // 
-            this.cmbFormaPago.FormattingEnabled = true;
-            this.cmbFormaPago.Items.AddRange(new object[] {
-            "Pago en una sola exhibición",
-            "Parcialidades"});
-            this.cmbFormaPago.Location = new System.Drawing.Point(124, 20);
-            this.cmbFormaPago.Name = "cmbFormaPago";
-            this.cmbFormaPago.Size = new System.Drawing.Size(195, 22);
-            this.cmbFormaPago.TabIndex = 106;
-            // 
-            // cmbMetodoPago
-            // 
-            this.cmbMetodoPago.FormattingEnabled = true;
-            this.cmbMetodoPago.Items.AddRange(new object[] {
-            "01-Efectivo",
-            "02-Cheque",
-            "03-Transferencia",
-            "04-Tarjetas de crédito",
-            "05-Monederos electrónicos",
-            "06-Dinero electrónico",
-            "07-Tarjetas digitales",
-            "08-Vales de despensa",
-            "09-Bienes",
-            "10-Servicio",
-            "11-Por cuenta de tercero",
-            "12-Dación en pago",
-            "13-Pago por subrogación",
-            "14-Pago por consignación",
-            "15-Condonación",
-            "16-Cancelación",
-            "17-Compensación",
-            "28-Tarjetas de Débito",
-            "98-“NA”",
-            "99-Otros"});
-            this.cmbMetodoPago.Location = new System.Drawing.Point(124, 44);
-            this.cmbMetodoPago.Name = "cmbMetodoPago";
-            this.cmbMetodoPago.Size = new System.Drawing.Size(195, 22);
-            this.cmbMetodoPago.TabIndex = 105;
-            // 
-            // txtNumeroCuenta
-            // 
-            this.txtNumeroCuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumeroCuenta.Location = new System.Drawing.Point(124, 92);
-            this.txtNumeroCuenta.Name = "txtNumeroCuenta";
-            this.txtNumeroCuenta.Size = new System.Drawing.Size(195, 22);
-            this.txtNumeroCuenta.TabIndex = 3;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(15, 95);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(107, 14);
-            this.label20.TabIndex = 104;
-            this.label20.Text = "Número de Cuenta:";
-            // 
-            // txtCondicionesPago
-            // 
-            this.txtCondicionesPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCondicionesPago.Location = new System.Drawing.Point(124, 68);
-            this.txtCondicionesPago.Name = "txtCondicionesPago";
-            this.txtCondicionesPago.Size = new System.Drawing.Size(195, 22);
-            this.txtCondicionesPago.TabIndex = 2;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(1, 71);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(119, 14);
-            this.label12.TabIndex = 102;
-            this.label12.Text = "Condiciones de Pago:";
-            // 
-            // txtMetodoPago
-            // 
-            this.txtMetodoPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMetodoPago.Location = new System.Drawing.Point(124, 44);
-            this.txtMetodoPago.Name = "txtMetodoPago";
-            this.txtMetodoPago.Size = new System.Drawing.Size(195, 22);
-            this.txtMetodoPago.TabIndex = 1;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(26, 47);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(96, 14);
-            this.label11.TabIndex = 100;
-            this.label11.Text = "Método de Pago:";
-            // 
-            // txtFormaPago
-            // 
-            this.txtFormaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFormaPago.Location = new System.Drawing.Point(124, 20);
-            this.txtFormaPago.Name = "txtFormaPago";
-            this.txtFormaPago.Size = new System.Drawing.Size(195, 22);
-            this.txtFormaPago.TabIndex = 0;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(33, 24);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 14);
-            this.label10.TabIndex = 98;
-            this.label10.Text = "Forma de Pago:";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(80, 122);
+            this.label9.Location = new System.Drawing.Point(81, 169);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(37, 14);
             this.label9.TabIndex = 97;
             this.label9.Text = "Email:";
             // 
-            // txtEmail
+            // txtNombreFiscal
             // 
-            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(124, 116);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(195, 22);
-            this.txtEmail.TabIndex = 4;
+            this.txtNombreFiscal.Enabled = false;
+            this.txtNombreFiscal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombreFiscal.Location = new System.Drawing.Point(125, 18);
+            this.txtNombreFiscal.Name = "txtNombreFiscal";
+            this.txtNombreFiscal.Size = new System.Drawing.Size(195, 22);
+            this.txtNombreFiscal.TabIndex = 107;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(34, 71);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 14);
+            this.label10.TabIndex = 98;
+            this.label10.Text = "Forma de Pago:";
+            // 
+            // txtFormaPago
+            // 
+            this.txtFormaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFormaPago.Location = new System.Drawing.Point(125, 67);
+            this.txtFormaPago.Name = "txtFormaPago";
+            this.txtFormaPago.Size = new System.Drawing.Size(195, 22);
+            this.txtFormaPago.TabIndex = 0;
+            // 
+            // cmbMetodoPago
+            // 
+            this.cmbMetodoPago.Enabled = false;
+            this.cmbMetodoPago.FormattingEnabled = true;
+            this.cmbMetodoPago.Items.AddRange(new object[] {
+            "PUE - Pago en una sola exhibición",
+            "PPD - Pago en parcialidades o diferido"});
+            this.cmbMetodoPago.Location = new System.Drawing.Point(125, 91);
+            this.cmbMetodoPago.Name = "cmbMetodoPago";
+            this.cmbMetodoPago.Size = new System.Drawing.Size(195, 22);
+            this.cmbMetodoPago.TabIndex = 105;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(27, 94);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(96, 14);
+            this.label11.TabIndex = 100;
+            this.label11.Text = "Método de Pago:";
+            // 
+            // txtNumeroCuenta
+            // 
+            this.txtNumeroCuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNumeroCuenta.Location = new System.Drawing.Point(125, 139);
+            this.txtNumeroCuenta.Name = "txtNumeroCuenta";
+            this.txtNumeroCuenta.Size = new System.Drawing.Size(195, 22);
+            this.txtNumeroCuenta.TabIndex = 3;
+            // 
+            // txtMetodoPago
+            // 
+            this.txtMetodoPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMetodoPago.Location = new System.Drawing.Point(125, 91);
+            this.txtMetodoPago.Name = "txtMetodoPago";
+            this.txtMetodoPago.Size = new System.Drawing.Size(195, 22);
+            this.txtMetodoPago.TabIndex = 1;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(16, 142);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(107, 14);
+            this.label20.TabIndex = 104;
+            this.label20.Text = "Número de Cuenta:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(2, 118);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(119, 14);
+            this.label12.TabIndex = 102;
+            this.label12.Text = "Condiciones de Pago:";
+            // 
+            // txtCondicionesPago
+            // 
+            this.txtCondicionesPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCondicionesPago.Location = new System.Drawing.Point(125, 115);
+            this.txtCondicionesPago.Name = "txtCondicionesPago";
+            this.txtCondicionesPago.Size = new System.Drawing.Size(195, 22);
+            this.txtCondicionesPago.TabIndex = 2;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.txtFolio);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.txtUUID);
+            this.groupBox2.Location = new System.Drawing.Point(4, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(373, 72);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Datos de Factura";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(27, 48);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 14);
+            this.label5.TabIndex = 118;
+            this.label5.Text = "Folio:";
+            // 
+            // txtFolio
+            // 
+            this.txtFolio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFolio.Location = new System.Drawing.Point(67, 43);
+            this.txtFolio.Name = "txtFolio";
+            this.txtFolio.ReadOnly = true;
+            this.txtFolio.Size = new System.Drawing.Size(91, 22);
+            this.txtFolio.TabIndex = 117;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(27, 23);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 14);
+            this.label7.TabIndex = 116;
+            this.label7.Text = "UUID:";
+            // 
+            // txtUUID
+            // 
+            this.txtUUID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUUID.Location = new System.Drawing.Point(67, 18);
+            this.txtUUID.Name = "txtUUID";
+            this.txtUUID.ReadOnly = true;
+            this.txtUUID.Size = new System.Drawing.Size(300, 22);
+            this.txtUUID.TabIndex = 115;
             // 
             // groupBox1
             // 
@@ -310,12 +386,13 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.txtColonia);
-            this.groupBox1.Location = new System.Drawing.Point(5, 200);
+            this.groupBox1.Location = new System.Drawing.Point(385, 252);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(327, 175);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dirección Fiscal";
+            this.groupBox1.Visible = false;
             // 
             // txtCP
             // 
@@ -462,7 +539,7 @@
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(224, 485);
+            this.btnCancelar.Location = new System.Drawing.Point(230, 399);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(70, 64);
             this.btnCancelar.TabIndex = 4;
@@ -480,7 +557,7 @@
             this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAgregar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(124, 485);
+            this.btnAgregar.Location = new System.Drawing.Point(130, 399);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(73, 64);
             this.btnAgregar.TabIndex = 3;
@@ -489,34 +566,16 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 381);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 14);
-            this.label4.TabIndex = 42;
-            this.label4.Text = "Descripción:";
-            // 
-            // txtDescripcion
-            // 
-            this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(88, 376);
-            this.txtDescripcion.Multiline = true;
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(238, 54);
-            this.txtDescripcion.TabIndex = 41;
-            this.txtDescripcion.Text = "NOTA DE CRÉDITO";
-            // 
             // AgregaFactura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(423, 570);
+            this.ClientSize = new System.Drawing.Size(423, 475);
             this.Controls.Add(this.pnlFacturacion);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AgregaFactura";
@@ -525,7 +584,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AgregaFactura_FormClosing);
             this.Load += new System.EventHandler(this.AgregaDeuda_Load);
             this.pnlFacturacion.ResumeLayout(false);
-            this.pnlFacturacion.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -576,5 +636,10 @@
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtFolio;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtUUID;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }

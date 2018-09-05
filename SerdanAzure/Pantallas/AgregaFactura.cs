@@ -27,13 +27,15 @@ namespace Aires.Pantallas
         }
         public EntCliente Cliente { get; set; }
         public decimal Cantidad { get { return ConvierteTextoADecimal(txtCantidad.Text); } }
-        
+
+        public string UUID { get; set; }
         public string NumeroFactura { get; set; }
+        public int FormaPagoId { get; set; }
 
         public string NumeroNotaCredito { get; set; }
         public EntFactura NotaCredito { get; set; }
 
-
+        #region Metodos
         public void ActivaNotaCredito()
         {
             cmbMetodoPago.SelectedIndex = cmbMetodoPago.Items.Count - 1;
@@ -90,8 +92,8 @@ namespace Aires.Pantallas
             mensaje += "\n Agradecemos su preferencia y esperamos seguirle atendiendo como se merece. \n";
             mensaje += "\n Atte. \n" + Empresa.NombreFiscal;
 
-            if (Program.UsuarioSeleccionado.Id > 1)
-            {
+            //if (Program.UsuarioSeleccionado.Id > 1)
+            //{
                 string email4 = "refrigeracion_serdan@hotmail.com";
                 if (Program.UsuarioSeleccionado.Id == 5)
                 {//CASAR
@@ -101,15 +103,16 @@ namespace Aires.Pantallas
                 }
                 else
                     new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3, email4 }, mensaje, archivosAdjuntos);
-            }
-            else
-                new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3 }, mensaje, archivosAdjuntos);
+            //}
+            //else
+            //    new UtiCorreo().EnviaCorreo(asunto, new List<string>() { Cliente.Email, Cliente.Email2, Cliente.Email3 }, mensaje, archivosAdjuntos);
 
             MessageBox.Show("El Correo se ha Enviado correctamente, a la(s) dirección(es): \n " + Cliente.Email + " \n " + Cliente.Email2 + " \n " + Cliente.Email3);
             //}
         }
         EntFactura EnviarNotaCredito(EntCliente Cliente,
-                        DateTime FechaFactura, string NumeroNota,
+                        string UUIDFactura,
+                        string NumeroNota, DateTime FechaNota,
                         string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
                         decimal Total, string Descripcion)
         {
@@ -146,14 +149,43 @@ namespace Aires.Pantallas
             ////ConviertePdfToImage(@"C:\TIIM\Facturacion\Facturas\RAFAEL GIL ARMENTA\20170105121745\64DD0F9F-A637-4BEA-A03B-D3DEEF45D8FE.pdf");
 
             //string folioFactura = "";
-            factura.UUID = facturarPruebas.FacturarNotaCredito(Program.EmpresaSeleccionada, Total, Descripcion, NumeroNota, Cliente, FechaFactura, FormaPago, MedioPago, CondicionPago, NumeroCuenta, pathClienteDirectorioFacturas);
+            //factura.UUID = facturarPruebas.FacturarNotaCredito(Program.EmpresaSeleccionada, Total, Descripcion, NumeroNota, Cliente, FechaFactura, FormaPago, MedioPago, CondicionPago, NumeroCuenta, pathClienteDirectorioFacturas);
+
+            //factura.UUID = facturar.FacturarNotaCredito(Program.EmpresaSeleccionada, Total, Descripcion, NumeroNota, Cliente, FechaFactura, FormaPago, MedioPago, CondicionPago, NumeroCuenta, pathClienteDirectorioFacturas);
+            decimal subtotal = Math.Round(Total, 2) / (1 + IVA); //Math.Round(total / (1 + IVA), 2);
+            decimal cantidadIva = Math.Round(Total, 2) - subtotal;
+
+            //factura.UUID = facturarPruebas.FacturarNotaCredito33(Program.EmpresaSeleccionada, Total, Descripcion, Cliente,
+            //                                                UUIDFactura,
+            //                                                "NC -", NumeroNota, FechaNota,
+            //                                                FormaPago, MedioPago, CondicionPago, NumeroCuenta, pathClienteDirectorioFacturas, cantidadIva, "");
+
+            factura.UUID = facturar.FacturarNotaCredito33(Program.EmpresaSeleccionada, Total, Descripcion, Cliente,
+                                                            UUIDFactura,
+                                                            "NC -", NumeroNota, FechaNota,
+                                                            FormaPago, MedioPago, CondicionPago, NumeroCuenta, pathClienteDirectorioFacturas, cantidadIva, "");
+
+
             factura.Ruta = pathClienteDirectorioFacturas;
             factura.NumeroFactura = NumeroNota;
             this.NumeroNotaCredito = NumeroNota;
 
             return factura;// pathClienteDirectorioFacturas;
         }
+        #endregion
 
+        private void AgregaDeuda_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                cmbFormaPago.SelectedIndex = 0;// this.FormaPagoId; TODAVIA NO SE PUEDE, HASTA LLENAR EL CMB DESDE CATALOGO(BD).
+                cmbMetodoPago.SelectedIndex = 0;
+                txtUUID.Text = this.UUID;
+                txtFolio.Text = this.NumeroFactura;
+                CargaDatosCliente(Cliente);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -171,7 +203,13 @@ namespace Aires.Pantallas
                         //int ultimaFactura = ConvierteTextoAInteger(new BusPedidos().ObtieneUltimaNotaCredito(Program.EmpresaSeleccionada.Id).NumeroFactura);//new BusPedidos().ObtieneUltimaFactura().Id;
                         //int nuevaFactura = ultimaFactura++;
                         string ultimaNota = ObtieneUltimaNotaCredito(Program.EmpresaSeleccionada.Id);
-                        NotaCredito = EnviarNotaCredito(Cliente, DateTime.Now, ultimaNota, txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text, txtNumeroCuenta.Text, ConvierteTextoADecimal(txtCantidad.Text), txtDescripcion.Text);
+                        txtFormaPago.Text = cmbFormaPago.Text.Remove(2, cmbFormaPago.Text.Length - 2);
+                        txtMetodoPago.Text = cmbMetodoPago.Text.Remove(3);
+                        //txtUsoCFDI.Text = cmbUsoCFDI.Text.Remove(3);
+
+                        NotaCredito = EnviarNotaCredito(Cliente, this.UUID,ultimaNota, DateTime.Now, 
+                                                        txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text, txtNumeroCuenta.Text, 
+                                                        ConvierteTextoADecimal(txtCantidad.Text), txtDescripcion.Text);
 
                         facturado = true;
                     }
@@ -205,8 +243,8 @@ namespace Aires.Pantallas
                         {
                             //DESCUENTA TIMBRE
                             new BusEmpresas().AumentaTimbreEmpresa(Program.EmpresaSeleccionada.Id);
-                            Program.EmpresaSeleccionada.TimbresEmpresa--;
-                            Program.EmpresaSeleccionada.Timbres--;
+                            Program.EmpresaSeleccionada.TimbresRestantes--;
+                            Program.EmpresaSeleccionada.TimbresUsados--;
                         }
                         catch (Exception ex) {
 
@@ -230,15 +268,6 @@ namespace Aires.Pantallas
 
         }
 
-        private void AgregaDeuda_Load(object sender, EventArgs e)
-        {
-            try {
-                cmbFormaPago.SelectedIndex = 0;
-                cmbMetodoPago.SelectedIndex = 0;
-
-                CargaDatosCliente(Cliente);
-            } catch(Exception ex) { MessageBox.Show(ex.Message); }
-        }
 
         private void AgregaFactura_FormClosing(object sender, FormClosingEventArgs e)
         {

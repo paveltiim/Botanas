@@ -106,8 +106,8 @@ namespace Aires.Pantallas
                 if (!string.IsNullOrWhiteSpace(p.Serie))
                     ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += p.Serie + " | ";
             }
-            
-            if (Program.UsuarioSeleccionado.Id > 1)
+
+            if (Program.UsuarioSeleccionado.Id == 8 || Program.UsuarioSeleccionado.Id == 9)//OBR-NAV
                 ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += "Solicitud:".PadLeft(60, '-') + Solicitud;
 
             UtiFacturacionPruebas factura = new UtiFacturacionPruebas();

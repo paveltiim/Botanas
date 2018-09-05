@@ -278,6 +278,21 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+        public DataTable selObtieneProductosDetalleHastaFecha(int EmpresaId, DateTime FehaHasta)
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneProductosDetalleHastaFechaPorEmpresa", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("FechaHasta", FehaHasta);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
 
         public DataTable selObtieneProductoDetalleHistorial(string Serie)
         {

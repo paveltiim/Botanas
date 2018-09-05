@@ -540,7 +540,9 @@ namespace Aires.Pantallas
                     GastoId=p.Id,
                     Pago=p.Pago,
                     Deuda=p.Total,
+                    UUIDFactura=p.UUID,
                     NumeroFactura = p.Factura,
+                    FormaPagoId=p.FormaPagoId,
                     FechaFactura =p.Fecha
                 };
                 lst.Add(e);
@@ -614,7 +616,9 @@ namespace Aires.Pantallas
 
                     AgregaFactura vAgregaFactura = new AgregaFactura(clienteSeleccionado);
                     vAgregaFactura.ActivaNotaCredito();
-                    vAgregaFactura.NumeroFactura = vSeleccionaFactura.ProveedorGastoSeleccionado.NumeroFactura;
+                    vAgregaFactura.UUID = proveedorGastoSeleccionado.UUIDFactura;
+                    vAgregaFactura.NumeroFactura = proveedorGastoSeleccionado.NumeroFactura;
+                    vAgregaFactura.FormaPagoId = proveedorGastoSeleccionado.FormaPagoId;
                     if (vAgregaFactura.ShowDialog() == DialogResult.OK)
                     {
                         AgregarNotaCredito(Program.EmpresaSeleccionada.Id, pedidoId, vAgregaFactura.NumeroNotaCredito, vAgregaFactura.Cantidad, DateTime.Today.Date);
@@ -622,7 +626,6 @@ namespace Aires.Pantallas
                         //    ActualizaEstatusPedido(pedidoId, 2);//PAGADO
 
                         MuestraMensaje("¡Nota de Crédito Registrada!", "CONFIRMACIÓN PAGO");
-
                     }
 
                 }

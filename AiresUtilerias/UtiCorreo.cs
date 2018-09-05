@@ -26,7 +26,7 @@ namespace AiresUtilerias
              * y Contrasena correspondiente
              */
 
-            server.Credentials = new System.Net.NetworkCredential("pavel_tiim@hotmail.com", "tiimzoe10");
+            server.Credentials = new System.Net.NetworkCredential("tiimfacturacion@hotmail.com", "tiim10gl");
             server.EnableSsl = true;
         }
 
@@ -43,7 +43,7 @@ namespace AiresUtilerias
 
             mnsj.To.Add(new MailAddress(Para));
 
-            mnsj.From = new MailAddress("pavel_tiim@hotmail.com", "Serdan Refrigeraciones");
+            mnsj.From = new MailAddress("tiimfacturacion@hotmail.com", "Serdan Refrigeración");
 
             /* Si deseamos Adjuntar algún archivo*/
             //mnsj.Attachments.Add(new Attachment("C:\\archivo.pdf"));
@@ -66,7 +66,7 @@ namespace AiresUtilerias
                         mnsj.To.Add(new MailAddress(p));
                 }
 
-                mnsj.From = new MailAddress("pavel_tiim@hotmail.com", "TIIM Facturación");
+                mnsj.From = new MailAddress("tiimfacturacion@hotmail.com", "TIIM Facturación");
 
                 /* Si deseamos Adjuntar algún archivo*/
                 foreach (string s in PathArchivosAdjuntos)

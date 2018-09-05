@@ -75,7 +75,9 @@ namespace AiresNegocio
         {
             try
             {
-                new DatFacturas().agregaFactura(Factura.EmpresaId, Factura.PedidoId, Factura.NumeroFactura, Factura.UUID, Factura.Fecha, Factura.Ruta);
+                new DatFacturas().agregaFactura(Factura.EmpresaId, Factura.PedidoId, Factura.SerieFactura, Factura.NumeroFactura, Factura.UUID,
+                                                Factura.TipoComprobanteId, Factura.FormaPagoId, Factura.MetodoPagoId, Factura.UsoCFDIId,
+                                                Factura.Fecha, Factura.Ruta);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }

@@ -465,29 +465,37 @@ namespace AiresDatos
         }
 
         //MOVER A DatFactura
-        public int agregaFactura(int PedidoId, string UUID, DateTime FechaPago, string Ruta)
-        {
-            try
-            {
-                int Id = 0;
+        //public int agregaFactura(int PedidoId, string UUID,
+        //                            int TipoComprobanteId, int FormaPagoId, int MetodoPagoId, int UsoCFDIId,
+        //                            DateTime FechaPago, string Ruta)
+        //{
+        //    try
+        //    {
+        //        int Id = 0;
 
-                com = new SqlCommand("insAgregaFacturaPedido", con);
-                com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("PedidoId", PedidoId);
-                com.Parameters.AddWithValue("UUID", UUID);
-                com.Parameters.AddWithValue("FechaPago", FechaPago);
-                com.Parameters.AddWithValue("Ruta", Ruta);
-                SqlParameter parm = new SqlParameter("Id", Id);
-                parm.Direction = ParameterDirection.InputOutput;
-                com.Parameters.Add(parm);
-                con.Open();
-                com.ExecuteNonQuery();
+        //        com = new SqlCommand("insAgregaFacturaPedido33", con);
+        //        com.CommandType = CommandType.StoredProcedure;
+        //        com.Parameters.AddWithValue("PedidoId", PedidoId);
+        //        com.Parameters.AddWithValue("UUID", UUID);
 
-                return Convert.ToInt32(com.Parameters["Id"].Value);
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-            finally { con.Close(); }
-        }
+        //        com.Parameters.AddWithValue("TipoComprobanteId", TipoComprobanteId);
+        //        com.Parameters.AddWithValue("FormaPagoId", FormaPagoId);
+        //        com.Parameters.AddWithValue("MetodoPagoId", MetodoPagoId);
+        //        com.Parameters.AddWithValue("UsoCFDIId", UsoCFDIId);
+
+        //        com.Parameters.AddWithValue("FechaPago", FechaPago);
+        //        com.Parameters.AddWithValue("Ruta", Ruta);
+        //        SqlParameter parm = new SqlParameter("Id", Id);
+        //        parm.Direction = ParameterDirection.InputOutput;
+        //        com.Parameters.Add(parm);
+        //        con.Open();
+        //        com.ExecuteNonQuery();
+
+        //        return Convert.ToInt32(com.Parameters["Id"].Value);
+        //    }
+        //    catch (Exception ex) { throw new Exception(ex.Message); }
+        //    finally { con.Close(); }
+        //}
         public void actualizaEstatusFacturaPedido(int FacturaId, int EstatusId)
         {
             try

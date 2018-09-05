@@ -60,6 +60,10 @@ namespace Aires.Pantallas
         {
             try {
                 pnlBotones.Enabled = Program.UsuarioSeleccionado.Administrador;
+
+                if (Program.UsuarioSeleccionado.Id == 0)//MARTIN
+                    pnlBotones.Enabled = true; 
+
                 if (Program.UsuarioSeleccionado.Id > 1)
                     gvProductosDetalle.Columns[4].Visible = false;
             } catch(Exception ex) { MuestraExcepcion(ex); }

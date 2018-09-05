@@ -56,6 +56,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cmbRegimenFiscal = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.txtTasaOCuota = new System.Windows.Forms.TextBox();
+            this.cmbUsoCFDI = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbTipoFactor = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
             this.txtRegimenFiscal = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.txtNoCertificado = new System.Windows.Forms.TextBox();
@@ -111,15 +118,12 @@
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.gvEmpresas = new System.Windows.Forms.DataGridView();
-            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreFiscalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefonoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefono2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entEmpresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnEmpresaBusqueda = new System.Windows.Forms.Button();
+            this.txtEmpresaBusqueda = new System.Windows.Forms.TextBox();
+            this.entClienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RegimenFiscal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RFC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -132,16 +136,15 @@
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NoCertificado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEmpresaBusqueda = new System.Windows.Forms.Button();
-            this.txtEmpresaBusqueda = new System.Windows.Forms.TextBox();
-            this.entClienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label31 = new System.Windows.Forms.Label();
-            this.txtTasaOCuota = new System.Windows.Forms.TextBox();
-            this.cmbUsoCFDI = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmbTipoFactor = new System.Windows.Forms.ComboBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.cmbRegimenFiscal = new System.Windows.Forms.ComboBox();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreFiscalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefonoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefono2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Timbres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimbresUsados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimbresRestantes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.pnlDatos.SuspendLayout();
@@ -476,6 +479,108 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(390, 501);
             this.panel2.TabIndex = 0;
+            // 
+            // cmbRegimenFiscal
+            // 
+            this.cmbRegimenFiscal.DisplayMember = "Descripcion";
+            this.cmbRegimenFiscal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRegimenFiscal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbRegimenFiscal.FormattingEnabled = true;
+            this.cmbRegimenFiscal.Location = new System.Drawing.Point(110, 38);
+            this.cmbRegimenFiscal.Name = "cmbRegimenFiscal";
+            this.cmbRegimenFiscal.Size = new System.Drawing.Size(270, 21);
+            this.cmbRegimenFiscal.TabIndex = 148;
+            this.cmbRegimenFiscal.ValueMember = "Id";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(231, 340);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(45, 18);
+            this.label31.TabIndex = 147;
+            this.label31.Text = "Tasa:";
+            // 
+            // txtTasaOCuota
+            // 
+            this.txtTasaOCuota.Enabled = false;
+            this.txtTasaOCuota.Location = new System.Drawing.Point(276, 339);
+            this.txtTasaOCuota.Name = "txtTasaOCuota";
+            this.txtTasaOCuota.Size = new System.Drawing.Size(83, 20);
+            this.txtTasaOCuota.TabIndex = 146;
+            this.txtTasaOCuota.Text = "0.16000000";
+            // 
+            // cmbUsoCFDI
+            // 
+            this.cmbUsoCFDI.DisplayMember = "Descripcion";
+            this.cmbUsoCFDI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUsoCFDI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbUsoCFDI.FormattingEnabled = true;
+            this.cmbUsoCFDI.Items.AddRange(new object[] {
+            "601 - General de Ley Personas Morales",
+            "603 - Personas Morales con Fines no Lucrativos",
+            "605 - Sueldos y Salarios e Ingresos Asimilados a Salarios",
+            "606 - Arrendamiento",
+            "607 - Régimen de Enajenación o Adquisición de Bienes",
+            "608 - Demás ingresos",
+            "609 - Consolidación",
+            "610 - Residentes en el Extranjero sin Establecimiento Permanente en México",
+            "611 - Ingresos por Dividendos (socios y accionistas)",
+            "612 - Personas Físicas con Actividades Empresariales y Profesionales",
+            "614 - Ingresos por intereses",
+            "615 - Régimen de los ingresos por obtención de premios",
+            "616 - Sin obligaciones fiscales",
+            "620 - Sociedades Cooperativas de Producción que optan por diferir sus ingresos",
+            "621 - Incorporación Fiscal",
+            "622 - Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras",
+            "623 - Opcional para Grupos de Sociedades",
+            "624 - Coordinados",
+            "628 - Hidrocarburos",
+            "629 - De los Regímenes Fiscales Preferentes y de las Empresas Multinacionales",
+            "630 - Enajenación de acciones en bolsa de valores"});
+            this.cmbUsoCFDI.Location = new System.Drawing.Point(110, 369);
+            this.cmbUsoCFDI.Name = "cmbUsoCFDI";
+            this.cmbUsoCFDI.Size = new System.Drawing.Size(249, 21);
+            this.cmbUsoCFDI.TabIndex = 145;
+            this.cmbUsoCFDI.ValueMember = "Id";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(33, 370);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 18);
+            this.label5.TabIndex = 144;
+            this.label5.Text = "Uso CFDI:";
+            // 
+            // cmbTipoFactor
+            // 
+            this.cmbTipoFactor.DisplayMember = "Descripcion";
+            this.cmbTipoFactor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoFactor.Enabled = false;
+            this.cmbTipoFactor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbTipoFactor.FormattingEnabled = true;
+            this.cmbTipoFactor.Items.AddRange(new object[] {
+            "Tasa",
+            "Cuota",
+            "Exento"});
+            this.cmbTipoFactor.Location = new System.Drawing.Point(110, 337);
+            this.cmbTipoFactor.Name = "cmbTipoFactor";
+            this.cmbTipoFactor.Size = new System.Drawing.Size(110, 21);
+            this.cmbTipoFactor.TabIndex = 142;
+            this.cmbTipoFactor.ValueMember = "Id";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(22, 338);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(88, 18);
+            this.label32.TabIndex = 143;
+            this.label32.Text = "Tipo Factor:";
             // 
             // txtRegimenFiscal
             // 
@@ -1029,7 +1134,10 @@
             this.direccionDataGridViewTextBoxColumn,
             this.telefonoDataGridViewTextBoxColumn,
             this.telefono2DataGridViewTextBoxColumn,
-            this.emailDataGridViewTextBoxColumn});
+            this.emailDataGridViewTextBoxColumn,
+            this.Timbres,
+            this.TimbresUsados,
+            this.TimbresRestantes});
             this.gvEmpresas.DataSource = this.entEmpresaBindingSource;
             this.gvEmpresas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvEmpresas.GridColor = System.Drawing.Color.DimGray;
@@ -1045,54 +1153,6 @@
             this.gvEmpresas.Size = new System.Drawing.Size(1206, 623);
             this.gvEmpresas.TabIndex = 79;
             this.gvEmpresas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvEmpresas_CellDoubleClick);
-            // 
-            // nombreDataGridViewTextBoxColumn
-            // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.FillWeight = 2F;
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // nombreFiscalDataGridViewTextBoxColumn
-            // 
-            this.nombreFiscalDataGridViewTextBoxColumn.DataPropertyName = "NombreFiscal";
-            this.nombreFiscalDataGridViewTextBoxColumn.FillWeight = 3F;
-            this.nombreFiscalDataGridViewTextBoxColumn.HeaderText = "NombreFiscal";
-            this.nombreFiscalDataGridViewTextBoxColumn.Name = "nombreFiscalDataGridViewTextBoxColumn";
-            this.nombreFiscalDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // direccionDataGridViewTextBoxColumn
-            // 
-            this.direccionDataGridViewTextBoxColumn.DataPropertyName = "Direccion";
-            this.direccionDataGridViewTextBoxColumn.FillWeight = 3F;
-            this.direccionDataGridViewTextBoxColumn.HeaderText = "Direccion";
-            this.direccionDataGridViewTextBoxColumn.Name = "direccionDataGridViewTextBoxColumn";
-            this.direccionDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // telefonoDataGridViewTextBoxColumn
-            // 
-            this.telefonoDataGridViewTextBoxColumn.DataPropertyName = "Telefono";
-            this.telefonoDataGridViewTextBoxColumn.FillWeight = 1F;
-            this.telefonoDataGridViewTextBoxColumn.HeaderText = "Telefono";
-            this.telefonoDataGridViewTextBoxColumn.Name = "telefonoDataGridViewTextBoxColumn";
-            this.telefonoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // telefono2DataGridViewTextBoxColumn
-            // 
-            this.telefono2DataGridViewTextBoxColumn.DataPropertyName = "Telefono2";
-            this.telefono2DataGridViewTextBoxColumn.FillWeight = 1F;
-            this.telefono2DataGridViewTextBoxColumn.HeaderText = "Telefono2";
-            this.telefono2DataGridViewTextBoxColumn.Name = "telefono2DataGridViewTextBoxColumn";
-            this.telefono2DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // emailDataGridViewTextBoxColumn
-            // 
-            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            this.emailDataGridViewTextBoxColumn.FillWeight = 2F;
-            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
-            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
-            this.emailDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // entEmpresaBindingSource
             // 
@@ -1146,9 +1206,33 @@
             this.dataGridView1.TabIndex = 80;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvEmpresas_CellDoubleClick);
             // 
+            // btnEmpresaBusqueda
+            // 
+            this.btnEmpresaBusqueda.BackColor = System.Drawing.Color.White;
+            this.btnEmpresaBusqueda.BackgroundImage = global::Aires.Properties.Resources.Search;
+            this.btnEmpresaBusqueda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEmpresaBusqueda.Location = new System.Drawing.Point(319, 11);
+            this.btnEmpresaBusqueda.Name = "btnEmpresaBusqueda";
+            this.btnEmpresaBusqueda.Size = new System.Drawing.Size(45, 30);
+            this.btnEmpresaBusqueda.TabIndex = 1;
+            this.btnEmpresaBusqueda.UseVisualStyleBackColor = false;
+            // 
+            // txtEmpresaBusqueda
+            // 
+            this.txtEmpresaBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtEmpresaBusqueda.Location = new System.Drawing.Point(6, 15);
+            this.txtEmpresaBusqueda.Name = "txtEmpresaBusqueda";
+            this.txtEmpresaBusqueda.Size = new System.Drawing.Size(307, 23);
+            this.txtEmpresaBusqueda.TabIndex = 0;
+            // 
+            // entClienteBindingSource
+            // 
+            this.entClienteBindingSource.DataSource = typeof(AiresEntidades.EntCliente);
+            // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "NombreFiscal";
+            this.dataGridViewTextBoxColumn2.FillWeight = 200F;
             this.dataGridViewTextBoxColumn2.HeaderText = "NombreFiscal";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -1230,130 +1314,77 @@
             this.NoCertificado.Name = "NoCertificado";
             this.NoCertificado.ReadOnly = true;
             // 
-            // btnEmpresaBusqueda
+            // nombreDataGridViewTextBoxColumn
             // 
-            this.btnEmpresaBusqueda.BackColor = System.Drawing.Color.White;
-            this.btnEmpresaBusqueda.BackgroundImage = global::Aires.Properties.Resources.Search;
-            this.btnEmpresaBusqueda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnEmpresaBusqueda.Location = new System.Drawing.Point(319, 11);
-            this.btnEmpresaBusqueda.Name = "btnEmpresaBusqueda";
-            this.btnEmpresaBusqueda.Size = new System.Drawing.Size(45, 30);
-            this.btnEmpresaBusqueda.TabIndex = 1;
-            this.btnEmpresaBusqueda.UseVisualStyleBackColor = false;
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.FillWeight = 2F;
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // txtEmpresaBusqueda
+            // nombreFiscalDataGridViewTextBoxColumn
             // 
-            this.txtEmpresaBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtEmpresaBusqueda.Location = new System.Drawing.Point(6, 15);
-            this.txtEmpresaBusqueda.Name = "txtEmpresaBusqueda";
-            this.txtEmpresaBusqueda.Size = new System.Drawing.Size(307, 23);
-            this.txtEmpresaBusqueda.TabIndex = 0;
+            this.nombreFiscalDataGridViewTextBoxColumn.DataPropertyName = "NombreFiscal";
+            this.nombreFiscalDataGridViewTextBoxColumn.FillWeight = 3F;
+            this.nombreFiscalDataGridViewTextBoxColumn.HeaderText = "NombreFiscal";
+            this.nombreFiscalDataGridViewTextBoxColumn.Name = "nombreFiscalDataGridViewTextBoxColumn";
+            this.nombreFiscalDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // entClienteBindingSource
+            // direccionDataGridViewTextBoxColumn
             // 
-            this.entClienteBindingSource.DataSource = typeof(AiresEntidades.EntCliente);
+            this.direccionDataGridViewTextBoxColumn.DataPropertyName = "Direccion";
+            this.direccionDataGridViewTextBoxColumn.FillWeight = 3F;
+            this.direccionDataGridViewTextBoxColumn.HeaderText = "Direccion";
+            this.direccionDataGridViewTextBoxColumn.Name = "direccionDataGridViewTextBoxColumn";
+            this.direccionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // label31
+            // telefonoDataGridViewTextBoxColumn
             // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(231, 340);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(45, 18);
-            this.label31.TabIndex = 147;
-            this.label31.Text = "Tasa:";
+            this.telefonoDataGridViewTextBoxColumn.DataPropertyName = "Telefono";
+            this.telefonoDataGridViewTextBoxColumn.FillWeight = 1F;
+            this.telefonoDataGridViewTextBoxColumn.HeaderText = "Telefono";
+            this.telefonoDataGridViewTextBoxColumn.Name = "telefonoDataGridViewTextBoxColumn";
+            this.telefonoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // txtTasaOCuota
+            // telefono2DataGridViewTextBoxColumn
             // 
-            this.txtTasaOCuota.Enabled = false;
-            this.txtTasaOCuota.Location = new System.Drawing.Point(276, 339);
-            this.txtTasaOCuota.Name = "txtTasaOCuota";
-            this.txtTasaOCuota.Size = new System.Drawing.Size(83, 20);
-            this.txtTasaOCuota.TabIndex = 146;
-            this.txtTasaOCuota.Text = "0.16000000";
+            this.telefono2DataGridViewTextBoxColumn.DataPropertyName = "Telefono2";
+            this.telefono2DataGridViewTextBoxColumn.FillWeight = 1F;
+            this.telefono2DataGridViewTextBoxColumn.HeaderText = "Telefono2";
+            this.telefono2DataGridViewTextBoxColumn.Name = "telefono2DataGridViewTextBoxColumn";
+            this.telefono2DataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // cmbUsoCFDI
+            // emailDataGridViewTextBoxColumn
             // 
-            this.cmbUsoCFDI.DisplayMember = "Descripcion";
-            this.cmbUsoCFDI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbUsoCFDI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbUsoCFDI.FormattingEnabled = true;
-            this.cmbUsoCFDI.Items.AddRange(new object[] {
-            "601 - General de Ley Personas Morales",
-            "603 - Personas Morales con Fines no Lucrativos",
-            "605 - Sueldos y Salarios e Ingresos Asimilados a Salarios",
-            "606 - Arrendamiento",
-            "607 - Régimen de Enajenación o Adquisición de Bienes",
-            "608 - Demás ingresos",
-            "609 - Consolidación",
-            "610 - Residentes en el Extranjero sin Establecimiento Permanente en México",
-            "611 - Ingresos por Dividendos (socios y accionistas)",
-            "612 - Personas Físicas con Actividades Empresariales y Profesionales",
-            "614 - Ingresos por intereses",
-            "615 - Régimen de los ingresos por obtención de premios",
-            "616 - Sin obligaciones fiscales",
-            "620 - Sociedades Cooperativas de Producción que optan por diferir sus ingresos",
-            "621 - Incorporación Fiscal",
-            "622 - Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras",
-            "623 - Opcional para Grupos de Sociedades",
-            "624 - Coordinados",
-            "628 - Hidrocarburos",
-            "629 - De los Regímenes Fiscales Preferentes y de las Empresas Multinacionales",
-            "630 - Enajenación de acciones en bolsa de valores"});
-            this.cmbUsoCFDI.Location = new System.Drawing.Point(110, 369);
-            this.cmbUsoCFDI.Name = "cmbUsoCFDI";
-            this.cmbUsoCFDI.Size = new System.Drawing.Size(249, 21);
-            this.cmbUsoCFDI.TabIndex = 145;
-            this.cmbUsoCFDI.ValueMember = "Id";
+            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
+            this.emailDataGridViewTextBoxColumn.FillWeight = 2F;
+            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            this.emailDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // label5
+            // Timbres
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(33, 370);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 18);
-            this.label5.TabIndex = 144;
-            this.label5.Text = "Uso CFDI:";
+            this.Timbres.DataPropertyName = "Timbres";
+            this.Timbres.FillWeight = 0.8F;
+            this.Timbres.HeaderText = "Timbres Contratados";
+            this.Timbres.Name = "Timbres";
+            this.Timbres.ReadOnly = true;
             // 
-            // cmbTipoFactor
+            // TimbresUsados
             // 
-            this.cmbTipoFactor.DisplayMember = "Descripcion";
-            this.cmbTipoFactor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoFactor.Enabled = false;
-            this.cmbTipoFactor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbTipoFactor.FormattingEnabled = true;
-            this.cmbTipoFactor.Items.AddRange(new object[] {
-            "Tasa",
-            "Cuota",
-            "Exento"});
-            this.cmbTipoFactor.Location = new System.Drawing.Point(110, 337);
-            this.cmbTipoFactor.Name = "cmbTipoFactor";
-            this.cmbTipoFactor.Size = new System.Drawing.Size(110, 21);
-            this.cmbTipoFactor.TabIndex = 142;
-            this.cmbTipoFactor.ValueMember = "Id";
+            this.TimbresUsados.DataPropertyName = "TimbresUsados";
+            this.TimbresUsados.FillWeight = 0.7F;
+            this.TimbresUsados.HeaderText = "Timbres Usados";
+            this.TimbresUsados.Name = "TimbresUsados";
+            this.TimbresUsados.ReadOnly = true;
             // 
-            // label32
+            // TimbresRestantes
             // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(22, 338);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(88, 18);
-            this.label32.TabIndex = 143;
-            this.label32.Text = "Tipo Factor:";
-            // 
-            // cmbRegimenFiscal
-            // 
-            this.cmbRegimenFiscal.DisplayMember = "Descripcion";
-            this.cmbRegimenFiscal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbRegimenFiscal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbRegimenFiscal.FormattingEnabled = true;
-            this.cmbRegimenFiscal.Location = new System.Drawing.Point(110, 38);
-            this.cmbRegimenFiscal.Name = "cmbRegimenFiscal";
-            this.cmbRegimenFiscal.Size = new System.Drawing.Size(270, 21);
-            this.cmbRegimenFiscal.TabIndex = 148;
-            this.cmbRegimenFiscal.ValueMember = "Id";
+            this.TimbresRestantes.DataPropertyName = "TimbresRestantes";
+            this.TimbresRestantes.FillWeight = 0.7F;
+            this.TimbresRestantes.HeaderText = "Timbres Restantes";
+            this.TimbresRestantes.Name = "TimbresRestantes";
+            this.TimbresRestantes.ReadOnly = true;
             // 
             // Empresas
             // 
@@ -1474,14 +1505,18 @@
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView gvEmpresas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreFiscalDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn direccionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn telefonoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn telefono2DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnEmpresaBusqueda;
+        private System.Windows.Forms.TextBox txtEmpresaBusqueda;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cmbRegimenFiscal;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox txtTasaOCuota;
+        private System.Windows.Forms.ComboBox cmbUsoCFDI;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbTipoFactor;
+        private System.Windows.Forms.Label label32;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn RegimenFiscal;
         private System.Windows.Forms.DataGridViewTextBoxColumn RFC;
@@ -1494,15 +1529,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn CP;
         private System.Windows.Forms.DataGridViewTextBoxColumn NoCertificado;
-        private System.Windows.Forms.Button btnEmpresaBusqueda;
-        private System.Windows.Forms.TextBox txtEmpresaBusqueda;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox cmbRegimenFiscal;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox txtTasaOCuota;
-        private System.Windows.Forms.ComboBox cmbUsoCFDI;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmbTipoFactor;
-        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreFiscalDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn direccionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn telefonoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn telefono2DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Timbres;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimbresUsados;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimbresRestantes;
     }
 }
