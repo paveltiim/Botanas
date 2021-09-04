@@ -19,16 +19,28 @@ namespace Aires.Pantallas
         {
             InitializeComponent();
         }
-        public AgregaComplementoPago(EntFactura Factura)
+        //public AgregaComplementoPago(EntFactura Factura)
+        //{
+        //    InitializeComponent();
+
+        //    this.Factura = Factura;
+        //}
+        public AgregaComplementoPago(List<EntFactura> ListaFacturas, EntCliente Cliente, decimal DeudaTotal, decimal Pago)
         {
             InitializeComponent();
-
-            this.Factura = Factura;
+            this.ListaFacturas = ListaFacturas;
+            this.Cliente = Cliente;
+            this.DeudaTotal = DeudaTotal;
+            this.CantidadPago = Pago;
         }
+
         public EntFactura Factura { get; set; }
         public EntCliente Cliente { get; set; }
         public EntPedido PedidoFactura { get; set; }
-        public decimal Cantidad { get { return ConvierteTextoADecimal(txtCantidadPago.Text); } }
+        List<EntFactura> ListaFacturas { get; set; }
+        public decimal DeudaTotal { get { return ConvierteTextoADecimal(txtSaldoAnterior.Text); } set { txtSaldoAnterior.Text=FormatoMoney(value); } }
+        
+        public decimal CantidadPago { get { return ConvierteTextoADecimal(txtCantidadPago.Text); } set { txtCantidadPago.Text = FormatoMoney(value); } }
         public bool CantidadEnabled { set { txtCantidadPago.Enabled = value; } }
         public int FormaPagoId { get { return cmbFormaPago.SelectedIndex + 1; } }
 
@@ -42,7 +54,7 @@ namespace Aires.Pantallas
         /// <param name="Cliente"></param>
         /// <param name="NotaVenta"></param>
         /// <param name="Presupuesto"></param>
-        void EnviarCorreo(EntPedido Pedido, EntCliente Cliente, string PathArchivosFactura)
+        void EnviarCorreo(EntFactura FacturaCP, List<EntFactura> ListaFacturas, EntCliente Cliente, string PathArchivosFactura)
         {
             Cursor.Current = Cursors.WaitCursor;
             EntEmpresa empresa = Program.EmpresaSeleccionada;
@@ -54,8 +66,12 @@ namespace Aires.Pantallas
                 archivosAdjuntos.Add(file.FullName);
             }
 
-            //string asunto = "COMPLEMENTO PAGO - " + PedidoFactura.Factura + " - " ;
-            string asunto = "COMPLEMENTO PAGO - FACTURA: " + PedidoFactura.Factura + " - " + empresa.NombreFiscal + "- " + DateTime.Today.ToString("dd MMM");
+            string facturas = "";
+            foreach (EntFactura f in ListaFacturas)
+            {
+                facturas += f.NumeroFactura+ " | ";
+            }
+            string asunto = "COMPLEMENTO PAGO: CP-"+ FacturaCP.NumeroFactura+"; FACTURA(s): " + facturas + " - " + empresa.NombreFiscal + "- " + DateTime.Today.ToString("dd MMM");
             string mensaje = "Apreciable " + Cliente.NombreFiscal + ", \n\n Le enviamos su debido comprobante fiscal solicitado, recordandole que estamos a sus ordenes para cualquier duda o aclaración. \n";
             mensaje += "\n Agradecemos su preferencia y esperamos seguirle atendiendo como se merece. \n";
             mensaje += "\n Atte. \n" + empresa.NombreFiscal;
@@ -65,17 +81,59 @@ namespace Aires.Pantallas
             MessageBox.Show("El Correo se ha Enviado correctamente, a la(s) dirección(es): \n " + Cliente.Email + " \n " + Cliente.Email2 + " \n " + Cliente.Email3);
         }
 
-        EntFactura EnviarComplementoPago(EntEmpresa EmpresaEmisor, EntCliente Cliente, EntPedido PedidoFactura,
-                                        DateTime FechaPago, string FormaPago, decimal SaldoAnterior, decimal Total)
+        //EntFactura EnviarComplementoPago(EntEmpresa EmpresaEmisor, EntCliente Cliente, EntPedido PedidoFactura,
+        //                                DateTime FechaPago, string FormaPago, decimal SaldoAnterior,
+        //                                decimal MontoPago, string NumParcialidad)
+        //{
+        //    if (Cliente == null)
+        //        Cliente = new EntCliente();
+        //    //Cliente.Nombre = txtNombre.Text;
+        //    Cliente.NombreFiscal = txtNombreFiscal.Text;
+        //    Cliente.RFC = txtRFC.Text;
+
+        //    Cliente.Email = txtEmail.Text;
+
+
+        //    string pathClienteDirectorio = PathFacturasComplementos + "\\" + Cliente.Nombre;
+        //    if (!System.IO.Directory.Exists(pathClienteDirectorio))
+        //        System.IO.Directory.CreateDirectory(pathClienteDirectorio);
+
+        //    string pathClienteDirectorioFacturas = pathClienteDirectorio + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + "-CP";
+        //    System.IO.Directory.CreateDirectory(pathClienteDirectorioFacturas);
+        //    UtiFacturacion facturar = new UtiFacturacion();
+        //    UtiFacturacionPruebas facturarPruebas = new UtiFacturacionPruebas();
+
+        //    string uuid = "";
+        //    int ultimoComplemento = new BusFacturas().ObtieneUltimoComplementoPago().Id;
+        //    ultimoComplemento++;
+
+        //    if (Program.ConexionIdActual == 1)//PRODUCCION
+        //        uuid = facturar.FacturarComplementoPago(EmpresaEmisor, Cliente, ultimoComplemento.ToString(), DateTime.Now,
+        //                                                    FechaPago, FormaPago, PedidoFactura.UUID, EmpresaEmisor.SerieFactura, PedidoFactura.Factura,
+        //                                                    PedidoFactura.Total, SaldoAnterior, MontoPago, NumParcialidad, pathClienteDirectorioFacturas);
+        //    else if (Program.ConexionIdActual == 2)
+        //    {
+        //        uuid = facturarPruebas.FacturarComplementoPago(EmpresaEmisor, Cliente, ultimoComplemento.ToString(), DateTime.Now,
+        //                                                    FechaPago, FormaPago, PedidoFactura.UUID, EmpresaEmisor.SerieFactura, PedidoFactura.Factura,
+        //                                                    PedidoFactura.Total, SaldoAnterior, MontoPago,
+        //                                                    NumParcialidad, pathClienteDirectorioFacturas);
+        //    }
+        //    return new EntFactura() { Id = ultimoComplemento, Fecha = DateTime.Today, UUID = uuid, Ruta = pathClienteDirectorioFacturas };// pathClienteDirectorioFacturas;
+        //}
+
+        EntFactura EnviarComplementoPago(EntEmpresa EmpresaSeleccionada, EntCliente Cliente, List<EntFactura> ListaFacturas, string FacturasRelacionadas,
+                                        DateTime FechaPago, string FormaPago, decimal CantidadPago, int TipoMonedaId, string Moneda, decimal TipoCambio)
         {
             if (Cliente == null)
                 Cliente = new EntCliente();
             ////Cliente.Nombre = txtNombre.Text;
             //Cliente.NombreFiscal = txtNombreFiscal.Text;
-            //Cliente.RFC = txtRFC.Text;
 
             Cliente.Email = txtEmail.Text;
-
+            //Cliente.Email2 = txtEmail2.Text;
+            //Cliente.Email3 = txtEmail3.Text;
+            Cliente.Nombre = txtNombreFiscal.Text;
+            Cliente.RFC = txtRFC.Text;
 
             string pathClienteDirectorio = PathFacturasComplementos + "\\" + Cliente.Nombre;
             if (!System.IO.Directory.Exists(pathClienteDirectorio))
@@ -86,33 +144,65 @@ namespace Aires.Pantallas
             UtiFacturacion facturar = new UtiFacturacion();
             UtiFacturacionPruebas facturarPruebas = new UtiFacturacionPruebas();
 
-            int ultimoComplemento = new BusPedidos().ObtieneUltimoComplementoPago().Id;
+            string uuid = "";
+            int ultimoComplemento = new BusFacturas().ObtieneUltimoComplementoPago().Id;
             ultimoComplemento++;
 
-            //if (Program.ConexionIdActual == 1)//PRODUCCION
-            facturar.FacturarComplementoPago(EmpresaEmisor, Cliente, ultimoComplemento.ToString(), DateTime.Now,
-                                                        FechaPago, FormaPago, Total, PedidoFactura.UUID, PedidoFactura.Factura, SaldoAnterior, pathClienteDirectorioFacturas);
-            //else if (Program.ConexionIdActual == 2)
+            if (Program.ConexionIdActual == 1)//PRODUCCION
+            {
+                uuid = facturar.FacturarComplementoPago(EmpresaSeleccionada, Cliente, ultimoComplemento.ToString(), DateTime.Now, FechaPago,
+                                                            FormaPago, CantidadPago, Moneda, TipoCambio,
+                                                            ListaFacturas, FacturasRelacionadas, pathClienteDirectorioFacturas);
+            }
+            else if (Program.ConexionIdActual == 2)
+            {
+                MessageBox.Show("FACTURACIÓN COMPLEMENTO DE PRUEBA");
+                uuid = facturarPruebas.FacturarComplementoPago(EmpresaSeleccionada, Cliente, ultimoComplemento.ToString(), DateTime.Now, FechaPago,
+                                                            FormaPago, CantidadPago, Moneda, TipoCambio,
+                                                            ListaFacturas, FacturasRelacionadas, pathClienteDirectorioFacturas);
+            }
+
+            EntFactura comp = new EntFactura();
+            comp = new EntFactura()
+            {
+                Id = ultimoComplemento,
+                NumeroFactura = ultimoComplemento.ToString(),
+                Fecha = DateTime.Today,
+                Pago = CantidadPago,
+                UUID = uuid,
+                Ruta = pathClienteDirectorioFacturas,
+                //MonedaId = TipoMonedaId,
+                //TipoCambio = TipoCambio,
+                //UsuarioId = this.UsuarioLogin.Id
+            };
+            //System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(pathClienteDirectorioFacturas);
+            //foreach (System.IO.FileInfo file in dir.GetFiles())
             //{
-            //    MessageBox.Show("FACTURACIÓN COMPLEMENTO DE PRUEBA");
-            //    facturarPruebas.FacturarComplementoPago(Cliente, ultimoComplemento.ToString(), DateTime.Now,
-            //                                                FechaPago, FormaPago, Total, PedidoFactura.UUID, PedidoFactura.Factura, SaldoAnterior, pathClienteDirectorioFacturas);
+            //    if (file.Extension == ".pdf")
+            //        comp.PDF = System.IO.File.ReadAllBytes(file.FullName);
+            //    else
+            //        comp.XML = System.IO.File.ReadAllBytes(file.FullName);
             //}
-            return new EntFactura() { Id = ultimoComplemento, Fecha = DateTime.Today, Ruta = pathClienteDirectorioFacturas };// pathClienteDirectorioFacturas;
+            return comp;
         }
 
 
-        void AgregarComplementoPago(int FacturaId, int FormaPagoId, DateTime FechaComplemento, string Ruta)
+        public void AgregarComplementoPago(int FacturaId, DateTime FechaComplemento, decimal PagoFactura, int FormaPagoId, 
+                                            string NumeroComplemento, decimal Pago, string UUID, string Ruta)
         {
             EntFactura complemento = new EntFactura()
             {
                 Id = FacturaId,
                 FormaPagoId = FormaPagoId,
                 Fecha = FechaComplemento,
+                Pago = Pago,
                 TipoComprobanteId = 5,//PAGO
+                NumeroFactura= NumeroComplemento,
+                Saldo= Pago,
+                UUID =UUID,
                 Ruta = Ruta
             };
-            new BusPedidos().AgregaComplementePago(complemento);
+            new BusFacturas().AgregaComplementePago(complemento);
         }
 
         void CargaDatosCliente(EntCliente Cliente)
@@ -126,11 +216,30 @@ namespace Aires.Pantallas
         {
             txtUUID.Text = PedidoFactura.UUID;
             txtFolio.Text = PedidoFactura.Factura;
+
             txtTotalFactura.Text = FormatoMoney(PedidoFactura.Total);
-            txtSaldoAnterior.Text = FormatoMoney(PedidoFactura.Total - PedidoFactura.Pago);//FormatoMoney(PedidoFactura.Total - PedidoFactura.PagoTotal + PedidoFactura.Pago);
-            //txtCantidadPago.Text = FormatoMoney(PedidoFactura.Pago);
-            //txtSaldoPendiente.Text = FormatoMoney(PedidoFactura.Total - PedidoFactura.PagoTotal);
+            txtSaldoAnterior.Text = FormatoMoney(PedidoFactura.Total - PedidoFactura.PagoTotal);
+            txtCantidadPago.Text = FormatoMoney(PedidoFactura.Pago);
+            txtSaldoPendiente.Text = FormatoMoney(PedidoFactura.Total - PedidoFactura.PagoTotal - PedidoFactura.Pago);
+            txtNumParcialidad.Text = (new BusFacturas().ObtieneNumeroParcialidades(PedidoFactura.FacturaId)+1).ToString();
         }
+        void CargaDatosFacturasPedido(List<EntPedido> ListaFacturasPedido)
+        {
+            //txtUUID.Text = PedidoFactura.UUID;
+            foreach (EntFactura f in this.ListaFacturas)
+            {
+                txtFolio.Text += f.NumeroFactura + " | ";
+            }
+
+            //txtTotalFactura.Text = FormatoMoney(PedidoFactura.Total);
+            //txtSaldoAnterior.Text = FormatoMoney(PedidoFactura.Total - PedidoFactura.PagoTotal);
+            txtSaldoPendiente.Text = FormatoMoney(this.DeudaTotal - this.CantidadPago);
+            //txtCantidadPago.Text = FormatoMoney(PedidoFactura.Pago);
+            //txtSaldoPendiente.Text = FormatoMoney(PedidoFactura.Total - PedidoFactura.PagoTotal - PedidoFactura.Pago);
+            //txtNumParcialidad.Text = (new BusFacturas().ObtieneNumeroParcialidades(PedidoFactura.FacturaId) + 1).ToString();
+        }
+
+
 
         private void AgregaComplementoPago_Load(object sender, EventArgs e)
         {
@@ -139,27 +248,35 @@ namespace Aires.Pantallas
                 cmbFormaPago.SelectedIndex = 0;
 
                 CargaDatosCliente(Cliente);
-                CargaDatosPedidoFactura(PedidoFactura);
+                List<EntPedido> lst = new List<EntPedido>();
+                CargaDatosFacturasPedido(lst);
+
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
+        public EntFactura ComplementoPago = new EntFactura();
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             try
             {
+                if (Program.ConexionIdActual == 2)
+                    MessageBox.Show("FACTURACIÓN COMPLEMENTO DE PRUEBA");
+
                 if (MuestraMensajeYesNo(string.Format("¿Desea enviar COMPLEMENTO DE PAGO? \n Cliente:{0}", txtNombreFiscal.Text), "CONFIRMACIÓN") == DialogResult.Yes)
                 {
                     Cursor.Current = Cursors.WaitCursor;
 
                     bool facturado = false;
-                    EntFactura factura = new EntFactura();
+                    
                     //string pahtArchivosFactura = "";
                     try
                     {
                         txtFormaPago.Text = cmbFormaPago.Text.Remove(2, cmbFormaPago.Text.Length - 2);
 
-                        factura = EnviarComplementoPago(Program.EmpresaSeleccionada, Cliente, PedidoFactura, dtpFechaPago.Value.Date, txtFormaPago.Text, ConvierteTextoADecimal(txtSaldoAnterior), ConvierteTextoADecimal(txtCantidadPago.Text));
+                        ComplementoPago = EnviarComplementoPago(Program.EmpresaSeleccionada, Cliente, this.ListaFacturas, txtFolio.Text,
+                                                                dtpFechaPago.Value.Date, txtFormaPago.Text, ConvierteTextoADecimal(txtCantidadPago.Text),
+                                                                1,"MXN", 0);
                         facturado = true;
                     }
                     catch (Exception ex)
@@ -169,19 +286,18 @@ namespace Aires.Pantallas
                     }
                     //COMENTAR EN PRODUCCION
                     //facturado = true;
-                    Cursor.Current = Cursors.Default;
                     if (facturado)
                     {
-                        AgregarComplementoPago(factura.Id, cmbFormaPago.SelectedIndex + 1, factura.Fecha, factura.Ruta);
+                        //AgregarComplementoPago(this.Factura.Id, factura.Fecha, ConvierteTextoADecimal(txtCantidadPago.Text), cmbFormaPago.SelectedIndex + 1, factura.UUID, factura.Ruta);
+                        //MuestraMensaje("¡El COMPLEMENTO fue FACTURADO satisfactoriamente!", "CONFIRMACIÓN COMPLEMENTO DE PAGO");
+                        //////uuid = "A620B7D2-028B-4749-ACC9-52CB772CC4C2";
                         MuestraMensaje("¡El COMPLEMENTO fue FACTURADO satisfactoriamente!", "CONFIRMACIÓN COMPLEMENTO DE PAGO");
-                        ////uuid = "A620B7D2-028B-4749-ACC9-52CB772CC4C2";
-
                         try
                         {
                             //throw new Exception("error");
                             //pahtArchivosFactura = PathClienteDirectorioFacturas;
                             //pahtArchivosFactura = @"C:\TIIM\Facturacion\Facturas\RAFAEL GIL ARMENTA\20170105122126";
-                            EnviarCorreo(PedidoFactura, Cliente, factura.Ruta);
+                            EnviarCorreo(ComplementoPago, this.ListaFacturas, Cliente, ComplementoPago.Ruta);
                         }
                         catch (Exception ex)
                         {
@@ -189,8 +305,13 @@ namespace Aires.Pantallas
                         }
                     }
 
-                    Cursor.Current = Cursors.Default;
                 }
+                else
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                }
+                Cursor.Current = Cursors.Default;
+
             }
             catch (Exception ex) { this.DialogResult = DialogResult.Abort; MuestraExcepcion(ex); }
         }

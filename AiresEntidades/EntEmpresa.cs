@@ -72,7 +72,7 @@ namespace AiresEntidades
                     if (nombreSplit.Length == 0)
                         return "AA";
                     else if (nombreSplit.Length > 1)
-                        return (nombreSplit[0][0].ToString() + nombreSplit[nombreSplit.Length - 1][0].ToString()).ToUpper();
+                        return (nombreSplit[0][0].ToString() + nombreSplit[nombreSplit.Length - 1][0].ToString().Replace("G","V")).ToUpper();
                     else
                         return (nombreSplit[0][0].ToString() + nombreSplit[1][0].ToString()).ToUpper();
                 }catch(Exception ex) { return ""; }

@@ -1,17 +1,22 @@
 ﻿using AiresEntidades;
 using AiresNegocio;
 using AiresUtilerias;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 //using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static iTextSharp.text.pdf.parser.LocationTextExtractionStrategy;
 
 namespace Aires.Pantallas
 {
@@ -43,7 +48,7 @@ namespace Aires.Pantallas
             cmbMetodoPago.SelectedIndex = 0;
             gvProductosPedido.DataSource = null;
             //MuestraUltimaFactura(txtNumeroFactura);
-            if (Program.UsuarioSeleccionado.Id == 8 || Program.UsuarioSeleccionado.Id == 9)
+            //if (Program.UsuarioSeleccionado.Id == 8 || Program.UsuarioSeleccionado.Id == 9)
                 pnlSolicitud.Visible = true;
 
             if (Program.EmpresaSeleccionada != null && cmbEmpresas.Items.Count > 0)
@@ -125,16 +130,40 @@ namespace Aires.Pantallas
                     ((Registros)vRegVent).CargaGvPedidos(Program.EmpresaSeleccionada.Id);
             }
 
-            /// <summary>
-            /// Agrega nuevo registro del Pedido solicitado.
-            /// </summary>
-            /// <param name="pedido"></param>
-            public EntPedido AgregarPedido(int ClienteId, string Detalle, string Observaciones, decimal Total, decimal Pago, DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId)
+        void PoneSolicitud()
+        {
+            if (ObtieneListaProductosFromGV(gvProductosPedido)
+                .Where(P => P.TipoProductoId == 1).Count() > 0)
+            {
+                EntProducto productoPedido = ObtieneListaProductosFromGV(gvProductosPedido)
+                    .Where(P => P.TipoProductoId == 1).Last();
+
+                //productosPedido[productosPedido.Count - 1].Descripcion = productosPedido[productosPedido.Count - 1].Descripcion.Replace("SOLICITUD:".PadLeft(5, '-') + txtSolicitud.Text, "")
+                //    .Replace("CONTRATO: NO-LM-004-20", "");
+                //productosPedido[productosPedido.Count - 1].Descripcion += " SOLICITU:".PadLeft(5, '-') + txtSolicitud.Text 
+                //    + " CONTRATO: NO-LM-004-20";
+                productoPedido.Descripcion = productoPedido.Descripcion
+                    .Replace("GARANTIA () AÑO(S) EN TODAS SUS PARTES", "")
+                    .Replace("SOLICITUD:".PadLeft(5, '-') + txtSolicitud.Text, "")
+                    .Replace("CONTRATO: NO-LM-004-20", "");
+                productoPedido.Descripcion += ". CONTRATO: NO-LM-004-20 |"
+                    + " SOLICITUD:".PadLeft(5, '-') + txtSolicitud.Text + " |"
+                    + " GARANTIA () AÑO(S) EN TODAS SUS PARTES";
+            }
+            gvProductosPedido.Refresh();
+        }
+
+        /// <summary>
+        /// Agrega nuevo registro del Pedido solicitado.
+        /// </summary>
+        /// <param name="pedido"></param>
+        public EntPedido AgregarPedido(int ClienteId, string Detalle, string Solicitud, string Observaciones, decimal Total, decimal Pago, DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId)
             {
                 EntPedido pedido = new EntPedido()
                 {
                     ClienteId = ClienteId,
                     Detalle = Detalle,
+                    Solicitud = Solicitud,
                     Observaciones = Observaciones,
                     Total = Total,
                     Pago = Pago,
@@ -183,28 +212,7 @@ namespace Aires.Pantallas
                 };
                 new BusPedidos().AgregaPagoPedido(pago);
             }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="pedido"></param>
-            //void AgregarFacturaPedido(int PedidoId, string UUID, string Ruta, int FormaPagoId, int MetodoPagoId, int UsoCFDIId)
-            //{
-            //    EntFactura factura = new EntFactura()
-            //    {
-            //        PedidoId = PedidoId,
-            //        UUID=UUID,
-
-            //        TipoComprobanteId = 1,
-            //        FormaPagoId = FormaPagoId,
-            //        MetodoPagoId = MetodoPagoId,
-            //        UsoCFDIId = UsoCFDIId,
-
-            //        Fecha = DateTime.Today,
-            //        Ruta=Ruta
-            //    };
-            //    new BusPedidos().AgregaFactura(factura);
-            //}
-
+        
         void AgregaProductoEnPedido(EntProducto ProductoSeleccionado, decimal CantidadAgrega)
         {
             List<EntProducto> productosPedido = ObtieneListaProductosFromGV(gvProductosPedido);
@@ -215,6 +223,11 @@ namespace Aires.Pantallas
                     productosPedido = new List<EntProducto>();
 
                 //ProductoSeleccionado = ObtieneProductosFromGV(gvProductos);
+                ProductoSeleccionado.Descripcion = ProductoSeleccionado.Descripcion.Replace(" MARCA: " + ProductoSeleccionado.Marca + " MODELO: " + ProductoSeleccionado.Modelo, "");
+                if(!string.IsNullOrWhiteSpace(ProductoSeleccionado.Marca))
+                    ProductoSeleccionado.Descripcion += " | MARCA: " + ProductoSeleccionado.Marca;
+                if (!string.IsNullOrWhiteSpace(ProductoSeleccionado.Modelo))
+                    ProductoSeleccionado.Descripcion += " | MODELO: " + ProductoSeleccionado.Modelo;
                 ProductoSeleccionado.Cantidad = CantidadAgrega;
                 productosPedido.Add(ProductoSeleccionado);
             }
@@ -229,6 +242,10 @@ namespace Aires.Pantallas
 
             CalculaSumaTotal(productosPedido, txtTotal);
             lbContadorSeries.Text = productosPedido.Count.ToString();
+
+            //productosPedido[productosPedido.Count - 1].Descripcion=productosPedido[productosPedido.Count - 1].Descripcion.Replace("Solicitud:".PadLeft(5, '-') + txtSolicitud.Text,"");
+            //productosPedido[productosPedido.Count - 1].Descripcion += "Solicitud:".PadLeft(5, '-') + txtSolicitud.Text;
+
         }
         void AgregaRemueveProductoEnPedido(EntProducto ProductoSeleccionado, decimal CantidadAgrega)
         {
@@ -240,6 +257,7 @@ namespace Aires.Pantallas
                     productosPedido = new List<EntProducto>();
 
                 //ProductoSeleccionado = ObtieneProductosFromGV(gvProductos);
+                ProductoSeleccionado.Descripcion += " " + ProductoSeleccionado.Marca + " " + ProductoSeleccionado.Modelo;
                 ProductoSeleccionado.Cantidad = CantidadAgrega;
                 productosPedido.Add(ProductoSeleccionado);
                 ListaProductos.Remove(ProductoSeleccionado);
@@ -283,32 +301,6 @@ namespace Aires.Pantallas
             Cliente.Email2 = txtEmail2.Text;
             Cliente.Email3 = txtEmail3.Text;
         }
-        EntCliente ObtieneCliente(int ClienteId)
-        {
-            List<EntCliente> clientes = ListaClientes.Where(P => P.Id == ClienteId).ToList();
-
-            if (clientes.Count == 0)
-                throw new Exception("Cliente NO encontrado");
-
-            return clientes[0];
-        }
-        void ActualizaEstatusFacturaPedido(int FacturaId, int EstatusId)
-        {
-            EntFactura fac = new EntFactura()
-            {
-                Id = FacturaId,
-                EstatusId = EstatusId
-            };
-            new BusFacturas().ActualizaEstatusFacturaPedido(fac);
-        }
-
-        void MuestraUltimaFactura(TextBox TxtMuestraFactura)
-        {
-            int ultimaFactura = ConvierteTextoAInteger(new BusFacturas().ObtieneUltimaFactura().NumeroFactura);
-            ultimaFactura++;
-            //pedidoAgrega.Factura = ultimaFactura.ToString();
-            TxtMuestraFactura.Text = ultimaFactura.ToString();
-        }
 
         public void AumentaPagoPedido(int PedidoId, decimal Pago)
             {
@@ -343,7 +335,7 @@ namespace Aires.Pantallas
                 txtMunicipio.Text = Cliente.Municipio;
                 txtEstado.Text = Cliente.Estado;
                 txtCP.Text = Cliente.CP;
-                txtBanco.Text = Cliente.Banco;
+                txtSolicitud.Text = Cliente.Banco;
                 txtNumeroCuenta.Text = Cliente.NumeroCuenta;
             //txtSucursal.Text = Cliente.Sucursal;
             //txtCLABE.Text = Cliente.CLABE;
@@ -400,6 +392,7 @@ namespace Aires.Pantallas
         void CalculaSumaTotal(List<EntProducto> ListaProductos, TextBox TxtMuestraTotal)
         {
             decimal total, subtotal, cantidadIva, descuento;
+            decimal cantidadIVARetenido = 0;
 
             if (ListaProductos == null)
             {
@@ -419,16 +412,22 @@ namespace Aires.Pantallas
                 //}
                 //else
                 //{
-                    subtotal = Math.Round(total, 2) / (1 + IVA); //Math.Round(total / (1 + IVA), 2);
-                    cantidadIva = subtotal * IVA;
-                    cantidadIva = Math.Round(total, 2) - subtotal;
+                subtotal = Math.Round(total, 2) / (1 + IVA); //Math.Round(total / (1 + IVA), 2);
+                cantidadIva = subtotal * this.IVA;
+                cantidadIva = Math.Round(total, 2) - subtotal;
                 //}
+            }
+            if (chkRetencionIVA.Checked)
+            {
+                cantidadIVARetenido = subtotal * this.RetencionIVA;
+                total -= cantidadIVARetenido;
             }
 
             descuento = ConvierteTextoADecimal(txtDescuento);
             TxtMuestraTotal.Text = FormatoMoney(total-descuento);
             txtSubtotal.Text = FormatoMoney(subtotal);
             txtIVA.Text = FormatoMoney(cantidadIva);
+            txtIVARetenido.Text= FormatoMoney(cantidadIVARetenido);
             txtRestante.Text = FormatoMoney(total - ConvierteTextoADecimal(txtPago.Text));
         }
 
@@ -514,7 +513,8 @@ namespace Aires.Pantallas
                                     string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
                                     decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS,
                                     string Observaciones,
-                                    string TipoComprobante, string UsoCFDI)
+                                    string TipoComprobante, string UsoCFDI,
+                                    bool RelacionaFactura, string UUIDRelacionado)
         {
             string pathClienteDirectorio = PathFacturas + "\\" + Cliente.Nombre;
             if (!System.IO.Directory.Exists(pathClienteDirectorio))
@@ -541,7 +541,8 @@ namespace Aires.Pantallas
             List<EntProducto> ListaProductosFactura = new List<EntProducto>();
             string codigo = "";
             int cantidad = 1;
-            foreach (EntProducto p in productosDetalle.OrderBy(P => P.Codigo).ToList())
+            string finalDescripcion = "";
+            foreach (EntProducto p in productosDetalle.OrderByDescending(P => P.TipoProductoId).ThenBy(P => P.Codigo).ToList())
             {
                 if (p.Codigo != codigo)
                 {
@@ -565,26 +566,42 @@ namespace Aires.Pantallas
                         PrecioVentaSinIVA = p.PrecioVentaSinIVA,
                         ProductoId = p.ProductoId
                     };
-                    //EntProducto pneue = new EntProducto() { Id = p.Id, Codigo = p.Codigo, Serie = p.Serie, Descripcion = p.Descripcion
-                    //                                        , Unidad = p.Unidad, Cantidad = p.Cantidad, PrecioVenta = p.PrecioVenta
-                    //                                        , PrecioVentaSinIVA=p.PrecioVentaSinIVA, ProductoId = p.ProductoId };
-                    ////pneue.Descripcion = p.Descripcion.PadRight(100, '°');
-                    pneue.Descripcion += " ";
 
+                    if (p.TipoProductoId == 1)
+                    {
+                        if (!string.IsNullOrWhiteSpace(finalDescripcion))
+                            ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += finalDescripcion;
+
+                        if (pneue.Descripcion.Contains("CONTRATO"))
+                        {
+                            int index = pneue.Descripcion.IndexOf("CONTRATO");
+                            finalDescripcion = pneue.Descripcion.Substring(index);
+                            pneue.Descripcion = pneue.Descripcion.Remove(index);
+                        }
+                        if (!string.IsNullOrWhiteSpace(p.Serie))
+                            pneue.Descripcion += "SERIE:";
+                        pneue.Descripcion += " ";
+                    }
                     ListaProductosFactura.Add(pneue);
                     codigo = pneue.Codigo;
-                    cantidad = 1;
+                    cantidad = 1;             
                 }
                 else
                 {
+                    if (p.Descripcion.Contains("CONTRATO"))
+                    {
+                        int index = p.Descripcion.IndexOf("CONTRATO");
+                        finalDescripcion = p.Descripcion.Substring(index);
+                        p.Descripcion = p.Descripcion.Remove(index);
+                    }
+
                     cantidad++;
                     ListaProductosFactura[ListaProductosFactura.Count - 1].Cantidad++;
                 }
                 if (!string.IsNullOrWhiteSpace(p.Serie))
                     ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += p.Serie + " | ";
             }
-            if(Program.UsuarioSeleccionado.Id == 8 || Program.UsuarioSeleccionado.Id == 9)//OBR-NAV
-                ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += "Solicitud:".PadLeft(60,'-') + txtBanco.Text;
+            ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += finalDescripcion;
 
             //FacturacionPrueba factura = new FacturacionPrueba();
             //MessageBox.Show("FACTURACIÓN DE PRUEBA");
@@ -593,23 +610,15 @@ namespace Aires.Pantallas
             int tipoTasaIVAid = Empresa.TipoTasaIVAId;
             decimal tasaOCuota = Empresa.TasaOCuota;
 
-            ////CHECAR
-            //if ((txtRFC.Text == "XAXX010101000" || chkFacturaPublicoGeneral.Checked) && Program.EmpresaSeleccionada.TipoPersonaId == 1)//Persona Fisica
-            //{
-            //    Empresa.TipoTasaIVAId = 2;//TASA 0%
-            //    Empresa.TasaOCuota = 0.0m;//TASA 0%
-            //}
-            //else
-            //{
-            //    Empresa.TipoTasaIVAId = 1;//TASA 16%
-            //    Empresa.TasaOCuota = 0.16m;//TASA 0%
-            //}
-
-            ////string uuid = factura.Facturar(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
-            ////                               NumeroCuenta, pathClienteDirectorioFacturas,
-            ////                               CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
             string serie = Empresa.SerieFactura;//"AA";
-            string uuid = factura.Facturar33(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, serie, FechaFactura, 
+            string uuid;
+            if(RelacionaFactura)
+                uuid = factura.Facturar33conRelacion(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, serie, FechaFactura, 
+                                           TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
+                                           NumeroCuenta, pathClienteDirectorioFacturas,
+                                           CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones,"04",UUIDRelacionado);
+            else
+                uuid = factura.Facturar33(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, serie, FechaFactura,
                                            TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
                                            NumeroCuenta, pathClienteDirectorioFacturas,
                                            CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
@@ -672,6 +681,7 @@ namespace Aires.Pantallas
             ////string uuid = factura.Facturar(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, FormaPago, MedioPago, CondicionPago,
             ////                               NumeroCuenta, pathClienteDirectorioFacturas,
             ////                               CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
+            //UtiFacturacion  FAC= new UtiFacturacion();
             string uuid = factura.Facturar33(Empresa, Pedido, ListaProductos, Cliente, Pedido.Factura, FechaFactura, 
                                            TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
                                            NumeroCuenta, pathClienteDirectorioFacturas,
@@ -710,7 +720,6 @@ namespace Aires.Pantallas
             //    ((ClientesCredito)vCli).CargaGvPedidosClientesCredito();
             //}
         }
-
 
 
         private void Ventas_Load(object sender, EventArgs e)
@@ -945,6 +954,8 @@ namespace Aires.Pantallas
                     EntProducto productoRemueve = ObtieneProductoFromGV(gvProductosPedido);
 
                     AgregaProductoEnPedido(productoRemueve, -productoRemueve.Cantidad);
+
+                    chkFacturar.Checked = false;
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -969,7 +980,7 @@ namespace Aires.Pantallas
                                 MandaExcepcion("PRODUCTOS CON SERIE NO SE PUEDEN VENDER EN CANTIDADES MAYORES A 1.");
                             }
 
-                            List<EntProducto> listaProductosSeleccionados = ListaProductos.Where(P => P.ProductoId == productoSeleccionado.ProductoId).ToList();
+                            List<EntProducto> listaProductosSeleccionados = this.ListaProductos.Where(P => P.ProductoId == productoSeleccionado.ProductoId).ToList();
                             int existenciaProducto = listaProductosSeleccionados.Count() + 1;//COMPENSACION POR PRODUCTOSELECCIONADO
                             int cantidadProductos = Convert.ToInt32(productoSeleccionado.Cantidad);
                             if (productoSeleccionado.Cantidad > existenciaProducto)
@@ -1057,7 +1068,10 @@ namespace Aires.Pantallas
             try
             {
                 if (chkFacturar.Checked)
+                {
                     VerificaProductosSeleccionados(ListaProductosPedido);
+                    PoneSolicitud();
+                }
 
                 pnlFacturacion.Visible = chkFacturar.Checked;
             }
@@ -1086,7 +1100,7 @@ namespace Aires.Pantallas
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
-
+        
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             try
@@ -1124,11 +1138,11 @@ namespace Aires.Pantallas
                         detallePedido += p.Cantidad + " " + p.Descripcion + " | ";
 
                     decimal cantidadIVA = ConvierteTextoADecimal(txtIVA.Text);
-                    decimal cantidadIVARetenido = 0;//ConvierteTextoADecimal(txtIVARetenido);
+                    decimal cantidadIVARetenido = ConvierteTextoADecimal(txtIVARetenido);
                     decimal cantidadISRRetenido = 0;//ConvierteTextoADecimal(txtISRRetenido);
                     decimal cantidadIEPS = 0;// ConvierteTextoADecimal(textBox1.Text);
 
-                    pedidoAgrega = AgregarPedido(ClienteSeleccionado.Id, detallePedido.Remove(detallePedido.Length - 2), "", ConvierteTextoADecimal(txtTotal.Text), ConvierteTextoADecimal(txtPago.Text), DateTime.Now, DateTime.Today, 0, chkFacturar.Checked, 1);
+                    pedidoAgrega = AgregarPedido(ClienteSeleccionado.Id, detallePedido.Remove(detallePedido.Length - 2), txtSolicitud.Text, "", ConvierteTextoADecimal(txtTotal.Text), ConvierteTextoADecimal(txtPago.Text), DateTime.Now, DateTime.Today, 0, chkFacturar.Checked, 1);
 
                     int ingresoId = 0;
                     foreach (EntProducto p in productosSeleccionados)
@@ -1148,10 +1162,10 @@ namespace Aires.Pantallas
                                     string descripcion, factura = "";
 
                                     if (chkFacturar.Checked)
-                                        factura = "FAC: "+empresaSeleccionada.SerieFactura + ObtieneUltimaFactura(empresaSeleccionada.Id);
+                                        factura = "FAC: " + empresaSeleccionada.SerieFactura + ObtieneUltimaFactura(empresaSeleccionada.Id);
                                     else
                                         factura = "SIN FACTURAR";
-                                    descripcion = "COMPRA A EMPRESA -" + empresaSeleccionada.Nombre + "- "+factura+" - "+ DateTime.Today.ToShortDateString();
+                                    descripcion = "COMPRA A EMPRESA -" + empresaSeleccionada.Nombre + "- " + factura + " - " + DateTime.Today.ToShortDateString();
                                     //ProductoIngresa.Fecha.ToShortDateString();
 
                                     //VERIFICA SI YA SE AGREGO LA EMPRESANUEVA COMO PROVEEDOR. LO HACE POR NOMBRE, NO SE PUEDE BUSCAR POR ID DE PROVEEDOR(NO SE SABE).
@@ -1161,7 +1175,7 @@ namespace Aires.Pantallas
                                     else
                                         proveedorId = new Pantallas.Proveedores().AgregaProveedor(ClienteSeleccionado.EmpresaId, empresaSeleccionada.Nombre, empresaSeleccionada.Nombre, "");
 
-                                    ingresoId = new BusProductos().AgregaIngreso(new EntCatalogoGenerico() { EmpresaId=proveedorId, Descripcion = descripcion, Fecha = DateTime.Today.Date });
+                                    ingresoId = new BusProductos().AgregaIngreso(new EntCatalogoGenerico() { EmpresaId = proveedorId, Descripcion = descripcion, Fecha = DateTime.Today.Date });
                                 }
 
                                 //List<EntProducto> productosEmpresa=new BusProductos().ObtieneProductos(ClienteSeleccionado.EmpresaId);
@@ -1174,7 +1188,8 @@ namespace Aires.Pantallas
                                 }
 
                                 //PARA LA EMPRESA QUE COMPRA EL PRODUCTO EL PRECIOCOSTO SERIA A LO QUE SE LE ESTA VENDIENDO.
-                                vProd.AgregaProductoDetalle(p.ProductoId, ingresoId, ClienteSeleccionado.EmpresaId, p.Serie, p.PrecioVenta, p.PrecioVenta, p.PrecioVenta2, p.PrecioCosto);
+                                vProd.AgregaProductoDetalle(p.ProductoId, ingresoId, ClienteSeleccionado.EmpresaId, 
+                                    p.Marca, p.Modelo, p.Serie, p.PrecioVenta, p.PrecioVenta, p.PrecioVenta2, p.PrecioCosto);
                             }
                         }
                     }
@@ -1190,7 +1205,9 @@ namespace Aires.Pantallas
                         else
                         {
                             AgregarPago(pedidoAgrega.Id, pago);
-                            AumentaPagoPedido(pedidoAgrega.Id, 0);//SOLO PARA CAMBIAR ESTATUS. VERIFICA SI EL TOTAL DEL PEDIDO ESTA PAGADO, CAMBIA ESTATUS DE SER ASI.
+                            //SOLO PARA CAMBIAR ESTATUS. VERIFICA SI EL TOTAL DEL PEDIDO ESTA PAGADO, CAMBIA ESTATUS DE SER ASI.
+                            AumentaPagoPedido(pedidoAgrega.Id, 0);
+
                             if (pago < ConvierteTextoADecimal(txtTotal.Text))
                                 CargaClientesDeudaEnPantallas();
                         }
@@ -1222,7 +1239,8 @@ namespace Aires.Pantallas
                                                     txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text,
                                                     txtNumeroCuenta.Text,
                                                     cantidadIVA, cantidadIVARetenido, cantidadISRRetenido, cantidadIEPS, txtObservaciones.Text,
-                                                    "I", txtUsoCFDI.Text);
+                                                    "I", txtUsoCFDI.Text,
+                                                    chkRelacionaFactura.Checked, txtUUIDRelacion.Text);
 
                                 try
                                 {
@@ -1277,6 +1295,11 @@ namespace Aires.Pantallas
                             try
                             {
                                 Cursor.Current = Cursors.WaitCursor;
+                                UtiPDF modiPDF = new UtiPDF();
+                                string estonoes = "ESTE DOCUMENTO ES UNA REPRESENTACION IMPRESA DE UN CFD";
+                                string pagare = "Por medio de este PAGARÉ me obligo a pagar  incondicionalmente  a  la  orden  de " + empresaSeleccionada.NombreFiscal + ",  la  cantidad  de  " + FormatoMoney(pedidoAgrega.Total) + " correspondiente al Pedido estipulado en esta FACTURA, en esta ciudad. La cantidad que ampara este PAGARÉ causará intereses al tipo de 3 % mensual en caso de mora. Este PAGARÉ es mercantil no domiciliario y se rige por lo estipulado en la última parte del art. 173 de la ley general de títulos y operaciones de Crédito. Firma " + ClienteSeleccionado.Nombre;
+                                string rutaArchivoPDF = factura.Ruta + "\\" + EncuentraArchivo(factura.Ruta, ".pdf");
+                                modiPDF.ModificaPDF(pagare, rutaArchivoPDF, "1", productosSeleccionados.Count);
 
                                 EnviaCorreo(empresaSeleccionada, pedidoAgrega, ClienteSeleccionado, factura.Ruta);
                             }
@@ -1371,10 +1394,17 @@ namespace Aires.Pantallas
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
+        public void MuestraCantidadTimbres() {
+            lbFacturasRestantes.Text = Program.EmpresaSeleccionada.TimbresRestantes.ToString();
+            lbFacturasContratadas.Text = Program.EmpresaSeleccionada.TimbresUsados.ToString() + '/' + Program.EmpresaSeleccionada.Timbres.ToString();
+        }
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             try
             {
+                chkRetencionIVA.Checked = false;
+
                 LimpiaTextBox(pnlCliente);
                 LimpiaTextBox(pnlAgrega);
                 LimpiaTextBox(pnlFacturacion, true);
@@ -1489,6 +1519,7 @@ namespace Aires.Pantallas
                         clientePublicoGeneral.Nombre = "PUBLICO GENERAL";
                     clientePublicoGeneral.NombreFiscal = "PUBLICO GENERAL";
                     clientePublicoGeneral.RFC = "XAXX010101000";
+                    clientePublicoGeneral.Banco = ClienteSeleccionado.Banco;
                     clientePublicoGeneral.Email = "tiimfacturacion@hotmail.com";
                     clientePublicoGeneral.FormaPagoId = 1;
 
@@ -1561,6 +1592,7 @@ namespace Aires.Pantallas
 
                     decimal cantidadIVA = ConvierteTextoADecimal(txtIVA.Text);
                     decimal cantidadIEPS = ConvierteTextoADecimal(txtEmail2.Text);
+                    decimal cantidadIVARetenido = ConvierteTextoADecimal(txtIVARetenido);
 
                     //EntFactura factura = new EntFactura();
 
@@ -1576,52 +1608,17 @@ namespace Aires.Pantallas
 
                     int tipoTasaIVAid = empresaSeleccionada.TipoTasaIVAId;
                     decimal tasaIVA = empresaSeleccionada.TasaOCuota;
-                    //if ((txtRFC.Text=="XAXX010101000" || chkFacturaPublicoGeneral.Checked) && Program.EmpresaSeleccionada.TipoPersonaId == 1)//Persona Fisica
-                    //{
-                    //    empresaSeleccionada.TipoTasaIVAId = 2;//TASA 0%
-                    //    empresaSeleccionada.TasaOCuota = 0.0m;
-                    //}
+                    
                     PreFactura vPreFac = new PreFactura(empresaSeleccionada, pedidoAgrega, productosSeleccionados, ClienteSeleccionado,
                                            "I", txtUsoCFDI.Text, txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text,
                                            txtNumeroCuenta.Text,
-                                           cantidadIVA, 0, 0, cantidadIEPS, txtObservaciones.Text);
-
-                    //PreFactura vPreFac = new PreFactura(empresaSeleccionada, pedidoAgrega, productosSeleccionados, ClienteSeleccionado, 
-                    //                        txtFormaPago.Text, txtMetodoPago.Text, txtCondicionesPago.Text,
-                    //                        txtNumeroCuenta.Text, cantidadIVA, txtObservaciones.Text);
+                                           cantidadIVA, cantidadIVARetenido, 0, cantidadIEPS, txtObservaciones.Text, 
+                                           chkRelacionaFactura.Checked,"04",txtUUIDRelacion.Text);
                     vPreFac.Show();
                     vPreFac.Close();
 
                     empresaSeleccionada.TipoTasaIVAId = tipoTasaIVAid;
                     empresaSeleccionada.TasaOCuota = tasaIVA;
-                    //    facturado = true;
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    MuestraExcepcionPreFacturacion(ex);
-                    //    //MuestraExcepcion(ex, "Error en Pre-Factura");
-                    //}
-
-                    //if (facturado)
-                    //{
-                    //    Cursor.Current = Cursors.WaitCursor;
-
-                    //    try
-                    //    {
-                    //string nombreArchivo = EncuentraArchivo(factura.Ruta, ".pdf");
-                    //        MuestraArchivo(factura.Ruta, nombreArchivo);
-                    //    }
-                    //    catch (Exception ex) { MuestraExcepcion(ex, "ERROR AL MOSTRAR FACTURA"); }
-                    //}
-                    //Cursor.Current = Cursors.Default;
-
-                    //Ventas vVentas = new Ventas(empresaSeleccionada, pedidoAgrega, productosSeleccionados, ClienteSeleccionado
-                    //                            , cmbFormaPago.SelectedIndex + 1, cmbMetodoPago.SelectedIndex + 1, txtCondicionesPago.Text, txtNumeroCuenta.Text);
-
-                    //vVentas.MdiParent = this.MdiParent;
-                    //vVentas.Show();
-
-                    //this.Close();
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -1744,6 +1741,40 @@ namespace Aires.Pantallas
             try {
                 CalculaSumaTotal(ListaProductosPedido, txtTotal);
             } catch(Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void chkRetencionIVA_CheckedChanged(object sender, EventArgs e)
+        {
+            try {
+                CalculaSumaTotal(ObtieneListaProductosFromGV(gvProductosPedido), txtTotal);
+            } catch(Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void chkRelacionaFactura_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                pnlRelacionFactura.Visible = chkRelacionaFactura.Checked;
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void btnBuscaFacturaRelacionar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                VerificaClienteSeleccionado();
+                List<EntPedido> facturasCliente = new BusPedidos().ObtienePedidosClientesPorCliente(this.ClienteSeleccionado.Id);
+                EntCliente cliente = new BusClientes().ObtieneCliente(this.ClienteSeleccionado.Id);
+                SeleccionaFactura vSelFac = new SeleccionaFactura(facturasCliente);
+                if (vSelFac.ShowDialog() == DialogResult.OK)
+                {
+                    EntPedido pedidofacturaSeleccionada = vSelFac.FacturaPedidoSeleccionado;
+                    txtFacturaRelacion.Text = pedidofacturaSeleccionada.Factura;
+                    txtUUIDRelacion.Text = pedidofacturaSeleccionada.UUID;
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
         }
     }
 }

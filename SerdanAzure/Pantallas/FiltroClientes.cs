@@ -18,6 +18,12 @@ namespace Aires.Pantallas
         {
             InitializeComponent();
         }
+        public FiltroClientes(List<EntCliente> ListaClientes)
+        {
+            InitializeComponent();
+            this.ListaClientes = ListaClientes;
+        }
+
         List<EntCliente> ListaClientes;
         bool SelectedFromGV = false;
 
@@ -25,8 +31,9 @@ namespace Aires.Pantallas
 
         public void CargaClientes()
         {
-            ListaClientes = new BusClientes().ObtieneClientes(Program.EmpresaSeleccionada.Id).OrderBy(P => P.Nombre).ToList();
-            gvClientes.DataSource = ListaClientes;
+            if (this.ListaClientes == null)
+                this.ListaClientes = new BusClientes().ObtieneClientes(Program.EmpresaSeleccionada.Id).OrderBy(P => P.Nombre).ToList();
+            gvClientes.DataSource = this.ListaClientes;
         }
 
         private void FiltroClientes_Load(object sender, EventArgs e)

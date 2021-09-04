@@ -24,231 +24,19 @@ namespace Aires.Pantallas
             InitializeComponent();
         }
 
+        int establecimientoId = 1;
         EntProducto ProductoSeleccionado;
         List<EntProducto> ListaProductos = new List<EntProducto>();
         List<EntProducto> ListaProductosDetalle = new List<EntProducto>();
+
+        List<EntProducto> ListaProductosC = new List<EntProducto>();
+        List<EntProducto> ListaProductosDetalleC = new List<EntProducto>();
 
         int IngresoProductoId = 0;
 
         bool NuevoProducto;
 
-        #region Metodos
-        public void CargaProductos(int EmpresaId)
-            {
-                ListaProductos = new BusProductos().ObtieneProductos(EmpresaId).OrderBy(P => P.Descripcion).ToList();
-                gvProductos.DataSource = ListaProductos;
-
-                CargaProductosEnPantallas();
-            }
-            public void CargaProductosDetalle(int EmpresaId)
-            {
-            //ListaProductosDetalle = new BusProductos().ObtieneProductosDetalle().OrderBy(P => P.Descripcion).ToList();
-            gvProductosDetalle.DataSource = new BusProductos().ObtieneProductosDetalle(EmpresaId).OrderBy(P => P.Descripcion).ToList();
-            }
-        public void CargaProductosConsignacion(int EmpresaId)
-        {
-            int estatusId = 5;//CONSIGNACION
-            //ListaProductos = new BusProductos().ObtieneProductos(EmpresaId, estatusId).OrderBy(P => P.Descripcion).ToList();
-            gvProductosConsignacion.DataSource = new BusProductos().ObtieneProductos(EmpresaId, estatusId);
-        }
-        public void CargaProductosDetalleConsignacion(int EmpresaId)
-        {
-            int estatusId = 5;//CONSIGNACION
-            //ListaProductos = new BusProductos().ObtieneProductos(EmpresaId, estatusId).OrderBy(P => P.Descripcion).ToList();
-            gvProductosDetalleConsignacion.DataSource = new BusProductos().ObtieneProductosDetalle(EmpresaId, estatusId);
-        }
-
-        public void CargaProductosDetalleTodos()
-            {
-                //SE UTILIZA PARA VERIFICAR NUMERO DE SERIE
-                ListaProductosDetalle = new BusProductos().ObtieneProductosDetalleTodos().OrderBy(P => P.Descripcion).ToList();
-                //gvProductosDetalle.DataSource = ListaProductosDetalle;
-            }
-
-            void CargaProductosEnPantallas()
-            {
-                Form forma = BuscaFormaBase(new Ventas().Titulo);
-                if (forma != null)
-                {
-                    //((Ventas)forma).CargaProductos();
-                    ((Ventas)forma).CargaProductosDetalle(Program.EmpresaSeleccionada.Id); 
-                }
-            }
-
-            public EntProducto AgregaProducto(int TipoProductoId, string Codigo, string Descripcion,
-                                            int TipoProductoServicioId, int TipoUnidadId)
-        {
-                EntProducto producto = new EntProducto()
-                {
-                    TipoProductoId = TipoProductoId,
-                    Codigo = Codigo,
-                    Descripcion = Descripcion,
-                    ProductoServicioId = TipoProductoServicioId,
-                    UnidadId = TipoUnidadId,
-                    Fecha =DateTime.Now
-                };
-                producto.Id = new BusProductos().AgregaProducto(producto);
-
-                return producto;
-            }
-            public void AgregaProductoDetalle(int ProductoId, int IngresoId, int EmpresaId, string Serie, decimal PrecioCosto, decimal PrecioVenta, decimal PrecioVenta2, decimal PrecioEspecial)
-            {
-                EntProducto producto = new EntProducto()
-                {
-                    Id = ProductoId,
-                    IngresoId=IngresoId,
-                    EmpresaId = EmpresaId,
-                    Serie = Serie,
-                    PrecioCosto = PrecioCosto,
-                    PrecioVenta = PrecioVenta,
-                    PrecioVenta2 = PrecioVenta2,
-                    PrecioEspecial = PrecioEspecial,
-                    Fecha = DateTime.Now
-                };
-                producto.Id = new BusProductos().AgregaProductoDetalle(producto);
-            }
-            public int AgregaIngresoProducto(int EmpresaId, string Descripcion, DateTime Fecha)
-            {
-                EntCatalogoGenerico ingreso = new EntCatalogoGenerico()
-                {
-                    Id=EmpresaId,
-                    Descripcion = Descripcion,
-                    Fecha = Fecha
-                };
-                return new BusProductos().AgregaIngreso(ingreso);
-            }
-
-            public void ActualizaProducto(int ProductoId, int TipoProductoId, string Codigo, string Descripcion,
-                                    int TipoProductoServicioId, int TipoUnidadId)
-        {
-                EntProducto producto = new EntProducto()
-                {
-                    Id=ProductoId,
-                    TipoProductoId = TipoProductoId,
-                    Codigo = Codigo,
-                    Descripcion = Descripcion,
-                    ProductoServicioId = TipoProductoServicioId,
-                    UnidadId = TipoUnidadId,
-                    Fecha = DateTime.Now
-                };
-                new BusProductos().ActualizaProducto(producto);
-            }        
-            public void ActualizaEstatusProducto(EntProducto Producto, bool Estatus)
-            {
-                Producto.Estatus = Estatus;
-                new BusProductos().ActualizaEstatusProducto(Producto);
-            }
-            public void ActualizaEstatusProductoDetalle(EntProducto Producto, int EstatusId)
-            {
-                Producto.EstatusId = EstatusId;
-                new BusProductos().ActualizaEstatusProductoDetalle(Producto);
-            }
-
-            public void AumentaProducto(int ProductoId, int Cantidad)
-            {
-                new BusProductos().AumentaProducto(ProductoId, Cantidad);
-            }
-            //void AumentaProductoDetalle(EntProducto Producto, int Cantidad)
-            //{
-            //    new BusProductos().AumentaProductoDetalle(Producto, Cantidad);
-            //}
-
-            void CargaDatosProducto(EntProducto Producto)
-            {
-                txtCodigo.Text = Producto.Codigo;
-                txtDescripcion.Text = Producto.Descripcion;
-                txtPrecioCosto.Text = FormatoMoney(0); //FormatoMoney(Producto.PrecioCosto);
-                txtPrecioVenta.Text = FormatoMoney(Producto.PrecioVenta);
-                txtPrecioVenta2.Text =FormatoMoney( Producto.PrecioVenta2);
-                txtPrecioEspecial.Text = FormatoMoney(Producto.PrecioEspecial);
-                cmbTipoProducto.SelectedIndex = Producto.TipoProductoId - 1;
-
-                cmbTipoProductoServicio.SelectedIndex = ((List<EntCatalogoGenerico>)cmbTipoProductoServicio.DataSource).FindIndex(P => P.Id == Producto.ProductoServicioId);
-                cmbTipoUnidad.SelectedIndex = ((List<EntCatalogoGenerico>)cmbTipoUnidad.DataSource).FindIndex(P => P.Id == Producto.UnidadId);
-
-            }
-
-        /// <summary>
-        /// Filtra Clientes por los distintos parametros, y los carga en gvClientes.
-        /// </summary>
-        /// <param name="Clientes"></param>
-        /// <param name="Nombre"></param>
-        void FiltrarProductosPorDescripcion(List<EntProducto> ListaProductos, string DescripcionProducto)
-            {
-                //List<EntCliente> clientes = (List<EntCliente>)gvClientes.DataSource;
-
-                var productosFiltro = from c in ListaProductos
-                                     where c.Descripcion.ToUpper().Contains(DescripcionProducto.ToUpper())
-                                     select c;
-
-                gvProductos.DataSource = null;
-                gvProductos.DataSource = productosFiltro.ToList();
-            }
-            void FiltrarProductosPorCodigo(List<EntProducto> ListaProductos, string CodigoProducto)
-            {
-                var productosFiltro = from c in ListaProductos
-                                      where c.Codigo.ToUpper().Contains(CodigoProducto.ToUpper())
-                                      select c;
-
-                gvProductos.DataSource = null;
-                gvProductos.DataSource = productosFiltro.ToList();
-            }
-
-            /// <summary>
-            /// .
-            /// </summary>
-            /// <param name="Clientes"></param>
-            /// <param name="Codigo"></param>
-            EntProducto ObtieneProductoPorCodigo(List<EntProducto> Productos, string Codigo)
-            {
-                var productoFiltro = from c in Productos
-                                     where c.Codigo.Trim().ToUpper().Equals(Codigo.Trim().ToUpper())
-                                     select c;
-
-                if (productoFiltro.ToList().Count > 0)
-                    return productoFiltro.ToList()[0];
-                else
-                    return null;
-            }
-
-        #endregion
         List<EntEmpresa> ListaEmpresas;
-
-        void InicializaPantalla()
-        {
-            if (Program.UsuarioSeleccionado.Id > 1)
-            {
-                btnEliminar.Enabled = false;
-                pnlDatos.Visible = false;
-                lbTituloIngreso.Visible = false;
-
-                gvProductos.Columns[6].Visible = false;
-                gvProductosConsignacion.Columns[2].Visible = false;
-                gvProductosDetalle.Columns[3].Visible = false;
-                gvProductosDetalleConsignacion.Columns[3].Visible = false;
-            }
-            LimpiaTextBox(pnlDatos);
-            ActivaAgregar(true);
-
-            cmbTipoProducto.SelectedIndex = 0;
-            cmbTipoProductoServicio.SelectedIndex = 0;
-            cmbTipoUnidad.SelectedIndex = 0;
-            //if(Program.EmpresaSeleccionada!=null)
-            //    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
-        }
-        public void CargaEmpresas()
-        {
-            if (Program.UsuarioSeleccionado.Id > 1)
-                ListaEmpresas = new BusEmpresas().ObtieneEmpresas().Where(P => P.UsuarioId == Program.UsuarioSeleccionado.Id).ToList();
-            else
-                ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
-
-            Program.CambiaEmpresa = false;
-            cmbEmpresas.DataSource = ListaEmpresas;
-            Program.CambiaEmpresa = true;
-
-            //CargaClientesEnPantallas();
-        }
         List<EntCatalogoGenerico> ListaProductosServicios;
         List<EntCatalogoGenerico> ListaUnidades;
         public void CargaProductosServicios()
@@ -262,7 +50,223 @@ namespace Aires.Pantallas
             ListaUnidades = new BusEmpresas().ObtieneUnidades();
             cmbTipoUnidad.DataSource = ListaUnidades;
         }
-        private void Clientes_Load(object sender, EventArgs e)
+
+        #region Metodos
+        public void CargaProductos(int EmpresaId)
+        {
+            this.ListaProductos = new BusProductos().ObtieneProductos(EmpresaId).OrderBy(P => P.Descripcion).ToList();
+            gvProductos.DataSource = this.ListaProductos;
+
+            CargaProductosEnPantallas();
+        }
+
+        void CargaProductosEnPantallas()
+        {
+            Form forma = BuscaFormaBase(new Ventas().Titulo);
+            if (forma != null)
+            {
+                //((Ventas)forma).CargaProductos();
+                ((Ventas)forma).CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
+            }
+        }
+
+        public EntProducto AgregaProducto(int TipoProductoId, string Codigo, string Descripcion,
+                                        string Marca, string Modelo,
+                                        int TipoProductoServicioId, int TipoUnidadId, decimal PrecioCosto)
+        {
+            EntProducto producto = new EntProducto()
+            {
+                TipoProductoId = TipoProductoId,
+                Codigo = Codigo,
+                Descripcion = Descripcion,
+                Marca = Marca,
+                Modelo = Modelo,
+                ProductoServicioId = TipoProductoServicioId,
+                UnidadId = TipoUnidadId,
+                PrecioCosto=PrecioCosto
+            };
+            producto.Id = new BusProductos().AgregaProducto(producto);
+
+            return producto;
+        }
+        public int AgregaProductoDetalle(int ProductoId, int IngresoId, int EmpresaId,
+                                       string Marca, string Modelo, string Serie, decimal PrecioCosto, decimal PrecioVenta, decimal PrecioVenta2, decimal PrecioEspecial)
+        {
+            EntProducto producto = new EntProducto()
+            {
+                Id = ProductoId,
+                IngresoId = IngresoId,
+                EmpresaId = EmpresaId,
+                Marca = Marca,
+                Modelo = Modelo,
+                Serie = Serie,
+                PrecioCosto = PrecioCosto,
+                PrecioVenta = PrecioVenta,
+                PrecioVenta2 = PrecioVenta2,
+                PrecioEspecial = PrecioEspecial,
+                Fecha = DateTime.Now
+            };
+            producto.Id = new BusProductos().AgregaProductoDetalle(producto);
+            return producto.Id;
+        }
+        public int AgregaIngresoProducto(int EmpresaId, string Descripcion, DateTime Fecha)
+        {
+            EntCatalogoGenerico ingreso = new EntCatalogoGenerico()
+            {
+                Id = EmpresaId,
+                Descripcion = Descripcion,
+                Fecha = Fecha
+            };
+            return new BusProductos().AgregaIngreso(ingreso);
+        }
+
+        public void ActualizaProducto(int ProductoId, int TipoProductoId, string Codigo, string Descripcion,
+                                        string Marca, string Modelo,
+                                        int TipoProductoServicioId, int TipoUnidadId, decimal PrecioCosto)
+        {
+            EntProducto producto = new EntProducto()
+            {
+                Id = ProductoId,
+                TipoProductoId = TipoProductoId,
+                Codigo = Codigo,
+                Descripcion = Descripcion,
+                Marca = Marca,
+                Modelo = Modelo,
+                ProductoServicioId = TipoProductoServicioId,
+                UnidadId = TipoUnidadId,
+                PrecioCosto = PrecioCosto
+            };
+            new BusProductos().ActualizaProducto(producto);
+        }
+        public void ActualizaEstatusProducto(EntProducto Producto, bool Estatus)
+        {
+            Producto.Estatus = Estatus;
+            new BusProductos().ActualizaEstatusProducto(Producto);
+        }
+        public void ActualizaEstatusProductoDetalle(EntProducto Producto, int EstatusId)
+        {
+            Producto.EstatusId = EstatusId;
+            new BusProductos().ActualizaEstatusProductoDetalle(Producto);
+        }
+
+        public void AumentaProducto(int ProductoId, int Cantidad)
+        {
+            new BusProductos().AumentaProducto(ProductoId, Cantidad);
+        }
+
+        void CargaDatosProducto(EntProducto Producto)
+        {
+            txtCodigo.Text = Producto.Codigo;
+            txtDescripcion.Text = Producto.Descripcion;
+            txtPrecioCosto.Text = FormatoMoney(Producto.PrecioCosto);
+            txtMarca.Text = Producto.Marca;
+            txtModelo.Text = Producto.Modelo;
+
+            cmbTipoProducto.SelectedIndex = Producto.TipoProductoId - 1;
+
+            cmbTipoProductoServicio.SelectedIndex = ((List<EntCatalogoGenerico>)cmbTipoProductoServicio.DataSource).FindIndex(P => P.Id == Producto.ProductoServicioId);
+            cmbTipoUnidad.SelectedIndex = ((List<EntCatalogoGenerico>)cmbTipoUnidad.DataSource).FindIndex(P => P.Id == Producto.UnidadId);
+
+        }
+
+        /// <summary>
+        /// Filtra Clientes por los distintos parametros, y los carga en gvClientes.
+        /// </summary>
+        /// <param name="Clientes"></param>
+        /// <param name="Nombre"></param>
+        void FiltrarProductosPorDescripcion(List<EntProducto> ListaProductos, string DescripcionProducto, bool SoloExistencia)
+        {
+            //List<EntCliente> clientes = (List<EntCliente>)gvClientes.DataSource;
+
+            var productosFiltro = from c in ListaProductos
+                                  where c.Descripcion.ToUpper().Contains(DescripcionProducto.ToUpper())
+                                  select c;
+
+            gvProductos.DataSource = null;
+            if (SoloExistencia)
+                gvProductos.DataSource = productosFiltro.Where(P => P.Existencia > 0).ToList();
+            else
+                gvProductos.DataSource = productosFiltro.ToList();
+        }
+        void FiltrarProductosPorCodigo(List<EntProducto> ListaProductos, string CodigoProducto, bool SoloExistencia)
+        {
+            var productosFiltro = from c in ListaProductos
+                                  where c.Codigo.ToUpper().Contains(CodigoProducto.ToUpper())
+                                  select c;
+
+            gvProductos.DataSource = null;
+            if (SoloExistencia)
+                gvProductos.DataSource = productosFiltro.Where(P => P.Existencia > 0).ToList();
+            else
+                gvProductos.DataSource = productosFiltro.ToList();
+        }
+        void FiltrarProductos(List<EntProducto> ListaProductos, string Proveedor, string CodigoProducto, string DescripcionProducto,
+                            bool SoloExistencia, DataGridView GvMuestra)
+        {
+            var productosFiltro = from c in ListaProductos
+                                  where c.Codigo.ToUpper().Contains(CodigoProducto.ToUpper())
+                                  select c;
+
+            if (string.IsNullOrWhiteSpace(Proveedor))
+                productosFiltro = from c in ListaProductos
+                                  where c.Ingreso.ToUpper().Contains(Proveedor.ToUpper())
+                                  select c;
+            if (string.IsNullOrWhiteSpace(DescripcionProducto))
+                productosFiltro = from c in ListaProductos
+                                  where c.Descripcion.ToUpper().Contains(DescripcionProducto.ToUpper())
+                                  select c;
+
+            GvMuestra.DataSource = null;
+            if (SoloExistencia)
+                GvMuestra.DataSource = productosFiltro.Where(P => P.Existencia > 0).ToList();
+            else
+                GvMuestra.DataSource = productosFiltro.ToList();
+        }
+
+        /// <summary>
+        /// .
+        /// </summary>
+        /// <param name="Clientes"></param>
+        /// <param name="Codigo"></param>
+        EntProducto ObtieneProductoPorCodigo(List<EntProducto> Productos, string Codigo)
+        {
+            var productoFiltro = from c in Productos
+                                 where c.Codigo.Trim().ToUpper().Equals(Codigo.Trim().ToUpper())
+                                 select c;
+
+            if (productoFiltro.ToList().Count > 0)
+                return productoFiltro.ToList()[0];
+            else
+                return null;
+        }
+
+        #endregion
+
+        //public void CargaEmpresas()
+        //{
+        //    if (Program.UsuarioSeleccionado.Id > 1)
+        //        ListaEmpresas = new BusEmpresas().ObtieneEmpresas().Where(P => P.UsuarioId == Program.UsuarioSeleccionado.Id).ToList();
+        //    else
+        //        ListaEmpresas = new BusEmpresas().ObtieneEmpresas();
+
+        //    Program.CambiaEmpresa = false;
+        //    cmbEmpresas.DataSource = ListaEmpresas;
+        //    Program.CambiaEmpresa = true;
+
+        //    //CargaClientesEnPantallas();
+        //}  
+        void InicializaPantalla()
+        {
+            LimpiaTextBox(pnlDatos);
+            //ActivaAgregar(true);
+
+            cmbTipoProducto.SelectedIndex = 0;
+            cmbTipoProductoServicio.SelectedIndex = 0;
+            cmbTipoUnidad.SelectedIndex = 0;
+        } 
+
+
+        private void Productos_Load(object sender, EventArgs e)
         {
             try
             {
@@ -270,18 +274,15 @@ namespace Aires.Pantallas
                 CargaUnidades();
 
                 InicializaPantalla();
-                CargaEmpresas();
+                //CargaEmpresas();
 
-                if (Program.EmpresaSeleccionada == null)
-                    Program.EmpresaSeleccionada = SeleccionaEmpresa();
+                //if (Program.EmpresaSeleccionada == null)
+                //    Program.EmpresaSeleccionada = SeleccionaEmpresa();
 
-                cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
+                //cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
 
-                CargaProductos(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalleTodos();
-                CargaProveedores(Program.EmpresaSeleccionada.Id);
-                gvSeries.DataSource = null;
+                CargaProductos(establecimientoId);
+                //chkSoloExistencia.Checked = true;
             }
             catch (Exception ex)
             {
@@ -301,114 +302,18 @@ namespace Aires.Pantallas
                 }
                 else
                 {
-                    EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
-                    if (cmbTipoProducto.SelectedIndex == 0)//PRODUCTO
-                    {
-                        List<EntCatalogoGenerico> series = new List<EntCatalogoGenerico>(); ;
-
-                        switch (tcSeries.SelectedIndex)
-                        {
-                            case 0://Series Manual
-                                series = ObtieneListaGenericaFromGV(gvSeries);
-                                if (series == null)
-                                    MandaExcepcion("Agrege Serie del Producto");
-                                break;
-                            case 1://Series Automatico
-                                series = ObtieneListaGenericaFromGV(gvSeriesAutomatico);
-                                if (series == null)
-                                    MandaExcepcion("Agrege Serie Inicio y/o Serie Fin");
-                                break;
-                            case 2://Sin Serie
-                                int cantidadProductos = ConvierteTextoAInteger(txtCantidadSinSerie.Text);
-                                if (cantidadProductos == 0)
-                                {
-                                    txtCantidadSinSerie.Focus();
-                                    throw new Exception("Ingrese Cantidad de Productos sin Serie a agregar");
-                                }
-                                series = new List<EntCatalogoGenerico>();
-                                for (int x = 0; x < cantidadProductos; x++)
-                                {
-                                    EntCatalogoGenerico serie = new EntCatalogoGenerico();
-                                    serie.Descripcion = "";
-                                    series.Add(serie);
-                                }
-                                break;
-                        }
-
-                        if (NuevoProducto)
-                        {
-                            EntCatalogoGenerico productoservicio = ObtieneCatalogoGenericoFromCmb(cmbTipoProductoServicio);
-                            EntCatalogoGenerico unidad = ObtieneCatalogoGenericoFromCmb(cmbTipoUnidad);
-                            ProductoSeleccionado = AgregaProducto(cmbTipoProducto.SelectedIndex + 1, txtCodigo.Text, txtDescripcion.Text,
-                                                productoservicio.Id, unidad.Id);
-                        }
-
-                        foreach (EntCatalogoGenerico s in series)
-                        {
-                            AgregaProductoDetalle(ProductoSeleccionado.Id, IngresoProductoId, empresaSeleccionada.Id, s.Descripcion, ConvierteTextoADecimal(txtPrecioCosto.Text), ConvierteTextoADecimal(txtPrecioVenta.Text), ConvierteTextoADecimal(txtPrecioVenta2.Text), ConvierteTextoADecimal(txtPrecioEspecial.Text));
-                        }
-
-                        //if(series.Count==0)
-                        //    AumentaProducto(ProductoSeleccionado,1);
-                        //else
-                        AumentaProducto(ProductoSeleccionado.Id, series.Count);
-                    }
-                    else //SERVICIO
-                    {
-                        if (NuevoProducto)
-                        {
-                            EntCatalogoGenerico productoservicio = ObtieneCatalogoGenericoFromCmb(cmbTipoProductoServicio);
-                            EntCatalogoGenerico unidad = ObtieneCatalogoGenericoFromCmb(cmbTipoUnidad);
-                            ProductoSeleccionado = AgregaProducto(cmbTipoProducto.SelectedIndex + 1, txtCodigo.Text, txtDescripcion.Text,
-                                                productoservicio.Id, unidad.Id);
-                        }
-                        AgregaProductoDetalle(ProductoSeleccionado.Id, IngresoProductoId, empresaSeleccionada.Id, "", ConvierteTextoADecimal(txtPrecioCosto.Text), ConvierteTextoADecimal(txtPrecioVenta.Text), ConvierteTextoADecimal(txtPrecioVenta2.Text), ConvierteTextoADecimal(txtPrecioEspecial.Text));
-                        AumentaProducto(ProductoSeleccionado.Id, 1);
-                    }
+                    //EntEmpresa empresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
+                    EntCatalogoGenerico productoservicio = ObtieneCatalogoGenericoFromCmb(cmbTipoProductoServicio);
+                    EntCatalogoGenerico unidad = ObtieneCatalogoGenericoFromCmb(cmbTipoUnidad);
+                    ProductoSeleccionado = AgregaProducto(cmbTipoProducto.SelectedIndex + 1, txtCodigo.Text, txtDescripcion.Text,                                           txtMarca.Text, txtModelo.Text,
+                                                          productoservicio.Id, unidad.Id, ConvierteTextoADecimal(txtPrecioCosto));
                 }
-              
-                CargaProductos(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalleTodos();
+
+                CargaProductos(establecimientoId);
+                //chkSoloExistencia.Checked = !chkSoloExistencia.Checked;
                 LimpiaTextBox(tcDatosProductoIngresa, true);
                 chkPrecioCosto0.Checked = false;
-                gvSeries.DataSource = null;
-                gvSeriesAutomatico.DataSource = null;
-                lbContadorSeries.Text = "0";
-                ProductoSeleccionado = null;
-                //NuevoProducto = true;
-                ActivaAgregar(true);
-            }
-            catch (Exception ex)
-            {
-                MuestraExcepcion(ex);
-            }
-        }
-
-        void ActivaAgregar(bool Visible) {
-            btnAgregar.Visible = Visible;
-            btnActualizar.Visible = !Visible;
-            txtCodigo.Focus();
-
-            NuevoProducto = Visible;
-
-            //CUANDO SOLO SE QUIERA MODIFICAR CON CONTRASEÑA
-            //txtPrecioVenta.Enabled = false;
-            //
-            txtPrecioVenta.Enabled = true;
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LimpiaTextBox(tcDatosProductoIngresa, true);
-                chkPrecioCosto0.Checked = false;
-                gvSeries.DataSource = null;
-                gvSeriesAutomatico.DataSource = null;
-                lbContadorSeries.Text = "0";
-                ProductoSeleccionado = null;
-                //NuevoProducto = true;
+                this.ProductoSeleccionado = null;
                 ActivaAgregar(true);
             }
             catch (Exception ex)
@@ -429,79 +334,22 @@ namespace Aires.Pantallas
                 }
                 else
                 {
-                    if (cmbTipoProducto.SelectedIndex == 0)//PRODUCTO
-                    {
-                        List<EntCatalogoGenerico> series = new List<EntCatalogoGenerico>(); ;
+                    EntCatalogoGenerico productoservicio = ObtieneCatalogoGenericoFromCmb(cmbTipoProductoServicio);
+                    EntCatalogoGenerico unidad = ObtieneCatalogoGenericoFromCmb(cmbTipoUnidad);
 
-                        switch (tcSeries.SelectedIndex)
-                        {
-                            case 0://Series Manual
-                                series = ObtieneListaGenericaFromGV(gvSeries);
-                                if (series == null)
-                                    MandaExcepcion("Agrege Serie del Producto");
-                                break;
-                            case 1://Series Automatico
-                                series = ObtieneListaGenericaFromGV(gvSeriesAutomatico);
-                                if (series == null)
-                                    MandaExcepcion("Agrege Serie Inicio y/o Serie Fin");
-                                break;
-                            case 2://Sin Serie
-                                int cantidadProductos = ConvierteTextoAInteger(txtCantidadSinSerie.Text);
-                                if (cantidadProductos == 0)
-                                {
-                                    txtCantidadSinSerie.Focus();
-                                    throw new Exception("Ingrese Cantidad de Productos sin Serie a agregar");
-                                }
-                                series = new List<EntCatalogoGenerico>();
-                                for (int x = 0; x < cantidadProductos; x++)
-                                {
-                                    EntCatalogoGenerico serie = new EntCatalogoGenerico();
-                                    serie.Descripcion = "";
-                                    series.Add(serie);
-                                }
-                                break;
-                        }
-                        EntCatalogoGenerico productoservicio = ObtieneCatalogoGenericoFromCmb(cmbTipoProductoServicio);
-                        EntCatalogoGenerico unidad = ObtieneCatalogoGenericoFromCmb(cmbTipoUnidad);
-                        
-                        ActualizaProducto(ProductoSeleccionado.Id, cmbTipoProducto.SelectedIndex + 1, txtCodigo.Text, txtDescripcion.Text,
-                                        productoservicio.Id, unidad.Id);
-
-                        foreach (EntCatalogoGenerico s in series)
-                        {
-                            AgregaProductoDetalle(ProductoSeleccionado.Id, IngresoProductoId, Program.EmpresaSeleccionada.Id, s.Descripcion, ConvierteTextoADecimal(txtPrecioCosto.Text), ConvierteTextoADecimal(txtPrecioVenta.Text), ConvierteTextoADecimal(txtPrecioVenta2.Text), ConvierteTextoADecimal(txtPrecioEspecial.Text));
-                        }
-
-                        AumentaProducto(ProductoSeleccionado.Id, series.Count);
-                    }
-                    else //SERVICIO
-                    {
-                        EntCatalogoGenerico productoservicio = ObtieneCatalogoGenericoFromCmb(cmbTipoProductoServicio);
-                        EntCatalogoGenerico unidad = ObtieneCatalogoGenericoFromCmb(cmbTipoUnidad);
-                        ActualizaProducto(ProductoSeleccionado.Id, cmbTipoProducto.SelectedIndex + 1, txtCodigo.Text, txtDescripcion.Text,
-                                        productoservicio.Id, unidad.Id);
-
-                        if (ProductoSeleccionado.Existencia == 0)
-                        {
-                            AgregaProductoDetalle(ProductoSeleccionado.Id, IngresoProductoId, Program.EmpresaSeleccionada.Id, "", ConvierteTextoADecimal(txtPrecioCosto.Text), ConvierteTextoADecimal(txtPrecioVenta.Text), ConvierteTextoADecimal(txtPrecioVenta2.Text), ConvierteTextoADecimal(txtPrecioEspecial.Text));
-                            AumentaProducto(ProductoSeleccionado.Id, 1);
-                        }
-                    }
+                    ActualizaProducto(this.ProductoSeleccionado.Id, cmbTipoProducto.SelectedIndex + 1, txtCodigo.Text,          
+                                        txtDescripcion.Text, txtMarca.Text, txtModelo.Text,
+                                        productoservicio.Id, unidad.Id, ConvierteTextoADecimal(txtPrecioCosto));
                 }
 
-                CargaProductos(Program.EmpresaSeleccionada.Id);
+                CargaProductos(establecimientoId);
 
-                CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalleTodos();
+                chkSoloExistencia.Checked = !chkSoloExistencia.Checked;
+                chkSoloExistencia.Checked = !chkSoloExistencia.Checked;
 
                 LimpiaTextBox(tcDatosProductoIngresa, true);
                 chkPrecioCosto0.Checked = false;
                 ActivaAgregar(true);
-
-                gvSeries.DataSource = null; 
-                gvSeriesAutomatico.DataSource = null;
-
-                lbContadorSeries.Text = "0";
             }
             catch (Exception ex)
             {
@@ -509,6 +357,30 @@ namespace Aires.Pantallas
             }
         }
 
+        void ActivaAgregar(bool Visible) {
+            btnAgregar.Visible = Visible;
+            btnActualizar.Visible = !Visible;
+            txtCodigo.Focus();
+
+            NuevoProducto = Visible;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiaTextBox(tcDatosProductoIngresa, true);
+                chkPrecioCosto0.Checked = false;
+                this.ProductoSeleccionado = null;
+                ActivaAgregar(true);
+
+                CargaProductos(this.establecimientoId);
+            }
+            catch (Exception ex)
+            {
+                MuestraExcepcion(ex);
+            }
+        }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -516,21 +388,14 @@ namespace Aires.Pantallas
             {
                 ProductoSeleccionado = ObtieneProductoFromGV(gvProductos);
 
-                if (MuestraMensajeYesNo(string.Format("¿Desea Eliminar el Producto: {0} - {1}? \n Se eliminará de todas las Empresas donde este registrado.", ProductoSeleccionado.Codigo, ProductoSeleccionado.Descripcion), "CONFIRMACIÓN ELIMINAR") == DialogResult.Yes)
+                if (MuestraMensajeYesNo(string.Format("¿Desea Eliminar el Producto: {0} - {1}? \n Se eliminará de todas las Empresas donde este registrado.", this.ProductoSeleccionado.Codigo, this.ProductoSeleccionado.Descripcion), "CONFIRMACIÓN ELIMINAR") == DialogResult.Yes)
                 {
-                    ActualizaEstatusProducto(ProductoSeleccionado, false);
-                    ProductoSeleccionado = null;
+                    ActualizaEstatusProducto(this.ProductoSeleccionado, false);
+                    this.ProductoSeleccionado = null;
 
-                    CargaProductos(Program.EmpresaSeleccionada.Id);
-
-                    CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
-                    CargaProductosDetalleTodos();
+                    CargaProductos(establecimientoId);
                     LimpiaTextBox(pnlDatos);
-                    ////NuevoProducto = true;
                     ActivaAgregar(true);
-
-                    gvSeries.DataSource = null;
-                    gvSeriesAutomatico.DataSource = null;
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -540,23 +405,16 @@ namespace Aires.Pantallas
         {
             try
             {
-                ProductoSeleccionado = ObtieneProductoFromGV(gvProductos);
-                ActualizaProducto vActualizaProd = new Pantallas.ActualizaProducto(ProductoSeleccionado);
+                this.ProductoSeleccionado = ObtieneProductoFromGV(gvProductos);
+                ActualizaProducto vActualizaProd = new Pantallas.ActualizaProducto(this.ProductoSeleccionado);
                 if (vActualizaProd.ShowDialog() == DialogResult.OK)
                 {
-                    CargaProductos(Program.EmpresaSeleccionada.Id);
-                    CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
+                    CargaProductos(establecimientoId);
                     LimpiaTextBox(pnlDatos);
                     ActivaAgregar(true);
 
-                    gvSeries.DataSource = null;
-                    gvSeriesAutomatico.DataSource = null;
-
                     btnFiltroProducto.PerformClick();
                 }
-                //CargaDatosProducto(ProductoSeleccionado);
-                ////NuevoProducto = false;
-                //ActivaAgregar(false);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -565,20 +423,9 @@ namespace Aires.Pantallas
         {
             try
             {
-                //if (btnEditar.Enabled)
-                //{
-                if (txtCodigo.Enabled)
-                {
-                    ProductoSeleccionado = ObtieneProductoFromGV(gvProductos);
-                    CargaDatosProducto(ProductoSeleccionado);
-                    ActivaAgregar(false);
-                }else
-                    {
-                    //EntProducto productoSeleccionado = ObtieneProductoFromGV(gvProductos);
-                    //MuestraProductosDetalle vMuestraDetalle = new MuestraProductosDetalle(new BusProductos().ObtieneProductosDetalle().Where(P => P.ProductoId == productoSeleccionado.Id).ToList());
-                    //vMuestraDetalle.Show();
-                    btnVerSeriesProducto.PerformClick();
-                }
+                this.ProductoSeleccionado = ObtieneProductoFromGV(gvProductos);
+                CargaDatosProducto(this.ProductoSeleccionado);
+                ActivaAgregar(false);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -596,12 +443,10 @@ namespace Aires.Pantallas
         {
             try
             {
-                ProductoSeleccionado = ObtieneProductoPorCodigo(ObtieneListaProductosFromGV(gvProductos), txtCodigo.Text);
-                if (ProductoSeleccionado != null)
+                this.ProductoSeleccionado = ObtieneProductoPorCodigo(ObtieneListaProductosFromGV(gvProductos), txtCodigo.Text);
+                if (this.ProductoSeleccionado != null)//actualiza
                 {
-                    CargaDatosProducto(ProductoSeleccionado);
-                    ////NuevoProducto = false;
-                    //ActivaAgregar(false);
+                    CargaDatosProducto(this.ProductoSeleccionado);
                     btnAgregar.Visible = false;
                     btnActualizar.Visible = true;
                     NuevoProducto = false;
@@ -630,70 +475,7 @@ namespace Aires.Pantallas
             {
                 if ((Keys)e.KeyChar == Keys.Enter) {
                     txtDescripcion.Focus();
-                    //ProductoSeleccionado = ObtieneProductoPorCodigo(ObtieneListaProductosFromGV(gvProductos), txtCodigo.Text);
-                    //if (ProductoSeleccionado != null)
-                    //{
-                    //    CargaDatosProducto(ProductoSeleccionado);
-                    //    //NuevoProducto = false;
-                    //    ActivaAgregar(false);
-
-                    //    txtPrecioCosto.Focus();
-                    //}
-                    //else
-                    //{
-                    //    string codigo = txtCodigo.Text;
-                    //    LimpiaTextBox(tcDatosProductoIngresa,true);
-                    //    //NuevoProducto = true;
-                    //    ActivaAgregar(true);
-                    //    //ProductoSeleccionado = null;
-
-                    //    txtCodigo.Text = codigo;
-                    //    txtDescripcion.Focus();
-                    //}
                 }
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnAgregaSerie_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(txtSerie.Text))
-                    MandaExcepcion("Ingrese Serie del Producto");
-                EntCatalogoGenerico serie = new EntCatalogoGenerico();
-                serie.Descripcion = txtSerie.Text;
-
-                List<EntCatalogoGenerico> listaSerie = ObtieneListaGenericaFromGV(gvSeries);
-                if (listaSerie == null)
-                    listaSerie = new List<EntCatalogoGenerico>();
-                else
-                {
-                    if (listaSerie.Where(P => P.Descripcion == serie.Descripcion).ToList().Count > 0)
-                        throw new Exception("La Serie ya se encuentra registrada en este Ingreso");
-                }
-
-                if (ListaProductosDetalle.Where(P => P.Serie == serie.Descripcion).ToList().Count > 0)
-                    throw new Exception("La Serie ya se registro en Ingreso previo");
-
-                listaSerie.Add(serie);
-
-                gvSeries.DataSource = null;
-                gvSeries.DataSource = listaSerie;
-                gvSeries.Refresh();
-
-                lbContadorSeries.Text = listaSerie.Count.ToString();
-                txtSerie.Text = "";
-                txtSerie.Focus();
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void txtSerie_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try {
-                if ((Keys)e.KeyChar == Keys.Enter)
-                    btnAgregaSerie.PerformClick();
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -702,9 +484,7 @@ namespace Aires.Pantallas
         {
             try
             {
-                CargaProductos(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalleTodos();
+                CargaProductos(establecimientoId);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -729,136 +509,12 @@ namespace Aires.Pantallas
 
         }
 
-        private void btnNuevoIngresoProducto_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                LimpiaTextBox(tcDatosIngreso);
-
-                btnNuevoIngresoProducto.Visible = false;
-                tcDatosIngreso.Enabled = true;
-
-                btnCancelar.PerformClick();
-                tcDatosProductoIngresa.Enabled = false;
-                ////gvProductos.Enabled = false;
-                //btnEditar.Enabled = false;
-                //btnEliminar.Enabled = false;
-
-                txtDescripcionIngreso.Focus();
-            }
-            catch (Exception ex) {
-                MuestraExcepcion(ex);
-            }
-        }
-
-        private void btnIngresaProducto_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                IngresoProductoId=AgregaIngresoProducto(ConvierteTextoAInteger(cmbProveedores.SelectedValue.ToString()),txtDescripcionIngreso.Text, dtpFechaIngreso.Value);
-
-                btnNuevoIngresoProducto.Visible = true;
-                btnNuevoIngresoProducto.BringToFront();
-                tcDatosIngreso.Enabled = false;
-                tcDatosProductoIngresa.Enabled = true;
-                ////gvProductos.Enabled = true;
-                //btnEditar.Enabled = true;
-                //btnEliminar.Enabled = true;
-                
-                txtCodigo.Focus();
-            }
-            catch (Exception ex)
-            {
-                MuestraExcepcion(ex);
-            }
-        }
-
-        private void txtDescripcionIngreso_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try {
-                if ((Keys)e.KeyChar == Keys.Enter)
-                {
-                    btnIngresaProducto.PerformClick();
-                }
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnAgregaSerieAutomatico_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int serieInicio,serieFin;
-
-                serieInicio=ConvierteTextoAInteger(txtSerieInicio.Text);
-                serieFin=ConvierteTextoAInteger(txtSerieFin.Text);
-
-                txtSerieInicio.Text = serieInicio.ToString();
-                txtSerieFin.Text = serieFin.ToString();
-                
-                if (serieInicio >= serieFin)
-                    throw new Exception("La Serie Fin debe ser mayor a la Serie Inicio.");
-
-                List<EntCatalogoGenerico> listaSerie = new List<EntCatalogoGenerico>();
-                for (int x = serieInicio; x <= serieFin; x++)
-                {
-                    EntCatalogoGenerico serie = new EntCatalogoGenerico();
-                    serie.Descripcion = x.ToString().PadLeft(4,'0');
-
-                    listaSerie.Add(serie);
-                }
-
-                gvSeriesAutomatico.DataSource = null;
-                gvSeriesAutomatico.DataSource = listaSerie;
-                gvSeriesAutomatico.Refresh();
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void txtSerieInicio_Validated(object sender, EventArgs e)
-        {
-            //foreach(char c in txtSerieInicio.Text.ToCharArray()){
-            //    if (char.IsLetter(c))
-            //        errorProvider1.SetError((Control)sender, "Debe ser Numerico");
-            //}
-        }
-
-        private void txtSerieInicio_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void txtSerieInicio_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                ((TextBox)sender).Text=ConvierteTextoAInteger(((TextBox)sender).Text).ToString();
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void txtSerieFin_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                ((TextBox)sender).Text = ConvierteTextoAInteger(((TextBox)sender).Text).ToString();
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
         private void txtProductoBusqueda_TextChanged(object sender, EventArgs e)
         {
             try
             {
                 TextBox txt = ((TextBox)sender);
-                //if (string.IsNullOrEmpty(txt.Text))
-                //    CargaProductos(Program.EmpresaSeleccionada.Id);
-                //else
-                    FiltrarProductosPorDescripcion(ListaProductos, txt.Text);
+                    FiltrarProductosPorDescripcion(ListaProductos, txt.Text,chkSoloExistencia.Checked);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -868,43 +524,9 @@ namespace Aires.Pantallas
             try
             {
                 TextBox txt = ((TextBox)sender);
-                //if (string.IsNullOrEmpty(txt.Text))
-                //    CargaProductos();
-                //else
-                    FiltrarProductosPorCodigo(ListaProductos, txt.Text);
+                    FiltrarProductosPorCodigo(ListaProductos, txt.Text, chkSoloExistencia.Checked);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnVerSeriesProducto_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                EntProducto productoSeleccionado = ObtieneProductoFromGV(gvProductos);
-                //MuestraProductosDetalle vMuestraDetalle = new MuestraProductosDetalle(new BusProductos().ObtieneProductosDetalle().Where(P=>P.ProductoId==productoSeleccionado.Id).ToList());
-                MuestraProductosDetalle vMuestraDetalle = new MuestraProductosDetalle(ObtieneListaProductosFromGV(gvProductosDetalle).Where(P => P.ProductoId == productoSeleccionado.Id).ToList());
-                vMuestraDetalle.Show();
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnActualizaGasto_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.Cursor = Cursors.WaitCursor;
-                CargaProductos(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalleTodos();
-
-                btnFiltroProducto.PerformClick();
-                this.Cursor = Cursors.Default;
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-        public void CargaProveedores(int EmpresaId)
-        {
-            cmbProveedores.DataSource = new BusProveedores().ObtieneProveedores(EmpresaId);
         }
 
         private void btnFiltroProducto_Click(object sender, EventArgs e)
@@ -912,13 +534,11 @@ namespace Aires.Pantallas
             try
             {
                 if (!string.IsNullOrEmpty(txtCodigoBusqueda.Text))
-                    FiltrarProductosPorCodigo(ListaProductos, txtCodigoBusqueda.Text);
+                    FiltrarProductosPorCodigo(this.ListaProductos, txtCodigoBusqueda.Text, chkSoloExistencia.Checked);
                 else if (!string.IsNullOrEmpty(txtProductoBusqueda.Text))
-                    FiltrarProductosPorDescripcion(ListaProductos, txtProductoBusqueda.Text);
+                    FiltrarProductosPorDescripcion(this.ListaProductos, txtProductoBusqueda.Text, chkSoloExistencia.Checked);
                 else
-                    FiltrarProductosPorDescripcion(ListaProductos, "");
-
-                //CargaProductos();
+                    FiltrarProductosPorDescripcion(this.ListaProductos, "", chkSoloExistencia.Checked);
             }
             catch (Exception ex) { MuestraExcepcion(ex);}
         }
@@ -928,7 +548,7 @@ namespace Aires.Pantallas
             try
             {
                 if ((Keys)e.KeyChar == Keys.Enter)
-                    FiltrarProductosPorCodigo(ListaProductos, txtCodigoBusqueda.Text);
+                    FiltrarProductosPorCodigo(this.ListaProductos, txtCodigoBusqueda.Text, chkSoloExistencia.Checked);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -937,51 +557,9 @@ namespace Aires.Pantallas
         {
             try { 
                 if ((Keys)e.KeyChar == Keys.Enter)
-                    FiltrarProductosPorDescripcion(ListaProductos, txtProductoBusqueda.Text);
+                    FiltrarProductosPorDescripcion(this.ListaProductos, txtProductoBusqueda.Text, chkSoloExistencia.Checked);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void gvSeries_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                //if ((Keys)e.KeyChar == Keys.Enter)
-                //    FiltrarProductosPorDescripcion(ListaProductos, txtProductoBusqueda.Text);
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void gvSeries_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                int index = 0;
-                if ((Keys)e.KeyChar == Keys.Back)
-                {
-                    index = gvSeries.CurrentRow.Index;
-                    List<EntCatalogoGenerico> lst=ObtieneListaGenericaFromGV(gvSeries);
-                    lst.RemoveAt(index);
-
-                    gvSeries.DataSource = null;
-                    gvSeries.DataSource = lst;
-
-                    lbContadorSeries.Text = lst.Count.ToString();
-                }
-
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnCambioDivisa_Click(object sender, EventArgs e)
-        {
-            try {
-                //CambioDivisa vCambioDiv = new Pantallas.CambioDivisa();
-                //if (vCambioDiv.ShowDialog() == DialogResult.OK)
-                //{
-                //    txtPrecioCosto.Text = FormatoMoney(vCambioDiv.Cambio);
-                //}
-            } catch(Exception ex) { MuestraExcepcion(ex); }
         }
 
         private void gvProductos_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -1031,40 +609,6 @@ namespace Aires.Pantallas
             catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void gvProductosDetalle_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            try
-            {
-                if (e.ColumnIndex == 0)
-                {
-                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
-                    {
-                        gvProductosDetalle.DataSource = ((List<EntProducto>)((DataGridView)sender).DataSource).OrderBy(P => P.Codigo).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
-                    }
-                    else
-                    {
-                        gvProductosDetalle.DataSource = ((List<EntProducto>)((DataGridView)sender).DataSource).OrderByDescending(P => P.Codigo).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
-                    }
-                }
-                else if (e.ColumnIndex == 1)
-                {
-                    if (((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None || ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Descending)
-                    {
-                        gvProductosDetalle.DataSource = ((List<EntProducto>)((DataGridView)sender).DataSource).OrderBy(P => P.Descripcion).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
-                    }
-                    else
-                    {
-                        gvProductosDetalle.DataSource = ((List<EntProducto>)((DataGridView)sender).DataSource).OrderByDescending(P => P.Descripcion).ToList();
-                        ((DataGridView)sender).Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = SortOrder.Descending;
-                    }
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        }
-
         private void cmbEmpresas_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -1072,10 +616,8 @@ namespace Aires.Pantallas
                 if (Program.CambiaEmpresa)
                 {
                     Program.EmpresaSeleccionada = ObtieneEmpresaFromCmb(cmbEmpresas);
-                    CargaProveedores(Program.EmpresaSeleccionada.Id);
                     CargaProductos(Program.EmpresaSeleccionada.Id);
-                    CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
-                    btnNuevoIngresoProducto.PerformClick();
+                    btnFiltroProducto.PerformClick();
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
@@ -1098,59 +640,16 @@ namespace Aires.Pantallas
         {
             try
             {
-                if (cmbTipoProducto.SelectedIndex == 0)
-                    tcSeries.Visible = true;
-                else
-                    tcSeries.Visible = false;
+
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
-        private void btnMateriales_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                EntProducto productoSeleccionado = ObtieneProductoFromGV(gvProductos);
-                AgregaMaterialesProducto vMaterialesKit = new AgregaMaterialesProducto(productoSeleccionado);
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-        
         private void tcProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                btnRefrescarProductosConsignacion.PerformClick();
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
 
-        private void btnVerSeriesProductoConsignacion_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                EntProducto productoSeleccionado = ObtieneProductoFromGV(gvProductosConsignacion);
-                MuestraProductosDetalle vMuestraDetalle = new MuestraProductosDetalle(ObtieneListaProductosFromGV(gvProductosDetalleConsignacion).Where(P => P.ProductoId == productoSeleccionado.Id).ToList());
-                vMuestraDetalle.Show();
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnRefrescaProductosConsignacion_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                CargaProductosConsignacion(Program.EmpresaSeleccionada.Id);
-                CargaProductosDetalleConsignacion(Program.EmpresaSeleccionada.Id);
-            }
-            catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void gvProductosConsignacion_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                btnVerSeriesProductoConsignacion.PerformClick();
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -1159,67 +658,15 @@ namespace Aires.Pantallas
         {
             try
             {
-                ContraseñaGeneral vContra = new Pantallas.ContraseñaGeneral(true);
-                if (vContra.ShowDialog() == DialogResult.OK)
-                {
-                    txtPrecioVenta.Enabled = true;
-                    txtPrecioVenta.Focus();
-                }
+
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
-        }
-
-        private void btnIngresaProductoAEmpresa_Click(object sender, EventArgs e)
-        {
-            //INGRESA SI EL CLIENTE ES EMPRESA PROPIA.
-            //if (ClienteSeleccionado.EmpresaId > 0)
-            //{
-                //if (ingresoId == 0)
-                //{
-                    int proveedorId = 0;
-                    string descripcion, factura = "";
-
-            //if (chkFacturar.Checked)
-            factura = "FAC: " + Program.EmpresaSeleccionada.SerieFactura + "208";//ObtieneUltimaFactura(Program.EmpresaSeleccionada.Id);
-            factura = "FAC: AA208";
-            //else
-            //    factura = "SIN FACTURAR";
-            descripcion = "COMPRA A EMPRESA -" + Program.EmpresaSeleccionada.Nombre + "- " + factura + " - " + DateTime.Today.ToShortDateString();
-            //ProductoIngresa.Fecha.ToShortDateString();
-
-            //VERIFICA SI YA SE AGREGO LA EMPRESANUEVA COMO PROVEEDOR. LO HACE POR NOMBRE, NO SE PUEDE BUSCAR POR ID DE PROVEEDOR(NO SE SABE).
-            int empresaAsociadaId = 6;//EJEMPLO: GRISELDA MOCHIS = 6.
-            string empresaNombre = "MARCOS JAVIER CASTRO FIERRO";
-            List<EntProveedor> provedores = new BusProveedores().ObtieneProveedores(empresaAsociadaId).Where(P => P.Nombre == empresaNombre).ToList();
-            if (provedores.Count > 0)
-                proveedorId = provedores[0].Id;
-            else
-                proveedorId = new Pantallas.Proveedores().AgregaProveedor(empresaAsociadaId, empresaNombre, empresaNombre, "");
-
-            int ingresoId = new BusProductos().AgregaIngreso(new EntCatalogoGenerico() { EmpresaId = proveedorId, Descripcion = descripcion, Fecha = DateTime.Today.Date });
-            //}
-
-            //List<EntProducto> productosEmpresa=new BusProductos().ObtieneProductos(ClienteSeleccionado.EmpresaId);
-            int productoId = 196;//    BHS30;
-            string serie = "721170900205";
-            decimal precioEspecial= 27355.20m;//PRECIO COSTO ORIGINAL
-            decimal precioVenta= 34905.24m;
-
-            //if (productoId != p.ProductoId)
-            //{
-            //    productoId = p.ProductoId;
-
-            new BusProductos().ActualizaEstatusProducto(productoId, true);
-            //}
-
-            //PARA LA EMPRESA QUE COMPRA EL PRECIOCOSTO DEL PRODUCTO SERIA A LO QUE SE LE ESTA VENDIENDO.
-            AgregaProductoDetalle(productoId, ingresoId, empresaAsociadaId, serie, precioVenta, 0, 0, precioEspecial);
-            //}
         }
 
         private void label21_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }

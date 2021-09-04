@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Aires.Pantallas
 {
-    public partial class AgregaObservacionFactura : Form
+    public partial class AgregaObservacion : Form
     {
-        public AgregaObservacionFactura()
+        public AgregaObservacion()
         {
             InitializeComponent();
         }

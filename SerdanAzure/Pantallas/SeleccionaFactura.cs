@@ -13,22 +13,33 @@ namespace Aires.Pantallas
 {
     public partial class SeleccionaFactura : Form
     {
-        public SeleccionaFactura(List<AiresEntidades.EntProveedor> ProveedorGastos)
+        public SeleccionaFactura(List<AiresEntidades.EntPedido> FacturasPedido)
         {
             InitializeComponent();
 
-            gvGastosProveedor.DataSource = ProveedorGastos;
+            gvFacturasPedido.DataSource = FacturasPedido;
         }
 
-        public EntProveedor ObtieneProveedorFromGV(DataGridView GridViewProveedores)
+        public EntPedido ObtienePedidoFromGV(DataGridView GridViewPedidos)
         {
-            if (GridViewProveedores.CurrentRow == null)
+            if (GridViewPedidos.CurrentRow == null)
                 return null;
-            return (EntProveedor)((List<EntProveedor>)GridViewProveedores.DataSource)[GridViewProveedores.CurrentRow.Index];
+            return (EntPedido)((List<EntPedido>)GridViewPedidos.DataSource)[GridViewPedidos.CurrentRow.Index];
         }
-
-        public AiresEntidades.EntProveedor ProveedorGastoSeleccionado { get { return ObtieneProveedorFromGV(gvGastosProveedor); } }
-        
+        public List<EntPedido> ObtieneListaPedidosFromGV(DataGridView GridViewPedidos)
+        {
+            if (GridViewPedidos.DataSource == null)
+                return new List<EntPedido>();
+            return ((List<EntPedido>)GridViewPedidos.DataSource).ToList();
+        }
+        public List<EntPedido> ObtieneListaPedidosFromGV(DataGridView GridViewPedidos, bool Estatus)
+        {
+            if (GridViewPedidos.DataSource == null)
+                return new List<EntPedido>();
+            return ((List<EntPedido>)GridViewPedidos.DataSource).Where(P=>P.Estatus=Estatus).ToList();
+        }
+        public AiresEntidades.EntPedido FacturaPedidoSeleccionado { get { return ObtienePedidoFromGV(gvFacturasPedido); } }
+        public List<EntPedido> FacturasPedidoSeleccionados { get { return ObtieneListaPedidosFromGV(gvFacturasPedido).Where(P => P.Estatus).ToList(); } }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -60,7 +71,21 @@ namespace Aires.Pantallas
 
         private void gvGastosEmpresa_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnAgregar.PerformClick();
+            //btnAgregar.PerformClick();
+        }
+
+        private void gvFacturasPedido_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                ObtienePedidoFromGV(gvFacturasPedido).Estatus = !ObtienePedidoFromGV(gvFacturasPedido).Estatus;
+                gvFacturasPedido.Refresh();
+                //this.FacturasPedidoSeleccionados = ObtieneListaPedidosFromGV(gvFacturasPedido);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

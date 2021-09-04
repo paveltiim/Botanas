@@ -28,12 +28,15 @@ namespace Aires.Pantallas
         {
             txtCodigo.Text = Producto.Codigo;
             txtDescripcion.Text = Producto.Descripcion;
+            txtMarca.Text = Producto.Marca;
+            txtModelo.Text = Producto.Modelo;
             cmbTipoProducto.SelectedIndex = Producto.TipoProductoId - 1;
 
             cmbTipoProductoServicio.SelectedIndex = ((List<EntCatalogoGenerico>)cmbTipoProductoServicio.DataSource).FindIndex(P => P.Id == Producto.ProductoServicioId);
             cmbTipoUnidad.SelectedIndex = ((List<EntCatalogoGenerico>)cmbTipoUnidad.DataSource).FindIndex(P => P.Id == Producto.UnidadId);
 
         }
+
         EntProducto ProductoSeleccionado;
         //void ActualizarProducto(int ProductoId, int TipoProductoId, string Codigo, string Descripcion)
         //{
@@ -93,13 +96,17 @@ namespace Aires.Pantallas
         {
             try
             {
-                this.Cursor = Cursors.WaitCursor;
-                //ActualizarProducto(ProductoSeleccionado.Id, cmbTipoProducto.SelectedIndex + 1, txtCodigo.Text, txtDescripcion.Text);
+                this.Cursor = Cursors.WaitCursor; 
+                
+                if (ConvierteTextoADecimal(txtPrecioCosto.Text) == 0 && !chkPrecioCosto0.Checked && cmbTipoProducto.SelectedIndex == 0)
+                    MandaExcepcion("Asigne un Precio de Costo mayor a $0 o seleccione la casilla 'Precio Costo $0'");
+                
                 EntCatalogoGenerico productoservicio = ObtieneCatalogoGenericoFromCmb(cmbTipoProductoServicio);
                 EntCatalogoGenerico unidad = ObtieneCatalogoGenericoFromCmb(cmbTipoUnidad);
 
-                new Productos().ActualizaProducto(ProductoSeleccionado.Id, cmbTipoProducto.SelectedIndex + 1, txtCodigo.Text, txtDescripcion.Text, 
-                    productoservicio.Id, unidad.Id);
+                new Productos().ActualizaProducto(ProductoSeleccionado.Id, cmbTipoProducto.SelectedIndex + 1, txtCodigo.Text,           
+                                                    txtDescripcion.Text, txtMarca.Text, txtModelo.Text,
+                                                    productoservicio.Id, unidad.Id, ConvierteTextoADecimal(txtPrecioCosto));
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

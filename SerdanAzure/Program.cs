@@ -22,5 +22,6 @@ namespace Aires.Pantallas
         public static AiresEntidades.EntEmpresa EmpresaSeleccionada { get; set; }
         public static AiresEntidades.EntUsuario UsuarioSeleccionado { get; set; }
         public static bool CambiaEmpresa { get; set; }
+        public static int ConexionIdActual{ get; set; }
     }
 }

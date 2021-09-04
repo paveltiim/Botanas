@@ -95,8 +95,7 @@ namespace Aires.Pantallas
             forma = BuscaFormaBase(new Productos().Titulo);
             if (forma != null)
             {
-                //((Ventas)forma).CargaProductos();
-                ((Productos)forma).CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
+                //((Productos)forma).CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
                 ((Productos)forma).CargaProductos(Program.EmpresaSeleccionada.Id);
             }
         }

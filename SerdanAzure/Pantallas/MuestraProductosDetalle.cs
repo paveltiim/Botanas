@@ -1,5 +1,6 @@
 ﻿using AiresEntidades;
 using AiresNegocio;
+using AiresUtilerias;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,8 +65,8 @@ namespace Aires.Pantallas
                 if (Program.UsuarioSeleccionado.Id == 0)//MARTIN
                     pnlBotones.Enabled = true; 
 
-                if (Program.UsuarioSeleccionado.Id > 1)
-                    gvProductosDetalle.Columns[4].Visible = false;
+                //if (Program.UsuarioSeleccionado.Id > 1)
+                //    gvProductosDetalle.Columns[4].Visible = false;
             } catch(Exception ex) { MuestraExcepcion(ex); }
         }
 
@@ -78,7 +79,7 @@ namespace Aires.Pantallas
         private void btnRefrescar_Click(object sender, EventArgs e)
         {
             try {
-                if(MuestraMensajeYesNo("¿Desea guardar los cambios realizdos?") == DialogResult.Yes)
+                if(MuestraMensajeYesNo("¿Desea guardar los cambios realizados?") == DialogResult.Yes)
                 {
                     List<EntProducto> productosSeleccionados = ObtieneListaProductosFromGV(gvProductosDetalle);
                     foreach (EntProducto p in productosSeleccionados) {
@@ -99,8 +100,6 @@ namespace Aires.Pantallas
             forma = BuscaFormaBase(new Productos().Titulo);
             if (forma != null)
             {
-                //((Ventas)forma).CargaProductos();
-                ((Productos)forma).CargaProductosDetalle(Program.EmpresaSeleccionada.Id);
                 ((Productos)forma).CargaProductos(Program.EmpresaSeleccionada.Id);
             }
         }
@@ -108,7 +107,7 @@ namespace Aires.Pantallas
         {
             try
             {
-                if (MuestraMensajeYesNo("¿Desea eliminar el Producto seleccionado?") == DialogResult.Yes)
+                if (MuestraMensajeYesNo("¿Desea eliminar el(los) Producto(s) seleccionado(s)?") == DialogResult.Yes)
                 {
                     //EntProducto productoSeleccionado = ObtieneProductoFromGV(gvProductosDetalle);
                     List<EntProducto> productosSeleccionados = ObtieneListaProductosFromGV(gvProductosDetalle);
@@ -229,6 +228,42 @@ namespace Aires.Pantallas
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
+        void ImprimirOrdenSalidaConsignacion(EntCliente ClienteConsigna, EntPedido PedidoConsignacion, List<EntProducto> ProductosSeleccionados)
+        {
+            string rutaGuardaArchivosOrden = base.RutaImpresionConsignacion +"\\"+ PedidoConsignacion.Cliente + "\\" + PedidoConsignacion.NumOrden;
+            base.VerificaRutas(base.RutaImpresionConsignacion, PedidoConsignacion.Cliente + "\\" + PedidoConsignacion.NumOrden);
+            //CreaImagenBMPcotizacion(rutaGuardaArchivosOrden, pbImpresionFondoBlanco.Image, pbLogo.Image, pbLeyendaConsignacion.Image, pbLeyendaConsignacion.Image, PedidoConsignacion.NumOrden,
+            //                Program.EmpresaSeleccionada, Cliente, PedidoConsignacion, ProductosSeleccionados);
+
+            //CreaImagenesBMPCompra(rutaGuardaArchivosOrden, pbImpresionFondoBlanco.Image, pbLogo.Image, pbLeyendaCompras.Image, pbFirma.Image,
+            //pedidoAgrega.NumOrden,
+            //Program.EmpresaSeleccionada, this.ProveedorSeleccionado, pedidoAgrega, productosSeleccionados);
+
+            List<string> lstRutas = new List<string>();
+            if (ProductosSeleccionados.Count > 20)
+                lstRutas = base.CreaImagenesBMPOrdenSalidaConsignacion(rutaGuardaArchivosOrden, pbImpresionFondoBlanco.Image, pbLogo.Image,          
+                            pbLeyendaConsignacion.Image, pbLeyendaConsignacion.Image, PedidoConsignacion.NumOrden,
+                            Program.EmpresaSeleccionada, ClienteConsigna, PedidoConsignacion, ProductosSeleccionados);
+            else
+            {
+                CreaImagenBMPOrdenSalidaConsignacion(rutaGuardaArchivosOrden, pbImpresionFondoBlanco.Image, pbLogo.Image,
+                            pbLeyendaConsignacion.Image, pbLeyendaConsignacion.Image, PedidoConsignacion.NumOrden,
+                            Program.EmpresaSeleccionada, ClienteConsigna, PedidoConsignacion, ProductosSeleccionados);
+                lstRutas.Add(rutaGuardaArchivosOrden + "\\" + PedidoConsignacion.NumOrden + ".bmp");
+            }
+
+            try
+            {
+                new UtiPDF().CreaPDF(lstRutas,
+                                     rutaGuardaArchivosOrden + "\\" + PedidoConsignacion.NumOrden + ".pdf");
+            }
+            catch (Exception ex) { }
+            finally
+            {
+                string nombreArchivo = EncuentraArchivo(rutaGuardaArchivosOrden, ".pdf");
+                MuestraArchivo(rutaGuardaArchivosOrden, nombreArchivo);
+            }
+        }
         private void btnMueveAConsignacion_Click(object sender, EventArgs e)
         {
             try
@@ -241,27 +276,52 @@ namespace Aires.Pantallas
                 if (vSeleccionaEmp.ShowDialog() == DialogResult.OK)
                 {
                     EntEmpresa empresaNuevaSeleccionada = vSeleccionaEmp.EmpresaSeleccionada;
-                    int ingresoId=0;
-
-                    if (empresaNuevaSeleccionada.Id!=Program.EmpresaSeleccionada.Id)
-                        ingresoId = AgregaIngreso(empresaNuevaSeleccionada, Program.EmpresaSeleccionada.Nombre);
-
-                    foreach (EntProducto p in productosSeleccionados)
+                    //YA NO SE NECESITA. YA NO HAY RELACION ENTRE LAS EMPRESAS. ERA PARA REGISTRAR INGRESO EN LA EMPRESA A LA QUE SE MANDABA EL PRODUCTO.
+                    //int ingresoId=0;
+                    //if (empresaNuevaSeleccionada.Id!=Program.EmpresaSeleccionada.Id)
+                    //    ingresoId = AgregaIngreso(empresaNuevaSeleccionada, Program.EmpresaSeleccionada.Nombre);
+                    FiltroClientes vClientes = new FiltroClientes(new BusClientes().ObtieneClientes(empresaNuevaSeleccionada.Id));
+                    if (vClientes.ShowDialog() == DialogResult.OK)
                     {
-                        if (ingresoId>0)
+                        string detallePedido = "";
+                        foreach (EntProducto p in productosSeleccionados)
                         {
-                            new BusProductos().AgregaMovimiento(p, ingresoId, 3, DateTime.Today);//3 - TRASPASO
-                            p.IngresoId = ingresoId;
+                            detallePedido += p.Cantidad + " " + p.Descripcion + " | ";
                         }
-                        p.EmpresaId = empresaNuevaSeleccionada.Id;
-                        //SOLO PARA ACTUALIZAR EMPRESAID e INGRESOID
-                        new BusProductos().ActualizaProductoDetalle(p);
 
-                        p.EstatusId = 5;//ESTATUSID: 5=CONSIGNACION.
-                        new BusProductos().ActualizaEstatusProductoDetalle(p);
+                        Ventas vVentas = new Ventas();
+                        Productos vProductos = new Productos();
+                        EntCliente clienteEnvia = vClientes.ClienteSeleccionado;
+                        EntPedido pedidoAgrega = vVentas.AgregarPedido(clienteEnvia.Id, "CONSIGNACIÓN | " + detallePedido.Remove(detallePedido.Length - 2),
+                                                                        "", "",
+                                                                        productosSeleccionados.Sum(P => P.PrecioCosto), 0, DateTime.Now, DateTime.Today, 0,
+                                                                        false, 1);
+
+                        foreach (EntProducto p in productosSeleccionados)
+                        {
+                            //YA NO SE NECESITA. YA NO HAY RELACION ENTRE LAS EMPRESAS. ERA PARA REGISTRAR INGRESO EN LA EMPRESA A LA QUE SE MANDABA EL PRODUCTO.
+                            //if (ingresoId>0)
+                            //{
+                            //    new BusProductos().AgregaMovimiento(p, ingresoId, 3, DateTime.Today);//3 - TRASPASO
+                            //    p.IngresoId = ingresoId;
+                            //}
+                            //p.EmpresaId = empresaNuevaSeleccionada.Id;
+                            ////SOLO PARA ACTUALIZAR EMPRESAID e INGRESOID
+                            //new BusProductos().ActualizaProductoDetalle(p);
+
+                            p.EstatusId = 5;//ESTATUSID: 5=CONSIGNACION.
+                            new BusProductos().ActualizaEstatusProductoDetalle(p);
+
+                            vVentas.AgregarProductoDetallePedido(pedidoAgrega.Id, p.Id, p.Cantidad, p.PrecioCosto, p.PrecioVenta);
+                            vProductos.AumentaProducto(p.ProductoId, -Convert.ToInt32(p.Cantidad));
+                        }
+
+                        pedidoAgrega.Cliente = clienteEnvia.Nombre;
+                        pedidoAgrega.NumOrden = "CONS-" + pedidoAgrega.Id.ToString().PadLeft(6, '0');
+                        ImprimirOrdenSalidaConsignacion(clienteEnvia, pedidoAgrega, productosSeleccionados);
+
+                        MuestraMensaje(string.Format("PRODUCTOS EN CONSIGNACIÓN DE -{0}-", empresaNuevaSeleccionada.Nombre), "CONFIRMACIÓN");
                     }
-
-                    MuestraMensaje(string.Format("PRODUCTOS EN CONSIGNACIÓN DE -{0}-",empresaNuevaSeleccionada.Nombre),"CONFIRMACIÓN");
                     this.Close();
                     //CargaProductosEnPantallas(); //NO PUEDE POR NO SER HIJA (MdiChildren)
                 }
@@ -302,6 +362,33 @@ namespace Aires.Pantallas
                     {
                         gvProductosDetalle.Columns[5].ReadOnly = false;
                     }
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void btnFueraDeServicio_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MuestraMensajeYesNo("¿Desea poner 'FUERA DE SERVICIO' el(los) Producto(s) seleccionado(s)?") == DialogResult.Yes)
+                {
+                    List<EntProducto> productosSeleccionados = ObtieneListaProductosFromGV(gvProductosDetalle);
+                    string observacion = "";
+                    AgregaObservacion vObservacion = new AgregaObservacion();
+                    if (vObservacion.ShowDialog() == DialogResult.OK)
+                        observacion = vObservacion.Observacion;
+                    foreach (EntProducto p in productosSeleccionados)
+                    {
+                        if (p.Estatus)
+                        {
+                            p.EstatusId = 3;
+                            new BusProductos().ActualizaEstatusProductoDetalle(p,observacion);
+                            int productoId = p.ProductoId;
+                            //new BusProductos().AumentaProducto(productoId, -1);
+                        }
+                    }
+                    this.Close();
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serdan", "Aires\Serdan.csproj", "{239A581C-CEF3-4ABF-A59B-70B349AD035F}"
 EndProject
@@ -11,17 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DATA", "DATA", "{183F1C8D-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BUSINESS", "BUSINESS", "{FD0E2E5C-E20A-4C90-912C-6A1389E0C5AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerdanDatos", "AiresDatos\SerdanDatos.csproj", "{7604044F-2B51-430D-A40C-EFAA536CFEBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotanasDatos", "AiresDatos\BotanasDatos.csproj", "{7604044F-2B51-430D-A40C-EFAA536CFEBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerdanNegocio", "AiresNegocio\SerdanNegocio.csproj", "{B0B0069A-C1CD-419B-A505-DB0400956583}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotanasNegocio", "AiresNegocio\BotanasNegocio.csproj", "{B0B0069A-C1CD-419B-A505-DB0400956583}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerdanEntidades", "AiresEntidades\SerdanEntidades.csproj", "{5308D57C-05C8-495A-B18B-51A361A786E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotanasEntidades", "AiresEntidades\BotanasEntidades.csproj", "{5308D57C-05C8-495A-B18B-51A361A786E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerdanUtilerias", "AiresUtilerias\SerdanUtilerias.csproj", "{02A506C1-5B69-48EF-97A0-3CB0FD718B91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotanasUtilerias", "AiresUtilerias\BotanasUtilerias.csproj", "{02A506C1-5B69-48EF-97A0-3CB0FD718B91}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSConecFM", "WSConecFM\WSConecFM.csproj", "{274A24FE-64EE-4B9E-9F5A-20A6033298AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerdanAzure", "SerdanAzure\SerdanAzure.csproj", "{8FD43934-F994-4903-92C5-7553EFB9F298}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Botanas", "SerdanAzure\Botanas.csproj", "{8FD43934-F994-4903-92C5-7553EFB9F298}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,5 +129,8 @@ Global
 		{02A506C1-5B69-48EF-97A0-3CB0FD718B91} = {FD0E2E5C-E20A-4C90-912C-6A1389E0C5AC}
 		{274A24FE-64EE-4B9E-9F5A-20A6033298AA} = {FD0E2E5C-E20A-4C90-912C-6A1389E0C5AC}
 		{8FD43934-F994-4903-92C5-7553EFB9F298} = {6090EE9F-4463-4F43-93C0-2844A7683808}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30FF261A-BAF9-4399-81A8-0B3E8582F8D0}
 	EndGlobalSection
 EndGlobal

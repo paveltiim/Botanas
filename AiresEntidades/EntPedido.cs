@@ -8,22 +8,26 @@ namespace AiresEntidades
 {
     public class EntPedido:EntAbstracta
     {
+        public string NumOrden { get; set; }
         public decimal SubTotal { get; set; }
         public decimal Total { get; set; }
         public decimal TotalSinIVA { get { return Total - IVA; } }
         public decimal Pago { get; set; }
+        public decimal NotasCredito { get; set; }
         public decimal TotalSinRetenciones { get { return Total - IVARetencion - ISRRetencion; } }
         public decimal IVA { get; set; }
         public decimal IVARetencion { get; set; }
         public decimal ISRRetencion { get; set; }
         public decimal Debe { get { return Total - Pago; } }
         public decimal Descuento { get; set; }
+        public decimal PagoTotal { get; set; }
 
         public int ClienteId { get; set; }
         public string Cliente { get; set; }
         public string NumCliente { get { return ClienteId.ToString().PadLeft(4, '0'); } }
 
         public string Detalle { get; set; }
+        public string Solicitud { get; set; }
         public string Observaciones { get; set; }
         public DateTime FechaEntrega { get; set; }
         public DateTime FechaPago { get; set; }
@@ -33,9 +37,10 @@ namespace AiresEntidades
         public int EmpleadoId { get; set; }
         public string Empleado { get; set; }
 
+        public int FacturaId { get; set; }
+        public string Factura { get; set; }
         public bool Facturado { get; set; }
         public string UUID { get; set; }
-        public string Factura { get; set; }
         public int FormaPagoId { get; set; }
         public string RutaFactura { get; set; }
 

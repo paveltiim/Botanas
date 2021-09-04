@@ -1,6 +1,10 @@
 ﻿using Ghostscript.NET;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,7 +17,7 @@ namespace AiresUtilerias
         public void LoadImage(string InputPDFFile, int PageNumber, string OutputPath)
         {
 
-            string outImageName = Path.GetFileNameWithoutExtension(InputPDFFile);
+            string outImageName = System.IO.Path.GetFileNameWithoutExtension(InputPDFFile);
             outImageName = outImageName + "_" + PageNumber.ToString() + "_.png";
 
 
@@ -303,5 +307,309 @@ namespace AiresUtilerias
         //// Cerramos el documento
         //doc.Close();
         //writer.Close();
+
+
+        public class LocationTextExtractionStrategyWithPosition : LocationTextExtractionStrategy
+        {
+            private readonly List<TextChunk> locationalResult = new List<TextChunk>();
+
+            private readonly ITextChunkLocationStrategy tclStrat;
+
+            public LocationTextExtractionStrategyWithPosition() : this(new TextChunkLocationStrategyDefaultImp())
+            {
+            }
+
+            /**
+             * Creates a new text extraction renderer, with a custom strategy for
+             * creating new TextChunkLocation objects based on the input of the
+             * TextRenderInfo.
+             * @param strat the custom strategy
+             */
+            public LocationTextExtractionStrategyWithPosition(ITextChunkLocationStrategy strat)
+            {
+                tclStrat = strat;
+            }
+
+            private bool StartsWithSpace(string str)
+            {
+                if (str.Length == 0) return false;
+                return str[0] == ' ';
+            }
+
+            private bool EndsWithSpace(string str)
+            {
+                if (str.Length == 0) return false;
+                return str[str.Length - 1] == ' ';
+            }
+
+            /**
+             * Filters the provided list with the provided filter
+             * @param textChunks a list of all TextChunks that this strategy found during processing
+             * @param filter the filter to apply.  If null, filtering will be skipped.
+             * @return the filtered list
+             * @since 5.3.3
+             */
+
+            private List<TextChunk> filterTextChunks(List<TextChunk> textChunks, ITextChunkFilter filter)
+            {
+                if (filter == null)
+                {
+                    return textChunks;
+                }
+
+                var filtered = new List<TextChunk>();
+
+                foreach (var textChunk in textChunks)
+                {
+                    if (filter.Accept(textChunk))
+                    {
+                        filtered.Add(textChunk);
+                    }
+                }
+
+                return filtered;
+            }
+
+            public override void RenderText(TextRenderInfo renderInfo)
+            {
+                LineSegment segment = renderInfo.GetBaseline();
+                if (renderInfo.GetRise() != 0)
+                { // remove the rise from the baseline - we do this because the text from a super/subscript render operations should probably be considered as part of the baseline of the text the super/sub is relative to 
+                    Matrix riseOffsetTransform = new Matrix(0, -renderInfo.GetRise());
+                    segment = segment.TransformBy(riseOffsetTransform);
+                }
+                TextChunk tc = new TextChunk(renderInfo.GetText(), tclStrat.CreateLocation(renderInfo, segment));
+                locationalResult.Add(tc);
+            }
+
+            public IList<TextLocation> GetLocations()
+            {
+
+                var filteredTextChunks = filterTextChunks(locationalResult, null);
+                filteredTextChunks.Sort();
+
+                TextChunk lastChunk = null;
+
+                var textLocations = new List<TextLocation>();
+
+                foreach (var chunk in filteredTextChunks)
+                {
+
+                    if (lastChunk == null)
+                    {
+                        //initial
+                        textLocations.Add(new TextLocation
+                        {
+                            Text = chunk.Text,
+                            X = iTextSharp.text.Utilities.PointsToMillimeters(chunk.Location.StartLocation[0]),
+                            Y = iTextSharp.text.Utilities.PointsToMillimeters(chunk.Location.StartLocation[1])
+                        });
+
+                    }
+                    else
+                    {
+                        if (chunk.SameLine(lastChunk))
+                        {
+                            var text = "";
+                            // we only insert a blank space if the trailing character of the previous string wasn't a space, and the leading character of the current string isn't a space
+                            if (IsChunkAtWordBoundary(chunk, lastChunk) && !StartsWithSpace(chunk.Text) && !EndsWithSpace(lastChunk.Text))
+                                text += ' ';
+
+                            text += chunk.Text;
+
+                            textLocations[textLocations.Count - 1].Text += text;
+
+                        }
+                        else
+                        {
+
+                            textLocations.Add(new TextLocation
+                            {
+                                Text = chunk.Text,
+                                X = iTextSharp.text.Utilities.PointsToMillimeters(chunk.Location.StartLocation[0]),
+                                Y = iTextSharp.text.Utilities.PointsToMillimeters(chunk.Location.StartLocation[1])
+                            });
+                        }
+                    }
+                    lastChunk = chunk;
+                }
+
+                //now find the location(s) with the given texts
+                return textLocations;
+
+            }
+
+        }
+
+        public class TextLocation
+        {
+            public float X { get; set; }
+            public float Y { get; set; }
+
+            public string Text { get; set; }
+        }
+        int CuentaCaracteresHastaEspacio(string Descripcion)
+        {
+            if (char.IsWhiteSpace(Descripcion[Descripcion.Length - 1]))
+                return 1;
+            else
+                return 1 + CuentaCaracteresHastaEspacio(Descripcion.Remove(Descripcion.Length - 1));
+        }
+        /// <summary>
+        /// Método recursivo que divide Descripcion en renglones dependiendo de la longitud de la Descripcion 
+        /// y de la LongitudRenglon.
+        /// </summary>
+        /// <param name="Descripcion"></param>
+        /// <param name="Graphic"></param>
+        /// <param name="Font"></param>
+        /// <param name="FontHeight"></param>
+        /// <param name="Pen"></param>
+        /// <param name="StartX"></param>
+        /// <param name="StartY"></param>
+        /// <param name="Offset"></param>
+        /// <param name="LongitudRenglon">Longitud límite del renglon</param>
+        /// <returns></returns>
+        int EscribeRenglonesDescripciones(PdfContentByte Pbover, string TextoEscribe, int x, int y, iTextSharp.text.Font Font)
+        {
+            int caracteresHastaEspacio = 1;
+            int LongitudRenglon = 245;
+            if (TextoEscribe.Length >= LongitudRenglon)
+            {
+                if (char.IsWhiteSpace(TextoEscribe[LongitudRenglon - 1]))
+                    ColumnText.ShowTextAligned(Pbover, Element.ALIGN_LEFT, new Phrase(TextoEscribe.Remove(LongitudRenglon - 1), Font), x, y, 0);
+                else
+                {
+                    caracteresHastaEspacio = CuentaCaracteresHastaEspacio(TextoEscribe.Remove(LongitudRenglon - caracteresHastaEspacio));
+                    ColumnText.ShowTextAligned(Pbover, Element.ALIGN_LEFT, new Phrase(TextoEscribe.Remove(LongitudRenglon - caracteresHastaEspacio), Font), x, y, 0);
+                }
+                y = EscribeRenglonesDescripciones(Pbover, TextoEscribe.Remove(0, LongitudRenglon - caracteresHastaEspacio), x, y - 10, Font);
+            }
+            else
+            {
+                ColumnText.ShowTextAligned(Pbover, Element.ALIGN_LEFT, new Phrase(TextoEscribe, Font), x, y, 0);
+                y += 13;// FontHeight;
+            }
+            return y;
+        }
+        /// <summary>
+        /// Devuelve la Ruta del Nuevo Archivo Modificado.
+        /// </summary>
+        /// <param name="TextoEscribe"></param>
+        /// <param name="RutaArchivoModifica"></param>
+        /// <param name="VersionModificada"></param>
+        /// <returns></returns>
+        public string ModificaPDF(string TextoEscribe, string RutaArchivoModifica, string VersionModificada, int NumProductos)
+        {
+            string pathSourcePDF = RutaArchivoModifica;
+            //FileInfo file = new FileInfo(RutaArchivoModifica);
+            string pathOutputPDF = RutaArchivoModifica.Remove(RutaArchivoModifica.Length - 4) + "-" + VersionModificada + ".pdf";
+            //string pathOutputPDF = RutaArchivoModifica;
+
+            //create PdfReader object to read from the existing document
+            using (PdfReader reader3 = new PdfReader(pathSourcePDF))
+            {
+                //create PdfStamper object to write to get the pages from reader 
+                using (PdfStamper stamper = new PdfStamper(reader3, new FileStream(pathOutputPDF, FileMode.Create)))
+                {
+                    //select two pages from the original document
+                    reader3.SelectPages("1");
+
+                    //gettins the page size in order to substract from the iTextSharp coordinates
+                    var pageSize = reader3.GetPageSize(1);
+
+                    // PdfContentByte from stamper to add content to the pages over the original content
+                    PdfContentByte pbover = stamper.GetOverContent(1);
+
+                    //add content to the page using ColumnText
+                    iTextSharp.text.Font font = new iTextSharp.text.Font();
+                    font.Size = 5;
+
+                    //***BUSCACOORDENADAS***
+                    //string textSearch = "SELLO DEL SAT";
+                    //string textSearch = "ESTE DOCUMENTO ES";
+                    string textSearch = "CADENA ORIGINAL DEL"; 
+                    //int cant = ListaProductos.Count;
+                    //if (cant > 1)
+                    //{
+                    //    textSearch = "SUBTOTAL"; //"TOTAL";
+                    //    sumaY = 180;
+                    //    tamañoImagen = 70;
+                    //}
+
+                    var parser = new PdfReaderContentParser(reader3);
+
+                    var strategy = parser.ProcessContent(1, new LocationTextExtractionStrategyWithPosition());
+
+                    var res = strategy.GetLocations();
+
+                    var searchResult = res.Where(p => p.Text.Contains(textSearch)).OrderBy(p => p.Y).Reverse().ToList();
+
+                    int x = 30;
+                    int y = (Convert.ToInt32(searchResult[0].Y)); //+ sumaY);///cant;
+
+                    if(NumProductos==1)
+                        y -= 10;
+                    else
+                        y -= 46;
+                    // (Convert.ToInt32(searchResult[0].Y))*4; // (int)(pageSize.Height -800); //- cant;
+                    //Creates an image that is the size i need to hide the text i'm interested in removing
+                    //iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(ImagenMuestra, BaseColor.WHITE);
+                    iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(new Bitmap(801, 104), BaseColor.WHITE);
+                    
+                    //Sets the position that the image needs to be placed (ie the location of the text to be removed)
+                    image.SetAbsolutePosition(x - 35, y-15);
+                    //Adds the image to the output pdf
+                    stamper.GetOverContent(1).AddImage(image, true);
+
+
+                    iTextSharp.text.Font fontTitulo = new iTextSharp.text.Font();
+                    fontTitulo.Size = 8;
+                    fontTitulo.IsBold();
+                    ColumnText.ShowTextAligned(pbover, Element.ALIGN_CENTER,
+                                               new Phrase("ESTE DOCUMENTO ES UNA REPRESENTACION IMPRESA DE UN CFDI", fontTitulo), x + 265, y + 76, 0);
+
+                    //setting up the X and Y coordinates of the document
+                    ColumnText.ShowTextAligned(pbover, Element.ALIGN_CENTER,
+                                               new Phrase("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ", font), x + 140, y + 66, 0);
+
+
+                    y += 60;// (Convert.ToInt32(searchResult[0].Y))*4; // (int)(pageSize.Height -800); //- cant;
+                    y = EscribeRenglonesDescripciones(pbover, TextoEscribe, x-10, y, font);
+                    ColumnText.ShowTextAligned(pbover, Element.ALIGN_CENTER,
+                                               new Phrase("Firma: ____________________________", font), x + 250, y - 25, 0);
+                }
+            }
+
+            FileInfo file = new FileInfo(pathOutputPDF);
+            file.Replace(pathSourcePDF, RutaArchivoModifica.Remove(RutaArchivoModifica.Length - 4) + "-BACKUP.pdf");
+            file.Delete();
+            new FileInfo(RutaArchivoModifica.Remove(RutaArchivoModifica.Length - 4) + "-BACKUP.pdf").Delete();
+            return pathSourcePDF;
+        }
+
+        public void CreaPDF(List<string> RutasArchivoBmpOrigen, string RutaArchivoSalida)
+        {
+            Document document = new Document();
+            using (var stream = new FileStream(RutaArchivoSalida, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                PdfWriter.GetInstance(document, stream);
+                document.Open();
+
+                foreach (string s in RutasArchivoBmpOrigen)
+                {
+                    using (var imageStream = new FileStream(s, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        var image = iTextSharp.text.Image.GetInstance(imageStream);
+                        image.ScaleToFitHeight = true;
+
+                        image.ScaleToFit(530, 1070);
+                        document.Add(image);
+                    }
+                }
+
+                document.Close();
+                document.Dispose();
+            }
+        }
     }
 }

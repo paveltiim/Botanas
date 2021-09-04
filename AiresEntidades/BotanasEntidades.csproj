@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B0B0069A-C1CD-419B-A505-DB0400956583}</ProjectGuid>
+    <ProjectGuid>{5308D57C-05C8-495A-B18B-51A361A786E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AiresNegocio</RootNamespace>
-    <AssemblyName>AiresNegocio</AssemblyName>
+    <RootNamespace>AiresEntidades</RootNamespace>
+    <AssemblyName>BotanasEntidades</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -61,28 +61,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusAbstracta.cs" />
-    <Compile Include="BusClientes.cs" />
-    <Compile Include="BusDepositos.cs" />
-    <Compile Include="BusDivisas.cs" />
-    <Compile Include="BusProveedores.cs" />
-    <Compile Include="BusEmpresas.cs" />
-    <Compile Include="BusFacturas.cs" />
-    <Compile Include="BusGastos.cs" />
-    <Compile Include="BusPedidos.cs" />
-    <Compile Include="BusProductos.cs" />
-    <Compile Include="BusVencimiento.cs" />
+    <Compile Include="EntAbstracta.cs" />
+    <Compile Include="EntIngreso.cs" />
+    <Compile Include="EntMaterial.cs" />
+    <Compile Include="EntCatalogoGenerico.cs" />
+    <Compile Include="EntCliente.cs" />
+    <Compile Include="EntDeposito.cs" />
+    <Compile Include="EntDivisa.cs" />
+    <Compile Include="EntEmpresa.cs" />
+    <Compile Include="EntFactura.cs" />
+    <Compile Include="EntGasto.cs" />
+    <Compile Include="EntPago.cs" />
+    <Compile Include="EntPedido.cs" />
+    <Compile Include="EntProducto.cs" />
+    <Compile Include="EntProveedor.cs" />
+    <Compile Include="EntUsuario.cs" />
+    <Compile Include="EntVencimiento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AiresDatos\SerdanDatos.csproj">
-      <Project>{7604044f-2b51-430d-a40c-efaa536cfebc}</Project>
-      <Name>SerdanDatos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AiresEntidades\SerdanEntidades.csproj">
-      <Project>{5308d57c-05c8-495a-b18b-51a361a786e1}</Project>
-      <Name>SerdanEntidades</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,7 @@
 ﻿using AiresEntidades;
 using AiresNegocio;
 using AiresUtilerias;
-using Microsoft.Office.Interop.Excel;
+//using Microsoft.Office.Interop.Excel;
 using Microsoft.Reporting.WinForms;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -46,6 +46,7 @@ namespace Aires.Pantallas
                 gvPedidos.DataSource = ListaPedidos;
                 txtCantidadVentas.Text = ListaPedidos.Count.ToString();
             }
+
             public void CargaGvPedidos(int EmpresaId, bool Estatus)
             {
                 ListaPedidos = new BusPedidos().ObtienePedidos(EmpresaId, 1, 1, 1, Convert.ToInt16(Estatus), 1);
@@ -355,164 +356,164 @@ namespace Aires.Pantallas
         {
             try
             {
-                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+                //    Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
 
-                if (xlApp == null)
-                    MandaExcepcion("Excel NO esta instalado apropiadamente!!");
+                //    if (xlApp == null)
+                //        MandaExcepcion("Excel NO esta instalado apropiadamente!!");
 
-                this.Cursor = Cursors.WaitCursor;
+                //    this.Cursor = Cursors.WaitCursor;
 
-                CargaEmpresas();
-                EntEmpresa empresaSeleccionada = ListaEmpresas.Where(P => P.Id == EmpresaId).ToList()[0];
+                //    CargaEmpresas();
+                //    EntEmpresa empresaSeleccionada = ListaEmpresas.Where(P => P.Id == EmpresaId).ToList()[0];
 
-                List<EntPedido> pedidosVentas = ObtieneVentas(EmpresaId, Fecha, Fecha);
-                //SeleccionaEmail vEmail = new Pantallas.SeleccionaEmail();
-                //if (vEmail.ShowDialog() == DialogResult.OK)
-                //{
+                //    List<EntPedido> pedidosVentas = ObtieneVentas(EmpresaId, Fecha, Fecha);
+                //    //SeleccionaEmail vEmail = new Pantallas.SeleccionaEmail();
+                //    //if (vEmail.ShowDialog() == DialogResult.OK)
+                //    //{
 
-                if (pedidosVentas.Count > 0)
-                {
-                    Workbook xlWorkBook;
-                    Worksheet xlWorkSheet;
+                //    if (pedidosVentas.Count > 0)
+                //    {
+                //        Workbook xlWorkBook;
+                //        Worksheet xlWorkSheet;
 
-                    object misValue = System.Reflection.Missing.Value;
-                    xlWorkBook = xlApp.Workbooks.Add(misValue);
-                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                //        object misValue = System.Reflection.Missing.Value;
+                //        xlWorkBook = xlApp.Workbooks.Add(misValue);
+                //        xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
 
-                    try
-                    {
-                        //agregaPedido
-                        //int ClienteId, string Detalle, string Observaciones, decimal Total, decimal Pago, 
-                        //DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId
+                //        try
+                //        {
+                //            //agregaPedido
+                //            //int ClienteId, string Detalle, string Observaciones, decimal Total, decimal Pago, 
+                //            //DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId
 
-                        //AgregarProductoDetallePedido
-                        //(int PedidoId, int ProductoId, int Cantidad, decimal PrecioCosto, decimal PrecioVenta)
+                //            //AgregarProductoDetallePedido
+                //            //(int PedidoId, int ProductoId, int Cantidad, decimal PrecioCosto, decimal PrecioVenta)
 
-                        //if (p.TipoProductoId == 1)
-                        //{
-                        //    vProd.ActualizaEstatusProductoDetalle(p, 2);//ESTATUS:2=ENTREGADO
-                        //    vProd.AumentaProducto(p.ProductoId, -p.Cantidad);
-                        //}
+                //            //if (p.TipoProductoId == 1)
+                //            //{
+                //            //    vProd.ActualizaEstatusProductoDetalle(p, 2);//ESTATUS:2=ENTREGADO
+                //            //    vProd.AumentaProducto(p.ProductoId, -p.Cantidad);
+                //            //}
 
-                        // AumentaPagoPedido
-                        //(pedidoAgrega.Id, -pago);
+                //            // AumentaPagoPedido
+                //            //(pedidoAgrega.Id, -pago);
 
-                        //agregaFactura
-                        //(Factura.EmpresaId, Factura.PedidoId, Factura.NumeroFactura, Factura.UUID, Factura.Fecha, Factura.Ruta);
+                //            //agregaFactura
+                //            //(Factura.EmpresaId, Factura.PedidoId, Factura.NumeroFactura, Factura.UUID, Factura.Fecha, Factura.Ruta);
 
-                        //--------------REN|COL----------//
-                        xlWorkSheet.Cells[1, 1] = "CLIENTEID";
-                        xlWorkSheet.Cells[1, 2] = "CLIENTE";
-                        xlWorkSheet.Cells[1, 3] = "PEDIDOID";
-                        xlWorkSheet.Cells[1, 4] = "PEDIDODETALLE";
-                        xlWorkSheet.Cells[1, 5] = "TOTAL";
-                        xlWorkSheet.Cells[1, 6] = "PAGO";
-                        xlWorkSheet.Cells[1, 7] = "FECHA";
-                        xlWorkSheet.Cells[1, 8] = "FACTURADO";
-                        xlWorkSheet.Cells[1, 9] = "PEDIDOESTATUSID";
+                //            //--------------REN|COL----------//
+                //            xlWorkSheet.Cells[1, 1] = "CLIENTEID";
+                //            xlWorkSheet.Cells[1, 2] = "CLIENTE";
+                //            xlWorkSheet.Cells[1, 3] = "PEDIDOID";
+                //            xlWorkSheet.Cells[1, 4] = "PEDIDODETALLE";
+                //            xlWorkSheet.Cells[1, 5] = "TOTAL";
+                //            xlWorkSheet.Cells[1, 6] = "PAGO";
+                //            xlWorkSheet.Cells[1, 7] = "FECHA";
+                //            xlWorkSheet.Cells[1, 8] = "FACTURADO";
+                //            xlWorkSheet.Cells[1, 9] = "PEDIDOESTATUSID";
 
-                        xlWorkSheet.Cells[1, 10] = "PRODUCTODETALLEID";
-                        xlWorkSheet.Cells[1, 11] = "CANTIDAD";
-                        xlWorkSheet.Cells[1, 12] = "PRECIOCOSTO";
-                        xlWorkSheet.Cells[1, 13] = "PRECIOVENTA";
-                    
-                        xlWorkSheet.Cells[1, 14] = "TIPOPRODUCTOID";
-                        xlWorkSheet.Cells[1, 15] = "PRODUCTOID";
+                //            xlWorkSheet.Cells[1, 10] = "PRODUCTODETALLEID";
+                //            xlWorkSheet.Cells[1, 11] = "CANTIDAD";
+                //            xlWorkSheet.Cells[1, 12] = "PRECIOCOSTO";
+                //            xlWorkSheet.Cells[1, 13] = "PRECIOVENTA";
 
-                        xlWorkSheet.Cells[1, 16] = "NUMEROFACTURA";
-                        xlWorkSheet.Cells[1, 17] = "UUID";
-                        xlWorkSheet.Cells[1, 18] = "FECHAFACTURA";
-                        xlWorkSheet.Cells[1, 19] = "RUTAFACTURA";
-                        //hacer rutina para obtener los archivos de facturas
+                //            xlWorkSheet.Cells[1, 14] = "TIPOPRODUCTOID";
+                //            xlWorkSheet.Cells[1, 15] = "PRODUCTOID";
 
-                        int ren = 2;
-                        foreach (EntPedido pe in pedidosVentas)
-                        {
-                            List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetallePorPedido(pe.Id);
+                //            xlWorkSheet.Cells[1, 16] = "NUMEROFACTURA";
+                //            xlWorkSheet.Cells[1, 17] = "UUID";
+                //            xlWorkSheet.Cells[1, 18] = "FECHAFACTURA";
+                //            xlWorkSheet.Cells[1, 19] = "RUTAFACTURA";
+                //            //hacer rutina para obtener los archivos de facturas
 
-                            //p.Id = Convert.ToInt32(r["PED_ID"]);
-                            //p.Detalle = r["PED_DETALLE"].ToString();
-                            //p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
-                            //p.Cliente = r["CLI_NOMBRE"].ToString();
-                            //p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
-                            //p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
-                            //p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
-                            //p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
-                            //p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
-                            //p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
-                            //p.Facturado = Convert.ToBoolean(r["FAC_ID"]);
-                            //p.Factura = "AA" + r["FAC_NUMEROFACTURA"].ToString();
-                            //p.Factura = "S/F";
-                            //p.UUID = r["FAC_UUID"].ToString();
-                            //p.RutaFactura = r["FAC_RUTA"].ToString();
-                            //p.FechaEntrega = Convert.ToDateTime(r["FAC_FECHA"])
+                //            int ren = 2;
+                //            foreach (EntPedido pe in pedidosVentas)
+                //            {
+                //                List<EntProducto> listaProductos = new BusProductos().ObtieneProductosDetallePorPedido(pe.Id);
 
-                            //p.Id = Convert.ToInt32(r["PRODET_ID"]);
-                            //p.ProductoId = Convert.ToInt32(r["PRO_ID"]);
-                            //p.TipoProductoId = Convert.ToInt32(r["PRO_TIPOPRODUCTOID"]);
-                            //p.Codigo = r["PRO_CODIGO"].ToString();
-                            //p.Descripcion = r["PRO_DESCRIPCION"].ToString();
-                            //p.Cantidad = Convert.ToInt32(r["PROPED_CANTIDAD"]);
-                            //p.PrecioCosto = Convert.ToDecimal(r["PROPED_PRECIOCOSTO"]);
-                            //p.PrecioVenta = Convert.ToDecimal(r["PROPED_PRECIOVENTA"]);
-                            //p.Serie = r["PRODET_SERIE"].ToString();
+                //                //p.Id = Convert.ToInt32(r["PED_ID"]);
+                //                //p.Detalle = r["PED_DETALLE"].ToString();
+                //                //p.ClienteId = Convert.ToInt32(r["PED_CLIENTEID"]);
+                //                //p.Cliente = r["CLI_NOMBRE"].ToString();
+                //                //p.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+                //                //p.Total = Convert.ToDecimal(r["PED_TOTAL"]);
+                //                //p.FechaCorta = Convert.ToDateTime(r["PED_FECHA"]).ToShortDateString();
+                //                //p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
+                //                //p.EstatusId = Convert.ToInt32(r["PED_ESTATUSID"]);
+                //                //p.EstatusDescripcion = r["ESTPED_DESCRIPCION"].ToString();
+                //                //p.Facturado = Convert.ToBoolean(r["FAC_ID"]);
+                //                //p.Factura = "AA" + r["FAC_NUMEROFACTURA"].ToString();
+                //                //p.Factura = "S/F";
+                //                //p.UUID = r["FAC_UUID"].ToString();
+                //                //p.RutaFactura = r["FAC_RUTA"].ToString();
+                //                //p.FechaEntrega = Convert.ToDateTime(r["FAC_FECHA"])
 
-                            foreach (EntProducto p in listaProductos)
-                            {
-                                xlWorkSheet.Cells[ren, 1] = pe.ClienteId;           // "CLIENTEID";
-                                xlWorkSheet.Cells[ren, 2] = pe.Cliente;             // "CLIENTE";
-                                xlWorkSheet.Cells[ren, 3] = pe.Id;             // "PEDIDOID";
-                                xlWorkSheet.Cells[ren, 4] = pe.Detalle;             // "PEDIDODETALLE";
-                                xlWorkSheet.Cells[ren, 5] = pe.Total;               // "TOTAL";
-                                xlWorkSheet.Cells[ren, 6] = pe.Pago;                //"PAGO";
-                                xlWorkSheet.Cells[ren, 7] = pe.Fecha;               //"FECHA";
-                                xlWorkSheet.Cells[ren, 8] = pe.Facturado;           // "FACTURADO";
-                                xlWorkSheet.Cells[ren, 9] = pe.EstatusId;           // "PEDIDOESTATUSID";
+                //                //p.Id = Convert.ToInt32(r["PRODET_ID"]);
+                //                //p.ProductoId = Convert.ToInt32(r["PRO_ID"]);
+                //                //p.TipoProductoId = Convert.ToInt32(r["PRO_TIPOPRODUCTOID"]);
+                //                //p.Codigo = r["PRO_CODIGO"].ToString();
+                //                //p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+                //                //p.Cantidad = Convert.ToInt32(r["PROPED_CANTIDAD"]);
+                //                //p.PrecioCosto = Convert.ToDecimal(r["PROPED_PRECIOCOSTO"]);
+                //                //p.PrecioVenta = Convert.ToDecimal(r["PROPED_PRECIOVENTA"]);
+                //                //p.Serie = r["PRODET_SERIE"].ToString();
 
-                                xlWorkSheet.Cells[ren, 10] = p.Id;                   // "PRODUCTODETALLEID";
-                                xlWorkSheet.Cells[ren, 11] = p.Cantidad;            // "CANTIDAD";
-                                xlWorkSheet.Cells[ren, 12] = p.PrecioCosto;         // "PRECIOCOSTO";
-                                xlWorkSheet.Cells[ren, 13] = p.PrecioVenta;         // "PRECIOVENTA";
-                            
-                                xlWorkSheet.Cells[ren, 14] = p.TipoProductoId;      // "TIPOPRODUCTOID";
-                                xlWorkSheet.Cells[ren, 15] = p.ProductoId;          // "PRODUCTOID";
+                //                foreach (EntProducto p in listaProductos)
+                //                {
+                //                    xlWorkSheet.Cells[ren, 1] = pe.ClienteId;           // "CLIENTEID";
+                //                    xlWorkSheet.Cells[ren, 2] = pe.Cliente;             // "CLIENTE";
+                //                    xlWorkSheet.Cells[ren, 3] = pe.Id;             // "PEDIDOID";
+                //                    xlWorkSheet.Cells[ren, 4] = pe.Detalle;             // "PEDIDODETALLE";
+                //                    xlWorkSheet.Cells[ren, 5] = pe.Total;               // "TOTAL";
+                //                    xlWorkSheet.Cells[ren, 6] = pe.Pago;                //"PAGO";
+                //                    xlWorkSheet.Cells[ren, 7] = pe.Fecha;               //"FECHA";
+                //                    xlWorkSheet.Cells[ren, 8] = pe.Facturado;           // "FACTURADO";
+                //                    xlWorkSheet.Cells[ren, 9] = pe.EstatusId;           // "PEDIDOESTATUSID";
 
-                                xlWorkSheet.Cells[ren, 16] = pe.Factura;            // "NUMEROFACTURA";
-                                xlWorkSheet.Cells[ren, 17] = pe.UUID;               // "UUID";
-                                xlWorkSheet.Cells[ren, 18] = pe.FechaEntrega;       // "FECHAFACTURA";
-                                xlWorkSheet.Cells[ren, 19] = pe.RutaFactura;        // "RUTAFACTURA";
-                                ren++;
-                            }
-                        }
+                //                    xlWorkSheet.Cells[ren, 10] = p.Id;                   // "PRODUCTODETALLEID";
+                //                    xlWorkSheet.Cells[ren, 11] = p.Cantidad;            // "CANTIDAD";
+                //                    xlWorkSheet.Cells[ren, 12] = p.PrecioCosto;         // "PRECIOCOSTO";
+                //                    xlWorkSheet.Cells[ren, 13] = p.PrecioVenta;         // "PRECIOVENTA";
 
-                        //EntCatalogoGenerico ingreso = ObtieneCatalogoGenericoFromGV(gvIngresos);
-                        string rutaExportacion = string.Format(@"c:\TIIM\EXPORTACIONES\Ventas {0:yyyy-MM-dd} {1}.xls", Fecha, empresaSeleccionada.Nombre);
+                //                    xlWorkSheet.Cells[ren, 14] = p.TipoProductoId;      // "TIPOPRODUCTOID";
+                //                    xlWorkSheet.Cells[ren, 15] = p.ProductoId;          // "PRODUCTOID";
 
-                        xlWorkBook.SaveAs(rutaExportacion, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-                        xlWorkBook.Close(true, misValue, misValue);
-                        xlApp.Quit();
+                //                    xlWorkSheet.Cells[ren, 16] = pe.Factura;            // "NUMEROFACTURA";
+                //                    xlWorkSheet.Cells[ren, 17] = pe.UUID;               // "UUID";
+                //                    xlWorkSheet.Cells[ren, 18] = pe.FechaEntrega;       // "FECHAFACTURA";
+                //                    xlWorkSheet.Cells[ren, 19] = pe.RutaFactura;        // "RUTAFACTURA";
+                //                    ren++;
+                //                }
+                //            }
 
-                        Marshal.ReleaseComObject(xlWorkSheet);
-                        Marshal.ReleaseComObject(xlWorkBook);
-                        Marshal.ReleaseComObject(xlApp);
+                //            //EntCatalogoGenerico ingreso = ObtieneCatalogoGenericoFromGV(gvIngresos);
+                //            string rutaExportacion = string.Format(@"c:\TIIM\EXPORTACIONES\Ventas {0:yyyy-MM-dd} {1}.xls", Fecha, empresaSeleccionada.Nombre);
 
-                        EnviaCorreoArchivo(Email, Fecha, rutaExportacion, empresaSeleccionada.Nombre);
-                    }
-                    catch (Exception ex)
-                    {
-                        xlWorkBook.Close(true, misValue, misValue);
-                        xlApp.Quit();
+                //            xlWorkBook.SaveAs(rutaExportacion, XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                //            xlWorkBook.Close(true, misValue, misValue);
+                //            xlApp.Quit();
 
-                        Marshal.ReleaseComObject(xlWorkSheet);
-                        Marshal.ReleaseComObject(xlWorkBook);
-                        Marshal.ReleaseComObject(xlApp);
-                        MandaExcepcion(ex.Message);
-                    }
-                }
-                //MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xls");
-                //}
-                this.Cursor = Cursors.Default;
+                //            Marshal.ReleaseComObject(xlWorkSheet);
+                //            Marshal.ReleaseComObject(xlWorkBook);
+                //            Marshal.ReleaseComObject(xlApp);
+
+                //            EnviaCorreoArchivo(Email, Fecha, rutaExportacion, empresaSeleccionada.Nombre);
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            xlWorkBook.Close(true, misValue, misValue);
+                //            xlApp.Quit();
+
+                //            Marshal.ReleaseComObject(xlWorkSheet);
+                //            Marshal.ReleaseComObject(xlWorkBook);
+                //            Marshal.ReleaseComObject(xlApp);
+                //            MandaExcepcion(ex.Message);
+                //        }
+                //    }
+                //    //MessageBox.Show("Excel file created , you can find the file d:\\csharp-Excel.xls");
+                //    //}
+                //    this.Cursor = Cursors.Default;
             }
             catch (Exception ex) { MuestraExcepcion(ex, "ERROR EN LA EXPORTACIÓN"); }
         }
@@ -981,7 +982,7 @@ namespace Aires.Pantallas
                 if (MuestraMensajeYesNo(string.Format("¿Seguro desea enviar la FACTURA al correo seleccionado? \n \n Cliente:{0} \n \n Email:  {1} \n Email2: {2} \n Email3: {3}", pedidoSeleccionado.Cliente, cliente.Email, cliente.Email2, cliente.Email3), "CONFIRMACIÓN") == DialogResult.Yes)
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    //cliente.Email = txtEmail.Text;
+                    //cliente.Email = "pavel_tiim@hotmail.com";
                     try
                     {
                         //throw new Exception("error");
@@ -1014,12 +1015,14 @@ namespace Aires.Pantallas
                     UtiFacturacionPruebas facturaPruebas = new UtiFacturacionPruebas();
 
 
-                    if (Program.EmpresaSeleccionada.Facturacion)
-                        factura.Cancelar(Program.EmpresaSeleccionada, pedidoSeleccionado.UUID);
-                    else
-                        facturaPruebas.Cancelar(new EntEmpresa() { RFC = "XAXX010101000" }, pedidoSeleccionado.UUID);
-                    //factura.Cancelar(1, pedidoSeleccionado.UUID);
-
+                    if (!string.IsNullOrWhiteSpace(pedidoSeleccionado.UUID))
+                    {
+                        if (Program.EmpresaSeleccionada.Facturacion)
+                            factura.Cancelar(Program.EmpresaSeleccionada, pedidoSeleccionado.UUID);
+                        else
+                            facturaPruebas.Cancelar(new EntEmpresa() { RFC = "XAXX010101000" }, pedidoSeleccionado.UUID);
+                        //factura.Cancelar(1, pedidoSeleccionado.UUID);
+                    }
                     List<EntFactura> facturasPedido=new BusPedidos().ObtieneFacturasPorPedido(pedidoSeleccionado.Id);
 
                     if (facturasPedido.Count > 0)
@@ -1039,6 +1042,8 @@ namespace Aires.Pantallas
             {
                 EntPedido pedido = ObtienePedidoFromGV(gvPedidos);
                 btnCancelar.Enabled = pedido.Facturado;
+                btnComplementoPago.Visible = pedido.Facturado;
+
                 btnFacturar.Visible= string.IsNullOrEmpty(pedido.UUID);
                 pnlFacturacion.Visible = string.IsNullOrEmpty(pedido.UUID);
 
@@ -1116,7 +1121,7 @@ namespace Aires.Pantallas
             try
             {
                 EntPedido pedidoSeleccionado= ObtienePedidoFromGV(gvPedidos);
-                if (!pedidoSeleccionado.Facturado)
+                if (!pedidoSeleccionado.Facturado && string.IsNullOrWhiteSpace(pedidoSeleccionado.UUID))
                     throw new Exception("Pedido Sin Facturar");
 
                 MuestraArchivo(pedidoSeleccionado.RutaFactura);
@@ -1439,18 +1444,18 @@ namespace Aires.Pantallas
         /// Agrega nuevo registro del Pedido solicitado.
         /// </summary>
         /// <param name="pedido"></param>
-        void AgregarPago(int PedidoId, decimal Cantidad)
+        public int AgregarPago(int PedidoId, decimal Cantidad, DateTime FechaPago)
         {
             EntPago pago = new EntPago()
             {
                 PedidoId = PedidoId,
                 TipoPagoId = 1,
                 Cantidad = Cantidad,
-                FechaPago = DateTime.Today
+                FechaPago = FechaPago
             };
-            new BusPedidos().AgregaPagoPedido(pago);
+            return new BusPedidos().AgregaPagoPedido(pago);
         }
-        void AumentaPagoPedido(int PedidoId, decimal Pago)
+        public void AumentaPagoPedido(int PedidoId, decimal Pago)
         {
             EntPedido pedido = new EntPedido()
             {
@@ -1460,28 +1465,113 @@ namespace Aires.Pantallas
             };
             new BusPedidos().AumentaPagoPedido(pedido);
         }
-
-        void MuestraAgregarComprobantePago(EntPedido PedidoFactura)
+        public void DescuentaTimbre(EntEmpresa EmpresaSeleccionada)
         {
-            AgregaComplementoPago vComple = new AgregaComplementoPago();
-            vComple.Cliente = new BusClientes().ObtieneCliente(PedidoFactura.ClienteId);
-            vComple.PedidoFactura = PedidoFactura;
-
-            if (vComple.ShowDialog() == DialogResult.OK)
+            try
             {
-                AgregarPago(PedidoFactura.Id, vComple.Cantidad);
-                AumentaPagoPedido(PedidoFactura.Id, vComple.Cantidad);
+                //DESCUENTA TIMBRE
+                new BusEmpresas().AumentaTimbreEmpresa(EmpresaSeleccionada.Id);
+                //Program.EmpresaSeleccionada.TimbresRestantes--;
+                //Program.EmpresaSeleccionada.TimbresUsados++;
+                EmpresaSeleccionada.TimbresRestantes--;
+                EmpresaSeleccionada.TimbresUsados++;
 
-                btnRefrescar.PerformClick();
-                MuestraMensaje("COMPLEMENTO ENVIADO", "CONFIRMACIÓN");
+                MuestraTimbresEnPantallas();
             }
+            catch (Exception ex) { }
         }
+        //void MuestraAgregarComprobantePago(EntPedido PedidoFactura)
+        //{
+        //    AgregaComplementoPago vComple = new AgregaComplementoPago(new EntFactura() { Id = PedidoFactura.FacturaId });
+        //    vComple.Cliente = new BusClientes().ObtieneCliente(PedidoFactura.ClienteId);
+        //    vComple.PedidoFactura = PedidoFactura;
+
+        //    if (vComple.ShowDialog() == DialogResult.OK)
+        //    {
+        //        DescuentaTimbre(Program.EmpresaSeleccionada);
+
+        //        AgregarPago(PedidoFactura.Id, vComple.CantidadPago);
+        //        AumentaPagoPedido(PedidoFactura.Id, vComple.CantidadPago);
+
+        //        btnRefrescar.PerformClick();
+        //        MuestraMensaje("COMPLEMENTO ENVIADO", "CONFIRMACIÓN");
+        //    }
+        //}
         private void btnComplementoPago_Click(object sender, EventArgs e)
         {
             try
             {
                 EntPedido pedido = ObtienePedidoFromGV(gvPedidos);
-                MuestraAgregarComprobantePago(pedido);
+                List<EntPedido> facturasCliente=ObtieneListaPedidosFromGV(gvPedidos).Where(P=>P.ClienteId==pedido.ClienteId 
+                                                                                           && P.Facturado
+                                                                                           && P.EstatusId==1).ToList();
+                EntCliente cliente = new BusClientes().ObtieneCliente(pedido.ClienteId);
+                SeleccionaFacturas vSelFac = new SeleccionaFacturas(facturasCliente);
+                if (vSelFac.ShowDialog() == DialogResult.OK)
+                {
+                    //MuestraAgregarComprobantePago(pedido);
+
+                    List<EntPedido> pedidosfacturasSeleccionadas = vSelFac.FacturasPedidoSeleccionados;
+                    foreach (EntPedido pf in pedidosfacturasSeleccionadas)
+                    {
+                        //SOLO AGREGA EL PAGO QUE DEBE TENER CADA FACTURA
+                        AgregaPago vAgregaPago = new AgregaPago(pf);//pedidosDeudaCliente);
+                        if (vAgregaPago.ShowDialog() == DialogResult.OK)
+                        {
+                            decimal cantidadPaga = ConvierteTextoADecimal(vAgregaPago.CantidadPago);
+                            //SE USA INSTEAD OF PAGO PARA NO ALTERAR DEBE
+                            pf.PagoTotal = cantidadPaga;
+                            pf.FechaPago = vAgregaPago.FechaPago;
+                        }
+                        else
+                            return;
+                    }
+
+                    AgregaComplementoPago vComplePago = new AgregaComplementoPago(ConvierteListaPedidosEnFacturas(pedidosfacturasSeleccionadas), 
+                                                                                    cliente,
+                                                                                    pedidosfacturasSeleccionadas.Sum(P => P.Debe), 
+                                                                                    pedidosfacturasSeleccionadas.Sum(P => P.PagoTotal));
+                    if (vComplePago.ShowDialog() == DialogResult.OK)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                        bool pagoAgregado = false;
+
+                        DescuentaTimbre(Program.EmpresaSeleccionada);
+
+                        foreach (EntPedido p in pedidosfacturasSeleccionadas)
+                        {
+                            int pagoId = 0;
+                            pagoAgregado = true;
+                            try
+                            {
+                                //pagoId = AgregarPago(p, p.PagoTotal, vComplePago.FechaPago, vComplePago.FormaPagoId, vComplePago.FormaPago);
+                                pagoId = AgregarPago(p.Id, p.PagoTotal,p.FechaPago);
+                                AumentaPagoPedido(p.Id, p.PagoTotal);
+                            }
+                            catch (Exception ex)
+                            {
+                                MuestraMensajeError("NO SE LOGRO GUARDAR TODOS LOS PAGOS ASIGNADOS A LAS FACTURAS \n\n" + ex.Message, "ERROR AL AGREGAR PAGO");
+                            }
+                            try
+                            {
+                                vComplePago.AgregarComplementoPago(p.FacturaId, DateTime.Today, p.PagoTotal,
+                                                                    vComplePago.FormaPagoId,
+                                                                    vComplePago.ComplementoPago.NumeroFactura, vComplePago.CantidadPago, 
+                                                                    vComplePago.ComplementoPago.UUID, vComplePago.ComplementoPago.Ruta);                                
+                            }
+                            catch (Exception ex)
+                            {
+                                MuestraMensajeError("NO SE LOGRO RELACIONAR TODAS LAS FACTURAS AL COMPLEMNTO \n\n" + ex.Message, "ERROR - COMPLEMENTO SI FUE TIMBRADO");
+                            }
+                        }
+                        
+                        if (pagoAgregado)
+                            MuestraMensaje("¡Pago Agregado!", "CONFIRMACIÓN PAGO");
+                        else
+                            MuestraMensajeError("Error al agregar el Pago", "ERROR PAGO-COMPLEMENTO");
+                        this.Cursor = Cursors.Default;
+                    }
+                }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
@@ -1523,8 +1613,58 @@ namespace Aires.Pantallas
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
+
+        int CuentaCaracteresHastaEspacio(string Descripcion)
+        {
+            if (char.IsWhiteSpace(Descripcion[Descripcion.Length - 1]))
+                return 1;
+            else
+                return 1 + CuentaCaracteresHastaEspacio(Descripcion.Remove(Descripcion.Length - 1));
+        }
+        /// <summary>
+        /// Método recursivo que divide Descripcion en renglones dependiendo de la longitud de la Descripcion 
+        /// y de la LongitudRenglon.
+        /// </summary>
+        /// <param name="Descripcion"></param>
+        /// <param name="Graphic"></param>
+        /// <param name="Font"></param>
+        /// <param name="FontHeight"></param>
+        /// <param name="Pen"></param>
+        /// <param name="StartX"></param>
+        /// <param name="StartY"></param>
+        /// <param name="Offset"></param>
+        /// <param name="LongitudRenglon">Longitud límite del renglon</param>
+        /// <returns></returns>
+        int EscribeRenglonesDescripciones(PdfContentByte Pbover, string TextoEscribe, int x, int y, iTextSharp.text.Font Font)
+        {
+            int caracteresHastaEspacio = 1;
+            int LongitudRenglon = 100;
+            if (TextoEscribe.Length >= LongitudRenglon)
+            {
+                if (char.IsWhiteSpace(TextoEscribe[LongitudRenglon - 1]))                                                 //startX + offsetXmedio + offsetXpequeña //startY + offset
+                    ColumnText.ShowTextAligned(Pbover, Element.ALIGN_LEFT, new Phrase(TextoEscribe.Remove(LongitudRenglon - 1), Font), x, y, 0);
+                //Graphic.DrawString(Descripcion.Remove(LongitudRenglon - 1), Font, new SolidBrush(Color.Black), StartX, StartY);
+                else
+                {
+                    caracteresHastaEspacio = CuentaCaracteresHastaEspacio(TextoEscribe.Remove(LongitudRenglon - caracteresHastaEspacio));
+                    ColumnText.ShowTextAligned(Pbover, Element.ALIGN_LEFT, new Phrase(TextoEscribe.Remove(LongitudRenglon - caracteresHastaEspacio), Font), x, y, 0);
+                    //Graphic.DrawString(TextoEscribe.Remove(LongitudRenglon - caracteresHastaEspacio), Font, new SolidBrush(Color.Black), StartX, StartY);
+                    ////Graphic.DrawString(Descripcion.Remove(LongitudRenglon - 1) + '-', Font, new SolidBrush(Color.Black), StartX, StartY);
+                }
+                //StartY = StartY + FontHeight;
+                y = EscribeRenglonesDescripciones(Pbover,TextoEscribe.Remove(0, LongitudRenglon - caracteresHastaEspacio), x, y - 10, Font);
+            }
+            else
+            {
+                ColumnText.ShowTextAligned(Pbover, Element.ALIGN_LEFT, new Phrase(TextoEscribe, Font), x, y, 0);
+                //Graphic.DrawString(Descripcion, Font, new SolidBrush(Color.Black), StartX, StartY);
+                y += FontHeight;
+            }
+            return y;
+        }
+
         ///CREAR PDF'S
-        void ModificaPDF(string TextoEscribe, string RutaArchivoModifica, string VersionModificada, List<EntProducto> ListaProductos)
+        void ModificaPDF(string TextoEscribe, string RutaArchivoModifica, string VersionModificada, List<EntProducto> ListaProductos, int DistanciaAntesDeObservacion)
         {
             string pathSourcePDF = RutaArchivoModifica;
             //pathSourcePDF = @"C:\TIIM\Facturacion\FacturasPruebas\SERGIO PATRICIO GREE\20171004024601\439DFA02-9679-11E8-9275-D737D49CA409.pdf";
@@ -1579,6 +1719,15 @@ namespace Aires.Pantallas
 
                 //***BUSCACOORDENADAS***
                 string textSearch = "TOTAL";
+                int cant = ListaProductos.Count;
+                int sumaY = 110;
+                int tamañoImagen = 60;
+                if (cant > 1) {
+                    textSearch = "SUBTOTAL"; //"TOTAL";
+                    sumaY = 180;
+                    tamañoImagen = 70;
+                }
+
                 var parser = new PdfReaderContentParser(reader3);
 
                     var strategy = parser.ProcessContent(1, new LocationTextExtractionStrategyWithPosition());
@@ -1587,21 +1736,23 @@ namespace Aires.Pantallas
                     
                 var searchResult = res.Where(p => p.Text.Contains(textSearch)).OrderBy(p => p.Y).Reverse().ToList();
                 //****//
-                int cant = ListaProductos.Count;
                 
-                int x = 120;
-                int y = (Convert.ToInt32(searchResult[1].Y)+118)/cant;
-
-                y = (int)(pageSize.Height - y);
+                int x = 110;
+                int y = (Convert.ToInt32(searchResult[0].Y)+sumaY);///cant;
+                //if (cant > 1)
+                //    y+=180;
+                y = (int)(pageSize.Height - y)-cant;
                 //Creates an image that is the size i need to hide the text i'm interested in removing
-                iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(new Bitmap(600, 40), BaseColor.WHITE);
+                iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(new Bitmap(600, tamañoImagen), BaseColor.WHITE);
                 //Sets the position that the image needs to be placed (ie the location of the text to be removed)
-                image.SetAbsolutePosition(0, y-20);
+                image.SetAbsolutePosition(0, y- DistanciaAntesDeObservacion);
                 //Adds the image to the output pdf
                 stamper.GetOverContent(1).AddImage(image, true);
                 //setting up the X and Y coordinates of the document
-                ColumnText.ShowTextAligned(pbover, Element.ALIGN_CENTER, new Phrase(TextoEscribe, font), x, y, 0);
-                ColumnText.ShowTextAligned(pbover, Element.ALIGN_CENTER, new Phrase("Facturación 3.3 - Tiim Tecnología - www.tiimtecnologia.com -", font), 80, y-20, 0);
+
+                y = EscribeRenglonesDescripciones(pbover,TextoEscribe, x, y, font);
+                //ColumnText.ShowTextAligned(pbover, Element.ALIGN_LEFT, new Phrase(TextoEscribe, font), x, y, 0);
+                ColumnText.ShowTextAligned(pbover, Element.ALIGN_CENTER, new Phrase(" Facturación 3.3 - Tiim Tecnología - www.tiimtecnologia.com -", font), x+50, y-25, 0);
             }
 
         }
@@ -1749,365 +1900,365 @@ namespace Aires.Pantallas
             public string Text { get; set; }
         }
     
-    ////Helper class that stores our rectangle and text
-    //public class RectAndText
-    //{
-    //    public iTextSharp.text.Rectangle Rect;
-    //    public String Text;
-    //    public RectAndText(iTextSharp.text.Rectangle rect, String text)
-    //    {
-    //        this.Rect = rect;
-    //        this.Text = text;
-    //    }
-    //}
-    //public class MyLocationTextExtractionStrategy : LocationTextExtractionStrategy
-    //{
-    //    //Hold each coordinate
-    //    public List<RectAndText> myPoints = new List<RectAndText>();
+        ////Helper class that stores our rectangle and text
+        //public class RectAndText
+        //{
+        //    public iTextSharp.text.Rectangle Rect;
+        //    public String Text;
+        //    public RectAndText(iTextSharp.text.Rectangle rect, String text)
+        //    {
+        //        this.Rect = rect;
+        //        this.Text = text;
+        //    }
+        //}
+        //public class MyLocationTextExtractionStrategy : LocationTextExtractionStrategy
+        //{
+        //    //Hold each coordinate
+        //    public List<RectAndText> myPoints = new List<RectAndText>();
 
-    //    //The string that we're searching for
-    //    public String TextToSearchFor { get; set; }
+        //    //The string that we're searching for
+        //    public String TextToSearchFor { get; set; }
 
-    //    //How to compare strings
-    //    public System.Globalization.CompareOptions CompareOptions { get; set; }
+        //    //How to compare strings
+        //    public System.Globalization.CompareOptions CompareOptions { get; set; }
 
-    //    public MyLocationTextExtractionStrategy(String textToSearchFor, System.Globalization.CompareOptions compareOptions = System.Globalization.CompareOptions.None)
-    //    {
-    //        this.TextToSearchFor = textToSearchFor;
-    //        this.CompareOptions = compareOptions;
-    //    }
+        //    public MyLocationTextExtractionStrategy(String textToSearchFor, System.Globalization.CompareOptions compareOptions = System.Globalization.CompareOptions.None)
+        //    {
+        //        this.TextToSearchFor = textToSearchFor;
+        //        this.CompareOptions = compareOptions;
+        //    }
 
-    //    //Automatically called for each chunk of text in the PDF
-    //    public override void RenderText(TextRenderInfo renderInfo)
-    //    {
-    //        base.RenderText(renderInfo);
+        //    //Automatically called for each chunk of text in the PDF
+        //    public override void RenderText(TextRenderInfo renderInfo)
+        //    {
+        //        base.RenderText(renderInfo);
 
-    //        //See if the current chunk contains the text
-    //        var startPosition = System.Globalization.CultureInfo.CurrentCulture.CompareInfo.IndexOf(renderInfo.GetText(), this.TextToSearchFor, this.CompareOptions);
+        //        //See if the current chunk contains the text
+        //        var startPosition = System.Globalization.CultureInfo.CurrentCulture.CompareInfo.IndexOf(renderInfo.GetText(), this.TextToSearchFor, this.CompareOptions);
 
-    //        //If not found bail
-    //        if (startPosition < 0)
-    //        {
-    //            return;
-    //        }
+        //        //If not found bail
+        //        if (startPosition < 0)
+        //        {
+        //            return;
+        //        }
 
-    //        //Grab the individual characters
-    //        var chars = renderInfo.GetCharacterRenderInfos().Skip(startPosition).Take(this.TextToSearchFor.Length).ToList();
+        //        //Grab the individual characters
+        //        var chars = renderInfo.GetCharacterRenderInfos().Skip(startPosition).Take(this.TextToSearchFor.Length).ToList();
 
-    //        //Grab the first and last character
-    //        var firstChar = chars.First();
-    //        var lastChar = chars.Last();
-
-
-    //        //Get the bounding box for the chunk of text
-    //        var bottomLeft = firstChar.GetDescentLine().GetStartPoint();
-    //        var topRight = lastChar.GetAscentLine().GetEndPoint();
-
-    //        //Create a rectangle from it
-    //        var rect = new iTextSharp.text.Rectangle(
-    //                                                bottomLeft[Vector.I1],
-    //                                                bottomLeft[Vector.I2],
-    //                                                topRight[Vector.I1],
-    //                                                topRight[Vector.I2]
-    //                                                );
-
-    //        //Add this to our main collection
-    //        this.myPoints.Add(new RectAndText(rect, this.TextToSearchFor));
-    //    }
-
-    //}
-
-    //public static class PdfTextExtract
-    //{
-    //    public static string pdfText(string path)
-    //    {
-    //        PdfReader reader = new PdfReader(path);
-    //        string text = string.Empty;
-    //        for (int page = 1; page <= reader.NumberOfPages; page++)
-    //        {
-    //            text += PdfTextExtractor.GetTextFromPage(reader, page);
-    //        }
-    //        reader.Close();
-    //        return text;
-    //    }
-    //}
-
-    ///// <summary>
-    ///// Parses a PDF file and extracts the text from it.
-    ///// </summary>
-    //public class PDFParser
-    //{
-    //    /// BT = Beginning of a text object operator 
-    //    /// ET = End of a text object operator
-    //    /// Td move to the start of next line
-    //    ///  5 Ts = superscript
-    //    /// -5 Ts = subscript
-
-    //    #region Fields
-
-    //    #region _numberOfCharsToKeep
-    //    /// <summary>
-    //    /// The number of characters to keep, when extracting text.
-    //    /// </summary>
-    //    private static int _numberOfCharsToKeep = 15;
-    //    #endregion
-
-    //    #endregion
-
-    //    #region ExtractText
-    //    /// <summary>
-    //    /// Extracts a text from a PDF file.
-    //    /// </summary>
-    //    /// <param name="inFileName">the full path to the pdf file.</param>
-    //    /// <param name="outFileName">the output file name.</param>
-    //    /// <returns>the extracted text</returns>
-    //    public bool ExtractText(string inFileName, string outFileName)
-    //    {
-    //        StreamWriter outFile = null;
-    //        try
-    //        {
-    //            // Create a reader for the given PDF file
-    //            PdfReader reader = new PdfReader(inFileName);
-    //            //outFile = File.CreateText(outFileName);
-    //            outFile = new StreamWriter(outFileName, false, System.Text.Encoding.UTF8);
-
-    //            Console.Write("Processing: ");
-
-    //            int totalLen = 68;
-    //            float charUnit = ((float)totalLen) / (float)reader.NumberOfPages;
-    //            int totalWritten = 0;
-    //            float curUnit = 0;
-
-    //            for (int page = 1; page <= reader.NumberOfPages; page++)
-    //            {
-    //                outFile.Write(ExtractTextFromPDFBytes(reader.GetPageContent(page)) + " ");
-
-    //                // Write the progress.
-    //                if (charUnit >= 1.0f)
-    //                {
-    //                    for (int i = 0; i < (int)charUnit; i++)
-    //                    {
-    //                        Console.Write("#");
-    //                        totalWritten++;
-    //                    }
-    //                }
-    //                else
-    //                {
-    //                    curUnit += charUnit;
-    //                    if (curUnit >= 1.0f)
-    //                    {
-    //                        for (int i = 0; i < (int)curUnit; i++)
-    //                        {
-    //                            Console.Write("#");
-    //                            totalWritten++;
-    //                        }
-    //                        curUnit = 0;
-    //                    }
-
-    //                }
-    //            }
-
-    //            if (totalWritten < totalLen)
-    //            {
-    //                for (int i = 0; i < (totalLen - totalWritten); i++)
-    //                {
-    //                    Console.Write("#");
-    //                }
-    //            }
-    //            return true;
-    //        }
-    //        catch
-    //        {
-    //            return false;
-    //        }
-    //        finally
-    //        {
-    //            if (outFile != null) outFile.Close();
-    //        }
-    //    }
-    //    #endregion
-
-    //    #region ExtractTextFromPDFBytes
-    //    /// <summary>
-    //    /// This method processes an uncompressed Adobe (text) object 
-    //    /// and extracts text.
-    //    /// </summary>
-    //    /// <param name="input">uncompressed</param>
-    //    /// <returns></returns>
-    //    public string ExtractTextFromPDFBytes(byte[] input)
-    //    {
-    //        if (input == null || input.Length == 0) return "";
-
-    //        try
-    //        {
-    //            string resultString = "";
-
-    //            // Flag showing if we are we currently inside a text object
-    //            bool inTextObject = false;
-
-    //            // Flag showing if the next character is literal 
-    //            // e.g. '\\' to get a '\' character or '\(' to get '('
-    //            bool nextLiteral = false;
-
-    //            // () Bracket nesting level. Text appears inside ()
-    //            int bracketDepth = 0;
-
-    //            // Keep previous chars to get extract numbers etc.:
-    //            char[] previousCharacters = new char[_numberOfCharsToKeep];
-    //            for (int j = 0; j < _numberOfCharsToKeep; j++) previousCharacters[j] = ' ';
+        //        //Grab the first and last character
+        //        var firstChar = chars.First();
+        //        var lastChar = chars.Last();
 
 
-    //            for (int i = 0; i < input.Length; i++)
-    //            {
-    //                char c = (char)input[i];
-    //                if (input[i] == 213)
-    //                    c = "'".ToCharArray()[0];
+        //        //Get the bounding box for the chunk of text
+        //        var bottomLeft = firstChar.GetDescentLine().GetStartPoint();
+        //        var topRight = lastChar.GetAscentLine().GetEndPoint();
 
-    //                if (inTextObject)
-    //                {
-    //                    // Position the text
-    //                    if (bracketDepth == 0)
-    //                    {
-    //                        if (CheckToken(new string[] { "TD", "Td" }, previousCharacters))
-    //                        {
-    //                            resultString += "\n\r";
-    //                        }
-    //                        else
-    //                        {
-    //                            if (CheckToken(new string[] { "'", "T*", "\"" }, previousCharacters))
-    //                            {
-    //                                resultString += "\n";
-    //                            }
-    //                            else
-    //                            {
-    //                                if (CheckToken(new string[] { "Tj" }, previousCharacters))
-    //                                {
-    //                                    resultString += " ";
-    //                                }
-    //                            }
-    //                        }
-    //                    }
+        //        //Create a rectangle from it
+        //        var rect = new iTextSharp.text.Rectangle(
+        //                                                bottomLeft[Vector.I1],
+        //                                                bottomLeft[Vector.I2],
+        //                                                topRight[Vector.I1],
+        //                                                topRight[Vector.I2]
+        //                                                );
 
-    //                    // End of a text object, also go to a new line.
-    //                    if (bracketDepth == 0 &&
-    //                        CheckToken(new string[] { "ET" }, previousCharacters))
-    //                    {
+        //        //Add this to our main collection
+        //        this.myPoints.Add(new RectAndText(rect, this.TextToSearchFor));
+        //    }
 
-    //                        inTextObject = false;
-    //                        resultString += " ";
-    //                    }
-    //                    else
-    //                    {
-    //                        // Start outputting text
-    //                        if ((c == '(') && (bracketDepth == 0) && (!nextLiteral))
-    //                        {
-    //                            bracketDepth = 1;
-    //                        }
-    //                        else
-    //                        {
-    //                            // Stop outputting text
-    //                            if ((c == ')') && (bracketDepth == 1) && (!nextLiteral))
-    //                            {
-    //                                bracketDepth = 0;
-    //                            }
-    //                            else
-    //                            {
-    //                                // Just a normal text character:
-    //                                if (bracketDepth == 1)
-    //                                {
-    //                                    // Only print out next character no matter what. 
-    //                                    // Do not interpret.
-    //                                    if (c == '\\' && !nextLiteral)
-    //                                    {
-    //                                        resultString += c.ToString();
-    //                                        nextLiteral = true;
-    //                                    }
-    //                                    else
-    //                                    {
-    //                                        if (((c >= ' ') && (c <= '~')) ||
-    //                                            ((c >= 128) && (c < 255)))
-    //                                        {
-    //                                            resultString += c.ToString();
-    //                                        }
+        //}
 
-    //                                        nextLiteral = false;
-    //                                    }
-    //                                }
-    //                            }
-    //                        }
-    //                    }
-    //                }
+        //public static class PdfTextExtract
+        //{
+        //    public static string pdfText(string path)
+        //    {
+        //        PdfReader reader = new PdfReader(path);
+        //        string text = string.Empty;
+        //        for (int page = 1; page <= reader.NumberOfPages; page++)
+        //        {
+        //            text += PdfTextExtractor.GetTextFromPage(reader, page);
+        //        }
+        //        reader.Close();
+        //        return text;
+        //    }
+        //}
 
-    //                // Store the recent characters for 
-    //                // when we have to go back for a checking
-    //                for (int j = 0; j < _numberOfCharsToKeep - 1; j++)
-    //                {
-    //                    previousCharacters[j] = previousCharacters[j + 1];
-    //                }
-    //                previousCharacters[_numberOfCharsToKeep - 1] = c;
+        ///// <summary>
+        ///// Parses a PDF file and extracts the text from it.
+        ///// </summary>
+        //public class PDFParser
+        //{
+        //    /// BT = Beginning of a text object operator 
+        //    /// ET = End of a text object operator
+        //    /// Td move to the start of next line
+        //    ///  5 Ts = superscript
+        //    /// -5 Ts = subscript
 
-    //                // Start of a text object
-    //                if (!inTextObject && CheckToken(new string[] { "BT" }, previousCharacters))
-    //                {
-    //                    inTextObject = true;
-    //                }
-    //            }
+        //    #region Fields
 
-    //            return CleanupContent(resultString);
-    //        }
-    //        catch
-    //        {
-    //            return "";
-    //        }
-    //    }
+        //    #region _numberOfCharsToKeep
+        //    /// <summary>
+        //    /// The number of characters to keep, when extracting text.
+        //    /// </summary>
+        //    private static int _numberOfCharsToKeep = 15;
+        //    #endregion
 
-    //    private string CleanupContent(string text)
-    //    {
-    //        string[] patterns = { @"\\\(", @"\\\)", @"\\226", @"\\222", @"\\223", @"\\224", @"\\340", @"\\342", @"\\344", @"\\300", @"\\302", @"\\304", @"\\351", @"\\350", @"\\352", @"\\353", @"\\311", @"\\310", @"\\312", @"\\313", @"\\362", @"\\364", @"\\366", @"\\322", @"\\324", @"\\326", @"\\354", @"\\356", @"\\357", @"\\314", @"\\316", @"\\317", @"\\347", @"\\307", @"\\371", @"\\373", @"\\374", @"\\331", @"\\333", @"\\334", @"\\256", @"\\231", @"\\253", @"\\273", @"\\251", @"\\221" };
-    //        string[] replace = { "(", ")", "-", "'", "\"", "\"", "à", "â", "ä", "À", "Â", "Ä", "é", "è", "ê", "ë", "É", "È", "Ê", "Ë", "ò", "ô", "ö", "Ò", "Ô", "Ö", "ì", "î", "ï", "Ì", "Î", "Ï", "ç", "Ç", "ù", "û", "ü", "Ù", "Û", "Ü", "®", "™", "«", "»", "©", "'" };
+        //    #endregion
 
-    //        for (int i = 0; i < patterns.Length; i++)
-    //        {
-    //            string regExPattern = patterns[i];
-    //            Regex regex = new Regex(regExPattern, RegexOptions.IgnoreCase);
-    //            text = regex.Replace(text, replace[i]);
-    //        }
+        //    #region ExtractText
+        //    /// <summary>
+        //    /// Extracts a text from a PDF file.
+        //    /// </summary>
+        //    /// <param name="inFileName">the full path to the pdf file.</param>
+        //    /// <param name="outFileName">the output file name.</param>
+        //    /// <returns>the extracted text</returns>
+        //    public bool ExtractText(string inFileName, string outFileName)
+        //    {
+        //        StreamWriter outFile = null;
+        //        try
+        //        {
+        //            // Create a reader for the given PDF file
+        //            PdfReader reader = new PdfReader(inFileName);
+        //            //outFile = File.CreateText(outFileName);
+        //            outFile = new StreamWriter(outFileName, false, System.Text.Encoding.UTF8);
 
-    //        return text;
-    //    }
+        //            Console.Write("Processing: ");
 
-    //    #endregion
+        //            int totalLen = 68;
+        //            float charUnit = ((float)totalLen) / (float)reader.NumberOfPages;
+        //            int totalWritten = 0;
+        //            float curUnit = 0;
 
-    //    #region CheckToken
-    //    /// <summary>
-    //    /// Check if a certain 2 character token just came along (e.g. BT)
-    //    /// </summary>
-    //    /// <param name="tokens">the searched token</param>
-    //    /// <param name="recent">the recent character array</param>
-    //    /// <returns></returns>
-    //    private bool CheckToken(string[] tokens, char[] recent)
-    //    {
-    //        foreach (string token in tokens)
-    //        {
-    //            if ((recent[_numberOfCharsToKeep - 3] == token[0]) &&
-    //                (recent[_numberOfCharsToKeep - 2] == token[1]) &&
-    //                ((recent[_numberOfCharsToKeep - 1] == ' ') ||
-    //                (recent[_numberOfCharsToKeep - 1] == 0x0d) ||
-    //                (recent[_numberOfCharsToKeep - 1] == 0x0a)) &&
-    //                ((recent[_numberOfCharsToKeep - 4] == ' ') ||
-    //                (recent[_numberOfCharsToKeep - 4] == 0x0d) ||
-    //                (recent[_numberOfCharsToKeep - 4] == 0x0a))
-    //                )
-    //            {
-    //                return true;
-    //            }
-    //        }
-    //        return false;
-    //    }
-    //    #endregion
-    //}
+        //            for (int page = 1; page <= reader.NumberOfPages; page++)
+        //            {
+        //                outFile.Write(ExtractTextFromPDFBytes(reader.GetPageContent(page)) + " ");
 
-    private void btnReimprimeObservaciones_Click(object sender, EventArgs e)
+        //                // Write the progress.
+        //                if (charUnit >= 1.0f)
+        //                {
+        //                    for (int i = 0; i < (int)charUnit; i++)
+        //                    {
+        //                        Console.Write("#");
+        //                        totalWritten++;
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    curUnit += charUnit;
+        //                    if (curUnit >= 1.0f)
+        //                    {
+        //                        for (int i = 0; i < (int)curUnit; i++)
+        //                        {
+        //                            Console.Write("#");
+        //                            totalWritten++;
+        //                        }
+        //                        curUnit = 0;
+        //                    }
+
+        //                }
+        //            }
+
+        //            if (totalWritten < totalLen)
+        //            {
+        //                for (int i = 0; i < (totalLen - totalWritten); i++)
+        //                {
+        //                    Console.Write("#");
+        //                }
+        //            }
+        //            return true;
+        //        }
+        //        catch
+        //        {
+        //            return false;
+        //        }
+        //        finally
+        //        {
+        //            if (outFile != null) outFile.Close();
+        //        }
+        //    }
+        //    #endregion
+
+        //    #region ExtractTextFromPDFBytes
+        //    /// <summary>
+        //    /// This method processes an uncompressed Adobe (text) object 
+        //    /// and extracts text.
+        //    /// </summary>
+        //    /// <param name="input">uncompressed</param>
+        //    /// <returns></returns>
+        //    public string ExtractTextFromPDFBytes(byte[] input)
+        //    {
+        //        if (input == null || input.Length == 0) return "";
+
+        //        try
+        //        {
+        //            string resultString = "";
+
+        //            // Flag showing if we are we currently inside a text object
+        //            bool inTextObject = false;
+
+        //            // Flag showing if the next character is literal 
+        //            // e.g. '\\' to get a '\' character or '\(' to get '('
+        //            bool nextLiteral = false;
+
+        //            // () Bracket nesting level. Text appears inside ()
+        //            int bracketDepth = 0;
+
+        //            // Keep previous chars to get extract numbers etc.:
+        //            char[] previousCharacters = new char[_numberOfCharsToKeep];
+        //            for (int j = 0; j < _numberOfCharsToKeep; j++) previousCharacters[j] = ' ';
+
+
+        //            for (int i = 0; i < input.Length; i++)
+        //            {
+        //                char c = (char)input[i];
+        //                if (input[i] == 213)
+        //                    c = "'".ToCharArray()[0];
+
+        //                if (inTextObject)
+        //                {
+        //                    // Position the text
+        //                    if (bracketDepth == 0)
+        //                    {
+        //                        if (CheckToken(new string[] { "TD", "Td" }, previousCharacters))
+        //                        {
+        //                            resultString += "\n\r";
+        //                        }
+        //                        else
+        //                        {
+        //                            if (CheckToken(new string[] { "'", "T*", "\"" }, previousCharacters))
+        //                            {
+        //                                resultString += "\n";
+        //                            }
+        //                            else
+        //                            {
+        //                                if (CheckToken(new string[] { "Tj" }, previousCharacters))
+        //                                {
+        //                                    resultString += " ";
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+
+        //                    // End of a text object, also go to a new line.
+        //                    if (bracketDepth == 0 &&
+        //                        CheckToken(new string[] { "ET" }, previousCharacters))
+        //                    {
+
+        //                        inTextObject = false;
+        //                        resultString += " ";
+        //                    }
+        //                    else
+        //                    {
+        //                        // Start outputting text
+        //                        if ((c == '(') && (bracketDepth == 0) && (!nextLiteral))
+        //                        {
+        //                            bracketDepth = 1;
+        //                        }
+        //                        else
+        //                        {
+        //                            // Stop outputting text
+        //                            if ((c == ')') && (bracketDepth == 1) && (!nextLiteral))
+        //                            {
+        //                                bracketDepth = 0;
+        //                            }
+        //                            else
+        //                            {
+        //                                // Just a normal text character:
+        //                                if (bracketDepth == 1)
+        //                                {
+        //                                    // Only print out next character no matter what. 
+        //                                    // Do not interpret.
+        //                                    if (c == '\\' && !nextLiteral)
+        //                                    {
+        //                                        resultString += c.ToString();
+        //                                        nextLiteral = true;
+        //                                    }
+        //                                    else
+        //                                    {
+        //                                        if (((c >= ' ') && (c <= '~')) ||
+        //                                            ((c >= 128) && (c < 255)))
+        //                                        {
+        //                                            resultString += c.ToString();
+        //                                        }
+
+        //                                        nextLiteral = false;
+        //                                    }
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                }
+
+        //                // Store the recent characters for 
+        //                // when we have to go back for a checking
+        //                for (int j = 0; j < _numberOfCharsToKeep - 1; j++)
+        //                {
+        //                    previousCharacters[j] = previousCharacters[j + 1];
+        //                }
+        //                previousCharacters[_numberOfCharsToKeep - 1] = c;
+
+        //                // Start of a text object
+        //                if (!inTextObject && CheckToken(new string[] { "BT" }, previousCharacters))
+        //                {
+        //                    inTextObject = true;
+        //                }
+        //            }
+
+        //            return CleanupContent(resultString);
+        //        }
+        //        catch
+        //        {
+        //            return "";
+        //        }
+        //    }
+
+        //    private string CleanupContent(string text)
+        //    {
+        //        string[] patterns = { @"\\\(", @"\\\)", @"\\226", @"\\222", @"\\223", @"\\224", @"\\340", @"\\342", @"\\344", @"\\300", @"\\302", @"\\304", @"\\351", @"\\350", @"\\352", @"\\353", @"\\311", @"\\310", @"\\312", @"\\313", @"\\362", @"\\364", @"\\366", @"\\322", @"\\324", @"\\326", @"\\354", @"\\356", @"\\357", @"\\314", @"\\316", @"\\317", @"\\347", @"\\307", @"\\371", @"\\373", @"\\374", @"\\331", @"\\333", @"\\334", @"\\256", @"\\231", @"\\253", @"\\273", @"\\251", @"\\221" };
+        //        string[] replace = { "(", ")", "-", "'", "\"", "\"", "à", "â", "ä", "À", "Â", "Ä", "é", "è", "ê", "ë", "É", "È", "Ê", "Ë", "ò", "ô", "ö", "Ò", "Ô", "Ö", "ì", "î", "ï", "Ì", "Î", "Ï", "ç", "Ç", "ù", "û", "ü", "Ù", "Û", "Ü", "®", "™", "«", "»", "©", "'" };
+
+        //        for (int i = 0; i < patterns.Length; i++)
+        //        {
+        //            string regExPattern = patterns[i];
+        //            Regex regex = new Regex(regExPattern, RegexOptions.IgnoreCase);
+        //            text = regex.Replace(text, replace[i]);
+        //        }
+
+        //        return text;
+        //    }
+
+        //    #endregion
+
+        //    #region CheckToken
+        //    /// <summary>
+        //    /// Check if a certain 2 character token just came along (e.g. BT)
+        //    /// </summary>
+        //    /// <param name="tokens">the searched token</param>
+        //    /// <param name="recent">the recent character array</param>
+        //    /// <returns></returns>
+        //    private bool CheckToken(string[] tokens, char[] recent)
+        //    {
+        //        foreach (string token in tokens)
+        //        {
+        //            if ((recent[_numberOfCharsToKeep - 3] == token[0]) &&
+        //                (recent[_numberOfCharsToKeep - 2] == token[1]) &&
+        //                ((recent[_numberOfCharsToKeep - 1] == ' ') ||
+        //                (recent[_numberOfCharsToKeep - 1] == 0x0d) ||
+        //                (recent[_numberOfCharsToKeep - 1] == 0x0a)) &&
+        //                ((recent[_numberOfCharsToKeep - 4] == ' ') ||
+        //                (recent[_numberOfCharsToKeep - 4] == 0x0d) ||
+        //                (recent[_numberOfCharsToKeep - 4] == 0x0a))
+        //                )
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //        return false;
+        //    }
+        //    #endregion
+        //}
+
+        private void btnReimprimeObservaciones_Click(object sender, EventArgs e)
         {
             try
             {
@@ -2115,17 +2266,54 @@ namespace Aires.Pantallas
                 if (!pedidoSeleccionado.Facturado)
                     throw new Exception("Pedido Sin Facturar");
 
-                AgregaObservacionFactura vObserv = new AgregaObservacionFactura();
+                AgregaObservacion vObserv = new AgregaObservacion();
                 if (vObserv.ShowDialog() == DialogResult.OK)
                 {
-                    string rutaArchivo = pedidoSeleccionado.RutaFactura + "\\" + EncuentraArchivo(pedidoSeleccionado.RutaFactura, ".pdf");
+                    string rutaArchivo = pedidoSeleccionado.RutaFactura + "\\" + EncuentraArchivoOriginal(pedidoSeleccionado.RutaFactura, ".pdf");
                     //string rutaArchivo = @"C:\TIIM\Facturacion\FacturasPruebas\SERGIO PATRICIO GREE\20171004024601\439DFA02-9679-11E8-9275-D737D49CA409.pdf";
                     int versionArchivo = CuentaArchivos(pedidoSeleccionado.RutaFactura, ".pdf");
-                    ModificaPDF(vObserv.Observacion, rutaArchivo, versionArchivo.ToString(), new BusProductos().ObtieneProductosPorPedido(pedidoSeleccionado.Id));
+                    ModificaPDF(vObserv.Observacion.Replace("˜N", "Ñ").Replace("˜n", "ñ"), rutaArchivo, versionArchivo.ToString(), 
+                                new BusProductos().ObtieneProductosPorPedido(pedidoSeleccionado.Id), 40);
                     MuestraArchivo(rutaArchivo.Remove(rutaArchivo.Length - 4) + "-OBSERVACION" + versionArchivo.ToString() + ".pdf", true);
                 }
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+    
+        private void btnReimprimeObservaciones2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EntPedido pedidoSeleccionado = ObtienePedidoFromGV(gvPedidos);
+                if (!pedidoSeleccionado.Facturado)
+                    throw new Exception("Pedido Sin Facturar");
+
+                AgregaObservacion vObserv = new AgregaObservacion();
+                if (vObserv.ShowDialog() == DialogResult.OK)
+                {
+                    string rutaArchivo = pedidoSeleccionado.RutaFactura + "\\" + EncuentraArchivoOriginal(pedidoSeleccionado.RutaFactura, ".pdf");
+                    //string rutaArchivo = @"C:\TIIM\Facturacion\FacturasPruebas\SERGIO PATRICIO GREE\20171004024601\439DFA02-9679-11E8-9275-D737D49CA409.pdf";
+                    int versionArchivo = CuentaArchivos(pedidoSeleccionado.RutaFactura, ".pdf");
+                    ModificaPDF(vObserv.Observacion.Replace("˜N", "Ñ").Replace("˜n", "ñ"), rutaArchivo, versionArchivo.ToString(), 
+                                new BusProductos().ObtieneProductosPorPedido(pedidoSeleccionado.Id),60);
+                    MuestraArchivo(rutaArchivo.Remove(rutaArchivo.Length - 4) + "-OBSERVACION" + versionArchivo.ToString() + ".pdf", true);
+                }
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
+        }
+
+        private void btnVerComplemento_Click(object sender, EventArgs e)
+        {
+            EntPedido pedidoSeleccionado = ObtienePedidoFromGV(gvPedidos);
+            List<EntFactura> facturasComplementos = new BusFacturas().ObtieneComplementos(pedidoSeleccionado.FacturaId, pedidoSeleccionado.Factura, pedidoSeleccionado.Total);
+
+            SeleccionaComplemento vSelFactura = new SeleccionaComplemento(pedidoSeleccionado);
+            vSelFactura.FacturaId = pedidoSeleccionado.FacturaId;
+            vSelFactura.ListaFacturasComplemento = facturasComplementos;
+            if (vSelFactura.ShowDialog() == DialogResult.OK)
+            {
+                MuestraArchivo(vSelFactura.FacturaComplementoSeleccionada.Ruta);
+            }
         }
     }
 }

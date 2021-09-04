@@ -27,6 +27,22 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+        public DataTable obtieneFacturasPorComplemento(string Complemento)
+        {
+            try
+            {
+                com = new SqlCommand("[selObtieneFaturasPorComplementosPago]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("Complemento", Complemento);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
 
         public DataTable obtieneUltimaFactura()
         {
@@ -55,6 +71,52 @@ namespace AiresDatos
                 da.Fill(dt);
                 //if (dt.Rows.Count == 0)
                 //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public DataTable obtieneComplementos(int FacturaId)
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneComplementosPagoPorFactura", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("FacturaId", FacturaId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneUltimoComplemento()
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneUltimoComplementoPago", con);
+                com.CommandType = CommandType.StoredProcedure;
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneNumeroParcialidades(int FacturaId)
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneNumeroPagosPorFactura", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("FacturaId", FacturaId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
                 return dt;
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
@@ -94,6 +156,37 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
         }
+
+        public int agregaComplementoPago(int FacturaId, DateTime Fecha, decimal PagoFactura,
+                                        int TipoComprobanteId, int FormaPagoId, string NumeroComplemento, decimal Pago, string UUID, string Ruta)
+        {
+            try
+            {
+                int Id = 0;
+
+                com = new SqlCommand("insAgregaComplementoPagoFactura", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("FacturaId", FacturaId);
+                com.Parameters.AddWithValue("PagoFactura", PagoFactura);
+                com.Parameters.AddWithValue("TipoComprobanteId", TipoComprobanteId);
+                com.Parameters.AddWithValue("FormaPagoId", FormaPagoId);
+                com.Parameters.AddWithValue("NumeroComplemento", NumeroComplemento);
+                com.Parameters.AddWithValue("Pago", Pago);
+                com.Parameters.AddWithValue("Fecha", Fecha);
+                com.Parameters.AddWithValue("UUID", UUID);
+                com.Parameters.AddWithValue("Ruta", Ruta);
+                SqlParameter parm = new SqlParameter("Id", Id);
+                parm.Direction = ParameterDirection.InputOutput;
+                com.Parameters.Add(parm);
+                con.Open();
+                com.ExecuteNonQuery();
+
+                return Convert.ToInt32(com.Parameters["Id"].Value);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
+
         public void actualizaEstatusFacturaPedido(int FacturaId, int EstatusId)
         {
             try
@@ -102,6 +195,20 @@ namespace AiresDatos
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("FacturaId", FacturaId);
                 com.Parameters.AddWithValue("EstatusId", EstatusId);
+                con.Open();
+                com.ExecuteNonQuery();
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
+        public void actualizaEstatusComplementoPago(int ComplementoPagoId, bool Estatus)
+        {
+            try
+            {
+                com = new SqlCommand("updActualizaEstatusComplementoPago", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("Complemento", ComplementoPagoId.ToString());
+                com.Parameters.AddWithValue("Estatus", Estatus);
                 con.Open();
                 com.ExecuteNonQuery();
             }

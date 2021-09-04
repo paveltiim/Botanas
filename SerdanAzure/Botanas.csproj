@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Aires</RootNamespace>
-    <AssemblyName>Serdan</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AssemblyName>Botanas</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LOGO_T_sin_fondo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp">
       <HintPath>..\Aires\bin\Debug\itextsharp.dll</HintPath>
@@ -39,10 +43,28 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -99,11 +121,11 @@
     <Compile Include="Pantallas\AgregaMaterialesProducto.designer.cs">
       <DependentUpon>AgregaMaterialesProducto.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pantallas\AgregaObservacionFactura.cs">
+    <Compile Include="Pantallas\AgregaObservacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pantallas\AgregaObservacionFactura.designer.cs">
-      <DependentUpon>AgregaObservacionFactura.cs</DependentUpon>
+    <Compile Include="Pantallas\AgregaObservacion.designer.cs">
+      <DependentUpon>AgregaObservacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\AgregaPago.cs">
       <SubType>Form</SubType>
@@ -122,6 +144,24 @@
     </Compile>
     <Compile Include="Pantallas\AgregaPagoGasto.designer.cs">
       <DependentUpon>AgregaPagoGasto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Salidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Salidas.designer.cs">
+      <DependentUpon>Salidas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\EstadoDeCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\EstadoDeCuenta.designer.cs">
+      <DependentUpon>EstadoDeCuenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\ClientesCredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\ClientesCredito.designer.cs">
+      <DependentUpon>ClientesCredito.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\Clientes.cs">
       <SubType>Form</SubType>
@@ -177,11 +217,23 @@
     <Compile Include="Pantallas\Menu.designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\MuestraPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\MuestraPagos.designer.cs">
+      <DependentUpon>MuestraPagos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pantallas\MuestraIngreso.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pantallas\MuestraIngreso.designer.cs">
       <DependentUpon>MuestraIngreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\MuestraProductosDetalleFueraDeServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\MuestraProductosDetalleFueraDeServicio.designer.cs">
+      <DependentUpon>MuestraProductosDetalleFueraDeServicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\MuestraProductosDetalle.cs">
       <SubType>Form</SubType>
@@ -231,11 +283,29 @@
     <Compile Include="Pantallas\SeleccionaEmpresa.designer.cs">
       <DependentUpon>SeleccionaEmpresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\SeleccionaComplemento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaComplemento.designer.cs">
+      <DependentUpon>SeleccionaComplemento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pantallas\SeleccionaFactura.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pantallas\SeleccionaFactura.designer.cs">
       <DependentUpon>SeleccionaFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaFacturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaFacturas.designer.cs">
+      <DependentUpon>SeleccionaFacturas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaFacturaProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\SeleccionaFacturaProveedor.designer.cs">
+      <DependentUpon>SeleccionaFacturaProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\SeleccionaFacturaPedidos.cs">
       <SubType>Form</SubType>
@@ -249,11 +319,11 @@
     <Compile Include="Pantallas\SeleccionaIngreso.designer.cs">
       <DependentUpon>SeleccionaIngreso.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pantallas\Sincronizar.cs">
+    <Compile Include="Pantallas\Entradas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pantallas\Sincronizar.designer.cs">
-      <DependentUpon>Sincronizar.cs</DependentUpon>
+    <Compile Include="Pantallas\Entradas.designer.cs">
+      <DependentUpon>Entradas.cs</DependentUpon>
     </Compile>
     <Compile Include="Pantallas\Ventas.cs">
       <SubType>Form</SubType>
@@ -263,11 +333,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="FormBase.resx">
       <DependentUpon>FormBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\ActualizaProducto.resx">
       <DependentUpon>ActualizaProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\AgregaComplementoPago.resx">
+      <DependentUpon>AgregaComplementoPago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\AgregaDeposito.resx">
       <DependentUpon>AgregaDeposito.cs</DependentUpon>
@@ -284,8 +363,8 @@
     <EmbeddedResource Include="Pantallas\AgregaMaterialesProducto.resx">
       <DependentUpon>AgregaMaterialesProducto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\AgregaObservacionFactura.resx">
-      <DependentUpon>AgregaObservacionFactura.cs</DependentUpon>
+    <EmbeddedResource Include="Pantallas\AgregaObservacion.resx">
+      <DependentUpon>AgregaObservacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\AgregaPago.resx">
       <DependentUpon>AgregaPago.cs</DependentUpon>
@@ -295,6 +374,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\AgregaPagoGasto.resx">
       <DependentUpon>AgregaPagoGasto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Salidas.resx">
+      <DependentUpon>Salidas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\EstadoDeCuenta.resx">
+      <DependentUpon>EstadoDeCuenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\ClientesCredito.resx">
+      <DependentUpon>ClientesCredito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Clientes.resx">
       <DependentUpon>Clientes.cs</DependentUpon>
@@ -323,8 +411,14 @@
     <EmbeddedResource Include="Pantallas\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\MuestraPagos.resx">
+      <DependentUpon>MuestraPagos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\MuestraIngreso.resx">
       <DependentUpon>MuestraIngreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\MuestraProductosDetalleFueraDeServicio.resx">
+      <DependentUpon>MuestraProductosDetalleFueraDeServicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\MuestraProductosDetalle.resx">
       <DependentUpon>MuestraProductosDetalle.cs</DependentUpon>
@@ -350,8 +444,17 @@
     <EmbeddedResource Include="Pantallas\SeleccionaEmpresa.resx">
       <DependentUpon>SeleccionaEmpresa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\SeleccionaComplemento.resx">
+      <DependentUpon>SeleccionaComplemento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\SeleccionaFactura.resx">
       <DependentUpon>SeleccionaFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\SeleccionaFacturas.resx">
+      <DependentUpon>SeleccionaFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\SeleccionaFacturaProveedor.resx">
+      <DependentUpon>SeleccionaFacturaProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\SeleccionaFacturaPedidos.resx">
       <DependentUpon>SeleccionaFacturaPedidos.cs</DependentUpon>
@@ -359,22 +462,18 @@
     <EmbeddedResource Include="Pantallas\SeleccionaIngreso.resx">
       <DependentUpon>SeleccionaIngreso.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\Sincronizar.resx">
-      <DependentUpon>Sincronizar.cs</DependentUpon>
+    <EmbeddedResource Include="Pantallas\Entradas.resx">
+      <DependentUpon>Entradas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Ventas.resx">
       <DependentUpon>Ventas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <EmbeddedResource Include="Reportes\rptComprasVentasNeue.rdlc" />
     <EmbeddedResource Include="Reportes\rptCompras.rdlc" />
     <EmbeddedResource Include="Reportes\rptComprasPorProveedor.rdlc" />
     <EmbeddedResource Include="Reportes\rptDepositos.rdlc" />
@@ -386,19 +485,27 @@
     <EmbeddedResource Include="Reportes\rptEstadoDeCuentaCliente.rdlc" />
     <EmbeddedResource Include="Reportes\rptGraficaVentasClientes.rdlc" />
     <EmbeddedResource Include="Reportes\rptGraficaVentasProductos.rdlc" />
-    <EmbeddedResource Include="Reportes\rptHistoricoProductosDetallePorCantidad.rdlc" />
+    <EmbeddedResource Include="Reportes\rptHistoricoProductosDetallePorCantidad.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptHistoricoProductosDetallePorPrecioCosto.rdlc" />
     <EmbeddedResource Include="Reportes\rptHistoricoProductosPorCantidad.rdlc" />
     <EmbeddedResource Include="Reportes\rptHistoricoProductosPorPrecioCosto.rdlc" />
-    <EmbeddedResource Include="Reportes\rptInventarioDetalle.rdlc" />
-    <EmbeddedResource Include="Reportes\rptInventarioProducto.rdlc" />
+    <EmbeddedResource Include="Reportes\rptInventarioDetalle.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rptInventarioProducto.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptNotasCreditoClientes.rdlc" />
     <EmbeddedResource Include="Reportes\rptNotasCreditoProveedores.rdlc" />
     <EmbeddedResource Include="Reportes\rptPagosClientes.rdlc" />
     <EmbeddedResource Include="Reportes\rptPagosClientesNeue.rdlc" />
     <EmbeddedResource Include="Reportes\rptPagosProveedores.rdlc" />
     <EmbeddedResource Include="Reportes\rptProductosHastaFecha.rdlc" />
-    <EmbeddedResource Include="Reportes\rptProductosHastaFecha2.rdlc" />
+    <EmbeddedResource Include="Reportes\rptProductosHastaFecha2.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptVentas.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -406,7 +513,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptVentasPorProducto.rdlc" />
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\AiresEntidades.EntCliente.datasource" />
+    <None Include="Properties\DataSources\AiresEntidades.EntPedido.datasource" />
+    <None Include="Properties\DataSources\AiresEntidades.EntProducto.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -423,17 +533,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AiresEntidades\SerdanEntidades.csproj">
+    <ProjectReference Include="..\AiresEntidades\BotanasEntidades.csproj">
       <Project>{5308d57c-05c8-495a-b18b-51a361a786e1}</Project>
-      <Name>SerdanEntidades</Name>
+      <Name>BotanasEntidades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AiresNegocio\SerdanNegocio.csproj">
+    <ProjectReference Include="..\AiresNegocio\BotanasNegocio.csproj">
       <Project>{b0b0069a-c1cd-419b-a505-db0400956583}</Project>
-      <Name>SerdanNegocio</Name>
+      <Name>BotanasNegocio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AiresUtilerias\SerdanUtilerias.csproj">
+    <ProjectReference Include="..\AiresUtilerias\BotanasUtilerias.csproj">
       <Project>{02a506c1-5b69-48ef-97a0-3cb0fd718b91}</Project>
-      <Name>SerdanUtilerias</Name>
+      <Name>BotanasUtilerias</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -579,6 +689,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paper-add %28Chico%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LOGO_T_sin_fondo.ico" />
+    <None Include="Resources\Warning.png" />
+    <None Include="Resources\Inventario2chico.jpg" />
+    <None Include="Resources\MembreteBlanco.jpg" />
+    <None Include="Resources\Cancelar.png" />
+    <None Include="Resources\Aceptar.png" />
+    <None Include="Resources\Eliminar.png" />
+    <None Include="Resources\Editar.png" />
+    <None Include="Resources\Productos.png" />
+    <None Include="Resources\ProductosSinFondo.png" />
+    <None Include="Resources\EntradasSinFondo.png" />
+    <None Include="Resources\EntradasSinFondo1.png" />
+    <None Include="Resources\Refrescar.png" />
+    <None Include="Resources\LOGO.jpg" />
+    <None Include="Resources\EntradasNeueSinFondo.png" />
+    <None Include="Resources\ProductosNeueSinFondo.png" />
+    <None Include="Resources\SalidasSinFondo.png" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Pagare.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

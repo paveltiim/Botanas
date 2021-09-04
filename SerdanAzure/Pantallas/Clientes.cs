@@ -37,7 +37,7 @@ namespace Aires.Pantallas
                 CargaClientesEnPantallas();
             }
 
-            public void AgregaCliente(int EmpresaId, string Nombre, string NombreFiscal, string Direccion, string Calle, string NoExterior, string NoInterior, string Colonia,
+            public void AgregaCliente(int EmpresaId, int TipoClienteId, string Nombre, string NombreFiscal, string Direccion, string Calle, string NoExterior, string NoInterior, string Colonia,
             string Localidad, string Municipio, string Estado, string CP, string Telefono, string Telefono2, string Celular, string RFC, 
             string Email, string Email2, string Email3, string Banco, string NumeroCuenta,
             string Sucursal, string CLABE, string NumeroReferencia, int FormaPagoId, bool IncluyeKit)
@@ -45,7 +45,7 @@ namespace Aires.Pantallas
                 EntCliente Cliente = new EntCliente()
                 {
                     EmpresaId=EmpresaId,
-                    TipoPersonaId=0,
+                    TipoPersonaId= TipoClienteId,
                     Nombre = Nombre,
                     NombreFiscal=NombreFiscal,
                     Direccion = Direccion,
@@ -75,12 +75,12 @@ namespace Aires.Pantallas
                 };
                 Cliente.Id = new BusClientes().AgregaCliente(Cliente);
             }
-        public void AgregaCliente(int EmpresaId, string Nombre)
+        public void AgregaCliente(int EmpresaId, int TipoClienteId, string Nombre)
         {
             EntCliente Cliente = new EntCliente()
             {
                 EmpresaId = EmpresaId,
-                TipoPersonaId = 0,
+                TipoPersonaId = TipoClienteId,
                 Nombre = Nombre,
 
                 NombreFiscal = "",
@@ -112,13 +112,13 @@ namespace Aires.Pantallas
             };
             Cliente.Id = new BusClientes().AgregaCliente(Cliente);
         }
-        public void AgregaCliente(int ClienteId, int EmpresaId, string Nombre)
+        public void AgregaCliente(int ClienteId, int EmpresaId, int TipoClienteId, string Nombre)
         {
             EntCliente Cliente = new EntCliente()
             {
                 Id=ClienteId,
                 EmpresaId = EmpresaId,
-                TipoPersonaId = 0,
+                TipoPersonaId = TipoClienteId,
                 Nombre = Nombre,
 
                 NombreFiscal = "",
@@ -151,7 +151,7 @@ namespace Aires.Pantallas
             Cliente.Id = new BusClientes().AgregaCliente(ClienteId,Cliente);
         }
 
-        public void ActualizaCliente(int ClienteId, int EmpresaId, string Nombre, string NombreFiscal, string Direccion, string Calle, string NoExterior, string NoInterior, string Colonia,
+        public void ActualizaCliente(int ClienteId, int EmpresaId, int TipoClienteId, string Nombre, string NombreFiscal, string Direccion, string Calle, string NoExterior, string NoInterior, string Colonia,
             string Localidad, string Municipio, string Estado, string CP, string Telefono, string Telefono2, string Celular, string RFC, string Email, string Email2, string Email3, string Banco, string NumeroCuenta,
             string Sucursal, string CLABE, string NumeroReferencia, int FormaPagoId, bool IncluyeKit)
             {
@@ -159,7 +159,7 @@ namespace Aires.Pantallas
                 {
                     Id=ClienteId,
                     EmpresaId = EmpresaId,
-                    TipoPersonaId = 0,
+                    TipoPersonaId = TipoClienteId,
                     Nombre = Nombre,
                     NombreFiscal = NombreFiscal,
                     Direccion = Direccion,
@@ -211,6 +211,7 @@ namespace Aires.Pantallas
 
             void CargaDatosCliente(EntCliente Cliente)
             {
+                chkClienteASI.Checked = Convert.ToBoolean(Cliente.TipoPersonaId);
                 txtNombre.Text = Cliente.Nombre;
                 txtDireccion.Text = Cliente.Direccion;
                 txtTelefono.Text = Cliente.Telefono;
@@ -229,7 +230,7 @@ namespace Aires.Pantallas
                 txtMunicipio.Text = Cliente.Municipio;
                 txtEstado.Text = Cliente.Estado;
                 txtCP.Text = Cliente.CP;
-                txtBanco.Text = Cliente.Banco;
+                txtSolicitud.Text = Cliente.Banco;
                 txtNumeroCuenta.Text = Cliente.NumeroCuenta;
                 txtSucursal.Text = Cliente.Sucursal;
                 txtCLABE.Text = Cliente.CLABE;
@@ -275,13 +276,13 @@ namespace Aires.Pantallas
             ClienteSeleccionado = null;
             ActivaAgregar(true);
 
-            if (Program.UsuarioSeleccionado.Id > 1)
-            {
+            //if (Program.UsuarioSeleccionado.Id > 1)
+            //{
                 lbBanco.Visible = true;
-                txtBanco.Visible = true;
-            }
-            //if(Program.EmpresaSeleccionada!=null)
-            //    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
+                txtSolicitud.Visible = true;
+            //}
+            ////if(Program.EmpresaSeleccionada!=null)
+            ////    cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
         }
         public void CargaEmpresas()
         {
@@ -318,9 +319,9 @@ namespace Aires.Pantallas
                 if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
                     MandaExcepcion("Ingrese Nombre del Cliente");
                 else
-                    AgregaCliente(Program.EmpresaSeleccionada.Id, txtNombre.Text, txtNombreFiscal.Text, txtDireccion.Text, txtCalle.Text, txtNoExterior.Text, txtNoInterior.Text
+                    AgregaCliente(Program.EmpresaSeleccionada.Id, Convert.ToInt16(chkClienteASI.Checked), txtNombre.Text, txtNombreFiscal.Text, txtDireccion.Text, txtCalle.Text, txtNoExterior.Text, txtNoInterior.Text
                             , txtColonia.Text, txtLocalidad.Text, txtMunicipio.Text, txtEstado.Text, txtCP.Text, txtTelefono.Text, txtTelefono2.Text
-                            , txtCelular.Text, txtRFC.Text, txtEmail.Text, txtEmail2.Text, txtEmail3.Text, txtBanco.Text, txtNumeroCuenta.Text
+                            , txtCelular.Text, txtRFC.Text, txtEmail.Text, txtEmail2.Text, txtEmail3.Text, txtSolicitud.Text, txtNumeroCuenta.Text
                             , txtSucursal.Text, txtCLABE.Text, txtNumeroReferencia.Text, cmbFormaPago.SelectedIndex+1, chkIncluyeKit.Checked);
                 //AgregaCliente(Program.EmpresaSeleccionada.Id, txtNombre.Text, txtNombreFiscal.Text, txtDireccion.Text, txtCalle.Text, txtNoExterior.Text, txtNoInterior.Text, txtColonia.Text, txtLocalidad.Text, txtMunicipio.Text, txtEstado.Text, txtCP.Text, txtTelefono.Text, txtTelefono2.Text, txtCelular.Text, txtRFC.Text, txtEmail.Text, txtBanco.Text, txtNumeroCuenta.Text, txtSucursal.Text, txtCLABE.Text, txtNumeroReferencia.Text);
 
@@ -363,9 +364,9 @@ namespace Aires.Pantallas
                 if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
                     MandaExcepcion("Ingrese Nombre del Cliente");
                 else
-                    ActualizaCliente(ClienteSeleccionado.Id, Program.EmpresaSeleccionada.Id, txtNombre.Text, txtNombreFiscal.Text, txtDireccion.Text, txtCalle.Text, txtNoExterior.Text, txtNoInterior.Text, txtColonia.Text, txtLocalidad.Text
+                    ActualizaCliente(ClienteSeleccionado.Id, Program.EmpresaSeleccionada.Id, Convert.ToInt16(chkClienteASI.Checked), txtNombre.Text, txtNombreFiscal.Text, txtDireccion.Text, txtCalle.Text, txtNoExterior.Text, txtNoInterior.Text, txtColonia.Text, txtLocalidad.Text
                         , txtMunicipio.Text, txtEstado.Text, txtCP.Text, txtTelefono.Text, txtTelefono2.Text
-                        , txtCelular.Text, txtRFC.Text, txtEmail.Text, txtEmail2.Text, txtEmail3.Text, txtBanco.Text
+                        , txtCelular.Text, txtRFC.Text, txtEmail.Text, txtEmail2.Text, txtEmail3.Text, txtSolicitud.Text
                         , txtNumeroCuenta.Text, txtSucursal.Text, txtCLABE.Text, txtNumeroReferencia.Text, cmbFormaPago.SelectedIndex+1, chkIncluyeKit.Checked);
 
                 CargaGvClientes(Program.EmpresaSeleccionada.Id);
@@ -599,15 +600,31 @@ namespace Aires.Pantallas
             }
             return lst;
         }
+        public void DescuentaTimbre(EntEmpresa EmpresaSeleccionada)
+        {
+            try
+            {
+                //DESCUENTA TIMBRE
+                new BusEmpresas().AumentaTimbreEmpresa(EmpresaSeleccionada.Id);
+                //Program.EmpresaSeleccionada.TimbresRestantes--;
+                //Program.EmpresaSeleccionada.TimbresUsados++;
+                EmpresaSeleccionada.TimbresRestantes--;
+                EmpresaSeleccionada.TimbresUsados++;
+
+                MuestraTimbresEnPantallas();
+            }
+            catch (Exception ex) { }
+        }
         private void btnAgregaNotaCredito_Click(object sender, EventArgs e)
         {
             try
             {
+                MuestraTimbresEnPantallas();
                 EntCliente clienteSeleccionado = ObtieneClienteFromGV(gvClientes);
                 List<EntPedido> pedidosPorCliente = new BusPedidos().ObtienePedidosClientesPorCliente(clienteSeleccionado.Id);
 
                 //SeleccionaFactura vSeleccionaFactura = new SeleccionaFactura(ConvierteListaPedidosEnListaEmpresas(pedidosPorCliente));
-                SeleccionaFactura vSeleccionaFactura = new SeleccionaFactura(ConvierteListaPedidosEnListaProveedores(pedidosPorCliente));
+                SeleccionaFacturaProveedor vSeleccionaFactura = new SeleccionaFacturaProveedor(ConvierteListaPedidosEnListaProveedores(pedidosPorCliente));
                 if (vSeleccionaFactura.ShowDialog() == DialogResult.OK)
                 {
                     EntProveedor proveedorGastoSeleccionado = vSeleccionaFactura.ProveedorGastoSeleccionado;
@@ -621,6 +638,7 @@ namespace Aires.Pantallas
                     vAgregaFactura.FormaPagoId = proveedorGastoSeleccionado.FormaPagoId;
                     if (vAgregaFactura.ShowDialog() == DialogResult.OK)
                     {
+                        DescuentaTimbre(Program.EmpresaSeleccionada);
                         AgregarNotaCredito(Program.EmpresaSeleccionada.Id, pedidoId, vAgregaFactura.NumeroNotaCredito, vAgregaFactura.Cantidad, DateTime.Today.Date);
                         //if (proveedorGastoSeleccionado.Deuda == (proveedorGastoSeleccionado.Pago + vAgregaFactura.Cantidad))
                         //    ActualizaEstatusPedido(pedidoId, 2);//PAGADO
@@ -641,8 +659,18 @@ namespace Aires.Pantallas
             try
             {
                 EntCliente clienteSeleccionado = ObtieneClienteFromGV(gvClientes);
-                //MuestraPagos vPagos = new MuestraPagos(clienteSeleccionado.Id);
-                //vPagos.ShowDialog();
+                MuestraPagos vPagos = new MuestraPagos(clienteSeleccionado.Id);
+                vPagos.ShowDialog();
+                //EntPedido pedidoSeleccionado = ObtienePedidoFromGV(gvPedidosClientesCreditoDetalle);
+                //List<EntFactura> facturasComplementos = new BusFacturas().ObtieneComplementos(pedidoSeleccionado.FacturaId, pedidoSeleccionado.Factura, pedidoSeleccionado.Total);
+
+                //SeleccionaComplemento vSelFactura = new SeleccionaComplemento(pedidoSeleccionado);
+                //vSelFactura.FacturaId = pedidoSeleccionado.FacturaId;
+                //vSelFactura.ListaFacturasComplemento = facturasComplementos;
+                //if (vSelFactura.ShowDialog() == DialogResult.OK)
+                //{
+                //    MuestraArchivo(vSelFactura.FacturaComplementoSeleccionada.Ruta);
+                //}
             }
             catch (Exception ex)
             {
@@ -655,8 +683,8 @@ namespace Aires.Pantallas
             try
             {
                 EntCliente clienteSeleccionado = ObtieneClienteFromGV(gvClientes);
-                //EstadoDeCuenta vPagos = new EstadoDeCuenta(clienteSeleccionado);
-                //vPagos.ShowDialog();
+                EstadoDeCuenta vPagos = new EstadoDeCuenta(clienteSeleccionado);
+                vPagos.ShowDialog();
             }
             catch (Exception ex)
             {

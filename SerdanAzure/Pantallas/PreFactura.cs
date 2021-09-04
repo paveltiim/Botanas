@@ -17,7 +17,8 @@ namespace Aires.Pantallas
         public PreFactura(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente
                         , string TipoComprobante, string UsoCFDI, string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta
                         , decimal CantidadIVA, decimal CantidadIVARetenido, decimal CantidadISRRetenido, decimal CantidadIEPS
-                        , string Observaciones)
+                        , string Observaciones
+                        , bool RelacionaFactura, string TipoRelacion, string UUIDRelacionado)
         {
             InitializeComponent();
             EmpresaSeleccionada = Empresa;
@@ -34,11 +35,12 @@ namespace Aires.Pantallas
             this.CondicionPago = CondicionPago;
             this.NumeroCuenta = NumeroCuenta;
             this.CantidadIVA = CantidadIVA;
+            this.RetencionIVA = CantidadIVARetenido;
             this.Observaciones = Observaciones;
-            
-            //this.CantidadIVARetenido = CantidadIVARetenido;
-            //this.CantidadISRRetenido = CantidadISRRetenido;
-            //this.CantidadIEPS = CantidadIEPS;
+
+            this.RelacionaFactura = RelacionaFactura;
+            this.TipoRelacion = TipoRelacion;
+            this.UUIDRelacionado = UUIDRelacionado;
             this.TipoComprobante = TipoComprobante;
             this.UsoCFDI = UsoCFDI;
         }
@@ -46,13 +48,16 @@ namespace Aires.Pantallas
         EntEmpresa EmpresaSeleccionada;
         EntPedido PedidoSeleccionado;
         List<EntProducto> ListaProductosSeleccionados;
-        string FormaPago, MedioPago, CondicionPago, NumeroCuenta, Observaciones,TipoComprobante, UsoCFDI;
+        string FormaPago, MedioPago, CondicionPago, NumeroCuenta, Observaciones,TipoComprobante, UsoCFDI, TipoRelacion, UUIDRelacionado;
         decimal CantidadIVA;
+        bool RelacionaFactura;
 
         EntFactura EnviarPreFactura(EntEmpresa Empresa, EntPedido Pedido, List<EntProducto> ListaProductos, EntCliente Cliente, DateTime FechaFactura,
-                                    string TipoComprobante, string UsoCFDI, string FormaPago, string MedioPago, string CondicionPago, string NumeroCuenta,
+                                    string TipoComprobante, string UsoCFDI, string FormaPago, string MedioPago, 
+                                    string CondicionPago, string NumeroCuenta,
                                     decimal CantidadIVA, decimal IVARetenido, decimal ISRRetenido, decimal CantidadIEPS,
-                                    string Solicitud, string Observaciones)
+                                    string Solicitud, string Observaciones, 
+                                    bool RelacionaFactura, string TipoRelacion, string UUIDRelacionado)
         {
             string pathClienteDirectorio = PathPreFacturas + "\\" + Cliente.Nombre;
             if (!System.IO.Directory.Exists(pathClienteDirectorio))
@@ -68,7 +73,8 @@ namespace Aires.Pantallas
             List<EntProducto> ListaProductosFactura = new List<EntProducto>();
             string codigo = "";
             int cantidad = 1;
-            foreach (EntProducto p in productosDetalle.OrderBy(P => P.Codigo).ToList())
+            string finalDescripcion = "";
+            foreach (EntProducto p in productosDetalle.OrderByDescending(P => P.TipoProductoId).ThenBy(P => P.Codigo).ToList())
             {
                 if (p.Codigo != codigo)
                 {
@@ -91,32 +97,62 @@ namespace Aires.Pantallas
                         PrecioVenta = p.PrecioVenta,
                         ProductoId = p.ProductoId
                     };
-                    //pneue.Descripcion = p.Descripcion.PadRight(100, '°');
-                    pneue.Descripcion += " ";
 
+                    if (p.TipoProductoId == 1)
+                    {
+                        if (!string.IsNullOrWhiteSpace(finalDescripcion))
+                            ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += finalDescripcion;
+
+                        if (pneue.Descripcion.Contains("CONTRATO"))
+                        {
+                            int index = pneue.Descripcion.IndexOf("CONTRATO");
+                            finalDescripcion = pneue.Descripcion.Substring(index);
+                            pneue.Descripcion = pneue.Descripcion.Remove(index);
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(p.Serie))
+                            pneue.Descripcion += "SERIE:";
+                        pneue.Descripcion += " ";
+                    }
                     ListaProductosFactura.Add(pneue);
                     codigo = pneue.Codigo;
                     cantidad = 1;
                 }
-                else
+                else 
                 {
+                    if (p.Descripcion.Contains("CONTRATO"))
+                    {
+                        int index = p.Descripcion.IndexOf("CONTRATO");
+                        finalDescripcion = p.Descripcion.Substring(index);
+                        p.Descripcion = p.Descripcion.Remove(index);
+                    }
+
                     cantidad++;
                     ListaProductosFactura[ListaProductosFactura.Count - 1].Cantidad++;
                 }
                 if (!string.IsNullOrWhiteSpace(p.Serie))
                     ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += p.Serie + " | ";
             }
-
-            if (Program.UsuarioSeleccionado.Id == 8 || Program.UsuarioSeleccionado.Id == 9)//OBR-NAV
-                ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += "Solicitud:".PadLeft(60, '-') + Solicitud;
+            ListaProductosFactura[ListaProductosFactura.Count - 1].Descripcion += finalDescripcion;
 
             UtiFacturacionPruebas factura = new UtiFacturacionPruebas();
             MessageBox.Show("MUESTRA PRE-FACTURA");
 
-            string uuid = factura.Facturar33(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, FechaFactura,
-                                           TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
-                                           NumeroCuenta, pathClienteDirectorioFacturas,
-                                           CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
+            string uuid;
+            if (RelacionaFactura)
+            {
+                uuid = factura.Facturar33conRelacion(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, FechaFactura,
+                                               TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
+                                               NumeroCuenta, pathClienteDirectorioFacturas,
+                                               CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones, TipoRelacion, UUIDRelacionado);
+            }
+            else
+            {
+                uuid = factura.Facturar33(Empresa, Pedido, ListaProductosFactura, Cliente, Pedido.Factura, FechaFactura,
+                                               TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago,
+                                               NumeroCuenta, pathClienteDirectorioFacturas,
+                                               CantidadIVA, IVARetenido, ISRRetenido, CantidadIEPS, Observaciones);
+            }
             EntFactura fact = new EntFactura() { PedidoId = Pedido.Id, NumeroFactura = Pedido.Factura, UUID = uuid, Ruta = pathClienteDirectorioFacturas, Fecha = DateTime.Today };
 
             return fact;
@@ -133,7 +169,8 @@ namespace Aires.Pantallas
                 {
                     factura = EnviarPreFactura(EmpresaSeleccionada, PedidoSeleccionado, ListaProductosSeleccionados, ClienteSeleccionado,
                                                 DateTime.Now, TipoComprobante, UsoCFDI, FormaPago, MedioPago, CondicionPago, NumeroCuenta,
-                                                CantidadIVA, 0, 0, 0, ClienteSeleccionado.Banco, Observaciones);
+                                                CantidadIVA, this.RetencionIVA, 0, 0, ClienteSeleccionado.Banco, Observaciones,
+                                                this.RelacionaFactura,this.TipoRelacion, this.UUIDRelacionado);
                     facturado = true;
                 }
                 catch (Exception ex)
@@ -148,9 +185,13 @@ namespace Aires.Pantallas
 
                     try
                     {
+                        UtiPDF modiPDF = new UtiPDF();
+                        string pagare = "Por medio de este PAGARÉ me obligo a pagar  incondicionalmente  a  la  orden  de " + EmpresaSeleccionada.NombreFiscal + ",  la  cantidad  de  " + FormatoMoney(PedidoSeleccionado.Total) + " correspondiente al Pedido estipulado en esta FACTURA, en esta ciudad. La cantidad que ampara este PAGARÉ causará intereses al tipo de 3 % mensual en caso de mora. Este PAGARÉ es mercantil no domiciliario y se rige por lo estipulado en la última parte del art. 173 de la ley general de títulos y operaciones de Crédito. Firma " + ClienteSeleccionado.Nombre;
+                        string rutaArchivoPDF = factura.Ruta + "\\" + EncuentraArchivo(factura.Ruta, ".pdf");
+                        //rutaArchivoPDF = @"c:\tiim\facturacion\prefacturas\prueba\prueba\F4BD2F40-9F10-11EB-87A4-9DD1737F0D72 (1).pdf";
+                        modiPDF.ModificaPDF(pagare, rutaArchivoPDF, "1",this.ListaProductosSeleccionados.Count);
+                        //factura.Ruta= @"C:\TIIM\Facturacion\PreFacturas\PRUEBA\PRUEBA\";
                         string nombreArchivo = EncuentraArchivo(factura.Ruta, ".pdf");
-
-                        ////COPIAR EN RED (SOLO SERDAN-MARTIN)
                         if (Program.UsuarioSeleccionado.Id == 1)
                         {
                             try
@@ -177,7 +218,6 @@ namespace Aires.Pantallas
                             {
                             }
                         }
-
                         MuestraArchivo(factura.Ruta, nombreArchivo);
                     }
                     catch (Exception ex) { MuestraExcepcion(ex, "ERROR AL MOSTRAR FACTURA"); }

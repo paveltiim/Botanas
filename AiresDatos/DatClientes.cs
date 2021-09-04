@@ -59,17 +59,16 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
-        public DataTable obtieneClientesCredito()
+        public DataTable obtieneClientesCredito(int EmpresaId)
         {
             try
             {
-                com = new SqlCommand("selObtieneClientesDeuda", con);
+                com = new SqlCommand("[selObtieneClientesDeudaPorEmpresa]", con);
                 com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 da = new SqlDataAdapter(com);
                 dt = new DataTable();
                 da.Fill(dt);
-                //if (dt.Rows.Count == 0)
-                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
                 return dt;
             }
             catch (Exception ex) { throw new Exception(ex.Message); }

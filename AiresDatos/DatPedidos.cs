@@ -10,6 +10,40 @@ namespace AiresDatos
 {
     public class DatPedidos : DatAbstracta
     {
+        public DataTable obtieneReporteComprasVentas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta)
+        {
+            try
+            {
+                com = new SqlCommand("[selReporteComprasVentasPorFechasPorEmpresa]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("FechaDesde", FechaDesde);
+                com.Parameters.AddWithValue("FechaHasta", FechaHasta);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneReporteComprasVentas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta, int ProductoId)
+        {
+            try
+            {
+                com = new SqlCommand("[selReporteComprasVentasPorFechasProductoPorEmpresa]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("FechaDesde", FechaDesde);
+                com.Parameters.AddWithValue("FechaHasta", FechaHasta);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         public DataTable obtienePedidos(int EmpresaId, int Pendientes, int Pagados, int Entregados, int Cancelados, int Presupuesto)
         {
             try
@@ -128,28 +162,13 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
-        public DataTable obtienePedidosClientesCredito()
+        public DataTable obtienePedidosClientesCredito(int EmpresaId)
         {
             try
             {
-                com = new SqlCommand("selObtienePedidosClientesDeuda", con);
+                com = new SqlCommand("[selObtienePedidosClientesDeudaPorEmpresa]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                da = new SqlDataAdapter(com);
-                dt = new DataTable();
-                da.Fill(dt);
-                //if (dt.Rows.Count == 0)
-                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
-                return dt;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
-        public DataTable obtienePedidosClientesCredito(int ClienteId)
-        {
-            try
-            {
-                com = new SqlCommand("selObtienePedidosClienteDeuda", con);
-                com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("ClienteId", ClienteId);
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 da = new SqlDataAdapter(com);
                 dt = new DataTable();
                 da.Fill(dt);
@@ -255,17 +274,18 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
-        public int agregaPedido(int ClienteId, string Detalle, string Observaciones, decimal Total, decimal Pago, DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId)
+        public int agregaPedido(int ClienteId, string Detalle, string Solicitud, string Observaciones, decimal Total, decimal Pago, DateTime Fecha, DateTime FechaEntrega, int EmpleadoId, bool Facturado, int EstatusId)
         {
             try
             {
                 int Id = 0;
 
-                com = new SqlCommand("insAgregaPedido", con);
+                com = new SqlCommand("insAgregaPedidoNeue", con);
                 //com = new SqlCommand("AgregaPedido", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("ClienteId", ClienteId);
                 com.Parameters.AddWithValue("Detalle", Detalle);
+                com.Parameters.AddWithValue("Solicitud", Solicitud);
                 com.Parameters.AddWithValue("Observaciones", Observaciones);
                 com.Parameters.AddWithValue("Total", Total);
                 com.Parameters.AddWithValue("Pago", Pago);
@@ -287,7 +307,100 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
         }
+        public int agregaMovimientoMaster(string Comentario, int TipoMovimientoId, int Orientacion, int AlmacenId, int PedidoId, 
+                                            int UsuarioId)
+        {
+            try
+            {
+                int Id = 0;
 
+                com = new SqlCommand("spMovimientoMaster", con);
+                //com = new SqlCommand("AgregaPedido", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("Comentario", Comentario);
+                com.Parameters.AddWithValue("TIPOMOVIMIENTOINVENTARIOID", TipoMovimientoId);
+                com.Parameters.AddWithValue("Orientacion", Orientacion);
+                com.Parameters.AddWithValue("AlmacenId", AlmacenId);
+                com.Parameters.AddWithValue("PedidoId", PedidoId);
+                com.Parameters.AddWithValue("UsuarioId", UsuarioId);
+                SqlParameter parm = new SqlParameter("Id", Id);
+                parm.Direction = ParameterDirection.InputOutput;
+                com.Parameters.Add(parm);
+                con.Open();
+                com.ExecuteNonQuery();
+
+                return Convert.ToInt32(com.Parameters["Id"].Value);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
+        public int agregaMovimientoDetalle(int MovimientoInventarioId, int ProductoId, decimal Cantidad, decimal Total)
+        {
+            try
+            {
+                int Id = 0;
+
+                com = new SqlCommand("spMovimientoDetalle", con);
+                //com = new SqlCommand("AgregaPedido", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("MovimientoInventarioId", MovimientoInventarioId);
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("Cantidad", Cantidad);
+                com.Parameters.AddWithValue("Total", Total);
+                SqlParameter parm = new SqlParameter("Id", Id);
+                parm.Direction = ParameterDirection.InputOutput;
+                com.Parameters.Add(parm);
+                con.Open();
+                com.ExecuteNonQuery();
+
+                return Convert.ToInt32(com.Parameters["Id"].Value);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
+        public int agregaMovimientoLote(int MovimientoId, int Orientacion)
+        {
+            try
+            {
+                int Id = 0;
+
+                com = new SqlCommand("spMovimientoLote", con);
+                //com = new SqlCommand("AgregaPedido", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("MovimientoId", MovimientoId);
+                com.Parameters.AddWithValue("Orientacion", Orientacion);
+                con.Open();
+                com.ExecuteNonQuery();
+
+                return Id;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
+
+
+        public void actualizaEstatusPago(int PedidoId, DateTime FechaPago, decimal Pago, bool Estatus)
+        {
+            try
+            {
+                com = new SqlCommand("[updActualizaEstatusPagoPorFechaPagoPedido]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("PedidoId", PedidoId);
+                com.Parameters.AddWithValue("Pago", Pago);
+                com.Parameters.AddWithValue("FechaPago", FechaPago);
+                com.Parameters.AddWithValue("Estatus", Estatus);
+                con.Open();
+                com.ExecuteNonQuery();
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
         public void agregaProductoPedido(int PedidoId, int ProductoId, decimal ProductoCantidad, decimal ProductoPrecio, string Detalle)
         {
             try
@@ -358,6 +471,22 @@ namespace AiresDatos
 
 
         //MOVER A DatPagos
+        public DataTable obtienePagosPorCliente(int ClienteId)
+        {
+            try
+            {
+                com = new SqlCommand("[selObtienePagosPorCliente]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("ClienteId", ClienteId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
         public int agregaPagoPedido(int PedidoId, int TipoPagoId, decimal Pago, DateTime FechaPago)
         {
             try
@@ -381,28 +510,14 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
         }
-        public DataTable obtienePagosPorCliente(int ClienteId)
+        
+        public DataTable obtienePagosClientes(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta)
         {
             try
             {
-                com = new SqlCommand("selObtienePagosPorCliente", con);
+                com = new SqlCommand("selObtienePagosClientesPorFechaPagoPorEmpresa", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("ClienteId", ClienteId);
-                da = new SqlDataAdapter(com);
-                dt = new DataTable();
-                da.Fill(dt);
-                //if (dt.Rows.Count == 0)
-                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
-                return dt;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
-        public DataTable obtienePagosClientes(DateTime FechaDesde, DateTime FechaHasta)
-        {
-            try
-            {
-                com = new SqlCommand("selObtienePagosClientesPorFechaPago", con);
-                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 com.Parameters.AddWithValue("FechaDesde", FechaDesde);
                 com.Parameters.AddWithValue("FechaHasta", FechaHasta);
                 da = new SqlDataAdapter(com);
@@ -594,6 +709,22 @@ namespace AiresDatos
             finally { con.Close(); }
         }
 
+        public void aumentaPagoEnPedido(int PedidoId, decimal Pago)
+        {
+            try
+            {
+                com = new SqlCommand("[AumentaPagoEnPedido]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("PedidoId", PedidoId);
+                com.Parameters.AddWithValue("Pago", Pago);
+                con.Open();
+                com.ExecuteNonQuery();
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
         public void aumentaPagoPedido(int PedidoId, decimal Pago)
         {
             try

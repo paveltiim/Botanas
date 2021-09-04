@@ -78,7 +78,7 @@ namespace AiresNegocio
                     m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
                     m.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
 
-                    m.Fecha = Convert.ToDateTime(r["PRO_FECHAREGISTRO"]);
+                    //m.Fecha = Convert.ToDateTime(r["PRO_FECHAREGISTRO"]);
                     lst.Add(m);
                 }
                 return lst;

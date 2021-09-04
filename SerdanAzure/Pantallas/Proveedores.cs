@@ -28,12 +28,7 @@ namespace Aires.Pantallas
         List<EntProveedor> ListaProveedores = new List<EntProveedor>();
 
         #region Metodos
-            void CargaProveedoresEnPantallas()
-            {
-                Form vProd = BuscaFormaBase(new Productos().Titulo);
-                if (vProd != null)
-                    ((Productos)vProd).CargaProveedores(Program.EmpresaSeleccionada.Id);
-            }
+            
             void CargaProveedores(int EmpresaId)
             {
                 ListaProveedores = new BusProveedores().ObtieneProveedores(EmpresaId);
@@ -41,8 +36,6 @@ namespace Aires.Pantallas
                 gvProveedoresSaldo.DataSource = ListaProveedores;
 
                 cmbProveedores.DataSource = ListaProveedores;
-
-                CargaProveedoresEnPantallas(); 
             }
 
             void AgregaProveedor(int EmpresaId, string Nombre, string NombreFiscal, string Direccion, string Telefono, string Telefono2, string Email, string Contacto, string TelefonoContacto, string Banco, string NumeroCuenta, string Sucursal, string CLABE, string NumeroReferencia)
@@ -331,7 +324,7 @@ namespace Aires.Pantallas
                 {
                     EntProveedor proveedorSeleccionado = ObtieneProveedorFromGV(gvProveedores);
                     //CargaGastosEmpresa(proveedorSeleccionado.Id);
-                    SeleccionaFactura vSeleccionaFactura = new SeleccionaFactura(ObtieneListaProveedoresFromGV(gvProveedorGastos));
+                    SeleccionaFacturaProveedor vSeleccionaFactura = new SeleccionaFacturaProveedor(ObtieneListaProveedoresFromGV(gvProveedorGastos));
                     if (vSeleccionaFactura.ShowDialog() == DialogResult.OK)
                     {
                         int gastoId = vSeleccionaFactura.ProveedorGastoSeleccionado.GastoId;
@@ -475,11 +468,6 @@ namespace Aires.Pantallas
                     Cantidad = Cantidad,
                 };
                 new BusGastos().AumentaPagoGasto(gasto);
-            } 
-            void CargaGastosEmpresa(int EmpresaId)
-            {
-                List<EntEmpresa> lst = new BusEmpresas().ObtieneEmpresaGastosPorEmpresa(EmpresaId);
-                gvProveedorGastos.DataSource = lst;
             }
         #endregion
             private void tcProveedores_SelectedIndexChanged(object sender, EventArgs e)
@@ -599,7 +587,6 @@ namespace Aires.Pantallas
 
                     LimpiaTextBox(pnlDatosGasto);
                     int indexEmpresa = cmbProveedores.SelectedIndex;
-                    CargaGastosEmpresa(ObtieneEmpresaFromCmb(cmbProveedores).Id);
                     cmbProveedores.SelectedIndex = indexEmpresa;
                 }
                 catch (Exception ex) { MuestraExcepcion(ex); }
@@ -645,7 +632,6 @@ namespace Aires.Pantallas
                     LimpiaTextBox(pnlDatosGasto);
 
                     int indexEmpresa = cmbProveedores.SelectedIndex;
-                    CargaGastosEmpresa(empresaGastoSeleccionado.Id);
                     cmbProveedores.SelectedIndex = indexEmpresa;
 
                     ActivaAgregarGasto(true);

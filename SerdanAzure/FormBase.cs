@@ -1,6 +1,9 @@
 ﻿using AiresEntidades;
+using AiresUtilerias;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +20,12 @@ namespace Aires
         public string PathPreFacturasCopia = @"\Servidor\Facturacion\PreFacturas";
         public string PathFacturasCopia = @"\Oficina - pc\tiim\Facturacion\Facturas";//@"\LAPTOP-LJCQA84V\Users\pavel\Documents\FacturacionModerna";//
         public string PathFacturasComplementos = @"C:\TIIM\Facturacion\Facturas";
+        public string RutaImpresionConsignacion= @"C:\TIIM\OrdenesSalidas\Consignacion";
 
         public string Titulo { get { return this.Text; } }
 
         public decimal IVA = 0.16m;
+        public decimal RetencionIVA = 0.06m;
         public int AlturaMaximaGrid = 200;
 
         public int AñoInicio = 2016;
@@ -50,6 +55,14 @@ namespace Aires
             //    this.Close();
 
             return null;
+        }
+        public void SetWaitCursor()
+        {
+            this.Cursor = Cursors.WaitCursor;
+        }
+        public void SetDefaultCursor()
+        {
+            this.Cursor = Cursors.Default;
         }
         public void AjustaAlturaGrid(DataGridView Grid, int CantidadRegistros, int AlturaMaxima)
         {
@@ -199,6 +212,24 @@ namespace Aires
         }
 
         /// <summary>
+        /// Verifica si existe directorio para la Ruta + DateTime.Today y para Ruta + DateTime.Today + Cliente.
+        /// Si no existen los crea.
+        /// Regresa la Ruta completa (Ruta + DateTime.Today + Cliente).
+        /// </summary>
+        /// <param name="Ruta"></param>
+        /// <param name="ClienteId"></param>
+        public string VerificaRutas(string Ruta, string ClienteOrden)
+        {
+            string rutaCompleta = Ruta; //+ DateTime.Today.ToString("yyyyMMdd");
+            if (!System.IO.Directory.Exists(rutaCompleta))
+                System.IO.Directory.CreateDirectory(rutaCompleta);
+            if (!System.IO.Directory.Exists(rutaCompleta + "\\" + ClienteOrden))
+                System.IO.Directory.CreateDirectory(rutaCompleta + "\\" + ClienteOrden);
+
+            return rutaCompleta + "\\" + ClienteOrden;
+        }
+
+        /// <summary>
         /// Crea OpenFileDialog y lo abre en la ruta especificada Path. Abre el archivo seleccionado con Proccess.
         /// Si no encuentra la ruta Path envia mensaje de error.
         /// </summary>
@@ -315,6 +346,24 @@ namespace Aires
             return "";
         }
         /// <summary>
+        /// Busca el tipo de archivo con la Extension solicitada y regresa el nombre del archivo (el primero que encuentre).
+        /// </summary>
+        /// <param name="Ruta">Ruta del directorio que contiene el archivo</param>
+        /// <param name="Extension"></param>
+        /// <returns></returns>
+        public string EncuentraArchivoOriginal(string Ruta, string Extension)
+        {
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(Ruta);
+
+            System.IO.FileInfo[] fi = di.GetFiles();
+            foreach (System.IO.FileInfo f in fi)
+            {
+                if (f.Extension == Extension && !f.Name.Contains("OBSERVACION"))
+                    return f.Name;
+            }
+            return "";
+        }
+        /// <summary>
         /// Regresa el numero de archivos encontrados con la Extension solicitada en la Ruta solicitada.
         /// </summary>
         /// <param name="Ruta"></param>
@@ -333,6 +382,14 @@ namespace Aires
             return fi.Length;
         }
 
+        /// <summary>
+        /// "CONFIRMACIÓN"
+        /// </summary>
+        /// <param name="Mensaje"></param>
+        public void MuestraMensaje(string Mensaje)
+        {
+            MessageBox.Show(Mensaje, "CONFIRMACIÓN", MessageBoxButtons.OK);
+        }
         public void MuestraMensaje(string Mensaje, string Titulo)
         {
             MessageBox.Show(Mensaje, Titulo, MessageBoxButtons.OK);
@@ -382,7 +439,35 @@ namespace Aires
         {
             MessageBox.Show(ex.Message + "\n (" + MensajeAgregado + ")", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
+
+        public List<EntFactura> ConvierteListaPedidosEnFacturas(List<EntPedido> ListaPedidos)
+        {
+            List<EntFactura> lst = new List<EntFactura>();
+            foreach (EntPedido p in ListaPedidos)
+            {
+                EntFactura e = new EntFactura()
+                {
+                    Id = p.FacturaId,
+                    PedidoId = p.Id,
+                    Saldo = p.Debe,
+                    Pago = p.PagoTotal,
+                    //IVA = p.IVA,
+                    Total = p.Total,
+                    //SubTotal = p.Total - p.IVA,
+                    Fecha = p.Fecha,
+                    //FechaCorta = p.FechaCorta,
+                    //Serie = p.Detalle,
+                    NumeroFactura = p.Factura,
+                    UUID = p.UUID,
+                    //MonedaId = p.TipoMonedaId,
+                    //TipoCambio = p.TipoCambio,
+                    Parcialidad = new AiresNegocio.BusFacturas().ObtieneNumeroParcialidades(p.FacturaId) + 1
+                };
+                lst.Add(e);
+            }
+            return lst;
+        }
+
         public List<EntProducto> ObtieneListaProductosFromGV(DataGridView GridViewProductos)
         {
             return (List<EntProducto>)GridViewProductos.DataSource;
@@ -426,7 +511,10 @@ namespace Aires
         }
         public EntCliente ObtieneClienteFromCmb(ComboBox ComboBoxCliente)
         {
-            return (EntCliente)((List<EntCliente>)ComboBoxCliente.DataSource)[ComboBoxCliente.SelectedIndex];
+            if (ComboBoxCliente.SelectedIndex >= 0)
+                return (EntCliente)((List<EntCliente>)ComboBoxCliente.DataSource)[ComboBoxCliente.SelectedIndex];
+           
+            return new EntCliente();
         }
         public EntEmpresa ObtieneEmpresaFromGV(DataGridView GridViewEmpresas)
         {
@@ -469,6 +557,13 @@ namespace Aires
 
             return (EntPedido)((List<EntPedido>)GridViewPedidos.DataSource)[GridViewPedidos.CurrentRow.Index];
         }
+        public EntFactura ObtieneFacturaFromGV(DataGridView GridViewFacturas)
+        {
+            if (GridViewFacturas.CurrentRow == null)
+                return null;
+
+            return (EntFactura)((List<EntFactura>)GridViewFacturas.DataSource)[GridViewFacturas.CurrentRow.Index];
+        }
         public EntPago ObtienePagoFromGV(DataGridView GridViewPagos)
         {
             if (GridViewPagos.CurrentRow == null)
@@ -476,10 +571,103 @@ namespace Aires
 
             return (EntPago)((List<EntPago>)GridViewPagos.DataSource)[GridViewPagos.CurrentRow.Index];
         }
-
+        
         public EntCatalogoGenerico ObtieneCatalogoGenericoFromCmb(ComboBox ComboBox)
         {
             return (EntCatalogoGenerico)((List<EntCatalogoGenerico>)ComboBox.DataSource)[ComboBox.SelectedIndex];
+        }
+
+
+        /// <summary>
+        /// Crea Imagen(BMP) con la Nota de Venta y/o Presupuesto; en la ruta C:\TIIM\NotasVenta\ y C:\TIIM\Presupuesto\
+        /// </summary>
+        /// <param name="ListaProductos"></param>
+        /// <param name="NotaVenta"></param>
+        /// <param name="Presupuesto"></param>
+        public void CreaImagenBMPOrdenSalidaConsignacion(string RutaCompleta, Image Fondo, Image Logo, Image Leyenda, Image Firma, string NumeroOrden,
+                           EntEmpresa EmpresaSeleccionada, EntCliente ClienteConsigna, EntPedido PedidoAgrega,
+                           List<EntProducto> ProductosSeleccionados)
+        {
+            string rutaArchivoImagen = RutaCompleta + "\\" + NumeroOrden + ".bmp";
+            using (Bitmap myBitmap = new Bitmap(820, 1070))
+            {
+                Graphics newGraphics = Graphics.FromImage(myBitmap);
+                newGraphics.DrawImage(Fondo, 0, 0);
+                UtiImpresiones imprimir = new UtiImpresiones();
+                imprimir.ImprimirOrdenSalidaConsignacion(EmpresaSeleccionada, ClienteConsigna, PedidoAgrega, ProductosSeleccionados, IVA, Logo, Leyenda, Firma, newGraphics);
+
+                //myBitmap.Save(RutaCompleta+ "\\"+NumeroOrden+".bmp");
+
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    StreamWriter sw = new StreamWriter(rutaArchivoImagen);
+                    myBitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                    stream.WriteTo(sw.BaseStream);
+                    Clipboard.SetImage(Image.FromStream(stream));//FromFile(RutaCompleta + "\\" + NumeroOrden + ".bmp"));
+                    //new UtiPDF().ModificaPDF(Image.FromStream(stream),
+                    //                    @"C:\TIIM\OrdenesCompra\OrdenCompra.pdf", base.RutaImpresionCompra + PedidoAgrega.Cliente + "\\" + PedidoAgrega.NumOrden + "\\" + PedidoAgrega.NumOrden + ".pdf");
+                    sw.Close();
+                    stream.Close();
+                }
+                myBitmap.Dispose();
+                newGraphics.Dispose();
+            }
+            //if (System.IO.File.Exists(rutaArchivoImagen))
+            //{
+            //    System.IO.File.Delete(rutaArchivoImagen);
+            //}
+        }
+        public List<string> CreaImagenesBMPOrdenSalidaConsignacion(string RutaCompleta, Image Fondo, Image Logo, Image Leyenda, Image Firma, string NumeroOrden,
+                           EntEmpresa EmpresaSeleccionada, EntCliente ClienteConsigna, EntPedido PedidoAgrega,
+                           List<EntProducto> ProductosSeleccionados)
+        {
+            int index = 0;
+            int cantLimite = 25;
+            List<string> listaRutas = new List<string>();
+            while (index < ProductosSeleccionados.Count)
+            {
+                string rutaArchivoImagen = RutaCompleta + "\\" + NumeroOrden + "-" + index.ToString() + ".bmp";
+                listaRutas.Add(rutaArchivoImagen);
+                using (Bitmap myBitmap = new Bitmap(820, 1100))
+                {
+                    Graphics newGraphics = Graphics.FromImage(myBitmap);
+                    newGraphics.DrawImage(Fondo, 0, 0);
+                    UtiImpresiones imprimir = new UtiImpresiones();
+
+                    if (index + cantLimite < ProductosSeleccionados.Count)
+                    {
+                        imprimir.ImprimirOrdenSalidaConsignacionSoloProductos(EmpresaSeleccionada, ClienteConsigna, PedidoAgrega,
+                            ProductosSeleccionados.GetRange(index, cantLimite), IVA, Logo, Leyenda, Firma, newGraphics);
+                    }
+                    else
+                        imprimir.ImprimirOrdenSalidaConsignacion(EmpresaSeleccionada, ClienteConsigna, PedidoAgrega,
+                            ProductosSeleccionados.GetRange(index, ProductosSeleccionados.Count - index), IVA, Logo, Leyenda, Firma, newGraphics);
+                    //myBitmap.Save(RutaCompleta+ "\\"+NumeroOrden+".bmp");
+
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        StreamWriter sw = new StreamWriter(rutaArchivoImagen);
+                        myBitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                        stream.WriteTo(sw.BaseStream);
+                        Clipboard.SetImage(Image.FromStream(stream));//FromFile(RutaCompleta + "\\" + NumeroOrden + ".bmp"));
+                                                                     //new UtiPDF().ModificaPDF(Image.FromStream(stream),
+                                                                     //                    @"C:\TIIM\OrdenesCompra\OrdenCompra.pdf", base.RutaImpresionCompra + PedidoAgrega.Cliente + "\\" + PedidoAgrega.NumOrden + "\\" + PedidoAgrega.NumOrden + ".pdf");
+                        sw.Close();
+                        stream.Close();
+                    }
+                    myBitmap.Dispose();
+                    newGraphics.Dispose();
+                }
+                index += cantLimite;
+            }
+            return listaRutas;
+        }
+
+        public void MuestraTimbresEnPantallas()
+        {
+            Form vVent = BuscaFormaBase(new Pantallas.Ventas().Titulo);
+            if (vVent != null)
+                ((Pantallas.Ventas)vVent).MuestraCantidadTimbres();
         }
 
         private void InitializeComponent()

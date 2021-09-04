@@ -27,6 +27,7 @@ namespace AiresUtilerias
              */
 
             server.Credentials = new System.Net.NetworkCredential("tiimfacturacion@hotmail.com", "tiim10gl");
+            //server.Credentials = new System.Net.NetworkCredential("tiimtecnologia@gmail.com", "tiim10gl");
             server.EnableSsl = true;
         }
 

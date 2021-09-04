@@ -13,5 +13,6 @@ namespace AiresEntidades
         public int TipoPagoId { get; set; }
         public decimal Cantidad { get; set; }
         public DateTime FechaPago { get; set; }
+        public string Factura { get; set; }
     }
 }

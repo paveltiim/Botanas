@@ -65,6 +65,8 @@ namespace AiresNegocio
                     p.Existencia = Convert.ToInt32(r["PRO_EXISTENCIA"]);
                     p.Cantidad = p.Existencia;
 
+                    p.Marca = r["PRO_MARCA"].ToString();
+                    p.Modelo = r["PRO_MODELO"].ToString();
 
                     p.ProductoServicioId = Convert.ToInt32(r["PRO_TIPOPRODUCTOSERVICIOID"]);
                     p.ProductoServicio = r["CATPRO_DESCRIPCION"].ToString();
@@ -78,6 +80,70 @@ namespace AiresNegocio
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+
+        public List<EntProducto> ObtieneProductosPorAlmacen(int ProductoId, int AlmacenId)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                dt = new DatProductos().obtieneProductosPorAlmacen(ProductoId, AlmacenId);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    p.Id = Convert.ToInt32(r["PRO_ID"]);
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+                    p.PrecioCosto = Convert.ToDecimal(r["PRO_PRECIOCOSTO"]);
+                    p.Existencia = Convert.ToInt32(r["EXISTENCIA"]);
+                    p.AlmacenId = Convert.ToInt32(r["ALM_ID"]);
+                    p.Almacen = r["ALM_NOMBRE"].ToString();
+                    p.Cantidad = p.Existencia;
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntProducto> ObtieneProductosExistenciaPorAlmacen(int ProductoId, int AlmacenId)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                dt = new DatProductos().obtieneProductosExistentesPorAlmacen(ProductoId, AlmacenId);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    p.Id = Convert.ToInt32(r["PRO_ID"]);
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+                    //p.TipoProductoId = Convert.ToInt32(r["PRO_TIPOPRODUCTOID"]);
+                    //p.TipoProducto = r["TIPPRO_DESCRIPCION"].ToString();
+                    p.PrecioCosto = Convert.ToDecimal(r["PRO_PRECIOCOSTO"]);
+                    //p.PrecioVenta = Convert.ToDecimal(r["PRO_PRECIOVENTA"]);
+                    //p.PrecioVenta2 = Convert.ToDecimal(r["PRO_PRECIOVENTA2"]);
+                    //p.PrecioEspecial = Convert.ToDecimal(r["PRO_PRECIOESPECIAL"]);
+                    p.Existencia = Convert.ToInt32(r["EXISTENCIA"]);
+                    p.AlmacenId = Convert.ToInt32(r["ALM_ID"]);
+                    p.Almacen = r["ALM_NOMBRE"].ToString();
+                    p.Cantidad = p.Existencia;
+
+                    //p.Marca = r["PRO_MARCA"].ToString();
+                    //p.Modelo = r["PRO_MODELO"].ToString();
+
+                    //p.ProductoServicioId = Convert.ToInt32(r["PRO_TIPOPRODUCTOSERVICIOID"]);
+                    //p.ProductoServicio = r["CATPRO_DESCRIPCION"].ToString();
+                    //p.ClaveProductoServicio = r["CATPRO_CLAVE"].ToString();
+                    //p.UnidadId = Convert.ToInt32(r["PRO_TIPOUNIDADID"]);
+                    //p.Unidad = r["CATUNI_DESCRIPCION"].ToString();
+                    //p.ClaveUnidad = r["CATUNI_CLAVE"].ToString();
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+
         public List<EntProducto> ObtieneProductos(int EmpresaId, int EstatusId)
         {
             try
@@ -92,6 +158,35 @@ namespace AiresNegocio
                     p.Descripcion = r["PRO_DESCRIPCION"].ToString();
                     p.TipoProductoId = Convert.ToInt32(r["PRO_TIPOPRODUCTOID"]);
                     p.TipoProducto = r["TIPPRO_DESCRIPCION"].ToString();
+                    p.PrecioCosto = Convert.ToDecimal(r["PRO_PRECIOCOSTO"]);
+                    p.PrecioVenta = Convert.ToDecimal(r["PRO_PRECIOVENTA"]);
+                    p.PrecioVenta2 = Convert.ToDecimal(r["PRO_PRECIOVENTA2"]);
+                    p.PrecioEspecial = Convert.ToDecimal(r["PRO_PRECIOESPECIAL"]);
+                    p.Existencia = Convert.ToInt32(r["PRO_EXISTENCIA"]);
+                    p.Cantidad = p.Existencia;
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntProducto> ObtieneProductosProveedor(int EmpresaId, int EstatusId)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                dt = new DatProductos().obtieneProductosProveedor(EmpresaId, EstatusId);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    p.Id = Convert.ToInt32(r["PRO_ID"]);
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+                    p.TipoProductoId = Convert.ToInt32(r["PRO_TIPOPRODUCTOID"]);
+                    p.TipoProducto = r["TIPPRO_DESCRIPCION"].ToString();
+
+                    p.Ingreso = r["PROV_NOMBRE"].ToString();
+
                     p.PrecioCosto = Convert.ToDecimal(r["PRO_PRECIOCOSTO"]);
                     p.PrecioVenta = Convert.ToDecimal(r["PRO_PRECIOVENTA"]);
                     p.PrecioVenta2 = Convert.ToDecimal(r["PRO_PRECIOVENTA2"]);
@@ -219,9 +314,13 @@ namespace AiresNegocio
 
                     p.Codigo = r["PRO_CODIGO"].ToString();
                     p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+                    p.Marca= r["PRO_MARCA"].ToString();
+                    p.Modelo= r["PRO_MODELO"].ToString();
                     p.TipoProductoId = Convert.ToInt32(r["PRO_TIPOPRODUCTOID"]);
                     p.TipoProducto = r["TIPPRO_DESCRIPCION"].ToString();
                     p.EmpresaId = Convert.ToInt32(r["PRODET_EMPRESAID"]);
+                    //p.Marca = r["PRODET_MARCA"].ToString();
+                    //p.Modelo = r["PRODET_MODELO"].ToString();
                     p.Serie = r["PRODET_SERIE"].ToString();
 
                     //p.Unidad = "PIEZA";
@@ -293,6 +392,8 @@ namespace AiresNegocio
 
                     p.Existencia = Convert.ToInt32(r["PRO_EXISTENCIA"]);
                     p.Existencia = Convert.ToInt32(p.Cantidad);
+
+                    p.Tipo= r["PRODET_OBSERVACION"].ToString();
 
                     p.EstatusId = Convert.ToInt32(r["PRODET_ESTATUSID"]);
 
@@ -611,6 +712,33 @@ namespace AiresNegocio
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+
+        public List<EntProducto> ObtieneProductosCodigoHastaFecha(DateTime FechaHasta)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                dt = new DatProductos().obtieneProductosHastaFecha(FechaHasta);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    //p.Id = Convert.ToInt32(r["PROPED_ID"]);
+                    //p.Id = Convert.ToInt32(r["PRO_ID"]);
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+                    p.Descripcion = r["PRO_CODIGO"].ToString() + "-" + r["PRO_DESCRIPCION"].ToString();
+                    p.Cantidad = Convert.ToInt32(r["CANTIDAD_RESTANTES"]);
+                    p.PrecioCosto = Convert.ToDecimal(r["PRECIOCOSTO"]);
+                    p.PrecioVenta = Convert.ToDecimal(r["PRECIOVENTA"]);
+
+                    //p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         /// <summary>
         /// Productos sin vender Hasta Fecha
         /// </summary>
@@ -667,6 +795,220 @@ namespace AiresNegocio
                     p.PrecioVenta = Convert.ToDecimal(r["PRODET_PRECIOVENTA"]);
 
                     //p.Fecha = Convert.ToDateTime(r["PED_FECHA"]);
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public List<EntProducto> ObtieneHistorialProductosPrecioCosto(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta, 
+                                                                        string Empresa)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                dt = new DatProductos().selObtieneHistorialProductosPrecioCosto(EmpresaId, FechaDesde, FechaHasta);
+
+                string fechaDesde = FechaDesde.ToString(" MM - yyyy ");
+                string fechaHasta = FechaHasta.ToString(" MM - yyyy ");
+
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    p.Id = Convert.ToInt32(r["PRO_ID"]);
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString().ToString().Trim();
+                    p.Ingreso = Empresa;
+
+                    if (fechaDesde == fechaHasta)
+                        p.FechaCorta = fechaDesde;
+                    else
+                        p.FechaCorta = fechaDesde + "  |  " + fechaHasta;
+                    p.PrecioCosto = Convert.ToDecimal(r["EXISTENCIA"]);
+                    p.PrecioEspecial = Convert.ToDecimal(r["ENTRADAS"]);
+                    //p.PrecioEspecial2 = Convert.ToDecimal(r["ENTRADASTRASPASOS"]);
+                    p.PrecioVenta = Convert.ToDecimal(r["SALIDAS"]);
+                    //p.PrecioVentaSinIVA = Convert.ToDecimal(r["SALIDASTRASPASOS"]);
+                    p.PrecioVenta2 = Convert.ToDecimal(r["EFINAL"]);
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntProducto> ObtieneHistorialProductosPrecioCostoCodigo(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta,
+                                                                        string Empresa)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                dt = new DatProductos().selObtieneHistorialProductosPrecioCosto(EmpresaId, FechaDesde, FechaHasta);
+
+                string fechaDesde = FechaDesde.ToString(" MM - yyyy ");
+                string fechaHasta = FechaHasta.ToString(" MM - yyyy ");
+
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    p.Id = Convert.ToInt32(r["PRO_ID"]);
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString().ToString().Trim();
+                    p.Descripcion = r["PRO_CODIGO"].ToString() + "-" + r["PRO_DESCRIPCION"].ToString();
+                    p.Ingreso = Empresa;
+
+                    if (fechaDesde == fechaHasta)
+                        p.FechaCorta = fechaDesde;
+                    else
+                        p.FechaCorta = fechaDesde + "  |  " + fechaHasta;
+                    p.PrecioCosto = Convert.ToDecimal(r["EXISTENCIA"]);
+                    p.PrecioEspecial = Convert.ToDecimal(r["ENTRADAS"]);
+                    //p.PrecioEspecial2 = Convert.ToDecimal(r["ENTRADASTRASPASOS"]);
+                    p.PrecioVenta = Convert.ToDecimal(r["SALIDAS"]);
+                    //p.PrecioVentaSinIVA = Convert.ToDecimal(r["SALIDASTRASPASOS"]);
+                    p.PrecioVenta2 = Convert.ToDecimal(r["EFINAL"]);
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntProducto> ObtieneHistorialProductos(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta,
+                                                                        string Empresa)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                dt = new DatProductos().selObtieneHistorialProductos(EmpresaId, FechaDesde, FechaHasta);
+
+                string fechaDesde = FechaDesde.ToString(" MM - yyyy ");
+                string fechaHasta = FechaHasta.ToString(" MM - yyyy ");
+
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    p.Id = Convert.ToInt32(r["PRO_ID"]);
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString().ToString().Trim();
+                    p.Ingreso = Empresa;
+
+                    if (fechaDesde == fechaHasta)
+                        p.FechaCorta = fechaDesde;
+                    else
+                        p.FechaCorta = fechaDesde + "  |  " + fechaHasta;
+                    
+                    p.Existencia = Convert.ToInt32(r["EXISTENCIA"]);
+                    p.IngresoId = Convert.ToInt32(r["ENTRADAS"]);
+                    //p.EstatusId = Convert.ToInt32(r["ENTRADASTRASPASOS"]);
+                    p.ProductoId = Convert.ToInt32(r["SALIDAS"]);
+                    //p.TipoProductoId = Convert.ToInt32(r["SALIDASTRASPASOS"]);
+                    p.Cantidad = Convert.ToInt32(r["EFINAL"]);
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntProducto> ObtieneHistorialProductosCodigo(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta,
+                                                                        string Empresa)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                dt = new DatProductos().selObtieneHistorialProductos(EmpresaId, FechaDesde, FechaHasta);
+
+                string fechaDesde = FechaDesde.ToString(" MM - yyyy ");
+                string fechaHasta = FechaHasta.ToString(" MM - yyyy ");
+
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    p.Id = Convert.ToInt32(r["PRO_ID"]);
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString().ToString().Trim();
+                    p.Descripcion = r["PRO_CODIGO"].ToString() + "-" + r["PRO_DESCRIPCION"].ToString();
+                    p.Ingreso = Empresa;
+
+                    if (fechaDesde == fechaHasta)
+                        p.FechaCorta = fechaDesde;
+                    else
+                        p.FechaCorta = fechaDesde + "  |  " + fechaHasta;
+
+                    p.Existencia = Convert.ToInt32(r["EXISTENCIA"]);
+                    p.IngresoId = Convert.ToInt32(r["ENTRADAS"]);
+                    //p.EstatusId = Convert.ToInt32(r["ENTRADASTRASPASOS"]);
+                    p.ProductoId = Convert.ToInt32(r["SALIDAS"]);
+                    //p.TipoProductoId = Convert.ToInt32(r["SALIDASTRASPASOS"]);
+                    p.Cantidad = Convert.ToInt32(r["EFINAL"]);
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public List<EntProducto> ObtieneHistorialProductosDetalle(int EmpresaId, int ProductoId, int ExistenciaI, DateTime FechaDesde, DateTime FechaHasta)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                int existenciaF = ExistenciaI;
+                dt = new DatProductos().ObtieneHistorialProductosDetalle(EmpresaId,ProductoId, FechaDesde, FechaHasta);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+
+                    p.Fecha = Convert.ToDateTime(r["FECHA"]);
+                    p.TipoProductoId = Convert.ToInt32(r["TIPO"]);
+                    p.IngresoId = Convert.ToInt32(r["ENTRADAS"]);
+                    p.ProductoId = Convert.ToInt32(r["SALIDAS"]);
+                    p.ProductoServicioId = Convert.ToInt32(r["TRASPASOS"]);
+
+                    if (p.TipoProductoId == 2)//ENTRADA
+                        existenciaF += p.IngresoId;
+                    else if (p.TipoProductoId == 3)//SALIDA
+                        existenciaF -= p.ProductoId;
+                    else if (p.TipoProductoId == 4)//SALIDA
+                        existenciaF -= p.ProductoServicioId;
+
+                    p.Existencia = existenciaF;
+
+                    lst.Add(p);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntProducto> ObtieneHistorialProductosDetallePrecioCosto(int EmpresaId, int ProductoId, decimal ExistenciaI, DateTime FechaDesde, DateTime FechaHasta)
+        {
+            try
+            {
+                List<EntProducto> lst = new List<EntProducto>();
+                decimal existenciaF = ExistenciaI;
+                dt = new DatProductos().ObtieneHistorialProductosDetallePrecioCosto(EmpresaId,ProductoId, FechaDesde, FechaHasta);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntProducto p = new EntProducto();
+                    p.Codigo = r["PRO_CODIGO"].ToString();
+                    p.Descripcion = r["PRO_DESCRIPCION"].ToString();
+
+                    p.Fecha = Convert.ToDateTime(r["FECHA"]);
+                    p.TipoProductoId = Convert.ToInt32(r["TIPO"]);
+                    p.PrecioCosto = Convert.ToInt32(r["ENTRADAS"]);
+                    p.PrecioVenta = Convert.ToInt32(r["SALIDAS"]);
+                    p.PrecioVentaSinIVA = Convert.ToInt32(r["TRASPASOS"]);
+
+                    if (p.TipoProductoId == 2)//ENTRADA
+                        existenciaF += p.PrecioCosto;
+                    else if (p.TipoProductoId == 3)//SALIDA
+                        existenciaF -= p.PrecioVenta;
+                    else if (p.TipoProductoId == 4)//TRASPASO
+                        existenciaF -= p.PrecioVentaSinIVA;
+
+                    p.PrecioVenta2 = existenciaF;
+
                     lst.Add(p);
                 }
                 return lst;
@@ -896,15 +1238,16 @@ namespace AiresNegocio
         /// Agrega nuevo Producto.
         /// </summary>
         /// <param name="producto">
-        /// Propiedades Necesarias: TipoProductoId ,Descripcion, PrecioCosto, PrecioVenta, PrecioEspecial.
+        /// Propiedades Necesarias: TipoProductoId ,Descripcion, PrecioCosto.
         /// </param>
         public int AgregaProducto(EntProducto producto)
         {
             try
             {
-                return new DatProductos().agregaProducto(producto.TipoProductoId, producto.Codigo, producto.Descripcion, 
+                return new DatProductos().agregaProducto(producto.TipoProductoId, producto.Codigo, producto.Descripcion,
+                                                        producto.Marca, producto.Modelo,
                                                         producto.ProductoServicioId, producto.UnidadId, 
-                                                        producto.Fecha);
+                                                        producto.PrecioCosto);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
@@ -926,7 +1269,8 @@ namespace AiresNegocio
         {
             try
             {
-                return new DatProductos().agregaProductoDetalle(producto.Id, producto.IngresoId,producto.EmpresaId,producto.Serie, producto.PrecioCosto, producto.PrecioVenta, producto.PrecioVenta2, producto.PrecioEspecial, producto.Fecha);
+                return new DatProductos().agregaProductoDetalle(producto.Id, producto.IngresoId,producto.EmpresaId,
+                    producto.Marca, producto.Modelo, producto.Serie, producto.PrecioCosto, producto.PrecioVenta, producto.PrecioVenta2, producto.PrecioEspecial, producto.Fecha);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
@@ -940,7 +1284,10 @@ namespace AiresNegocio
         {
             try
             {
-                return new DatProductos().agregaProductoDetalle(Id, producto.ProductoId, producto.IngresoId, producto.EmpresaId, producto.Serie, producto.PrecioCosto, producto.PrecioVenta, producto.PrecioVenta2, producto.PrecioEspecial, producto.Fecha);
+                return new DatProductos().agregaProductoDetalle(Id, producto.ProductoId, producto.IngresoId, producto.EmpresaId, 
+                                    producto.Serie, 
+                                    producto.PrecioCosto, producto.PrecioVenta, producto.PrecioVenta2, producto.PrecioEspecial, 
+                                    producto.Fecha);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
@@ -971,14 +1318,14 @@ namespace AiresNegocio
         /// Actualiza campos de Producto.
         /// </summary>
         /// <param name="producto">
-        /// Propiedades Necesarias: Id=Id del Producto a Actualizar;Campos a Actualizar: TipoProductoId, Descripcion, PrecioCosto, PrecioVenta, PrecioEspecial.
+        /// Propiedades Necesarias: Id=Id del Producto a Actualizar;Campos a Actualizar: TipoProductoId, Descripcion, PrecioCosto.
         /// </param>
         public void ActualizaProducto(EntProducto producto)
         {
             try
             {
-                new DatProductos().actualizaProducto(producto.Id, producto.TipoProductoId, producto.Codigo, producto.Descripcion,
-                                                    producto.ProductoServicioId, producto.UnidadId);
+                new DatProductos().actualizaProducto(producto.Id, producto.TipoProductoId, producto.Codigo, producto.Descripcion,                                          producto.Marca, producto.Modelo,
+                                                     producto.ProductoServicioId, producto.UnidadId, producto.PrecioCosto);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
@@ -988,6 +1335,15 @@ namespace AiresNegocio
             try
             {
                 new DatProductos().actualizaProductoDetalle(producto.Id, producto.EmpresaId, producto.IngresoId, producto.Serie, producto.PrecioCosto);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public void ActualizaProductosDetalle(int EmpresaId, int ProductoId, decimal PrecioCosto)
+        {
+            try
+            {
+                new DatProductos().actualizaProductosDetalle(EmpresaId, ProductoId, PrecioCosto);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
@@ -1063,6 +1419,22 @@ namespace AiresNegocio
             try
             {
                 new DatProductos().actualizaEstatusProductoDetalle(producto.Id, producto.EstatusId);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public void ActualizaEstatusProductoDetalle(int ProductoId, int EstatusId)
+        {
+            try
+            {
+                new DatProductos().actualizaEstatusProductoDetalle(ProductoId, EstatusId);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public void ActualizaEstatusProductoDetalle(EntProducto producto, string Observacion)
+        {
+            try
+            {
+                new DatProductos().actualizaEstatusProductoDetalle(producto.Id, producto.EstatusId, Observacion);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }

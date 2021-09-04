@@ -1,6 +1,6 @@
 ﻿namespace Aires.Pantallas
 {
-    partial class AgregaObservacionFactura
+    partial class AgregaObservacion
     {
         /// <summary>
         /// Required designer variable.

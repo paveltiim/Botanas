@@ -1,4 +1,5 @@
 ﻿using AiresEntidades;
+using AiresNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,28 +14,41 @@ namespace Aires.Pantallas
 {
     public partial class Contraseña : Form
     {
+        List<EntUsuario> Usuarios;
+        public EntUsuario UsuarioLogin { get; set; }
+        public EntUsuario Usuario { get; set; }
+
+        public Contraseña()
+        {
+            InitializeComponent();
+            this.Usuarios = new BusUsuarios().ObtieneUsuarios();
+        }
+
         public Contraseña(List<AiresEntidades.EntUsuario> Usuarios)
         {
             InitializeComponent();
             this.Usuarios = Usuarios;
         }
+        public void CargaNombreUsuario()
+        {
+            txtUsuario.Text = this.Usuarios[0].Usuario;
+        }
 
-        List<EntUsuario> Usuarios;
 
-        public EntUsuario Usuario { get; set; } 
-        //AiresEntidades.EntCatalogoGenerico UsuarioSeleccionado
-        //public string CantidadPago { get { return txtCantidadPaga.Text; } }
-        //public DateTime FechaPago { get { return dtpFechaPago.Value; } }
+        private void Contraseña_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             bool usuarioEncontrado=false;
             foreach (EntUsuario u in Usuarios)
             {
-                if (textBox1.Text.ToUpper() == u.Usuario.ToUpper() && txtContraseña.Text == u.Contraseña)
+                if (txtUsuario.Text.ToUpper() == u.Usuario.ToUpper() && txtContraseña.Text == u.Contraseña)
                 {
                     usuarioEncontrado = true;
-                    Usuario = u;
+                    UsuarioLogin = u;
                     break;
                 }
             }
@@ -60,10 +74,6 @@ namespace Aires.Pantallas
             }
         }
 
-        private void AgregaPago_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void txtContraseña_TextChanged(object sender, EventArgs e)
         {
@@ -77,7 +87,7 @@ namespace Aires.Pantallas
                 if (this.DialogResult == DialogResult.Abort)
                 {
                     e.Cancel = true;
-                    textBox1.Focus();
+                    txtUsuario.Focus();
                     MessageBox.Show("Usuario y/o Contraseña Incorrecto(s)");
                 }
             }

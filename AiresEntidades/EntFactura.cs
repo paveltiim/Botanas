@@ -14,11 +14,13 @@ namespace AiresEntidades
         public string UUID { get; set; }
         public string Ruta { get; set; }
 
-
+        public decimal Saldo { get; set; }
+        public decimal Pago { get; set; }
+        public decimal Total { get; set; }
         public int TipoComprobanteId { get; set; }
         public int FormaPagoId { get; set; }
         public int MetodoPagoId { get; set; }
         public int UsoCFDIId { get; set; }
-
+        public int Parcialidad { get; set; }
     }
 }

@@ -63,6 +63,7 @@ namespace AiresNegocio
                 {
                     EntCliente c = new EntCliente();
                     c.Id = Convert.ToInt32(r["CLI_ID"]);
+                    c.TipoPersonaId= Convert.ToInt32(r["CLI_TIPOPERSONAID"]);
                     c.Nombre = r["CLI_NOMBRE"].ToString();
                     c.NombreFiscal = r["CLI_NOMBREFISCAL"].ToString();
                     c.Direccion = r["CLI_DIRECCION"].ToString();
@@ -141,12 +142,12 @@ namespace AiresNegocio
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
-        public List<EntCliente> ObtieneClientesCredito()
+        public List<EntCliente> ObtieneClientesDeuda(int EmpresaId)
         {
             try
             {
                 List<EntCliente> lst = new List<EntCliente>();
-                dt = new DatClientes().obtieneClientesCredito();
+                dt = new DatClientes().obtieneClientesCredito(EmpresaId);
                 foreach (DataRow r in dt.Rows)
                 {
                     EntCliente c = new EntCliente();
@@ -157,9 +158,9 @@ namespace AiresNegocio
                     c.Telefono = r["CLI_TELEFONO"].ToString();
                     c.Celular = r["CLI_CELULAR"].ToString();
                     c.Email = r["CLI_EMAIL"].ToString();
-                    c.Total = Convert.ToDecimal(r["TOTAL"]);
+                    c.Total = Convert.ToDecimal(r["PED_TOTAL"]);
                     c.Pago = Convert.ToDecimal(r["PED_PAGO"]);
-                    //c.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
+                    //c.nc = Convert.ToDecimal(r["PED_NOTASCREDITO"]);
                     c.Debe = Convert.ToDecimal(r["DEBE"]);
                     lst.Add(c);
                 }

@@ -25,12 +25,16 @@ namespace AiresEntidades
         public string Unidad { get; set; }
 
         public string Codigo { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
         public string Serie { get; set; }
         public int TipoProductoId { get; set; }
         public string TipoProducto { get; set; }
 
         public decimal Cantidad { get; set; }
         public int Existencia { get; set; }
+        public int AlmacenId { get; set; }
+        public string Almacen { get; set; }
         public decimal PrecioCosto { get; set; }
         public decimal PrecioVenta { get; set; }
         public decimal PrecioVentaSinIVA { get; set; }
@@ -38,7 +42,7 @@ namespace AiresEntidades
         public decimal PrecioEspecial { get; set; }
 
         /// <summary>
-        /// Cantidad X PrecioVenta 
+        /// Cantidad X PrecioCosto
         /// </summary>
         public decimal PrecioC { get { return Cantidad * PrecioCosto; } }
         /// <summary>

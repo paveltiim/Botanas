@@ -14,6 +14,20 @@ namespace Aires.Pantallas
 {
     public partial class Inicio : Form
     {
+        enum TiposUsuario
+        {
+            MASTER = 1,
+            COMPRAS = 2,
+            COBRANZA = 3,
+            CONTADOR = 4,
+            GERENTECOMERCIAL = 5,
+            ALMACEN = 6,
+            VENTAS = 7,
+            FACTURACION = 8,
+            ADMINISTRADORGENERAL = 10,
+            ADMINISTRADORBASICO = 11,
+            ADMINISTRADORCASAR = 12
+        }
         public Inicio()
         {
             InitializeComponent();
@@ -69,71 +83,102 @@ namespace Aires.Pantallas
         }
         #endregion
 
-        List<EntUsuario> CargaUsuarios()
+        int TipoUsuarioLoginId { get; set; }
+        void MuestraBotonesMenu(TiposUsuario TipoUsuario)
         {
-            List<EntUsuario> usuarios=new List<EntUsuario>();
-            usuarios.Add(new EntUsuario() { Id=1, Usuario = "admin", Contraseña = "serdan1", Administrador=true });
-            usuarios.Add(new EntUsuario() { Id = 8, Usuario = "serdannav", Contraseña = "sernav30" });
-            usuarios.Add(new EntUsuario() { Id = 9, Usuario = "serdanobr", Contraseña = "serobr20" });
-            usuarios.Add(new EntUsuario() { Id = 5, Usuario = "serdancas", Contraseña = "sercas10" });
+            switch (TipoUsuario)
+            {
+                case TiposUsuario.ADMINISTRADORGENERAL:
+                    break;
+                case TiposUsuario.ADMINISTRADORBASICO:
+                    break;
+                case TiposUsuario.MASTER:
+                    tsbEntradas.Visible = true;
+                    tsbProductos.Visible = true;
+                    break;
+            }
 
-            usuarios.Add(new EntUsuario() { Id = 0, Usuario = "martin", Contraseña = "serdan1"});
-            return usuarios;
         }
+
         private void Inicio_Load(object sender, EventArgs e)
         {
             try
             {
-                //VerificaVencimiento();
-                
-                List<EntUsuario> usuarios=CargaUsuarios();
+                Program.ConexionIdActual = 1;// 1:PRODUCCION; 2:PRUEBAS
+                Program.EmpresaSeleccionada = new EntEmpresa() { Id = 1, Nombre = "-BOTANAS JAVI-" };
 
-                int version = 4;//1:SERDAN; 2:CASAR; 3:OBR NAV; 4:MARTIN
 
-                tsbSincronizacion.Enabled = false;
-                switch (version)
+                Pantallas.Contraseña vInicioSesion = new Pantallas.Contraseña();
+                vInicioSesion.CargaNombreUsuario();
+                if (vInicioSesion.ShowDialog() == DialogResult.OK)
                 {
-                    case 1:
-                        Program.UsuarioSeleccionado = usuarios[0];// 1 - admin //new EntUsuario() { Id = 1 };
-                        break;
-                    case 2:
-                        Program.UsuarioSeleccionado = usuarios[3];// 5 - SerdanCasar //new EntUsuario()
-                        break;
-                    case 3:
-                        Contraseña vInicioSesion = new Contraseña(usuarios);
-
-                        if (vInicioSesion.ShowDialog() != DialogResult.OK)
-                            this.Close();
-                        else
-                            Program.UsuarioSeleccionado = vInicioSesion.Usuario;// new EntUsuario() { Id = 9 };/
-
-                        break;
-                    case 4:
-                        Program.UsuarioSeleccionado = usuarios[4];// 2 - Martin //new EntUsuario() { Id = 2 };/
-                        break;
-                }
-
-                if (Program.UsuarioSeleccionado.Id > 1)
-                {
-                    tsbProveedores.Visible = false;
-                    ////tsbInventario.Visible = false;
-
-                    //VERSION AZURE - YA NO ES NECESASRIO EXPORTACION DE VENTAS
-                    //VerificaExportacion(Program.UsuarioSeleccionado.Id);
-
-                    ////VerificaExportacion(DateTime.Today.AddDays(-2), Program.UsuarioSeleccionado.Id);
-                    ////VerificaExportacion(DateTime.Today.AddDays(-1), Program.UsuarioSeleccionado.Id);
-                }
-
-                Menu a = (Menu)BuscaForma("Menu");
-                if (a == null)
-                {
-                    a = new Menu();
-                    a.MdiParent = this;
-                    a.Show();
+                    Program.UsuarioSeleccionado = vInicioSesion.UsuarioLogin;
+                    //if (!vInicioSesion.UsuarioLogin.Administrador)
+                    //    Program.EmpresaSeleccionada = new AiresNegocio.BusEmpresas().ObtieneEmpresa(vInicioSesion.UsuarioLogin.EmpresaId);
                 }
                 else
-                    a.BringToFront();
+                    this.Close();
+
+                if (Program.UsuarioSeleccionado != null)
+                { 
+                    this.Text = " Usuario: " + vInicioSesion.UsuarioLogin.Usuario + " | " + "Conexión:" + Program.ConexionIdActual;
+                    this.TipoUsuarioLoginId = vInicioSesion.UsuarioLogin.TipoUsuarioId;
+
+                    MuestraBotonesMenu((TiposUsuario)TipoUsuarioLoginId);
+
+                    Menu a = (Menu)BuscaForma("Menu");
+                    if (a == null)
+                    {
+                        a = new Menu(this.TipoUsuarioLoginId);
+                        a.MdiParent = this;
+                        a.Show();
+                    }
+                    else
+                        a.BringToFront();
+                }
+
+                //switch (version)
+                //{
+                //    case 1:
+                //        Program.UsuarioSeleccionado = usuarios[0];// 1 - admin //new EntUsuario() { Id = 1 };
+                //        break;
+                //    case 2:
+                //        Program.UsuarioSeleccionado = usuarios[3];// 5 - SerdanCasar //new EntUsuario()
+                //        break;
+                //    case 3:
+                //        Contraseña vInicioSesion = new Contraseña(usuarios);
+
+                //        if (vInicioSesion.ShowDialog() != DialogResult.OK)
+                //            this.Close();
+                //        else
+                //            Program.UsuarioSeleccionado = vInicioSesion.Usuario;// new EntUsuario() { Id = 9 };/
+                //        break;
+                //    case 4:
+                //        Program.UsuarioSeleccionado = usuarios[4];// 2 - Martin //new EntUsuario() { Id = 2 };/
+                //        break;
+                //}
+
+                //if (Program.UsuarioSeleccionado.Id > 1)
+                //{
+                //    tsbProveedores.Visible = false;
+                //    ////tsbInventario.Visible = false;
+
+                //    //VERSION AZURE - YA NO ES NECESASRIO EXPORTACION DE VENTAS
+                //    //VerificaExportacion(Program.UsuarioSeleccionado.Id);
+
+                //    ////VerificaExportacion(DateTime.Today.AddDays(-2), Program.UsuarioSeleccionado.Id);
+                //    ////VerificaExportacion(DateTime.Today.AddDays(-1), Program.UsuarioSeleccionado.Id);
+                //}
+
+                //Menu a = (Menu)BuscaForma("Menu");
+                //if (a == null)
+                //{
+                //    a = new Menu();
+                //    a.MdiParent = this;
+                //    a.Show();
+                //}
+                //else
+                //    a.BringToFront();
 
                 
             }
@@ -173,12 +218,12 @@ namespace Aires.Pantallas
                     a = new Productos();
                     a.MdiParent = this;
                     a.Show();
-                    if (Program.EmpresaSeleccionada == null)
-                        a.Close();
+                    //if (Program.EmpresaSeleccionada == null)
+                    //    a.Close();
                 }
                 else
                 {
-                    a.VerificaEmpresa();
+                    //a.VerificaEmpresa();
                     a.BringToFront();
                 }
             }
@@ -268,15 +313,20 @@ namespace Aires.Pantallas
         {
             try
             {
-                //ClientesCredito a = (ClientesCredito)BuscaForma(new ClientesCredito().Titulo);
-                //if (a == null)
-                //{
-                //    a = new ClientesCredito();
-                //    a.MdiParent = this;
-                //    a.Show();
-                //}
-                //else
-                //    a.BringToFront();
+                ClientesCredito a = (ClientesCredito)BuscaForma(new ClientesCredito().Titulo);
+                if (a == null)
+                {
+                    a = new ClientesCredito();
+                    a.MdiParent = this;
+                    a.Show();
+                    if (Program.EmpresaSeleccionada == null)
+                        a.Close();
+                }
+                else
+                {
+                    a.VerificaEmpresa();
+                    a.BringToFront();
+                }
             }
             catch (Exception ex)
             {
@@ -357,26 +407,6 @@ namespace Aires.Pantallas
             }
         }
         
-        private void toolStripButton10_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                //EstadosDeCuentasClientes a = (EstadosDeCuentasClientes)BuscaForma(new EstadosDeCuentasClientes().Titulo);
-                //if (a == null)
-                //{
-                //    a = new EstadosDeCuentasClientes();
-                //    a.MdiParent = this;
-                //    a.Show();
-                //}
-                //else
-                //    a.BringToFront();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void toolStripButton11_Click(object sender, EventArgs e)
         {
             try
@@ -397,22 +427,47 @@ namespace Aires.Pantallas
             }
         }
 
-        private void toolStripButton12_Click(object sender, EventArgs e)
+        private void toolStripButton2_Click_1(object sender, EventArgs e)
         {
             try
             {
-                Sincronizacion a = (Sincronizacion)BuscaForma(new Sincronizacion().Titulo);
+                Entradas a = (Entradas)BuscaForma(new Entradas().Titulo);
                 if (a == null)
                 {
-                    a = new Sincronizacion();
+                    a = new Entradas();
                     a.MdiParent = this;
                     a.Show();
-                    if (Program.EmpresaSeleccionada == null)
-                        a.Close();
+                    //if (Program.EmpresaSeleccionada == null)
+                    //    a.Close();
                 }
                 else
                 {
-                    a.VerificaEmpresa();
+                    //a.VerificaEmpresa();
+                    a.BringToFront();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void tsbSalidas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Salidas a = (Salidas)BuscaForma(new Salidas().Titulo);
+                if (a == null)
+                {
+                    a = new Salidas();
+                    a.MdiParent = this;
+                    a.Show();
+                    //if (Program.EmpresaSeleccionada == null)
+                    //    a.Close();
+                }
+                else
+                {
+                    //a.VerificaEmpresa();
                     a.BringToFront();
                 }
             }
