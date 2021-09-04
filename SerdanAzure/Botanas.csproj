@@ -494,6 +494,9 @@
     <EmbeddedResource Include="Reportes\rptInventarioDetalle.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rptInventarioAlmacen.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptInventarioProducto.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -711,6 +714,7 @@
     <None Include="Resources\EntradasNeueSinFondo.png" />
     <None Include="Resources\ProductosNeueSinFondo.png" />
     <None Include="Resources\SalidasSinFondo.png" />
+    <None Include="Resources\InventarioSinFondo.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

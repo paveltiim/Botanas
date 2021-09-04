@@ -254,5 +254,22 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+        public DataTable obtieneAlmacenes(int EmpresaId, int UsuarioId)
+        {
+            try
+            {
+                com = new SqlCommand("spGetUsuarioAlmacenes", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("UsuarioId", UsuarioId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
     }
 }

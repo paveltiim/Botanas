@@ -30,11 +30,19 @@ namespace Aires.Pantallas
 
         List<EntEmpresa> ListaEmpresas;
         
+        void CargaAlmacenes()
+        {
+            List<EntCatalogoGenerico> almacenes = new BusEmpresas().ObtieneAlmacenes(Program.EmpresaSeleccionada.Id, Program.UsuarioSeleccionado.Id);
+            almacenes.Insert(0, new EntCatalogoGenerico() { Id=0, Descripcion="-TODAS-"});
+            cmbAlmacenes.DataSource = almacenes;
+            cmbAlmacenes.SelectedIndex = 0;
+        }
+
         /// <summary>
         /// 
         /// 
         /// </summary>
-        public void CargaInventario()
+        public void CargaInventario(int AlmacenId)
         {
             int EmpresaId = Program.EmpresaSeleccionada.Id;
             ReportParameter parmEmpresa;
@@ -44,9 +52,9 @@ namespace Aires.Pantallas
             {
                 List<EntProducto> listaProductos;
                 if (chkSoloConExistencia.Checked)
-                    listaProductos = new BusProductos().ObtieneProductosDetalle(EmpresaId).Where(P=>P.TipoProductoId!=2).ToList();
+                    listaProductos = new BusProductos().ObtieneProductosExistenciaPorAlmacen(0, AlmacenId);
                 else
-                    listaProductos = new BusProductos().ObtieneProductos(EmpresaId);
+                    listaProductos = new BusProductos().ObtieneProductosPorAlmacen(0, AlmacenId);
                 //gvPedidos.DataSource = ListaPedidos;
                 EntProductoBindingSource.DataSource = listaProductos;
 
@@ -167,6 +175,7 @@ namespace Aires.Pantallas
                 //    gvProductos.Columns[3].Visible = false;
                 //    gvProductos.Columns[5].Visible = false;
                 //}
+                CargaAlmacenes();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -175,7 +184,8 @@ namespace Aires.Pantallas
         {
             try
             {
-                CargaInventario();
+                EntCatalogoGenerico almacen = ObtieneCatalogoGenericoFromCmb(cmbAlmacenes);
+                CargaInventario(almacen.Id);
 
                 if (rdoEntradasPorMes.Checked)
                     CargaIngresosProductos(new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, 1), new DateTime(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1, DateTime.DaysInMonth(ConvierteTextoAInteger(cmbAñoEntradas.Text), cmbMesesEntradas.SelectedIndex + 1)));
@@ -436,7 +446,8 @@ namespace Aires.Pantallas
         {
             try
             {
-                CargaInventario();
+                EntCatalogoGenerico almacen = ObtieneCatalogoGenericoFromCmb(cmbAlmacenes);
+                CargaInventario(almacen.Id);
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }

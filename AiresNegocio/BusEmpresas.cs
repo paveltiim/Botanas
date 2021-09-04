@@ -259,5 +259,22 @@ namespace AiresNegocio
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+        public List<EntCatalogoGenerico> ObtieneAlmacenes(int EmpresaId, int UsuarioId)
+        {
+            try
+            {
+                List<EntCatalogoGenerico> lst = new List<EntCatalogoGenerico>();
+                dt = new DatEmpresas().obtieneAlmacenes(EmpresaId, UsuarioId);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntCatalogoGenerico m = new EntCatalogoGenerico();
+                    m.Id = Convert.ToInt32(r["EST_ID"]);
+                    m.Descripcion = r["EST_NOMBRE"].ToString();
+                    lst.Add(m);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
     }
 }

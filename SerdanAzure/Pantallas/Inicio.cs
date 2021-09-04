@@ -370,12 +370,12 @@ namespace Aires.Pantallas
                     a = new Inventarios();
                     a.MdiParent = this;
                     a.Show();
-                    if (Program.EmpresaSeleccionada == null)
-                        a.Close();
+                    //if (Program.EmpresaSeleccionada == null)
+                    //    a.Close();
                 }
                 else
                 {
-                    a.VerificaEmpresa();
+                    //a.VerificaEmpresa();
                     a.BringToFront();
                 }
             }
