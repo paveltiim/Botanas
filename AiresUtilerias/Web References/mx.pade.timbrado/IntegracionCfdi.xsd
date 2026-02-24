@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="integracionCfdi.ws.pade.mx" targetNamespace="integracionCfdi.ws.pade.mx" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="acuseCancelacionCfdi" type="tns:acuseCancelacionCfdi" />
+  <xs:element name="acuseCancelacionCfdiResponse" type="tns:acuseCancelacionCfdiResponse" />
+  <xs:element name="cancelarCfdi" type="tns:cancelarCfdi" />
+  <xs:element name="cancelarCfdiConOpciones" type="tns:cancelarCfdiConOpciones" />
+  <xs:element name="cancelarCfdiConOpcionesResponse" type="tns:cancelarCfdiConOpcionesResponse" />
+  <xs:element name="cancelarCfdiResponse" type="tns:cancelarCfdiResponse" />
+  <xs:element name="consultaCfdiPorUUID" type="tns:consultaCfdiPorUUID" />
+  <xs:element name="consultaCfdiPorUUIDResponse" type="tns:consultaCfdiPorUUIDResponse" />
+  <xs:element name="obtenerXmlDesdeCsv" type="tns:obtenerXmlDesdeCsv" />
+  <xs:element name="obtenerXmlDesdeCsvResponse" type="tns:obtenerXmlDesdeCsvResponse" />
+  <xs:element name="procesarArchivo" type="tns:procesarArchivo" />
+  <xs:element name="procesarArchivoConCSD" type="tns:procesarArchivoConCSD" />
+  <xs:element name="procesarArchivoConCSDResponse" type="tns:procesarArchivoConCSDResponse" />
+  <xs:element name="procesarArchivoResponse" type="tns:procesarArchivoResponse" />
+  <xs:complexType name="acuseCancelacionCfdi">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contrato" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="passwd" type="xs:string" />
+      <xs:element minOccurs="0" name="uuid" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="acuseCancelacionCfdiResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerXmlDesdeCsv">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contrato" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="passwd" type="xs:string" />
+      <xs:element minOccurs="0" name="datos" type="xs:string" />
+      <xs:element minOccurs="0" name="plugin" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerXmlDesdeCsvResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="procesarArchivoConCSD">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contrato" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="passwd" type="xs:string" />
+      <xs:element name="prueba" type="xs:boolean" />
+      <xs:element minOccurs="0" name="datos" type="xs:string" />
+      <xs:element minOccurs="0" name="cert" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="key" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="keyPass" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="opciones" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="procesarArchivoConCSDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaCfdiPorUUID">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contrato" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="passwd" type="xs:string" />
+      <xs:element minOccurs="0" name="uuid" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultaCfdiPorUUIDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cancelarCfdiConOpciones">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contrato" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="passwd" type="xs:string" />
+      <xs:element minOccurs="0" name="rfcEmisor" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="arregloUUID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="cert" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="key" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="keyPass" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="opciones" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cancelarCfdiConOpcionesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="procesarArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contrato" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="passwd" type="xs:string" />
+      <xs:element name="prueba" type="xs:boolean" />
+      <xs:element minOccurs="0" name="datos" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="opciones" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="procesarArchivoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cancelarCfdi">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="contrato" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="passwd" type="xs:string" />
+      <xs:element minOccurs="0" name="rfcEmisor" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="arregloUUID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="cert" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="key" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="keyPass" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cancelarCfdiResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

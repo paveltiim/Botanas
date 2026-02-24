@@ -8,13 +8,15 @@ namespace AiresEntidades
 {
     public class EntCliente : EntAbstracta
     {
-        public int EmpresaId { get; set; }
+        public int EstablecimientoId { get; set; }
         public string Nombre { get; set; }
         public string NombreLegal { get; set; }
         public string Celular { get; set; }
         public string RFC { get; set; }
 
         public string NombreFiscal { get; set; }
+        public int RegimenFiscalId { get; set; }
+
         public string Direccion { get; set; }
         public string Calle { get; set; }
         public string NoExterior { get; set; }
@@ -40,13 +42,20 @@ namespace AiresEntidades
         public int TipoPersonaId { get; set; }
 
         public int FormaPagoId { get; set; }
+        public string FormaPago { get; set; }
 
-        public bool IncluyeKit { get; set; }
+        public bool Credito { get; set; }
+        public int DiasCredito { get; set; }
+        public int DiasVencidos { get; set; }
+        public DateTime FechaPago { get; set; }
+        public DateTime FechaVencimiento { get; set; }
 
         public string NumCliente { get { return Id.ToString().PadLeft(4, '0'); } }
 
         public decimal Total { get; set; }
         public decimal Pago { get; set; }
+        public decimal NotasCredito{ get; set; }
         public decimal Debe { get; set; }
+        public decimal DebeFacturas { get; set; }
     }
 }

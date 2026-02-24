@@ -11,48 +11,6 @@ namespace AiresNegocio
 {
     public class BusClientes : BusAbstracta
     {
-        public List<EntCliente> ObtieneClientes()
-        {
-            try
-            {
-                List<EntCliente> lst = new List<EntCliente>();
-                dt = new DatClientes().obtieneClientes();
-                foreach (DataRow r in dt.Rows)
-                {
-                    EntCliente c = new EntCliente();
-                    c.Id = Convert.ToInt32(r["CLI_ID"]);
-                    c.Nombre = r["CLI_NOMBRE"].ToString();
-                    c.NombreFiscal = r["CLI_NOMBREFISCAL"].ToString();
-                    c.Direccion= r["CLI_DIRECCION"].ToString();
-                    c.Calle = r["CLI_CALLE"].ToString();
-                    c.NoExterior= r["CLI_NOEXTERIOR"].ToString();
-                    c.NoInterior= r["CLI_NOINTERIOR"].ToString();
-                    c.Colonia = r["CLI_COLONIA"].ToString();
-                    c.Localidad= r["CLI_LOCALIDAD"].ToString();
-                    c.Municipio= r["CLI_MUNICIPIO"].ToString();
-                    c.Estado= r["CLI_ESTADO"].ToString();
-                    c.CP= r["CLI_CP"].ToString();
-                    c.Telefono = r["CLI_TELEFONO"].ToString();
-                    c.Telefono2 = r["CLI_TELEFONO2"].ToString();
-                    c.Celular = r["CLI_CELULAR"].ToString();
-                    c.RFC = r["CLI_RFC"].ToString();
-                    c.Email = r["CLI_EMAIL"].ToString();
-                    c.Email2 = r["CLI_EMAIL2"].ToString();
-                    c.Email3 = r["CLI_EMAIL3"].ToString();
-                    c.Banco = r["CLI_BANCO"].ToString();
-                    c.NumeroCuenta = r["CLI_NUMEROCUENTA"].ToString();
-                    c.Sucursal = r["CLI_SUCURSAL"].ToString();
-                    c.CLABE = r["CLI_CLABE"].ToString();
-                    c.NumeroReferencia = r["CLI_NUMEROREFERENCIA"].ToString();
-                    c.IncluyeKit =Convert.ToBoolean( r["CLI_INCLUYEKIT"]);
-                    c.Fecha = Convert.ToDateTime(r["CLI_FECHAREGISTRO"]);
-                    c.Estatus = Convert.ToBoolean(r["CLI_ESTATUS"]);
-                    lst.Add(c);
-                }
-                return lst;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
         public List<EntCliente> ObtieneClientes(int EmpresaId)
         {
             try
@@ -63,7 +21,7 @@ namespace AiresNegocio
                 {
                     EntCliente c = new EntCliente();
                     c.Id = Convert.ToInt32(r["CLI_ID"]);
-                    c.TipoPersonaId= Convert.ToInt32(r["CLI_TIPOPERSONAID"]);
+                    c.TipoPersonaId= Convert.ToInt32(r["CLI_TIPOCLIENTEID"]);
                     c.Nombre = r["CLI_NOMBRE"].ToString();
                     c.NombreFiscal = r["CLI_NOMBREFISCAL"].ToString();
                     c.Direccion = r["CLI_DIRECCION"].ToString();
@@ -78,6 +36,7 @@ namespace AiresNegocio
                     c.Telefono = r["CLI_TELEFONO"].ToString();
                     c.Telefono2 = r["CLI_TELEFONO2"].ToString();
                     c.Celular = r["CLI_CELULAR"].ToString();
+                    c.Contacto = r["CLI_CONTACTO"].ToString();
                     c.RFC = r["CLI_RFC"].ToString();
                     c.Email = r["CLI_EMAIL"].ToString();
                     c.Email2 = r["CLI_EMAIL2"].ToString();
@@ -88,11 +47,9 @@ namespace AiresNegocio
                     c.CLABE = r["CLI_CLABE"].ToString();
                     c.NumeroReferencia = r["CLI_NUMEROREFERENCIA"].ToString();
                     c.FormaPagoId = Convert.ToInt32(r["CLI_FORMAPAGOID"]);
-                    c.IncluyeKit = Convert.ToBoolean(r["CLI_INCLUYEKIT"]);
-
-                    c.EmpresaId = Convert.ToInt32(r["CLI_EMPRESAASOCIADAID"]);
-
-                    c.Fecha = Convert.ToDateTime(r["CLI_FECHAREGISTRO"]);
+                    c.Credito = Convert.ToBoolean(r["CLI_CREDITO"]);
+                    c.DiasCredito= Convert.ToInt32(r["CLI_DIASCREDITO"]);
+                    c.RegimenFiscalId = Convert.ToInt32(r["CLI_REGIMENFISCALID"]);
                     c.Estatus = Convert.ToBoolean(r["CLI_ESTATUS"]);
                     lst.Add(c);
                 }
@@ -100,7 +57,54 @@ namespace AiresNegocio
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+        public List<EntCliente> ObtieneClientesPorEstablecimiento(int EstablecimientoId)
+        {
+            try
+            {
+                List<EntCliente> lst = new List<EntCliente>();
+                dt = new DatClientes().obtieneClientesPorEstablecimiento(EstablecimientoId);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntCliente c = new EntCliente();
+                    c.Id = Convert.ToInt32(r["CLI_ID"]);
+                    c.EmpresaId = Convert.ToInt32(r["CLI_EMPRESAID"]);
+                    c.TipoPersonaId = Convert.ToInt32(r["CLI_TIPOCLIENTEID"]);
+                    c.Nombre = r["CLI_NOMBRE"].ToString();
+                    c.NombreFiscal = r["CLI_NOMBREFISCAL"].ToString();
+                    c.Direccion = r["CLI_DIRECCION"].ToString();
+                    c.Calle = r["CLI_CALLE"].ToString();
+                    c.NoExterior = r["CLI_NOEXTERIOR"].ToString();
+                    c.NoInterior = r["CLI_NOINTERIOR"].ToString();
+                    c.Colonia = r["CLI_COLONIA"].ToString();
+                    c.Localidad = r["CLI_LOCALIDAD"].ToString();
+                    c.Municipio = r["CLI_MUNICIPIO"].ToString();
+                    c.Estado = r["CLI_ESTADO"].ToString();
+                    c.CP = r["CLI_CP"].ToString();
+                    c.Telefono = r["CLI_TELEFONO"].ToString();
+                    c.Telefono2 = r["CLI_TELEFONO2"].ToString();
+                    c.Celular = r["CLI_CELULAR"].ToString();
+                    c.Contacto = r["CLI_CONTACTO"].ToString();
+                    c.RFC = r["CLI_RFC"].ToString();
+                    c.Email = r["CLI_EMAIL"].ToString();
+                    c.Email2 = r["CLI_EMAIL2"].ToString();
+                    c.Email3 = r["CLI_EMAIL3"].ToString();
+                    c.Banco = r["CLI_BANCO"].ToString();
+                    c.NumeroCuenta = r["CLI_NUMEROCUENTA"].ToString();
+                    c.Sucursal = r["CLI_SUCURSAL"].ToString();
+                    c.CLABE = r["CLI_CLABE"].ToString();
+                    c.NumeroReferencia = r["CLI_NUMEROREFERENCIA"].ToString();
+                    c.FormaPagoId = Convert.ToInt32(r["CLI_FORMAPAGOID"]);
+                    c.Credito = Convert.ToBoolean(r["CLI_CREDITO"]);
+                    c.DiasCredito = Convert.ToInt32(r["CLI_DIASCREDITO"]);
 
+                    c.RegimenFiscalId = Convert.ToInt32(r["CLI_REGIMENFISCALID"]);
+                    c.Estatus = Convert.ToBoolean(r["CLI_ESTATUS"]);
+                    lst.Add(c);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
         public EntCliente ObtieneCliente(int ClienteId)
         {
             try
@@ -110,6 +114,8 @@ namespace AiresNegocio
                 foreach (DataRow r in dt.Rows)
                 {
                     c.Id = Convert.ToInt32(r["CLI_ID"]);
+                    c.EmpresaId = Convert.ToInt32(r["CLI_EMPRESAID"]);
+                    c.TipoPersonaId = Convert.ToInt32(r["CLI_TIPOCLIENTEID"]);
                     c.Nombre = r["CLI_NOMBRE"].ToString();
                     c.NombreFiscal = r["CLI_NOMBREFISCAL"].ToString();
                     c.Direccion = r["CLI_DIRECCION"].ToString();
@@ -134,20 +140,24 @@ namespace AiresNegocio
                     c.NumeroCuenta = r["CLI_NUMEROCUENTA"].ToString();
                     c.Sucursal = r["CLI_SUCURSAL"].ToString();
                     c.CLABE = r["CLI_CLABE"].ToString();
-                    c.NumeroReferencia = r["CLI_NUMEROREFERENCIA"].ToString();
-                    c.Fecha = Convert.ToDateTime(r["CLI_FECHAREGISTRO"]);
+                    c.NumeroReferencia = r["CLI_NUMEROREFERENCIA"].ToString(); 
+                    c.FormaPagoId = Convert.ToInt32(r["CLI_FORMAPAGOID"]);
+                    c.Credito = Convert.ToBoolean(r["CLI_CREDITO"]);
+                    c.DiasCredito = Convert.ToInt32(r["CLI_DIASCREDITO"]);
+
+                    c.RegimenFiscalId = Convert.ToInt32(r["CLI_REGIMENFISCALID"]);
                     c.Estatus = Convert.ToBoolean(r["CLI_ESTATUS"]);
                 }
                 return c;
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
-        public List<EntCliente> ObtieneClientesDeuda(int EmpresaId)
+        public List<EntCliente> ObtieneClientesDeuda()
         {
             try
             {
                 List<EntCliente> lst = new List<EntCliente>();
-                dt = new DatClientes().obtieneClientesCredito(EmpresaId);
+                dt = new DatClientes().obtieneClientesCredito();
                 foreach (DataRow r in dt.Rows)
                 {
                     EntCliente c = new EntCliente();
@@ -155,6 +165,8 @@ namespace AiresNegocio
                     c.Nombre = r["CLI_NOMBRE"].ToString();
                     c.NombreFiscal = r["CLI_NOMBREFISCAL"].ToString();
                     c.RFC = r["CLI_RFC"].ToString();
+                    c.CP = r["CLI_CP"].ToString();
+                    c.RegimenFiscalId = Convert.ToInt32(r["CLI_REGIMENFISCALID"]);
                     c.Telefono = r["CLI_TELEFONO"].ToString();
                     c.Celular = r["CLI_CELULAR"].ToString();
                     c.Email = r["CLI_EMAIL"].ToString();
@@ -165,6 +177,108 @@ namespace AiresNegocio
                     lst.Add(c);
                 }
                 return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public List<EntCliente> ObtieneClientesDeuda(int EstablecimientoId)
+        {
+            try
+            {
+                DateTime fechaToday = DateTime.Today;
+                List<EntCliente> lst = new List<EntCliente>();
+                dt = new DatClientes().obtieneClientesCredito(EstablecimientoId);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntCliente c = new EntCliente();
+                    c.Id = Convert.ToInt32(r["CLI_ID"]);
+                    c.Nombre = r["CLI_NOMBRE"].ToString();
+                    c.NombreFiscal = r["CLI_NOMBREFISCAL"].ToString();
+                    c.RFC = r["CLI_RFC"].ToString();
+                    c.CP = r["CLI_CP"].ToString();
+                    c.RegimenFiscalId = Convert.ToInt32(r["CLI_REGIMENFISCALID"]);
+                    c.Telefono = r["CLI_TELEFONO"].ToString();
+                    c.Celular = r["CLI_CELULAR"].ToString();
+                    c.Email = r["CLI_EMAIL"].ToString();
+                    c.Total = Convert.ToDecimal(r["PED_TOTAL"]);
+                    c.Pago = Convert.ToDecimal(r["PED_PAGO"]);
+                    c.NotasCredito = Convert.ToDecimal(r["PED_NOTASCREDITO"]);
+                    c.Debe = Convert.ToDecimal(r["DEBE_PEDIDOS"]);
+                    c.DebeFacturas = Convert.ToDecimal(r["DEBE_FACTURAS"]);
+                    //c.Debe = Convert.ToDecimal(r["DEBE_GLOBAL"]);
+                    c.FormaPagoId = Convert.ToInt32(r["CLI_FORMAPAGOID"]);
+                    c.FormaPago = r["CATFOR_DESCRIPCION"].ToString(); 
+                    //c.Credito = Convert.ToBoolean(r["CLI_CREDITO"]);
+                    //c.DiasCredito = Convert.ToInt32(r["CLI_DIASCREDITO"]);
+                    c.EmpresaId = Convert.ToInt32(r["PED_EMPRESAID"]);
+
+                    c.DiasCredito = Convert.ToInt32(r["CLI_DIASCREDITO"]);
+                    c.Fecha = Convert.ToDateTime(r["FECHA"]);
+                    c.FechaPago = Convert.ToDateTime(r["ULTIMAFECHAPAGO"]);
+                    c.FechaVencimiento = Convert.ToDateTime(r["FECHAVENCIMIENTO"]);
+                    TimeSpan ts = fechaToday - c.FechaVencimiento;
+                    c.DiasVencidos = ts.Days;
+
+                    lst.Add(c);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        /// <summary>
+        /// OBTIENE CLIENTES DEUDA (INCLUYE ULTIMA PAGO, FECHA VENCIMIENTO, DIAS VENCIMIENTO)
+        /// </summary>
+        /// <param name="EstablecimientoId"></param>
+        /// <returns></returns>
+        public List<EntCliente> ObtieneClientesDeudaUltimoPago(int EstablecimientoId)
+        {
+            try
+            {
+                DateTime fechaToday = DateTime.Today;
+                List<EntCliente> lst = new List<EntCliente>();
+                dt = new DatClientes().obtieneClientesCreditoUltimoPago(EstablecimientoId);
+                foreach (DataRow r in dt.Rows)
+                {
+                    EntCliente c = new EntCliente();
+                    c.Id = Convert.ToInt32(r["CLI_ID"]);
+                    c.Nombre = r["CLI_NOMBRE"].ToString();
+                    c.NombreFiscal = r["CLI_NOMBREFISCAL"].ToString();
+                    c.RFC = r["CLI_RFC"].ToString();
+                    c.CP = r["CLI_CP"].ToString();
+                    c.RegimenFiscalId = Convert.ToInt32(r["CLI_REGIMENFISCALID"]);
+                    c.Telefono = r["CLI_TELEFONO"].ToString();
+                    c.Celular = r["CLI_CELULAR"].ToString();
+                    c.Email = r["CLI_EMAIL"].ToString();
+                    c.Total = Convert.ToDecimal(r["PED_TOTAL"]);
+                    c.Pago = Convert.ToDecimal(r["PED_PAGO"]);
+                    c.NotasCredito = Convert.ToDecimal(r["PED_NOTASCREDITO"]);
+                    c.Debe = Convert.ToDecimal(r["DEBE"]);
+                    c.FormaPagoId = Convert.ToInt32(r["CLI_FORMAPAGOID"]);
+                    c.FormaPago = r["CATFOR_DESCRIPCION"].ToString();
+                    //c.Credito = Convert.ToBoolean(r["CLI_CREDITO"]);
+                    c.EmpresaId = Convert.ToInt32(r["PED_EMPRESAID"]);
+
+                    c.DiasCredito = Convert.ToInt32(r["CLI_DIASCREDITO"]);
+                    c.Fecha = Convert.ToDateTime(r["FECHA"]);
+                    c.FechaPago = Convert.ToDateTime(r["ULTIMAFECHAPAGO"]);
+                    c.FechaVencimiento = Convert.ToDateTime(r["FECHAVENCIMIENTO"]);
+                    TimeSpan ts = fechaToday - c.FechaVencimiento ;
+                    c.DiasVencidos = ts.Days;
+                    lst.Add(c);
+                }
+                return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public void AsignaUltimaFechaPagoFacturaEnClientesDeuda(int EstablecimientoId, EntCliente ClienteCredito)
+        {
+            try
+            {
+                List<EntCliente> lst = new List<EntCliente>();
+                dt = new DatClientes().obtieneUltimoPagoFacturaClienteCredito(EstablecimientoId, ClienteCredito.Id);
+                foreach (DataRow r in dt.Rows)
+                {
+                    ClienteCredito.Fecha = Convert.ToDateTime(r["ULTIMAFECHAPAGO"]);
+                }
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
@@ -180,20 +294,13 @@ namespace AiresNegocio
             try
             {
                 //return new DatClientes().agregaCliente(cliente.EmpresaId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit, cliente.Fecha);
-                return new DatClientes().agregaClientePorEmpresa(cliente.EmpresaId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit, cliente.Fecha);
+                return new DatClientes().agregaClientePorEmpresa(cliente.EmpresaId, cliente.EstablecimientoId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, 
+                    cliente.Contacto, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, 
+                    cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.Credito, cliente.DiasCredito,
+                    cliente.RegimenFiscalId);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
-        public int AgregaCliente(int ClienteId, EntCliente cliente)
-        {
-            try
-            {
-                //return new DatClientes().agregaCliente(cliente.EmpresaId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit, cliente.Fecha);
-                return new DatClientes().agregaCliente(ClienteId,cliente.EmpresaId, cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit, cliente.Fecha);
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
-
         /// <summary>
         /// Actualiza nuevo Cliente.
         /// </summary>
@@ -204,7 +311,10 @@ namespace AiresNegocio
         {
             try
             {
-                new DatClientes().actualizaCliente(cliente.Id, cliente.EmpresaId,cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.IncluyeKit);
+                new DatClientes().actualizaCliente(cliente.Id, cliente.EmpresaId,cliente.TipoPersonaId, cliente.Nombre, cliente.NombreFiscal, cliente.Direccion, cliente.Calle, cliente.NoExterior, cliente.NoInterior, cliente.Colonia, cliente.Localidad, cliente.Municipio, cliente.Estado, cliente.CP, cliente.Telefono, cliente.Telefono2, cliente.Celular,
+                    cliente.Contacto, cliente.RFC, cliente.Email, cliente.Email2, cliente.Email3, cliente.Banco, cliente.NumeroCuenta, 
+                    cliente.Sucursal, cliente.CLABE, cliente.NumeroReferencia, cliente.FormaPagoId, cliente.Credito, cliente.DiasCredito,
+                    cliente.RegimenFiscalId);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }

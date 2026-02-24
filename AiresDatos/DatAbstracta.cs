@@ -21,6 +21,7 @@ namespace AiresDatos
         {
             //string cadena = ConfigurationManager.ConnectionStrings["SQLPromo"].ToString();
             string cadena = ConfigurationManager.ConnectionStrings["SQLSerdan"].ToString();
+            cadena = "Data Source=tiimserver.database.windows.net;Initial Catalog=BotanasAzure;User ID=tiim;password =Zoeserv10";
             con = new SqlConnection(cadena);
         }
     }

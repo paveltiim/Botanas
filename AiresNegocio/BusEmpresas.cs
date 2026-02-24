@@ -11,17 +11,18 @@ namespace AiresNegocio
 {
     public class BusEmpresas : BusAbstracta
     {
-        public List<EntEmpresa> ObtieneEmpresas()
+        public List<EntEmpresa> ObtieneEmpresas(int CompañiaId=1)
         {
             try
             {
                 List<EntEmpresa> lst = new List<EntEmpresa>();
 
-                dt = new DatEmpresas().obtieneEmpresas();
+                dt = new DatEmpresas().obtieneEmpresas(CompañiaId);
                 foreach (DataRow r in dt.Rows)
                 {
                     EntEmpresa m = new EntEmpresa();
                     m.Id = Convert.ToInt32(r["EMP_ID"]);
+                    m.CompañiaId = Convert.ToInt32(r["EMP_COMPAÑIAID"]);
 
                     //m.TipoPersonaId = Convert.ToInt32(r["EMP_TIPOPERSONAID"]);
                     m.Descripcion = r["EMP_NOMBRE"].ToString();
@@ -51,41 +52,85 @@ namespace AiresNegocio
                     m.CLABE = r["EMP_CLABE"].ToString();
                     m.NumeroReferencia = r["EMP_NUMEROREFERENCIA"].ToString();
 
-                    m.Certificado = r["EMP_CERTIFICADORUTA"].ToString();
-                    m.Key = r["EMP_KEYRUTA"].ToString();
-                    //m.Clave = r["EMP_CLAVE"].ToString();
-
+                    m.Logo = r["EMP_LOGO"].ToString();
                     m.NoCertificado = r["EMP_NOCERTIFICADO"].ToString();
-                    //m.TipoTasaIVAId = Convert.ToInt32(r["EMP_TIPOTASAIVAID"]);
 
+                    m.TipoFactorId = Convert.ToInt32(r["EMP_TIPOFACTORID"]);
+                    m.TipoFactor = r["CATFAC_DESCRIPCION"].ToString();
 
-                    m.TipoFactorId = 1;//Convert.ToInt32(r["EMP_TIPOFACTORID"]);
-                    m.TipoFactor = "Tasa";//r["CATFAC_DESCRIPCION"].ToString();
-                    m.TasaOCuota = 0.16m;//Convert.ToDecimal(r["EMP_TASAOCUOTA"]);
+                    m.TasaOCuota = Convert.ToDecimal(r["EMP_TASAOCUOTA"]);
+                    m.TasaIEPS = Convert.ToDecimal(r["EMP_TASAIEPS"]);
 
-
-                    //m.RegimenFiscalId = Convert.ToInt32(r["EMP_REGIMENFISCALID"]);
-                    //m.RegimenFiscal = r["CATREG_DESCRIPCION"].ToString();
-
-                    //m.UsoCFDIId = Convert.ToInt32(r["EMP_USOCFDIID"]);
-
-                    //m.Timbres = Convert.ToInt32(r["TIM_TIMBRESCONTRATADOS"]);
-                    //m.TimbresUsados = Convert.ToInt32(r["TIM_TIMBRESUSADOS"]);
-
-                    //m.TimbresRestantes = Convert.ToInt32(r["TIMBRESRESTANTES"]);
-                    //m.Timbres = Convert.ToInt32(r["TIMBRESRESTANTES"]);
-
-                    //m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
-                    //m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
-                    //m.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
-
-                    //m.Fecha = Convert.ToDateTime(r["EMP_FECHAREGISTRO"]);
-                    //m.Facturacion= Convert.ToBoolean(r["EMP_FACTURACION"]);
-
-                    m.UsuarioId = Convert.ToInt32(r["EMP_USUARIOID"]);
+                    m.RegimenFiscalId = Convert.ToInt32(r["EMP_REGIMENFISCALID"]);
+                    m.RegimenFiscal = r["CATREG_DESCRIPCION"].ToString();
+                                        
+                    m.UsoCFDIId = Convert.ToInt32(r["EMP_USOCFDIID"]);
+                    m.Facturacion = Convert.ToBoolean(r["EMP_FACTURACION"]);
+                    m.LinkCancelacionFactura = r["CATLIN_DESCRIPCION"].ToString();
                     lst.Add(m);
                 }
                 return lst;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public EntEmpresa ObtieneEmpresa(int EmpresaId)
+        {
+            try
+            {
+                EntEmpresa m = new EntEmpresa();
+
+                dt = new DatEmpresas().obtieneEmpresa(EmpresaId);
+                foreach (DataRow r in dt.Rows)
+                {
+                    m.Id = Convert.ToInt32(r["EMP_ID"]);
+                    m.CompañiaId = Convert.ToInt32(r["EMP_COMPAÑIAID"]);
+
+                    //m.TipoPersonaId = Convert.ToInt32(r["EMP_TIPOPERSONAID"]);
+                    m.Descripcion = r["EMP_NOMBRE"].ToString();
+                    m.Nombre = r["EMP_NOMBRE"].ToString();
+                    m.NombreFiscal = r["EMP_NOMBREFISCAL"].ToString();
+                    m.RegimenFiscal = r["EMP_REGIMENFISCAL"].ToString();
+                    m.Direccion = r["EMP_DIRECCION"].ToString();
+                    m.Telefono = r["EMP_TELEFONO"].ToString();
+                    m.Telefono2 = r["EMP_TELEFONO2"].ToString();
+                    m.Email = r["EMP_EMAIL"].ToString();
+
+                    m.RFC = r["EMP_RFC"].ToString();
+                    m.Calle = r["EMP_CALLE"].ToString();
+                    m.NoExterior = r["EMP_NOEXTERIOR"].ToString();
+                    m.NoInterior = r["EMP_NOINTERIOR"].ToString();
+                    m.Colonia = r["EMP_COLONIA"].ToString();
+                    m.Localidad = r["EMP_LOCALIDAD"].ToString();
+                    m.Municipio = r["EMP_MUNICIPIO"].ToString();
+                    m.Estado = r["EMP_ESTADO"].ToString();
+                    m.CP = r["EMP_CP"].ToString();
+
+                    m.Contacto = r["EMP_CONTACTO"].ToString();
+                    m.TelefonoContacto = r["EMP_TELEFONOCONTACTO"].ToString();
+                    m.Banco = r["EMP_BANCO"].ToString();
+                    m.NumeroCuenta = r["EMP_NUMEROCUENTA"].ToString();
+                    m.Sucursal = r["EMP_SUCURSAL"].ToString();
+                    m.CLABE = r["EMP_CLABE"].ToString();
+                    m.NumeroReferencia = r["EMP_NUMEROREFERENCIA"].ToString();
+
+                    m.Logo = r["EMP_LOGO"].ToString();
+                    m.NoCertificado = r["EMP_NOCERTIFICADO"].ToString();
+
+                    m.TipoFactorId = Convert.ToInt32(r["EMP_TIPOFACTORID"]);
+                    m.TipoFactor = r["CATFAC_DESCRIPCION"].ToString();
+
+                    m.TasaOCuota = Convert.ToDecimal(r["EMP_TASAOCUOTA"]);
+                    m.TasaIEPS = Convert.ToDecimal(r["EMP_TASAIEPS"]);
+
+                    m.RegimenFiscalId = Convert.ToInt32(r["EMP_REGIMENFISCALID"]);
+                    m.RegimenFiscal = r["CATREG_DESCRIPCION"].ToString();
+
+                    m.UsoCFDIId = Convert.ToInt32(r["EMP_USOCFDIID"]);
+                    m.Facturacion = Convert.ToBoolean(r["EMP_FACTURACION"]);
+
+                    m.LinkCancelacionFactura = r["CATLIN_DESCRIPCION"].ToString();
+                }
+                return m;
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
@@ -93,7 +138,7 @@ namespace AiresNegocio
         /// Gastos con ESTATUSID=1
         /// </summary>
         /// <returns></returns>
-        
+
         /// <summary>
         /// Agrega una Empresa.
         /// </summary>

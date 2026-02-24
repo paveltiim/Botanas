@@ -9,12 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AiresUtilerias</RootNamespace>
     <AssemblyName>BotanasUtilerias</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,7 +100,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -113,6 +116,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="UtiCompresion.cs" />
     <Compile Include="UtiFacturacionPruebas.cs" />
     <Compile Include="UtiFacturacion.cs" />
@@ -122,15 +130,94 @@
     <Compile Include="UtiImpresiones.cs" />
     <Compile Include="UtiLinqToExcel.cs" />
     <Compile Include="UtiPDF.cs" />
+    <Compile Include="Web References\mx.pade.timbradoCorreo\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\mx.pade.timbrado\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AiresEntidades\BotanasEntidades.csproj">
       <Project>{5308d57c-05c8-495a-b18b-51a361a786e1}</Project>
       <Name>BotanasEntidades</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AiresNegocio\BotanasNegocio.csproj">
+      <Project>{B0B0069A-C1CD-419B-A505-DB0400956583}</Project>
+      <Name>BotanasNegocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\mx.pade.timbradoCorreo\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\mx.pade.timbradoCorreo\resultDisponibilidadServicio.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\mx.pade.timbradoCorreo\Timbrado4.wsdl" />
+    <None Include="Web References\mx.pade.timbradoCorreo\Timbrado4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\mx.pade.timbrado\IntegracionCfdi.wsdl" />
+    <None Include="Web References\mx.pade.timbrado\IntegracionCfdi.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\mx.pade.timbrado\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://timbrado.pade.mx/PadeServ/IntegracionCfdi%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\mx.pade.timbrado\</RelPath>
+      <UpdateFromURL>https://timbrado.pade.mx/PadeServ/IntegracionCfdi%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>BotanasUtilerias_mx_pade_timbrado_IntegracionCfdi</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://timbrado.pade.mx/servicio/Timbrado4.0%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\mx.pade.timbradoCorreo\</RelPath>
+      <UpdateFromURL>https://timbrado.pade.mx/servicio/Timbrado4.0%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>BotanasUtilerias_mx_pade_timbradoCorreo_Timbrado4_0</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

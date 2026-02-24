@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="integracionCfdi.ws.pade.mx" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="IntegracionCfdi" targetNamespace="integracionCfdi.ws.pade.mx" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://timbrado.pade.mx:443/PadeServ/IntegracionCfdi?xsd=1" namespace="integracionCfdi.ws.pade.mx" />
+    </xsd:schema>
+  </types>
+  <message name="cancelarCfdi">
+    <part name="parameters" element="tns:cancelarCfdi" />
+  </message>
+  <message name="cancelarCfdiResponse">
+    <part name="parameters" element="tns:cancelarCfdiResponse" />
+  </message>
+  <message name="procesarArchivo">
+    <part name="parameters" element="tns:procesarArchivo" />
+  </message>
+  <message name="procesarArchivoResponse">
+    <part name="parameters" element="tns:procesarArchivoResponse" />
+  </message>
+  <message name="obtenerXmlDesdeCsv">
+    <part name="parameters" element="tns:obtenerXmlDesdeCsv" />
+  </message>
+  <message name="obtenerXmlDesdeCsvResponse">
+    <part name="parameters" element="tns:obtenerXmlDesdeCsvResponse" />
+  </message>
+  <message name="procesarArchivoConCSD">
+    <part name="parameters" element="tns:procesarArchivoConCSD" />
+  </message>
+  <message name="procesarArchivoConCSDResponse">
+    <part name="parameters" element="tns:procesarArchivoConCSDResponse" />
+  </message>
+  <message name="cancelarCfdiConOpciones">
+    <part name="parameters" element="tns:cancelarCfdiConOpciones" />
+  </message>
+  <message name="cancelarCfdiConOpcionesResponse">
+    <part name="parameters" element="tns:cancelarCfdiConOpcionesResponse" />
+  </message>
+  <message name="acuseCancelacionCfdi">
+    <part name="parameters" element="tns:acuseCancelacionCfdi" />
+  </message>
+  <message name="acuseCancelacionCfdiResponse">
+    <part name="parameters" element="tns:acuseCancelacionCfdiResponse" />
+  </message>
+  <message name="consultaCfdiPorUUID">
+    <part name="parameters" element="tns:consultaCfdiPorUUID" />
+  </message>
+  <message name="consultaCfdiPorUUIDResponse">
+    <part name="parameters" element="tns:consultaCfdiPorUUIDResponse" />
+  </message>
+  <portType name="IntegracionCfdi">
+    <operation name="cancelarCfdi">
+      <input wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/cancelarCfdiRequest" message="tns:cancelarCfdi" />
+      <output wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/cancelarCfdiResponse" message="tns:cancelarCfdiResponse" />
+    </operation>
+    <operation name="procesarArchivo">
+      <input wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/procesarArchivoRequest" message="tns:procesarArchivo" />
+      <output wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/procesarArchivoResponse" message="tns:procesarArchivoResponse" />
+    </operation>
+    <operation name="obtenerXmlDesdeCsv">
+      <input wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/obtenerXmlDesdeCsvRequest" message="tns:obtenerXmlDesdeCsv" />
+      <output wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/obtenerXmlDesdeCsvResponse" message="tns:obtenerXmlDesdeCsvResponse" />
+    </operation>
+    <operation name="procesarArchivoConCSD">
+      <input wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/procesarArchivoConCSDRequest" message="tns:procesarArchivoConCSD" />
+      <output wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/procesarArchivoConCSDResponse" message="tns:procesarArchivoConCSDResponse" />
+    </operation>
+    <operation name="cancelarCfdiConOpciones">
+      <input wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/cancelarCfdiConOpcionesRequest" message="tns:cancelarCfdiConOpciones" />
+      <output wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/cancelarCfdiConOpcionesResponse" message="tns:cancelarCfdiConOpcionesResponse" />
+    </operation>
+    <operation name="acuseCancelacionCfdi">
+      <input wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/acuseCancelacionCfdiRequest" message="tns:acuseCancelacionCfdi" />
+      <output wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/acuseCancelacionCfdiResponse" message="tns:acuseCancelacionCfdiResponse" />
+    </operation>
+    <operation name="consultaCfdiPorUUID">
+      <input wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/consultaCfdiPorUUIDRequest" message="tns:consultaCfdiPorUUID" />
+      <output wsam:Action="integracionCfdi.ws.pade.mx/IntegracionCfdi/consultaCfdiPorUUIDResponse" message="tns:consultaCfdiPorUUIDResponse" />
+    </operation>
+  </portType>
+  <binding name="IntegracionCfdiPortBinding" type="tns:IntegracionCfdi">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="cancelarCfdi">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="procesarArchivo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerXmlDesdeCsv">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="procesarArchivoConCSD">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="cancelarCfdiConOpciones">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="acuseCancelacionCfdi">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consultaCfdiPorUUID">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="IntegracionCfdi">
+    <port name="IntegracionCfdiPort" binding="tns:IntegracionCfdiPortBinding">
+      <soap:address location="https://timbrado.pade.mx:443/PadeServ/IntegracionCfdi" />
+    </port>
+  </service>
+</definitions>

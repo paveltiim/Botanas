@@ -10,12 +10,13 @@ namespace AiresDatos
 {
     public class DatProductos : DatAbstracta
     {
-        public DataTable obtieneProductos()
+        public DataTable obtieneProducto(int ProductoId)
         {
             try
             {
-                com = new SqlCommand("selObtieneProductos", con);
+                com = new SqlCommand("selObtieneProducto", con);
                 com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
                 da = new SqlDataAdapter(com);
                 dt = new DataTable();
                 da.Fill(dt);
@@ -42,12 +43,30 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
-        public DataTable obtieneProductosPorAlmacen(int ProductoId, int AlmacenId)
+        public DataTable obtieneProductosPorTipo(int EmpresaId, int TipoProductoId)
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneProductosPorTipoProductoEmpresa", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("TipoProductoId", TipoProductoId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneProductosPorAlmacen(int CompañiaId, int ProductoId, int AlmacenId)
         {
             try
             {
                 com = new SqlCommand("spExistenciaProductos", con);
                 com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", CompañiaId);
                 com.Parameters.AddWithValue("ProductoId", ProductoId);
                 com.Parameters.AddWithValue("AlmacenId", AlmacenId);
                 com.Parameters.AddWithValue("Tipo", 1);
@@ -60,15 +79,38 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
-        public DataTable obtieneProductosExistentesPorAlmacen(int ProductoId, int AlmacenId)
+        public DataTable obtieneProductosPorAlmacen(int EmpresaId, int ProductoId, int AlmacenId, int TipoProductoId)
         {
             try
             {
                 com = new SqlCommand("spExistenciaProductos", con);
                 com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 com.Parameters.AddWithValue("ProductoId", ProductoId);
                 com.Parameters.AddWithValue("AlmacenId", AlmacenId);
+                com.Parameters.AddWithValue("Tipo", 1);//INCLUYE SIN EXISTENCIA
+                com.Parameters.AddWithValue("TipoProductoId", TipoProductoId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneProductosPorAlmacenConPreciosVenta(int ProductoId, int EstablecimientoId, int TipoProductoId,
+                                                                            int ClienteId)
+        {
+            try
+            {
+                com = new SqlCommand("spProductosVenta", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("EstablecimientoId", EstablecimientoId);
                 com.Parameters.AddWithValue("Tipo", 2);
+                com.Parameters.AddWithValue("TipoProductoId", TipoProductoId);
+                com.Parameters.AddWithValue("ClienteId", ClienteId);
                 da = new SqlDataAdapter(com);
                 dt = new DataTable();
                 da.Fill(dt);
@@ -78,13 +120,17 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
-        public DataTable obtieneProductosInventario(int EmpresaId)
+        public DataTable obtieneProductosExistentesPorAlmacen(int EmpresaId, int ProductoId, int AlmacenId, int TipoProductoId)
         {
             try
             {
-                com = new SqlCommand("selObtieneProductosInventarioPorEmpresa", con);
+                com = new SqlCommand("spExistenciaProductos", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("AlmacenId", AlmacenId);
+                com.Parameters.AddWithValue("Tipo", 2);//SOLO CON EXISTENCIAS
+                com.Parameters.AddWithValue("TipoProductoId", TipoProductoId);
                 da = new SqlDataAdapter(com);
                 dt = new DataTable();
                 da.Fill(dt);
@@ -94,14 +140,18 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
-        public DataTable obtieneProductos(int EmpresaId, int EstatusId)
+        public DataTable obtieneProductosExistentesPorAlmacenConPreciosVenta(int ProductoId, int EstablecimientoId, int TipoProductoId, 
+                                                                            int ClienteId)
         {
             try
             {
-                com = new SqlCommand("selObtieneProductosPorEmpresaEstatus", con);
+                com = new SqlCommand("spExistenciaProductosVenta", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
-                com.Parameters.AddWithValue("EstatusId", EstatusId);
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("EstablecimientoId", EstablecimientoId);
+                com.Parameters.AddWithValue("Tipo", 2);
+                com.Parameters.AddWithValue("TipoProductoId", TipoProductoId);
+                com.Parameters.AddWithValue("ClienteId", ClienteId);
                 da = new SqlDataAdapter(com);
                 dt = new DataTable();
                 da.Fill(dt);
@@ -111,6 +161,83 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+        public DataTable obtieneProductosExistentesMinMax(int EmpresaId, int AlmacenId)
+        {
+            try
+            {
+                com = new SqlCommand("spExistenciaStockMaxMin", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("AlmacenId", AlmacenId);
+                com.Parameters.AddWithValue("TipoProductoId", 1);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        
+        public DataTable obtieneProductosExistenciaConsigna(int EmpresaId, int TrabajadorId)
+        {
+            try
+            {
+                com = new SqlCommand("spExistenciaProductosConsigna", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("ProductoId", 0);
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("UsuarioId", TrabajadorId);
+                com.Parameters.AddWithValue("Tipo", 1);//INCLUYE SIN EXISTENCIA
+                com.Parameters.AddWithValue("TipoProductoId", 1);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public DataTable obtieneListaPreciosProducto(int EstablecimientoId, int ProductoId)
+        {
+            try
+            {
+                com = new SqlCommand("spGetPrecioProductoEstablecimiento", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EstablecimientoId", EstablecimientoId);
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public DataTable obtienePrecioProductoPorCantidad(int EstablecimientoId, int ProductoId, decimal Cantidad)
+        {
+            try
+            {
+                com = new SqlCommand("[spGetPrecioProductoCantidad]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("EstablecimientoId", EstablecimientoId);
+                com.Parameters.AddWithValue("Cantidad", Cantidad);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         public DataTable obtieneProductosProveedor(int EmpresaId, int EstatusId)
         {
             try
@@ -208,6 +335,20 @@ namespace AiresDatos
                 com = new SqlCommand("selObtieneProductosPorPedido", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("PedidoId", PedidoId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneProductosPorPedidoPreVenta(int PedidoPreVentaId)
+        {
+            try
+            {
+                com = new SqlCommand("[selObtieneProductosPorPedidoPreVenta]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("PedidoPreVentaId", PedidoPreVentaId);
                 da = new SqlDataAdapter(com);
                 dt = new DataTable();
                 da.Fill(dt);
@@ -447,6 +588,115 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
+        public DataTable obtieneMovimientosProductosPorFechas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta,
+                                                                int Orientacion, int AlmacenId)
+        {
+            try
+            {
+                com = new SqlCommand("[spGetMovimientoInventario]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("FechaInicio", FechaDesde);
+                com.Parameters.AddWithValue("FechaFin", FechaHasta);
+                com.Parameters.AddWithValue("Orientacion", Orientacion);
+                com.Parameters.AddWithValue("Almacen", AlmacenId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneMovimientosProductosPorFechas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta,
+                                                                int Orientacion, int AlmacenId, int TipoMovimientoId)
+        {
+            try
+            {
+                com = new SqlCommand("[spGetMovimientoInventarioTipo]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("FechaInicio", FechaDesde);
+                com.Parameters.AddWithValue("FechaFin", FechaHasta);
+                com.Parameters.AddWithValue("Orientacion", Orientacion);
+                com.Parameters.AddWithValue("Almacen", AlmacenId);
+                com.Parameters.AddWithValue("TipoMovimientoId", TipoMovimientoId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneMovimientosDetalleProductosPorFechas(int MovimientoId)
+        {
+            try
+            {
+                com = new SqlCommand("[spGetMovimientoInventarioDetalle]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("MovimientoId", MovimientoId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public DataTable obtieneMovimientosTraspasosRecepcionProductosPorFechas(int EmpresaId, 
+                                                                                DateTime FechaDesde, DateTime FechaHasta,
+                                                                                int Estado, int AlmacenId)
+        {
+            try
+            {
+                com = new SqlCommand("[spGetMovimientoTraspasoDestino]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("FechaInicio", FechaDesde);
+                com.Parameters.AddWithValue("FechaFin", FechaHasta);
+                com.Parameters.AddWithValue("Estado", Estado);
+                com.Parameters.AddWithValue("Almacen", AlmacenId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneMovimientosTraspasosEnvioProductosPorFechas(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta,
+                                                            int Estado, int AlmacenId)
+        {
+            try
+            {
+                com = new SqlCommand("[spGetMovimientoTraspasoOrigen]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("FechaInicio", FechaDesde);
+                com.Parameters.AddWithValue("FechaFin", FechaHasta);
+                com.Parameters.AddWithValue("Estado", Estado);
+                com.Parameters.AddWithValue("Almacen", AlmacenId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneMovimientosDetalleTraspasoProductosPorFechas(int TraspasoId)
+        {
+            try
+            {
+                com = new SqlCommand("[spGetMovimientoTraspasoDetalle]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("TraspasoId", TraspasoId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+
         public DataTable obtieneIngreso(int IngresoId)
         {
             try
@@ -476,7 +726,7 @@ namespace AiresDatos
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
-        
+
         public DataTable obtieneIngresosProductosPorFechas(DateTime FechaDesde, DateTime FechaHasta)
         {
             try
@@ -560,15 +810,17 @@ namespace AiresDatos
         //    catch (Exception ex) { throw new Exception(ex.Message); }
         //}
 
-        public int agregaProducto(int TipoProductoId, string Codigo, string Descripcion, 
+        public int agregaProducto(int EmpresaId, int TipoProductoId, string Codigo, string CodigoBarra, string Descripcion, 
+
                                 string Marca, string Modelo,
-                                int TipoProductoServicioId, int TipoUnidadId, decimal PrecioCosto)
+                                int TipoProductoServicioId, int TipoUnidadId, decimal PrecioCosto, bool IncluyeIEPS)
         {
             try
             {
                 int Id = 0;
-                com = new SqlCommand("insAgregaProductoNeue", con);
+                com = new SqlCommand("insAgregaProductoConIEPScodigo", con);
                 com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 com.Parameters.AddWithValue("TipoProductoId", TipoProductoId);
                 com.Parameters.AddWithValue("Codigo", Codigo);
                 com.Parameters.AddWithValue("Descripcion", Descripcion);
@@ -577,6 +829,7 @@ namespace AiresDatos
                 com.Parameters.AddWithValue("TipoProductoServicioId", TipoProductoServicioId);
                 com.Parameters.AddWithValue("TipoUnidadId", TipoUnidadId);
                 com.Parameters.AddWithValue("PrecioCosto", PrecioCosto);
+                com.Parameters.AddWithValue("IncluyeIEPS", IncluyeIEPS);
                 SqlParameter parm = new SqlParameter("Id", Id);
                 parm.Direction = ParameterDirection.InputOutput;
                 com.Parameters.Add(parm);
@@ -587,19 +840,28 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
         }
-        public int agregaProducto(int Id, int TipoProductoId, string Codigo, string Descripcion)
+        public int agregaProductoIngreso(int EmpresaId, int IngresoId, int ProductoId,
+                                        decimal ProductoCantidad,
+                                        decimal ProductoPrecioCosto, decimal ProductoIEPS, decimal ProductoIVA)
         {
             try
             {
-                com = new SqlCommand("insAgregaProductoConId", con);
+                int Id = 0;
+                com = new SqlCommand("[insAgregaProductoIngresoNeue]", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("TipoProductoId", TipoProductoId);
-                com.Parameters.AddWithValue("Codigo", Codigo);
-                com.Parameters.AddWithValue("Descripcion", Descripcion);
-                com.Parameters.AddWithValue("Id", Id);
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
+                com.Parameters.AddWithValue("IngresoId", IngresoId);
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("ProductoCantidad", ProductoCantidad);
+                com.Parameters.AddWithValue("ProductoPrecioCosto", ProductoPrecioCosto);
+                com.Parameters.AddWithValue("ProductoIEPS", ProductoIEPS);
+                com.Parameters.AddWithValue("ProductoIVA", ProductoIVA);
+                SqlParameter parm = new SqlParameter("Id", Id);
+                parm.Direction = ParameterDirection.InputOutput;
+                com.Parameters.Add(parm);
                 con.Open();
                 com.ExecuteNonQuery();
-                return Id;
+                return Convert.ToInt32(com.Parameters["Id"].Value);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
@@ -658,18 +920,68 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
         }
-   
-        public void actualizaProducto(int ProductoId, int TipoProductoId, string Codigo, string Descripcion,
-                                    string Marca, string Modelo,
-                                    int TipoProductoServicioId, int TipoUnidadId, decimal PrecioCosto)
+        string Host = Environment.MachineName;
+        public int agregaListaPreciosProducto(int EstablecimientoId, int ProductoId, 
+                decimal PrecioMenudeo, decimal PrecioMayoreoLocal, decimal PrecioSonora, 
+                decimal PrecioCuliacan, decimal PrecioEspecial, decimal PrecioEspecial2, decimal PrecioEspecial3,
+                decimal PrecioEspecial4, decimal PrecioEspecial5,
+                decimal PrecioEspecialDetalle, decimal PrecioEspecialDetalleM, decimal PrecioEspecialComercial,
+                string Usuario)
         {
             try
             {
-                com = new SqlCommand("updActualizaProductoNeue", con);
+                com = new SqlCommand("spEstablecimientoProductoListaPrecio", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EstablecimientoId", EstablecimientoId);
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("Menudeo", PrecioMenudeo);
+                com.Parameters.AddWithValue("MayoreoLocal", PrecioMayoreoLocal);
+                com.Parameters.AddWithValue("Sonora", PrecioSonora);
+                com.Parameters.AddWithValue("Culiacan", PrecioCuliacan);
+                com.Parameters.AddWithValue("Especial", PrecioEspecial);
+                com.Parameters.AddWithValue("Cabo", PrecioEspecial2);
+                com.Parameters.AddWithValue("Conveniencia", PrecioEspecial3);
+                com.Parameters.AddWithValue("Eventual", PrecioEspecial4);
+                com.Parameters.AddWithValue("Hermosillo", PrecioEspecial5);
+                com.Parameters.AddWithValue("Detalle", PrecioEspecialDetalle);
+                com.Parameters.AddWithValue("DetalleMayoreo", PrecioEspecialDetalleM);
+                com.Parameters.AddWithValue("CadenaComercial", PrecioEspecialComercial);
+                com.Parameters.AddWithValue("Usuario", Usuario);
+                com.Parameters.AddWithValue("Host", this.Host);
+
+                con.Open();
+
+                //com.ExecuteNonQuery();
+                DataTable dtCambios = new DataTable();
+                DataTable dtSinCambios = new DataTable();
+                using (SqlDataReader reader = com.ExecuteReader())
+                {
+                    // Primer SELECT → cambios y nuevos
+                    dtCambios.Load(reader);
+
+                    // Segundo SELECT → sin cambios
+                    if (reader.NextResult())
+                        dtSinCambios.Load(reader);
+                }
+
+                return ProductoId;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
+
+        public void actualizaProducto(int ProductoId, int TipoProductoId, string Codigo, string CodigoBarra, string Descripcion,
+                                    string Marca, string Modelo,
+                                    int TipoProductoServicioId, int TipoUnidadId, decimal PrecioCosto, bool IncluyeIEPS)
+        {
+            try
+            {
+                com = new SqlCommand("[updActualizaProductoConIEPScodigo]", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("ProductoId", ProductoId);
                 com.Parameters.AddWithValue("TipoProductoId", TipoProductoId);
                 com.Parameters.AddWithValue("Codigo", Codigo);
+                com.Parameters.AddWithValue("CodigoBarra", CodigoBarra);
                 com.Parameters.AddWithValue("Descripcion", Descripcion);
                 com.Parameters.AddWithValue("Marca", Marca);
                 com.Parameters.AddWithValue("Modelo", Modelo);
@@ -677,6 +989,22 @@ namespace AiresDatos
                 com.Parameters.AddWithValue("TipoProductoServicioId", TipoProductoServicioId);
                 com.Parameters.AddWithValue("TipoUnidadId", TipoUnidadId);
                 com.Parameters.AddWithValue("PrecioCosto", PrecioCosto);
+                com.Parameters.AddWithValue("IncluyeIEPS", IncluyeIEPS);
+                con.Open();
+                com.ExecuteNonQuery();
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
+        public void actualizaProductoMinMax(int ProductoId, decimal ExistenciaMinima, decimal ExistenciaMaxima)
+        {
+            try
+            {
+                com = new SqlCommand("[updActualizaProductoMinMax]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("ProductoId", ProductoId);
+                com.Parameters.AddWithValue("ExistenciaMinima", ExistenciaMinima);
+                com.Parameters.AddWithValue("ExistenciaMaxima", ExistenciaMaxima);
                 con.Open();
                 com.ExecuteNonQuery();
             }
@@ -704,7 +1032,7 @@ namespace AiresDatos
             finally { con.Close(); }
         }
 
-        public void aumentaProducto(int ProductoId, int CantidadAumenta)
+        public void aumentaProducto(int ProductoId, decimal CantidadAumenta)
         {
             try
             {
@@ -821,16 +1149,18 @@ namespace AiresDatos
             finally { con.Close(); }
         }
 
-        public int agregaIngresoProducto(int ProveedorId, string Descripcion, DateTime Fecha)
+        public int agregaIngresoProducto(int EmpresaId, int ProveedorId, string Descripcion, DateTime Fecha, int UsuarioIngresoId)
         {
             try
             {
                 int Id = 0;
                 com = new SqlCommand("insAgregaIngreso", con);
                 com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 com.Parameters.AddWithValue("ProveedorId", ProveedorId);
                 com.Parameters.AddWithValue("Descripcion", Descripcion);
                 com.Parameters.AddWithValue("Fecha", Fecha);
+                com.Parameters.AddWithValue("UsuarioIngresoId", UsuarioIngresoId);
                 //com.Parameters.AddWithValue("Id", Id);
                 SqlParameter parm = new SqlParameter("Id", Id);
                 parm.Direction = ParameterDirection.InputOutput;

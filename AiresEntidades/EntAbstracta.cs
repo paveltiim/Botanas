@@ -12,6 +12,7 @@ namespace AiresEntidades
         public int UsuarioId { get; set; }
         public string Descripcion { get; set; }
         public bool Estatus { get; set; }
+        public string EstatusDescripcion { get; set; }
         public int EstatusId { get; set; }
         public DateTime Fecha { get; set; }
 

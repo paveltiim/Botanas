@@ -8,6 +8,7 @@ namespace AiresEntidades
 {
     public class EntEmpresa : EntAbstracta
     {
+        public int CompañiaId { get; set; }
         public string Nombre { get; set; }
         public string NombreFiscal { get; set; }
         public string RegimenFiscal { get; set; }
@@ -48,20 +49,23 @@ namespace AiresEntidades
         public string Certificado { get; set; }
         public string Key { get; set; }
         public string Clave { get; set; }
-        public int TipoTasaIVAId { get; set; }
         public string NoCertificado { get; set; }
         public bool Facturacion { get; set; }
+        public string LinkCancelacionFactura { get; set; }
 
         public int RegimenFiscalId { get; set; }
+        public int TipoTasaIVAId { get; set; }
         public int TipoFactorId { get; set; }
         public string TipoFactor { get; set; }
         public decimal TasaOCuota { get; set; }
+        public decimal TasaIEPS { get; set; }
         public int UsoCFDIId { get; set; }
 
         public int Timbres { get; set; }
         public int TimbresUsados { get; set; }
         public int TimbresRestantes { get; set; }
 
+        public string Logo { get; set; }
         public string SerieFactura
         {
             get

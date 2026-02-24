@@ -20,28 +20,29 @@ namespace AiresNegocio
                 foreach (DataRow r in dt.Rows)
                 {
                     EntProveedor m = new EntProveedor();
-                    m.Id = Convert.ToInt32(r["PRO_ID"]);
+                    m.Id = Convert.ToInt32(r["PROV_ID"]);
 
-                    m.Descripcion = r["PRO_NOMBRE"].ToString();
-                    m.Nombre = r["PRO_NOMBRE"].ToString();
-                    m.NombreFiscal = r["PRO_NOMBREFISCAL"].ToString();
-                    m.Direccion = r["PRO_DIRECCION"].ToString();
-                    m.Telefono = r["PRO_TELEFONO"].ToString();
-                    m.Telefono2 = r["PRO_TELEFONO2"].ToString();
-                    m.Email = r["PRO_EMAIL"].ToString();
-                    m.Contacto = r["PRO_CONTACTO"].ToString();
-                    m.TelefonoContacto = r["PRO_TELEFONOCONTACTO"].ToString();
-                    m.Banco = r["PRO_BANCO"].ToString();
-                    m.NumeroCuenta = r["PRO_NUMEROCUENTA"].ToString();
-                    m.Sucursal = r["PRO_SUCURSAL"].ToString();
-                    m.CLABE = r["PRO_CLABE"].ToString();
-                    m.NumeroReferencia = r["PRO_NUMEROREFERENCIA"].ToString();
+                    m.Descripcion = r["PROV_NOMBRE"].ToString();
+                    m.Nombre = r["PROV_NOMBRE"].ToString();
+                    m.NombreFiscal = r["PROV_NOMBREFISCAL"].ToString();
+                    m.RFC= r["PROV_RFC"].ToString();
+                    m.Direccion = r["PROV_DIRECCION"].ToString();
+                    m.Telefono = r["PROV_TELEFONO"].ToString();
+                    m.Telefono2 = r["PROV_TELEFONO2"].ToString();
+                    m.Email = r["PROV_EMAIL"].ToString();
+                    m.Contacto = r["PROV_CONTACTO"].ToString();
+                    m.TelefonoContacto = r["PROV_TELEFONOCONTACTO"].ToString();
+                    m.Banco = r["PROV_BANCO"].ToString();
+                    m.NumeroCuenta = r["PROV_NUMEROCUENTA"].ToString();
+                    m.Sucursal = r["PROV_SUCURSAL"].ToString();
+                    m.CLABE = r["PROV_CLABE"].ToString();
+                    m.NumeroReferencia = r["PROV_NUMEROREFERENCIA"].ToString();
 
-                    m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
-                    m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
-                    m.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
+                    //m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
+                    //m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+                    //m.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
 
-                    m.Fecha = Convert.ToDateTime(r["PRO_FECHAREGISTRO"]);
+                    //m.Fecha = Convert.ToDateTime(r["PRO_FECHAREGISTRO"]);
                     lst.Add(m);
                 }
                 return lst;
@@ -57,26 +58,27 @@ namespace AiresNegocio
                 foreach (DataRow r in dt.Rows)
                 {
                     EntProveedor m = new EntProveedor();
-                    m.Id = Convert.ToInt32(r["PRO_ID"]);
+                    m.Id = Convert.ToInt32(r["PROV_ID"]);
 
-                    m.Descripcion = r["PRO_NOMBRE"].ToString();
-                    m.Nombre = r["PRO_NOMBRE"].ToString();
-                    m.NombreFiscal = r["PRO_NOMBREFISCAL"].ToString();
-                    m.Direccion = r["PRO_DIRECCION"].ToString();
-                    m.Telefono = r["PRO_TELEFONO"].ToString();
-                    m.Telefono2 = r["PRO_TELEFONO2"].ToString();
-                    m.Email = r["PRO_EMAIL"].ToString();
-                    m.Contacto = r["PRO_CONTACTO"].ToString();
-                    m.TelefonoContacto = r["PRO_TELEFONOCONTACTO"].ToString();
-                    m.Banco = r["PRO_BANCO"].ToString();
-                    m.NumeroCuenta = r["PRO_NUMEROCUENTA"].ToString();
-                    m.Sucursal = r["PRO_SUCURSAL"].ToString();
-                    m.CLABE = r["PRO_CLABE"].ToString();
-                    m.NumeroReferencia = r["PRO_NUMEROREFERENCIA"].ToString();
+                    m.Descripcion = r["PROV_NOMBRE"].ToString();
+                    m.Nombre = r["PROV_NOMBRE"].ToString();
+                    m.NombreFiscal = r["PROV_NOMBREFISCAL"].ToString();
+                    m.RFC = r["PROV_RFC"].ToString();
+                    m.Direccion = r["PROV_DIRECCION"].ToString();
+                    m.Telefono = r["PROV_TELEFONO"].ToString();
+                    m.Telefono2 = r["PROV_TELEFONO2"].ToString();
+                    m.Email = r["PROV_EMAIL"].ToString();
+                    m.Contacto = r["PROV_CONTACTO"].ToString();
+                    m.TelefonoContacto = r["PROV_TELEFONOCONTACTO"].ToString();
+                    m.Banco = r["PROV_BANCO"].ToString();
+                    m.NumeroCuenta = r["PROV_NUMEROCUENTA"].ToString();
+                    m.Sucursal = r["PROV_SUCURSAL"].ToString();
+                    m.CLABE = r["PROV_CLABE"].ToString();
+                    m.NumeroReferencia = r["PROV_NUMEROREFERENCIA"].ToString();
 
-                    m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
-                    m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
-                    m.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
+                    //m.Deuda = Convert.ToDecimal(r["GAS_CANTIDAD"]);
+                    //m.Pago = Convert.ToDecimal(r["PAG_PAGO"]);
+                    //m.NotasCredito = Convert.ToDecimal(r["NOTASCREDITO"]);
 
                     //m.Fecha = Convert.ToDateTime(r["PRO_FECHAREGISTRO"]);
                     lst.Add(m);
@@ -309,13 +311,14 @@ namespace AiresNegocio
         /// Agrega una Empresa.
         /// </summary>
         /// <param name="empresa">
-        /// Propiedades Necesarias: Nombre, NombreFiscal, Direccion, Telefono, Telefono2, Email, Contacto, TelefonoContacto, Banco, NumeroCuenta, Sucursal, CLABE, NumeroReferencia, Fecha.
+        /// Propiedades Necesarias: Nombre, NombreFiscal, RFC, Direccion, Telefono, Telefono2, Email, Contacto, TelefonoContacto, Banco, NumeroCuenta, Sucursal, CLABE, NumeroReferencia, Fecha.
         /// </param>
         public int AgregaProveedor(EntProveedor Proveedor)
         {
             try
             {
-                return new DatProveedores().agregaProveedores(Proveedor.EmpresaId,Proveedor.Nombre, Proveedor.NombreFiscal, Proveedor.Direccion, Proveedor.Telefono, Proveedor.Telefono2, Proveedor.Email, Proveedor.Contacto, Proveedor.TelefonoContacto, Proveedor.Banco, Proveedor.NumeroCuenta, Proveedor.Sucursal, Proveedor.CLABE, Proveedor.NumeroReferencia, Proveedor.Fecha);
+                return new DatProveedores().agregaProveedores(Proveedor.EmpresaId,Proveedor.Nombre, Proveedor.NombreFiscal, 
+                    Proveedor.RFC, Proveedor.Direccion, Proveedor.Telefono, Proveedor.Telefono2, Proveedor.Email, Proveedor.Contacto, Proveedor.TelefonoContacto, Proveedor.Banco, Proveedor.NumeroCuenta, Proveedor.Sucursal, Proveedor.CLABE, Proveedor.NumeroReferencia, Proveedor.Fecha);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }

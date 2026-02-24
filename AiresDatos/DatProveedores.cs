@@ -142,7 +142,7 @@ namespace AiresDatos
         //    catch (Exception ex) { throw new Exception(ex.Message); }
         //}
 
-        public int agregaProveedores(int EmpresaId, string Nombre, string NombreFiscal, string Direccion, string Telefono, string Telefono2, string Email, string Contacto, string TelefonoContacto, string Banco, string NumeroCuenta, string Sucursal, string CLABE, string NumeroReferencia, DateTime Fecha)
+        public int agregaProveedores(int EmpresaId, string Nombre, string NombreFiscal, string RFC, string Direccion, string Telefono, string Telefono2, string Email, string Contacto, string TelefonoContacto, string Banco, string NumeroCuenta, string Sucursal, string CLABE, string NumeroReferencia, DateTime Fecha)
         {
             try
             {
@@ -153,6 +153,7 @@ namespace AiresDatos
                 com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 com.Parameters.AddWithValue("Nombre", Nombre);
                 com.Parameters.AddWithValue("NombreFiscal", NombreFiscal);
+                com.Parameters.AddWithValue("RFC", RFC);
                 com.Parameters.AddWithValue("Direccion", Direccion);
                 com.Parameters.AddWithValue("Telefono", Telefono);
                 com.Parameters.AddWithValue("Telefono2", Telefono2);
@@ -164,7 +165,6 @@ namespace AiresDatos
                 com.Parameters.AddWithValue("Sucursal", Sucursal);
                 com.Parameters.AddWithValue("CLABE", CLABE);
                 com.Parameters.AddWithValue("NumeroReferencia", NumeroReferencia);
-                com.Parameters.AddWithValue("FechaRegistro", Fecha);
                 SqlParameter parm = new SqlParameter("Id", Id);
                 parm.Direction = ParameterDirection.InputOutput;
                 com.Parameters.Add(parm);

@@ -10,12 +10,30 @@ namespace AiresDatos
 {
     public class DatEmpresas : DatAbstracta
     {
-        public DataTable obtieneEmpresas()
+        public DataTable obtieneEmpresas(int CompañiaId)
         {
             try
             {
-                com = new SqlCommand("selObtieneEmpresas", con);
+                com = new SqlCommand("selObtieneEmpresasPorCompañia", con);
                 com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("CompañiaId", CompañiaId);
+                da = new SqlDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+
+                //if (dt.Rows.Count == 0)
+                //    throw new Exception("Usuario y/o Contraseña Inválido(s)");
+                return dt;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public DataTable obtieneEmpresa(int EmpresaId)
+        {
+            try
+            {
+                com = new SqlCommand("selObtieneEmpresa", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("EmpresaId", EmpresaId);
                 da = new SqlDataAdapter(com);
                 dt = new DataTable();
                 da.Fill(dt);
