@@ -86,7 +86,7 @@ namespace Aires.Pantallas
                     btnCotizaciones.Enabled = true;
                     break;
                 case TiposUsuario.GERENTEVENTAS:
-                    
+                    btnProductos.Enabled = false;
                     break;
                 case TiposUsuario.GERENTEALMACEN://GERENTE (CULIACAN) 
                     btnProductos.Visible = false;

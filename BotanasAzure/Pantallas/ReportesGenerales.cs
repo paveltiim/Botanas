@@ -532,7 +532,7 @@ namespace Aires.Pantallas
                     tcReportes.TabPages.Remove(tpAuxiliar);
                 }
                 else if ((TipoUsuario)Program.UsuarioSeleccionado.TipoUsuarioId ==
-                                                TipoUsuario.GERENTEPRODUCCION)
+                                                TipoUsuario.GERENTEPRODUCCION)//ALFONSO ZAYAS
                 {
                     rdoPorAlmacenVentas.Visible = false;
                     lbEmpresa.Visible = false;
@@ -545,7 +545,7 @@ namespace Aires.Pantallas
                     tcReportes.TabPages.Remove(tpAnalitico);
                     tcReportes.TabPages.Remove(tpAuxiliar);
                     SeleccionarIndexComboBox(cmbAlmacenes, Program.UsuarioSeleccionado.AlmacenMayoristaId);
-                    cmbAlmacenes.Enabled = false;
+                    //cmbAlmacenes.Enabled = false;
                 }
 
                 cmbProductosFiltroReporteComprasVentas.SelectedIndex = -1;

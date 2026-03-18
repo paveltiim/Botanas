@@ -212,6 +212,7 @@ namespace Aires.Pantallas
                     registrosMovilToolStripMenuItem.Visible = true;    
                     break;
                 case TiposUsuario.GERENTEVENTAS://(LUIS ALFONSO-LM)
+                    tsbProductos.Visible = false;
                     tsbInventario.Visible = true;
                     tsbReportes.Visible = true;
                     tsbReportesGlobales.Visible = true;

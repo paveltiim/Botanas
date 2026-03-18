@@ -98,11 +98,14 @@ namespace Aires.Pantallas
                 else
                 {
                     //CANTIDAD MINIMA PARA ALMACENES CULIACAN Y MAZATLAN.
-                    if (this.AlmacenId == 6 || this.AlmacenId == 16 || this.AlmacenId == 21 || this.AlmacenId == 15)//CULIACAN; MAZATLAN; 15:PRUEBAS
+                if (this.AlmacenId == 6  //CULIACAN;
+                 || this.AlmacenId == 16 //PUNTO DE VENTA MOVIL - CULIACAN
+                 //|| this.AlmacenId == 21 //MAZATLAN;
+                 || this.AlmacenId == 15)//15:PRUEBAS
                     {
                         if (ProductoSeleccionado.Existencia < 6)
                             MandaExcepcion("Existencia insuficiente. \n\n Existencia: " + ProductoSeleccionado.Existencia);
-                        CantidadAgrega = 6;//CULIACAN; MAZATLAN; SIEMPRE 6
+                        CantidadAgrega = 6;//CULIACAN;SIEMPRE 6
                     }
 
                     //ASIGNA PRECIO DEPENDIENDO DE CLIENTE.
@@ -858,10 +861,13 @@ namespace Aires.Pantallas
                             productoSeleccionado.Cantidad = 0;
                         else if (!chkDevolucionCortesia.Checked && !chkCortesia.Checked)//SI NO ES DEV/CORTESIA VERIFICA CANTIDAD MINIMA.
                         {
-                            if (this.AlmacenId == 6 || this.AlmacenId == 16 || this.AlmacenId == 21 || this.AlmacenId == 15)//15:PRUEBAS
+                            if (this.AlmacenId == 6  //CULIACAN;
+                             || this.AlmacenId == 16 //PUNTO DE VENTA MOVIL - CULIACAN
+                             //|| this.AlmacenId == 21 //MAZATLAN;
+                             || this.AlmacenId == 15)//15:PRUEBAS
                             {
                                 if (productoSeleccionado.Cantidad < 6)//POR LOGICA EN AGREGADO SOLO HABRA PRODUCTOS CON EXISTENCIA MAYOR A 6.
-                                    productoSeleccionado.Cantidad = 6;//CULIACAN; MAZATLAN; SIEMPRE 6
+                                    productoSeleccionado.Cantidad = 6;//  SIEMPRE 6
                             }
                         }
 

@@ -757,11 +757,45 @@ namespace Aires.Pantallas
         {
             try
             {
-                if(e.RowIndex>=0)
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 {
-                    EntProducto productoSel = ObtieneProductoFromGV(gvPreciosVenta);
-                    productoSel.PrecioVentaSinIVA = Math.Round(productoSel.PrecioVenta * 1.08m, 2);
-                    productoSel.PrecioVenta2 = productoSel.PrecioVentaSinIVA * 1.02m;
+                    // Obtener el producto directamente de la fila editada (más seguro que usar el seleccionado)
+                    EntProducto productoSel = null;
+                    var row = gvPreciosVenta.Rows[e.RowIndex];
+                    if (row != null)
+                        productoSel = row.DataBoundItem as EntProducto;
+
+                    if (productoSel == null)
+                        productoSel = ObtieneProductoFromGV(gvPreciosVenta);
+
+                    if (productoSel == null)
+                    {
+                        gvPreciosVenta.Refresh();
+                        return;
+                    }
+
+                    string colName = gvPreciosVenta.Columns[e.ColumnIndex].Name;
+
+                    // Si se editó la columna PrecioVenta -> calcular PrecioVentaSinIVA y PrecioVenta2
+                    if (string.Equals(colName, "gvListaPrecios_PrecioVentaColumn", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // aplicar IEPS solo si está seleccionado
+                        decimal iepsFactor = chkIncluyeIEPS.Checked ? 1.08m : 1.00m;
+                        productoSel.PrecioVentaSinIVA = Math.Round(productoSel.PrecioVenta * iepsFactor, 2);
+                        productoSel.PrecioVenta2 = productoSel.PrecioVentaSinIVA * 1.02m;
+                    }
+                    // Si se editó la columna PrecioVenta2 -> proceso inverso: derivar PrecioVentaSinIVA y PrecioVenta
+                    else if (string.Equals(colName, "gvListaPrecios_PrecioVenta_2PColumn", StringComparison.OrdinalIgnoreCase)
+                          || string.Equals(colName, "gvListaPrecios_PrecioVenta2Column", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Evitar división por cero y respetar si IEPS aplica o no
+                        decimal iepsFactor = chkIncluyeIEPS.Checked ? 1.08m : 1.00m;
+                        if (1.02m != 0 && iepsFactor != 0)
+                        {
+                            productoSel.PrecioVentaSinIVA = Math.Round(productoSel.PrecioVenta2 / 1.02m, 2);
+                            productoSel.PrecioVenta = Math.Round(productoSel.PrecioVentaSinIVA / iepsFactor, 2);
+                        }
+                    }
 
                     gvPreciosVenta.Refresh();
                 }

@@ -14,9 +14,52 @@ namespace Aires.Pantallas
 {
     public partial class Clientes : FormBase
     {
+        // Sorting state for gvClientes
+        string _lastSortColumn = "";
+        bool _lastSortAscending = true;
         public void VerificaEmpresa()
         {
             cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
+        }
+
+        private void gvClientes_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                var col = gvClientes.Columns[e.ColumnIndex];
+                string prop = col.DataPropertyName;
+                if (string.IsNullOrEmpty(prop))
+                    return;
+
+                // Toggle sort direction if same column
+                if (prop == _lastSortColumn)
+                    _lastSortAscending = !_lastSortAscending;
+                else
+                {
+                    _lastSortColumn = prop;
+                    _lastSortAscending = true;
+                }
+
+                // Use string representation for comparison (works for most properties)
+                if (_lastSortAscending)
+                    ListaClientes = ListaClientes.OrderBy(x => (x.GetType().GetProperty(prop).GetValue(x, null) ?? "").ToString(), StringComparer.CurrentCultureIgnoreCase).ToList();
+                else
+                    ListaClientes = ListaClientes.OrderByDescending(x => (x.GetType().GetProperty(prop).GetValue(x, null) ?? "").ToString(), StringComparer.CurrentCultureIgnoreCase).ToList();
+
+                // Rebind
+                gvClientes.DataSource = null;
+                gvClientes.DataSource = ListaClientes;
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = ListaClientes;
+
+                // Update sort glyphs
+                foreach (DataGridViewColumn c in gvClientes.Columns)
+                {
+                    c.HeaderCell.SortGlyphDirection = SortOrder.None;
+                }
+                col.HeaderCell.SortGlyphDirection = _lastSortAscending ? SortOrder.Ascending : SortOrder.Descending;
+            }
+            catch (Exception ex) { MuestraExcepcion(ex); }
         }
 
         public Clientes()

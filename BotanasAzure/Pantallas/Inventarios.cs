@@ -121,7 +121,8 @@ namespace Aires.Pantallas
             cmbTipoProductoFiltro.SelectedIndex = 0;
 
             if(Program.UsuarioSeleccionado.TipoUsuarioId==(int)TipoUsuario.ADMINISTRADORINSUMOS
-                || Program.UsuarioSeleccionado.TipoUsuarioId == (int)TipoUsuario.MASTER)
+            || Program.UsuarioSeleccionado.TipoUsuarioId == (int)TipoUsuario.GERENTEPRODUCCION
+            || Program.UsuarioSeleccionado.TipoUsuarioId == (int)TipoUsuario.MASTER)
             {
                 lbTipoProductoFiltro.Visible = true;
                 cmbTipoProductoFiltro.Visible = true;
