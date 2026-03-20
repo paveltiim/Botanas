@@ -82,7 +82,8 @@ namespace Aires
             SUPERVISOR = 12, //OSBALDO
             GERENTEALMACEN = 13,
             GERENTEPRODUCCION = 14,
-            CYCVISUALIZA = 15
+            CYCVISUALIZA = 15,
+            PREVENTA = 16
         }
         public enum TipoMovimiento
         {

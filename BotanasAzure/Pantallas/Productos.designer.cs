@@ -107,8 +107,8 @@
             this.tpProductoPreciosDetalle = new System.Windows.Forms.TabPage();
             this.gvListaPreciosVentaDetalle = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvListaPrecioDetallePrecioVentaColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -266,7 +266,7 @@
             // 
             this.chkSoloExistencia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSoloExistencia.AutoSize = true;
-            this.chkSoloExistencia.Location = new System.Drawing.Point(511, 53);
+            this.chkSoloExistencia.Location = new System.Drawing.Point(510, 53);
             this.chkSoloExistencia.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.chkSoloExistencia.Name = "chkSoloExistencia";
             this.chkSoloExistencia.Size = new System.Drawing.Size(151, 26);
@@ -295,7 +295,7 @@
             this.btnRefrescar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRefrescar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescar.Location = new System.Drawing.Point(840, -435);
+            this.btnRefrescar.Location = new System.Drawing.Point(840, -434);
             this.btnRefrescar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefrescar.Name = "btnRefrescar";
             this.btnRefrescar.Size = new System.Drawing.Size(57, 41);
@@ -333,7 +333,7 @@
             this.tcProductosRegistrados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tcProductosRegistrados.Name = "tcProductosRegistrados";
             this.tcProductosRegistrados.SelectedIndex = 0;
-            this.tcProductosRegistrados.Size = new System.Drawing.Size(658, 440);
+            this.tcProductosRegistrados.Size = new System.Drawing.Size(659, 441);
             this.tcProductosRegistrados.TabIndex = 82;
             // 
             // tpProductosRegistrados
@@ -343,7 +343,7 @@
             this.tpProductosRegistrados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tpProductosRegistrados.Name = "tpProductosRegistrados";
             this.tpProductosRegistrados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tpProductosRegistrados.Size = new System.Drawing.Size(650, 411);
+            this.tpProductosRegistrados.Size = new System.Drawing.Size(651, 412);
             this.tpProductosRegistrados.TabIndex = 0;
             this.tpProductosRegistrados.Text = "Productos Registrados";
             this.tpProductosRegistrados.UseVisualStyleBackColor = true;
@@ -383,7 +383,7 @@
             this.gvProductos.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gvProductos.RowTemplate.Height = 27;
             this.gvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvProductos.Size = new System.Drawing.Size(647, 419);
+            this.gvProductos.Size = new System.Drawing.Size(647, 418);
             this.gvProductos.TabIndex = 78;
             this.gvProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvClientes_CellDoubleClick);
             this.gvProductos.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gvProductos_ColumnHeaderMouseClick);
@@ -614,7 +614,7 @@
             this.tcDatosProductoIngresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tcDatosProductoIngresa.Name = "tcDatosProductoIngresa";
             this.tcDatosProductoIngresa.SelectedIndex = 0;
-            this.tcDatosProductoIngresa.Size = new System.Drawing.Size(625, 435);
+            this.tcDatosProductoIngresa.Size = new System.Drawing.Size(625, 434);
             this.tcDatosProductoIngresa.TabIndex = 0;
             // 
             // tpProducto
@@ -640,7 +640,7 @@
             this.tpProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tpProducto.Name = "tpProducto";
             this.tpProducto.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tpProducto.Size = new System.Drawing.Size(617, 402);
+            this.tpProducto.Size = new System.Drawing.Size(617, 401);
             this.tpProducto.TabIndex = 0;
             this.tpProducto.Text = "Producto";
             this.tpProducto.UseVisualStyleBackColor = true;
@@ -712,7 +712,7 @@
             this.pnlDatosProductoVenta.Location = new System.Drawing.Point(7, 167);
             this.pnlDatosProductoVenta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlDatosProductoVenta.Name = "pnlDatosProductoVenta";
-            this.pnlDatosProductoVenta.Size = new System.Drawing.Size(604, 243);
+            this.pnlDatosProductoVenta.Size = new System.Drawing.Size(604, 242);
             this.pnlDatosProductoVenta.TabIndex = 3;
             // 
             // txtExistenciaMaxima
@@ -783,7 +783,7 @@
             this.gvPreciosVenta.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.gvPreciosVenta.RowTemplate.Height = 27;
             this.gvPreciosVenta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvPreciosVenta.Size = new System.Drawing.Size(388, 209);
+            this.gvPreciosVenta.Size = new System.Drawing.Size(388, 199);
             this.gvPreciosVenta.TabIndex = 2;
             this.gvPreciosVenta.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPreciosVenta_CellValueChanged);
             // 
@@ -983,9 +983,10 @@
             // 
             this.tpProductoPreciosDetalle.Controls.Add(this.gvListaPreciosVentaDetalle);
             this.tpProductoPreciosDetalle.Location = new System.Drawing.Point(4, 29);
+            this.tpProductoPreciosDetalle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tpProductoPreciosDetalle.Name = "tpProductoPreciosDetalle";
-            this.tpProductoPreciosDetalle.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tpProductoPreciosDetalle.Size = new System.Drawing.Size(617, 402);
+            this.tpProductoPreciosDetalle.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tpProductoPreciosDetalle.Size = new System.Drawing.Size(617, 401);
             this.tpProductoPreciosDetalle.TabIndex = 1;
             this.tpProductoPreciosDetalle.Text = "Precios Venta Detalle";
             this.tpProductoPreciosDetalle.UseVisualStyleBackColor = true;
@@ -1003,8 +1004,8 @@
             this.gvListaPreciosVentaDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvListaPreciosVentaDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
+            this.gvListaPrecioDetallePrecioVentaColumn,
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn});
             this.gvListaPreciosVentaDetalle.DataSource = this.entProductoBindingSource;
             this.gvListaPreciosVentaDetalle.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvListaPreciosVentaDetalle.GridColor = System.Drawing.Color.DimGray;
@@ -1017,8 +1018,9 @@
             this.gvListaPreciosVentaDetalle.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.gvListaPreciosVentaDetalle.RowTemplate.Height = 27;
             this.gvListaPreciosVentaDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvListaPreciosVentaDetalle.Size = new System.Drawing.Size(615, 246);
+            this.gvListaPreciosVentaDetalle.Size = new System.Drawing.Size(615, 245);
             this.gvListaPreciosVentaDetalle.TabIndex = 3;
+            this.gvListaPreciosVentaDetalle.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvListaPreciosVentaDetalle_CellValueChanged);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1029,26 +1031,26 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn3
+            // gvListaPrecioDetallePrecioVentaColumn
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "PrecioVenta";
+            this.gvListaPrecioDetallePrecioVentaColumn.DataPropertyName = "PrecioVenta";
             dataGridViewCellStyle8.Format = "c2";
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewTextBoxColumn3.FillWeight = 4F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Precio Venta";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.gvListaPrecioDetallePrecioVentaColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.gvListaPrecioDetallePrecioVentaColumn.FillWeight = 4F;
+            this.gvListaPrecioDetallePrecioVentaColumn.HeaderText = "Precio Venta";
+            this.gvListaPrecioDetallePrecioVentaColumn.MinimumWidth = 6;
+            this.gvListaPrecioDetallePrecioVentaColumn.Name = "gvListaPrecioDetallePrecioVentaColumn";
             // 
-            // dataGridViewTextBoxColumn4
+            // gvListaPrecioDetallePrecioVentaIEPSColumn
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "PrecioVentaSinIVA";
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.DataPropertyName = "PrecioVentaSinIVA";
             dataGridViewCellStyle9.Format = "c2";
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridViewTextBoxColumn4.FillWeight = 4F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Precio Venta + IEPS";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 8;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.FillWeight = 4F;
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.HeaderText = "Precio Venta + IEPS";
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.MinimumWidth = 8;
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.Name = "gvListaPrecioDetallePrecioVentaIEPSColumn";
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.ReadOnly = true;
             // 
             // btnAgregar
             // 
@@ -1165,7 +1167,6 @@
             this.PrecioVentaSinIVA.HeaderText = "Precio Venta + IEPS";
             this.PrecioVentaSinIVA.MinimumWidth = 8;
             this.PrecioVentaSinIVA.Name = "PrecioVentaSinIVA";
-            this.PrecioVentaSinIVA.ReadOnly = true;
             // 
             // gvListaPrecios_PrecioVenta_2PColumn
             // 
@@ -1203,7 +1204,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1352, 675);
+            this.ClientSize = new System.Drawing.Size(1352, 674);
             this.Controls.Add(this.btnBuscaEmpresa);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.cmbEmpresas);
@@ -1317,8 +1318,8 @@
         private System.Windows.Forms.Button btnExporta;
         private System.Windows.Forms.DataGridView gvListaPreciosVentaDetalle;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gvListaPrecioDetallePrecioVentaColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gvListaPrecioDetallePrecioVentaIEPSColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn gvListaPrecios_PrecioVentaColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioVentaSinIVA;

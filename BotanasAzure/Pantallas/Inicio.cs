@@ -30,7 +30,8 @@ namespace Aires.Pantallas
             SUPERVISOR = 12, //OSBALDO
             GERENTEALMACEN = 13,
             GERENTEPRODUCCION = 14,
-            CYCVISUALIZA = 15
+            CYCVISUALIZA = 15,
+            PREVENTA = 16
         }
         public Inicio()
         {
@@ -83,6 +84,7 @@ namespace Aires.Pantallas
             registrosMovilToolStripMenuItem.Visible = false;
             tsbInventarioMovil.Visible = false;
             tsbInventario.Visible = false;
+            tsbProductos.Visible = false;
             switch (TipoUsuario)
             {
                 case TiposUsuario.ADMINISTRADORINSUMOS:
@@ -211,12 +213,12 @@ namespace Aires.Pantallas
                     tsbSalidas.Visible = false;
                     registrosMovilToolStripMenuItem.Visible = true;    
                     break;
-                case TiposUsuario.GERENTEVENTAS://(LUIS ALFONSO-LM)
+                case TiposUsuario.GERENTEVENTAS://(PAUL ALVAREZ - )
+                    tsbProductos.Enabled = true;
                     tsbProductos.Visible = false;
                     tsbInventario.Visible = true;
                     tsbReportes.Visible = true;
                     tsbReportesGlobales.Visible = true;
-                    tsbProductos.Enabled = true;
                     tsbClientes.Visible = true;
                     tsbClientes.Enabled = true;
                     tsbClientesCredito.Visible = true;
@@ -233,8 +235,8 @@ namespace Aires.Pantallas
                     tsbInventarioMovil.Visible = true;
                     break;
                 case TiposUsuario.GERENTEALMACEN://GERENTE (CULIACAN) 
-                    tsbInventario.Visible = true;
                     tsbProductos.Visible = false;
+                    tsbInventario.Visible = true;
                     tsbReportes.Visible = true;
                     break;
                 case TiposUsuario.GERENTEPRODUCCION:
@@ -252,6 +254,15 @@ namespace Aires.Pantallas
                     tsbClientes.Visible = true;
                     tsbClientes.Enabled = true;
                     tsbClientesCredito.Visible = true;
+                    break;
+                case TiposUsuario.PREVENTA://(PREVENTA-HILLO)
+                    tsbInventario.Visible = true;
+                    tsbRegtistroVentas.Visible = true;
+                    tsmPreVenta.Visible = true;
+                    tsbReportes.Visible = true;
+                    tsbClientes.Visible = true;
+                    tsbClientes.Enabled = true;
+                    entradasTraspasosToolStripMenuItem.Visible = true;
                     break;
                 case TiposUsuario.MASTER:
                     tsbInventario.Visible = true;

@@ -26,7 +26,8 @@ namespace Aires.Pantallas
             SUPERVISOR = 12, //OSBALDO
             GERENTEALMACEN = 13,
             GERENTEPRODUCCION = 14,
-            CYCVISUALIZA = 15//CARLOS ALONSO
+            CYCVISUALIZA = 15,//CARLOS ALONSO
+            PREVENTA = 16//(PREVENTA-HILLO)
         }
 
         TiposUsuario TipoUsuarioLogin { get; set; }
@@ -57,6 +58,7 @@ namespace Aires.Pantallas
             //    btnUsuarios.Visible = true;
             btnEntradas.Enabled = false;
             btnSalidas.Enabled = false;
+            btnProductos.Enabled = false;
             switch (this.TipoUsuarioLogin)
             {
                 case TiposUsuario.ADMINISTRADORINSUMOS:
@@ -100,6 +102,10 @@ namespace Aires.Pantallas
                     btnSalidas.Enabled = true;
                     btnEntradas.Enabled = true;
                     btnInventario.Visible = false;
+                    break;
+                case TiposUsuario.PREVENTA://(PREVENTA-HILLO)
+                    btnInventario.Visible = true;
+                    btnCotizaciones.Visible = true;
                     break;
                 case TiposUsuario.MASTER:
                     btnProductos.Enabled = true;

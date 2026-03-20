@@ -512,6 +512,9 @@ namespace Aires.Pantallas
                 //tcReportes.TabPages.Remove(tpClientes);
                 tcReportes.TabPages.Remove(tpProveedores);
 
+                lbEmpresa.Visible = false;
+                cmbEmpresas.Visible = false;
+                btnBuscaEmpresa.Visible = false;
                 if ((TipoUsuario)Program.UsuarioSeleccionado.TipoUsuarioId == 
                                                 TipoUsuario.GERENTEVENTAS)
                 {
@@ -541,6 +544,16 @@ namespace Aires.Pantallas
                     tcReportesVentas.TabPages.Remove(tpVentasPorFecha);
                     tcReportesVentas.TabPages.Remove(tpVentasPorCliente);
                     tcReportesVentas.TabPages.Remove(tpVentasPorTrabajador);
+                    tcReportes.TabPages.Remove(tpClientes_CxC);
+                    tcReportes.TabPages.Remove(tpAnalitico);
+                    tcReportes.TabPages.Remove(tpAuxiliar);
+                    SeleccionarIndexComboBox(cmbAlmacenes, Program.UsuarioSeleccionado.AlmacenMayoristaId);
+                    //cmbAlmacenes.Enabled = false;
+                }
+                else if ((TipoUsuario)Program.UsuarioSeleccionado.TipoUsuarioId ==
+                                                TipoUsuario.PREVENTA)//PREVENTA-HILLO
+                {
+                    rdoPorAlmacenVentas.Visible = false;
                     tcReportes.TabPages.Remove(tpClientes_CxC);
                     tcReportes.TabPages.Remove(tpAnalitico);
                     tcReportes.TabPages.Remove(tpAuxiliar);

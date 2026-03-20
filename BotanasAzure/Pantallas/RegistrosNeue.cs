@@ -196,6 +196,21 @@ namespace Aires.Pantallas
                 CargaAlmacenes();
                 //CargaClientes();
                 //}
+                if ((TipoUsuario)Program.UsuarioSeleccionado.TipoUsuarioId ==
+                                               TipoUsuario.PREVENTA)//PREVENTA-HILLO
+                {
+                    btnFacturar.Visible = false;
+                    btnEliminar.Visible = false;
+                    btnEliminarSinDevolución.Visible = false;
+                    btnReasignaArchivos.Visible = false;
+                    btnVerComplemento.Visible = false;
+                    btnComplementoPago.Visible = false;
+                    btnCancelaFactura.Visible = false;
+                    btnCancelarFacturaSinDevolucion.Visible = false;
+                    btnCancelarPorUUID.Visible = false;
+                    btnCancelaSoloFactura.Visible = false;
+                    SeleccionarIndexComboBox(cmbAlmacenes, Program.UsuarioSeleccionado.AlmacenMayoristaId);
+                }
             }
             catch (Exception ex)
             {

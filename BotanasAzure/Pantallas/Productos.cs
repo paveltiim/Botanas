@@ -812,5 +812,10 @@ namespace Aires.Pantallas
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
         }
+
+        private void gvListaPreciosVentaDetalle_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
