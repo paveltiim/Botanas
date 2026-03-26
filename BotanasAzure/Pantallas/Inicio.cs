@@ -266,33 +266,32 @@ namespace Aires.Pantallas
                     break;
                 case TiposUsuario.MASTER:
                     tsbInventario.Visible = true;
-                    tsbClientesCreditoPruebas.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbEntradas.Visible = true;
-                    //tsbEntradasProductos.Visible = true;
-                    //tsbEntradasProductos.Enabled = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
-                    tsbProductos.Enabled = true;
-                    //tsbEntradasInsumos.Visible = true;
-                    entradasInsumosToolStripMenuItem.Visible = true;
-                    tsbSalidasInsumo.Visible = true;
                     tsbClientes.Visible = true;
-                    tsbSalidas.Enabled = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    //tsbVentasNeueDetalle.Visible = true;
+                    tsbClientesCredito.Visible = true;
+                    tsbClientesCreditoPruebas.Visible = false;
+                    tsbTrabajadores.Visible = true;
                     tsbVentasNeue.Visible = true;
                     tsbVentaMayorista.Visible = true;
-                    tsbVentasNeueDetalleNeue.Visible = false;
+                    tsbVentasNeueDetalle.Visible = false;
+                    tsbVentasNeueDetalleNeue.Visible = true;
                     tsbVentasNeueProductosVarios.Visible = false;
-                    tsbVentasNeueProductosVariosNeue.Visible = false;
+                    tsbVentasNeueProductosVariosNeue.Visible = true;
+                    tsbEntradas.Visible = true;
+                    entradasTraspasosToolStripMenuItem.Visible = true;
+                    entradasProductosToolStripMenuItem.Visible = true;
+                    tsbEntradasInsumos.Visible = false;
+                    tsbEntradasProductos.Visible = false;
+                    entradasInsumosToolStripMenuItem.Visible = true;
+                    tsbSalidas.Enabled = true;
+                    tsbSalidasInsumo.Visible = true;
+                    tsbProductos.Enabled = true;
                     tsbRegtistroVentas.Visible = true;
-                    //tsbRegtistroVentasMovil.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbTrabajadores.Visible = true;
+                    tsbReportes.Visible = true;
                     tsbReportesGlobales.Visible = true;
                     tsmTraspasosMovil.Visible = true;
                     registrosMovilToolStripMenuItem.Visible = true;
                     tsbInventarioMovil.Visible = true;
+
                     break;
             }
         }
