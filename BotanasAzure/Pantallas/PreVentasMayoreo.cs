@@ -2112,6 +2112,7 @@ namespace Aires.Pantallas
 
             gvPedidos.DataSource = null;
             gvPedidos.DataSource = pedidosFiltro.ToList();
+            txtTotalPedidos.Text = FormatoMoney(pedidosFiltro.Sum(P => P.Total));
         }
         private void btnFiltrarPedidos_Click(object sender, EventArgs e)
         {

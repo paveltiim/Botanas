@@ -348,13 +348,19 @@ namespace Aires.Pantallas
             
             CargaProductos(this.AlmacenId, this.TipoProductoId);
 
+            chkFacturar.Visible = false;
+            btnPreFactura.Visible = false;
             if (PedidoPreVenta.TipoPedidoId == (int)TipoPedido.PREVENTADEVOLUCION)
                 chkDevolucionCortesia.Checked = true;
             else if (PedidoPreVenta.TipoPedidoId == (int)TipoPedido.PREVENTACORTESIA)
                 chkCortesia.Checked = true;
-            else                    
+            else
+            {
+                chkFacturar.Visible = true;
+                btnPreFactura.Visible = true;
                 RevisaInventarioDisponible(productosPedidoPreVenta);
-            
+            }
+
             CargaProductosPedido(productosPedidoPreVenta);
 
             CalculaSumaTotal(productosPedidoPreVenta, txtSubtotal, txtIEPS, txtTotal);

@@ -120,13 +120,30 @@
   <metadata name="entProductoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>39, 39</value>
   </metadata>
-  <metadata name="entCatalogoGenericoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>709, 39</value>
-  </metadata>
-  <metadata name="entCatalogoGenericoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>709, 39</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnRefrescarProductosPreventas.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAmCAYAAAC29NkdAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAqdJREFUWEftl+1LU2EYxm+KEv2YFEVKxOjlQwmpUPhBP0hbztaqYVOjaBnJTMO3
+        Eb5kWmEhqVkW2YcMiiLdq9taa27zZZqiy9LSyFb5F/QnXHGOkjSZbnuOZHB+Hw/3fV3385zn3M99iERE
+        RETWNvmdUzhw1YfYS27EaF3YoHVha3kf0m68Q709gOD4VSOhahC7Sr1/DA81DIOUZlC+HTsq+pDaOApl
+        +wSkbX4kXRtGfJEbdMICyrUj79GH1S90e7UPe2p9qHd8B52ygpQW5D6eXNE4hVvIYT3itL0rxjKxu34I
+        VPCW37G01vGIzRKKPaAjBlSYvkacGxaJVQOg069BBU7sLPMiqdQTsVHqzRFQyvOI88ImvWUMyo6PyGzz
+        49j9iaiMVA+iy/u/ueueE3zVJS+mhdGMOe+E5HLk5205qi2zIIUFpOpBRqufUfuoCcXdXxhFglDbQIUu
+        rC/v44ukbBODvtLCkLwUedMY3w323Rqd7wqcxcMoPxydNQBSW6NLDkF2yziqTLPzmnIDm/aFlzN8Yw5+
+        LhjZRjbt25450MkeNpEQ1Ni+gWSMBfLI9LjDFSow6o5JUI4Qx0dtg7R5TAChv4kvdOFgwwi7roabWBRm
+        dqFgZAa0un4KpKuyIrlRgNUusOmsgx9qg59HTRHXqDO7BRE80/kJpGBpzCGQXBkA5bG1nBpbAJRlRM6T
+        KSad0HB9S7V4s1x3/gBJ9WGZaZ5N85O1pMQdVnzUJDeNgjK6sL9uCIOBX6CLvdir61/WNI7b+SwjNF0z
+        y8YJRq11Fus0b0C5Nmys7Aepl756+T0/Esu9oPRX2Fwm7DQUNnXcXX3OATpuhrR58T8lltsxhQnbKgf+
+        TWEcJU8/g+QmbCnzQmdcuPzXEjnt7yFrYx02RUREmPkN3aRb5hmyucgAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="entCatalogoGenericoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>709, 39</value>
+  </metadata>
+  <metadata name="entCatalogoGenericoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>709, 39</value>
+  </metadata>
   <data name="btnRefrescaTrabajadores.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAmCAYAAAC29NkdAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -816,23 +833,6 @@
 </value>
   </data>
   <data name="btnAgregaMovimientos.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAmCAYAAAC29NkdAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAqdJREFUWEftl+1LU2EYxm+KEv2YFEVKxOjlQwmpUPhBP0hbztaqYVOjaBnJTMO3
-        Eb5kWmEhqVkW2YcMiiLdq9taa27zZZqiy9LSyFb5F/QnXHGOkjSZbnuOZHB+Hw/3fV3385zn3M99iERE
-        RETWNvmdUzhw1YfYS27EaF3YoHVha3kf0m68Q709gOD4VSOhahC7Sr1/DA81DIOUZlC+HTsq+pDaOApl
-        +wSkbX4kXRtGfJEbdMICyrUj79GH1S90e7UPe2p9qHd8B52ygpQW5D6eXNE4hVvIYT3itL0rxjKxu34I
-        VPCW37G01vGIzRKKPaAjBlSYvkacGxaJVQOg069BBU7sLPMiqdQTsVHqzRFQyvOI88ImvWUMyo6PyGzz
-        49j9iaiMVA+iy/u/ueueE3zVJS+mhdGMOe+E5HLk5205qi2zIIUFpOpBRqufUfuoCcXdXxhFglDbQIUu
-        rC/v44ukbBODvtLCkLwUedMY3w323Rqd7wqcxcMoPxydNQBSW6NLDkF2yziqTLPzmnIDm/aFlzN8Yw5+
-        LhjZRjbt25450MkeNpEQ1Ni+gWSMBfLI9LjDFSow6o5JUI4Qx0dtg7R5TAChv4kvdOFgwwi7roabWBRm
-        dqFgZAa0un4KpKuyIrlRgNUusOmsgx9qg59HTRHXqDO7BRE80/kJpGBpzCGQXBkA5bG1nBpbAJRlRM6T
-        KSad0HB9S7V4s1x3/gBJ9WGZaZ5N85O1pMQdVnzUJDeNgjK6sL9uCIOBX6CLvdir61/WNI7b+SwjNF0z
-        y8YJRq11Fus0b0C5Nmys7Aepl756+T0/Esu9oPRX2Fwm7DQUNnXcXX3OATpuhrR58T8lltsxhQnbKgf+
-        TWEcJU8/g+QmbCnzQmdcuPzXEjnt7yFrYx02RUREmPkN3aRb5hmyucgAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnRefrescarProductosPreventas.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAmCAYAAAC29NkdAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAqdJREFUWEftl+1LU2EYxm+KEv2YFEVKxOjlQwmpUPhBP0hbztaqYVOjaBnJTMO3

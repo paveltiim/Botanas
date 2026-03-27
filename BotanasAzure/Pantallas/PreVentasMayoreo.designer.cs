@@ -275,10 +275,10 @@
             this.label24.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label24.AutoSize = true;
             this.label24.BackColor = System.Drawing.Color.Transparent;
-            this.label24.Location = new System.Drawing.Point(319, 26);
-            this.label24.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label24.Location = new System.Drawing.Point(232, 17);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(96, 25);
+            this.label24.Size = new System.Drawing.Size(65, 16);
             this.label24.TabIndex = 115;
             this.label24.Text = "Empresa:";
             this.label24.Visible = false;
@@ -290,10 +290,10 @@
             this.cmbEmpresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEmpresas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmpresas.FormattingEnabled = true;
-            this.cmbEmpresas.Location = new System.Drawing.Point(414, 10);
-            this.cmbEmpresas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbEmpresas.Location = new System.Drawing.Point(301, 7);
+            this.cmbEmpresas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbEmpresas.Name = "cmbEmpresas";
-            this.cmbEmpresas.Size = new System.Drawing.Size(654, 33);
+            this.cmbEmpresas.Size = new System.Drawing.Size(477, 33);
             this.cmbEmpresas.TabIndex = 116;
             this.cmbEmpresas.ValueMember = "Id";
             this.cmbEmpresas.Visible = false;
@@ -308,11 +308,11 @@
             this.tcGeneral.Controls.Add(this.tpRegistroPreVentas);
             this.tcGeneral.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tcGeneral.ItemSize = new System.Drawing.Size(244, 60);
-            this.tcGeneral.Location = new System.Drawing.Point(6, 22);
-            this.tcGeneral.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tcGeneral.Location = new System.Drawing.Point(4, 15);
+            this.tcGeneral.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tcGeneral.Name = "tcGeneral";
             this.tcGeneral.SelectedIndex = 0;
-            this.tcGeneral.Size = new System.Drawing.Size(1269, 840);
+            this.tcGeneral.Size = new System.Drawing.Size(923, 593);
             this.tcGeneral.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcGeneral.TabIndex = 4;
             this.tcGeneral.SelectedIndexChanged += new System.EventHandler(this.tcGeneral_SelectedIndexChanged);
@@ -324,10 +324,10 @@
             this.tpNuevaPreVenta.Controls.Add(this.pnlGeneral);
             this.tpNuevaPreVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tpNuevaPreVenta.Location = new System.Drawing.Point(4, 64);
-            this.tpNuevaPreVenta.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tpNuevaPreVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tpNuevaPreVenta.Name = "tpNuevaPreVenta";
-            this.tpNuevaPreVenta.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tpNuevaPreVenta.Size = new System.Drawing.Size(1332, 772);
+            this.tpNuevaPreVenta.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpNuevaPreVenta.Size = new System.Drawing.Size(915, 492);
             this.tpNuevaPreVenta.TabIndex = 1;
             this.tpNuevaPreVenta.Text = "Pre-Venta";
             this.tpNuevaPreVenta.ToolTipText = "Nueva PreVenta";
@@ -360,20 +360,20 @@
             this.pnlGeneral.Controls.Add(this.chkSinSucursal);
             this.pnlGeneral.Controls.Add(this.gbDatosFacturacion);
             this.pnlGeneral.Controls.Add(this.gbComentario);
-            this.pnlGeneral.Location = new System.Drawing.Point(6, 6);
-            this.pnlGeneral.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlGeneral.Location = new System.Drawing.Point(4, 4);
+            this.pnlGeneral.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlGeneral.Name = "pnlGeneral";
-            this.pnlGeneral.Size = new System.Drawing.Size(1315, 706);
+            this.pnlGeneral.Size = new System.Drawing.Size(900, 472);
             this.pnlGeneral.TabIndex = 84;
             // 
             // chkCortesia
             // 
             this.chkCortesia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkCortesia.AutoSize = true;
-            this.chkCortesia.Location = new System.Drawing.Point(400, 371);
-            this.chkCortesia.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkCortesia.Location = new System.Drawing.Point(206, 239);
+            this.chkCortesia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkCortesia.Name = "chkCortesia";
-            this.chkCortesia.Size = new System.Drawing.Size(91, 24);
+            this.chkCortesia.Size = new System.Drawing.Size(94, 24);
             this.chkCortesia.TabIndex = 146;
             this.chkCortesia.Text = "Cortesía";
             this.chkCortesia.UseVisualStyleBackColor = true;
@@ -384,10 +384,10 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.cmbEstablecimientos);
-            this.panel1.Location = new System.Drawing.Point(-1009, 333);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.panel1.Location = new System.Drawing.Point(-791, 222);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(569, 68);
+            this.panel1.Size = new System.Drawing.Size(415, 47);
             this.panel1.TabIndex = 134;
             // 
             // cmbEstablecimientos
@@ -399,10 +399,10 @@
             this.cmbEstablecimientos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbEstablecimientos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEstablecimientos.FormattingEnabled = true;
-            this.cmbEstablecimientos.Location = new System.Drawing.Point(11, 10);
-            this.cmbEstablecimientos.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbEstablecimientos.Location = new System.Drawing.Point(8, 7);
+            this.cmbEstablecimientos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbEstablecimientos.Name = "cmbEstablecimientos";
-            this.cmbEstablecimientos.Size = new System.Drawing.Size(539, 28);
+            this.cmbEstablecimientos.Size = new System.Drawing.Size(393, 28);
             this.cmbEstablecimientos.TabIndex = 118;
             this.cmbEstablecimientos.ValueMember = "Id";
             this.cmbEstablecimientos.SelectedIndexChanged += new System.EventHandler(this.cmbAlmacenes_SelectedIndexChanged);
@@ -419,10 +419,10 @@
             this.btnRefrescaTrabajadores.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRefrescaTrabajadores.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescaTrabajadores.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescaTrabajadores.Location = new System.Drawing.Point(-434, 337);
-            this.btnRefrescaTrabajadores.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRefrescaTrabajadores.Location = new System.Drawing.Point(-373, 225);
+            this.btnRefrescaTrabajadores.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefrescaTrabajadores.Name = "btnRefrescaTrabajadores";
-            this.btnRefrescaTrabajadores.Size = new System.Drawing.Size(82, 58);
+            this.btnRefrescaTrabajadores.Size = new System.Drawing.Size(60, 39);
             this.btnRefrescaTrabajadores.TabIndex = 145;
             this.btnRefrescaTrabajadores.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRefrescaTrabajadores.UseVisualStyleBackColor = false;
@@ -437,10 +437,10 @@
             this.cmbTrabajadores.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTrabajadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTrabajadores.FormattingEnabled = true;
-            this.cmbTrabajadores.Location = new System.Drawing.Point(-346, 345);
-            this.cmbTrabajadores.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbTrabajadores.Location = new System.Drawing.Point(-309, 230);
+            this.cmbTrabajadores.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTrabajadores.Name = "cmbTrabajadores";
-            this.cmbTrabajadores.Size = new System.Drawing.Size(494, 28);
+            this.cmbTrabajadores.Size = new System.Drawing.Size(360, 28);
             this.cmbTrabajadores.TabIndex = 144;
             this.cmbTrabajadores.ValueMember = "Id";
             // 
@@ -452,10 +452,10 @@
             // 
             this.chkDevolucionCortesia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkDevolucionCortesia.AutoSize = true;
-            this.chkDevolucionCortesia.Location = new System.Drawing.Point(234, 371);
-            this.chkDevolucionCortesia.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkDevolucionCortesia.Location = new System.Drawing.Point(80, 239);
+            this.chkDevolucionCortesia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkDevolucionCortesia.Name = "chkDevolucionCortesia";
-            this.chkDevolucionCortesia.Size = new System.Drawing.Size(111, 24);
+            this.chkDevolucionCortesia.Size = new System.Drawing.Size(114, 24);
             this.chkDevolucionCortesia.TabIndex = 142;
             this.chkDevolucionCortesia.Text = "Devolución";
             this.chkDevolucionCortesia.UseVisualStyleBackColor = true;
@@ -466,8 +466,8 @@
             this.txtSucursal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSucursal.Location = new System.Drawing.Point(1629, 122);
-            this.txtSucursal.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtSucursal.Location = new System.Drawing.Point(1185, 81);
+            this.txtSucursal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSucursal.Name = "txtSucursal";
             this.txtSucursal.Size = new System.Drawing.Size(0, 26);
             this.txtSucursal.TabIndex = 122;
@@ -476,10 +476,10 @@
             // 
             this.chkPagada.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkPagada.AutoSize = true;
-            this.chkPagada.Location = new System.Drawing.Point(1188, 477);
-            this.chkPagada.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkPagada.Location = new System.Drawing.Point(781, 310);
+            this.chkPagada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkPagada.Name = "chkPagada";
-            this.chkPagada.Size = new System.Drawing.Size(84, 24);
+            this.chkPagada.Size = new System.Drawing.Size(87, 24);
             this.chkPagada.TabIndex = 140;
             this.chkPagada.Text = "Pagada";
             this.chkPagada.UseVisualStyleBackColor = true;
@@ -491,8 +491,8 @@
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.Color.White;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(1497, 122);
-            this.label15.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label15.Location = new System.Drawing.Point(1089, 81);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(88, 28);
             this.label15.TabIndex = 121;
@@ -506,10 +506,10 @@
             this.btnPreFactura.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPreFactura.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPreFactura.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPreFactura.Location = new System.Drawing.Point(1152, 565);
-            this.btnPreFactura.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnPreFactura.Location = new System.Drawing.Point(781, 377);
+            this.btnPreFactura.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPreFactura.Name = "btnPreFactura";
-            this.btnPreFactura.Size = new System.Drawing.Size(136, 122);
+            this.btnPreFactura.Size = new System.Drawing.Size(99, 81);
             this.btnPreFactura.TabIndex = 139;
             this.btnPreFactura.Text = "Pre-Factura";
             this.btnPreFactura.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -521,10 +521,10 @@
             // 
             this.chkFacturar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkFacturar.AutoSize = true;
-            this.chkFacturar.Location = new System.Drawing.Point(556, 371);
-            this.chkFacturar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkFacturar.Location = new System.Drawing.Point(319, 239);
+            this.chkFacturar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkFacturar.Name = "chkFacturar";
-            this.chkFacturar.Size = new System.Drawing.Size(91, 24);
+            this.chkFacturar.Size = new System.Drawing.Size(94, 24);
             this.chkFacturar.TabIndex = 138;
             this.chkFacturar.Text = "Facturar";
             this.chkFacturar.UseVisualStyleBackColor = true;
@@ -535,10 +535,10 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-4, 527);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(-3, 351);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(252, 182);
+            this.pictureBox1.Size = new System.Drawing.Size(183, 121);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 137;
             this.pictureBox1.TabStop = false;
@@ -565,8 +565,8 @@
             this.gvClientes.DataSource = this.entClienteBindingSource;
             this.gvClientes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvClientes.GridColor = System.Drawing.Color.DimGray;
-            this.gvClientes.Location = new System.Drawing.Point(231, 114);
-            this.gvClientes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gvClientes.Location = new System.Drawing.Point(168, 76);
+            this.gvClientes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvClientes.MultiSelect = false;
             this.gvClientes.Name = "gvClientes";
             this.gvClientes.ReadOnly = true;
@@ -576,7 +576,7 @@
             this.gvClientes.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.gvClientes.RowTemplate.Height = 27;
             this.gvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvClientes.Size = new System.Drawing.Size(0, 15);
+            this.gvClientes.Size = new System.Drawing.Size(0, 10);
             this.gvClientes.TabIndex = 114;
             this.gvClientes.Visible = false;
             this.gvClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvClientes_CellDoubleClick);
@@ -651,18 +651,17 @@
             this.pnlDatosCliente.Controls.Add(this.btnBuscarCliente);
             this.pnlDatosCliente.Controls.Add(this.txtNombre);
             this.pnlDatosCliente.Controls.Add(this.label23);
-            this.pnlDatosCliente.Location = new System.Drawing.Point(4, 2);
-            this.pnlDatosCliente.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.pnlDatosCliente.Location = new System.Drawing.Point(3, 1);
+            this.pnlDatosCliente.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlDatosCliente.Name = "pnlDatosCliente";
-            this.pnlDatosCliente.Size = new System.Drawing.Size(1766, 226);
+            this.pnlDatosCliente.Size = new System.Drawing.Size(1284, 151);
             this.pnlDatosCliente.TabIndex = 121;
             // 
             // label29
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(28, 8);
-            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label29.Location = new System.Drawing.Point(20, 5);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(123, 25);
             this.label29.TabIndex = 166;
@@ -671,10 +670,10 @@
             // txtNumOrden
             // 
             this.txtNumOrden.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumOrden.Location = new System.Drawing.Point(227, 8);
-            this.txtNumOrden.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtNumOrden.Location = new System.Drawing.Point(165, 5);
+            this.txtNumOrden.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNumOrden.Name = "txtNumOrden";
-            this.txtNumOrden.Size = new System.Drawing.Size(180, 24);
+            this.txtNumOrden.Size = new System.Drawing.Size(132, 24);
             this.txtNumOrden.TabIndex = 165;
             // 
             // cmbRegimenFiscal
@@ -685,20 +684,20 @@
             this.cmbRegimenFiscal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbRegimenFiscal.Font = new System.Drawing.Font("Microsoft Tai Le", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbRegimenFiscal.FormattingEnabled = true;
-            this.cmbRegimenFiscal.Location = new System.Drawing.Point(1172, 176);
-            this.cmbRegimenFiscal.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbRegimenFiscal.Location = new System.Drawing.Point(852, 117);
+            this.cmbRegimenFiscal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbRegimenFiscal.Name = "cmbRegimenFiscal";
-            this.cmbRegimenFiscal.Size = new System.Drawing.Size(586, 29);
+            this.cmbRegimenFiscal.Size = new System.Drawing.Size(427, 29);
             this.cmbRegimenFiscal.TabIndex = 147;
             this.cmbRegimenFiscal.ValueMember = "Id";
             this.cmbRegimenFiscal.Visible = false;
             // 
             // txtRegimenFiscal
             // 
-            this.txtRegimenFiscal.Location = new System.Drawing.Point(1172, 176);
-            this.txtRegimenFiscal.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtRegimenFiscal.Location = new System.Drawing.Point(852, 117);
+            this.txtRegimenFiscal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtRegimenFiscal.Name = "txtRegimenFiscal";
-            this.txtRegimenFiscal.Size = new System.Drawing.Size(586, 26);
+            this.txtRegimenFiscal.Size = new System.Drawing.Size(427, 26);
             this.txtRegimenFiscal.TabIndex = 148;
             this.txtRegimenFiscal.TabStop = false;
             this.txtRegimenFiscal.Visible = false;
@@ -707,8 +706,8 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(936, 178);
-            this.label34.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label34.Location = new System.Drawing.Point(681, 119);
+            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(146, 24);
             this.label34.TabIndex = 149;
@@ -719,11 +718,11 @@
             // 
             this.txtRFC.Enabled = false;
             this.txtRFC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRFC.Location = new System.Drawing.Point(1172, 123);
-            this.txtRFC.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtRFC.Location = new System.Drawing.Point(852, 82);
+            this.txtRFC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtRFC.Name = "txtRFC";
             this.txtRFC.ReadOnly = true;
-            this.txtRFC.Size = new System.Drawing.Size(302, 26);
+            this.txtRFC.Size = new System.Drawing.Size(221, 26);
             this.txtRFC.TabIndex = 118;
             // 
             // label5
@@ -731,8 +730,8 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(1077, 122);
-            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Location = new System.Drawing.Point(783, 81);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 28);
             this.label5.TabIndex = 117;
@@ -742,8 +741,8 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(766, 176);
-            this.label35.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label35.Location = new System.Drawing.Point(557, 117);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(17, 24);
             this.label35.TabIndex = 146;
@@ -752,17 +751,17 @@
             // txtCP
             // 
             this.txtCP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCP.Location = new System.Drawing.Point(616, 176);
-            this.txtCP.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtCP.Location = new System.Drawing.Point(448, 117);
+            this.txtCP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCP.Name = "txtCP";
-            this.txtCP.Size = new System.Drawing.Size(137, 26);
+            this.txtCP.Size = new System.Drawing.Size(101, 26);
             this.txtCP.TabIndex = 144;
             // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(562, 176);
-            this.label28.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label28.Location = new System.Drawing.Point(409, 117);
+            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(37, 20);
             this.label28.TabIndex = 145;
@@ -775,10 +774,10 @@
             this.btnRefrescarClientes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRefrescarClientes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescarClientes.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescarClientes.Location = new System.Drawing.Point(832, 56);
-            this.btnRefrescarClientes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRefrescarClientes.Location = new System.Drawing.Point(605, 37);
+            this.btnRefrescarClientes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefrescarClientes.Name = "btnRefrescarClientes";
-            this.btnRefrescarClientes.Size = new System.Drawing.Size(92, 63);
+            this.btnRefrescarClientes.Size = new System.Drawing.Size(67, 42);
             this.btnRefrescarClientes.TabIndex = 120;
             this.btnRefrescarClientes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRefrescarClientes.UseVisualStyleBackColor = false;
@@ -787,10 +786,10 @@
             // txtNombreFiscal
             // 
             this.txtNombreFiscal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreFiscal.Location = new System.Drawing.Point(1172, 69);
-            this.txtNombreFiscal.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtNombreFiscal.Location = new System.Drawing.Point(852, 46);
+            this.txtNombreFiscal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNombreFiscal.Name = "txtNombreFiscal";
-            this.txtNombreFiscal.Size = new System.Drawing.Size(586, 26);
+            this.txtNombreFiscal.Size = new System.Drawing.Size(427, 26);
             this.txtNombreFiscal.TabIndex = 116;
             // 
             // label6
@@ -798,8 +797,8 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(961, 66);
-            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label6.Location = new System.Drawing.Point(699, 44);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(141, 28);
             this.label6.TabIndex = 115;
@@ -810,8 +809,8 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(81, 120);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label4.Location = new System.Drawing.Point(59, 80);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 28);
             this.label4.TabIndex = 113;
@@ -820,10 +819,10 @@
             // txtClienteBusqueda
             // 
             this.txtClienteBusqueda.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClienteBusqueda.Location = new System.Drawing.Point(227, 64);
-            this.txtClienteBusqueda.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtClienteBusqueda.Location = new System.Drawing.Point(165, 43);
+            this.txtClienteBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtClienteBusqueda.Name = "txtClienteBusqueda";
-            this.txtClienteBusqueda.Size = new System.Drawing.Size(526, 30);
+            this.txtClienteBusqueda.Size = new System.Drawing.Size(384, 30);
             this.txtClienteBusqueda.TabIndex = 109;
             this.txtClienteBusqueda.TextChanged += new System.EventHandler(this.txtClienteBusqueda_TextChanged);
             this.txtClienteBusqueda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtClienteBusqueda_KeyDown);
@@ -836,10 +835,10 @@
             this.btnBuscarCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBuscarCliente.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscarCliente.Location = new System.Drawing.Point(763, 56);
-            this.btnBuscarCliente.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnBuscarCliente.Location = new System.Drawing.Point(555, 37);
+            this.btnBuscarCliente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscarCliente.Name = "btnBuscarCliente";
-            this.btnBuscarCliente.Size = new System.Drawing.Size(67, 58);
+            this.btnBuscarCliente.Size = new System.Drawing.Size(49, 39);
             this.btnBuscarCliente.TabIndex = 111;
             this.btnBuscarCliente.UseVisualStyleBackColor = false;
             this.btnBuscarCliente.Click += new System.EventHandler(this.btnBuscarCliente_Click);
@@ -847,11 +846,11 @@
             // txtNombre
             // 
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(227, 123);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtNombre.Location = new System.Drawing.Point(165, 82);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.ReadOnly = true;
-            this.txtNombre.Size = new System.Drawing.Size(526, 26);
+            this.txtNombre.Size = new System.Drawing.Size(384, 26);
             this.txtNombre.TabIndex = 110;
             // 
             // label23
@@ -860,8 +859,8 @@
             this.label23.BackColor = System.Drawing.Color.White;
             this.label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label23.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(6, 64);
-            this.label23.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label23.Location = new System.Drawing.Point(4, 43);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(139, 30);
             this.label23.TabIndex = 112;
@@ -885,10 +884,10 @@
             this.pnlProductos.Controls.Add(this.txtBuscaProductoCodigo);
             this.pnlProductos.Controls.Add(this.tabControl3);
             this.pnlProductos.Enabled = false;
-            this.pnlProductos.Location = new System.Drawing.Point(4, 234);
-            this.pnlProductos.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlProductos.Location = new System.Drawing.Point(3, 156);
+            this.pnlProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlProductos.Name = "pnlProductos";
-            this.pnlProductos.Size = new System.Drawing.Size(1304, 101);
+            this.pnlProductos.Size = new System.Drawing.Size(891, 67);
             this.pnlProductos.TabIndex = 2;
             // 
             // cmbDescuentos
@@ -902,10 +901,10 @@
             "5% DESC.",
             "10% DESC.",
             "15% DESC."});
-            this.cmbDescuentos.Location = new System.Drawing.Point(1112, 70);
-            this.cmbDescuentos.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbDescuentos.Location = new System.Drawing.Point(752, 47);
+            this.cmbDescuentos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbDescuentos.Name = "cmbDescuentos";
-            this.cmbDescuentos.Size = new System.Drawing.Size(190, 26);
+            this.cmbDescuentos.Size = new System.Drawing.Size(139, 26);
             this.cmbDescuentos.TabIndex = 146;
             this.cmbDescuentos.SelectedIndexChanged += new System.EventHandler(this.cmbDescuentos_SelectedIndexChanged);
             // 
@@ -914,10 +913,10 @@
             this.chk5Descuento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chk5Descuento.AutoSize = true;
             this.chk5Descuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk5Descuento.Location = new System.Drawing.Point(1196, 114);
-            this.chk5Descuento.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chk5Descuento.Location = new System.Drawing.Point(781, 76);
+            this.chk5Descuento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chk5Descuento.Name = "chk5Descuento";
-            this.chk5Descuento.Size = new System.Drawing.Size(106, 19);
+            this.chk5Descuento.Size = new System.Drawing.Size(109, 19);
             this.chk5Descuento.TabIndex = 141;
             this.chk5Descuento.Text = "5% Descuento";
             this.chk5Descuento.UseVisualStyleBackColor = true;
@@ -931,10 +930,10 @@
             this.btnRefrescarProductos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRefrescarProductos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescarProductos.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescarProductos.Location = new System.Drawing.Point(1115, 2);
-            this.btnRefrescarProductos.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRefrescarProductos.Location = new System.Drawing.Point(811, 1);
+            this.btnRefrescarProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefrescarProductos.Name = "btnRefrescarProductos";
-            this.btnRefrescarProductos.Size = new System.Drawing.Size(92, 63);
+            this.btnRefrescarProductos.Size = new System.Drawing.Size(67, 42);
             this.btnRefrescarProductos.TabIndex = 110;
             this.btnRefrescarProductos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRefrescarProductos.UseVisualStyleBackColor = false;
@@ -947,10 +946,10 @@
             this.btnBuscarProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBuscarProducto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscarProducto.Location = new System.Drawing.Point(1028, 2);
-            this.btnBuscarProducto.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnBuscarProducto.Location = new System.Drawing.Point(748, 1);
+            this.btnBuscarProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscarProducto.Name = "btnBuscarProducto";
-            this.btnBuscarProducto.Size = new System.Drawing.Size(87, 64);
+            this.btnBuscarProducto.Size = new System.Drawing.Size(63, 43);
             this.btnBuscarProducto.TabIndex = 13;
             this.btnBuscarProducto.UseVisualStyleBackColor = false;
             this.btnBuscarProducto.Click += new System.EventHandler(this.btnBuscarProducto_Click);
@@ -965,10 +964,10 @@
             this.cmbTipoProductoFiltro.Items.AddRange(new object[] {
             "Producto Venta",
             "Insumo"});
-            this.cmbTipoProductoFiltro.Location = new System.Drawing.Point(798, 22);
-            this.cmbTipoProductoFiltro.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbTipoProductoFiltro.Location = new System.Drawing.Point(523, 15);
+            this.cmbTipoProductoFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTipoProductoFiltro.Name = "cmbTipoProductoFiltro";
-            this.cmbTipoProductoFiltro.Size = new System.Drawing.Size(305, 24);
+            this.cmbTipoProductoFiltro.Size = new System.Drawing.Size(223, 24);
             this.cmbTipoProductoFiltro.TabIndex = 116;
             this.cmbTipoProductoFiltro.Visible = false;
             this.cmbTipoProductoFiltro.SelectedIndexChanged += new System.EventHandler(this.cmbTipoProductoFiltro_SelectedIndexChanged);
@@ -977,8 +976,8 @@
             // 
             this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(622, 26);
-            this.label26.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label26.Location = new System.Drawing.Point(395, 17);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(123, 20);
             this.label26.TabIndex = 117;
@@ -990,8 +989,8 @@
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(1125, 29);
-            this.label22.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label22.Location = new System.Drawing.Point(761, 19);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(129, 20);
             this.label22.TabIndex = 109;
@@ -1002,8 +1001,8 @@
             this.lbContadorSeries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbContadorSeries.AutoSize = true;
             this.lbContadorSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbContadorSeries.Location = new System.Drawing.Point(1125, 61);
-            this.lbContadorSeries.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbContadorSeries.Location = new System.Drawing.Point(761, 41);
+            this.lbContadorSeries.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbContadorSeries.Name = "lbContadorSeries";
             this.lbContadorSeries.Size = new System.Drawing.Size(18, 20);
             this.lbContadorSeries.TabIndex = 108;
@@ -1012,10 +1011,10 @@
             // txtBuscaProductoSerie
             // 
             this.txtBuscaProductoSerie.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscaProductoSerie.Location = new System.Drawing.Point(1011, 10);
-            this.txtBuscaProductoSerie.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtBuscaProductoSerie.Location = new System.Drawing.Point(735, 7);
+            this.txtBuscaProductoSerie.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBuscaProductoSerie.Name = "txtBuscaProductoSerie";
-            this.txtBuscaProductoSerie.Size = new System.Drawing.Size(400, 35);
+            this.txtBuscaProductoSerie.Size = new System.Drawing.Size(292, 35);
             this.txtBuscaProductoSerie.TabIndex = 12;
             this.txtBuscaProductoSerie.Visible = false;
             this.txtBuscaProductoSerie.TextChanged += new System.EventHandler(this.txtBuscaProductoSerie_TextChanged);
@@ -1024,10 +1023,10 @@
             // txtBuscaProducto
             // 
             this.txtBuscaProducto.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscaProducto.Location = new System.Drawing.Point(483, 10);
-            this.txtBuscaProducto.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtBuscaProducto.Location = new System.Drawing.Point(351, 7);
+            this.txtBuscaProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBuscaProducto.Name = "txtBuscaProducto";
-            this.txtBuscaProducto.Size = new System.Drawing.Size(542, 35);
+            this.txtBuscaProducto.Size = new System.Drawing.Size(395, 35);
             this.txtBuscaProducto.TabIndex = 11;
             this.txtBuscaProducto.TextChanged += new System.EventHandler(this.txtProductoBusqueda_TextChanged);
             this.txtBuscaProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProductoBusqueda_KeyPress);
@@ -1035,10 +1034,10 @@
             // txtBuscaProductoCodigo
             // 
             this.txtBuscaProductoCodigo.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscaProductoCodigo.Location = new System.Drawing.Point(148, 10);
-            this.txtBuscaProductoCodigo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtBuscaProductoCodigo.Location = new System.Drawing.Point(108, 7);
+            this.txtBuscaProductoCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBuscaProductoCodigo.Name = "txtBuscaProductoCodigo";
-            this.txtBuscaProductoCodigo.Size = new System.Drawing.Size(328, 35);
+            this.txtBuscaProductoCodigo.Size = new System.Drawing.Size(240, 35);
             this.txtBuscaProductoCodigo.TabIndex = 10;
             this.txtBuscaProductoCodigo.TextChanged += new System.EventHandler(this.txtCodigoProductoBusqueda_TextChanged);
             this.txtBuscaProductoCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProductoBusqueda_KeyPress);
@@ -1050,11 +1049,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl3.Controls.Add(this.tabPage4);
             this.tabControl3.Controls.Add(this.tabPage5);
-            this.tabControl3.Location = new System.Drawing.Point(4, 22);
-            this.tabControl3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabControl3.Location = new System.Drawing.Point(3, 15);
+            this.tabControl3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1112, 71);
+            this.tabControl3.Size = new System.Drawing.Size(752, 47);
             this.tabControl3.TabIndex = 82;
             // 
             // tabPage4
@@ -1062,10 +1061,10 @@
             this.tabPage4.Controls.Add(this.gvProductosBusqueda);
             this.tabPage4.Controls.Add(this.gvProductosPedido);
             this.tabPage4.Location = new System.Drawing.Point(4, 29);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tabPage4.Size = new System.Drawing.Size(1104, 38);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage4.Size = new System.Drawing.Size(744, 14);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Productos";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1089,8 +1088,8 @@
             this.gvProductosBusqueda.DataSource = this.entProductoBindingSource;
             this.gvProductosBusqueda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvProductosBusqueda.GridColor = System.Drawing.Color.DimGray;
-            this.gvProductosBusqueda.Location = new System.Drawing.Point(136, -2);
-            this.gvProductosBusqueda.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gvProductosBusqueda.Location = new System.Drawing.Point(99, -1);
+            this.gvProductosBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvProductosBusqueda.MultiSelect = false;
             this.gvProductosBusqueda.Name = "gvProductosBusqueda";
             this.gvProductosBusqueda.ReadOnly = true;
@@ -1100,7 +1099,7 @@
             this.gvProductosBusqueda.RowsDefaultCellStyle = dataGridViewCellStyle16;
             this.gvProductosBusqueda.RowTemplate.Height = 27;
             this.gvProductosBusqueda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvProductosBusqueda.Size = new System.Drawing.Size(502, 15);
+            this.gvProductosBusqueda.Size = new System.Drawing.Size(308, 10);
             this.gvProductosBusqueda.TabIndex = 92;
             this.gvProductosBusqueda.Visible = false;
             this.gvProductosBusqueda.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvProductos_CellDoubleClick);
@@ -1166,7 +1165,7 @@
             this.gvProductosPedido.DataSource = this.entProductoBindingSource;
             this.gvProductosPedido.GridColor = System.Drawing.Color.DimGray;
             this.gvProductosPedido.Location = new System.Drawing.Point(0, 0);
-            this.gvProductosPedido.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gvProductosPedido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvProductosPedido.MultiSelect = false;
             this.gvProductosPedido.Name = "gvProductosPedido";
             this.gvProductosPedido.RowHeadersVisible = false;
@@ -1174,7 +1173,7 @@
             dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.75F);
             this.gvProductosPedido.RowsDefaultCellStyle = dataGridViewCellStyle23;
             this.gvProductosPedido.RowTemplate.Height = 27;
-            this.gvProductosPedido.Size = new System.Drawing.Size(1098, 18);
+            this.gvProductosPedido.Size = new System.Drawing.Size(742, 12);
             this.gvProductosPedido.TabIndex = 78;
             this.gvProductosPedido.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvProductosPedido_CellContentClick);
             this.gvProductosPedido.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvProductosPedido_CellContentDoubleClick);
@@ -1261,10 +1260,10 @@
             // tabPage5
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tabPage5.Size = new System.Drawing.Size(1564, 23);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage5.Size = new System.Drawing.Size(801, 14);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
@@ -1274,8 +1273,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDireccion.Enabled = false;
             this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDireccion.Location = new System.Drawing.Point(1913, 69);
-            this.txtDireccion.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtDireccion.Location = new System.Drawing.Point(1391, 46);
+            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.ReadOnly = true;
             this.txtDireccion.Size = new System.Drawing.Size(0, 26);
@@ -1298,18 +1297,18 @@
             this.pnlAgrega.Controls.Add(this.txtTotal);
             this.pnlAgrega.Controls.Add(this.label7);
             this.pnlAgrega.Controls.Add(this.txtDescuento);
-            this.pnlAgrega.Location = new System.Drawing.Point(650, 345);
-            this.pnlAgrega.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlAgrega.Location = new System.Drawing.Point(416, 230);
+            this.pnlAgrega.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAgrega.Name = "pnlAgrega";
-            this.pnlAgrega.Size = new System.Drawing.Size(469, 351);
+            this.pnlAgrega.Size = new System.Drawing.Size(341, 234);
             this.pnlAgrega.TabIndex = 108;
             // 
             // lbDescuento
             // 
             this.lbDescuento.AutoSize = true;
             this.lbDescuento.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDescuento.Location = new System.Drawing.Point(286, 170);
-            this.lbDescuento.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbDescuento.Location = new System.Drawing.Point(208, 113);
+            this.lbDescuento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbDescuento.Name = "lbDescuento";
             this.lbDescuento.Size = new System.Drawing.Size(87, 18);
             this.lbDescuento.TabIndex = 146;
@@ -1319,11 +1318,11 @@
             // txtCambio
             // 
             this.txtCambio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCambio.Location = new System.Drawing.Point(126, 166);
-            this.txtCambio.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtCambio.Location = new System.Drawing.Point(92, 111);
+            this.txtCambio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCambio.Name = "txtCambio";
             this.txtCambio.ReadOnly = true;
-            this.txtCambio.Size = new System.Drawing.Size(103, 26);
+            this.txtCambio.Size = new System.Drawing.Size(76, 26);
             this.txtCambio.TabIndex = 101;
             this.txtCambio.TabStop = false;
             this.txtCambio.Visible = false;
@@ -1331,10 +1330,10 @@
             // txtEfectivo
             // 
             this.txtEfectivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEfectivo.Location = new System.Drawing.Point(126, 118);
-            this.txtEfectivo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtEfectivo.Location = new System.Drawing.Point(92, 79);
+            this.txtEfectivo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtEfectivo.Name = "txtEfectivo";
-            this.txtEfectivo.Size = new System.Drawing.Size(103, 26);
+            this.txtEfectivo.Size = new System.Drawing.Size(76, 26);
             this.txtEfectivo.TabIndex = 103;
             this.txtEfectivo.Visible = false;
             this.txtEfectivo.TextChanged += new System.EventHandler(this.txtEfectivo_TextChanged);
@@ -1345,8 +1344,8 @@
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label14.Location = new System.Drawing.Point(18, 170);
-            this.label14.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label14.Location = new System.Drawing.Point(13, 113);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(71, 20);
             this.label14.TabIndex = 104;
@@ -1358,8 +1357,8 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(15, 120);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Location = new System.Drawing.Point(11, 80);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 20);
             this.label3.TabIndex = 102;
@@ -1369,11 +1368,11 @@
             // txtSubtotal
             // 
             this.txtSubtotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSubtotal.Location = new System.Drawing.Point(309, 10);
-            this.txtSubtotal.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtSubtotal.Location = new System.Drawing.Point(225, 7);
+            this.txtSubtotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSubtotal.Name = "txtSubtotal";
             this.txtSubtotal.ReadOnly = true;
-            this.txtSubtotal.Size = new System.Drawing.Size(152, 26);
+            this.txtSubtotal.Size = new System.Drawing.Size(112, 26);
             this.txtSubtotal.TabIndex = 99;
             this.txtSubtotal.TabStop = false;
             // 
@@ -1383,8 +1382,8 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(183, 15);
-            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label8.Location = new System.Drawing.Point(133, 10);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(88, 22);
             this.label8.TabIndex = 100;
@@ -1395,8 +1394,8 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(235, 70);
-            this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label9.Location = new System.Drawing.Point(171, 47);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(51, 20);
             this.label9.TabIndex = 98;
@@ -1405,11 +1404,11 @@
             // txtIEPS
             // 
             this.txtIEPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtIEPS.Location = new System.Drawing.Point(309, 63);
-            this.txtIEPS.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtIEPS.Location = new System.Drawing.Point(225, 42);
+            this.txtIEPS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtIEPS.Name = "txtIEPS";
             this.txtIEPS.ReadOnly = true;
-            this.txtIEPS.Size = new System.Drawing.Size(152, 26);
+            this.txtIEPS.Size = new System.Drawing.Size(112, 26);
             this.txtIEPS.TabIndex = 97;
             this.txtIEPS.TabStop = false;
             // 
@@ -1421,10 +1420,10 @@
             this.btnCancelar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(280, 222);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnCancelar.Location = new System.Drawing.Point(204, 148);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(183, 122);
+            this.btnCancelar.Size = new System.Drawing.Size(133, 81);
             this.btnCancelar.TabIndex = 51;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1439,10 +1438,10 @@
             this.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(54, 222);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnAgregar.Location = new System.Drawing.Point(39, 148);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(183, 122);
+            this.btnAgregar.Size = new System.Drawing.Size(133, 81);
             this.btnAgregar.TabIndex = 50;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1452,11 +1451,11 @@
             // txtTotal
             // 
             this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotal.Location = new System.Drawing.Point(337, 118);
-            this.txtTotal.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtTotal.Location = new System.Drawing.Point(245, 79);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
-            this.txtTotal.Size = new System.Drawing.Size(124, 26);
+            this.txtTotal.Size = new System.Drawing.Size(91, 26);
             this.txtTotal.TabIndex = 85;
             this.txtTotal.TabStop = false;
             // 
@@ -1465,8 +1464,8 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(254, 122);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label7.Location = new System.Drawing.Point(185, 81);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 20);
             this.label7.TabIndex = 86;
@@ -1475,10 +1474,10 @@
             // txtDescuento
             // 
             this.txtDescuento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDescuento.Location = new System.Drawing.Point(337, 118);
-            this.txtDescuento.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtDescuento.Location = new System.Drawing.Point(245, 79);
+            this.txtDescuento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDescuento.Name = "txtDescuento";
-            this.txtDescuento.Size = new System.Drawing.Size(124, 26);
+            this.txtDescuento.Size = new System.Drawing.Size(91, 26);
             this.txtDescuento.TabIndex = 96;
             this.txtDescuento.Visible = false;
             this.txtDescuento.Leave += new System.EventHandler(this.txtDescuento_Leave);
@@ -1488,8 +1487,8 @@
             this.label27.AutoSize = true;
             this.label27.BackColor = System.Drawing.Color.White;
             this.label27.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(1770, 66);
-            this.label27.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label27.Location = new System.Drawing.Point(1287, 44);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(98, 28);
             this.label27.TabIndex = 140;
@@ -1499,10 +1498,10 @@
             // 
             this.chkSinSucursal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkSinSucursal.AutoSize = true;
-            this.chkSinSucursal.Location = new System.Drawing.Point(1398, 129);
-            this.chkSinSucursal.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkSinSucursal.Location = new System.Drawing.Point(924, 86);
+            this.chkSinSucursal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkSinSucursal.Name = "chkSinSucursal";
-            this.chkSinSucursal.Size = new System.Drawing.Size(123, 24);
+            this.chkSinSucursal.Size = new System.Drawing.Size(126, 24);
             this.chkSinSucursal.TabIndex = 139;
             this.chkSinSucursal.Text = "Sin Sucursal";
             this.chkSinSucursal.UseVisualStyleBackColor = true;
@@ -1527,11 +1526,11 @@
             this.gbDatosFacturacion.Controls.Add(this.cmbFormaPago);
             this.gbDatosFacturacion.Controls.Add(this.txtFormaPago);
             this.gbDatosFacturacion.Enabled = false;
-            this.gbDatosFacturacion.Location = new System.Drawing.Point(-442, 397);
-            this.gbDatosFacturacion.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbDatosFacturacion.Location = new System.Drawing.Point(-378, 265);
+            this.gbDatosFacturacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbDatosFacturacion.Name = "gbDatosFacturacion";
-            this.gbDatosFacturacion.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.gbDatosFacturacion.Size = new System.Drawing.Size(1088, 297);
+            this.gbDatosFacturacion.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbDatosFacturacion.Size = new System.Drawing.Size(791, 198);
             this.gbDatosFacturacion.TabIndex = 136;
             this.gbDatosFacturacion.TabStop = false;
             this.gbDatosFacturacion.Text = "Datos de Factura";
@@ -1541,8 +1540,8 @@
             // 
             this.lbAumentoPagoT.AutoSize = true;
             this.lbAumentoPagoT.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAumentoPagoT.Location = new System.Drawing.Point(566, 208);
-            this.lbAumentoPagoT.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbAumentoPagoT.Location = new System.Drawing.Point(412, 139);
+            this.lbAumentoPagoT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbAumentoPagoT.Name = "lbAumentoPagoT";
             this.lbAumentoPagoT.Size = new System.Drawing.Size(201, 18);
             this.lbAumentoPagoT.TabIndex = 136;
@@ -1552,18 +1551,18 @@
             // txtCondicionesPago
             // 
             this.txtCondicionesPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCondicionesPago.Location = new System.Drawing.Point(271, 202);
-            this.txtCondicionesPago.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtCondicionesPago.Location = new System.Drawing.Point(197, 135);
+            this.txtCondicionesPago.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCondicionesPago.Name = "txtCondicionesPago";
-            this.txtCondicionesPago.Size = new System.Drawing.Size(220, 26);
+            this.txtCondicionesPago.Size = new System.Drawing.Size(161, 26);
             this.txtCondicionesPago.TabIndex = 3;
             this.txtCondicionesPago.Visible = false;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(28, 210);
-            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label12.Location = new System.Drawing.Point(20, 140);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(172, 20);
             this.label12.TabIndex = 135;
@@ -1579,10 +1578,10 @@
             this.cmbUsoCFDI.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbUsoCFDI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbUsoCFDI.FormattingEnabled = true;
-            this.cmbUsoCFDI.Location = new System.Drawing.Point(271, 40);
-            this.cmbUsoCFDI.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbUsoCFDI.Location = new System.Drawing.Point(197, 27);
+            this.cmbUsoCFDI.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbUsoCFDI.Name = "cmbUsoCFDI";
-            this.cmbUsoCFDI.Size = new System.Drawing.Size(797, 28);
+            this.cmbUsoCFDI.Size = new System.Drawing.Size(581, 28);
             this.cmbUsoCFDI.TabIndex = 0;
             this.cmbUsoCFDI.ValueMember = "Id";
             // 
@@ -1591,10 +1590,10 @@
             this.txtUsoCFDI.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUsoCFDI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsoCFDI.Location = new System.Drawing.Point(271, 40);
-            this.txtUsoCFDI.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtUsoCFDI.Location = new System.Drawing.Point(197, 27);
+            this.txtUsoCFDI.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUsoCFDI.Name = "txtUsoCFDI";
-            this.txtUsoCFDI.Size = new System.Drawing.Size(797, 26);
+            this.txtUsoCFDI.Size = new System.Drawing.Size(581, 26);
             this.txtUsoCFDI.TabIndex = 132;
             this.txtUsoCFDI.TabStop = false;
             // 
@@ -1602,8 +1601,8 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label30.Location = new System.Drawing.Point(125, 46);
-            this.label30.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label30.Location = new System.Drawing.Point(91, 31);
+            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(98, 18);
             this.label30.TabIndex = 133;
@@ -1621,10 +1620,10 @@
             this.cmbMetodoPago.Items.AddRange(new object[] {
             "PUE - Pago en una sola exhibición",
             "PPD - Pago en parcialidades o diferido"});
-            this.cmbMetodoPago.Location = new System.Drawing.Point(271, 98);
-            this.cmbMetodoPago.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbMetodoPago.Location = new System.Drawing.Point(197, 65);
+            this.cmbMetodoPago.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbMetodoPago.Name = "cmbMetodoPago";
-            this.cmbMetodoPago.Size = new System.Drawing.Size(797, 28);
+            this.cmbMetodoPago.Size = new System.Drawing.Size(581, 28);
             this.cmbMetodoPago.TabIndex = 1;
             this.cmbMetodoPago.SelectedIndexChanged += new System.EventHandler(this.cmbMetodoPago_SelectedIndexChanged);
             // 
@@ -1633,18 +1632,18 @@
             this.txtNumeroCuenta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNumeroCuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumeroCuenta.Location = new System.Drawing.Point(271, 362);
-            this.txtNumeroCuenta.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtNumeroCuenta.Location = new System.Drawing.Point(197, 241);
+            this.txtNumeroCuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNumeroCuenta.Name = "txtNumeroCuenta";
-            this.txtNumeroCuenta.Size = new System.Drawing.Size(456, 26);
+            this.txtNumeroCuenta.Size = new System.Drawing.Size(333, 26);
             this.txtNumeroCuenta.TabIndex = 23;
             this.txtNumeroCuenta.Visible = false;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(44, 366);
-            this.label20.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label20.Location = new System.Drawing.Point(32, 244);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(154, 20);
             this.label20.TabIndex = 104;
@@ -1656,17 +1655,17 @@
             this.txtMetodoPago.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMetodoPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMetodoPago.Location = new System.Drawing.Point(271, 98);
-            this.txtMetodoPago.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtMetodoPago.Location = new System.Drawing.Point(197, 65);
+            this.txtMetodoPago.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMetodoPago.Name = "txtMetodoPago";
-            this.txtMetodoPago.Size = new System.Drawing.Size(643, 26);
+            this.txtMetodoPago.Size = new System.Drawing.Size(469, 26);
             this.txtMetodoPago.TabIndex = 1;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(65, 98);
-            this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label11.Location = new System.Drawing.Point(47, 65);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(135, 20);
             this.label11.TabIndex = 100;
@@ -1675,8 +1674,8 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(77, 158);
-            this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label10.Location = new System.Drawing.Point(56, 105);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(128, 20);
             this.label10.TabIndex = 98;
@@ -1685,8 +1684,8 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(188, 262);
-            this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label13.Location = new System.Drawing.Point(137, 175);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(56, 20);
             this.label13.TabIndex = 97;
@@ -1697,10 +1696,10 @@
             this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(271, 254);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtEmail.Location = new System.Drawing.Point(197, 169);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(643, 26);
+            this.txtEmail.Size = new System.Drawing.Size(469, 26);
             this.txtEmail.TabIndex = 4;
             // 
             // cmbFormaPago
@@ -1733,10 +1732,10 @@
             "29 - Tarjeta de servicios",
             "30 - Aplicación de anticipos",
             "99 - Por definir"});
-            this.cmbFormaPago.Location = new System.Drawing.Point(271, 150);
-            this.cmbFormaPago.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbFormaPago.Location = new System.Drawing.Point(197, 100);
+            this.cmbFormaPago.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbFormaPago.Name = "cmbFormaPago";
-            this.cmbFormaPago.Size = new System.Drawing.Size(797, 28);
+            this.cmbFormaPago.Size = new System.Drawing.Size(581, 28);
             this.cmbFormaPago.TabIndex = 2;
             this.cmbFormaPago.SelectedIndexChanged += new System.EventHandler(this.cmbFormaPago_SelectedIndexChanged);
             // 
@@ -1745,10 +1744,10 @@
             this.txtFormaPago.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFormaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFormaPago.Location = new System.Drawing.Point(271, 153);
-            this.txtFormaPago.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtFormaPago.Location = new System.Drawing.Point(197, 102);
+            this.txtFormaPago.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtFormaPago.Name = "txtFormaPago";
-            this.txtFormaPago.Size = new System.Drawing.Size(643, 26);
+            this.txtFormaPago.Size = new System.Drawing.Size(469, 26);
             this.txtFormaPago.TabIndex = 0;
             // 
             // gbComentario
@@ -1757,11 +1756,11 @@
             this.gbComentario.Controls.Add(this.txtComentario);
             this.gbComentario.Controls.Add(this.textBox3);
             this.gbComentario.Controls.Add(this.label17);
-            this.gbComentario.Location = new System.Drawing.Point(-442, 397);
-            this.gbComentario.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbComentario.Location = new System.Drawing.Point(-378, 265);
+            this.gbComentario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbComentario.Name = "gbComentario";
-            this.gbComentario.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.gbComentario.Size = new System.Drawing.Size(1079, 290);
+            this.gbComentario.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbComentario.Size = new System.Drawing.Size(785, 193);
             this.gbComentario.TabIndex = 143;
             this.gbComentario.TabStop = false;
             this.gbComentario.Text = "Observaciones";
@@ -1769,11 +1768,11 @@
             // txtComentario
             // 
             this.txtComentario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComentario.Location = new System.Drawing.Point(11, 42);
-            this.txtComentario.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtComentario.Location = new System.Drawing.Point(8, 28);
+            this.txtComentario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtComentario.Multiline = true;
             this.txtComentario.Name = "txtComentario";
-            this.txtComentario.Size = new System.Drawing.Size(1061, 238);
+            this.txtComentario.Size = new System.Drawing.Size(773, 160);
             this.txtComentario.TabIndex = 3;
             // 
             // textBox3
@@ -1781,18 +1780,18 @@
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(271, 362);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox3.Location = new System.Drawing.Point(197, 241);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(450, 26);
+            this.textBox3.Size = new System.Drawing.Size(328, 26);
             this.textBox3.TabIndex = 23;
             this.textBox3.Visible = false;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(44, 366);
-            this.label17.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label17.Location = new System.Drawing.Point(32, 244);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(154, 20);
             this.label17.TabIndex = 104;
@@ -1803,10 +1802,10 @@
             // 
             this.tpRegistroPreVentas.Controls.Add(this.pnlGeneralRegistroPreVenta);
             this.tpRegistroPreVentas.Location = new System.Drawing.Point(4, 64);
-            this.tpRegistroPreVentas.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tpRegistroPreVentas.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.tpRegistroPreVentas.Name = "tpRegistroPreVentas";
-            this.tpRegistroPreVentas.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tpRegistroPreVentas.Size = new System.Drawing.Size(1261, 772);
+            this.tpRegistroPreVentas.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.tpRegistroPreVentas.Size = new System.Drawing.Size(915, 525);
             this.tpRegistroPreVentas.TabIndex = 2;
             this.tpRegistroPreVentas.Text = "Registros de Pre-Ventas";
             this.tpRegistroPreVentas.UseVisualStyleBackColor = true;
@@ -1816,10 +1815,10 @@
             this.pnlGeneralRegistroPreVenta.Controls.Add(this.tcRegistrosPreventas);
             this.pnlGeneralRegistroPreVenta.Controls.Add(this.flpFiltrosRegistrosPreVenta);
             this.pnlGeneralRegistroPreVenta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlGeneralRegistroPreVenta.Location = new System.Drawing.Point(4, 2);
-            this.pnlGeneralRegistroPreVenta.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlGeneralRegistroPreVenta.Location = new System.Drawing.Point(3, 1);
+            this.pnlGeneralRegistroPreVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlGeneralRegistroPreVenta.Name = "pnlGeneralRegistroPreVenta";
-            this.pnlGeneralRegistroPreVenta.Size = new System.Drawing.Size(1253, 768);
+            this.pnlGeneralRegistroPreVenta.Size = new System.Drawing.Size(909, 523);
             this.pnlGeneralRegistroPreVenta.TabIndex = 170;
             // 
             // tcRegistrosPreventas
@@ -1830,11 +1829,10 @@
             this.tcRegistrosPreventas.Controls.Add(this.tpRegistrosPreVentas);
             this.tcRegistrosPreventas.Controls.Add(this.tpProductosPreVenta);
             this.tcRegistrosPreventas.ItemSize = new System.Drawing.Size(240, 45);
-            this.tcRegistrosPreventas.Location = new System.Drawing.Point(6, 80);
-            this.tcRegistrosPreventas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcRegistrosPreventas.Location = new System.Drawing.Point(4, 53);
             this.tcRegistrosPreventas.Name = "tcRegistrosPreventas";
             this.tcRegistrosPreventas.SelectedIndex = 0;
-            this.tcRegistrosPreventas.Size = new System.Drawing.Size(1247, 686);
+            this.tcRegistrosPreventas.Size = new System.Drawing.Size(905, 468);
             this.tcRegistrosPreventas.TabIndex = 148;
             // 
             // tpRegistrosPreVentas
@@ -1843,10 +1841,9 @@
             this.tpRegistrosPreVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tpRegistrosPreVentas.Controls.Add(this.pnlRegistrosPedidosPreventas);
             this.tpRegistrosPreVentas.Location = new System.Drawing.Point(4, 49);
-            this.tpRegistrosPreVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tpRegistrosPreVentas.Name = "tpRegistrosPreVentas";
-            this.tpRegistrosPreVentas.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tpRegistrosPreVentas.Size = new System.Drawing.Size(1239, 633);
+            this.tpRegistrosPreVentas.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpRegistrosPreVentas.Size = new System.Drawing.Size(897, 415);
             this.tpRegistrosPreVentas.TabIndex = 0;
             this.tpRegistrosPreVentas.Text = "Pedidos PreVentas";
             // 
@@ -1874,10 +1871,9 @@
             this.pnlRegistrosPedidosPreventas.Controls.Add(this.label16);
             this.pnlRegistrosPedidosPreventas.Controls.Add(this.btnFiltrarPedidos);
             this.pnlRegistrosPedidosPreventas.Controls.Add(this.flowLayoutPanel1);
-            this.pnlRegistrosPedidosPreventas.Location = new System.Drawing.Point(4, 10);
-            this.pnlRegistrosPedidosPreventas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlRegistrosPedidosPreventas.Location = new System.Drawing.Point(3, 7);
             this.pnlRegistrosPedidosPreventas.Name = "pnlRegistrosPedidosPreventas";
-            this.pnlRegistrosPedidosPreventas.Size = new System.Drawing.Size(1233, 597);
+            this.pnlRegistrosPedidosPreventas.Size = new System.Drawing.Size(895, 409);
             this.pnlRegistrosPedidosPreventas.TabIndex = 147;
             // 
             // cmbTrabjadoresFiltro
@@ -1889,10 +1885,10 @@
             this.cmbTrabjadoresFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTrabjadoresFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTrabjadoresFiltro.FormattingEnabled = true;
-            this.cmbTrabjadoresFiltro.Location = new System.Drawing.Point(290, 16);
-            this.cmbTrabjadoresFiltro.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbTrabjadoresFiltro.Location = new System.Drawing.Point(209, 11);
+            this.cmbTrabjadoresFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTrabjadoresFiltro.Name = "cmbTrabjadoresFiltro";
-            this.cmbTrabjadoresFiltro.Size = new System.Drawing.Size(379, 28);
+            this.cmbTrabjadoresFiltro.Size = new System.Drawing.Size(277, 28);
             this.cmbTrabjadoresFiltro.TabIndex = 170;
             this.cmbTrabjadoresFiltro.ValueMember = "Id";
             this.cmbTrabjadoresFiltro.SelectedIndexChanged += new System.EventHandler(this.btnFiltrarPedidos_Click);
@@ -1902,8 +1898,7 @@
             this.label25.AutoSize = true;
             this.label25.BackColor = System.Drawing.Color.White;
             this.label25.Font = new System.Drawing.Font("Microsoft Tai Le", 8.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(10, -3);
-            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label25.Location = new System.Drawing.Point(7, -2);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(22, 19);
             this.label25.TabIndex = 161;
@@ -1914,8 +1909,7 @@
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.Color.White;
             this.label18.Font = new System.Drawing.Font("Microsoft Tai Le", 8.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(524, -3);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Location = new System.Drawing.Point(381, -2);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(57, 19);
             this.label18.TabIndex = 163;
@@ -1924,10 +1918,10 @@
             // txtNumPedidoFiltro
             // 
             this.txtNumPedidoFiltro.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumPedidoFiltro.Location = new System.Drawing.Point(6, 22);
-            this.txtNumPedidoFiltro.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtNumPedidoFiltro.Location = new System.Drawing.Point(4, 15);
+            this.txtNumPedidoFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNumPedidoFiltro.Name = "txtNumPedidoFiltro";
-            this.txtNumPedidoFiltro.Size = new System.Drawing.Size(91, 24);
+            this.txtNumPedidoFiltro.Size = new System.Drawing.Size(67, 24);
             this.txtNumPedidoFiltro.TabIndex = 160;
             this.txtNumPedidoFiltro.TextChanged += new System.EventHandler(this.btnFiltrarPedidos_Click);
             // 
@@ -1936,8 +1930,8 @@
             this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label31.AutoSize = true;
             this.label31.BackColor = System.Drawing.Color.Transparent;
-            this.label31.Location = new System.Drawing.Point(437, 466);
-            this.label31.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label31.Location = new System.Drawing.Point(316, 322);
+            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(64, 28);
             this.label31.TabIndex = 144;
@@ -1946,10 +1940,10 @@
             // txtFacturaFiltro
             // 
             this.txtFacturaFiltro.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFacturaFiltro.Location = new System.Drawing.Point(103, 22);
-            this.txtFacturaFiltro.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtFacturaFiltro.Location = new System.Drawing.Point(75, 15);
+            this.txtFacturaFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtFacturaFiltro.Name = "txtFacturaFiltro";
-            this.txtFacturaFiltro.Size = new System.Drawing.Size(103, 24);
+            this.txtFacturaFiltro.Size = new System.Drawing.Size(76, 24);
             this.txtFacturaFiltro.TabIndex = 159;
             this.txtFacturaFiltro.TextChanged += new System.EventHandler(this.btnFiltrarPedidos_Click);
             // 
@@ -1958,8 +1952,7 @@
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.Color.White;
             this.label19.Font = new System.Drawing.Font("Microsoft Tai Le", 8.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(331, -3);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Location = new System.Drawing.Point(241, -2);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(55, 19);
             this.label19.TabIndex = 162;
@@ -1970,8 +1963,8 @@
             this.txtDescripcionFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescripcionFiltro.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcionFiltro.Location = new System.Drawing.Point(521, 22);
-            this.txtDescripcionFiltro.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtDescripcionFiltro.Location = new System.Drawing.Point(379, 15);
+            this.txtDescripcionFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDescripcionFiltro.Name = "txtDescripcionFiltro";
             this.txtDescripcionFiltro.Size = new System.Drawing.Size(0, 24);
             this.txtDescripcionFiltro.TabIndex = 158;
@@ -1981,20 +1974,20 @@
             // 
             this.txtTotalPedidos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTotalPedidos.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalPedidos.Location = new System.Drawing.Point(539, 471);
-            this.txtTotalPedidos.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtTotalPedidos.Location = new System.Drawing.Point(390, 325);
+            this.txtTotalPedidos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtTotalPedidos.Name = "txtTotalPedidos";
             this.txtTotalPedidos.ReadOnly = true;
-            this.txtTotalPedidos.Size = new System.Drawing.Size(170, 24);
+            this.txtTotalPedidos.Size = new System.Drawing.Size(125, 24);
             this.txtTotalPedidos.TabIndex = 143;
             // 
             // txtNumClienteFiltro
             // 
             this.txtNumClienteFiltro.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumClienteFiltro.Location = new System.Drawing.Point(213, 22);
-            this.txtNumClienteFiltro.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtNumClienteFiltro.Location = new System.Drawing.Point(155, 15);
+            this.txtNumClienteFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNumClienteFiltro.Name = "txtNumClienteFiltro";
-            this.txtNumClienteFiltro.Size = new System.Drawing.Size(108, 24);
+            this.txtNumClienteFiltro.Size = new System.Drawing.Size(80, 24);
             this.txtNumClienteFiltro.TabIndex = 157;
             this.txtNumClienteFiltro.TextChanged += new System.EventHandler(this.btnFiltrarPedidos_Click);
             // 
@@ -2003,8 +1996,7 @@
             this.label21.AutoSize = true;
             this.label21.BackColor = System.Drawing.Color.White;
             this.label21.Font = new System.Drawing.Font("Microsoft Tai Le", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(216, 3);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label21.Location = new System.Drawing.Point(157, 2);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(77, 16);
             this.label21.TabIndex = 165;
@@ -2013,10 +2005,10 @@
             // txtClienteFiltro
             // 
             this.txtClienteFiltro.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClienteFiltro.Location = new System.Drawing.Point(329, 22);
-            this.txtClienteFiltro.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtClienteFiltro.Location = new System.Drawing.Point(239, 15);
+            this.txtClienteFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtClienteFiltro.Name = "txtClienteFiltro";
-            this.txtClienteFiltro.Size = new System.Drawing.Size(186, 24);
+            this.txtClienteFiltro.Size = new System.Drawing.Size(136, 24);
             this.txtClienteFiltro.TabIndex = 155;
             this.txtClienteFiltro.TextChanged += new System.EventHandler(this.btnFiltrarPedidos_Click);
             // 
@@ -2030,10 +2022,10 @@
             this.flpBotonesFacturacion.Controls.Add(this.btnEliminar);
             this.flpBotonesFacturacion.Controls.Add(this.btnEnviaCorreo);
             this.flpBotonesFacturacion.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpBotonesFacturacion.Location = new System.Drawing.Point(1078, 64);
-            this.flpBotonesFacturacion.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.flpBotonesFacturacion.Location = new System.Drawing.Point(782, 43);
+            this.flpBotonesFacturacion.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.flpBotonesFacturacion.Name = "flpBotonesFacturacion";
-            this.flpBotonesFacturacion.Size = new System.Drawing.Size(155, 938);
+            this.flpBotonesFacturacion.Size = new System.Drawing.Size(113, 625);
             this.flpBotonesFacturacion.TabIndex = 141;
             // 
             // btnEnviarVenta
@@ -2044,10 +2036,10 @@
             this.btnEnviarVenta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEnviarVenta.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnviarVenta.Image = global::Aires.Properties.Resources.Paper_arrow;
-            this.btnEnviarVenta.Location = new System.Drawing.Point(6, 6);
-            this.btnEnviarVenta.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnEnviarVenta.Location = new System.Drawing.Point(4, 4);
+            this.btnEnviarVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEnviarVenta.Name = "btnEnviarVenta";
-            this.btnEnviarVenta.Size = new System.Drawing.Size(142, 122);
+            this.btnEnviarVenta.Size = new System.Drawing.Size(103, 81);
             this.btnEnviarVenta.TabIndex = 118;
             this.btnEnviarVenta.Text = "Enviar a Venta";
             this.btnEnviarVenta.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2063,10 +2055,10 @@
             this.btnFacturar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnFacturar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFacturar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFacturar.Location = new System.Drawing.Point(6, 140);
-            this.btnFacturar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnFacturar.Location = new System.Drawing.Point(4, 93);
+            this.btnFacturar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFacturar.Name = "btnFacturar";
-            this.btnFacturar.Size = new System.Drawing.Size(142, 122);
+            this.btnFacturar.Size = new System.Drawing.Size(103, 81);
             this.btnFacturar.TabIndex = 122;
             this.btnFacturar.Text = "Facturar";
             this.btnFacturar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2081,10 +2073,10 @@
             this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditar.Image = global::Aires.Properties.Resources.Editar;
-            this.btnEditar.Location = new System.Drawing.Point(6, 274);
-            this.btnEditar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnEditar.Location = new System.Drawing.Point(4, 182);
+            this.btnEditar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(142, 122);
+            this.btnEditar.Size = new System.Drawing.Size(103, 81);
             this.btnEditar.TabIndex = 121;
             this.btnEditar.Text = "Editar";
             this.btnEditar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2100,10 +2092,10 @@
             this.btnDividirVenta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDividirVenta.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDividirVenta.Image = global::Aires.Properties.Resources.PagarEstablecimientoChico;
-            this.btnDividirVenta.Location = new System.Drawing.Point(6, 408);
-            this.btnDividirVenta.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnDividirVenta.Location = new System.Drawing.Point(4, 271);
+            this.btnDividirVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDividirVenta.Name = "btnDividirVenta";
-            this.btnDividirVenta.Size = new System.Drawing.Size(142, 122);
+            this.btnDividirVenta.Size = new System.Drawing.Size(103, 81);
             this.btnDividirVenta.TabIndex = 123;
             this.btnDividirVenta.Text = "Dividir Pre-Venta";
             this.btnDividirVenta.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2118,10 +2110,10 @@
             this.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(6, 542);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnEliminar.Location = new System.Drawing.Point(4, 360);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(142, 122);
+            this.btnEliminar.Size = new System.Drawing.Size(103, 81);
             this.btnEliminar.TabIndex = 113;
             this.btnEliminar.Text = "Cancelar";
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2137,10 +2129,10 @@
             this.btnEnviaCorreo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnEnviaCorreo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEnviaCorreo.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnviaCorreo.Location = new System.Drawing.Point(6, 676);
-            this.btnEnviaCorreo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnEnviaCorreo.Location = new System.Drawing.Point(4, 449);
+            this.btnEnviaCorreo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEnviaCorreo.Name = "btnEnviaCorreo";
-            this.btnEnviaCorreo.Size = new System.Drawing.Size(142, 122);
+            this.btnEnviaCorreo.Size = new System.Drawing.Size(103, 81);
             this.btnEnviaCorreo.TabIndex = 120;
             this.btnEnviaCorreo.Text = "Enviar Correo";
             this.btnEnviaCorreo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2154,10 +2146,10 @@
             this.flpFiltrosChecks.Controls.Add(this.chkVerCortesias);
             this.flpFiltrosChecks.Controls.Add(this.chkVerDevoluciones);
             this.flpFiltrosChecks.Controls.Add(this.chkVerFacturasCanceladas);
-            this.flpFiltrosChecks.Location = new System.Drawing.Point(748, 9);
-            this.flpFiltrosChecks.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.flpFiltrosChecks.Location = new System.Drawing.Point(542, 6);
+            this.flpFiltrosChecks.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.flpFiltrosChecks.Name = "flpFiltrosChecks";
-            this.flpFiltrosChecks.Size = new System.Drawing.Size(700, 54);
+            this.flpFiltrosChecks.Size = new System.Drawing.Size(509, 36);
             this.flpFiltrosChecks.TabIndex = 169;
             this.flpFiltrosChecks.Visible = false;
             // 
@@ -2167,8 +2159,8 @@
             this.chkVerCortesias.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkVerCortesias.AutoSize = true;
             this.chkVerCortesias.Font = new System.Drawing.Font("Microsoft Tai Le", 7.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkVerCortesias.Location = new System.Drawing.Point(6, 6);
-            this.chkVerCortesias.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkVerCortesias.Location = new System.Drawing.Point(4, 4);
+            this.chkVerCortesias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkVerCortesias.Name = "chkVerCortesias";
             this.chkVerCortesias.Size = new System.Drawing.Size(98, 26);
             this.chkVerCortesias.TabIndex = 168;
@@ -2182,8 +2174,8 @@
             this.chkVerDevoluciones.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkVerDevoluciones.AutoSize = true;
             this.chkVerDevoluciones.Font = new System.Drawing.Font("Microsoft Tai Le", 7.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkVerDevoluciones.Location = new System.Drawing.Point(116, 6);
-            this.chkVerDevoluciones.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkVerDevoluciones.Location = new System.Drawing.Point(110, 4);
+            this.chkVerDevoluciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkVerDevoluciones.Name = "chkVerDevoluciones";
             this.chkVerDevoluciones.Size = new System.Drawing.Size(125, 26);
             this.chkVerDevoluciones.TabIndex = 167;
@@ -2197,8 +2189,8 @@
             this.chkVerFacturasCanceladas.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkVerFacturasCanceladas.AutoSize = true;
             this.chkVerFacturasCanceladas.Font = new System.Drawing.Font("Microsoft Tai Le", 7.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkVerFacturasCanceladas.Location = new System.Drawing.Point(253, 6);
-            this.chkVerFacturasCanceladas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkVerFacturasCanceladas.Location = new System.Drawing.Point(243, 4);
+            this.chkVerFacturasCanceladas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkVerFacturasCanceladas.Name = "chkVerFacturasCanceladas";
             this.chkVerFacturasCanceladas.Size = new System.Drawing.Size(183, 26);
             this.chkVerFacturasCanceladas.TabIndex = 140;
@@ -2233,8 +2225,8 @@
             this.gvPedidos.DataSource = this.entPedidoBindingSource;
             this.gvPedidos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvPedidos.GridColor = System.Drawing.Color.DimGray;
-            this.gvPedidos.Location = new System.Drawing.Point(1, 66);
-            this.gvPedidos.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gvPedidos.Location = new System.Drawing.Point(1, 44);
+            this.gvPedidos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvPedidos.MultiSelect = false;
             this.gvPedidos.Name = "gvPedidos";
             this.gvPedidos.ReadOnly = true;
@@ -2244,7 +2236,7 @@
             this.gvPedidos.RowsDefaultCellStyle = dataGridViewCellStyle28;
             this.gvPedidos.RowTemplate.Height = 27;
             this.gvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvPedidos.Size = new System.Drawing.Size(1071, 398);
+            this.gvPedidos.Size = new System.Drawing.Size(777, 276);
             this.gvPedidos.TabIndex = 142;
             this.gvPedidos.SelectionChanged += new System.EventHandler(this.gvPedidos_SelectionChanged);
             // 
@@ -2365,8 +2357,7 @@
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.Color.White;
             this.label16.Font = new System.Drawing.Font("Microsoft Tai Le", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(107, 3);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Location = new System.Drawing.Point(78, 2);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(73, 16);
             this.label16.TabIndex = 164;
@@ -2380,10 +2371,10 @@
             this.btnFiltrarPedidos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFiltrarPedidos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFiltrarPedidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFiltrarPedidos.Location = new System.Drawing.Point(679, 9);
-            this.btnFiltrarPedidos.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnFiltrarPedidos.Location = new System.Drawing.Point(492, 6);
+            this.btnFiltrarPedidos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFiltrarPedidos.Name = "btnFiltrarPedidos";
-            this.btnFiltrarPedidos.Size = new System.Drawing.Size(67, 48);
+            this.btnFiltrarPedidos.Size = new System.Drawing.Size(49, 32);
             this.btnFiltrarPedidos.TabIndex = 156;
             this.btnFiltrarPedidos.UseVisualStyleBackColor = false;
             this.btnFiltrarPedidos.Click += new System.EventHandler(this.btnFiltrarPedidos_Click);
@@ -2396,10 +2387,10 @@
             this.flowLayoutPanel1.Controls.Add(this.btnVerFactura);
             this.flowLayoutPanel1.Controls.Add(this.btnImprimeNotaVenta);
             this.flowLayoutPanel1.Controls.Add(this.btnAgregaMovimientos);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 465);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 321);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(798, 134);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(580, 89);
             this.flowLayoutPanel1.TabIndex = 129;
             // 
             // btnRefrescarVentas
@@ -2410,10 +2401,10 @@
             this.btnRefrescarVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRefrescarVentas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescarVentas.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescarVentas.Location = new System.Drawing.Point(6, 6);
-            this.btnRefrescarVentas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRefrescarVentas.Location = new System.Drawing.Point(4, 4);
+            this.btnRefrescarVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefrescarVentas.Name = "btnRefrescarVentas";
-            this.btnRefrescarVentas.Size = new System.Drawing.Size(142, 122);
+            this.btnRefrescarVentas.Size = new System.Drawing.Size(103, 81);
             this.btnRefrescarVentas.TabIndex = 115;
             this.btnRefrescarVentas.Text = "Refrescar";
             this.btnRefrescarVentas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2428,10 +2419,10 @@
             this.btnImprimeTicket.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnImprimeTicket.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImprimeTicket.Image = global::Aires.Properties.Resources.PreVenta_Botanas;
-            this.btnImprimeTicket.Location = new System.Drawing.Point(160, 6);
-            this.btnImprimeTicket.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnImprimeTicket.Location = new System.Drawing.Point(115, 4);
+            this.btnImprimeTicket.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnImprimeTicket.Name = "btnImprimeTicket";
-            this.btnImprimeTicket.Size = new System.Drawing.Size(142, 122);
+            this.btnImprimeTicket.Size = new System.Drawing.Size(103, 81);
             this.btnImprimeTicket.TabIndex = 120;
             this.btnImprimeTicket.Text = "Imprime Pre-Venta";
             this.btnImprimeTicket.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2446,10 +2437,10 @@
             this.btnVerFactura.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnVerFactura.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVerFactura.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerFactura.Location = new System.Drawing.Point(314, 6);
-            this.btnVerFactura.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnVerFactura.Location = new System.Drawing.Point(226, 4);
+            this.btnVerFactura.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVerFactura.Name = "btnVerFactura";
-            this.btnVerFactura.Size = new System.Drawing.Size(142, 122);
+            this.btnVerFactura.Size = new System.Drawing.Size(103, 81);
             this.btnVerFactura.TabIndex = 114;
             this.btnVerFactura.Text = "Ver Factura";
             this.btnVerFactura.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2464,10 +2455,10 @@
             this.btnImprimeNotaVenta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnImprimeNotaVenta.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImprimeNotaVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnImprimeNotaVenta.Image")));
-            this.btnImprimeNotaVenta.Location = new System.Drawing.Point(468, 6);
-            this.btnImprimeNotaVenta.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnImprimeNotaVenta.Location = new System.Drawing.Point(337, 4);
+            this.btnImprimeNotaVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnImprimeNotaVenta.Name = "btnImprimeNotaVenta";
-            this.btnImprimeNotaVenta.Size = new System.Drawing.Size(142, 122);
+            this.btnImprimeNotaVenta.Size = new System.Drawing.Size(103, 81);
             this.btnImprimeNotaVenta.TabIndex = 121;
             this.btnImprimeNotaVenta.Text = "Imprime Nota Venta";
             this.btnImprimeNotaVenta.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2483,10 +2474,10 @@
             this.btnAgregaMovimientos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnAgregaMovimientos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAgregaMovimientos.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregaMovimientos.Location = new System.Drawing.Point(622, 6);
-            this.btnAgregaMovimientos.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnAgregaMovimientos.Location = new System.Drawing.Point(448, 4);
+            this.btnAgregaMovimientos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAgregaMovimientos.Name = "btnAgregaMovimientos";
-            this.btnAgregaMovimientos.Size = new System.Drawing.Size(142, 122);
+            this.btnAgregaMovimientos.Size = new System.Drawing.Size(103, 81);
             this.btnAgregaMovimientos.TabIndex = 116;
             this.btnAgregaMovimientos.Text = "Agrega Movimientos";
             this.btnAgregaMovimientos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2500,10 +2491,9 @@
             this.tpProductosPreVenta.Controls.Add(this.rvProductosPreventa);
             this.tpProductosPreVenta.Controls.Add(this.flpBotonesProductosBottom);
             this.tpProductosPreVenta.Location = new System.Drawing.Point(4, 49);
-            this.tpProductosPreVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tpProductosPreVenta.Name = "tpProductosPreVenta";
-            this.tpProductosPreVenta.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tpProductosPreVenta.Size = new System.Drawing.Size(1239, 633);
+            this.tpProductosPreVenta.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpProductosPreVenta.Size = new System.Drawing.Size(897, 415);
             this.tpProductosPreVenta.TabIndex = 1;
             this.tpProductosPreVenta.Text = "Productos PreVentas";
             // 
@@ -2513,21 +2503,21 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rvProductosPreventa.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptVentasPorProductosNeueTotales.rdlc";
-            this.rvProductosPreventa.Location = new System.Drawing.Point(4, 44);
-            this.rvProductosPreventa.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.rvProductosPreventa.Location = new System.Drawing.Point(3, 29);
+            this.rvProductosPreventa.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.rvProductosPreventa.Name = "rvProductosPreventa";
             this.rvProductosPreventa.ServerReport.BearerToken = null;
-            this.rvProductosPreventa.Size = new System.Drawing.Size(1228, 431);
+            this.rvProductosPreventa.Size = new System.Drawing.Size(892, 299);
             this.rvProductosPreventa.TabIndex = 98;
             // 
             // flpBotonesProductosBottom
             // 
             this.flpBotonesProductosBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.flpBotonesProductosBottom.Controls.Add(this.btnRefrescarProductosPreventas);
-            this.flpBotonesProductosBottom.Location = new System.Drawing.Point(0, 477);
-            this.flpBotonesProductosBottom.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.flpBotonesProductosBottom.Location = new System.Drawing.Point(0, 329);
+            this.flpBotonesProductosBottom.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.flpBotonesProductosBottom.Name = "flpBotonesProductosBottom";
-            this.flpBotonesProductosBottom.Size = new System.Drawing.Size(798, 134);
+            this.flpBotonesProductosBottom.Size = new System.Drawing.Size(580, 89);
             this.flpBotonesProductosBottom.TabIndex = 130;
             // 
             // btnRefrescarProductosPreventas
@@ -2538,10 +2528,10 @@
             this.btnRefrescarProductosPreventas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRefrescarProductosPreventas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescarProductosPreventas.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescarProductosPreventas.Location = new System.Drawing.Point(6, 6);
-            this.btnRefrescarProductosPreventas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRefrescarProductosPreventas.Location = new System.Drawing.Point(4, 4);
+            this.btnRefrescarProductosPreventas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefrescarProductosPreventas.Name = "btnRefrescarProductosPreventas";
-            this.btnRefrescarProductosPreventas.Size = new System.Drawing.Size(142, 122);
+            this.btnRefrescarProductosPreventas.Size = new System.Drawing.Size(103, 81);
             this.btnRefrescarProductosPreventas.TabIndex = 115;
             this.btnRefrescarProductosPreventas.Text = "Refrescar";
             this.btnRefrescarProductosPreventas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2556,9 +2546,9 @@
             this.flpFiltrosRegistrosPreVenta.Controls.Add(this.pnlFechasVentas);
             this.flpFiltrosRegistrosPreVenta.Dock = System.Windows.Forms.DockStyle.Top;
             this.flpFiltrosRegistrosPreVenta.Location = new System.Drawing.Point(0, 0);
-            this.flpFiltrosRegistrosPreVenta.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.flpFiltrosRegistrosPreVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flpFiltrosRegistrosPreVenta.Name = "flpFiltrosRegistrosPreVenta";
-            this.flpFiltrosRegistrosPreVenta.Size = new System.Drawing.Size(1253, 78);
+            this.flpFiltrosRegistrosPreVenta.Size = new System.Drawing.Size(909, 52);
             this.flpFiltrosRegistrosPreVenta.TabIndex = 0;
             // 
             // rdoPorMesVentas
@@ -2566,10 +2556,10 @@
             this.rdoPorMesVentas.AutoSize = true;
             this.rdoPorMesVentas.Checked = true;
             this.rdoPorMesVentas.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoPorMesVentas.Location = new System.Drawing.Point(6, 6);
-            this.rdoPorMesVentas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rdoPorMesVentas.Location = new System.Drawing.Point(4, 4);
+            this.rdoPorMesVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdoPorMesVentas.Name = "rdoPorMesVentas";
-            this.rdoPorMesVentas.Size = new System.Drawing.Size(82, 23);
+            this.rdoPorMesVentas.Size = new System.Drawing.Size(85, 23);
             this.rdoPorMesVentas.TabIndex = 127;
             this.rdoPorMesVentas.TabStop = true;
             this.rdoPorMesVentas.Text = "Por Mes";
@@ -2580,10 +2570,10 @@
             // 
             this.pnlEntradasPorMes.Controls.Add(this.cmbMesesEntradas);
             this.pnlEntradasPorMes.Controls.Add(this.cmbAñoEntradas);
-            this.pnlEntradasPorMes.Location = new System.Drawing.Point(100, 6);
-            this.pnlEntradasPorMes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlEntradasPorMes.Location = new System.Drawing.Point(97, 4);
+            this.pnlEntradasPorMes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlEntradasPorMes.Name = "pnlEntradasPorMes";
-            this.pnlEntradasPorMes.Size = new System.Drawing.Size(437, 63);
+            this.pnlEntradasPorMes.Size = new System.Drawing.Size(318, 42);
             this.pnlEntradasPorMes.TabIndex = 126;
             // 
             // cmbMesesEntradas
@@ -2605,10 +2595,10 @@
             "OCTUBRE",
             "NOVIEMBRE",
             "DICIEMBRE"});
-            this.cmbMesesEntradas.Location = new System.Drawing.Point(10, 10);
-            this.cmbMesesEntradas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbMesesEntradas.Location = new System.Drawing.Point(7, 7);
+            this.cmbMesesEntradas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbMesesEntradas.Name = "cmbMesesEntradas";
-            this.cmbMesesEntradas.Size = new System.Drawing.Size(228, 28);
+            this.cmbMesesEntradas.Size = new System.Drawing.Size(167, 28);
             this.cmbMesesEntradas.TabIndex = 19;
             this.cmbMesesEntradas.SelectedIndexChanged += new System.EventHandler(this.cmbMesesEntradas_SelectedIndexChanged);
             // 
@@ -2619,10 +2609,10 @@
             this.cmbAñoEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbAñoEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbAñoEntradas.FormattingEnabled = true;
-            this.cmbAñoEntradas.Location = new System.Drawing.Point(279, 10);
-            this.cmbAñoEntradas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmbAñoEntradas.Location = new System.Drawing.Point(203, 7);
+            this.cmbAñoEntradas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbAñoEntradas.Name = "cmbAñoEntradas";
-            this.cmbAñoEntradas.Size = new System.Drawing.Size(137, 28);
+            this.cmbAñoEntradas.Size = new System.Drawing.Size(101, 28);
             this.cmbAñoEntradas.TabIndex = 20;
             this.cmbAñoEntradas.ValueMember = "Descripcion";
             // 
@@ -2630,10 +2620,10 @@
             // 
             this.rdoPorFechas.AutoSize = true;
             this.rdoPorFechas.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoPorFechas.Location = new System.Drawing.Point(549, 6);
-            this.rdoPorFechas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rdoPorFechas.Location = new System.Drawing.Point(423, 4);
+            this.rdoPorFechas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdoPorFechas.Name = "rdoPorFechas";
-            this.rdoPorFechas.Size = new System.Drawing.Size(99, 23);
+            this.rdoPorFechas.Size = new System.Drawing.Size(102, 23);
             this.rdoPorFechas.TabIndex = 146;
             this.rdoPorFechas.Text = "Por Fechas";
             this.rdoPorFechas.UseVisualStyleBackColor = true;
@@ -2647,10 +2637,10 @@
             this.pnlFechasVentas.Controls.Add(this.label2);
             this.pnlFechasVentas.Controls.Add(this.label1);
             this.pnlFechasVentas.Enabled = false;
-            this.pnlFechasVentas.Location = new System.Drawing.Point(6, 81);
-            this.pnlFechasVentas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlFechasVentas.Location = new System.Drawing.Point(4, 54);
+            this.pnlFechasVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlFechasVentas.Name = "pnlFechasVentas";
-            this.pnlFechasVentas.Size = new System.Drawing.Size(792, 60);
+            this.pnlFechasVentas.Size = new System.Drawing.Size(577, 41);
             this.pnlFechasVentas.TabIndex = 145;
             // 
             // dtpFechaHastaVentas
@@ -2658,10 +2648,10 @@
             this.dtpFechaHastaVentas.CustomFormat = "ddd dd - MM - yyyy";
             this.dtpFechaHastaVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaHastaVentas.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaHastaVentas.Location = new System.Drawing.Point(525, 16);
-            this.dtpFechaHastaVentas.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.dtpFechaHastaVentas.Location = new System.Drawing.Point(382, 11);
+            this.dtpFechaHastaVentas.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.dtpFechaHastaVentas.Name = "dtpFechaHastaVentas";
-            this.dtpFechaHastaVentas.Size = new System.Drawing.Size(246, 23);
+            this.dtpFechaHastaVentas.Size = new System.Drawing.Size(180, 23);
             this.dtpFechaHastaVentas.TabIndex = 164;
             // 
             // dtpFechaDesdeVentas
@@ -2669,10 +2659,10 @@
             this.dtpFechaDesdeVentas.CustomFormat = "ddd dd - MM - yyyy";
             this.dtpFechaDesdeVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaDesdeVentas.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDesdeVentas.Location = new System.Drawing.Point(136, 16);
-            this.dtpFechaDesdeVentas.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.dtpFechaDesdeVentas.Location = new System.Drawing.Point(99, 11);
+            this.dtpFechaDesdeVentas.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.dtpFechaDesdeVentas.Name = "dtpFechaDesdeVentas";
-            this.dtpFechaDesdeVentas.Size = new System.Drawing.Size(246, 23);
+            this.dtpFechaDesdeVentas.Size = new System.Drawing.Size(180, 23);
             this.dtpFechaDesdeVentas.TabIndex = 162;
             // 
             // label2
@@ -2680,8 +2670,8 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(425, 15);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label2.Location = new System.Drawing.Point(309, 10);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 23);
             this.label2.TabIndex = 165;
@@ -2692,8 +2682,8 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(28, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Location = new System.Drawing.Point(20, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 23);
             this.label1.TabIndex = 163;
@@ -2719,10 +2709,10 @@
             this.btnRefrescaEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRefrescaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescaEmpresa.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescaEmpresa.Location = new System.Drawing.Point(1168, 6);
-            this.btnRefrescaEmpresa.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnRefrescaEmpresa.Location = new System.Drawing.Point(849, 4);
+            this.btnRefrescaEmpresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefrescaEmpresa.Name = "btnRefrescaEmpresa";
-            this.btnRefrescaEmpresa.Size = new System.Drawing.Size(67, 58);
+            this.btnRefrescaEmpresa.Size = new System.Drawing.Size(49, 39);
             this.btnRefrescaEmpresa.TabIndex = 133;
             this.btnRefrescaEmpresa.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRefrescaEmpresa.UseVisualStyleBackColor = false;
@@ -2737,10 +2727,10 @@
             this.btnBuscaEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBuscaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscaEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscaEmpresa.Location = new System.Drawing.Point(1084, 10);
-            this.btnBuscaEmpresa.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnBuscaEmpresa.Location = new System.Drawing.Point(788, 7);
+            this.btnBuscaEmpresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscaEmpresa.Name = "btnBuscaEmpresa";
-            this.btnBuscaEmpresa.Size = new System.Drawing.Size(73, 50);
+            this.btnBuscaEmpresa.Size = new System.Drawing.Size(53, 33);
             this.btnBuscaEmpresa.TabIndex = 114;
             this.btnBuscaEmpresa.UseVisualStyleBackColor = false;
             this.btnBuscaEmpresa.Visible = false;
@@ -2749,10 +2739,10 @@
             // pbImpresionFondoBlanco
             // 
             this.pbImpresionFondoBlanco.Image = ((System.Drawing.Image)(resources.GetObject("pbImpresionFondoBlanco.Image")));
-            this.pbImpresionFondoBlanco.Location = new System.Drawing.Point(994, 40);
-            this.pbImpresionFondoBlanco.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pbImpresionFondoBlanco.Location = new System.Drawing.Point(723, 27);
+            this.pbImpresionFondoBlanco.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pbImpresionFondoBlanco.Name = "pbImpresionFondoBlanco";
-            this.pbImpresionFondoBlanco.Size = new System.Drawing.Size(232, 94);
+            this.pbImpresionFondoBlanco.Size = new System.Drawing.Size(169, 63);
             this.pbImpresionFondoBlanco.TabIndex = 145;
             this.pbImpresionFondoBlanco.TabStop = false;
             this.pbImpresionFondoBlanco.Visible = false;
@@ -2760,10 +2750,10 @@
             // pbLeyendaCotizacion
             // 
             this.pbLeyendaCotizacion.Image = ((System.Drawing.Image)(resources.GetObject("pbLeyendaCotizacion.Image")));
-            this.pbLeyendaCotizacion.Location = new System.Drawing.Point(935, 57);
-            this.pbLeyendaCotizacion.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pbLeyendaCotizacion.Location = new System.Drawing.Point(680, 38);
+            this.pbLeyendaCotizacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pbLeyendaCotizacion.Name = "pbLeyendaCotizacion";
-            this.pbLeyendaCotizacion.Size = new System.Drawing.Size(59, 64);
+            this.pbLeyendaCotizacion.Size = new System.Drawing.Size(43, 43);
             this.pbLeyendaCotizacion.TabIndex = 146;
             this.pbLeyendaCotizacion.TabStop = false;
             this.pbLeyendaCotizacion.Visible = false;
@@ -2772,22 +2762,22 @@
             // 
             this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
-            this.pbLogo.Location = new System.Drawing.Point(654, 86);
-            this.pbLogo.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.pbLogo.Location = new System.Drawing.Point(476, 57);
+            this.pbLogo.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(595, 334);
+            this.pbLogo.Size = new System.Drawing.Size(433, 223);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbLogo.TabIndex = 144;
             this.pbLogo.TabStop = false;
             // 
             // PreVentasMayoreo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1278, 870);
+            this.ClientSize = new System.Drawing.Size(929, 613);
             this.Controls.Add(this.cmbEmpresas);
             this.Controls.Add(this.btnRefrescaEmpresa);
             this.Controls.Add(this.label24);
@@ -2797,7 +2787,7 @@
             this.Controls.Add(this.pbImpresionFondoBlanco);
             this.Controls.Add(this.pbLeyendaCotizacion);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "PreVentasMayoreo";
             this.Text = "PRE-VENTA";
             this.Load += new System.EventHandler(this.Ventas_Load);
