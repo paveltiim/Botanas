@@ -1643,6 +1643,7 @@ namespace Aires.Pantallas
 
             gvPedidos.DataSource = this.ListaPedidos;
             txtTotalPedidos.Text = FormatoMoney(this.ListaPedidos.Sum(P => P.Total));
+            CargaFiltrosPedidosPreVenta();
 
             // Obtener lista única de trabajadores
             var listaTrabajadores = this.ListaPedidos
@@ -1658,6 +1659,32 @@ namespace Aires.Pantallas
                 index = 0;
             cmbTrabjadoresFiltro.DataSource = listaTrabajadores;
             cmbTrabjadoresFiltro.SelectedIndex = index;
+        }
+
+        void CargaFiltrosPedidosPreVenta()
+        {
+            string estatusSeleccionado = cmbEstatusPedidoFiltro.Text;
+            string tipoPedidoSeleccionado = cmbTipoPedidoFiltro.Text;
+
+            List<string> lstEstatus = this.ListaPedidos
+                .Select(p => p.EstatusDescripcion)
+                .Where(p => !string.IsNullOrWhiteSpace(p))
+                .Distinct()
+                .OrderBy(p => p)
+                .ToList();
+            lstEstatus.Insert(0, "-TODOS-");
+            cmbEstatusPedidoFiltro.DataSource = lstEstatus;
+            cmbEstatusPedidoFiltro.SelectedIndex = lstEstatus.Contains(estatusSeleccionado) ? lstEstatus.IndexOf(estatusSeleccionado) : 0;
+
+            List<string> lstTipos = this.ListaPedidos
+                .Select(p => p.TipoPedido)
+                .Where(p => !string.IsNullOrWhiteSpace(p))
+                .Distinct()
+                .OrderBy(p => p)
+                .ToList();
+            lstTipos.Insert(0, "-TODOS-");
+            cmbTipoPedidoFiltro.DataSource = lstTipos;
+            cmbTipoPedidoFiltro.SelectedIndex = lstTipos.Contains(tipoPedidoSeleccionado) ? lstTipos.IndexOf(tipoPedidoSeleccionado) : 0;
         }
 
         private void cmbMesesEntradas_SelectedIndexChanged(object sender, EventArgs e)
@@ -2073,8 +2100,8 @@ namespace Aires.Pantallas
             finally { base.SetDefaultCursor(); }
         }
 
-        void FiltrarPedidosPreVenta(List<EntPedido> ListaPedidos, string Id, string NombreCliente, string Descripcion, 
-                                    string NumOrden, string Trabajador)
+        void FiltrarPedidosPreVenta(List<EntPedido> ListaPedidos, string Id, string NombreCliente, string Descripcion,
+                                    string NumOrden, string Trabajador, string EstatusDescripcion, string TipoPedido)
         {
             //List<EntCliente> clientes = (List<EntCliente>)gvClientes.DataSource;
 
@@ -2110,6 +2137,20 @@ namespace Aires.Pantallas
                                 select c;
             }
 
+            if (!string.IsNullOrWhiteSpace(EstatusDescripcion.Replace("-TODOS-", "")))
+            {
+                pedidosFiltro = from c in pedidosFiltro
+                                where string.Equals((c.EstatusDescripcion ?? string.Empty).Trim(), EstatusDescripcion.Trim(), StringComparison.OrdinalIgnoreCase)
+                                select c;
+            }
+
+            if (!string.IsNullOrWhiteSpace(TipoPedido.Replace("-TODOS-", "")))
+            {
+                pedidosFiltro = from c in pedidosFiltro
+                                where string.Equals((c.TipoPedido ?? string.Empty).Trim(), TipoPedido.Trim(), StringComparison.OrdinalIgnoreCase)
+                                select c;
+            }
+
             gvPedidos.DataSource = null;
             gvPedidos.DataSource = pedidosFiltro.ToList();
             txtTotalPedidos.Text = FormatoMoney(pedidosFiltro.Sum(P => P.Total));
@@ -2118,7 +2159,8 @@ namespace Aires.Pantallas
         {
             try
             {
-                FiltrarPedidosPreVenta(this.ListaPedidos, txtNumPedidoFiltro.Text, txtClienteFiltro.Text, txtDescripcionFiltro.Text, txtFacturaFiltro.Text, cmbTrabjadoresFiltro.Text);
+                FiltrarPedidosPreVenta(this.ListaPedidos, txtNumPedidoFiltro.Text, txtClienteFiltro.Text, txtDescripcionFiltro.Text,
+                                       txtFacturaFiltro.Text, cmbTrabjadoresFiltro.Text, cmbEstatusPedidoFiltro.Text, cmbTipoPedidoFiltro.Text);
             }
             catch (Exception ex)
             {
