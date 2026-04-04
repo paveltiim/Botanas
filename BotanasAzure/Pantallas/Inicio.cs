@@ -217,6 +217,9 @@ namespace Aires.Pantallas
                     tsbProductos.Enabled = true;
                     tsbProductos.Visible = false;
                     tsbInventario.Visible = true;
+                    tsmPreVenta1.Visible = true;
+                    tsbRegtistroVentas.Visible = true;
+                    registrosMovilToolStripMenuItem.Visible = true;
                     tsbReportes.Visible = true;
                     tsbReportesGlobales.Visible = true;
                     tsbClientes.Visible = true;
