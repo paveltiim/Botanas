@@ -34,12 +34,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.entProductoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entCatalogoGenericoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entClienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -87,6 +87,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtExistenciaMinima = new System.Windows.Forms.TextBox();
             this.gvPreciosVenta = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvListaPrecios_PrecioVentaColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioVentaSinIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvListaPrecios_PrecioVenta_2PColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioVenta3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioVenta4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chkIncluyeIEPS = new System.Windows.Forms.CheckBox();
             this.chkPrecioCosto0 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -106,21 +112,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tpProductoPreciosDetalle = new System.Windows.Forms.TabPage();
             this.gvListaPreciosVentaDetalle = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gvListaPrecioDetallePrecioVentaColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gvListaPrecioDetallePrecioVentaIEPSColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnFiltroProducto = new System.Windows.Forms.Button();
             this.txtProductoBusqueda = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gvListaPrecios_PrecioVentaColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioVentaSinIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gvListaPrecios_PrecioVenta_2PColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioVenta3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioVenta4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvListaPrecioDetallePrecioVentaColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.entProductoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entCatalogoGenericoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entClienteBindingSource)).BeginInit();
@@ -162,7 +162,7 @@
             this.btnBuscaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscaEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscaEmpresa.Location = new System.Drawing.Point(1103, 6);
-            this.btnBuscaEmpresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscaEmpresa.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscaEmpresa.Name = "btnBuscaEmpresa";
             this.btnBuscaEmpresa.Size = new System.Drawing.Size(53, 33);
             this.btnBuscaEmpresa.TabIndex = 125;
@@ -189,7 +189,7 @@
             this.cmbEmpresas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmpresas.FormattingEnabled = true;
             this.cmbEmpresas.Location = new System.Drawing.Point(616, 6);
-            this.cmbEmpresas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbEmpresas.Margin = new System.Windows.Forms.Padding(4);
             this.cmbEmpresas.Name = "cmbEmpresas";
             this.cmbEmpresas.Size = new System.Drawing.Size(477, 33);
             this.cmbEmpresas.TabIndex = 124;
@@ -205,7 +205,7 @@
             this.tcProductos.Controls.Add(this.tpProductos);
             this.tcProductos.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tcProductos.Location = new System.Drawing.Point(16, 20);
-            this.tcProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcProductos.Margin = new System.Windows.Forms.Padding(4);
             this.tcProductos.Name = "tcProductos";
             this.tcProductos.SelectedIndex = 0;
             this.tcProductos.Size = new System.Drawing.Size(1311, 641);
@@ -228,9 +228,9 @@
             this.tpProductos.Controls.Add(this.txtProductoBusqueda);
             this.tpProductos.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tpProductos.Location = new System.Drawing.Point(4, 27);
-            this.tpProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpProductos.Margin = new System.Windows.Forms.Padding(4);
             this.tpProductos.Name = "tpProductos";
-            this.tpProductos.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpProductos.Padding = new System.Windows.Forms.Padding(4);
             this.tpProductos.Size = new System.Drawing.Size(1303, 610);
             this.tpProductos.TabIndex = 1;
             this.tpProductos.Text = "Productos";
@@ -246,7 +246,7 @@
             "Producto Venta",
             "Insumo"});
             this.cmbTipoProductoFiltro.Location = new System.Drawing.Point(72, 12);
-            this.cmbTipoProductoFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbTipoProductoFiltro.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTipoProductoFiltro.Name = "cmbTipoProductoFiltro";
             this.cmbTipoProductoFiltro.Size = new System.Drawing.Size(223, 24);
             this.cmbTipoProductoFiltro.TabIndex = 112;
@@ -280,7 +280,7 @@
             // 
             this.txtCodigoBusqueda.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigoBusqueda.Location = new System.Drawing.Point(9, 47);
-            this.txtCodigoBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigoBusqueda.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodigoBusqueda.Name = "txtCodigoBusqueda";
             this.txtCodigoBusqueda.Size = new System.Drawing.Size(119, 35);
             this.txtCodigoBusqueda.TabIndex = 86;
@@ -296,7 +296,7 @@
             this.btnRefrescar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefrescar.Location = new System.Drawing.Point(840, -434);
-            this.btnRefrescar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRefrescar.Margin = new System.Windows.Forms.Padding(4);
             this.btnRefrescar.Name = "btnRefrescar";
             this.btnRefrescar.Size = new System.Drawing.Size(57, 41);
             this.btnRefrescar.TabIndex = 85;
@@ -317,7 +317,7 @@
             this.panel3.Controls.Add(this.flpBotonesLeftBottom);
             this.panel3.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel3.Location = new System.Drawing.Point(8, 84);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(656, 526);
             this.panel3.TabIndex = 84;
@@ -330,7 +330,7 @@
             this.tcProductosRegistrados.Controls.Add(this.tpProductosRegistrados);
             this.tcProductosRegistrados.Font = new System.Drawing.Font("Microsoft Tai Le", 7F);
             this.tcProductosRegistrados.Location = new System.Drawing.Point(-3, -1);
-            this.tcProductosRegistrados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcProductosRegistrados.Margin = new System.Windows.Forms.Padding(4);
             this.tcProductosRegistrados.Name = "tcProductosRegistrados";
             this.tcProductosRegistrados.SelectedIndex = 0;
             this.tcProductosRegistrados.Size = new System.Drawing.Size(659, 441);
@@ -340,9 +340,9 @@
             // 
             this.tpProductosRegistrados.Controls.Add(this.gvProductos);
             this.tpProductosRegistrados.Location = new System.Drawing.Point(4, 25);
-            this.tpProductosRegistrados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpProductosRegistrados.Margin = new System.Windows.Forms.Padding(4);
             this.tpProductosRegistrados.Name = "tpProductosRegistrados";
-            this.tpProductosRegistrados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpProductosRegistrados.Padding = new System.Windows.Forms.Padding(4);
             this.tpProductosRegistrados.Size = new System.Drawing.Size(651, 412);
             this.tpProductosRegistrados.TabIndex = 0;
             this.tpProductosRegistrados.Text = "Productos Registrados";
@@ -374,7 +374,7 @@
             this.gvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvProductos.GridColor = System.Drawing.Color.DimGray;
             this.gvProductos.Location = new System.Drawing.Point(0, 0);
-            this.gvProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gvProductos.Margin = new System.Windows.Forms.Padding(4);
             this.gvProductos.Name = "gvProductos";
             this.gvProductos.ReadOnly = true;
             this.gvProductos.RowHeadersVisible = false;
@@ -503,7 +503,7 @@
             this.btnExporta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExporta.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExporta.Location = new System.Drawing.Point(157, 4);
-            this.btnExporta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExporta.Margin = new System.Windows.Forms.Padding(4);
             this.btnExporta.Name = "btnExporta";
             this.btnExporta.Size = new System.Drawing.Size(120, 80);
             this.btnExporta.TabIndex = 85;
@@ -534,7 +534,7 @@
             this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditar.Location = new System.Drawing.Point(4, 4);
-            this.btnEditar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEditar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(120, 80);
             this.btnEditar.TabIndex = 83;
@@ -552,7 +552,7 @@
             this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.Location = new System.Drawing.Point(132, 4);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(120, 80);
             this.btnEliminar.TabIndex = 84;
@@ -588,7 +588,7 @@
             this.pnlDatos.Controls.Add(this.btnCancelar);
             this.pnlDatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlDatos.Location = new System.Drawing.Point(667, 36);
-            this.pnlDatos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlDatos.Margin = new System.Windows.Forms.Padding(4);
             this.pnlDatos.Name = "pnlDatos";
             this.pnlDatos.Size = new System.Drawing.Size(632, 571);
             this.pnlDatos.TabIndex = 81;
@@ -611,7 +611,7 @@
             this.tcDatosProductoIngresa.Controls.Add(this.tpProducto);
             this.tcDatosProductoIngresa.Controls.Add(this.tpProductoPreciosDetalle);
             this.tcDatosProductoIngresa.Location = new System.Drawing.Point(-1, 47);
-            this.tcDatosProductoIngresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcDatosProductoIngresa.Margin = new System.Windows.Forms.Padding(4);
             this.tcDatosProductoIngresa.Name = "tcDatosProductoIngresa";
             this.tcDatosProductoIngresa.SelectedIndex = 0;
             this.tcDatosProductoIngresa.Size = new System.Drawing.Size(625, 434);
@@ -637,9 +637,9 @@
             this.tpProducto.Controls.Add(this.txtDescripcion);
             this.tpProducto.Controls.Add(this.label2);
             this.tpProducto.Location = new System.Drawing.Point(4, 29);
-            this.tpProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpProducto.Margin = new System.Windows.Forms.Padding(4);
             this.tpProducto.Name = "tpProducto";
-            this.tpProducto.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpProducto.Padding = new System.Windows.Forms.Padding(4);
             this.tpProducto.Size = new System.Drawing.Size(617, 401);
             this.tpProducto.TabIndex = 0;
             this.tpProducto.Text = "Producto";
@@ -650,7 +650,7 @@
             // 
             this.txtCodigoBarra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigoBarra.Location = new System.Drawing.Point(115, 47);
-            this.txtCodigoBarra.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigoBarra.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodigoBarra.Name = "txtCodigoBarra";
             this.txtCodigoBarra.Size = new System.Drawing.Size(349, 26);
             this.txtCodigoBarra.TabIndex = 1;
@@ -674,7 +674,7 @@
             this.cmbTipoProductoServicio.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTipoProductoServicio.FormattingEnabled = true;
             this.cmbTipoProductoServicio.Location = new System.Drawing.Point(115, 138);
-            this.cmbTipoProductoServicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbTipoProductoServicio.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTipoProductoServicio.Name = "cmbTipoProductoServicio";
             this.cmbTipoProductoServicio.Size = new System.Drawing.Size(259, 24);
             this.cmbTipoProductoServicio.TabIndex = 3;
@@ -689,7 +689,7 @@
             this.cmbTipoUnidad.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTipoUnidad.FormattingEnabled = true;
             this.cmbTipoUnidad.Location = new System.Drawing.Point(399, 138);
-            this.cmbTipoUnidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbTipoUnidad.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTipoUnidad.Name = "cmbTipoUnidad";
             this.cmbTipoUnidad.Size = new System.Drawing.Size(211, 24);
             this.cmbTipoUnidad.TabIndex = 4;
@@ -719,7 +719,7 @@
             // 
             this.txtExistenciaMaxima.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExistenciaMaxima.Location = new System.Drawing.Point(108, 68);
-            this.txtExistenciaMaxima.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtExistenciaMaxima.Margin = new System.Windows.Forms.Padding(4);
             this.txtExistenciaMaxima.Name = "txtExistenciaMaxima";
             this.txtExistenciaMaxima.Size = new System.Drawing.Size(99, 26);
             this.txtExistenciaMaxima.TabIndex = 149;
@@ -748,7 +748,7 @@
             // 
             this.txtExistenciaMinima.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExistenciaMinima.Location = new System.Drawing.Point(108, 23);
-            this.txtExistenciaMinima.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtExistenciaMinima.Margin = new System.Windows.Forms.Padding(4);
             this.txtExistenciaMinima.Name = "txtExistenciaMinima";
             this.txtExistenciaMinima.Size = new System.Drawing.Size(99, 26);
             this.txtExistenciaMinima.TabIndex = 147;
@@ -774,8 +774,8 @@
             this.gvPreciosVenta.DataSource = this.entProductoBindingSource;
             this.gvPreciosVenta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvPreciosVenta.GridColor = System.Drawing.Color.DimGray;
-            this.gvPreciosVenta.Location = new System.Drawing.Point(213, 23);
-            this.gvPreciosVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gvPreciosVenta.Location = new System.Drawing.Point(213, 24);
+            this.gvPreciosVenta.Margin = new System.Windows.Forms.Padding(4);
             this.gvPreciosVenta.Name = "gvPreciosVenta";
             this.gvPreciosVenta.RowHeadersVisible = false;
             this.gvPreciosVenta.RowHeadersWidth = 51;
@@ -786,358 +786,6 @@
             this.gvPreciosVenta.Size = new System.Drawing.Size(388, 199);
             this.gvPreciosVenta.TabIndex = 2;
             this.gvPreciosVenta.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPreciosVenta_CellValueChanged);
-            // 
-            // chkIncluyeIEPS
-            // 
-            this.chkIncluyeIEPS.AutoSize = true;
-            this.chkIncluyeIEPS.Location = new System.Drawing.Point(213, 1);
-            this.chkIncluyeIEPS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.chkIncluyeIEPS.Name = "chkIncluyeIEPS";
-            this.chkIncluyeIEPS.Size = new System.Drawing.Size(125, 24);
-            this.chkIncluyeIEPS.TabIndex = 146;
-            this.chkIncluyeIEPS.Text = "Incluye IEPS";
-            this.chkIncluyeIEPS.UseVisualStyleBackColor = true;
-            // 
-            // chkPrecioCosto0
-            // 
-            this.chkPrecioCosto0.AutoSize = true;
-            this.chkPrecioCosto0.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkPrecioCosto0.Location = new System.Drawing.Point(43, 113);
-            this.chkPrecioCosto0.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.chkPrecioCosto0.Name = "chkPrecioCosto0";
-            this.chkPrecioCosto0.Size = new System.Drawing.Size(151, 24);
-            this.chkPrecioCosto0.TabIndex = 0;
-            this.chkPrecioCosto0.Text = "Precio Costo $0";
-            this.chkPrecioCosto0.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(39, 143);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 48);
-            this.label1.TabIndex = 94;
-            this.label1.Text = "Precio: Costo";
-            // 
-            // txtPrecioCosto
-            // 
-            this.txtPrecioCosto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecioCosto.Location = new System.Drawing.Point(108, 145);
-            this.txtPrecioCosto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPrecioCosto.Name = "txtPrecioCosto";
-            this.txtPrecioCosto.Size = new System.Drawing.Size(99, 26);
-            this.txtPrecioCosto.TabIndex = 1;
-            this.txtPrecioCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioCosto_KeyPress);
-            this.txtPrecioCosto.Leave += new System.EventHandler(this.txtDireccion_Leave);
-            // 
-            // btnEditaPrecioVenta
-            // 
-            this.btnEditaPrecioVenta.BackColor = System.Drawing.Color.White;
-            this.btnEditaPrecioVenta.BackgroundImage = global::Aires.Properties.Resources.editar2;
-            this.btnEditaPrecioVenta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnEditaPrecioVenta.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditaPrecioVenta.Font = new System.Drawing.Font("Segoe UI", 5.75F, System.Drawing.FontStyle.Bold);
-            this.btnEditaPrecioVenta.Location = new System.Drawing.Point(120, 170);
-            this.btnEditaPrecioVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnEditaPrecioVenta.Name = "btnEditaPrecioVenta";
-            this.btnEditaPrecioVenta.Size = new System.Drawing.Size(84, 46);
-            this.btnEditaPrecioVenta.TabIndex = 114;
-            this.btnEditaPrecioVenta.Text = "Actualizar Precios Venta";
-            this.btnEditaPrecioVenta.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEditaPrecioVenta.UseVisualStyleBackColor = false;
-            this.btnEditaPrecioVenta.Visible = false;
-            this.btnEditaPrecioVenta.Click += new System.EventHandler(this.btnEditaPrecioVenta_Click);
-            // 
-            // txtModelo
-            // 
-            this.txtModelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtModelo.Location = new System.Drawing.Point(115, 384);
-            this.txtModelo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtModelo.Name = "txtModelo";
-            this.txtModelo.Size = new System.Drawing.Size(259, 26);
-            this.txtModelo.TabIndex = 5;
-            this.txtModelo.Visible = false;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(41, 388);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(68, 20);
-            this.label17.TabIndex = 153;
-            this.label17.Text = "Modelo:";
-            this.label17.Visible = false;
-            // 
-            // txtMarca
-            // 
-            this.txtMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMarca.Location = new System.Drawing.Point(115, 340);
-            this.txtMarca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtMarca.Name = "txtMarca";
-            this.txtMarca.Size = new System.Drawing.Size(259, 26);
-            this.txtMarca.TabIndex = 4;
-            this.txtMarca.Visible = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(47, 342);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(61, 20);
-            this.label16.TabIndex = 151;
-            this.label16.Text = "Marca:";
-            this.label16.Visible = false;
-            // 
-            // label15
-            // 
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label15.Location = new System.Drawing.Point(23, 113);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(133, 49);
-            this.label15.TabIndex = 144;
-            this.label15.Text = "Producto/Servicio: (SAT)";
-            // 
-            // cmbTipoProducto
-            // 
-            this.cmbTipoProducto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoProducto.Enabled = false;
-            this.cmbTipoProducto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmbTipoProducto.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbTipoProducto.FormattingEnabled = true;
-            this.cmbTipoProducto.Items.AddRange(new object[] {
-            "Producto Venta",
-            "Insumo"});
-            this.cmbTipoProducto.Location = new System.Drawing.Point(396, 12);
-            this.cmbTipoProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cmbTipoProducto.Name = "cmbTipoProducto";
-            this.cmbTipoProducto.Size = new System.Drawing.Size(183, 24);
-            this.cmbTipoProducto.TabIndex = 1;
-            this.cmbTipoProducto.SelectedIndexChanged += new System.EventHandler(this.cmbTipoProducto_SelectedIndexChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label11.Location = new System.Drawing.Point(395, 113);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(57, 17);
-            this.label11.TabIndex = 145;
-            this.label11.Text = "Unidad:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(336, 12);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(46, 20);
-            this.label10.TabIndex = 111;
-            this.label10.Text = "Tipo:";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodigo.Location = new System.Drawing.Point(115, 10);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(187, 26);
-            this.txtCodigo.TabIndex = 0;
-            this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
-            this.txtCodigo.Leave += new System.EventHandler(this.txtCodigo_Leave);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 12);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 20);
-            this.label3.TabIndex = 102;
-            this.label3.Text = "Código:";
-            // 
-            // txtDescripcion
-            // 
-            this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(115, 80);
-            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(499, 26);
-            this.txtDescripcion.TabIndex = 2;
-            this.txtDescripcion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioCosto_KeyPress);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 84);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 20);
-            this.label2.TabIndex = 88;
-            this.label2.Text = "Descripción:";
-            // 
-            // tpProductoPreciosDetalle
-            // 
-            this.tpProductoPreciosDetalle.Controls.Add(this.gvListaPreciosVentaDetalle);
-            this.tpProductoPreciosDetalle.Location = new System.Drawing.Point(4, 29);
-            this.tpProductoPreciosDetalle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tpProductoPreciosDetalle.Name = "tpProductoPreciosDetalle";
-            this.tpProductoPreciosDetalle.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tpProductoPreciosDetalle.Size = new System.Drawing.Size(617, 401);
-            this.tpProductoPreciosDetalle.TabIndex = 1;
-            this.tpProductoPreciosDetalle.Text = "Precios Venta Detalle";
-            this.tpProductoPreciosDetalle.UseVisualStyleBackColor = true;
-            // 
-            // gvListaPreciosVentaDetalle
-            // 
-            this.gvListaPreciosVentaDetalle.AllowUserToAddRows = false;
-            this.gvListaPreciosVentaDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gvListaPreciosVentaDetalle.AutoGenerateColumns = false;
-            this.gvListaPreciosVentaDetalle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gvListaPreciosVentaDetalle.BackgroundColor = System.Drawing.Color.White;
-            this.gvListaPreciosVentaDetalle.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.gvListaPreciosVentaDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvListaPreciosVentaDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.gvListaPrecioDetallePrecioVentaColumn,
-            this.gvListaPrecioDetallePrecioVentaIEPSColumn});
-            this.gvListaPreciosVentaDetalle.DataSource = this.entProductoBindingSource;
-            this.gvListaPreciosVentaDetalle.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.gvListaPreciosVentaDetalle.GridColor = System.Drawing.Color.DimGray;
-            this.gvListaPreciosVentaDetalle.Location = new System.Drawing.Point(0, 43);
-            this.gvListaPreciosVentaDetalle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gvListaPreciosVentaDetalle.Name = "gvListaPreciosVentaDetalle";
-            this.gvListaPreciosVentaDetalle.RowHeadersVisible = false;
-            this.gvListaPreciosVentaDetalle.RowHeadersWidth = 51;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.gvListaPreciosVentaDetalle.RowsDefaultCellStyle = dataGridViewCellStyle10;
-            this.gvListaPreciosVentaDetalle.RowTemplate.Height = 27;
-            this.gvListaPreciosVentaDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvListaPreciosVentaDetalle.Size = new System.Drawing.Size(615, 245);
-            this.gvListaPreciosVentaDetalle.TabIndex = 3;
-            this.gvListaPreciosVentaDetalle.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvListaPreciosVentaDetalle_CellValueChanged);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Descripcion";
-            this.dataGridViewTextBoxColumn1.FillWeight = 5F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Lista Precio";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // gvListaPrecioDetallePrecioVentaColumn
-            // 
-            this.gvListaPrecioDetallePrecioVentaColumn.DataPropertyName = "PrecioVenta";
-            dataGridViewCellStyle8.Format = "c2";
-            this.gvListaPrecioDetallePrecioVentaColumn.DefaultCellStyle = dataGridViewCellStyle8;
-            this.gvListaPrecioDetallePrecioVentaColumn.FillWeight = 4F;
-            this.gvListaPrecioDetallePrecioVentaColumn.HeaderText = "Precio Venta";
-            this.gvListaPrecioDetallePrecioVentaColumn.MinimumWidth = 6;
-            this.gvListaPrecioDetallePrecioVentaColumn.Name = "gvListaPrecioDetallePrecioVentaColumn";
-            // 
-            // gvListaPrecioDetallePrecioVentaIEPSColumn
-            // 
-            this.gvListaPrecioDetallePrecioVentaIEPSColumn.DataPropertyName = "PrecioVentaSinIVA";
-            dataGridViewCellStyle9.Format = "c2";
-            this.gvListaPrecioDetallePrecioVentaIEPSColumn.DefaultCellStyle = dataGridViewCellStyle9;
-            this.gvListaPrecioDetallePrecioVentaIEPSColumn.FillWeight = 4F;
-            this.gvListaPrecioDetallePrecioVentaIEPSColumn.HeaderText = "Precio Venta + IEPS";
-            this.gvListaPrecioDetallePrecioVentaIEPSColumn.MinimumWidth = 8;
-            this.gvListaPrecioDetallePrecioVentaIEPSColumn.Name = "gvListaPrecioDetallePrecioVentaIEPSColumn";
-            this.gvListaPrecioDetallePrecioVentaIEPSColumn.ReadOnly = true;
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnAgregar.BackColor = System.Drawing.Color.White;
-            this.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Image = global::Aires.Properties.Resources.Aceptar;
-            this.btnAgregar.Location = new System.Drawing.Point(172, 485);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(120, 80);
-            this.btnAgregar.TabIndex = 0;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnActualizar.BackColor = System.Drawing.Color.White;
-            this.btnActualizar.BackgroundImage = global::Aires.Properties.Resources.Refrescar;
-            this.btnActualizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnActualizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnActualizar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActualizar.Location = new System.Drawing.Point(172, 484);
-            this.btnActualizar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(120, 80);
-            this.btnActualizar.TabIndex = 3;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnActualizar.UseVisualStyleBackColor = false;
-            this.btnActualizar.Visible = false;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancelar.BackColor = System.Drawing.Color.White;
-            this.btnCancelar.BackgroundImage = global::Aires.Properties.Resources.Cancelar;
-            this.btnCancelar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(335, 485);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(120, 80);
-            this.btnCancelar.TabIndex = 1;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnFiltroProducto
-            // 
-            this.btnFiltroProducto.BackColor = System.Drawing.Color.Transparent;
-            this.btnFiltroProducto.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFiltroProducto.BackgroundImage")));
-            this.btnFiltroProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnFiltroProducto.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFiltroProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFiltroProducto.Location = new System.Drawing.Point(607, 48);
-            this.btnFiltroProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnFiltroProducto.Name = "btnFiltroProducto";
-            this.btnFiltroProducto.Size = new System.Drawing.Size(49, 32);
-            this.btnFiltroProducto.TabIndex = 80;
-            this.btnFiltroProducto.UseVisualStyleBackColor = false;
-            this.btnFiltroProducto.Click += new System.EventHandler(this.btnFiltroProducto_Click);
-            // 
-            // txtProductoBusqueda
-            // 
-            this.txtProductoBusqueda.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProductoBusqueda.Location = new System.Drawing.Point(133, 47);
-            this.txtProductoBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtProductoBusqueda.Name = "txtProductoBusqueda";
-            this.txtProductoBusqueda.Size = new System.Drawing.Size(467, 35);
-            this.txtProductoBusqueda.TabIndex = 79;
-            this.txtProductoBusqueda.TextChanged += new System.EventHandler(this.txtProductoBusqueda_TextChanged);
-            this.txtProductoBusqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProductoBusqueda_KeyPress);
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -1198,6 +846,357 @@
             this.PrecioVenta4.ReadOnly = true;
             this.PrecioVenta4.Visible = false;
             // 
+            // chkIncluyeIEPS
+            // 
+            this.chkIncluyeIEPS.AutoSize = true;
+            this.chkIncluyeIEPS.Location = new System.Drawing.Point(213, 1);
+            this.chkIncluyeIEPS.Margin = new System.Windows.Forms.Padding(4);
+            this.chkIncluyeIEPS.Name = "chkIncluyeIEPS";
+            this.chkIncluyeIEPS.Size = new System.Drawing.Size(125, 24);
+            this.chkIncluyeIEPS.TabIndex = 146;
+            this.chkIncluyeIEPS.Text = "Incluye IEPS";
+            this.chkIncluyeIEPS.UseVisualStyleBackColor = true;
+            // 
+            // chkPrecioCosto0
+            // 
+            this.chkPrecioCosto0.AutoSize = true;
+            this.chkPrecioCosto0.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkPrecioCosto0.Location = new System.Drawing.Point(43, 113);
+            this.chkPrecioCosto0.Margin = new System.Windows.Forms.Padding(4);
+            this.chkPrecioCosto0.Name = "chkPrecioCosto0";
+            this.chkPrecioCosto0.Size = new System.Drawing.Size(151, 24);
+            this.chkPrecioCosto0.TabIndex = 0;
+            this.chkPrecioCosto0.Text = "Precio Costo $0";
+            this.chkPrecioCosto0.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(39, 143);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 48);
+            this.label1.TabIndex = 94;
+            this.label1.Text = "Precio: Costo";
+            // 
+            // txtPrecioCosto
+            // 
+            this.txtPrecioCosto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecioCosto.Location = new System.Drawing.Point(108, 145);
+            this.txtPrecioCosto.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPrecioCosto.Name = "txtPrecioCosto";
+            this.txtPrecioCosto.Size = new System.Drawing.Size(99, 26);
+            this.txtPrecioCosto.TabIndex = 1;
+            this.txtPrecioCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioCosto_KeyPress);
+            this.txtPrecioCosto.Leave += new System.EventHandler(this.txtDireccion_Leave);
+            // 
+            // btnEditaPrecioVenta
+            // 
+            this.btnEditaPrecioVenta.BackColor = System.Drawing.Color.White;
+            this.btnEditaPrecioVenta.BackgroundImage = global::Aires.Properties.Resources.editar2;
+            this.btnEditaPrecioVenta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEditaPrecioVenta.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditaPrecioVenta.Font = new System.Drawing.Font("Segoe UI", 5.75F, System.Drawing.FontStyle.Bold);
+            this.btnEditaPrecioVenta.Location = new System.Drawing.Point(120, 170);
+            this.btnEditaPrecioVenta.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEditaPrecioVenta.Name = "btnEditaPrecioVenta";
+            this.btnEditaPrecioVenta.Size = new System.Drawing.Size(84, 46);
+            this.btnEditaPrecioVenta.TabIndex = 114;
+            this.btnEditaPrecioVenta.Text = "Actualizar Precios Venta";
+            this.btnEditaPrecioVenta.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEditaPrecioVenta.UseVisualStyleBackColor = false;
+            this.btnEditaPrecioVenta.Visible = false;
+            this.btnEditaPrecioVenta.Click += new System.EventHandler(this.btnEditaPrecioVenta_Click);
+            // 
+            // txtModelo
+            // 
+            this.txtModelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtModelo.Location = new System.Drawing.Point(115, 384);
+            this.txtModelo.Margin = new System.Windows.Forms.Padding(4);
+            this.txtModelo.Name = "txtModelo";
+            this.txtModelo.Size = new System.Drawing.Size(259, 26);
+            this.txtModelo.TabIndex = 5;
+            this.txtModelo.Visible = false;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(41, 388);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(68, 20);
+            this.label17.TabIndex = 153;
+            this.label17.Text = "Modelo:";
+            this.label17.Visible = false;
+            // 
+            // txtMarca
+            // 
+            this.txtMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMarca.Location = new System.Drawing.Point(115, 340);
+            this.txtMarca.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMarca.Name = "txtMarca";
+            this.txtMarca.Size = new System.Drawing.Size(259, 26);
+            this.txtMarca.TabIndex = 4;
+            this.txtMarca.Visible = false;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(47, 342);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(61, 20);
+            this.label16.TabIndex = 151;
+            this.label16.Text = "Marca:";
+            this.label16.Visible = false;
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label15.Location = new System.Drawing.Point(23, 113);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(133, 49);
+            this.label15.TabIndex = 144;
+            this.label15.Text = "Producto/Servicio: (SAT)";
+            // 
+            // cmbTipoProducto
+            // 
+            this.cmbTipoProducto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoProducto.Enabled = false;
+            this.cmbTipoProducto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbTipoProducto.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbTipoProducto.FormattingEnabled = true;
+            this.cmbTipoProducto.Items.AddRange(new object[] {
+            "Producto Venta",
+            "Insumo"});
+            this.cmbTipoProducto.Location = new System.Drawing.Point(396, 12);
+            this.cmbTipoProducto.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbTipoProducto.Name = "cmbTipoProducto";
+            this.cmbTipoProducto.Size = new System.Drawing.Size(183, 24);
+            this.cmbTipoProducto.TabIndex = 1;
+            this.cmbTipoProducto.SelectedIndexChanged += new System.EventHandler(this.cmbTipoProducto_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label11.Location = new System.Drawing.Point(395, 113);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(57, 17);
+            this.label11.TabIndex = 145;
+            this.label11.Text = "Unidad:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(336, 12);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 20);
+            this.label10.TabIndex = 111;
+            this.label10.Text = "Tipo:";
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodigo.Location = new System.Drawing.Point(115, 10);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(187, 26);
+            this.txtCodigo.TabIndex = 0;
+            this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
+            this.txtCodigo.Leave += new System.EventHandler(this.txtCodigo_Leave);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(44, 12);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 20);
+            this.label3.TabIndex = 102;
+            this.label3.Text = "Código:";
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescripcion.Location = new System.Drawing.Point(115, 80);
+            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(499, 26);
+            this.txtDescripcion.TabIndex = 2;
+            this.txtDescripcion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioCosto_KeyPress);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(5, 84);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 20);
+            this.label2.TabIndex = 88;
+            this.label2.Text = "Descripción:";
+            // 
+            // tpProductoPreciosDetalle
+            // 
+            this.tpProductoPreciosDetalle.Controls.Add(this.gvListaPreciosVentaDetalle);
+            this.tpProductoPreciosDetalle.Location = new System.Drawing.Point(4, 29);
+            this.tpProductoPreciosDetalle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tpProductoPreciosDetalle.Name = "tpProductoPreciosDetalle";
+            this.tpProductoPreciosDetalle.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tpProductoPreciosDetalle.Size = new System.Drawing.Size(617, 401);
+            this.tpProductoPreciosDetalle.TabIndex = 1;
+            this.tpProductoPreciosDetalle.Text = "Precios Venta Detalle";
+            this.tpProductoPreciosDetalle.UseVisualStyleBackColor = true;
+            // 
+            // gvListaPreciosVentaDetalle
+            // 
+            this.gvListaPreciosVentaDetalle.AllowUserToAddRows = false;
+            this.gvListaPreciosVentaDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gvListaPreciosVentaDetalle.AutoGenerateColumns = false;
+            this.gvListaPreciosVentaDetalle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gvListaPreciosVentaDetalle.BackgroundColor = System.Drawing.Color.White;
+            this.gvListaPreciosVentaDetalle.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gvListaPreciosVentaDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvListaPreciosVentaDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.gvListaPrecioDetallePrecioVentaColumn,
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn});
+            this.gvListaPreciosVentaDetalle.DataSource = this.entProductoBindingSource;
+            this.gvListaPreciosVentaDetalle.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.gvListaPreciosVentaDetalle.GridColor = System.Drawing.Color.DimGray;
+            this.gvListaPreciosVentaDetalle.Location = new System.Drawing.Point(0, 43);
+            this.gvListaPreciosVentaDetalle.Margin = new System.Windows.Forms.Padding(4);
+            this.gvListaPreciosVentaDetalle.Name = "gvListaPreciosVentaDetalle";
+            this.gvListaPreciosVentaDetalle.RowHeadersVisible = false;
+            this.gvListaPreciosVentaDetalle.RowHeadersWidth = 51;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.gvListaPreciosVentaDetalle.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.gvListaPreciosVentaDetalle.RowTemplate.Height = 27;
+            this.gvListaPreciosVentaDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gvListaPreciosVentaDetalle.Size = new System.Drawing.Size(615, 245);
+            this.gvListaPreciosVentaDetalle.TabIndex = 3;
+            this.gvListaPreciosVentaDetalle.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvListaPreciosVentaDetalle_CellValueChanged);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnAgregar.BackColor = System.Drawing.Color.White;
+            this.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Image = global::Aires.Properties.Resources.Aceptar;
+            this.btnAgregar.Location = new System.Drawing.Point(172, 485);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(120, 80);
+            this.btnAgregar.TabIndex = 0;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnActualizar.BackColor = System.Drawing.Color.White;
+            this.btnActualizar.BackgroundImage = global::Aires.Properties.Resources.Refrescar;
+            this.btnActualizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnActualizar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnActualizar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActualizar.Location = new System.Drawing.Point(172, 484);
+            this.btnActualizar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(120, 80);
+            this.btnActualizar.TabIndex = 3;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnActualizar.UseVisualStyleBackColor = false;
+            this.btnActualizar.Visible = false;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnCancelar.BackColor = System.Drawing.Color.White;
+            this.btnCancelar.BackgroundImage = global::Aires.Properties.Resources.Cancelar;
+            this.btnCancelar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.Location = new System.Drawing.Point(335, 485);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(120, 80);
+            this.btnCancelar.TabIndex = 1;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnFiltroProducto
+            // 
+            this.btnFiltroProducto.BackColor = System.Drawing.Color.Transparent;
+            this.btnFiltroProducto.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFiltroProducto.BackgroundImage")));
+            this.btnFiltroProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFiltroProducto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFiltroProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFiltroProducto.Location = new System.Drawing.Point(607, 48);
+            this.btnFiltroProducto.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFiltroProducto.Name = "btnFiltroProducto";
+            this.btnFiltroProducto.Size = new System.Drawing.Size(49, 32);
+            this.btnFiltroProducto.TabIndex = 80;
+            this.btnFiltroProducto.UseVisualStyleBackColor = false;
+            this.btnFiltroProducto.Click += new System.EventHandler(this.btnFiltroProducto_Click);
+            // 
+            // txtProductoBusqueda
+            // 
+            this.txtProductoBusqueda.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProductoBusqueda.Location = new System.Drawing.Point(133, 47);
+            this.txtProductoBusqueda.Margin = new System.Windows.Forms.Padding(4);
+            this.txtProductoBusqueda.Name = "txtProductoBusqueda";
+            this.txtProductoBusqueda.Size = new System.Drawing.Size(467, 35);
+            this.txtProductoBusqueda.TabIndex = 79;
+            this.txtProductoBusqueda.TextChanged += new System.EventHandler(this.txtProductoBusqueda_TextChanged);
+            this.txtProductoBusqueda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProductoBusqueda_KeyPress);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Descripcion";
+            this.dataGridViewTextBoxColumn1.FillWeight = 5F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Lista Precio";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // gvListaPrecioDetallePrecioVentaColumn
+            // 
+            this.gvListaPrecioDetallePrecioVentaColumn.DataPropertyName = "PrecioVenta";
+            dataGridViewCellStyle8.Format = "c2";
+            this.gvListaPrecioDetallePrecioVentaColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.gvListaPrecioDetallePrecioVentaColumn.FillWeight = 4F;
+            this.gvListaPrecioDetallePrecioVentaColumn.HeaderText = "Precio Venta";
+            this.gvListaPrecioDetallePrecioVentaColumn.MinimumWidth = 6;
+            this.gvListaPrecioDetallePrecioVentaColumn.Name = "gvListaPrecioDetallePrecioVentaColumn";
+            // 
+            // gvListaPrecioDetallePrecioVentaIEPSColumn
+            // 
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.DataPropertyName = "PrecioVentaSinIVA";
+            dataGridViewCellStyle9.Format = "c2";
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.FillWeight = 4F;
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.HeaderText = "Precio Venta + IEPS";
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.MinimumWidth = 8;
+            this.gvListaPrecioDetallePrecioVentaIEPSColumn.Name = "gvListaPrecioDetallePrecioVentaIEPSColumn";
+            // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1209,7 +1208,7 @@
             this.Controls.Add(this.label21);
             this.Controls.Add(this.cmbEmpresas);
             this.Controls.Add(this.tcProductos);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Productos";
             this.ShowIcon = false;
             this.Text = "Productos";
@@ -1317,14 +1316,14 @@
         private System.Windows.Forms.FlowLayoutPanel flpBotonesAbajoDerecha;
         private System.Windows.Forms.Button btnExporta;
         private System.Windows.Forms.DataGridView gvListaPreciosVentaDetalle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gvListaPrecioDetallePrecioVentaColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gvListaPrecioDetallePrecioVentaIEPSColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn gvListaPrecios_PrecioVentaColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioVentaSinIVA;
         private System.Windows.Forms.DataGridViewTextBoxColumn gvListaPrecios_PrecioVenta_2PColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioVenta3;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioVenta4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gvListaPrecioDetallePrecioVentaColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gvListaPrecioDetallePrecioVentaIEPSColumn;
     }
 }
