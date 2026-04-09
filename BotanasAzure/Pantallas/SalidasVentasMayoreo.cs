@@ -1716,7 +1716,6 @@ namespace Aires.Pantallas
                 this.ListaPedidos = this.ListaPedidos.Where(P => !P.EstatusDescripcion.Contains("CANCELA")).ToList();
 
             gvPedidos.DataSource = this.ListaPedidos.OrderByDescending(P => P.FacturaId).ToList();
-            txtTotalPedidos.Text = FormatoMoney(this.ListaPedidos.Sum(P => P.Total));
         }
         private void cmbMesesEntradas_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2227,8 +2226,25 @@ namespace Aires.Pantallas
             }
 
 
+            var pedidosVisibles = pedidosFiltro.ToList();
             gvPedidos.DataSource = null;
-            gvPedidos.DataSource = pedidosFiltro.ToList();
+            gvPedidos.DataSource = pedidosVisibles;
+            ActualizaTotales_tpRegistroVentas(pedidosVisibles);
+        }
+
+        private void ActualizaTotales_tpRegistroVentas(List<EntPedido> pedidosVisibles)
+        {
+            txtNumRegistros_tpRegistroVentas.Text = pedidosVisibles.Count.ToString();
+            txtTotalPedidos_tpRegistroVentas.Text = FormatoMoney(pedidosVisibles.Sum(P => P.Total));
+            txtTotalFacturado_tpRegistroVentas.Text = FormatoMoney(pedidosVisibles
+                .Where(P => P.Facturado && !P.EstatusDescripcion.Contains("CANCELA"))
+                .Sum(P => P.Total));
+            txtTotalSinFacturar_tpRegistroVentas.Text = FormatoMoney(pedidosVisibles
+                .Where(P => !P.Facturado && !P.EstatusDescripcion.Contains("CANCELA"))
+                .Sum(P => P.Total));
+            txtTotalCancelado_tpRegistroVentas.Text = FormatoMoney(pedidosVisibles
+                .Where(P => P.EstatusDescripcion.Contains("CANCELA"))
+                .Sum(P => P.Total));
         }
         private void btnFiltrarPedidos_Click(object sender, EventArgs e)
         {
