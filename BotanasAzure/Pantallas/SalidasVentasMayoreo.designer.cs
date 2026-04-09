@@ -175,8 +175,18 @@
             this.dtpFechaDesdeVentas = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.txtTotalPedidos = new System.Windows.Forms.TextBox();
+            this.pnlTotales_tpRegistroVentas = new System.Windows.Forms.Panel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblNumRegistros_tpRegistroVentas = new System.Windows.Forms.Label();
+            this.txtNumRegistros_tpRegistroVentas = new System.Windows.Forms.TextBox();
+            this.lblTotalVenta_tpRegistroVentas = new System.Windows.Forms.Label();
+            this.txtTotalPedidos_tpRegistroVentas = new System.Windows.Forms.TextBox();
+            this.lblTotalFacturado_tpRegistroVentas = new System.Windows.Forms.Label();
+            this.txtTotalFacturado_tpRegistroVentas = new System.Windows.Forms.TextBox();
+            this.lblTotalSinFacturar_tpRegistroVentas = new System.Windows.Forms.Label();
+            this.txtTotalSinFacturar_tpRegistroVentas = new System.Windows.Forms.TextBox();
+            this.lblTotalCancelado_tpRegistroVentas = new System.Windows.Forms.Label();
+            this.txtTotalCancelado_tpRegistroVentas = new System.Windows.Forms.TextBox();
             this.gvPedidos = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -239,6 +249,7 @@
             this.gbDatosFacturacion.SuspendLayout();
             this.gbComentario.SuspendLayout();
             this.tpRegistroVentas.SuspendLayout();
+            this.pnlTotales_tpRegistroVentas.SuspendLayout();
             this.flpFiltrosChecks.SuspendLayout();
             this.pnlFechasVentas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvPedidos)).BeginInit();
@@ -1659,8 +1670,7 @@
             this.tpRegistroVentas.Controls.Add(this.txtClienteFiltro);
             this.tpRegistroVentas.Controls.Add(this.rdoPorFechas);
             this.tpRegistroVentas.Controls.Add(this.pnlFechasVentas);
-            this.tpRegistroVentas.Controls.Add(this.label31);
-            this.tpRegistroVentas.Controls.Add(this.txtTotalPedidos);
+            this.tpRegistroVentas.Controls.Add(this.pnlTotales_tpRegistroVentas);
             this.tpRegistroVentas.Controls.Add(this.gvPedidos);
             this.tpRegistroVentas.Controls.Add(this.flpBotonesFacturacion);
             this.tpRegistroVentas.Controls.Add(this.rdoPorMesVentas);
@@ -1917,26 +1927,147 @@
             this.label1.TabIndex = 163;
             this.label1.Text = "Desde:";
             // 
-            // label31
+            // pnlTotales_tpRegistroVentas
             // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.AutoSize = true;
-            this.label31.BackColor = System.Drawing.Color.Transparent;
-            this.label31.Location = new System.Drawing.Point(615, 348);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(35, 13);
-            this.label31.TabIndex = 144;
-            this.label31.Text = "Total:";
+            this.pnlTotales_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTotales_tpRegistroVentas.BackColor = System.Drawing.Color.Transparent;
+            this.pnlTotales_tpRegistroVentas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.lblTotalFacturado_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.txtTotalFacturado_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.lblTotalVenta_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.txtTotalPedidos_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.lblTotalSinFacturar_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.txtTotalSinFacturar_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.lblNumRegistros_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.txtNumRegistros_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.lblTotalCancelado_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Controls.Add(this.txtTotalCancelado_tpRegistroVentas);
+            this.pnlTotales_tpRegistroVentas.Location = new System.Drawing.Point(432, 346);
+            this.pnlTotales_tpRegistroVentas.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pnlTotales_tpRegistroVentas.Name = "pnlTotales_tpRegistroVentas";
+            this.pnlTotales_tpRegistroVentas.Size = new System.Drawing.Size(392, 72);
+            this.pnlTotales_tpRegistroVentas.TabIndex = 250;
             // 
-            // txtTotalPedidos
+            // lblTotalFacturado_tpRegistroVentas
             // 
-            this.txtTotalPedidos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotalPedidos.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalPedidos.Location = new System.Drawing.Point(653, 348);
-            this.txtTotalPedidos.Name = "txtTotalPedidos";
-            this.txtTotalPedidos.ReadOnly = true;
-            this.txtTotalPedidos.Size = new System.Drawing.Size(95, 21);
-            this.txtTotalPedidos.TabIndex = 143;
+            this.lblTotalFacturado_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalFacturado_tpRegistroVentas.AutoSize = true;
+            this.lblTotalFacturado_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalFacturado_tpRegistroVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblTotalFacturado_tpRegistroVentas.Location = new System.Drawing.Point(4, 4);
+            this.lblTotalFacturado_tpRegistroVentas.Name = "lblTotalFacturado_tpRegistroVentas";
+            this.lblTotalFacturado_tpRegistroVentas.Size = new System.Drawing.Size(72, 18);
+            this.lblTotalFacturado_tpRegistroVentas.TabIndex = 251;
+            this.lblTotalFacturado_tpRegistroVentas.Text = "Facturado:";
+            // 
+            // txtTotalFacturado_tpRegistroVentas
+            // 
+            this.txtTotalFacturado_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtTotalFacturado_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalFacturado_tpRegistroVentas.Location = new System.Drawing.Point(86, 2);
+            this.txtTotalFacturado_tpRegistroVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTotalFacturado_tpRegistroVentas.Name = "txtTotalFacturado_tpRegistroVentas";
+            this.txtTotalFacturado_tpRegistroVentas.ReadOnly = true;
+            this.txtTotalFacturado_tpRegistroVentas.Size = new System.Drawing.Size(98, 21);
+            this.txtTotalFacturado_tpRegistroVentas.TabIndex = 252;
+            this.toolTip1.SetToolTip(this.txtTotalFacturado_tpRegistroVentas, "Suma de pedidos con estado Facturado en la vista actual");
+            // 
+            // lblTotalVenta_tpRegistroVentas
+            // 
+            this.lblTotalVenta_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalVenta_tpRegistroVentas.AutoSize = true;
+            this.lblTotalVenta_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalVenta_tpRegistroVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblTotalVenta_tpRegistroVentas.Location = new System.Drawing.Point(199, 4);
+            this.lblTotalVenta_tpRegistroVentas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalVenta_tpRegistroVentas.Name = "lblTotalVenta_tpRegistroVentas";
+            this.lblTotalVenta_tpRegistroVentas.Size = new System.Drawing.Size(79, 18);
+            this.lblTotalVenta_tpRegistroVentas.TabIndex = 253;
+            this.lblTotalVenta_tpRegistroVentas.Text = "Total venta:";
+            // 
+            // txtTotalPedidos_tpRegistroVentas
+            // 
+            this.txtTotalPedidos_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtTotalPedidos_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalPedidos_tpRegistroVentas.Location = new System.Drawing.Point(287, 2);
+            this.txtTotalPedidos_tpRegistroVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTotalPedidos_tpRegistroVentas.Name = "txtTotalPedidos_tpRegistroVentas";
+            this.txtTotalPedidos_tpRegistroVentas.ReadOnly = true;
+            this.txtTotalPedidos_tpRegistroVentas.Size = new System.Drawing.Size(98, 21);
+            this.txtTotalPedidos_tpRegistroVentas.TabIndex = 143;
+            this.toolTip1.SetToolTip(this.txtTotalPedidos_tpRegistroVentas, "Suma total de ventas de los registros visibles");
+            // 
+            // lblTotalSinFacturar_tpRegistroVentas
+            // 
+            this.lblTotalSinFacturar_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalSinFacturar_tpRegistroVentas.AutoSize = true;
+            this.lblTotalSinFacturar_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalSinFacturar_tpRegistroVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblTotalSinFacturar_tpRegistroVentas.Location = new System.Drawing.Point(4, 28);
+            this.lblTotalSinFacturar_tpRegistroVentas.Name = "lblTotalSinFacturar_tpRegistroVentas";
+            this.lblTotalSinFacturar_tpRegistroVentas.Size = new System.Drawing.Size(80, 18);
+            this.lblTotalSinFacturar_tpRegistroVentas.TabIndex = 254;
+            this.lblTotalSinFacturar_tpRegistroVentas.Text = "Sin facturar:";
+            // 
+            // txtTotalSinFacturar_tpRegistroVentas
+            // 
+            this.txtTotalSinFacturar_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtTotalSinFacturar_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalSinFacturar_tpRegistroVentas.Location = new System.Drawing.Point(86, 26);
+            this.txtTotalSinFacturar_tpRegistroVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTotalSinFacturar_tpRegistroVentas.Name = "txtTotalSinFacturar_tpRegistroVentas";
+            this.txtTotalSinFacturar_tpRegistroVentas.ReadOnly = true;
+            this.txtTotalSinFacturar_tpRegistroVentas.Size = new System.Drawing.Size(98, 21);
+            this.txtTotalSinFacturar_tpRegistroVentas.TabIndex = 255;
+            this.toolTip1.SetToolTip(this.txtTotalSinFacturar_tpRegistroVentas, "Suma de pedidos sin facturar (Nota de Venta) en la vista actual");
+            // 
+            // lblNumRegistros_tpRegistroVentas
+            // 
+            this.lblNumRegistros_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblNumRegistros_tpRegistroVentas.AutoSize = true;
+            this.lblNumRegistros_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumRegistros_tpRegistroVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblNumRegistros_tpRegistroVentas.Location = new System.Drawing.Point(199, 28);
+            this.lblNumRegistros_tpRegistroVentas.Name = "lblNumRegistros_tpRegistroVentas";
+            this.lblNumRegistros_tpRegistroVentas.Size = new System.Drawing.Size(67, 18);
+            this.lblNumRegistros_tpRegistroVentas.TabIndex = 256;
+            this.lblNumRegistros_tpRegistroVentas.Text = "Registros:";
+            // 
+            // txtNumRegistros_tpRegistroVentas
+            // 
+            this.txtNumRegistros_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtNumRegistros_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNumRegistros_tpRegistroVentas.Location = new System.Drawing.Point(287, 26);
+            this.txtNumRegistros_tpRegistroVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNumRegistros_tpRegistroVentas.Name = "txtNumRegistros_tpRegistroVentas";
+            this.txtNumRegistros_tpRegistroVentas.ReadOnly = true;
+            this.txtNumRegistros_tpRegistroVentas.Size = new System.Drawing.Size(98, 21);
+            this.txtNumRegistros_tpRegistroVentas.TabIndex = 257;
+            this.toolTip1.SetToolTip(this.txtNumRegistros_tpRegistroVentas, "Número de registros actualmente visibles en la tabla");
+            // 
+            // lblTotalCancelado_tpRegistroVentas
+            // 
+            this.lblTotalCancelado_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalCancelado_tpRegistroVentas.AutoSize = true;
+            this.lblTotalCancelado_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalCancelado_tpRegistroVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblTotalCancelado_tpRegistroVentas.Location = new System.Drawing.Point(4, 52);
+            this.lblTotalCancelado_tpRegistroVentas.Name = "lblTotalCancelado_tpRegistroVentas";
+            this.lblTotalCancelado_tpRegistroVentas.Size = new System.Drawing.Size(74, 18);
+            this.lblTotalCancelado_tpRegistroVentas.TabIndex = 258;
+            this.lblTotalCancelado_tpRegistroVentas.Text = "Cancelado:";
+            // 
+            // txtTotalCancelado_tpRegistroVentas
+            // 
+            this.txtTotalCancelado_tpRegistroVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtTotalCancelado_tpRegistroVentas.Font = new System.Drawing.Font("Microsoft Tai Le", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalCancelado_tpRegistroVentas.Location = new System.Drawing.Point(86, 50);
+            this.txtTotalCancelado_tpRegistroVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTotalCancelado_tpRegistroVentas.Name = "txtTotalCancelado_tpRegistroVentas";
+            this.txtTotalCancelado_tpRegistroVentas.ReadOnly = true;
+            this.txtTotalCancelado_tpRegistroVentas.Size = new System.Drawing.Size(98, 21);
+            this.txtTotalCancelado_tpRegistroVentas.TabIndex = 259;
+            this.toolTip1.SetToolTip(this.txtTotalCancelado_tpRegistroVentas, "Suma de pedidos cancelados en la vista actual");
             // 
             // gvPedidos
             // 
@@ -2599,6 +2730,8 @@
             this.gbComentario.PerformLayout();
             this.tpRegistroVentas.ResumeLayout(false);
             this.tpRegistroVentas.PerformLayout();
+            this.pnlTotales_tpRegistroVentas.ResumeLayout(false);
+            this.pnlTotales_tpRegistroVentas.PerformLayout();
             this.flpFiltrosChecks.ResumeLayout(false);
             this.flpFiltrosChecks.PerformLayout();
             this.pnlFechasVentas.ResumeLayout(false);
@@ -2720,8 +2853,8 @@
         private System.Windows.Forms.BindingSource entPedidoBindingSource;
         private System.Windows.Forms.TextBox txtCondicionesPago;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox txtTotalPedidos;
+        private System.Windows.Forms.Label lblTotalVenta_tpRegistroVentas;
+        private System.Windows.Forms.TextBox txtTotalPedidos_tpRegistroVentas;
         private System.Windows.Forms.RadioButton rdoPorFechas;
         private System.Windows.Forms.Panel pnlFechasVentas;
         private System.Windows.Forms.Label label2;
@@ -2797,5 +2930,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn gvProductosPedidoPrecioColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn gvProductosPedidoPrecioCcolumn;
         private System.Windows.Forms.Panel pnlTipoProducto;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel pnlTotales_tpRegistroVentas;
+        private System.Windows.Forms.Label lblNumRegistros_tpRegistroVentas;
+        private System.Windows.Forms.TextBox txtNumRegistros_tpRegistroVentas;
+        private System.Windows.Forms.Label lblTotalFacturado_tpRegistroVentas;
+        private System.Windows.Forms.TextBox txtTotalFacturado_tpRegistroVentas;
+        private System.Windows.Forms.Label lblTotalSinFacturar_tpRegistroVentas;
+        private System.Windows.Forms.TextBox txtTotalSinFacturar_tpRegistroVentas;
+        private System.Windows.Forms.Label lblTotalCancelado_tpRegistroVentas;
+        private System.Windows.Forms.TextBox txtTotalCancelado_tpRegistroVentas;
     }
 }
