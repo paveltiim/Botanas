@@ -267,7 +267,6 @@ namespace Aires.Pantallas
                 this.ListaPedidos = this.ListaPedidos.Where(P => !P.EstatusDescripcion.Contains("CANCELA")).ToList();
 
             gvPedidos.DataSource = this.ListaPedidos.OrderByDescending(P => P.FacturaId).ToList();
-            txtTotalPedidos.Text = FormatoMoney(this.ListaPedidos.Sum(P => P.Total));
         }
         private void btnRefrescarEntradas_Click(object sender, EventArgs e)
         {
@@ -729,9 +728,25 @@ namespace Aires.Pantallas
                                 select c;
             }
 
-
+            var pedidosVisibles = pedidosFiltro.ToList();
             gvPedidos.DataSource = null;
-            gvPedidos.DataSource = pedidosFiltro.ToList();
+            gvPedidos.DataSource = pedidosVisibles;
+            ActualizaTotales(pedidosVisibles);
+        }
+
+        void ActualizaTotales(List<EntPedido> pedidosVisibles)
+        {
+            txtNumRegistros.Text = pedidosVisibles.Count.ToString();
+            txtTotalPedidos.Text = FormatoMoney(pedidosVisibles.Sum(P => P.Total));
+            txtTotalFacturado.Text = FormatoMoney(pedidosVisibles
+                .Where(P => P.Facturado && !P.EstatusDescripcion.Contains("CANCELA"))
+                .Sum(P => P.Total));
+            txtTotalSinFacturar.Text = FormatoMoney(pedidosVisibles
+                .Where(P => !P.Facturado && !P.EstatusDescripcion.Contains("CANCELA"))
+                .Sum(P => P.Total));
+            txtTotalCancelado.Text = FormatoMoney(pedidosVisibles
+                .Where(P => P.EstatusDescripcion.Contains("CANCELA"))
+                .Sum(P => P.Total));
         }
         private void btnFiltrarPedidos_Click(object sender, EventArgs e)
         {
