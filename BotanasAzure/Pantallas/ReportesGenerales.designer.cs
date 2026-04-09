@@ -1264,7 +1264,7 @@
             this.chkVentasPorFechaConGrafica.Location = new System.Drawing.Point(4, 4);
             this.chkVentasPorFechaConGrafica.Margin = new System.Windows.Forms.Padding(4);
             this.chkVentasPorFechaConGrafica.Name = "chkVentasPorFechaConGrafica";
-            this.chkVentasPorFechaConGrafica.Size = new System.Drawing.Size(98, 20);
+            this.chkVentasPorFechaConGrafica.Size = new System.Drawing.Size(97, 20);
             this.chkVentasPorFechaConGrafica.TabIndex = 102;
             this.chkVentasPorFechaConGrafica.Text = "Con Gráfica";
             this.chkVentasPorFechaConGrafica.UseVisualStyleBackColor = true;
@@ -1277,7 +1277,7 @@
             this.rdoVentasPorFechaDetalleAnual.Location = new System.Drawing.Point(1319, 4);
             this.rdoVentasPorFechaDetalleAnual.Margin = new System.Windows.Forms.Padding(4);
             this.rdoVentasPorFechaDetalleAnual.Name = "rdoVentasPorFechaDetalleAnual";
-            this.rdoVentasPorFechaDetalleAnual.Size = new System.Drawing.Size(105, 20);
+            this.rdoVentasPorFechaDetalleAnual.Size = new System.Drawing.Size(104, 20);
             this.rdoVentasPorFechaDetalleAnual.TabIndex = 106;
             this.rdoVentasPorFechaDetalleAnual.Text = "Detalle Anual";
             this.rdoVentasPorFechaDetalleAnual.UseVisualStyleBackColor = true;
@@ -1289,7 +1289,7 @@
             this.rdoVentasPorFechaDetalleMensual.Location = new System.Drawing.Point(1160, 4);
             this.rdoVentasPorFechaDetalleMensual.Margin = new System.Windows.Forms.Padding(4);
             this.rdoVentasPorFechaDetalleMensual.Name = "rdoVentasPorFechaDetalleMensual";
-            this.rdoVentasPorFechaDetalleMensual.Size = new System.Drawing.Size(122, 20);
+            this.rdoVentasPorFechaDetalleMensual.Size = new System.Drawing.Size(121, 20);
             this.rdoVentasPorFechaDetalleMensual.TabIndex = 105;
             this.rdoVentasPorFechaDetalleMensual.Text = "Detalle Mensual";
             this.rdoVentasPorFechaDetalleMensual.UseVisualStyleBackColor = true;
@@ -1302,7 +1302,7 @@
             this.rdoVentasPorFechaDetalleDiario.Location = new System.Drawing.Point(1017, 4);
             this.rdoVentasPorFechaDetalleDiario.Margin = new System.Windows.Forms.Padding(4);
             this.rdoVentasPorFechaDetalleDiario.Name = "rdoVentasPorFechaDetalleDiario";
-            this.rdoVentasPorFechaDetalleDiario.Size = new System.Drawing.Size(108, 20);
+            this.rdoVentasPorFechaDetalleDiario.Size = new System.Drawing.Size(107, 20);
             this.rdoVentasPorFechaDetalleDiario.TabIndex = 104;
             this.rdoVentasPorFechaDetalleDiario.TabStop = true;
             this.rdoVentasPorFechaDetalleDiario.Text = "Detalle Diario";
@@ -1444,7 +1444,7 @@
             this.chkSoloTotales.Location = new System.Drawing.Point(304, 5);
             this.chkSoloTotales.Margin = new System.Windows.Forms.Padding(4);
             this.chkSoloTotales.Name = "chkSoloTotales";
-            this.chkSoloTotales.Size = new System.Drawing.Size(102, 20);
+            this.chkSoloTotales.Size = new System.Drawing.Size(101, 20);
             this.chkSoloTotales.TabIndex = 101;
             this.chkSoloTotales.Text = "Solo Totales";
             this.chkSoloTotales.UseVisualStyleBackColor = true;
@@ -1456,7 +1456,7 @@
             this.radioButton4.Location = new System.Drawing.Point(136, 4);
             this.radioButton4.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(102, 20);
+            this.radioButton4.Size = new System.Drawing.Size(101, 20);
             this.radioButton4.TabIndex = 99;
             this.radioButton4.Text = "Por Almacén";
             this.radioButton4.UseVisualStyleBackColor = true;
@@ -1468,7 +1468,7 @@
             this.rdoGeneralPorProductoVentas.Location = new System.Drawing.Point(7, 4);
             this.rdoGeneralPorProductoVentas.Margin = new System.Windows.Forms.Padding(4);
             this.rdoGeneralPorProductoVentas.Name = "rdoGeneralPorProductoVentas";
-            this.rdoGeneralPorProductoVentas.Size = new System.Drawing.Size(74, 20);
+            this.rdoGeneralPorProductoVentas.Size = new System.Drawing.Size(73, 20);
             this.rdoGeneralPorProductoVentas.TabIndex = 98;
             this.rdoGeneralPorProductoVentas.TabStop = true;
             this.rdoGeneralPorProductoVentas.Text = "General";
@@ -1595,11 +1595,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rvVentasProductosUtilidad.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptVentasPorProductosNeueUtilidad.rdlc";
-            this.rvVentasProductosUtilidad.Location = new System.Drawing.Point(0, 12);
+            this.rvVentasProductosUtilidad.Location = new System.Drawing.Point(0, 1);
             this.rvVentasProductosUtilidad.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.rvVentasProductosUtilidad.Name = "rvVentasProductosUtilidad";
             this.rvVentasProductosUtilidad.ServerReport.BearerToken = null;
-            this.rvVentasProductosUtilidad.Size = new System.Drawing.Size(1118, 177);
+            this.rvVentasProductosUtilidad.Size = new System.Drawing.Size(1118, 170);
             this.rvVentasProductosUtilidad.TabIndex = 98;
             // 
             // flpFiltroPorProducto
@@ -2260,7 +2260,7 @@
             this.rvPagosPorClientesSinFactura.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.rvPagosPorClientesSinFactura.Name = "rvPagosPorClientesSinFactura";
             this.rvPagosPorClientesSinFactura.ServerReport.BearerToken = null;
-            this.rvPagosPorClientesSinFactura.Size = new System.Drawing.Size(938, 354);
+            this.rvPagosPorClientesSinFactura.Size = new System.Drawing.Size(938, 356);
             this.rvPagosPorClientesSinFactura.TabIndex = 122;
             // 
             // rvPagosPorClientes
@@ -2276,7 +2276,7 @@
             this.rvPagosPorClientes.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.rvPagosPorClientes.Name = "rvPagosPorClientes";
             this.rvPagosPorClientes.ServerReport.BearerToken = null;
-            this.rvPagosPorClientes.Size = new System.Drawing.Size(938, 355);
+            this.rvPagosPorClientes.Size = new System.Drawing.Size(938, 357);
             this.rvPagosPorClientes.TabIndex = 120;
             // 
             // tabPage12
@@ -2304,7 +2304,7 @@
             this.rvPagosClientes.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.rvPagosClientes.Name = "rvPagosClientes";
             this.rvPagosClientes.ServerReport.BearerToken = null;
-            this.rvPagosClientes.Size = new System.Drawing.Size(938, 377);
+            this.rvPagosClientes.Size = new System.Drawing.Size(938, 379);
             this.rvPagosClientes.TabIndex = 119;
             // 
             // panel3
@@ -3110,7 +3110,7 @@
             this.lbEmpresa.Location = new System.Drawing.Point(616, 17);
             this.lbEmpresa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbEmpresa.Name = "lbEmpresa";
-            this.lbEmpresa.Size = new System.Drawing.Size(68, 17);
+            this.lbEmpresa.Size = new System.Drawing.Size(65, 16);
             this.lbEmpresa.TabIndex = 126;
             this.lbEmpresa.Text = "Empresa:";
             // 
