@@ -734,7 +734,7 @@ namespace Aires.Pantallas
             ActualizaTotales(pedidosVisibles);
         }
 
-        void ActualizaTotales(List<EntPedido> pedidosVisibles)
+        private void ActualizaTotales(List<EntPedido> pedidosVisibles)
         {
             txtNumRegistros.Text = pedidosVisibles.Count.ToString();
             txtTotalPedidos.Text = FormatoMoney(pedidosVisibles.Sum(P => P.Total));
