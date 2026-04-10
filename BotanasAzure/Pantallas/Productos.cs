@@ -16,6 +16,7 @@ namespace Aires.Pantallas
     {
         public void VerificaEmpresa()
         {
+            if(cmbEmpresas.Items.Count>0)
             cmbEmpresas.SelectedIndex = ((List<EntEmpresa>)cmbEmpresas.DataSource).FindIndex(P => P.Id == Program.EmpresaSeleccionada.Id);
         }
 

@@ -565,6 +565,24 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { con.Close(); }
         }
+
+        public void agregaPDFXMLAFactura(int FacturaPedidoId, string RutaArchivos, byte[] PDF, byte[] XML, int UsuarioId)
+        {
+            try
+            {
+                com = new SqlCommand("[updActualizaPDFXMLenFacturaPedido]", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("FacturaPedidoId", FacturaPedidoId);
+                com.Parameters.AddWithValue("RutaArchivos", RutaArchivos);
+                com.Parameters.AddWithValue("PDF", PDF);
+                com.Parameters.AddWithValue("XML", XML);
+                com.Parameters.AddWithValue("UsuarioId", UsuarioId);
+                con.Open();
+                com.ExecuteNonQuery();
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { con.Close(); }
+        }
         public void actualizaPDFXMLEnComplementoPago(int ComplementoPagoId, string Ruta, byte[] PDF, byte[] XML,
                                                      int UsuarioId)
 

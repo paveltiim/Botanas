@@ -1087,6 +1087,7 @@ namespace AiresNegocio
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+        
         public List<EntCatalogoGenerico> ObtieneMovimientosSalidasProductos(int EmpresaId, DateTime FechaDesde, DateTime FechaHasta,
                                                                                 int AlmacenId)
         {
