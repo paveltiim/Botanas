@@ -1146,6 +1146,34 @@ namespace Aires
             }
         }
 
+        public void ReAsignaArchivosFactura(EntFactura Factura)
+        {
+            //if (Factura.XML.Length == new byte[1].Length)
+            //{
+            string rutaArchivoXml = SeleccionaArchivoConFiltro(".xml");
+            if (!string.IsNullOrWhiteSpace(rutaArchivoXml))
+            {
+                Factura.XML = System.IO.File.ReadAllBytes(rutaArchivoXml);
+                if (!string.IsNullOrWhiteSpace(EncuentraArchivo(Factura.Ruta, ".xml"))) //ELIMINA ARCHIVO "VACIO" o con ERROR.
+                    System.IO.File.Delete(Factura.Ruta + "\\" + EncuentraArchivo(Factura.Ruta, ".xml"));
+            }
+            else
+                MandaExcepcion("NO SE SELECCIONO ARCHIVO XML");
+            //}
+
+            //if (Factura.PDF.Length == new byte[1].Length)
+            //{
+            string rutaArchivoPDF = SeleccionaArchivoConFiltro(".pdf");
+            if (!string.IsNullOrWhiteSpace(rutaArchivoPDF))
+            {
+                Factura.PDF = System.IO.File.ReadAllBytes(rutaArchivoPDF);
+                if (!string.IsNullOrWhiteSpace(EncuentraArchivo(Factura.Ruta, ".pdf")))
+                    System.IO.File.Delete(Factura.Ruta + "\\" + EncuentraArchivo(Factura.Ruta, ".pdf"));
+            }
+            else
+                MandaExcepcion("NO SE SELECCIONO ARCHIVO PDF");
+            //}
+        }
         void ReAsignaArchivosComplementoPago(EntFactura Factura)
         {
             if (Factura.XML.Length == new byte[1].Length)

@@ -856,10 +856,10 @@ namespace Aires.Pantallas
             {
                 EntPedido pedidoSeleccionado = ObtienePedidoFromGV(gvPedidos);
                 EntFactura factura = new BusFacturas().ObtieneFacturasPorPedido(pedidoSeleccionado.Id).First();
-                //base.ReAsignaArchivosFactura(factura);
-           
-                //    new BusFacturas().AgregaPDFXMLAFactura(factura.Id, factura.Ruta, factura.PDF, factura.XML, Program.UsuarioSeleccionado.Id);
-                //MuestraMensaje("¡Archivos Actualizados!");
+                base.ReAsignaArchivosFactura(factura);
+
+                new BusFacturas().AgregaPDFXMLAFactura(factura.Id, factura.Ruta, factura.PDF, factura.XML, Program.UsuarioSeleccionado.Id);
+                MuestraMensaje("¡Archivos Actualizados!");
             }
             catch (Exception ex)
             {

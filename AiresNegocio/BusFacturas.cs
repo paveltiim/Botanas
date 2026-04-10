@@ -758,6 +758,14 @@ namespace AiresNegocio
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
+        public void AgregaPDFXMLAFactura(int FacturaPedidoId, string RutaArchivos, byte[] Pdf, byte[] Xml, int UsuarioId)
+        {
+            try
+            {
+                new DatFacturas().agregaPDFXMLAFactura(FacturaPedidoId, RutaArchivos, Pdf, Xml, UsuarioId);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
         public void ActualizaPDFXMLEnComplementoPago(EntFactura Factura)
         {
             try
