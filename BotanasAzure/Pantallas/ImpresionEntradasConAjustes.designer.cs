@@ -41,7 +41,7 @@ namespace Aires.Pantallas
             // 
             // EntReporteEntradasAjustesBindingSource
             // 
-            this.EntReporteEntradasAjustesBindingSource.DataMember = "EntReporteEntradasAjustes";
+            this.EntReporteEntradasAjustesBindingSource.DataMember = "";
             this.EntReporteEntradasAjustesBindingSource.DataSource = typeof(AiresEntidades.EntReporteEntradasAjustes);
             // 
             // tabControl1

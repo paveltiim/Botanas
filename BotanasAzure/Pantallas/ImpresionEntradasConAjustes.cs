@@ -18,6 +18,7 @@ namespace Aires.Pantallas
         public void CargaReporte(List<EntReporteEntradasAjustes> listaReporte)
         {
             base.SetWaitCursor();
+            EntReporteEntradasAjustesBindingSource.DataMember = "";
             EntReporteEntradasAjustesBindingSource.DataSource = listaReporte;
             rvEntradasAjustes.RefreshReport();
         }
