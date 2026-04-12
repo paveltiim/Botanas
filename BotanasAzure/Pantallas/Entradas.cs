@@ -820,7 +820,13 @@ namespace Aires.Pantallas
                     .OrderBy(r => r.Descripcion)
                     .ToList();
 
-                ImpresionEntradasConAjustes vImprime = new ImpresionEntradasConAjustes(listaReporte);
+                ImpresionEntradasConAjustes vImprime = new ImpresionEntradasConAjustes(
+                    listaReporte,
+                    Program.EmpresaSeleccionada != null ? Program.EmpresaSeleccionada.Nombre : "",
+                    fechaDesde.ToString("dd/MM/yyyy"),
+                    fechaHasta.AddDays(-1).ToString("dd/MM/yyyy"), // fechaHasta was pushed +1 day for inclusive query; display original last day
+                    almacen.Descripcion,
+                    Program.UsuarioSeleccionado != null ? Program.UsuarioSeleccionado.Descripcion : "");
                 vImprime.Show();
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
