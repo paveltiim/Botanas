@@ -1055,7 +1055,8 @@ namespace AiresNegocio
                     p.Descripcion = r["MOVINV_COMENTARIO"].ToString();
                     p.Detalle= r["MOVINV_PREVIEW"].ToString();
                     p.Fecha = Convert.ToDateTime(r["MOVINV_FECHA"]);
-                    p.IdSecundario = Convert.ToInt32(r["MOVINV_PEDIDOID"]);//EN ENTRADAS ES INGRESOID
+                    p.IdSecundario = Convert.ToInt32(r["MOVINV_PEDIDOID"]);//EN ENTRADAS ES INGRESOID;
+                    p.TipoId = Convert.ToInt32(r["MOINV_TIPOMOVIMIENTOINVENTARIOID"]);
                     p.Usuario= r["USU_NOMBRE"].ToString();
                     p.Usuario +=" | "+ r["tipmovinv_nombre"].ToString();
                     lst.Add(p);

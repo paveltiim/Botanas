@@ -761,7 +761,7 @@ namespace Aires.Pantallas
                     Program.UsuarioSeleccionado.CompañiaId, fechaDesde, fechaHasta, almacen.Id, 3);
                 foreach (EntCatalogoGenerico aj in listaAjustes)
                 {
-                    List<EntProducto> detalleAjuste = new BusProductos().ObtieneMovimientosDetalleProductosSinDatosFactura(2, aj.Id, 0);
+                    List<EntProducto> detalleAjuste = new BusProductos().ObtieneMovimientosDetalleProductosSinDatosFactura(1, aj.Id, 0);//SE PONE tipoMovimientoId=1 PARA PONER PRECIO EN COSTO
                     listaProductosAjuste.AddRange(detalleAjuste);
                 }
 
