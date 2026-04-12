@@ -477,1115 +477,498 @@
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
+            <!-- ===== ROW 1: Column headers (static) ===== -->
             <TablixRow>
               <Height>0.9cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrCodigo">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Código</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Código</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#2c4a7a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrDescripcion">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Descripción</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Left</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Descripción</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#2c4a7a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrCantEntrada">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Cant.
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Cant.
 Entrada</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#2c4a7a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrCostoEntrada">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Costo
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Costo
 Entrada</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#2c4a7a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrTotalCostoEntrada">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Total Costo
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Total Costo
 Entrada</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#2c4a7a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrCantAjuste">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Cant.
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Cant.
 Ajuste</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4a6080</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#4a6080</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrCostoAjuste">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Costo
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Costo
 Ajuste</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4a6080</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#4a6080</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrTotalCostoAjuste">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Total Costo
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Total Costo
 Ajuste</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4a6080</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#4a6080</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrCantReal">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Cant.
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Cant.
 Real</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#1a3a6a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#1a3a6a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="HdrTotalCostoReal">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Total Costo
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>Total Costo
 Real</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#1a3a6a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#1a3a6a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
             </TablixRow>
+            <!-- ===== ROW 2: Group header (TipoNombre) ===== -->
+            <TablixRow>
+              <Height>0.7cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpHdrTipoNombre">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Fields!TipoNombre.Value</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs>
+                      <ColSpan>10</ColSpan>
+                      <Style><Border><Color>#1a3a6a</Color><Style>Solid</Style></Border><BackgroundColor>#1a3a6a</BackgroundColor><PaddingLeft>6pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <!-- ===== ROW 3: Detail data row ===== -->
             <TablixRow>
               <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataCodigo">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Codigo.Value</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <Color>#222222</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Fields!Codigo.Value</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#222222</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataDescripcion">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Descripcion.Value</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <Color>#222222</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Fields!Descripcion.Value</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#222222</Color></Style>
+                      </TextRun></TextRuns><Style /></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataCantidadEntrada">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!CantidadEntrada.Value</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <Color>#222222</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Fields!CantidadEntrada.Value</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#222222</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataCostoEntrada">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Format(Fields!CostoEntrada.Value, "C2")</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <Color>#222222</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Fields!CostoEntrada.Value, "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#222222</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataTotalCostoEntrada">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Format(Fields!TotalCostoEntrada.Value, "C2")</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <Color>#222222</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Fields!TotalCostoEntrada.Value, "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#222222</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#f2f5fa", "White")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataCantidadSalidaAjuste">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!CantidadSalidaAjuste.Value</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <Color>#222222</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#eaf0f8", "#f5f8fc")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Fields!CantidadSalidaAjuste.Value</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#222222</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#eaf0f8", "#f5f8fc")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataCostoSalidaAjuste">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Format(Fields!CostoSalidaAjuste.Value, "C2")</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <Color>#222222</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#eaf0f8", "#f5f8fc")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Fields!CostoSalidaAjuste.Value, "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#222222</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#eaf0f8", "#f5f8fc")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataTotalCostoSalidaAjuste">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Format(Fields!TotalCostoSalidaAjuste.Value, "C2")</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <Color>#222222</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#eaf0f8", "#f5f8fc")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Fields!TotalCostoSalidaAjuste.Value, "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#222222</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#eaf0f8", "#f5f8fc")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataCantidadEntradaReal">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!CantidadEntradaReal.Value</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>#1a3a6a</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#e8eef8", "White")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Fields!CantidadEntradaReal.Value</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>#1a3a6a</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#e8eef8", "White")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DataTotalCostoEntradaReal">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Format(Fields!TotalCostoEntradaReal.Value, "C2")</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>7pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>#1a3a6a</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#cccccc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#e8eef8", "White")</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Fields!TotalCostoEntradaReal.Value, "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>#1a3a6a</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#cccccc</Color><Style>Solid</Style></Border><BackgroundColor>=IIF(RowNumber(Nothing) MOD 2 = 0, "#e8eef8", "White")</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
             </TablixRow>
+            <!-- ===== ROW 4: Group subtotal row ===== -->
+            <TablixRow>
+              <Height>0.65cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpFtrLabel">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>="Subtotal " &amp; Fields!TipoNombre.Value</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <ColSpan>2</ColSpan>
+                      <Style><Border><Color>#2c4a7a</Color><Style>Solid</Style></Border><BackgroundColor>#2c4a7a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpFtrCantidadEntrada">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Sum(Fields!CantidadEntrada.Value, "GrpTipoNombre")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#2c4a7a</Color><Style>Solid</Style></Border><BackgroundColor>#2c4a7a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpFtrCostoEntrada">
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs>
+                      <Style><Border><Color>#2c4a7a</Color><Style>Solid</Style></Border><BackgroundColor>#2c4a7a</BackgroundColor></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpFtrTotalCostoEntrada">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Sum(Fields!TotalCostoEntrada.Value, "GrpTipoNombre"), "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#2c4a7a</Color><Style>Solid</Style></Border><BackgroundColor>#2c4a7a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpFtrCantidadSalidaAjuste">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Sum(Fields!CantidadSalidaAjuste.Value, "GrpTipoNombre")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#4a6080</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpFtrCostoSalidaAjuste">
+                      <CanGrow>true</CanGrow>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#4a6080</BackgroundColor></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpFtrTotalCostoSalidaAjuste">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Sum(Fields!TotalCostoSalidaAjuste.Value, "GrpTipoNombre"), "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#4a6080</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpFtrCantidadEntradaReal">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Sum(Fields!CantidadEntradaReal.Value, "GrpTipoNombre")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#1a3a6a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GrpFtrTotalCostoEntradaReal">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Sum(Fields!TotalCostoEntradaReal.Value, "GrpTipoNombre"), "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#3a5a8a</Color><Style>Solid</Style></Border><BackgroundColor>#1a3a6a</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <!-- ===== ROW 5: Grand total row ===== -->
             <TablixRow>
               <Height>0.7cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FtrLabel">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>TOTALES</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                    <Textbox Name="GrandFtrLabel">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>TOTAL GENERAL</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <ColSpan>2</ColSpan>
+                      <Style><Border><Color>#0e2040</Color><Style>Solid</Style></Border><BackgroundColor>#0e2040</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FtrDescripcion">
-                      <CanGrow>true</CanGrow>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                      </Style>
+                    <Textbox Name="GrandFtrCantidadEntrada">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Sum(Fields!CantidadEntrada.Value)</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#0e2040</Color><Style>Solid</Style></Border><BackgroundColor>#0e2040</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FtrCantidadEntrada">
+                    <Textbox Name="GrandFtrCostoEntrada">
                       <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Sum(Fields!CantidadEntrada.Value)</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs>
+                      <Style><Border><Color>#0e2040</Color><Style>Solid</Style></Border><BackgroundColor>#0e2040</BackgroundColor></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FtrCostoEntrada">
-                      <CanGrow>true</CanGrow>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                      </Style>
+                    <Textbox Name="GrandFtrTotalCostoEntrada">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Sum(Fields!TotalCostoEntrada.Value), "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#0e2040</Color><Style>Solid</Style></Border><BackgroundColor>#0e2040</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FtrTotalCostoEntrada">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Format(Sum(Fields!TotalCostoEntrada.Value), "C2")</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#2c4a7a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                    <Textbox Name="GrandFtrCantidadSalidaAjuste">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Sum(Fields!CantidadSalidaAjuste.Value)</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#0e2040</Color><Style>Solid</Style></Border><BackgroundColor>#0e2040</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FtrCantidadSalidaAjuste">
+                    <Textbox Name="GrandFtrCostoSalidaAjuste">
                       <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Sum(Fields!CantidadSalidaAjuste.Value)</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4a6080</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                      <Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs>
+                      <Style><Border><Color>#0e2040</Color><Style>Solid</Style></Border><BackgroundColor>#0e2040</BackgroundColor></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FtrCostoSalidaAjuste">
-                      <CanGrow>true</CanGrow>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4a6080</BackgroundColor>
-                      </Style>
+                    <Textbox Name="GrandFtrTotalCostoSalidaAjuste">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Sum(Fields!TotalCostoSalidaAjuste.Value), "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#0e2040</Color><Style>Solid</Style></Border><BackgroundColor>#0e2040</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FtrTotalCostoSalidaAjuste">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Format(Sum(Fields!TotalCostoSalidaAjuste.Value), "C2")</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4a6080</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                    <Textbox Name="GrandFtrCantidadEntradaReal">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Sum(Fields!CantidadEntradaReal.Value)</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#0e2040</Color><Style>Solid</Style></Border><BackgroundColor>#0e2040</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FtrCantidadEntradaReal">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Sum(Fields!CantidadEntradaReal.Value)</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#1a3a6a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="FtrTotalCostoEntradaReal">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Format(Sum(Fields!TotalCostoEntradaReal.Value), "C2")</Value>
-                              <Style>
-                                <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Color>#3a5a8a</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#1a3a6a</BackgroundColor>
-                        <PaddingLeft>3pt</PaddingLeft>
-                        <PaddingRight>3pt</PaddingRight>
-                        <PaddingTop>3pt</PaddingTop>
-                        <PaddingBottom>3pt</PaddingBottom>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
+                    <Textbox Name="GrandFtrTotalCostoEntradaReal">
+                      <CanGrow>true</CanGrow><KeepTogether>true</KeepTogether>
+                      <Paragraphs><Paragraph><TextRuns><TextRun>
+                        <Value>=Format(Sum(Fields!TotalCostoEntradaReal.Value), "C2")</Value>
+                        <Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style>
+                      </TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs>
+                      <Style><Border><Color>#0e2040</Color><Style>Solid</Style></Border><BackgroundColor>#0e2040</BackgroundColor><PaddingLeft>3pt</PaddingLeft><PaddingRight>3pt</PaddingRight><PaddingTop>3pt</PaddingTop><PaddingBottom>3pt</PaddingBottom><VerticalAlign>Middle</VerticalAlign></Style>
                     </Textbox>
                   </CellContents>
                 </TablixCell>
@@ -1609,14 +992,47 @@ Real</Value>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
           <TablixMembers>
+            <!-- Static column-header row (repeats on each page) -->
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
               <RepeatOnNewPage>true</RepeatOnNewPage>
               <KeepTogether>true</KeepTogether>
             </TablixMember>
+            <!-- TipoNombre group -->
             <TablixMember>
-              <Group Name="Details" />
+              <Group Name="GrpTipoNombre">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!TipoNombre.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+              <SortExpressions>
+                <SortExpression>
+                  <Value>=Fields!TipoNombre.Value</Value>
+                  <Direction>Ascending</Direction>
+                </SortExpression>
+              </SortExpressions>
+              <TablixMembers>
+                <!-- Group header -->
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <!-- Detail rows (sorted by Descripcion within each group) -->
+                <TablixMember>
+                  <Group Name="Details" />
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!Descripcion.Value</Value>
+                      <Direction>Ascending</Direction>
+                    </SortExpression>
+                  </SortExpressions>
+                </TablixMember>
+                <!-- Group subtotal row -->
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
+              </TablixMembers>
             </TablixMember>
+            <!-- Grand total row -->
             <TablixMember>
               <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
@@ -1626,7 +1042,7 @@ Real</Value>
         <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>dsEntradasAjustes</DataSetName>
         <Top>3.55cm</Top>
-        <Height>2.2cm</Height>
+        <Height>4.55cm</Height>
         <Width>22.3cm</Width>
         <Style>
           <Border>
@@ -1735,6 +1151,14 @@ Real</Value>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="TipoId">
+          <DataField>TipoId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TipoNombre">
+          <DataField>TipoNombre</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="ProductoId">
           <DataField>ProductoId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>

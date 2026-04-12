@@ -746,42 +746,37 @@ namespace Aires.Pantallas
                     fechaHasta = dtpFechaEntradasFiltro.Value.Date.AddDays(1);
                 }
 
-                // Collect entry product details from the selected entries
-                List<EntProducto> listaProductosEntrada = new List<EntProducto>();
+                // Collect entry product details from the selected entries,
+                // keeping the TipoId from each movement header so we can group later.
+                // Key: "TipoId:ProductoId" (string composite to avoid ValueTuple dependency).
+                Dictionary<string, EntReporteEntradasAjustes> resumen =
+                    new Dictionary<string, EntReporteEntradasAjustes>();
+
+                BusProductos bus = new BusProductos();
                 List<EntCatalogoGenerico> listaEntradasSeleccionadas = ObtieneListaGenericaFromGV(gvIngresos);
                 foreach (EntCatalogoGenerico en in listaEntradasSeleccionadas)
                 {
-                    List<EntProducto> listaProductosIngreso = new BusProductos().ObtieneMovimientosDetalleProductosSinDatosFactura(1, en.Id, en.IdSecundario);
-                    listaProductosEntrada.AddRange(listaProductosIngreso);
-                }
-
-                // Collect adjustment (TipoMovimientoId = 3) product details for the same period
-                List<EntProducto> listaProductosAjuste = new List<EntProducto>();
-                List<EntCatalogoGenerico> listaAjustes = new BusProductos().ObtieneMovimientosSalidasProductos(
-                    Program.UsuarioSeleccionado.CompañiaId, fechaDesde, fechaHasta, almacen.Id, 3);
-                foreach (EntCatalogoGenerico aj in listaAjustes)
-                {
-                    List<EntProducto> detalleAjuste = new BusProductos().ObtieneMovimientosDetalleProductosSinDatosFactura(1, aj.Id, 0);//SE PONE tipoMovimientoId=1 PARA PONER PRECIO EN COSTO
-                    listaProductosAjuste.AddRange(detalleAjuste);
-                }
-
-                // Build a consolidated summary per product
-                Dictionary<int, EntReporteEntradasAjustes> resumen = new Dictionary<int, EntReporteEntradasAjustes>();
-
-                foreach (EntProducto ep in listaProductosEntrada)
-                {
-                    if (!resumen.ContainsKey(ep.ProductoId))
+                    int tipoId = en.TipoId;
+                    string tipoNombre = tipoId == 6 ? "REINGRESO CANCELACION" : "ENTRADAS";
+                    List<EntProducto> detalles = bus.ObtieneMovimientosDetalleProductosSinDatosFactura(1, en.Id, en.IdSecundario);
+                    foreach (EntProducto ep in detalles)
                     {
-                        resumen[ep.ProductoId] = new EntReporteEntradasAjustes
+                        string key = tipoId + ":" + ep.ProductoId;
+                        if (!resumen.ContainsKey(key))
                         {
-                            ProductoId = ep.ProductoId,
-                            Codigo = ep.Codigo,
-                            Descripcion = ep.Descripcion
-                        };
+                            resumen[key] = new EntReporteEntradasAjustes
+                            {
+                                ProductoId = ep.ProductoId,
+                                Codigo = ep.Codigo,
+                                Descripcion = ep.Descripcion,
+                                TipoId = tipoId,
+                                TipoNombre = tipoNombre
+                            };
+                        }
+                        EntReporteEntradasAjustes fila = resumen[key];
+                        fila.CantidadEntrada += ep.Cantidad;
+                        fila.TotalCostoEntrada += ep.Cantidad * ep.PrecioCosto;
                     }
-                    EntReporteEntradasAjustes fila = resumen[ep.ProductoId];
-                    fila.CantidadEntrada += ep.Cantidad;
-                    fila.TotalCostoEntrada += ep.Cantidad * ep.PrecioCosto;
                 }
 
                 // Compute weighted average unit cost for each entry product
@@ -792,20 +787,47 @@ namespace Aires.Pantallas
                         : 0m;
                 }
 
-                foreach (EntProducto ep in listaProductosAjuste)
+                // Collect adjustment (TipoMovimientoId = 3) product details for the same period.
+                // Adjustments are applied to the first matching product row that is NOT
+                // a reingreso-cancelacion (TipoId != 6); if no such row exists, they fall
+                // into a new "ENTRADAS" row.
+                List<EntCatalogoGenerico> listaAjustes = bus.ObtieneMovimientosSalidasProductos(
+                    Program.UsuarioSeleccionado.CompañiaId, fechaDesde, fechaHasta, almacen.Id, 3);
+                foreach (EntCatalogoGenerico aj in listaAjustes)
                 {
-                    if (!resumen.ContainsKey(ep.ProductoId))
+                    List<EntProducto> detalleAjuste = bus.ObtieneMovimientosDetalleProductosSinDatosFactura(1, aj.Id, 0);//SE PONE tipoMovimientoId=1 PARA PONER PRECIO EN COSTO
+                    foreach (EntProducto ep in detalleAjuste)
                     {
-                        resumen[ep.ProductoId] = new EntReporteEntradasAjustes
+                        // Prefer a non-reingreso row; fall back to any row for this product.
+                        EntReporteEntradasAjustes targetFila = null;
+                        foreach (EntReporteEntradasAjustes f in resumen.Values)
                         {
-                            ProductoId = ep.ProductoId,
-                            Codigo = ep.Codigo,
-                            Descripcion = ep.Descripcion
-                        };
+                            if (f.ProductoId == ep.ProductoId && f.TipoId != 6) { targetFila = f; break; }
+                        }
+                        if (targetFila == null)
+                        {
+                            foreach (EntReporteEntradasAjustes f in resumen.Values)
+                            {
+                                if (f.ProductoId == ep.ProductoId) { targetFila = f; break; }
+                            }
+                        }
+                        if (targetFila == null)
+                        {
+                            // Product not seen in entries; add it to the ENTRADAS group.
+                            string newKey = "0:" + ep.ProductoId;
+                            targetFila = new EntReporteEntradasAjustes
+                            {
+                                ProductoId = ep.ProductoId,
+                                Codigo = ep.Codigo,
+                                Descripcion = ep.Descripcion,
+                                TipoId = 0,
+                                TipoNombre = "ENTRADAS"
+                            };
+                            resumen[newKey] = targetFila;
+                        }
+                        targetFila.CantidadSalidaAjuste += ep.Cantidad;
+                        targetFila.TotalCostoSalidaAjuste += ep.Cantidad * ep.PrecioCosto;
                     }
-                    EntReporteEntradasAjustes fila = resumen[ep.ProductoId];
-                    fila.CantidadSalidaAjuste += ep.Cantidad;
-                    fila.TotalCostoSalidaAjuste += ep.Cantidad * ep.PrecioCosto;
                 }
 
                 // Compute weighted average unit cost for each adjustment
@@ -817,7 +839,8 @@ namespace Aires.Pantallas
                 }
 
                 List<EntReporteEntradasAjustes> listaReporte = resumen.Values
-                    .OrderBy(r => r.Descripcion)
+                    .OrderBy(r => r.TipoNombre)
+                    .ThenBy(r => r.Descripcion)
                     .ToList();
 
                 ImpresionEntradasConAjustes vImprime = new ImpresionEntradasConAjustes(
