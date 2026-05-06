@@ -1598,6 +1598,7 @@ namespace Aires.Pantallas
                             decimal cantidadPaga = ConvierteTextoADecimal(vAgregaPago.CantidadPago);
                             //SE USA INSTEAD OF PAGO PARA NO ALTERAR DEBE
                             pf.PagoTotal = cantidadPaga;
+                            pf.IEPSManualPorcentaje = vAgregaPago.IEPSManualPorcentaje;
                             pf.FechaPago = vAgregaPago.FechaPago;
                         }
                         else

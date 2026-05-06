@@ -21,6 +21,10 @@ namespace AiresEntidades
         public decimal NotasCredito { get; set; }
         public decimal TotalSinRetenciones { get { return Total - IVARetencion - ISRRetencion; } }
         public decimal IEPS{ get; set; }
+        /// <summary>
+        /// Porcentaje manual de IEPS a aplicar en el complemento de pago (0 = cálculo automático).
+        /// </summary>
+        public decimal IEPSManualPorcentaje { get; set; } = 0;
         public decimal IVA { get; set; }
         public decimal IVARetencion { get; set; }
         public decimal ISRRetencion { get; set; }
@@ -134,6 +138,7 @@ namespace AiresEntidades
                 Pago = this.Pago,
                 NotasCredito = this.NotasCredito,
                 IEPS = this.IEPS,
+                IEPSManualPorcentaje = this.IEPSManualPorcentaje,
                 IVA = this.IVA,
                 IVARetencion = this.IVARetencion,
                 ISRRetencion = this.ISRRetencion,

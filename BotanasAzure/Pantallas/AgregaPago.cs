@@ -13,25 +13,52 @@ namespace Aires.Pantallas
 {
     public partial class AgregaPago : FormBase
     {
+        private System.Windows.Forms.NumericUpDown numIEPSPorcentaje;
+
         public AgregaPago(EntPedido PedidoFactura)
         {
             InitializeComponent();
-
+            InitIEPSControl();
             CargaDatosFactura(PedidoFactura);
         }
         public AgregaPago(EntPedido PedidoFactura, bool MuestraFechaFormaPago)
         {
             InitializeComponent();
-
+            InitIEPSControl();
             CargaDatosFactura(PedidoFactura);
             pnlFechaFormaPago.Visible = MuestraFechaFormaPago;
         }
 
+        /// <summary>
+        /// Porcentaje del IEPS de la factura a incluir en el complemento de pago.
+        /// 0 = automático (comportamiento previo). 100 = 100% del IEPS.
+        /// </summary>
+        public decimal IEPSManualPorcentaje { get { return numIEPSPorcentaje.Value / 100m; } }
         public string CantidadPago { get { return txtCantidadPaga.Text; } }
         public decimal CantidadPagoDecimal { get { return ConvierteTextoADecimal(txtCantidadPaga); } }
         public string FormaPago { get { return cmbFormaPago.Text.Remove(0, 4); } }
         public int FormaPagoId { get { return ConvierteTextoAInteger(cmbFormaPago.Text.Remove(2)); } }
         public DateTime FechaPago { get { return dtpFechaPago.Value; } }
+
+        private void InitIEPSControl()
+        {
+            var lblIEPS = new System.Windows.Forms.Label();
+            lblIEPS.AutoSize = true;
+            lblIEPS.Location = new System.Drawing.Point(200, 110);
+            lblIEPS.Text = "% IEPS (0=auto)";
+
+            numIEPSPorcentaje = new System.Windows.Forms.NumericUpDown();
+            numIEPSPorcentaje.Location = new System.Drawing.Point(315, 107);
+            numIEPSPorcentaje.Minimum = 0;
+            numIEPSPorcentaje.Maximum = 100;
+            numIEPSPorcentaje.DecimalPlaces = 0;
+            numIEPSPorcentaje.Value = 0;
+            numIEPSPorcentaje.Size = new System.Drawing.Size(63, 25);
+            numIEPSPorcentaje.TabIndex = 5;
+
+            this.Controls.Add(lblIEPS);
+            this.Controls.Add(numIEPSPorcentaje);
+        }
 
         void CargaDatosFactura(AiresEntidades.EntPedido PedidoFactura)
         {
