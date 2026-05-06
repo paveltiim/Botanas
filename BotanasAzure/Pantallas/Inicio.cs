@@ -36,6 +36,7 @@ namespace Aires.Pantallas
         public Inicio()
         {
             InitializeComponent();
+            SetupSidebar();
         }
         #region Metodos
 
@@ -63,238 +64,231 @@ namespace Aires.Pantallas
         #endregion
 
         int TipoUsuarioLoginId { get; set; }
+
+        /// <summary>
+        /// Registra todos los grupos e ítems del sidebar.
+        /// Llamar una sola vez en el constructor (antes del login).
+        /// </summary>
+        private void SetupSidebar()
+        {
+            // ── Grupo: Sistema ────────────────────────────────────────────
+            sidebarPanel.AddGroup("inicio", "Sistema", "🏠");
+            sidebarPanel.AddItem("menu", "Menú Principal", "inicio", toolStripButton1_Click, "🏠", "Abrir / volver al Menú Principal");
+
+            // ── Grupo: Ventas ────────────────────────────────────────────
+            sidebarPanel.AddGroup("ventas", "Ventas", "💰");
+            sidebarPanel.AddItem("puntoVenta",      "Punto Venta",          "ventas", tsbVentasNeue_ButtonClick,              "🛒");
+            sidebarPanel.AddItem("pvDetalle",        "P.V. Detalle",         "ventas", tsbVentasNeueDetalleNeue_Click,         "🛒");
+            sidebarPanel.AddItem("pvVarios",         "P.V. - Prod. Varios",  "ventas", tsbVentasNeueProductosVariosNeue_Click, "🛒");
+            sidebarPanel.AddItem("ventaMayorista",   "Ventas Mayoristas",    "ventas", tsbVentaMayorista_ButtonClick,          "💼");
+            sidebarPanel.AddItem("preVenta",         "Pre Venta",            "ventas", tsmPreVenta_Click,                     "📋");
+            sidebarPanel.AddItem("registrosVentas",  "Registro Ventas",      "ventas", tsbRegistrosVentas_Click_1,             "📊");
+
+            // ── Grupo: Almacén / Inventario ──────────────────────────────
+            sidebarPanel.AddGroup("almacen", "Almacén / Inventario", "📦");
+            sidebarPanel.AddItem("inventario",       "Inventario",           "almacen", toolStripButton8_Click_1,                   "📦");
+            sidebarPanel.AddItem("productos",        "Productos",            "almacen", toolStripButton2_Click,                     "🏷");
+            sidebarPanel.AddItem("entradasProductos","Entradas Productos",   "almacen", entradasProductosToolStripMenuItem_Click,    "⬇");
+            sidebarPanel.AddItem("entradasInsumos",  "Entradas Insumos",     "almacen", entradasInsumosToolStripMenuItem_Click,      "⬇");
+            sidebarPanel.AddItem("recepcionTraspasos","Recepción Traspasos", "almacen", entradasTraspasosToolStripMenuItem_Click,    "🔄");
+            sidebarPanel.AddItem("salidasProducto",  "Salidas Producto",     "almacen", tsbSalidas_Click,                          "⬆");
+            sidebarPanel.AddItem("salidasInsumos",   "Salidas Insumos",      "almacen", tsbSalidasInsumo_Click,                    "⬆");
+
+            // ── Grupo: Reportes ──────────────────────────────────────────
+            sidebarPanel.AddGroup("reportes", "Reportes", "📊");
+            sidebarPanel.AddItem("reportes",         "Reportes",             "reportes", toolStripButton9_Click,      "📈");
+            sidebarPanel.AddItem("reportesGlobales", "Reportes Globales",    "reportes", tsbReportesGlobales_Click,   "🌐");
+
+            // ── Grupo: CRM / Clientes ────────────────────────────────────
+            sidebarPanel.AddGroup("crm", "CRM / Clientes", "👥");
+            sidebarPanel.AddItem("clientes",              "Clientes",          "crm", tsbClientes_Click,                "👤");
+            sidebarPanel.AddItem("clientesCredito",       "Clientes Crédito",  "crm", toolStripButton7_Click,           "💳");
+            sidebarPanel.AddItem("clientesCreditoPruebas","CxC Pruebas",       "crm", tsbClientesCreditoPruebas_Click,  "🔧");
+            sidebarPanel.AddItem("trabajadores",          "Trabajadores",      "crm", tsbTrabajadores_Click,            "👷");
+            sidebarPanel.AddItem("empresas",              "Empresas",          "crm", toolStripButton11_Click,          "🏢");
+            sidebarPanel.AddItem("proveedores",           "Proveedores",       "crm", toolStripButton5_Click,           "🚚");
+
+            // ── Grupo: Módulos Móvil ─────────────────────────────────────
+            sidebarPanel.AddGroup("movil", "Módulos Móvil", "📱");
+            sidebarPanel.AddItem("traspasosMovil",   "Traspasos Móvil",  "movil", tsmTraspasosMovil_Click,                  "🔄");
+            sidebarPanel.AddItem("registrosMovil",   "Registros Móvil",  "movil", registrosMóvilToolStripMenuItem_Click,    "📱");
+            sidebarPanel.AddItem("inventarioMovil",  "Inventario Móvil", "movil", tsbInventarioMovil_Click,                 "📦");
+        }
+
+        /// <summary>
+        /// Controla qué ítems del sidebar son visibles según el rol del usuario.
+        /// </summary>
         void MuestraBotonesMenu(TiposUsuario TipoUsuario)
         {
-            tsbClientes.Visible = false;
-            tsbEntradasProductos.Enabled = false;
-            tsbEntradasProductos.Visible = false;
-            tsbSalidas.Visible = false;
-            tsbSalidas.Enabled = false;
-            entradasProductosToolStripMenuItem.Visible = false;
-            entradasInsumosToolStripMenuItem.Visible = false;
-            entradasTraspasosToolStripMenuItem.Visible = false;
-            tsbVentaMayorista.Visible = false;
-            tsbRegtistroVentas.Visible = false;
-            tsbClientesCredito.Visible = false;
-            tsbTrabajadores.Visible = false;
-            tsbReportes.Visible = false;
-            tsbClientesCreditoPruebas.Visible = false;
-            tsbRegtistroVentas.Visible=false;
-            tsmTraspasosMovil.Visible = false;
-            registrosMovilToolStripMenuItem.Visible = false;
-            tsbInventarioMovil.Visible = false;
-            tsbInventario.Visible = false;
-            tsbProductos.Visible = false;
+            // Ocultar todo primero
+            sidebarPanel.SetAllItemsHidden();
+
+            // El botón de Menú Principal siempre es visible
+            sidebarPanel.SetItemVisible("menu", true);
+
             switch (TipoUsuario)
             {
                 case TiposUsuario.ADMINISTRADORINSUMOS:
-                    tsbInventario.Visible = true;
-                    tsbProductos.Enabled = true;
-                    //tsbEntradasInsumos.Visible = true;
-                    tsbEntradas.Visible = true;
-                    tsbEntradas.Enabled = true;
-                    entradasInsumosToolStripMenuItem.Visible = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbSalidasInsumo.Visible = true;
-                    tsbSalidas.Enabled = true;
-                    tsbClientes.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
+                    sidebarPanel.SetItemVisible("inventario",        true);
+                    sidebarPanel.SetItemVisible("entradasInsumos",   true);
+                    sidebarPanel.SetItemVisible("entradasProductos", true);
+                    sidebarPanel.SetItemVisible("recepcionTraspasos",true);
+                    sidebarPanel.SetItemVisible("salidasInsumos",    true);
+                    sidebarPanel.SetItemVisible("clientes",          true);
+                    sidebarPanel.SetItemVisible("registrosVentas",   true);
                     break;
+
                 case TiposUsuario.ADMINISTRADORPRODUCCION:
-                    tsbInventario.Visible = true;
-                    tsbEntradasProductos.Visible = true;
-                    tsbEntradasProductos.Enabled = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
+                    sidebarPanel.SetItemVisible("inventario",        true);
+                    sidebarPanel.SetItemVisible("entradasProductos", true);
                     break;
 
                 case TiposUsuario.ADMINISTRADORALMACEN:
-                    tsbInventario.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbSalidas.Enabled = true;
-                    tsbVentaMayorista.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    //tsbRegtistroVentasMovil.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbTrabajadores.Visible = true;
-                    break;                
-                case TiposUsuario.PUNTOVENTA://DINA;
-                    tsbInventario.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbVentasNeue.Visible = true;
-                    tsbVentaMayorista.Visible = true;
-                    tsbVentasNeueDetalle.Visible = false;
-                    tsbVentasNeueDetalleNeue.Visible = true;
-                    tsbVentasNeueProductosVarios.Visible = false;
-                    tsbVentasNeueProductosVariosNeue.Visible = true;
-                    tsbEntradas.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
-                    tsbTrabajadores.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    registrosMovilToolStripMenuItem.Visible = true;
+                    sidebarPanel.SetItemVisible("inventario",        true);
+                    sidebarPanel.SetItemVisible("clientes",          true);
+                    sidebarPanel.SetItemVisible("salidasProducto",   true);
+                    sidebarPanel.SetItemVisible("ventaMayorista",    true);
+                    sidebarPanel.SetItemVisible("registrosVentas",   true);
+                    sidebarPanel.SetItemVisible("clientesCredito",   true);
+                    sidebarPanel.SetItemVisible("trabajadores",      true);
                     break;
-                case TiposUsuario.CUENTASPORCOBRAR://MIRIAM
-                    tsbClientesCredito.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    //tsbRegtistroVentasMovil.Visible = true;
-                    tsbVentasNeueProductosVarios.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
+
+                case TiposUsuario.PUNTOVENTA:
+                    sidebarPanel.SetItemVisible("inventario",         true);
+                    sidebarPanel.SetItemVisible("clientes",           true);
+                    sidebarPanel.SetItemVisible("puntoVenta",         true);
+                    sidebarPanel.SetItemVisible("pvDetalle",          true);
+                    sidebarPanel.SetItemVisible("pvVarios",           true);
+                    sidebarPanel.SetItemVisible("ventaMayorista",     true);
+                    sidebarPanel.SetItemVisible("recepcionTraspasos", true);
+                    sidebarPanel.SetItemVisible("registrosVentas",    true);
+                    sidebarPanel.SetItemVisible("clientesCredito",    true);
+                    sidebarPanel.SetItemVisible("trabajadores",       true);
+                    sidebarPanel.SetItemVisible("reportes",           true);
+                    sidebarPanel.SetItemVisible("reportesGlobales",   true);
+                    sidebarPanel.SetItemVisible("registrosMovil",     true);
                     break;
+
+                case TiposUsuario.CUENTASPORCOBRAR:
+                    sidebarPanel.SetItemVisible("clientesCredito",   true);
+                    sidebarPanel.SetItemVisible("reportes",          true);
+                    sidebarPanel.SetItemVisible("clientes",          true);
+                    sidebarPanel.SetItemVisible("registrosVentas",   true);
+                    sidebarPanel.SetItemVisible("pvVarios",          true);
+                    break;
+
                 case TiposUsuario.ADMINISTRADORPUNTOVENTA:
-                    tsbInventario.Visible = true;
-                    tsbEntradas.Visible = true;
-                    tsbEntradas.Enabled = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    //tsbRegtistroVentasMovil.Visible = true;
-                    tsbVentaMayorista.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
-                    tsbTrabajadores.Visible = true;
+                    sidebarPanel.SetItemVisible("inventario",         true);
+                    sidebarPanel.SetItemVisible("recepcionTraspasos", true);
+                    sidebarPanel.SetItemVisible("clientes",           true);
+                    sidebarPanel.SetItemVisible("registrosVentas",    true);
+                    sidebarPanel.SetItemVisible("ventaMayorista",     true);
+                    sidebarPanel.SetItemVisible("trabajadores",       true);
                     break;
-                case TiposUsuario.PUNTOVENTAMENUDEO://CAROLINA;
-                    tsbClientes.Visible = true;
-                    tsbVentasNeue.Visible = true;
-                    //tsbVentaMayorista.Visible = true;
-                    tsbEntradas.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
-                    tsbTrabajadores.Visible = true;
-                    tsbReportes.Visible = true;
+
+                case TiposUsuario.PUNTOVENTAMENUDEO:
+                    sidebarPanel.SetItemVisible("clientes",           true);
+                    sidebarPanel.SetItemVisible("puntoVenta",         true);
+                    sidebarPanel.SetItemVisible("recepcionTraspasos", true);
+                    sidebarPanel.SetItemVisible("registrosVentas",    true);
+                    sidebarPanel.SetItemVisible("clientesCredito",    true);
+                    sidebarPanel.SetItemVisible("trabajadores",       true);
+                    sidebarPanel.SetItemVisible("reportes",           true);
                     break;
 
                 case TiposUsuario.ADMINISTRADORINVENTARIOS:
-                    tsbInventario.Visible = true;
-                    tsbEntradasProductos.Visible = true;
-                    tsbEntradasProductos.Enabled = true;
-                    tsbEntradasInsumos.Visible = true;
-                    tsbEntradasInsumos.Enabled = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
-                    entradasInsumosToolStripMenuItem.Visible = true;
-                    tsbSalidasInsumo.Visible = true;
-                    tsbSalidas.Enabled = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
+                    sidebarPanel.SetItemVisible("inventario",         true);
+                    sidebarPanel.SetItemVisible("entradasProductos",  true);
+                    sidebarPanel.SetItemVisible("entradasInsumos",    true);
+                    sidebarPanel.SetItemVisible("recepcionTraspasos", true);
+                    sidebarPanel.SetItemVisible("salidasProducto",    true);
+                    sidebarPanel.SetItemVisible("salidasInsumos",     true);
                     break;
-                case TiposUsuario.CUENTASPORCOBRARVENTAS://KENIA
-                    tsbVentasNeue.Visible = true;
-                    tsbVentaMayorista.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
 
-                    tsbClientes.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbTrabajadores.Visible = true;
-                    
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
-                    registrosMovilToolStripMenuItem.Visible = true;    
+                case TiposUsuario.CUENTASPORCOBRARVENTAS:
+                    sidebarPanel.SetItemVisible("puntoVenta",         true);
+                    sidebarPanel.SetItemVisible("pvDetalle",          true);
+                    sidebarPanel.SetItemVisible("pvVarios",           true);
+                    sidebarPanel.SetItemVisible("ventaMayorista",     true);
+                    sidebarPanel.SetItemVisible("recepcionTraspasos", true);
+                    sidebarPanel.SetItemVisible("registrosVentas",    true);
+                    sidebarPanel.SetItemVisible("reportes",           true);
+                    sidebarPanel.SetItemVisible("reportesGlobales",   true);
+                    sidebarPanel.SetItemVisible("clientes",           true);
+                    sidebarPanel.SetItemVisible("clientesCredito",    true);
+                    sidebarPanel.SetItemVisible("trabajadores",       true);
+                    sidebarPanel.SetItemVisible("registrosMovil",     true);
                     break;
-                case TiposUsuario.GERENTEVENTAS://(PAUL ALVAREZ - )
-                    tsbProductos.Enabled = true;
-                    tsbProductos.Visible = false;
-                    tsbInventario.Visible = true;
-                    tsmPreVenta1.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    registrosMovilToolStripMenuItem.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbClientes.Enabled = true;
-                    tsbClientesCredito.Visible = true;
+
+                case TiposUsuario.GERENTEVENTAS:
+                    sidebarPanel.SetItemVisible("inventario",        true);
+                    sidebarPanel.SetItemVisible("preVenta",          true);
+                    sidebarPanel.SetItemVisible("registrosVentas",   true);
+                    sidebarPanel.SetItemVisible("registrosMovil",    true);
+                    sidebarPanel.SetItemVisible("reportes",          true);
+                    sidebarPanel.SetItemVisible("reportesGlobales",  true);
+                    sidebarPanel.SetItemVisible("clientes",          true);
+                    sidebarPanel.SetItemVisible("clientesCredito",   true);
                     break;
-                case TiposUsuario.SUPERVISOR://OSBALDO (MOCHIS) 
-                    tsbInventario.Visible = true;
-                    tsbProductos.Enabled = true;
-                    tsbClientes.Visible = true;
-                    tsbClientes.Enabled = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    tsmTraspasosMovil.Visible = true;
-                    registrosMovilToolStripMenuItem.Visible = true;
-                    tsbInventarioMovil.Visible = true;
+
+                case TiposUsuario.SUPERVISOR:
+                    sidebarPanel.SetItemVisible("inventario",        true);
+                    sidebarPanel.SetItemVisible("clientes",          true);
+                    sidebarPanel.SetItemVisible("reportes",          true);
+                    sidebarPanel.SetItemVisible("reportesGlobales",  true);
+                    sidebarPanel.SetItemVisible("traspasosMovil",    true);
+                    sidebarPanel.SetItemVisible("registrosMovil",    true);
+                    sidebarPanel.SetItemVisible("inventarioMovil",   true);
                     break;
-                case TiposUsuario.GERENTEALMACEN://GERENTE (CULIACAN) 
-                    tsbProductos.Visible = false;
-                    tsbInventario.Visible = true;
-                    tsbReportes.Visible = true;
+
+                case TiposUsuario.GERENTEALMACEN:
+                    sidebarPanel.SetItemVisible("inventario",        true);
+                    sidebarPanel.SetItemVisible("reportes",          true);
                     break;
+
                 case TiposUsuario.GERENTEPRODUCCION:
-                    tsbInventario.Visible = true;
-                    tsbEntradasProductos.Visible = true;
-                    tsbEntradasProductos.Enabled = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
-                    tsbReportes.Visible = true;
+                    sidebarPanel.SetItemVisible("inventario",        true);
+                    sidebarPanel.SetItemVisible("entradasProductos", true);
+                    sidebarPanel.SetItemVisible("reportes",          true);
                     break;
-                case TiposUsuario.CYCVISUALIZA://(CARLOS ALONSO-CUL)
-                    //tsbInventario.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    //tsbProductos.Enabled = true;
-                    tsbClientes.Visible = true;
-                    tsbClientes.Enabled = true;
-                    tsbClientesCredito.Visible = true;
-                    break;
-                case TiposUsuario.PREVENTA://(PREVENTA-HILLO)
-                    tsbInventario.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsmPreVenta.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbClientes.Enabled = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    break;
-                case TiposUsuario.MASTER:
-                    tsbInventario.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbClientesCreditoPruebas.Visible = false;
-                    tsbTrabajadores.Visible = true;
-                    tsbVentasNeue.Visible = true;
-                    tsbVentaMayorista.Visible = true;
-                    tsbVentasNeueDetalle.Visible = false;
-                    tsbVentasNeueDetalleNeue.Visible = true;
-                    tsbVentasNeueProductosVarios.Visible = false;
-                    tsbVentasNeueProductosVariosNeue.Visible = true;
-                    tsbEntradas.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    entradasInsumosToolStripMenuItem.Visible = true;
-                    tsbSalidas.Enabled = true;
-                    tsbSalidasInsumo.Visible = true;
-                    tsbProductos.Enabled = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    tsmTraspasosMovil.Visible = true;
-                    registrosMovilToolStripMenuItem.Visible = true;
-                    tsbInventarioMovil.Visible = true;
 
+                case TiposUsuario.CYCVISUALIZA:
+                    sidebarPanel.SetItemVisible("reportes",          true);
+                    sidebarPanel.SetItemVisible("reportesGlobales",  true);
+                    sidebarPanel.SetItemVisible("clientes",          true);
+                    sidebarPanel.SetItemVisible("clientesCredito",   true);
+                    break;
+
+                case TiposUsuario.PREVENTA:
+                    sidebarPanel.SetItemVisible("inventario",         true);
+                    sidebarPanel.SetItemVisible("registrosVentas",    true);
+                    sidebarPanel.SetItemVisible("preVenta",           true);
+                    sidebarPanel.SetItemVisible("reportes",           true);
+                    sidebarPanel.SetItemVisible("clientes",           true);
+                    sidebarPanel.SetItemVisible("recepcionTraspasos", true);
+                    break;
+
+                case TiposUsuario.MASTER:
+                    sidebarPanel.SetItemVisible("inventario",         true);
+                    sidebarPanel.SetItemVisible("clientes",           true);
+                    sidebarPanel.SetItemVisible("clientesCredito",    true);
+                    sidebarPanel.SetItemVisible("trabajadores",       true);
+                    sidebarPanel.SetItemVisible("puntoVenta",         true);
+                    sidebarPanel.SetItemVisible("pvDetalle",          true);
+                    sidebarPanel.SetItemVisible("pvVarios",           true);
+                    sidebarPanel.SetItemVisible("ventaMayorista",     true);
+                    sidebarPanel.SetItemVisible("preVenta",           true);
+                    sidebarPanel.SetItemVisible("recepcionTraspasos", true);
+                    sidebarPanel.SetItemVisible("entradasProductos",  true);
+                    sidebarPanel.SetItemVisible("entradasInsumos",    true);
+                    sidebarPanel.SetItemVisible("salidasProducto",    true);
+                    sidebarPanel.SetItemVisible("salidasInsumos",     true);
+                    sidebarPanel.SetItemVisible("registrosVentas",    true);
+                    sidebarPanel.SetItemVisible("reportes",           true);
+                    sidebarPanel.SetItemVisible("reportesGlobales",   true);
+                    sidebarPanel.SetItemVisible("traspasosMovil",     true);
+                    sidebarPanel.SetItemVisible("registrosMovil",     true);
+                    sidebarPanel.SetItemVisible("inventarioMovil",    true);
                     break;
             }
         }
