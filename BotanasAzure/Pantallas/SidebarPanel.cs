@@ -579,7 +579,13 @@ namespace Aires.Pantallas
                 var group = _groups[gKey];
                 bool anyVisible = false;
                 foreach (var k in group.ItemKeys)
-                    if (_items.ContainsKey(k) && _items[k].Button.Visible) { anyVisible = true; break; }
+                {
+                    if (_items.ContainsKey(k) && _items[k].Button.Visible)
+                    {
+                        anyVisible = true;
+                        break;
+                    }
+                }
                 group.HeaderButton.Visible = anyVisible;
                 group.ContentPanel.Visible = anyVisible;
                 RefreshGroupContentHeight(gKey);

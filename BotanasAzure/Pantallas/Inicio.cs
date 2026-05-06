@@ -73,7 +73,7 @@ namespace Aires.Pantallas
         {
             // ── Grupo: Sistema ────────────────────────────────────────────
             sidebarPanel.AddGroup("inicio", "Sistema", "🏠");
-            sidebarPanel.AddItem("menu", "Menú Principal", "inicio", toolStripButton1_Click, "🏠", "Abrir panel de menú");
+            sidebarPanel.AddItem("menu", "Menú Principal", "inicio", toolStripButton1_Click, "🏠", "Abrir / volver al Menú Principal");
 
             // ── Grupo: Ventas ────────────────────────────────────────────
             sidebarPanel.AddGroup("ventas", "Ventas", "💰");
