@@ -411,5 +411,10 @@ namespace Aires.Pantallas
             catch (Exception ex) { MuestraExcepcion(ex); }
             finally { base.SetDefaultCursor(); }
         }
+
+        private void cmbTrabajadoresInventarioMovil_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

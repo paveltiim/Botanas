@@ -13,5 +13,6 @@ namespace AiresEntidades
         public string Clave { get; set; }
         public string Detalle { get; set; }
         public string Usuario { get; set; }
+        public int TipoId { get; set; }
     }
 }

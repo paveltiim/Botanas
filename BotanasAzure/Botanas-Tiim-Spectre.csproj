@@ -238,6 +238,12 @@
     <Compile Include="Pantallas\ImpresionEntradas.designer.cs">
       <DependentUpon>ImpresionEntradas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\ImpresionEntradasConAjustes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\ImpresionEntradasConAjustes.designer.cs">
+      <DependentUpon>ImpresionEntradasConAjustes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pantallas\ImpresionCorteDetalle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -567,6 +573,9 @@
     <EmbeddedResource Include="Pantallas\ImpresionEntradas.resx">
       <DependentUpon>ImpresionEntradas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\ImpresionEntradasConAjustes.resx">
+      <DependentUpon>ImpresionEntradasConAjustes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\ImpresionCorteDetalle.resx">
       <DependentUpon>ImpresionCorteDetalle.cs</DependentUpon>
     </EmbeddedResource>
@@ -705,6 +714,7 @@
     <EmbeddedResource Include="Reportes\rptDeudaProveedores.rdlc" />
     <EmbeddedResource Include="Reportes\rptEntradasMes.rdlc" />
     <EmbeddedResource Include="Reportes\rptEntradasProductosVenta.rdlc" />
+    <EmbeddedResource Include="Reportes\rptEntradasConAjustes.rdlc" />
     <EmbeddedResource Include="Reportes\rptPagosClientesCredito.rdlc" />
     <EmbeddedResource Include="Reportes\rptPagosCliente.rdlc" />
     <EmbeddedResource Include="Reportes\rptPagosClientesPorPagoAlmacen.rdlc" />
