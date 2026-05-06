@@ -36,6 +36,7 @@ namespace Aires.Pantallas
         public Inicio()
         {
             InitializeComponent();
+            menuStrip1.Renderer = new TopNavRenderer();
         }
         #region Metodos
 
@@ -65,236 +66,200 @@ namespace Aires.Pantallas
         int TipoUsuarioLoginId { get; set; }
         void MuestraBotonesMenu(TiposUsuario TipoUsuario)
         {
-            tsbClientes.Visible = false;
-            tsbEntradasProductos.Enabled = false;
-            tsbEntradasProductos.Visible = false;
-            tsbSalidas.Visible = false;
-            tsbSalidas.Enabled = false;
-            entradasProductosToolStripMenuItem.Visible = false;
-            entradasInsumosToolStripMenuItem.Visible = false;
-            entradasTraspasosToolStripMenuItem.Visible = false;
-            tsbVentaMayorista.Visible = false;
-            tsbRegtistroVentas.Visible = false;
-            tsbClientesCredito.Visible = false;
-            tsbTrabajadores.Visible = false;
-            tsbReportes.Visible = false;
-            tsbClientesCreditoPruebas.Visible = false;
-            tsbRegtistroVentas.Visible=false;
-            tsmTraspasosMovil.Visible = false;
-            registrosMovilToolStripMenuItem.Visible = false;
-            tsbInventarioMovil.Visible = false;
-            tsbInventario.Visible = false;
-            tsbProductos.Visible = false;
+            // Hide all sub-items initially
+            mnuClientesClientes.Visible = false;
+            mnuAlmacenEntradasProductos.Enabled = false;
+            mnuAlmacenEntradasProductos.Visible = false;
+            mnuAlmacenSalidasProducto.Visible = false;
+            mnuAlmacenSalidasProducto.Enabled = false;
+            mnuAlmacenEntradasInsumos.Visible = false;
+            mnuAlmacenEntradasInsumos.Enabled = false;
+            mnuAlmacenEntradasTraspasos.Visible = false;
+            mnuVentasMayoristas.Visible = false;
+            mnuVentasRegistros.Visible = false;
+            mnuClientesCredito.Visible = false;
+            mnuClientesTrabajadores.Visible = false;
+            mnuReportesGenerales.Visible = false;
+            mnuReportesGlobales.Visible = false;
+            mnuMovilTraspasos.Visible = false;
+            mnuMovilRegistros.Visible = false;
+            mnuMovilInventario.Visible = false;
+            mnuAlmacenInventario.Visible = false;
+            mnuAlmacenProductos.Visible = false;
+            mnuAlmacenProductos.Enabled = false;
+            mnuAlmacenSalidasInsumos.Visible = false;
+            mnuVentasPuntoVenta.Visible = false;
+            mnuVentasPVDetalle.Visible = false;
+            mnuVentasPVVarios.Visible = false;
+            mnuVentasPreVenta.Visible = false;
+            mnuClientesProveedores.Visible = false;
+            mnuClientesEmpresas.Visible = false;
+
             switch (TipoUsuario)
             {
                 case TiposUsuario.ADMINISTRADORINSUMOS:
-                    tsbInventario.Visible = true;
-                    tsbProductos.Enabled = true;
-                    //tsbEntradasInsumos.Visible = true;
-                    tsbEntradas.Visible = true;
-                    tsbEntradas.Enabled = true;
-                    entradasInsumosToolStripMenuItem.Visible = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbSalidasInsumo.Visible = true;
-                    tsbSalidas.Enabled = true;
-                    tsbClientes.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuAlmacenProductos.Enabled = true;
+                    mnuAlmacenEntradasInsumos.Visible = true;
+                    mnuAlmacenEntradasProductos.Visible = true;
+                    mnuAlmacenEntradasProductos.Enabled = true;
+                    mnuAlmacenEntradasTraspasos.Visible = true;
+                    mnuAlmacenSalidasInsumos.Visible = true;
+                    mnuAlmacenSalidasProducto.Enabled = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuVentasRegistros.Visible = true;
                     break;
                 case TiposUsuario.ADMINISTRADORPRODUCCION:
-                    tsbInventario.Visible = true;
-                    tsbEntradasProductos.Visible = true;
-                    tsbEntradasProductos.Enabled = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuAlmacenEntradasProductos.Visible = true;
+                    mnuAlmacenEntradasProductos.Enabled = true;
                     break;
 
                 case TiposUsuario.ADMINISTRADORALMACEN:
-                    tsbInventario.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbSalidas.Enabled = true;
-                    tsbVentaMayorista.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    //tsbRegtistroVentasMovil.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbTrabajadores.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuAlmacenSalidasProducto.Enabled = true;
+                    mnuVentasMayoristas.Visible = true;
+                    mnuVentasRegistros.Visible = true;
+                    mnuClientesCredito.Visible = true;
+                    mnuClientesTrabajadores.Visible = true;
                     break;                
                 case TiposUsuario.PUNTOVENTA://DINA;
-                    tsbInventario.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbVentasNeue.Visible = true;
-                    tsbVentaMayorista.Visible = true;
-                    tsbVentasNeueDetalle.Visible = false;
-                    tsbVentasNeueDetalleNeue.Visible = true;
-                    tsbVentasNeueProductosVarios.Visible = false;
-                    tsbVentasNeueProductosVariosNeue.Visible = true;
-                    tsbEntradas.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
-                    tsbTrabajadores.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    registrosMovilToolStripMenuItem.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuVentasPuntoVenta.Visible = true;
+                    mnuVentasMayoristas.Visible = true;
+                    mnuVentasPVDetalle.Visible = true;
+                    mnuVentasPVVarios.Visible = true;
+                    mnuAlmacenEntradasTraspasos.Visible = true;
+                    mnuVentasRegistros.Visible = true;
+                    mnuClientesCredito.Visible = true;
+                    mnuClientesTrabajadores.Visible = true;
+                    mnuReportesGenerales.Visible = true;
+                    mnuReportesGlobales.Visible = true;
+                    mnuMovilRegistros.Visible = true;
                     break;
                 case TiposUsuario.CUENTASPORCOBRAR://MIRIAM
-                    tsbClientesCredito.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    //tsbRegtistroVentasMovil.Visible = true;
-                    tsbVentasNeueProductosVarios.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
+                    mnuClientesCredito.Visible = true;
+                    mnuReportesGenerales.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuVentasRegistros.Visible = true;
+                    mnuVentasPVVarios.Visible = true;
                     break;
                 case TiposUsuario.ADMINISTRADORPUNTOVENTA:
-                    tsbInventario.Visible = true;
-                    tsbEntradas.Visible = true;
-                    tsbEntradas.Enabled = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    //tsbRegtistroVentasMovil.Visible = true;
-                    tsbVentaMayorista.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
-                    tsbTrabajadores.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuAlmacenEntradasTraspasos.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuVentasRegistros.Visible = true;
+                    mnuVentasMayoristas.Visible = true;
+                    mnuClientesTrabajadores.Visible = true;
                     break;
                 case TiposUsuario.PUNTOVENTAMENUDEO://CAROLINA;
-                    tsbClientes.Visible = true;
-                    tsbVentasNeue.Visible = true;
-                    //tsbVentaMayorista.Visible = true;
-                    tsbEntradas.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
-                    tsbTrabajadores.Visible = true;
-                    tsbReportes.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuVentasPuntoVenta.Visible = true;
+                    mnuAlmacenEntradasTraspasos.Visible = true;
+                    mnuVentasRegistros.Visible = true;
+                    mnuClientesCredito.Visible = true;
+                    mnuClientesTrabajadores.Visible = true;
+                    mnuReportesGenerales.Visible = true;
                     break;
 
                 case TiposUsuario.ADMINISTRADORINVENTARIOS:
-                    tsbInventario.Visible = true;
-                    tsbEntradasProductos.Visible = true;
-                    tsbEntradasProductos.Enabled = true;
-                    tsbEntradasInsumos.Visible = true;
-                    tsbEntradasInsumos.Enabled = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
-                    entradasInsumosToolStripMenuItem.Visible = true;
-                    tsbSalidasInsumo.Visible = true;
-                    tsbSalidas.Enabled = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuAlmacenEntradasProductos.Visible = true;
+                    mnuAlmacenEntradasProductos.Enabled = true;
+                    mnuAlmacenEntradasInsumos.Visible = true;
+                    mnuAlmacenEntradasInsumos.Enabled = true;
+                    mnuAlmacenSalidasInsumos.Visible = true;
+                    mnuAlmacenSalidasProducto.Enabled = true;
+                    mnuAlmacenEntradasTraspasos.Visible = true;
                     break;
                 case TiposUsuario.CUENTASPORCOBRARVENTAS://KENIA
-                    tsbVentasNeue.Visible = true;
-                    tsbVentaMayorista.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-
-                    tsbClientes.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbTrabajadores.Visible = true;
-                    
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    tsbProductos.Visible = false;
-                    tsbSalidas.Visible = false;
-                    registrosMovilToolStripMenuItem.Visible = true;    
+                    mnuVentasPuntoVenta.Visible = true;
+                    mnuVentasMayoristas.Visible = true;
+                    mnuAlmacenEntradasTraspasos.Visible = true;
+                    mnuVentasRegistros.Visible = true;
+                    mnuReportesGenerales.Visible = true;
+                    mnuReportesGlobales.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuClientesCredito.Visible = true;
+                    mnuClientesTrabajadores.Visible = true;
+                    mnuMovilRegistros.Visible = true;
                     break;
                 case TiposUsuario.GERENTEVENTAS://(PAUL ALVAREZ - )
-                    tsbProductos.Enabled = true;
-                    tsbProductos.Visible = false;
-                    tsbInventario.Visible = true;
-                    tsmPreVenta1.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    registrosMovilToolStripMenuItem.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbClientes.Enabled = true;
-                    tsbClientesCredito.Visible = true;
+                    mnuAlmacenProductos.Enabled = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuVentasPreVenta.Visible = true;
+                    mnuVentasRegistros.Visible = true;
+                    mnuMovilRegistros.Visible = true;
+                    mnuReportesGenerales.Visible = true;
+                    mnuReportesGlobales.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuClientesClientes.Enabled = true;
+                    mnuClientesCredito.Visible = true;
                     break;
                 case TiposUsuario.SUPERVISOR://OSBALDO (MOCHIS) 
-                    tsbInventario.Visible = true;
-                    tsbProductos.Enabled = true;
-                    tsbClientes.Visible = true;
-                    tsbClientes.Enabled = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    tsmTraspasosMovil.Visible = true;
-                    registrosMovilToolStripMenuItem.Visible = true;
-                    tsbInventarioMovil.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuAlmacenProductos.Enabled = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuClientesClientes.Enabled = true;
+                    mnuReportesGenerales.Visible = true;
+                    mnuReportesGlobales.Visible = true;
+                    mnuMovilTraspasos.Visible = true;
+                    mnuMovilRegistros.Visible = true;
+                    mnuMovilInventario.Visible = true;
                     break;
                 case TiposUsuario.GERENTEALMACEN://GERENTE (CULIACAN) 
-                    tsbProductos.Visible = false;
-                    tsbInventario.Visible = true;
-                    tsbReportes.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuReportesGenerales.Visible = true;
                     break;
                 case TiposUsuario.GERENTEPRODUCCION:
-                    tsbInventario.Visible = true;
-                    tsbEntradasProductos.Visible = true;
-                    tsbEntradasProductos.Enabled = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
-                    tsbReportes.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuAlmacenEntradasProductos.Visible = true;
+                    mnuAlmacenEntradasProductos.Enabled = true;
+                    mnuReportesGenerales.Visible = true;
                     break;
                 case TiposUsuario.CYCVISUALIZA://(CARLOS ALONSO-CUL)
-                    //tsbInventario.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    //tsbProductos.Enabled = true;
-                    tsbClientes.Visible = true;
-                    tsbClientes.Enabled = true;
-                    tsbClientesCredito.Visible = true;
+                    mnuReportesGenerales.Visible = true;
+                    mnuReportesGlobales.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuClientesClientes.Enabled = true;
+                    mnuClientesCredito.Visible = true;
                     break;
                 case TiposUsuario.PREVENTA://(PREVENTA-HILLO)
-                    tsbInventario.Visible = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsmPreVenta.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbClientes.Enabled = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
+                    mnuAlmacenInventario.Visible = true;
+                    mnuVentasRegistros.Visible = true;
+                    mnuVentasPreVenta.Visible = true;
+                    mnuReportesGenerales.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuClientesClientes.Enabled = true;
+                    mnuAlmacenEntradasTraspasos.Visible = true;
                     break;
                 case TiposUsuario.MASTER:
-                    tsbInventario.Visible = true;
-                    tsbClientes.Visible = true;
-                    tsbClientesCredito.Visible = true;
-                    tsbClientesCreditoPruebas.Visible = false;
-                    tsbTrabajadores.Visible = true;
-                    tsbVentasNeue.Visible = true;
-                    tsbVentaMayorista.Visible = true;
-                    tsbVentasNeueDetalle.Visible = false;
-                    tsbVentasNeueDetalleNeue.Visible = true;
-                    tsbVentasNeueProductosVarios.Visible = false;
-                    tsbVentasNeueProductosVariosNeue.Visible = true;
-                    tsbEntradas.Visible = true;
-                    entradasTraspasosToolStripMenuItem.Visible = true;
-                    entradasProductosToolStripMenuItem.Visible = true;
-                    tsbEntradasInsumos.Visible = false;
-                    tsbEntradasProductos.Visible = false;
-                    entradasInsumosToolStripMenuItem.Visible = true;
-                    tsbSalidas.Enabled = true;
-                    tsbSalidasInsumo.Visible = true;
-                    tsbProductos.Enabled = true;
-                    tsbRegtistroVentas.Visible = true;
-                    tsbReportes.Visible = true;
-                    tsbReportesGlobales.Visible = true;
-                    tsmTraspasosMovil.Visible = true;
-                    registrosMovilToolStripMenuItem.Visible = true;
-                    tsbInventarioMovil.Visible = true;
-
+                    mnuAlmacenInventario.Visible = true;
+                    mnuClientesClientes.Visible = true;
+                    mnuClientesCredito.Visible = true;
+                    mnuClientesTrabajadores.Visible = true;
+                    mnuVentasPuntoVenta.Visible = true;
+                    mnuVentasMayoristas.Visible = true;
+                    mnuVentasPVDetalle.Visible = true;
+                    mnuVentasPVVarios.Visible = true;
+                    mnuAlmacenEntradasTraspasos.Visible = true;
+                    mnuAlmacenEntradasProductos.Visible = true;
+                    mnuAlmacenEntradasProductos.Enabled = true;
+                    mnuAlmacenEntradasInsumos.Visible = true;
+                    mnuAlmacenEntradasInsumos.Enabled = true;
+                    mnuAlmacenSalidasProducto.Enabled = true;
+                    mnuAlmacenSalidasInsumos.Visible = true;
+                    mnuAlmacenProductos.Enabled = true;
+                    mnuVentasRegistros.Visible = true;
+                    mnuReportesGenerales.Visible = true;
+                    mnuReportesGlobales.Visible = true;
+                    mnuMovilTraspasos.Visible = true;
+                    mnuMovilRegistros.Visible = true;
+                    mnuMovilInventario.Visible = true;
+                    mnuClientesProveedores.Visible = true;
+                    mnuClientesEmpresas.Visible = true;
                     break;
             }
         }
@@ -1180,5 +1145,99 @@ namespace Aires.Pantallas
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+    }
+
+    /// <summary>
+    /// Custom renderer for the top navigation bar with a modern dark professional look.
+    /// </summary>
+    internal class TopNavRenderer : ToolStripProfessionalRenderer
+    {
+        private static readonly Color NavBackground   = Color.FromArgb(33, 37, 41);
+        private static readonly Color NavHover        = Color.FromArgb(13, 110, 253);
+        private static readonly Color NavPressed      = Color.FromArgb(10,  88, 202);
+        private static readonly Color DropdownBack    = Color.FromArgb(248, 249, 250);
+        private static readonly Color DropdownHover   = Color.FromArgb(209, 227, 253);
+        private static readonly Color DropdownBorder  = Color.FromArgb(200, 200, 200);
+        private static readonly Color TextLight       = Color.White;
+        private static readonly Color TextDark        = Color.FromArgb(33, 37, 41);
+        private static readonly Color SeparatorColor  = Color.FromArgb(200, 200, 200);
+
+        public TopNavRenderer() : base(new TopNavColorTable()) { }
+
+        protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
+        {
+            using (var brush = new SolidBrush(e.ToolStrip.IsDropDown ? DropdownBack : NavBackground))
+                e.Graphics.FillRectangle(brush, e.AffectedBounds);
+        }
+
+        protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+        {
+            var item = e.Item;
+            var bounds = new Rectangle(0, 0, item.Width, item.Height);
+
+            if (item.IsOnDropDown)
+            {
+                Color bg = (item.Selected || item.Pressed) ? DropdownHover : DropdownBack;
+                using (var brush = new SolidBrush(bg))
+                    e.Graphics.FillRectangle(brush, bounds);
+            }
+            else
+            {
+                Color bg = item.Pressed ? NavPressed
+                         : item.Selected ? NavHover
+                         : NavBackground;
+                using (var brush = new SolidBrush(bg))
+                    e.Graphics.FillRectangle(brush, bounds);
+            }
+        }
+
+        protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
+        {
+            e.TextColor = e.Item.IsOnDropDown ? TextDark : TextLight;
+            base.OnRenderItemText(e);
+        }
+
+        protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+        {
+            e.ArrowColor = e.Item.IsOnDropDown ? TextDark : TextLight;
+            base.OnRenderArrow(e);
+        }
+
+        protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
+        {
+            int mid = e.Item.Height / 2;
+            using (var pen = new Pen(SeparatorColor))
+                e.Graphics.DrawLine(pen, 28, mid, e.Item.Width - 4, mid);
+        }
+
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
+        {
+            if (e.ToolStrip.IsDropDown)
+            {
+                using (var pen = new Pen(DropdownBorder))
+                    e.Graphics.DrawRectangle(pen, 0, 0, e.ToolStrip.Width - 1, e.ToolStrip.Height - 1);
+            }
+        }
+
+        protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
+        {
+            if (e.ToolStrip.IsDropDown)
+            {
+                using (var brush = new SolidBrush(Color.FromArgb(235, 237, 240)))
+                    e.Graphics.FillRectangle(brush, e.AffectedBounds);
+            }
+        }
+    }
+
+    internal class TopNavColorTable : ProfessionalColorTable
+    {
+        public override Color MenuItemSelected            => Color.FromArgb(13, 110, 253);
+        public override Color MenuItemSelectedGradientBegin => Color.FromArgb(13, 110, 253);
+        public override Color MenuItemSelectedGradientEnd   => Color.FromArgb(13, 110, 253);
+        public override Color MenuItemPressedGradientBegin  => Color.FromArgb(10,  88, 202);
+        public override Color MenuItemPressedGradientEnd    => Color.FromArgb(10,  88, 202);
+        public override Color MenuItemBorder              => Color.FromArgb(13, 110, 253);
+        public override Color MenuBorder                  => Color.FromArgb(200, 200, 200);
+        public override Color ToolStripDropDownBackground => Color.FromArgb(248, 249, 250);
     }
 }
