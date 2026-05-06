@@ -440,7 +440,10 @@ namespace AiresUtilerias
                     porcentaje = Math.Round(totalCP / totalFac, 4);
                     //cp.SubTotal = fac.SubTotal * porcentaje;
                     //cp.IVA = f.IVA * porcentaje;
-                    cantidadiepsF = Math.Round(f.IEPS * porcentaje, 2);
+                    if (f.IEPSManualPorcentaje > 0)
+                        cantidadiepsF = Math.Round(f.IEPS * f.IEPSManualPorcentaje, 2);
+                    else
+                        cantidadiepsF = Math.Round(f.IEPS * porcentaje, 2);
                     cantidadiepsTotal += cantidadiepsF;
                     //cp.IVARetenciones = fac.IVARetenciones * porcentaje;
                     //cp.ISRRetenciones = fac.ISRRetenciones * porcentaje;
@@ -619,7 +622,10 @@ namespace AiresUtilerias
                     porcentaje = Math.Round(totalCP / totalFac, 4);
                     //cp.SubTotal = fac.SubTotal * porcentaje;
                     //cp.IVA = f.IVA * porcentaje;
-                    cantidadiepsF = Math.Round(f.IEPS * porcentaje, 2);
+                    if (f.IEPSManualPorcentaje > 0)
+                        cantidadiepsF = Math.Round(f.IEPS * f.IEPSManualPorcentaje, 2);
+                    else
+                        cantidadiepsF = Math.Round(f.IEPS * porcentaje, 2);
                     cantidadiepsTotal += cantidadiepsF;
                     //cp.IVARetenciones = fac.IVARetenciones * porcentaje;
                     //cp.ISRRetenciones = fac.ISRRetenciones * porcentaje;
