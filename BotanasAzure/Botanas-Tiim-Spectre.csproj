@@ -364,6 +364,7 @@
     <Compile Include="Pantallas\Inicio.designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\SidebarPanel.cs" />
     <Compile Include="Pantallas\Inventarios.cs">
       <SubType>Form</SubType>
     </Compile>
