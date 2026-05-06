@@ -75,6 +75,7 @@
     <Compile Include="EntPago.cs" />
     <Compile Include="EntPedido.cs" />
     <Compile Include="EntProducto.cs" />
+    <Compile Include="EntReporteEntradasAjustes.cs" />
     <Compile Include="EntProveedor.cs" />
     <Compile Include="EntTrabajador.cs" />
     <Compile Include="EntUsuario.cs" />

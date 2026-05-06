@@ -731,33 +731,126 @@ namespace Aires.Pantallas
             {
                 base.SetWaitCursor();
 
-                List<EntProducto> listaProductos = new List<EntProducto>();
-                List<EntCatalogoGenerico> listaEntradasSeleccionadas = ObtieneListaGenericaFromGV(gvIngresos);
-                //if (listaEntradasSeleccionadas.Count <= 0)
-                //    MandaExcepcion("SELECCIONE AL MENOS UNA ENTRADA");
+                // Determine date range and almacen used to load the current entries grid
+                EntCatalogoGenerico almacen = ObtieneCatalogoGenericoFromCmb(cmbAlmacenes);
+                DateTime fechaDesde;
+                DateTime fechaHasta;
+                if (rdoEntradasPorMes.Checked)
+                {
+                    fechaDesde = FechaDesdeFromComboBoxs(cmbMesesEntradas, cmbAñoEntradas);
+                    fechaHasta = FechaHastaFromComboBoxs(cmbMesesEntradas, cmbAñoEntradas).AddDays(1);
+                }
+                else
+                {
+                    fechaDesde = dtpFechaEntradasFiltro.Value.Date;
+                    fechaHasta = dtpFechaEntradasFiltro.Value.Date.AddDays(1);
+                }
 
-                string dia = "";
-                CultureInfo culturaEspanol = new CultureInfo("es-ES");
-                if (rdoPorDiaEntradas.Checked)
-                    dia = "\n" + culturaEspanol.DateTimeFormat.GetDayName(dtpFechaEntradasFiltro.Value.DayOfWeek) +" "+ dtpFechaEntradasFiltro.Value.Day.ToString().PadLeft(2,'0');
+                // Collect entry product details from the selected entries,
+                // keeping the TipoId from each movement header so we can group later.
+                // Key: "TipoId:ProductoId" (string composite to avoid ValueTuple dependency).
+                Dictionary<string, EntReporteEntradasAjustes> resumen =
+                    new Dictionary<string, EntReporteEntradasAjustes>();
+
+                BusProductos bus = new BusProductos();
+                List<EntCatalogoGenerico> listaEntradasSeleccionadas = ObtieneListaGenericaFromGV(gvIngresos);
                 foreach (EntCatalogoGenerico en in listaEntradasSeleccionadas)
                 {
-                    List<EntProducto> listaProductosIngreso = new BusProductos().ObtieneMovimientosDetalleProductosSinDatosFactura(1, en.Id, en.IdSecundario);//MOVIMIENTOID | INGRESOID
-                    if (en.IdSecundario == 0)
+                    int tipoId = en.TipoId;
+                    string tipoNombre = tipoId == 6 ? "REINGRESO CANCELACION" : "ENTRADAS";
+                    List<EntProducto> detalles = bus.ObtieneMovimientosDetalleProductosSinDatosFactura(1, en.Id, en.IdSecundario);
+                    foreach (EntProducto ep in detalles)
                     {
-                        foreach (EntProducto c in listaProductosIngreso)
+                        string key = tipoId + ":" + ep.ProductoId;
+                        if (!resumen.ContainsKey(key))
                         {
-                            //c.Modelo = en.Descripcion;
-                            c.Fecha = en.Fecha;
-                            c.FechaCorta = en.Fecha.ToString("yyyy - MMM").ToUpper() + dia;
+                            resumen[key] = new EntReporteEntradasAjustes
+                            {
+                                ProductoId = ep.ProductoId,
+                                Codigo = ep.Codigo,
+                                Descripcion = ep.Descripcion,
+                                TipoId = tipoId,
+                                TipoNombre = tipoNombre
+                            };
                         }
+                        EntReporteEntradasAjustes fila = resumen[key];
+                        fila.CantidadEntrada += ep.Cantidad;
+                        fila.TotalCostoEntrada += ep.Cantidad * ep.PrecioCosto;
                     }
-
-                    listaProductos.AddRange(listaProductosIngreso);
                 }
-                ImpresionEntradas vImprimeEntradas = new ImpresionEntradas(listaProductos);
-                vImprimeEntradas.Show();
 
+                // Compute weighted average unit cost for each entry product
+                foreach (EntReporteEntradasAjustes fila in resumen.Values)
+                {
+                    fila.CostoEntrada = fila.CantidadEntrada > 0
+                        ? Math.Round(fila.TotalCostoEntrada / fila.CantidadEntrada, 2)
+                        : 0m;
+                }
+
+                // Collect adjustment (TipoMovimientoId = 3) product details for the same period.
+                // Adjustments are applied to the first matching product row that is NOT
+                // a reingreso-cancelacion (TipoId != 6); if no such row exists, they fall
+                // into a new "ENTRADAS" row.
+                List<EntCatalogoGenerico> listaAjustes = bus.ObtieneMovimientosSalidasProductos(
+                    Program.UsuarioSeleccionado.CompañiaId, fechaDesde, fechaHasta, almacen.Id, 3);
+                foreach (EntCatalogoGenerico aj in listaAjustes)
+                {
+                    List<EntProducto> detalleAjuste = bus.ObtieneMovimientosDetalleProductosSinDatosFactura(1, aj.Id, 0);//SE PONE tipoMovimientoId=1 PARA PONER PRECIO EN COSTO
+                    foreach (EntProducto ep in detalleAjuste)
+                    {
+                        // Prefer a non-reingreso row; fall back to any row for this product.
+                        EntReporteEntradasAjustes targetFila = null;
+                        foreach (EntReporteEntradasAjustes f in resumen.Values)
+                        {
+                            if (f.ProductoId == ep.ProductoId && f.TipoId != 6) { targetFila = f; break; }
+                        }
+                        if (targetFila == null)
+                        {
+                            foreach (EntReporteEntradasAjustes f in resumen.Values)
+                            {
+                                if (f.ProductoId == ep.ProductoId) { targetFila = f; break; }
+                            }
+                        }
+                        if (targetFila == null)
+                        {
+                            // Product not seen in entries; add it to the ENTRADAS group.
+                            string newKey = "0:" + ep.ProductoId;
+                            targetFila = new EntReporteEntradasAjustes
+                            {
+                                ProductoId = ep.ProductoId,
+                                Codigo = ep.Codigo,
+                                Descripcion = ep.Descripcion,
+                                TipoId = 0,
+                                TipoNombre = "ENTRADAS"
+                            };
+                            resumen[newKey] = targetFila;
+                        }
+                        targetFila.CantidadSalidaAjuste += ep.Cantidad;
+                        targetFila.TotalCostoSalidaAjuste += ep.Cantidad * ep.PrecioCosto;
+                    }
+                }
+
+                // Compute weighted average unit cost for each adjustment
+                foreach (EntReporteEntradasAjustes fila in resumen.Values)
+                {
+                    fila.CostoSalidaAjuste = fila.CantidadSalidaAjuste > 0
+                        ? Math.Round(fila.TotalCostoSalidaAjuste / fila.CantidadSalidaAjuste, 2)
+                        : 0m;
+                }
+
+                List<EntReporteEntradasAjustes> listaReporte = resumen.Values
+                    .OrderBy(r => r.TipoNombre)
+                    .ThenBy(r => r.Descripcion)
+                    .ToList();
+
+                ImpresionEntradasConAjustes vImprime = new ImpresionEntradasConAjustes(
+                    listaReporte,
+                    Program.EmpresaSeleccionada != null ? Program.EmpresaSeleccionada.Nombre : "",
+                    fechaDesde.ToString("dd/MM/yyyy"),
+                    fechaHasta.AddDays(-1).ToString("dd/MM/yyyy"), // fechaHasta was pushed +1 day for inclusive query; display original last day
+                    almacen.Descripcion,
+                    Program.UsuarioSeleccionado != null ? Program.UsuarioSeleccionado.Descripcion : "");
+                vImprime.Show();
             }
             catch (Exception ex) { MuestraExcepcion(ex); }
             finally { base.SetDefaultCursor(); }

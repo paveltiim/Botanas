@@ -50,7 +50,7 @@
             this.entProductoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label24 = new System.Windows.Forms.Label();
             this.cmbEmpresas = new System.Windows.Forms.ComboBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tcGeneral = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlGeneralSalida = new System.Windows.Forms.Panel();
             this.gvClientes = new System.Windows.Forms.DataGridView();
@@ -133,6 +133,12 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.chkSeleccionaTodasSalidasTraspasos = new System.Windows.Forms.CheckBox();
             this.gvSalidasTraspasos = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstatusDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -156,14 +162,8 @@
             this.pbImpresionFondoBlanco = new System.Windows.Forms.PictureBox();
             this.pbLeyendaCotizacion = new System.Windows.Forms.PictureBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstatusDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.entProductoBindingSource)).BeginInit();
-            this.tabControl1.SuspendLayout();
+            this.tcGeneral.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.pnlGeneralSalida.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvClientes)).BeginInit();
@@ -205,9 +205,10 @@
             this.label24.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label24.AutoSize = true;
             this.label24.BackColor = System.Drawing.Color.Transparent;
-            this.label24.Location = new System.Drawing.Point(354, 14);
+            this.label24.Location = new System.Drawing.Point(267, 17);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(51, 13);
+            this.label24.Size = new System.Drawing.Size(65, 16);
             this.label24.TabIndex = 115;
             this.label24.Text = "Empresa:";
             this.label24.Visible = false;
@@ -219,37 +220,40 @@
             this.cmbEmpresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEmpresas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmpresas.FormattingEnabled = true;
-            this.cmbEmpresas.Location = new System.Drawing.Point(404, 6);
+            this.cmbEmpresas.Location = new System.Drawing.Point(535, 16);
+            this.cmbEmpresas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbEmpresas.Name = "cmbEmpresas";
-            this.cmbEmpresas.Size = new System.Drawing.Size(359, 28);
+            this.cmbEmpresas.Size = new System.Drawing.Size(344, 33);
             this.cmbEmpresas.TabIndex = 116;
             this.cmbEmpresas.ValueMember = "Id";
             this.cmbEmpresas.Visible = false;
             this.cmbEmpresas.SelectedIndexChanged += new System.EventHandler(this.cmbEmpresas_SelectedIndexChanged);
             // 
-            // tabControl1
+            // tcGeneral
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tcGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(9, 72);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1036, 508);
-            this.tabControl1.TabIndex = 4;
+            this.tcGeneral.Controls.Add(this.tabPage2);
+            this.tcGeneral.Controls.Add(this.tabPage1);
+            this.tcGeneral.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tcGeneral.Location = new System.Drawing.Point(10, 89);
+            this.tcGeneral.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcGeneral.Name = "tcGeneral";
+            this.tcGeneral.SelectedIndex = 0;
+            this.tcGeneral.Size = new System.Drawing.Size(983, 507);
+            this.tcGeneral.TabIndex = 4;
             // 
             // tabPage2
             // 
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tabPage2.Controls.Add(this.pnlGeneralSalida);
             this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 28);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1028, 482);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Size = new System.Drawing.Size(975, 475);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Salida Traspaso Móvil";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -271,9 +275,10 @@
             this.pnlGeneralSalida.Controls.Add(this.pnlVendedoresDestino);
             this.pnlGeneralSalida.Controls.Add(this.pnlAlmacenEntrada);
             this.pnlGeneralSalida.Controls.Add(this.pnlDatosCliente);
-            this.pnlGeneralSalida.Location = new System.Drawing.Point(6, 6);
+            this.pnlGeneralSalida.Location = new System.Drawing.Point(8, 7);
+            this.pnlGeneralSalida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlGeneralSalida.Name = "pnlGeneralSalida";
-            this.pnlGeneralSalida.Size = new System.Drawing.Size(1020, 477);
+            this.pnlGeneralSalida.Size = new System.Drawing.Size(961, 468);
             this.pnlGeneralSalida.TabIndex = 84;
             // 
             // gvClientes
@@ -298,7 +303,8 @@
             this.gvClientes.DataSource = this.entClienteBindingSource;
             this.gvClientes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvClientes.GridColor = System.Drawing.Color.DimGray;
-            this.gvClientes.Location = new System.Drawing.Point(128, 66);
+            this.gvClientes.Location = new System.Drawing.Point(171, 81);
+            this.gvClientes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvClientes.MultiSelect = false;
             this.gvClientes.Name = "gvClientes";
             this.gvClientes.ReadOnly = true;
@@ -308,7 +314,7 @@
             this.gvClientes.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gvClientes.RowTemplate.Height = 27;
             this.gvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvClientes.Size = new System.Drawing.Size(568, 162);
+            this.gvClientes.Size = new System.Drawing.Size(359, 81);
             this.gvClientes.TabIndex = 114;
             this.gvClientes.Visible = false;
             this.gvClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvClientes_CellDoubleClick);
@@ -368,9 +374,10 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 19);
+            this.label3.Location = new System.Drawing.Point(8, 23);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 17);
+            this.label3.Size = new System.Drawing.Size(97, 20);
             this.label3.TabIndex = 119;
             this.label3.Text = "Tipo Salida:";
             // 
@@ -382,9 +389,10 @@
             this.cmbTipoSalidas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTipoSalidas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTipoSalidas.FormattingEnabled = true;
-            this.cmbTipoSalidas.Location = new System.Drawing.Point(98, 12);
+            this.cmbTipoSalidas.Location = new System.Drawing.Point(131, 15);
+            this.cmbTipoSalidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTipoSalidas.Name = "cmbTipoSalidas";
-            this.cmbTipoSalidas.Size = new System.Drawing.Size(279, 28);
+            this.cmbTipoSalidas.Size = new System.Drawing.Size(371, 33);
             this.cmbTipoSalidas.TabIndex = 120;
             this.cmbTipoSalidas.ValueMember = "Id";
             this.cmbTipoSalidas.SelectedIndexChanged += new System.EventHandler(this.cmbTipoSalidas_SelectedIndexChanged);
@@ -396,19 +404,20 @@
             // txtDescripcionSalida
             // 
             this.txtDescripcionSalida.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcionSalida.Location = new System.Drawing.Point(566, 12);
-            this.txtDescripcionSalida.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.txtDescripcionSalida.Location = new System.Drawing.Point(755, 15);
+            this.txtDescripcionSalida.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.txtDescripcionSalida.Name = "txtDescripcionSalida";
-            this.txtDescripcionSalida.Size = new System.Drawing.Size(404, 29);
+            this.txtDescripcionSalida.Size = new System.Drawing.Size(537, 34);
             this.txtDescripcionSalida.TabIndex = 113;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(432, 17);
+            this.label2.Location = new System.Drawing.Point(576, 21);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 17);
+            this.label2.Size = new System.Drawing.Size(155, 20);
             this.label2.TabIndex = 112;
             this.label2.Text = "Descripción Salida:";
             // 
@@ -427,9 +436,10 @@
             this.pnlProductos.Controls.Add(this.txtBuscaProducto);
             this.pnlProductos.Controls.Add(this.txtBuscaProductoCodigo);
             this.pnlProductos.Controls.Add(this.tabControl3);
-            this.pnlProductos.Location = new System.Drawing.Point(2, 114);
+            this.pnlProductos.Location = new System.Drawing.Point(3, 140);
+            this.pnlProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlProductos.Name = "pnlProductos";
-            this.pnlProductos.Size = new System.Drawing.Size(1012, 238);
+            this.pnlProductos.Size = new System.Drawing.Size(951, 175);
             this.pnlProductos.TabIndex = 2;
             // 
             // cmbTipoProductoFiltro
@@ -442,18 +452,20 @@
             this.cmbTipoProductoFiltro.Items.AddRange(new object[] {
             "Producto Venta",
             "Insumo"});
-            this.cmbTipoProductoFiltro.Location = new System.Drawing.Point(735, 12);
+            this.cmbTipoProductoFiltro.Location = new System.Drawing.Point(582, 15);
+            this.cmbTipoProductoFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTipoProductoFiltro.Name = "cmbTipoProductoFiltro";
-            this.cmbTipoProductoFiltro.Size = new System.Drawing.Size(168, 22);
+            this.cmbTipoProductoFiltro.Size = new System.Drawing.Size(223, 24);
             this.cmbTipoProductoFiltro.TabIndex = 114;
             // 
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(638, 14);
+            this.label9.Location = new System.Drawing.Point(453, 17);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(99, 16);
+            this.label9.Size = new System.Drawing.Size(123, 20);
             this.label9.TabIndex = 115;
             this.label9.Text = "Tipo Producto: ";
             // 
@@ -464,9 +476,10 @@
             this.btnRefrescarProductos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRefrescarProductos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefrescarProductos.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescarProductos.Location = new System.Drawing.Point(608, 1);
+            this.btnRefrescarProductos.Location = new System.Drawing.Point(811, 1);
+            this.btnRefrescarProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefrescarProductos.Name = "btnRefrescarProductos";
-            this.btnRefrescarProductos.Size = new System.Drawing.Size(50, 34);
+            this.btnRefrescarProductos.Size = new System.Drawing.Size(67, 42);
             this.btnRefrescarProductos.TabIndex = 110;
             this.btnRefrescarProductos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRefrescarProductos.UseVisualStyleBackColor = false;
@@ -479,9 +492,10 @@
             this.btnBuscarProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBuscarProducto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscarProducto.Location = new System.Drawing.Point(561, 1);
+            this.btnBuscarProducto.Location = new System.Drawing.Point(748, 1);
+            this.btnBuscarProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscarProducto.Name = "btnBuscarProducto";
-            this.btnBuscarProducto.Size = new System.Drawing.Size(47, 35);
+            this.btnBuscarProducto.Size = new System.Drawing.Size(63, 43);
             this.btnBuscarProducto.TabIndex = 13;
             this.btnBuscarProducto.UseVisualStyleBackColor = false;
             this.btnBuscarProducto.Click += new System.EventHandler(this.btnBuscarProducto_Click);
@@ -491,9 +505,10 @@
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(907, 194);
+            this.label22.Location = new System.Drawing.Point(811, 121);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(109, 17);
+            this.label22.Size = new System.Drawing.Size(129, 20);
             this.label22.TabIndex = 109;
             this.label22.Text = "Núm. Productos";
             // 
@@ -502,18 +517,20 @@
             this.lbContadorSeries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbContadorSeries.AutoSize = true;
             this.lbContadorSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbContadorSeries.Location = new System.Drawing.Point(907, 211);
+            this.lbContadorSeries.Location = new System.Drawing.Point(811, 142);
+            this.lbContadorSeries.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbContadorSeries.Name = "lbContadorSeries";
-            this.lbContadorSeries.Size = new System.Drawing.Size(16, 17);
+            this.lbContadorSeries.Size = new System.Drawing.Size(18, 20);
             this.lbContadorSeries.TabIndex = 108;
             this.lbContadorSeries.Text = "0";
             // 
             // txtBuscaProductoSerie
             // 
             this.txtBuscaProductoSerie.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscaProductoSerie.Location = new System.Drawing.Point(561, 6);
+            this.txtBuscaProductoSerie.Location = new System.Drawing.Point(748, 7);
+            this.txtBuscaProductoSerie.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBuscaProductoSerie.Name = "txtBuscaProductoSerie";
-            this.txtBuscaProductoSerie.Size = new System.Drawing.Size(220, 29);
+            this.txtBuscaProductoSerie.Size = new System.Drawing.Size(292, 35);
             this.txtBuscaProductoSerie.TabIndex = 12;
             this.txtBuscaProductoSerie.Visible = false;
             this.txtBuscaProductoSerie.TextChanged += new System.EventHandler(this.txtBuscaProductoSerie_TextChanged);
@@ -522,9 +539,10 @@
             // txtBuscaProducto
             // 
             this.txtBuscaProducto.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscaProducto.Location = new System.Drawing.Point(195, 6);
+            this.txtBuscaProducto.Location = new System.Drawing.Point(260, 7);
+            this.txtBuscaProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBuscaProducto.Name = "txtBuscaProducto";
-            this.txtBuscaProducto.Size = new System.Drawing.Size(365, 29);
+            this.txtBuscaProducto.Size = new System.Drawing.Size(485, 35);
             this.txtBuscaProducto.TabIndex = 11;
             this.txtBuscaProducto.TextChanged += new System.EventHandler(this.txtProductoBusqueda_TextChanged);
             this.txtBuscaProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProductoBusqueda_KeyPress);
@@ -532,9 +550,10 @@
             // txtBuscaProductoCodigo
             // 
             this.txtBuscaProductoCodigo.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscaProductoCodigo.Location = new System.Drawing.Point(81, 6);
+            this.txtBuscaProductoCodigo.Location = new System.Drawing.Point(108, 7);
+            this.txtBuscaProductoCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBuscaProductoCodigo.Name = "txtBuscaProductoCodigo";
-            this.txtBuscaProductoCodigo.Size = new System.Drawing.Size(112, 29);
+            this.txtBuscaProductoCodigo.Size = new System.Drawing.Size(148, 35);
             this.txtBuscaProductoCodigo.TabIndex = 10;
             this.txtBuscaProductoCodigo.TextChanged += new System.EventHandler(this.txtCodigoProductoBusqueda_TextChanged);
             this.txtBuscaProductoCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProductoBusqueda_KeyPress);
@@ -546,20 +565,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl3.Controls.Add(this.tabPage4);
             this.tabControl3.Controls.Add(this.tabPage5);
-            this.tabControl3.Location = new System.Drawing.Point(2, 12);
+            this.tabControl3.Location = new System.Drawing.Point(3, 15);
+            this.tabControl3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(902, 222);
+            this.tabControl3.Size = new System.Drawing.Size(805, 155);
             this.tabControl3.TabIndex = 82;
             // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.gvProductosBusqueda);
             this.tabPage4.Controls.Add(this.gvProductosPedido);
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(894, 193);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage4.Size = new System.Drawing.Size(797, 122);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Productos";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -583,7 +604,8 @@
             this.gvProductosBusqueda.DataSource = this.entProductoBindingSource;
             this.gvProductosBusqueda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvProductosBusqueda.GridColor = System.Drawing.Color.DimGray;
-            this.gvProductosBusqueda.Location = new System.Drawing.Point(74, -1);
+            this.gvProductosBusqueda.Location = new System.Drawing.Point(99, -1);
+            this.gvProductosBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvProductosBusqueda.MultiSelect = false;
             this.gvProductosBusqueda.Name = "gvProductosBusqueda";
             this.gvProductosBusqueda.ReadOnly = true;
@@ -593,7 +615,7 @@
             this.gvProductosBusqueda.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gvProductosBusqueda.RowTemplate.Height = 27;
             this.gvProductosBusqueda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvProductosBusqueda.Size = new System.Drawing.Size(615, 175);
+            this.gvProductosBusqueda.Size = new System.Drawing.Size(422, 92);
             this.gvProductosBusqueda.TabIndex = 92;
             this.gvProductosBusqueda.Visible = false;
             this.gvProductosBusqueda.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvProductos_CellDoubleClick);
@@ -658,6 +680,7 @@
             this.gvProductosPedido.DataSource = this.entProductoBindingSource;
             this.gvProductosPedido.GridColor = System.Drawing.Color.DimGray;
             this.gvProductosPedido.Location = new System.Drawing.Point(0, -1);
+            this.gvProductosPedido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvProductosPedido.MultiSelect = false;
             this.gvProductosPedido.Name = "gvProductosPedido";
             this.gvProductosPedido.RowHeadersVisible = false;
@@ -665,7 +688,7 @@
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvProductosPedido.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.gvProductosPedido.RowTemplate.Height = 27;
-            this.gvProductosPedido.Size = new System.Drawing.Size(897, 201);
+            this.gvProductosPedido.Size = new System.Drawing.Size(798, 124);
             this.gvProductosPedido.TabIndex = 78;
             this.gvProductosPedido.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvProductosPedido_CellContentClick);
             this.gvProductosPedido.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvProductosPedido_CellContentDoubleClick);
@@ -739,10 +762,11 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 25);
+            this.tabPage5.Location = new System.Drawing.Point(4, 29);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(894, 193);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage5.Size = new System.Drawing.Size(1195, 240);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
@@ -754,9 +778,10 @@
             this.pnlAgrega.Controls.Add(this.txtTotal);
             this.pnlAgrega.Controls.Add(this.label7);
             this.pnlAgrega.Controls.Add(this.txtDescuento);
-            this.pnlAgrega.Location = new System.Drawing.Point(640, 351);
+            this.pnlAgrega.Location = new System.Drawing.Point(455, 314);
+            this.pnlAgrega.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAgrega.Name = "pnlAgrega";
-            this.pnlAgrega.Size = new System.Drawing.Size(268, 123);
+            this.pnlAgrega.Size = new System.Drawing.Size(357, 151);
             this.pnlAgrega.TabIndex = 108;
             // 
             // btnCancelar
@@ -767,9 +792,10 @@
             this.btnCancelar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(173, 46);
+            this.btnCancelar.Location = new System.Drawing.Point(231, 57);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(90, 66);
+            this.btnCancelar.Size = new System.Drawing.Size(120, 81);
             this.btnCancelar.TabIndex = 51;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -784,9 +810,10 @@
             this.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(52, 46);
+            this.btnAgregar.Location = new System.Drawing.Point(69, 57);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(90, 66);
+            this.btnAgregar.Size = new System.Drawing.Size(120, 81);
             this.btnAgregar.TabIndex = 50;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -796,10 +823,11 @@
             // txtTotal
             // 
             this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtTotal.Location = new System.Drawing.Point(194, 12);
+            this.txtTotal.Location = new System.Drawing.Point(259, 15);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
-            this.txtTotal.Size = new System.Drawing.Size(69, 22);
+            this.txtTotal.Size = new System.Drawing.Size(91, 26);
             this.txtTotal.TabIndex = 85;
             this.txtTotal.TabStop = false;
             // 
@@ -808,18 +836,20 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(148, 14);
+            this.label7.Location = new System.Drawing.Point(197, 17);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 16);
+            this.label7.Size = new System.Drawing.Size(51, 20);
             this.label7.TabIndex = 86;
             this.label7.Text = "Total:";
             // 
             // txtDescuento
             // 
             this.txtDescuento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtDescuento.Location = new System.Drawing.Point(194, 12);
+            this.txtDescuento.Location = new System.Drawing.Point(259, 15);
+            this.txtDescuento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDescuento.Name = "txtDescuento";
-            this.txtDescuento.Size = new System.Drawing.Size(69, 22);
+            this.txtDescuento.Size = new System.Drawing.Size(91, 26);
             this.txtDescuento.TabIndex = 96;
             this.txtDescuento.Visible = false;
             this.txtDescuento.TextChanged += new System.EventHandler(this.txtDescuento_TextChanged);
@@ -830,10 +860,10 @@
             this.pnlVendedoresDestino.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlVendedoresDestino.Controls.Add(this.label10);
             this.pnlVendedoresDestino.Controls.Add(this.cmbTrabajadoresDestino);
-            this.pnlVendedoresDestino.Location = new System.Drawing.Point(22, 48);
-            this.pnlVendedoresDestino.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pnlVendedoresDestino.Location = new System.Drawing.Point(29, 59);
+            this.pnlVendedoresDestino.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlVendedoresDestino.Name = "pnlVendedoresDestino";
-            this.pnlVendedoresDestino.Size = new System.Drawing.Size(408, 64);
+            this.pnlVendedoresDestino.Size = new System.Drawing.Size(543, 78);
             this.pnlVendedoresDestino.TabIndex = 136;
             // 
             // label10
@@ -841,9 +871,10 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(4, 22);
+            this.label10.Location = new System.Drawing.Point(5, 27);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(74, 17);
+            this.label10.Size = new System.Drawing.Size(85, 20);
             this.label10.TabIndex = 117;
             this.label10.Text = "Vendedor:";
             // 
@@ -855,9 +886,10 @@
             this.cmbTrabajadoresDestino.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTrabajadoresDestino.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTrabajadoresDestino.FormattingEnabled = true;
-            this.cmbTrabajadoresDestino.Location = new System.Drawing.Point(81, 16);
+            this.cmbTrabajadoresDestino.Location = new System.Drawing.Point(108, 20);
+            this.cmbTrabajadoresDestino.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTrabajadoresDestino.Name = "cmbTrabajadoresDestino";
-            this.cmbTrabajadoresDestino.Size = new System.Drawing.Size(313, 28);
+            this.cmbTrabajadoresDestino.Size = new System.Drawing.Size(416, 33);
             this.cmbTrabajadoresDestino.TabIndex = 118;
             this.cmbTrabajadoresDestino.ValueMember = "Id";
             // 
@@ -870,10 +902,10 @@
             this.pnlAlmacenEntrada.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlAlmacenEntrada.Controls.Add(this.label8);
             this.pnlAlmacenEntrada.Controls.Add(this.cmbAlmacenesEntrada);
-            this.pnlAlmacenEntrada.Location = new System.Drawing.Point(5, 51);
-            this.pnlAlmacenEntrada.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pnlAlmacenEntrada.Location = new System.Drawing.Point(7, 63);
+            this.pnlAlmacenEntrada.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlAlmacenEntrada.Name = "pnlAlmacenEntrada";
-            this.pnlAlmacenEntrada.Size = new System.Drawing.Size(416, 59);
+            this.pnlAlmacenEntrada.Size = new System.Drawing.Size(553, 72);
             this.pnlAlmacenEntrada.TabIndex = 135;
             // 
             // label8
@@ -881,9 +913,10 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(4, 19);
+            this.label8.Location = new System.Drawing.Point(5, 23);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 17);
+            this.label8.Size = new System.Drawing.Size(79, 20);
             this.label8.TabIndex = 117;
             this.label8.Text = "Almacen:";
             // 
@@ -895,9 +928,10 @@
             this.cmbAlmacenesEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbAlmacenesEntrada.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbAlmacenesEntrada.FormattingEnabled = true;
-            this.cmbAlmacenesEntrada.Location = new System.Drawing.Point(74, 14);
+            this.cmbAlmacenesEntrada.Location = new System.Drawing.Point(99, 17);
+            this.cmbAlmacenesEntrada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbAlmacenesEntrada.Name = "cmbAlmacenesEntrada";
-            this.cmbAlmacenesEntrada.Size = new System.Drawing.Size(329, 28);
+            this.cmbAlmacenesEntrada.Size = new System.Drawing.Size(437, 33);
             this.cmbAlmacenesEntrada.TabIndex = 118;
             this.cmbAlmacenesEntrada.ValueMember = "Id";
             // 
@@ -912,20 +946,21 @@
             this.pnlDatosCliente.Controls.Add(this.btnBuscarCliente);
             this.pnlDatosCliente.Controls.Add(this.txtNombre);
             this.pnlDatosCliente.Controls.Add(this.label23);
-            this.pnlDatosCliente.Location = new System.Drawing.Point(2, 40);
-            this.pnlDatosCliente.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.pnlDatosCliente.Location = new System.Drawing.Point(3, 49);
+            this.pnlDatosCliente.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlDatosCliente.Name = "pnlDatosCliente";
-            this.pnlDatosCliente.Size = new System.Drawing.Size(949, 72);
+            this.pnlDatosCliente.Size = new System.Drawing.Size(1265, 89);
             this.pnlDatosCliente.TabIndex = 121;
             // 
             // txtRFC
             // 
             this.txtRFC.Enabled = false;
             this.txtRFC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRFC.Location = new System.Drawing.Point(544, 38);
+            this.txtRFC.Location = new System.Drawing.Point(725, 47);
+            this.txtRFC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtRFC.Name = "txtRFC";
             this.txtRFC.ReadOnly = true;
-            this.txtRFC.Size = new System.Drawing.Size(166, 22);
+            this.txtRFC.Size = new System.Drawing.Size(220, 26);
             this.txtRFC.TabIndex = 118;
             // 
             // label5
@@ -933,9 +968,10 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(493, 31);
+            this.label5.Location = new System.Drawing.Point(657, 38);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 21);
+            this.label5.Size = new System.Drawing.Size(58, 28);
             this.label5.TabIndex = 117;
             this.label5.Text = "R.F.C:";
             // 
@@ -943,10 +979,11 @@
             // 
             this.txtNombreFiscal.Enabled = false;
             this.txtNombreFiscal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreFiscal.Location = new System.Drawing.Point(544, 8);
+            this.txtNombreFiscal.Location = new System.Drawing.Point(725, 10);
+            this.txtNombreFiscal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNombreFiscal.Name = "txtNombreFiscal";
             this.txtNombreFiscal.ReadOnly = true;
-            this.txtNombreFiscal.Size = new System.Drawing.Size(341, 22);
+            this.txtNombreFiscal.Size = new System.Drawing.Size(453, 26);
             this.txtNombreFiscal.TabIndex = 116;
             // 
             // label6
@@ -954,9 +991,10 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(427, 7);
+            this.label6.Location = new System.Drawing.Point(569, 9);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(113, 21);
+            this.label6.Size = new System.Drawing.Size(141, 28);
             this.label6.TabIndex = 115;
             this.label6.Text = "Nombre Fiscal:";
             // 
@@ -965,18 +1003,20 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(1, 36);
+            this.label4.Location = new System.Drawing.Point(1, 44);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 21);
+            this.label4.Size = new System.Drawing.Size(89, 28);
             this.label4.TabIndex = 113;
             this.label4.Text = "Nombre:";
             // 
             // txtClienteBusqueda
             // 
             this.txtClienteBusqueda.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClienteBusqueda.Location = new System.Drawing.Point(125, 6);
+            this.txtClienteBusqueda.Location = new System.Drawing.Point(167, 7);
+            this.txtClienteBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtClienteBusqueda.Name = "txtClienteBusqueda";
-            this.txtClienteBusqueda.Size = new System.Drawing.Size(250, 26);
+            this.txtClienteBusqueda.Size = new System.Drawing.Size(332, 30);
             this.txtClienteBusqueda.TabIndex = 109;
             this.txtClienteBusqueda.TextChanged += new System.EventHandler(this.txtClienteBusqueda_TextChanged);
             this.txtClienteBusqueda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtClienteBusqueda_KeyDown);
@@ -989,9 +1029,10 @@
             this.btnBuscarCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBuscarCliente.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscarCliente.Location = new System.Drawing.Point(381, 1);
+            this.btnBuscarCliente.Location = new System.Drawing.Point(508, 1);
+            this.btnBuscarCliente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscarCliente.Name = "btnBuscarCliente";
-            this.btnBuscarCliente.Size = new System.Drawing.Size(37, 32);
+            this.btnBuscarCliente.Size = new System.Drawing.Size(49, 39);
             this.btnBuscarCliente.TabIndex = 111;
             this.btnBuscarCliente.UseVisualStyleBackColor = false;
             this.btnBuscarCliente.Click += new System.EventHandler(this.btnBuscarCliente_Click);
@@ -999,10 +1040,11 @@
             // txtNombre
             // 
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(76, 38);
+            this.txtNombre.Location = new System.Drawing.Point(101, 47);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.ReadOnly = true;
-            this.txtNombre.Size = new System.Drawing.Size(299, 22);
+            this.txtNombre.Size = new System.Drawing.Size(397, 26);
             this.txtNombre.TabIndex = 110;
             // 
             // label23
@@ -1011,9 +1053,10 @@
             this.label23.BackColor = System.Drawing.Color.White;
             this.label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label23.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(4, 6);
+            this.label23.Location = new System.Drawing.Point(5, 7);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(113, 23);
+            this.label23.Size = new System.Drawing.Size(139, 30);
             this.label23.TabIndex = 112;
             this.label23.Text = "Buscar Cliente:";
             // 
@@ -1026,11 +1069,11 @@
             this.tabPage1.Controls.Add(this.rdoEntradasPorMes);
             this.tabPage1.Controls.Add(this.pnlEntradasPorMes);
             this.tabPage1.Controls.Add(this.flowLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 28);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.tabPage1.Size = new System.Drawing.Size(1028, 482);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.tabPage1.Size = new System.Drawing.Size(975, 475);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Registros Traspasos Móvil";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1039,24 +1082,27 @@
             // 
             this.pnlPorDiaEntradas.Controls.Add(this.dtpFechaEntradasFiltro);
             this.pnlPorDiaEntradas.Enabled = false;
-            this.pnlPorDiaEntradas.Location = new System.Drawing.Point(422, 18);
+            this.pnlPorDiaEntradas.Location = new System.Drawing.Point(563, 22);
+            this.pnlPorDiaEntradas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlPorDiaEntradas.Name = "pnlPorDiaEntradas";
-            this.pnlPorDiaEntradas.Size = new System.Drawing.Size(243, 32);
+            this.pnlPorDiaEntradas.Size = new System.Drawing.Size(324, 39);
             this.pnlPorDiaEntradas.TabIndex = 131;
             // 
             // dtpFechaEntradasFiltro
             // 
-            this.dtpFechaEntradasFiltro.Location = new System.Drawing.Point(8, 7);
+            this.dtpFechaEntradasFiltro.Location = new System.Drawing.Point(11, 9);
+            this.dtpFechaEntradasFiltro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpFechaEntradasFiltro.Name = "dtpFechaEntradasFiltro";
-            this.dtpFechaEntradasFiltro.Size = new System.Drawing.Size(224, 22);
+            this.dtpFechaEntradasFiltro.Size = new System.Drawing.Size(297, 26);
             this.dtpFechaEntradasFiltro.TabIndex = 15;
             // 
             // rdoPorDiaEntradas
             // 
             this.rdoPorDiaEntradas.AutoSize = true;
-            this.rdoPorDiaEntradas.Location = new System.Drawing.Point(352, 27);
+            this.rdoPorDiaEntradas.Location = new System.Drawing.Point(469, 33);
+            this.rdoPorDiaEntradas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdoPorDiaEntradas.Name = "rdoPorDiaEntradas";
-            this.rdoPorDiaEntradas.Size = new System.Drawing.Size(62, 17);
+            this.rdoPorDiaEntradas.Size = new System.Drawing.Size(74, 23);
             this.rdoPorDiaEntradas.TabIndex = 132;
             this.rdoPorDiaEntradas.Text = "Por Día";
             this.rdoPorDiaEntradas.UseVisualStyleBackColor = true;
@@ -1069,10 +1115,11 @@
             this.tabControl4.Controls.Add(this.tabPage6);
             this.tabControl4.Controls.Add(this.tabPage7);
             this.tabControl4.Font = new System.Drawing.Font("Microsoft Tai Le", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl4.Location = new System.Drawing.Point(652, 70);
+            this.tabControl4.Location = new System.Drawing.Point(869, 86);
+            this.tabControl4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl4.Name = "tabControl4";
             this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(375, 344);
+            this.tabControl4.Size = new System.Drawing.Size(102, 305);
             this.tabControl4.TabIndex = 130;
             // 
             // tabPage6
@@ -1080,10 +1127,11 @@
             this.tabPage6.Controls.Add(this.txtPrecioTotalEntradas);
             this.tabPage6.Controls.Add(this.txtCantidadTotalEntradas);
             this.tabPage6.Controls.Add(this.gvDetalleProductosSalida);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Location = new System.Drawing.Point(4, 25);
+            this.tabPage6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(367, 318);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage6.Size = new System.Drawing.Size(94, 276);
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Detalle Productos Salida";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1091,19 +1139,21 @@
             // txtPrecioTotalEntradas
             // 
             this.txtPrecioTotalEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPrecioTotalEntradas.Location = new System.Drawing.Point(248, 300);
+            this.txtPrecioTotalEntradas.Location = new System.Drawing.Point(-67, 248);
+            this.txtPrecioTotalEntradas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPrecioTotalEntradas.Name = "txtPrecioTotalEntradas";
             this.txtPrecioTotalEntradas.ReadOnly = true;
-            this.txtPrecioTotalEntradas.Size = new System.Drawing.Size(120, 20);
+            this.txtPrecioTotalEntradas.Size = new System.Drawing.Size(159, 23);
             this.txtPrecioTotalEntradas.TabIndex = 81;
             // 
             // txtCantidadTotalEntradas
             // 
             this.txtCantidadTotalEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCantidadTotalEntradas.Location = new System.Drawing.Point(196, 300);
+            this.txtCantidadTotalEntradas.Location = new System.Drawing.Point(-137, 248);
+            this.txtCantidadTotalEntradas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCantidadTotalEntradas.Name = "txtCantidadTotalEntradas";
             this.txtCantidadTotalEntradas.ReadOnly = true;
-            this.txtCantidadTotalEntradas.Size = new System.Drawing.Size(48, 20);
+            this.txtCantidadTotalEntradas.Size = new System.Drawing.Size(63, 23);
             this.txtCantidadTotalEntradas.TabIndex = 80;
             // 
             // gvDetalleProductosSalida
@@ -1127,6 +1177,7 @@
             this.gvDetalleProductosSalida.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvDetalleProductosSalida.GridColor = System.Drawing.Color.DimGray;
             this.gvDetalleProductosSalida.Location = new System.Drawing.Point(0, 0);
+            this.gvDetalleProductosSalida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvDetalleProductosSalida.Name = "gvDetalleProductosSalida";
             this.gvDetalleProductosSalida.ReadOnly = true;
             this.gvDetalleProductosSalida.RowHeadersVisible = false;
@@ -1135,7 +1186,7 @@
             this.gvDetalleProductosSalida.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.gvDetalleProductosSalida.RowTemplate.Height = 27;
             this.gvDetalleProductosSalida.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvDetalleProductosSalida.Size = new System.Drawing.Size(367, 300);
+            this.gvDetalleProductosSalida.Size = new System.Drawing.Size(91, 248);
             this.gvDetalleProductosSalida.TabIndex = 79;
             // 
             // dataGridViewTextBoxColumn2
@@ -1193,10 +1244,11 @@
             // tabPage7
             // 
             this.tabPage7.Controls.Add(this.rvSalidas);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Location = new System.Drawing.Point(4, 25);
+            this.tabPage7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(367, 318);
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage7.Size = new System.Drawing.Size(492, 394);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Impresión";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1212,9 +1264,10 @@
             this.rvSalidas.LocalReport.DataSources.Add(reportDataSource1);
             this.rvSalidas.LocalReport.ReportEmbeddedResource = "Aires.Reportes.rptEntradas.rdlc";
             this.rvSalidas.Location = new System.Drawing.Point(0, 0);
+            this.rvSalidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rvSalidas.Name = "rvSalidas";
             this.rvSalidas.ServerReport.BearerToken = null;
-            this.rvSalidas.Size = new System.Drawing.Size(369, 321);
+            this.rvSalidas.Size = new System.Drawing.Size(491, 391);
             this.rvSalidas.TabIndex = 0;
             // 
             // tabControl2
@@ -1223,10 +1276,11 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Font = new System.Drawing.Font("Microsoft Tai Le", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl2.Location = new System.Drawing.Point(4, 57);
+            this.tabControl2.Location = new System.Drawing.Point(5, 70);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(645, 357);
+            this.tabControl2.Size = new System.Drawing.Size(860, 321);
             this.tabControl2.TabIndex = 128;
             // 
             // tabPage3
@@ -1236,10 +1290,11 @@
             this.tabPage3.Controls.Add(this.textBox1);
             this.tabPage3.Controls.Add(this.textBox2);
             this.tabPage3.Controls.Add(this.textBox3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(637, 331);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Size = new System.Drawing.Size(852, 292);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Traspasos Venta Móvil";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1248,10 +1303,10 @@
             // 
             this.chkSeleccionaTodasSalidasTraspasos.AutoSize = true;
             this.chkSeleccionaTodasSalidasTraspasos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkSeleccionaTodasSalidasTraspasos.Location = new System.Drawing.Point(3, 3);
-            this.chkSeleccionaTodasSalidasTraspasos.Margin = new System.Windows.Forms.Padding(2);
+            this.chkSeleccionaTodasSalidasTraspasos.Location = new System.Drawing.Point(4, 4);
+            this.chkSeleccionaTodasSalidasTraspasos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkSeleccionaTodasSalidasTraspasos.Name = "chkSeleccionaTodasSalidasTraspasos";
-            this.chkSeleccionaTodasSalidasTraspasos.Size = new System.Drawing.Size(631, 17);
+            this.chkSeleccionaTodasSalidasTraspasos.Size = new System.Drawing.Size(844, 20);
             this.chkSeleccionaTodasSalidasTraspasos.TabIndex = 87;
             this.chkSeleccionaTodasSalidasTraspasos.Text = "Seleccionar Todos";
             this.chkSeleccionaTodasSalidasTraspasos.UseVisualStyleBackColor = true;
@@ -1278,7 +1333,8 @@
             this.gvSalidasTraspasos.DataSource = this.entCatalogoGenericoBindingSource;
             this.gvSalidasTraspasos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gvSalidasTraspasos.GridColor = System.Drawing.Color.DimGray;
-            this.gvSalidasTraspasos.Location = new System.Drawing.Point(0, 25);
+            this.gvSalidasTraspasos.Location = new System.Drawing.Point(0, 31);
+            this.gvSalidasTraspasos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvSalidasTraspasos.MultiSelect = false;
             this.gvSalidasTraspasos.Name = "gvSalidasTraspasos";
             this.gvSalidasTraspasos.RowHeadersVisible = false;
@@ -1287,323 +1343,9 @@
             this.gvSalidasTraspasos.RowsDefaultCellStyle = dataGridViewCellStyle16;
             this.gvSalidasTraspasos.RowTemplate.Height = 27;
             this.gvSalidasTraspasos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvSalidasTraspasos.Size = new System.Drawing.Size(637, 306);
+            this.gvSalidasTraspasos.Size = new System.Drawing.Size(849, 255);
             this.gvSalidasTraspasos.TabIndex = 86;
             this.gvSalidasTraspasos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvIngresos_CellContentDoubleClick);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(1439, 545);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(181, 20);
-            this.textBox1.TabIndex = 82;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(1240, 545);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(196, 20);
-            this.textBox2.TabIndex = 81;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(1141, 545);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(96, 20);
-            this.textBox3.TabIndex = 80;
-            // 
-            // rdoEntradasPorMes
-            // 
-            this.rdoEntradasPorMes.AutoSize = true;
-            this.rdoEntradasPorMes.Checked = true;
-            this.rdoEntradasPorMes.Location = new System.Drawing.Point(16, 27);
-            this.rdoEntradasPorMes.Name = "rdoEntradasPorMes";
-            this.rdoEntradasPorMes.Size = new System.Drawing.Size(66, 17);
-            this.rdoEntradasPorMes.TabIndex = 127;
-            this.rdoEntradasPorMes.TabStop = true;
-            this.rdoEntradasPorMes.Text = "Por Mes";
-            this.rdoEntradasPorMes.UseVisualStyleBackColor = true;
-            this.rdoEntradasPorMes.CheckedChanged += new System.EventHandler(this.rdoEntradasPorMes_CheckedChanged);
-            // 
-            // pnlEntradasPorMes
-            // 
-            this.pnlEntradasPorMes.Controls.Add(this.cmbMesesEntradas);
-            this.pnlEntradasPorMes.Controls.Add(this.cmbAñoEntradas);
-            this.pnlEntradasPorMes.Location = new System.Drawing.Point(86, 16);
-            this.pnlEntradasPorMes.Name = "pnlEntradasPorMes";
-            this.pnlEntradasPorMes.Size = new System.Drawing.Size(243, 34);
-            this.pnlEntradasPorMes.TabIndex = 126;
-            // 
-            // cmbMesesEntradas
-            // 
-            this.cmbMesesEntradas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMesesEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmbMesesEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbMesesEntradas.FormattingEnabled = true;
-            this.cmbMesesEntradas.Items.AddRange(new object[] {
-            "ENERO",
-            "FEBRERO",
-            "MARZO",
-            "ABRIL",
-            "MAYO",
-            "JUNIO",
-            "JULIO",
-            "AGOSTO",
-            "SEPTIEMBRE",
-            "OCTUBRE",
-            "NOVIEMBRE",
-            "DICIEMBRE"});
-            this.cmbMesesEntradas.Location = new System.Drawing.Point(5, 6);
-            this.cmbMesesEntradas.Name = "cmbMesesEntradas";
-            this.cmbMesesEntradas.Size = new System.Drawing.Size(126, 24);
-            this.cmbMesesEntradas.TabIndex = 19;
-            this.cmbMesesEntradas.SelectedIndexChanged += new System.EventHandler(this.cmbMesesEntradas_SelectedIndexChanged);
-            // 
-            // cmbAñoEntradas
-            // 
-            this.cmbAñoEntradas.DisplayMember = "Descripcion";
-            this.cmbAñoEntradas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAñoEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmbAñoEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbAñoEntradas.FormattingEnabled = true;
-            this.cmbAñoEntradas.Location = new System.Drawing.Point(152, 6);
-            this.cmbAñoEntradas.Name = "cmbAñoEntradas";
-            this.cmbAñoEntradas.Size = new System.Drawing.Size(77, 24);
-            this.cmbAñoEntradas.TabIndex = 20;
-            this.cmbAñoEntradas.ValueMember = "Descripcion";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.flowLayoutPanel1.Controls.Add(this.btnRefrescarSalidas);
-            this.flowLayoutPanel1.Controls.Add(this.btnEditar);
-            this.flowLayoutPanel1.Controls.Add(this.btnExportaEntradas);
-            this.flowLayoutPanel1.Controls.Add(this.btnExportaEntradasPorMes);
-            this.flowLayoutPanel1.Controls.Add(this.btnCancelarSalida);
-            this.flowLayoutPanel1.Controls.Add(this.btnCancelarSinDevolucion);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(2, 412);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(641, 72);
-            this.flowLayoutPanel1.TabIndex = 129;
-            // 
-            // btnRefrescarSalidas
-            // 
-            this.btnRefrescarSalidas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefrescarSalidas.BackColor = System.Drawing.Color.White;
-            this.btnRefrescarSalidas.BackgroundImage = global::Aires.Properties.Resources.RefrescarChicoSinFondo;
-            this.btnRefrescarSalidas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRefrescarSalidas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefrescarSalidas.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescarSalidas.Location = new System.Drawing.Point(3, 3);
-            this.btnRefrescarSalidas.Name = "btnRefrescarSalidas";
-            this.btnRefrescarSalidas.Size = new System.Drawing.Size(77, 66);
-            this.btnRefrescarSalidas.TabIndex = 115;
-            this.btnRefrescarSalidas.Text = "Refrescar";
-            this.btnRefrescarSalidas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRefrescarSalidas.UseVisualStyleBackColor = false;
-            this.btnRefrescarSalidas.Click += new System.EventHandler(this.btnRefrescarEntradas_Click);
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.BackColor = System.Drawing.Color.White;
-            this.btnEditar.BackgroundImage = global::Aires.Properties.Resources.Editar;
-            this.btnEditar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(86, 3);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(77, 66);
-            this.btnEditar.TabIndex = 114;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEditar.UseVisualStyleBackColor = false;
-            this.btnEditar.Visible = false;
-            // 
-            // btnExportaEntradas
-            // 
-            this.btnExportaEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExportaEntradas.BackColor = System.Drawing.Color.White;
-            this.btnExportaEntradas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportaEntradas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExportaEntradas.Font = new System.Drawing.Font("Segoe UI", 5.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportaEntradas.Image = global::Aires.Properties.Resources.ExportaPapel;
-            this.btnExportaEntradas.Location = new System.Drawing.Point(169, 3);
-            this.btnExportaEntradas.Name = "btnExportaEntradas";
-            this.btnExportaEntradas.Size = new System.Drawing.Size(77, 66);
-            this.btnExportaEntradas.TabIndex = 119;
-            this.btnExportaEntradas.Text = "Imprime Productos Por Fecha";
-            this.btnExportaEntradas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnExportaEntradas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnExportaEntradas.UseVisualStyleBackColor = false;
-            this.btnExportaEntradas.Click += new System.EventHandler(this.btnExportaEntradas_Click);
-            // 
-            // btnExportaEntradasPorMes
-            // 
-            this.btnExportaEntradasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExportaEntradasPorMes.BackColor = System.Drawing.Color.White;
-            this.btnExportaEntradasPorMes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportaEntradasPorMes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExportaEntradasPorMes.Font = new System.Drawing.Font("Segoe UI", 5.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportaEntradasPorMes.Image = global::Aires.Properties.Resources.ExportaPapel;
-            this.btnExportaEntradasPorMes.Location = new System.Drawing.Point(252, 3);
-            this.btnExportaEntradasPorMes.Name = "btnExportaEntradasPorMes";
-            this.btnExportaEntradasPorMes.Size = new System.Drawing.Size(77, 66);
-            this.btnExportaEntradasPorMes.TabIndex = 120;
-            this.btnExportaEntradasPorMes.Text = "Imprime Productos Por Mes";
-            this.btnExportaEntradasPorMes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnExportaEntradasPorMes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnExportaEntradasPorMes.UseVisualStyleBackColor = false;
-            this.btnExportaEntradasPorMes.Click += new System.EventHandler(this.btnExportaEntradasPorMes_Click);
-            // 
-            // btnCancelarSalida
-            // 
-            this.btnCancelarSalida.BackColor = System.Drawing.Color.White;
-            this.btnCancelarSalida.BackgroundImage = global::Aires.Properties.Resources.Eliminar;
-            this.btnCancelarSalida.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnCancelarSalida.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelarSalida.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelarSalida.Location = new System.Drawing.Point(335, 3);
-            this.btnCancelarSalida.Name = "btnCancelarSalida";
-            this.btnCancelarSalida.Size = new System.Drawing.Size(77, 66);
-            this.btnCancelarSalida.TabIndex = 113;
-            this.btnCancelarSalida.Text = "Cancelar";
-            this.btnCancelarSalida.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCancelarSalida.UseVisualStyleBackColor = false;
-            this.btnCancelarSalida.Visible = false;
-            this.btnCancelarSalida.Click += new System.EventHandler(this.btnCancelarSalida_Click);
-            // 
-            // btnCancelarSinDevolucion
-            // 
-            this.btnCancelarSinDevolucion.BackColor = System.Drawing.Color.White;
-            this.btnCancelarSinDevolucion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnCancelarSinDevolucion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelarSinDevolucion.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelarSinDevolucion.Location = new System.Drawing.Point(418, 3);
-            this.btnCancelarSinDevolucion.Name = "btnCancelarSinDevolucion";
-            this.btnCancelarSinDevolucion.Size = new System.Drawing.Size(77, 66);
-            this.btnCancelarSinDevolucion.TabIndex = 116;
-            this.btnCancelarSinDevolucion.Text = "Cancelar Sin Devolucion de Mercancia";
-            this.btnCancelarSinDevolucion.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCancelarSinDevolucion.UseVisualStyleBackColor = false;
-            this.btnCancelarSinDevolucion.Visible = false;
-            this.btnCancelarSinDevolucion.Click += new System.EventHandler(this.btnCancelarSinDevolucion_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 17);
-            this.label1.TabIndex = 117;
-            this.label1.Text = "Almacen:";
-            // 
-            // cmbAlmacenes
-            // 
-            this.cmbAlmacenes.DataSource = this.entCatalogoGenericoBindingSource;
-            this.cmbAlmacenes.DisplayMember = "Descripcion";
-            this.cmbAlmacenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAlmacenes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmbAlmacenes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbAlmacenes.FormattingEnabled = true;
-            this.cmbAlmacenes.Location = new System.Drawing.Point(82, 12);
-            this.cmbAlmacenes.Name = "cmbAlmacenes";
-            this.cmbAlmacenes.Size = new System.Drawing.Size(294, 24);
-            this.cmbAlmacenes.TabIndex = 118;
-            this.cmbAlmacenes.ValueMember = "Id";
-            this.cmbAlmacenes.SelectedIndexChanged += new System.EventHandler(this.cmbAlmacenes_SelectedIndexChanged);
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.Description = "Elimina el registro del producto seleccionado";
-            this.dataGridViewImageColumn1.FillWeight = 1F;
-            this.dataGridViewImageColumn1.HeaderText = "Elim.";
-            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
-            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn1.MinimumWidth = 6;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ToolTipText = "Elimina el registro del producto seleccionado";
-            this.dataGridViewImageColumn1.Width = 228;
-            // 
-            // btnRefrescaEmpresa
-            // 
-            this.btnRefrescaEmpresa.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnRefrescaEmpresa.BackColor = System.Drawing.Color.White;
-            this.btnRefrescaEmpresa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRefrescaEmpresa.BackgroundImage")));
-            this.btnRefrescaEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRefrescaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefrescaEmpresa.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescaEmpresa.Location = new System.Drawing.Point(814, 3);
-            this.btnRefrescaEmpresa.Name = "btnRefrescaEmpresa";
-            this.btnRefrescaEmpresa.Size = new System.Drawing.Size(37, 32);
-            this.btnRefrescaEmpresa.TabIndex = 133;
-            this.btnRefrescaEmpresa.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRefrescaEmpresa.UseVisualStyleBackColor = false;
-            this.btnRefrescaEmpresa.Visible = false;
-            this.btnRefrescaEmpresa.Click += new System.EventHandler(this.btnRefrescaEmpresa_Click);
-            // 
-            // btnBuscaEmpresa
-            // 
-            this.btnBuscaEmpresa.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnBuscaEmpresa.BackColor = System.Drawing.Color.Transparent;
-            this.btnBuscaEmpresa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBuscaEmpresa.BackgroundImage")));
-            this.btnBuscaEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBuscaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBuscaEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscaEmpresa.Location = new System.Drawing.Point(770, 6);
-            this.btnBuscaEmpresa.Name = "btnBuscaEmpresa";
-            this.btnBuscaEmpresa.Size = new System.Drawing.Size(40, 27);
-            this.btnBuscaEmpresa.TabIndex = 114;
-            this.btnBuscaEmpresa.UseVisualStyleBackColor = false;
-            this.btnBuscaEmpresa.Visible = false;
-            this.btnBuscaEmpresa.Click += new System.EventHandler(this.btnBuscaEmpresa_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.cmbAlmacenes);
-            this.panel1.Location = new System.Drawing.Point(9, 13);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(391, 49);
-            this.panel1.TabIndex = 134;
-            // 
-            // pbImpresionFondoBlanco
-            // 
-            this.pbImpresionFondoBlanco.Image = global::Aires.Properties.Resources.MembreteBlanco;
-            this.pbImpresionFondoBlanco.Location = new System.Drawing.Point(681, 38);
-            this.pbImpresionFondoBlanco.Name = "pbImpresionFondoBlanco";
-            this.pbImpresionFondoBlanco.Size = new System.Drawing.Size(141, 51);
-            this.pbImpresionFondoBlanco.TabIndex = 145;
-            this.pbImpresionFondoBlanco.TabStop = false;
-            this.pbImpresionFondoBlanco.Visible = false;
-            // 
-            // pbLeyendaCotizacion
-            // 
-            this.pbLeyendaCotizacion.Image = global::Aires.Properties.Resources.MembreteBlanco;
-            this.pbLeyendaCotizacion.Location = new System.Drawing.Point(613, 38);
-            this.pbLeyendaCotizacion.Name = "pbLeyendaCotizacion";
-            this.pbLeyendaCotizacion.Size = new System.Drawing.Size(62, 35);
-            this.pbLeyendaCotizacion.TabIndex = 146;
-            this.pbLeyendaCotizacion.TabStop = false;
-            this.pbLeyendaCotizacion.Visible = false;
-            // 
-            // pbLogo
-            // 
-            this.pbLogo.Image = global::Aires.Properties.Resources.LOGO;
-            this.pbLogo.Location = new System.Drawing.Point(827, 3);
-            this.pbLogo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(214, 64);
-            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLogo.TabIndex = 144;
-            this.pbLogo.TabStop = false;
             // 
             // dataGridViewCheckBoxColumn1
             // 
@@ -1663,18 +1405,352 @@
             this.EstatusDescripcion.DataPropertyName = "EstatusDescripcion";
             this.EstatusDescripcion.FillWeight = 3F;
             this.EstatusDescripcion.HeaderText = "Estatus";
+            this.EstatusDescripcion.MinimumWidth = 6;
             this.EstatusDescripcion.Name = "EstatusDescripcion";
             this.EstatusDescripcion.ReadOnly = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1919, 671);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(240, 23);
+            this.textBox1.TabIndex = 82;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(1653, 671);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(260, 23);
+            this.textBox2.TabIndex = 81;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(1521, 671);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(127, 23);
+            this.textBox3.TabIndex = 80;
+            // 
+            // rdoEntradasPorMes
+            // 
+            this.rdoEntradasPorMes.AutoSize = true;
+            this.rdoEntradasPorMes.Checked = true;
+            this.rdoEntradasPorMes.Location = new System.Drawing.Point(21, 33);
+            this.rdoEntradasPorMes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdoEntradasPorMes.Name = "rdoEntradasPorMes";
+            this.rdoEntradasPorMes.Size = new System.Drawing.Size(80, 23);
+            this.rdoEntradasPorMes.TabIndex = 127;
+            this.rdoEntradasPorMes.TabStop = true;
+            this.rdoEntradasPorMes.Text = "Por Mes";
+            this.rdoEntradasPorMes.UseVisualStyleBackColor = true;
+            this.rdoEntradasPorMes.CheckedChanged += new System.EventHandler(this.rdoEntradasPorMes_CheckedChanged);
+            // 
+            // pnlEntradasPorMes
+            // 
+            this.pnlEntradasPorMes.Controls.Add(this.cmbMesesEntradas);
+            this.pnlEntradasPorMes.Controls.Add(this.cmbAñoEntradas);
+            this.pnlEntradasPorMes.Location = new System.Drawing.Point(115, 20);
+            this.pnlEntradasPorMes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlEntradasPorMes.Name = "pnlEntradasPorMes";
+            this.pnlEntradasPorMes.Size = new System.Drawing.Size(324, 42);
+            this.pnlEntradasPorMes.TabIndex = 126;
+            // 
+            // cmbMesesEntradas
+            // 
+            this.cmbMesesEntradas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMesesEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbMesesEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbMesesEntradas.FormattingEnabled = true;
+            this.cmbMesesEntradas.Items.AddRange(new object[] {
+            "ENERO",
+            "FEBRERO",
+            "MARZO",
+            "ABRIL",
+            "MAYO",
+            "JUNIO",
+            "JULIO",
+            "AGOSTO",
+            "SEPTIEMBRE",
+            "OCTUBRE",
+            "NOVIEMBRE",
+            "DICIEMBRE"});
+            this.cmbMesesEntradas.Location = new System.Drawing.Point(7, 7);
+            this.cmbMesesEntradas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbMesesEntradas.Name = "cmbMesesEntradas";
+            this.cmbMesesEntradas.Size = new System.Drawing.Size(167, 28);
+            this.cmbMesesEntradas.TabIndex = 19;
+            this.cmbMesesEntradas.SelectedIndexChanged += new System.EventHandler(this.cmbMesesEntradas_SelectedIndexChanged);
+            // 
+            // cmbAñoEntradas
+            // 
+            this.cmbAñoEntradas.DisplayMember = "Descripcion";
+            this.cmbAñoEntradas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAñoEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbAñoEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbAñoEntradas.FormattingEnabled = true;
+            this.cmbAñoEntradas.Location = new System.Drawing.Point(203, 7);
+            this.cmbAñoEntradas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbAñoEntradas.Name = "cmbAñoEntradas";
+            this.cmbAñoEntradas.Size = new System.Drawing.Size(101, 28);
+            this.cmbAñoEntradas.TabIndex = 20;
+            this.cmbAñoEntradas.ValueMember = "Descripcion";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.flowLayoutPanel1.Controls.Add(this.btnRefrescarSalidas);
+            this.flowLayoutPanel1.Controls.Add(this.btnEditar);
+            this.flowLayoutPanel1.Controls.Add(this.btnExportaEntradas);
+            this.flowLayoutPanel1.Controls.Add(this.btnExportaEntradasPorMes);
+            this.flowLayoutPanel1.Controls.Add(this.btnCancelarSalida);
+            this.flowLayoutPanel1.Controls.Add(this.btnCancelarSinDevolucion);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 389);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(855, 89);
+            this.flowLayoutPanel1.TabIndex = 129;
+            // 
+            // btnRefrescarSalidas
+            // 
+            this.btnRefrescarSalidas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefrescarSalidas.BackColor = System.Drawing.Color.White;
+            this.btnRefrescarSalidas.BackgroundImage = global::Aires.Properties.Resources.RefrescarChicoSinFondo;
+            this.btnRefrescarSalidas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnRefrescarSalidas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefrescarSalidas.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefrescarSalidas.Location = new System.Drawing.Point(4, 4);
+            this.btnRefrescarSalidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRefrescarSalidas.Name = "btnRefrescarSalidas";
+            this.btnRefrescarSalidas.Size = new System.Drawing.Size(103, 81);
+            this.btnRefrescarSalidas.TabIndex = 115;
+            this.btnRefrescarSalidas.Text = "Refrescar";
+            this.btnRefrescarSalidas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRefrescarSalidas.UseVisualStyleBackColor = false;
+            this.btnRefrescarSalidas.Click += new System.EventHandler(this.btnRefrescarEntradas_Click);
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.BackColor = System.Drawing.Color.White;
+            this.btnEditar.BackgroundImage = global::Aires.Properties.Resources.Editar;
+            this.btnEditar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.Location = new System.Drawing.Point(115, 4);
+            this.btnEditar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(103, 81);
+            this.btnEditar.TabIndex = 114;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Visible = false;
+            // 
+            // btnExportaEntradas
+            // 
+            this.btnExportaEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExportaEntradas.BackColor = System.Drawing.Color.White;
+            this.btnExportaEntradas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnExportaEntradas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExportaEntradas.Font = new System.Drawing.Font("Segoe UI", 5.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportaEntradas.Image = global::Aires.Properties.Resources.ExportaPapel;
+            this.btnExportaEntradas.Location = new System.Drawing.Point(226, 4);
+            this.btnExportaEntradas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExportaEntradas.Name = "btnExportaEntradas";
+            this.btnExportaEntradas.Size = new System.Drawing.Size(103, 81);
+            this.btnExportaEntradas.TabIndex = 119;
+            this.btnExportaEntradas.Text = "Imprime Productos Por Fecha";
+            this.btnExportaEntradas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnExportaEntradas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnExportaEntradas.UseVisualStyleBackColor = false;
+            this.btnExportaEntradas.Click += new System.EventHandler(this.btnExportaEntradas_Click);
+            // 
+            // btnExportaEntradasPorMes
+            // 
+            this.btnExportaEntradasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExportaEntradasPorMes.BackColor = System.Drawing.Color.White;
+            this.btnExportaEntradasPorMes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnExportaEntradasPorMes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExportaEntradasPorMes.Font = new System.Drawing.Font("Segoe UI", 5.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportaEntradasPorMes.Image = global::Aires.Properties.Resources.ExportaPapel;
+            this.btnExportaEntradasPorMes.Location = new System.Drawing.Point(337, 4);
+            this.btnExportaEntradasPorMes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExportaEntradasPorMes.Name = "btnExportaEntradasPorMes";
+            this.btnExportaEntradasPorMes.Size = new System.Drawing.Size(103, 81);
+            this.btnExportaEntradasPorMes.TabIndex = 120;
+            this.btnExportaEntradasPorMes.Text = "Imprime Productos Por Mes";
+            this.btnExportaEntradasPorMes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnExportaEntradasPorMes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnExportaEntradasPorMes.UseVisualStyleBackColor = false;
+            this.btnExportaEntradasPorMes.Click += new System.EventHandler(this.btnExportaEntradasPorMes_Click);
+            // 
+            // btnCancelarSalida
+            // 
+            this.btnCancelarSalida.BackColor = System.Drawing.Color.White;
+            this.btnCancelarSalida.BackgroundImage = global::Aires.Properties.Resources.Eliminar;
+            this.btnCancelarSalida.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnCancelarSalida.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancelarSalida.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelarSalida.Location = new System.Drawing.Point(448, 4);
+            this.btnCancelarSalida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelarSalida.Name = "btnCancelarSalida";
+            this.btnCancelarSalida.Size = new System.Drawing.Size(103, 81);
+            this.btnCancelarSalida.TabIndex = 113;
+            this.btnCancelarSalida.Text = "Cancelar";
+            this.btnCancelarSalida.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCancelarSalida.UseVisualStyleBackColor = false;
+            this.btnCancelarSalida.Visible = false;
+            this.btnCancelarSalida.Click += new System.EventHandler(this.btnCancelarSalida_Click);
+            // 
+            // btnCancelarSinDevolucion
+            // 
+            this.btnCancelarSinDevolucion.BackColor = System.Drawing.Color.White;
+            this.btnCancelarSinDevolucion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnCancelarSinDevolucion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancelarSinDevolucion.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelarSinDevolucion.Location = new System.Drawing.Point(559, 4);
+            this.btnCancelarSinDevolucion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelarSinDevolucion.Name = "btnCancelarSinDevolucion";
+            this.btnCancelarSinDevolucion.Size = new System.Drawing.Size(103, 81);
+            this.btnCancelarSinDevolucion.TabIndex = 116;
+            this.btnCancelarSinDevolucion.Text = "Cancelar Sin Devolucion de Mercancia";
+            this.btnCancelarSinDevolucion.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCancelarSinDevolucion.UseVisualStyleBackColor = false;
+            this.btnCancelarSinDevolucion.Visible = false;
+            this.btnCancelarSinDevolucion.Click += new System.EventHandler(this.btnCancelarSinDevolucion_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(5, 17);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 20);
+            this.label1.TabIndex = 117;
+            this.label1.Text = "Almacen:";
+            // 
+            // cmbAlmacenes
+            // 
+            this.cmbAlmacenes.DataSource = this.entCatalogoGenericoBindingSource;
+            this.cmbAlmacenes.DisplayMember = "Descripcion";
+            this.cmbAlmacenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAlmacenes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbAlmacenes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbAlmacenes.FormattingEnabled = true;
+            this.cmbAlmacenes.Location = new System.Drawing.Point(109, 15);
+            this.cmbAlmacenes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbAlmacenes.Name = "cmbAlmacenes";
+            this.cmbAlmacenes.Size = new System.Drawing.Size(391, 28);
+            this.cmbAlmacenes.TabIndex = 118;
+            this.cmbAlmacenes.ValueMember = "Id";
+            this.cmbAlmacenes.SelectedIndexChanged += new System.EventHandler(this.cmbAlmacenes_SelectedIndexChanged);
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.Description = "Elimina el registro del producto seleccionado";
+            this.dataGridViewImageColumn1.FillWeight = 1F;
+            this.dataGridViewImageColumn1.HeaderText = "Elim.";
+            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.MinimumWidth = 6;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ToolTipText = "Elimina el registro del producto seleccionado";
+            this.dataGridViewImageColumn1.Width = 228;
+            // 
+            // btnRefrescaEmpresa
+            // 
+            this.btnRefrescaEmpresa.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnRefrescaEmpresa.BackColor = System.Drawing.Color.White;
+            this.btnRefrescaEmpresa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRefrescaEmpresa.BackgroundImage")));
+            this.btnRefrescaEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRefrescaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefrescaEmpresa.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefrescaEmpresa.Location = new System.Drawing.Point(881, 10);
+            this.btnRefrescaEmpresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRefrescaEmpresa.Name = "btnRefrescaEmpresa";
+            this.btnRefrescaEmpresa.Size = new System.Drawing.Size(49, 39);
+            this.btnRefrescaEmpresa.TabIndex = 133;
+            this.btnRefrescaEmpresa.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRefrescaEmpresa.UseVisualStyleBackColor = false;
+            this.btnRefrescaEmpresa.Visible = false;
+            this.btnRefrescaEmpresa.Click += new System.EventHandler(this.btnRefrescaEmpresa_Click);
+            // 
+            // btnBuscaEmpresa
+            // 
+            this.btnBuscaEmpresa.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnBuscaEmpresa.BackColor = System.Drawing.Color.Transparent;
+            this.btnBuscaEmpresa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBuscaEmpresa.BackgroundImage")));
+            this.btnBuscaEmpresa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBuscaEmpresa.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuscaEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscaEmpresa.Location = new System.Drawing.Point(931, 13);
+            this.btnBuscaEmpresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscaEmpresa.Name = "btnBuscaEmpresa";
+            this.btnBuscaEmpresa.Size = new System.Drawing.Size(53, 33);
+            this.btnBuscaEmpresa.TabIndex = 114;
+            this.btnBuscaEmpresa.UseVisualStyleBackColor = false;
+            this.btnBuscaEmpresa.Visible = false;
+            this.btnBuscaEmpresa.Click += new System.EventHandler(this.btnBuscaEmpresa_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.cmbAlmacenes);
+            this.panel1.Location = new System.Drawing.Point(12, 16);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(520, 59);
+            this.panel1.TabIndex = 134;
+            // 
+            // pbImpresionFondoBlanco
+            // 
+            this.pbImpresionFondoBlanco.Image = global::Aires.Properties.Resources.MembreteBlanco;
+            this.pbImpresionFondoBlanco.Location = new System.Drawing.Point(554, 51);
+            this.pbImpresionFondoBlanco.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbImpresionFondoBlanco.Name = "pbImpresionFondoBlanco";
+            this.pbImpresionFondoBlanco.Size = new System.Drawing.Size(148, 63);
+            this.pbImpresionFondoBlanco.TabIndex = 145;
+            this.pbImpresionFondoBlanco.TabStop = false;
+            this.pbImpresionFondoBlanco.Visible = false;
+            // 
+            // pbLeyendaCotizacion
+            // 
+            this.pbLeyendaCotizacion.Image = global::Aires.Properties.Resources.MembreteBlanco;
+            this.pbLeyendaCotizacion.Location = new System.Drawing.Point(469, 71);
+            this.pbLeyendaCotizacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbLeyendaCotizacion.Name = "pbLeyendaCotizacion";
+            this.pbLeyendaCotizacion.Size = new System.Drawing.Size(83, 43);
+            this.pbLeyendaCotizacion.TabIndex = 146;
+            this.pbLeyendaCotizacion.TabStop = false;
+            this.pbLeyendaCotizacion.Visible = false;
+            // 
+            // pbLogo
+            // 
+            this.pbLogo.Image = global::Aires.Properties.Resources.LOGO;
+            this.pbLogo.Location = new System.Drawing.Point(709, 51);
+            this.pbLogo.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(285, 79);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLogo.TabIndex = 144;
+            this.pbLogo.TabStop = false;
+            // 
             // SalidasTraspasoMovil
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BackgroundImage = global::Aires.Properties.Resources.verdeClaro;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1055, 599);
+            this.ClientSize = new System.Drawing.Size(997, 603);
             this.Controls.Add(this.pbImpresionFondoBlanco);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pbLeyendaCotizacion);
@@ -1682,14 +1758,15 @@
             this.Controls.Add(this.label24);
             this.Controls.Add(this.cmbEmpresas);
             this.Controls.Add(this.btnBuscaEmpresa);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tcGeneral);
             this.Controls.Add(this.pbLogo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "SalidasTraspasoMovil";
             this.Text = "Salidas";
             this.Load += new System.EventHandler(this.Ventas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.entProductoBindingSource)).EndInit();
-            this.tabControl1.ResumeLayout(false);
+            this.tcGeneral.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.pnlGeneralSalida.ResumeLayout(false);
             this.pnlGeneralSalida.PerformLayout();
@@ -1737,7 +1814,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tcGeneral;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.BindingSource entProductoBindingSource;
         private System.Windows.Forms.Panel pnlGeneralSalida;
