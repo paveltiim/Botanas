@@ -100,7 +100,7 @@ namespace AiresDatos
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
         public DataTable obtieneProductosPorAlmacenConPreciosVenta(int ProductoId, int EstablecimientoId, int TipoProductoId,
-                                                                            int ClienteId)
+                                                                   int ClienteId)
         {
             try
             {

@@ -940,6 +940,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\rptEntradasConAjustesBkp2008.rdlc" />
     <None Include="Resources\palomitaChica.jpg" />
   </ItemGroup>
   <ItemGroup>
