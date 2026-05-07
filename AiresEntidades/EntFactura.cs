@@ -29,6 +29,11 @@ namespace AiresEntidades
         public decimal Descuento { get; set; }
         public decimal SubTotal { get; set; }
         public decimal IEPS { get; set; }
+        /// <summary>
+        /// Porcentaje manual de IEPS a aplicar en el complemento de pago (0 = cálculo automático).
+        /// Usar 1.0 para aplicar el 100% del IEPS de la factura, 0.5 para 50%, etc.
+        /// </summary>
+        public decimal IEPSManualPorcentaje { get; set; } = 0;
         public decimal IVA { get; set; }
         public decimal Total { get; set; }
         public decimal TotalUSD { get; set; }

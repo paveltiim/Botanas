@@ -409,23 +409,13 @@ namespace AiresUtilerias
                                 "|" + Cliente.RFC + "|" + Cliente.NombreFiscal + "|" + Cliente.CP + "|||" + Cliente.RegimenFiscalId.ToString() + "|CP01|\n";//" + UsoCFDI + "
             textoCSV += "CONC|84111506||1|ACT||Pago|0|0||01|\n";
             textoCSV += "COMP|\n";
-            textoCSV += "CRPS20|2.0|" + "\n" +
-                                "CTOT20||||" +
-                                //TotalRetencionesIVA | TotalRetencionesISR | TotalRetencionesIEPS |
-                                //TotalTrasladosBaseIVA16 |TotalTrasladosImpuestoIVA16|
-                                //subtotal.ToString("0.00") + "|" + cantidadIvaMonto.ToString("0.00") + "|"+//NO APLICA PARA BOTANAS(TODO A 0%)
-                                "||" +
-                                //TotalTrasladosBaseIVA8|TotalTrasladosImpuestoIVA8|
-                                "||" +
-                                //TotalTrasladosBaseIVA0|TotalTrasladosImpuestoIVA0|
-                                subtotal.ToString("0.00") + "|0.00|" +
-                                //TotalTrasladosBaseIVAExento
-                                "|" + Monto.ToString("0.00") + "\n";
-            //MontoTotalPagos
+            textoCSV += "CRPS20|2.0|\n";
+            // CTOT20 se construirá después del loop para usar la suma real de subtotalF por factura
 
             int cont = 1;
             decimal cantidadiepsTotal = 0;
             decimal subtotalTotal = 0;
+            StringBuilder sbCuerpo = new StringBuilder();
             foreach (EntFactura f in ListaFacturasRelacionadas)
             {
                 decimal subtotalF = f.Pago / (1 + IVA);
@@ -440,7 +430,10 @@ namespace AiresUtilerias
                     porcentaje = Math.Round(totalCP / totalFac, 4);
                     //cp.SubTotal = fac.SubTotal * porcentaje;
                     //cp.IVA = f.IVA * porcentaje;
-                    cantidadiepsF = Math.Round(f.IEPS * porcentaje, 2);
+                    if (f.IEPSManualPorcentaje > 0)
+                        cantidadiepsF = Math.Round(f.IEPS * f.IEPSManualPorcentaje, 2);
+                    else
+                        cantidadiepsF = Math.Round(f.IEPS * porcentaje, 2);
                     cantidadiepsTotal += cantidadiepsF;
                     //cp.IVARetenciones = fac.IVARetenciones * porcentaje;
                     //cp.ISRRetenciones = fac.ISRRetenciones * porcentaje;
@@ -449,7 +442,7 @@ namespace AiresUtilerias
                     subtotalTotal += subtotalF;
                 }
 
-                textoCSV += "CPAG20|" + FechaPago.ToString("yyyy-MM-ddTHH:mm:ss") + "|" + FormaPago + "|MXN|1|" + f.Pago.ToString("0.00") + "|" +
+                sbCuerpo.Append("CPAG20|" + FechaPago.ToString("yyyy-MM-ddTHH:mm:ss") + "|" + FormaPago + "|MXN|1|" + f.Pago.ToString("0.00") + "|" +
                             //FechaPago | FormaDePagoP | MonedaP | TipoCambioP | Monto |
                             "|||||||||\n" +
                             //NumOperacion | RfcEmisorCtaOrd | NomBancoOrdExt | CtaOrdenante | RfcEmisorCtaBen | CtaBeneficiario | TipoCadPago | CertPago | CadPago | SelloPago
@@ -457,33 +450,47 @@ namespace AiresUtilerias
                             //IdDocumento | Serie | Folio |
                             "|MXN|1|" + f.Parcialidad + "|" + f.Saldo.ToString("0.00") + "|" + f.Pago.ToString("0.00") + "|" + (f.Saldo - f.Pago).ToString("0.00") + "|02|\n" +
                             //MonedaDR | EquivalenciaDR | NumParcialidad | ImpSaldoAnt | ImpPagado | ImpSaldoInsoluto | ObjetoImpDR
-                            "CPIDR20|\n";
-                textoCSV += "CPTDR20|" + subtotalF.ToString("0.00") + "|002|" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") +
+                            "CPIDR20|\n");
+                sbCuerpo.Append("CPTDR20|" + subtotalF.ToString("0.00") + "|002|" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") +
                             //BaseDR | ImpuestoDR | TipoFactorDR | 
-                            "|" + IVA.ToString().PadRight(8, '0') + "|" + cantidadIvaF.ToString("0.00") + "|\n";
+                            "|" + IVA.ToString().PadRight(8, '0') + "|" + cantidadIvaF.ToString("0.00") + "|\n");
                 //TasaOCuotaDR | ImporteDR
                 if (cantidadiepsF > 0)
                 {
-                    textoCSV += "CPTDR20|" + (cantidadiepsF / this.IEPS).ToString("0.00") + "|003|Tasa" +
+                    sbCuerpo.Append("CPTDR20|" + (cantidadiepsF / this.IEPS).ToString("0.00") + "|003|Tasa" +
                             //BaseDR | ImpuestoDR | TipoFactorDR | 
-                            "|" + this.IEPS.ToString().PadRight(8, '0') + "|" + cantidadiepsF.ToString("0.00") + "|\n";
+                            "|" + this.IEPS.ToString().PadRight(8, '0') + "|" + cantidadiepsF.ToString("0.00") + "|\n");
                 }
 
-                textoCSV += "CPIM20|\n";
-                textoCSV += "CPIT20|" + subtotalF.ToString("0.00") + "|002|" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") +
+                sbCuerpo.Append("CPIM20|\n");
+                sbCuerpo.Append("CPIT20|" + subtotalF.ToString("0.00") + "|002|" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") +
                 //BaseP | ImpuestoP | TipoFactorP | 
-                "|" + IVA.ToString().PadRight(8, '0') + "|" + cantidadIvaF.ToString("0.00") + "\n";
+                "|" + IVA.ToString().PadRight(8, '0') + "|" + cantidadIvaF.ToString("0.00") + "\n");
                 //TasaOCuotaP | ImporteP
 
                 if (cantidadiepsTotal > 0)
                 {
-                    textoCSV += "CPIT20|" + (cantidadiepsF / this.IEPS).ToString("0.00") + "|003|Tasa" +
+                    sbCuerpo.Append("CPIT20|" + (cantidadiepsF / this.IEPS).ToString("0.00") + "|003|Tasa" +
                                 //BaseP | ImpuestoP | TipoFactorP | 
-                                "|" + this.IEPS.ToString().PadRight(8, '0') + "|" + cantidadiepsF.ToString("0.00") + "\n";
+                                "|" + this.IEPS.ToString().PadRight(8, '0') + "|" + cantidadiepsF.ToString("0.00") + "\n");
                     //TasaOCuotaP | ImporteP
                 }
 
             }
+
+            // CTOT20 con subtotalTotal (suma real de BaseP por factura) para cuadrar con el SAT
+            textoCSV += "CTOT20||||" +
+                        //TotalRetencionesIVA | TotalRetencionesISR | TotalRetencionesIEPS |
+                        //TotalTrasladosBaseIVA16 | TotalTrasladosImpuestoIVA16 |
+                        "||" +
+                        //TotalTrasladosBaseIVA8 | TotalTrasladosImpuestoIVA8 |
+                        "||" +
+                        //TotalTrasladosBaseIVA0 | TotalTrasladosImpuestoIVA0 |
+                        subtotalTotal.ToString("0.00") + "|0.00|" +
+                        //TotalTrasladosBaseIVAExento
+                        "|" + Monto.ToString("0.00") + "\n";
+            //MontoTotalPagos
+            textoCSV += sbCuerpo.ToString();
 
             string observacion = "Complemento de Pago relacionado a la(s) Factura(s): " + FacturasRelacionadas + "\n " +
                 //" > TOTAL: " + TotalFactura.ToString("$0.00") + " | SALDO ANTERIOR: " + SaldoAnterior.ToString("0.00") + "" +
@@ -587,21 +594,12 @@ namespace AiresUtilerias
                                 "|" + Cliente.RFC + "|" + Cliente.NombreFiscal + "|" + Cliente.CP + "|||" + Cliente.RegimenFiscalId.ToString() + "|CP01|\n";//" + UsoCFDI + "
             textoCSV += "CONC|84111506||1|ACT||Pago|0|0||01|\n";
             textoCSV += "COMP|\n";
-            textoCSV += "CRPS20|2.0|" + "\n" +
-                                "CTOT20||||" +
-                                //TotalRetencionesIVA | TotalRetencionesISR | TotalRetencionesIEPS |
-                                //TotalTrasladosBaseIVA16 |TotalTrasladosImpuestoIVA16|
-                                //subtotal.ToString("0.00") + "|" + cantidadIvaMonto.ToString("0.00") + "|"+//NO APLICA PARA BOTANAS(TODO A 0%)
-                                "||" +
-                                //TotalTrasladosBaseIVA8|TotalTrasladosImpuestoIVA8|
-                                "||" +
-                                //TotalTrasladosBaseIVA0|TotalTrasladosImpuestoIVA0|
-                                subtotalTotal.ToString("0.00") + "|0.00|" +
-                                //TotalTrasladosBaseIVAExento
-                                "|" + Monto.ToString("0.00") + "\n";
-            //MontoTotalPagos
+            textoCSV += "CRPS20|2.0|\n";
+            // CTOT20 se construirá después del loop para usar la suma real de BaseP de CPIT20
 
             StringBuilder sbFacturas = new StringBuilder();
+            StringBuilder sbCuerpoRecalculo = new StringBuilder();
+            decimal subtotalTotalCSV = 0; // suma real de los BaseP escritos en CPIT20
             //sbFacturas.Clear();
             foreach (EntFactura f in ListaFacturasRelacionadas)
             {
@@ -619,16 +617,19 @@ namespace AiresUtilerias
                     porcentaje = Math.Round(totalCP / totalFac, 4);
                     //cp.SubTotal = fac.SubTotal * porcentaje;
                     //cp.IVA = f.IVA * porcentaje;
-                    cantidadiepsF = Math.Round(f.IEPS * porcentaje, 2);
+                    if (f.IEPSManualPorcentaje > 0)
+                        cantidadiepsF = Math.Round(f.IEPS * f.IEPSManualPorcentaje, 2);
+                    else
+                        cantidadiepsF = Math.Round(f.IEPS * porcentaje, 2);
                     cantidadiepsTotal += cantidadiepsF;
                     //cp.IVARetenciones = fac.IVARetenciones * porcentaje;
                     //cp.ISRRetenciones = fac.ISRRetenciones * porcentaje;
                     //cp.Retenciones = fac.Retenciones * porcentaje;
                     subtotalF = (subtotalF - cantidadIvaF - cantidadiepsF);
-                    subtotalTotal += subtotalF;
+                    subtotalTotalCSV += subtotalF; // acumular BaseP real de CPIT20
                 }
 
-                textoCSV += "CPAG20|" + FechaPago.ToString("yyyy-MM-ddTHH:mm:ss") + "|" + FormaPago + "|MXN|1|" + f.Pago.ToString("0.00") + "|" +
+                sbCuerpoRecalculo.Append("CPAG20|" + FechaPago.ToString("yyyy-MM-ddTHH:mm:ss") + "|" + FormaPago + "|MXN|1|" + f.Pago.ToString("0.00") + "|" +
                             //FechaPago | FormaDePagoP | MonedaP | TipoCambioP | Monto |
                             "|||||||||\n" +
                             //NumOperacion | RfcEmisorCtaOrd | NomBancoOrdExt | CtaOrdenante | RfcEmisorCtaBen | CtaBeneficiario | TipoCadPago | CertPago | CadPago | SelloPago
@@ -636,33 +637,47 @@ namespace AiresUtilerias
                             //IdDocumento | Serie | Folio |
                             "|MXN|1|" + f.Parcialidad + "|" + f.Saldo.ToString("0.00") + "|" + f.Pago.ToString("0.00") + "|" + (f.Saldo - f.Pago).ToString("0.00") + "|02|\n" +
                             //MonedaDR | EquivalenciaDR | NumParcialidad | ImpSaldoAnt | ImpPagado | ImpSaldoInsoluto | ObjetoImpDR
-                            "CPIDR20|\n";
-                textoCSV += "CPTDR20|" + subtotalF.ToString("0.00") + "|002|" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") +
+                            "CPIDR20|\n");
+                sbCuerpoRecalculo.Append("CPTDR20|" + subtotalF.ToString("0.00") + "|002|" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") +
                             //BaseDR | ImpuestoDR | TipoFactorDR | 
-                            "|" + IVA.ToString().PadRight(8, '0') + "|" + cantidadIvaF.ToString("0.00") + "|\n";
+                            "|" + IVA.ToString().PadRight(8, '0') + "|" + cantidadIvaF.ToString("0.00") + "|\n");
                 //TasaOCuotaDR | ImporteDR
                 if (cantidadiepsF > 0)
                 {
-                    textoCSV += "CPTDR20|" + (cantidadiepsF / this.IEPS).ToString("0.00") + "|003|Tasa" +
+                    sbCuerpoRecalculo.Append("CPTDR20|" + (cantidadiepsF / this.IEPS).ToString("0.00") + "|003|Tasa" +
                             //BaseDR | ImpuestoDR | TipoFactorDR | 
-                            "|" + this.IEPS.ToString().PadRight(8, '0') + "|" + cantidadiepsF.ToString("0.00") + "|\n";
+                            "|" + this.IEPS.ToString().PadRight(8, '0') + "|" + cantidadiepsF.ToString("0.00") + "|\n");
                 }
 
-                textoCSV += "CPIM20|\n";
-                textoCSV += "CPIT20|" + subtotalF.ToString("0.00") + "|002|" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") +
+                sbCuerpoRecalculo.Append("CPIM20|\n");
+                sbCuerpoRecalculo.Append("CPIT20|" + subtotalF.ToString("0.00") + "|002|" + Emisor.TipoFactor.Replace("\r", "").Replace("\n", "") +
                 //BaseP | ImpuestoP | TipoFactorP | 
-                "|" + IVA.ToString().PadRight(8, '0') + "|" + cantidadIvaF.ToString("0.00") + "\n";
+                "|" + IVA.ToString().PadRight(8, '0') + "|" + cantidadIvaF.ToString("0.00") + "\n");
                 //TasaOCuotaP | ImporteP
 
                 if (cantidadiepsTotal > 0)
                 {
-                    textoCSV += "CPIT20|" + (cantidadiepsF / this.IEPS).ToString("0.00") + "|003|Tasa" +
+                    sbCuerpoRecalculo.Append("CPIT20|" + (cantidadiepsF / this.IEPS).ToString("0.00") + "|003|Tasa" +
                                 //BaseP | ImpuestoP | TipoFactorP | 
-                                "|" + this.IEPS.ToString().PadRight(8, '0') + "|" + cantidadiepsF.ToString("0.00") + "\n";
+                                "|" + this.IEPS.ToString().PadRight(8, '0') + "|" + cantidadiepsF.ToString("0.00") + "\n");
                     //TasaOCuotaP | ImporteP
                 }
 
             }
+
+            // CTOT20 con subtotalTotalCSV (suma real de BaseP de CPIT20) para cuadrar con el SAT
+            textoCSV += "CTOT20||||" +
+                        //TotalRetencionesIVA | TotalRetencionesISR | TotalRetencionesIEPS |
+                        //TotalTrasladosBaseIVA16 | TotalTrasladosImpuestoIVA16 |
+                        "||" +
+                        //TotalTrasladosBaseIVA8 | TotalTrasladosImpuestoIVA8 |
+                        "||" +
+                        //TotalTrasladosBaseIVA0 | TotalTrasladosImpuestoIVA0 |
+                        subtotalTotalCSV.ToString("0.00") + "|0.00|" +
+                        //TotalTrasladosBaseIVAExento
+                        "|" + Monto.ToString("0.00") + "\n";
+            //MontoTotalPagos
+            textoCSV += sbCuerpoRecalculo.ToString();
 
             string observacion = " \nComplemento de Pago relacionado a la(s) Factura(s): \n" +
               " " + FacturasRelacionadas + "\n\n " +

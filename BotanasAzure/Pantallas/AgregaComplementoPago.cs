@@ -228,6 +228,8 @@ namespace Aires.Pantallas
                     cmbRegimenFiscal.SelectedIndex = ((List<EntCatalogoGenerico>)cmbRegimenFiscal.DataSource).FindIndex(P => P.Id == 616);//SIN OBLIGACIONES FISCALES
                     cmbRegimenFiscal.Enabled = false;
                 }
+                chkRecalcularFactura.Checked = true;
+                chkRecalcularFactura.Enabled = false;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

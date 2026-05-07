@@ -1488,6 +1488,7 @@ namespace Aires
                     Pago = p.PagoTotal,
                     //IVA = p.IVA,
                     IEPS = p.IEPS,
+                    IEPSManualPorcentaje = p.IEPSManualPorcentaje,
                     Total = p.Total,
                     //SubTotal = p.Total - p.IVA,
                     Fecha = p.Fecha,
